@@ -6,7 +6,7 @@
 import SnapStyle
 import SwiftUI
 
-struct FontExampleScreen: View {
+struct ColorExampleScreen: View {
     
     var body: some View {
         VStack {
@@ -36,5 +36,5 @@ struct FontExampleScreen: View {
 }
 
 #Preview {
-    FontExampleScreen()
+    ColorExampleScreen()
 }

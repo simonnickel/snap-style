@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum FontKey: StyleKey {
+    public enum FontKey: String, StyleKey {
         
         /// A key to indicate a missing value.
         case fallback
