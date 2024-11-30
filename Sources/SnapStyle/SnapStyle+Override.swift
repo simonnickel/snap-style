@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
     
-    func replaced(
+    internal func replaced(
         fonts: [FontKey : ValuesForContext<FontKey.Value>]? = nil
     ) -> Self {
         var style = self
@@ -21,7 +21,7 @@ extension SnapStyle {
     
 }
 
-struct StyleOverride: ViewModifier {
+internal struct StyleOverride: ViewModifier {
     
     @Environment(\.style) private var style
     

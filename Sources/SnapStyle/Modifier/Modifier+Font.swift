@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct StyleFont: ViewModifier {
+struct FontModifier: ViewModifier {
     
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
@@ -23,7 +23,7 @@ struct StyleFont: ViewModifier {
 extension View {
     
     public func font(_ key: SnapStyle.FontKey) -> some View {
-        self.modifier(StyleFont(fontKey: key))
+        self.modifier(FontModifier(fontKey: key))
     }
     
 }

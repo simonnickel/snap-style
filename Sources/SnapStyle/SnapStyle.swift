@@ -16,7 +16,7 @@ public struct SnapStyle {
     
     // MARK: - Get
     
-    func font(for key: FontKey, in context: Context) -> Font {
+    internal func font(for key: FontKey, in context: Context) -> Font {
         guard let value = fonts[key]?.value(in: context) else {
             return fonts[.fallback]?.value(in: context).font ?? DefaultValues.values(for: FontKey.fallback).value(in: context).font
         }
