@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum FontKey: CaseIterable {
+    public enum FontKey: StyleKey {
         
         /// A key to indicate a missing value.
         case fallback
@@ -34,7 +34,7 @@ extension SnapStyle.FontKey {
         case font(Font)
         case reference(SnapStyle.FontKey)
         
-        var value: Font {
+        var wrappedValue: Font {
             switch self {
                 case .definition(let definition): Font.system(size: definition.size)
                 case .font(let font): font

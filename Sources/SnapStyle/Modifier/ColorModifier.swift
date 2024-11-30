@@ -32,12 +32,12 @@ extension SnapStyle {
     
     internal func color(for key: ColorKey, in context: Context) -> Color {
         guard let value = colors[key]?.value(in: context) else {
-            return colors[.fallback]?.value(in: context).value ?? DefaultValues.values(for: ColorKey.fallback).value(in: context).value
+            return colors[.fallback]?.value(in: context).wrappedValue ?? ColorValues.values(for: ColorKey.fallback).value(in: context).wrappedValue
         }
         
         return switch value {
             case .reference(let key): color(for: key, in: context)
-            default: value.value
+            default: value.wrappedValue
         }
     }
     

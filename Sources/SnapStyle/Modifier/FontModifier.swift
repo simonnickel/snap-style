@@ -32,12 +32,12 @@ extension SnapStyle {
     
     internal func font(for key: FontKey, in context: Context) -> Font {
         guard let value = fonts[key]?.value(in: context) else {
-            return fonts[.fallback]?.value(in: context).value ?? DefaultValues.values(for: FontKey.fallback).value(in: context).value
+            return fonts[.fallback]?.value(in: context).wrappedValue ?? FontValues.values(for: FontKey.fallback).value(in: context).wrappedValue
         }
         
         return switch value {
             case .reference(let key): font(for: key, in: context)
-            default: value.value
+            default: value.wrappedValue
         }
     }
     

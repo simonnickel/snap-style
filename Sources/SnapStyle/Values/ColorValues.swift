@@ -4,27 +4,20 @@
 //
 
 
-extension SnapStyle.DefaultValues {
+class ColorValues: DefaultValues {
     
-    typealias ColorKey = SnapStyle.ColorKey
-    typealias ColorValuesForContext = SnapStyle.ValuesForContext<ColorKey.Value>
+    typealias Key = SnapStyle.ColorKey
+    typealias Value = Key.Value
+    typealias ValuesForContext = SnapStyle.ValuesForContext<Key.Value>
     
-    static var defaultColors: [ColorKey : ColorValuesForContext] {
-        var entries: [ColorKey : ColorValuesForContext] = [:]
-        for key in ColorKey.allCases {
-            entries[key] = values(for: key)
-        }
-        return entries
-    }
-    
-    static func values(for key: ColorKey) -> ColorValuesForContext {
+    static func values(for key: Key) -> ValuesForContext {
         switch key {
                 
-            case .fallback: ColorValuesForContext(
+            case .fallback: ValuesForContext(
                 base: .color(.pink)
             )
                 
-            case .highlight: ColorValuesForContext(
+            case .highlight: ValuesForContext(
                 base: .color(.green)
             )
         }

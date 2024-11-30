@@ -3,61 +3,54 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle.DefaultValues {
+class FontValues: DefaultValues {
     
-    typealias FontKey = SnapStyle.FontKey
-    typealias FontValuesForContext = SnapStyle.ValuesForContext<FontKey.Value>
+    typealias Key = SnapStyle.FontKey
+    typealias Value = Key.Value
+    typealias ValuesForContext = SnapStyle.ValuesForContext<Key.Value>
     
-    static var defaultFonts: [FontKey : FontValuesForContext] {
-        var entries: [FontKey : FontValuesForContext] = [:]
-        for key in FontKey.allCases {
-            entries[key] = values(for: key)
-        }
-        return entries
-    }
-    
-    static func values(for key: FontKey) -> FontValuesForContext {
+    static func values(for key: Key) -> ValuesForContext {
         switch key {
                 
-            case .fallback: FontValuesForContext(
+            case .fallback: ValuesForContext(
                 base: .definition(.init(size: 1))
             )
                 
-            case .title: FontValuesForContext(
+            case .title: ValuesForContext(
                 base: .definition(.init(size: 18)),
                 values: [
                     .card: .reference(.label),
                 ]
             )
                 
-            case .subtitle: FontValuesForContext(
+            case .subtitle: ValuesForContext(
                 base: .definition(.init(size: 16)),
                 values: [
                     .card: .reference(.label),
                 ]
             )
                 
-            case .label: FontValuesForContext(
+            case .label: ValuesForContext(
                 base: .font(.body)
             )
                 
-            case .block: FontValuesForContext(
+            case .block: ValuesForContext(
                 base: .reference(.label)
             )
                 
-            case .value: FontValuesForContext(
+            case .value: ValuesForContext(
                 base: .reference(.label)
             )
                 
-            case .note: FontValuesForContext(
+            case .note: ValuesForContext(
                 base: .reference(.label)
             )
                 
-            case .icon: FontValuesForContext(
+            case .icon: ValuesForContext(
                 base: .reference(.label)
             )
                 
-            case .indicator: FontValuesForContext(
+            case .indicator: ValuesForContext(
                 base: .reference(.label)
             )
                 

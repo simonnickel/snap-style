@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
     
-    public enum ColorKey: CaseIterable {
+    public enum ColorKey: StyleKey {
         
         /// A key to indicate a missing value.
         case fallback
@@ -24,7 +24,7 @@ extension SnapStyle.ColorKey {
         case color(Color)
         case reference(SnapStyle.ColorKey)
         
-        var value: Color {
+        var wrappedValue: Color {
             switch self {
                 case .color(let color): color
                 case .reference(let key):

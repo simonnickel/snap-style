@@ -11,8 +11,8 @@ public struct SnapStyle {
     internal var colors: [ColorKey : ValuesForContext<ColorKey.Value>]
     
     public init() {
-        fonts = DefaultValues.defaultFonts
-        colors = DefaultValues.defaultColors
+        fonts = FontValues.defaultValues
+        colors = ColorValues.defaultValues
     }
     
 }
