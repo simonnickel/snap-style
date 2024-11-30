@@ -16,11 +16,11 @@ extension SnapStyle {
         
     }
     
-    struct ValuesForContext<Value> {
+    public struct ValuesForContext<Value> {
         private let base: Value
         private let values: [Context : Value]
         
-        init(base: Value, values: [SnapStyle.Context : Value] = [:]) {
+        public init(base: Value, values: [SnapStyle.Context : Value] = [:]) {
             self.base = base
             self.values = values
         }

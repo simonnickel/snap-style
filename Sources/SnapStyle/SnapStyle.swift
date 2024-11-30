@@ -7,7 +7,7 @@ import SwiftUI
 
 public struct SnapStyle {
     
-    let fonts: [FontKey : ValuesForContext<FontKey.Value>]
+    internal var fonts: [FontKey : ValuesForContext<FontKey.Value>]
     
     public init() {
         fonts = DefaultValues.defaultFonts

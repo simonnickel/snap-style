@@ -15,6 +15,7 @@ struct ExampleScreenFont: View {
             
             content
                 .environment(\.styleContext, .card)
+                .styleOverride(fonts: [.block : .init(base: .definition(.init(size: 8)))])
         }
     }
     
@@ -25,7 +26,9 @@ struct ExampleScreenFont: View {
             Text("Subtitle")
                 .font(.subtitle)
             Text("Block with some more words to be like a paragraph with multiple lines.")
+                .font(.block)
             Text("Label")
+                .font(.label)
         }
     }
     

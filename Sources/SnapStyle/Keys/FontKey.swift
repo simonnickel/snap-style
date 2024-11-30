@@ -29,7 +29,7 @@ extension SnapStyle {
 
 extension SnapStyle.FontKey {
     
-    enum Value {
+    public enum Value {
         case definition(Definition)
         case font(Font)
         case reference(SnapStyle.FontKey)
@@ -44,8 +44,14 @@ extension SnapStyle.FontKey {
         }
     }
     
-    struct Definition {
+    public struct Definition {
+        
         let size: CGFloat
+
+        public init(size: CGFloat) {
+            self.size = size
+        }
+        
     }
     
 }
