@@ -8,9 +8,11 @@ import SwiftUI
 public struct SnapStyle {
     
     internal var fonts: [FontKey : ValuesForContext<FontKey.Value>]
+    internal var colors: [ColorKey : ValuesForContext<ColorKey.Value>]
     
     public init() {
         fonts = DefaultValues.defaultFonts
+        colors = DefaultValues.defaultColors
     }
     
 }

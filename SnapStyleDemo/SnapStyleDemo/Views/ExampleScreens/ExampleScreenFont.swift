@@ -23,6 +23,7 @@ struct ExampleScreenFont: View {
         VStack(alignment: .leading) {
             Text("Title")
                 .font(.title)
+                .color(.highlight)
             Text("Subtitle")
                 .font(.subtitle)
             Text("Block with some more words to be like a paragraph with multiple lines.")
