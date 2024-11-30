@@ -3,18 +3,17 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.style) private var style
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        ExampleScreenFont()
     }
+    
 }
 
 #Preview {
