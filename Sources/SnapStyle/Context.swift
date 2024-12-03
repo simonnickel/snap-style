@@ -14,6 +14,25 @@ extension SnapStyle {
         case sidebar
         case toolbar
         
+        public enum State {
+            
+            case disabled
+            case normal
+            case interactive
+            case navigative
+            case highlighted
+            case selected
+            
+        }
+        
+        public enum Hierarchy {
+            
+            case primary
+            case secondary
+            case tertiary
+            
+        }
+        
     }
     
     public struct ValuesForContext<Value> {

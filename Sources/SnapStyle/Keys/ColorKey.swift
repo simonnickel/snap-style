@@ -14,6 +14,20 @@ extension SnapStyle {
         
         case highlight
         
+        case foreground
+        case background
+        case border
+        
+//        case backgroundContainer
+//        case backgroundItemPrimary
+//        case backgroundItemSecondary
+//        case backgroundInteractivePrimary
+//        case backgroundInteractiveSecondary
+//        
+//        case foregroundPrimary
+//        case foregroundSecondary
+//        case foregroundDisabled
+        
     }
     
 }
