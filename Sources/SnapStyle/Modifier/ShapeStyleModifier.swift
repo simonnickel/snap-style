@@ -7,7 +7,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(shapeStyle key: SnapStyle.ShapeStyleKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
+    public func style(surface key: SnapStyle.SurfaceKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
         self
             .modifier(ForegroundModifier(key: key, hierarchy: hierarchy))
             .modifier(BackgroundModifier(key: key, hierarchy: hierarchy))
@@ -23,7 +23,7 @@ internal struct ForegroundModifier: ViewModifier {
     @Environment(\.style) private var style
     @Environment(\.styleComponent) private var styleComponent
 
-    let key: SnapStyle.ShapeStyleKey
+    let key: SnapStyle.SurfaceKey
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
@@ -42,7 +42,7 @@ internal struct BackgroundModifier: ViewModifier {
     @Environment(\.style) private var style
     @Environment(\.styleComponent) private var styleComponent
 
-    let key: SnapStyle.ShapeStyleKey
+    let key: SnapStyle.SurfaceKey
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
@@ -61,10 +61,10 @@ internal struct BackgroundModifier: ViewModifier {
 
 extension SnapStyle {
 
-    internal func shapeStyle(layer: SnapStyle.ShapeStyleKey.Layer, for key: ShapeStyleKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
+    internal func shapeStyle(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
 
-        guard let valueBuilder = colors[key] else {
-            return colors[.fallback]?(component, hierarchy).wrappedValue.shapeStyle(for: layer) ?? ShapeStyleValues.values(for: ShapeStyleKey.fallback)(component, hierarchy).wrappedValue.shapeStyle(for: layer)
+        guard let valueBuilder = surfaces[key] else {
+            return surfaces[.fallback]?(component, hierarchy).wrappedValue.shapeStyle(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(component, hierarchy).wrappedValue.shapeStyle(for: layer)
         }
 
         let value = valueBuilder(component, hierarchy)

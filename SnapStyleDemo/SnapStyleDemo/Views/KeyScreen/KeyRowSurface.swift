@@ -6,16 +6,16 @@
 import SnapStyle
 import SwiftUI
 
-struct KeyRowColor: View {
+struct KeyRowSurface: View {
     
-    let key: SnapStyle.ShapeStyleKey
+    let key: SnapStyle.SurfaceKey
     
     var body: some View {
         Text(key.description)
-            .style(shapeStyle: key)
+            .style(surface: key)
     }
 }
 
 #Preview {
-    KeyRowColor(key: .interactive)
+    KeyRowSurface(key: .interactive)
 }

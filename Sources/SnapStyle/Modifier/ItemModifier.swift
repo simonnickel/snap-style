@@ -8,6 +8,7 @@ import SwiftUI
 extension SnapStyle {
 
     public enum Item {
+        
         case title
         case content
         case label
@@ -47,37 +48,37 @@ internal struct ItemModifier: ViewModifier {
     private func title(_ content: Content) -> some View {
         content
             .style(font: .title, hierarchy: hierarchy)
-            .style(shapeStyle: .title, hierarchy: hierarchy)
+            .style(surface: .title, hierarchy: hierarchy)
     }
 
     private func conten(_ content: Content) -> some View {
         content
             .style(font: .content, hierarchy: hierarchy)
-            .style(shapeStyle: .content, hierarchy: hierarchy)
+            .style(surface: .content, hierarchy: hierarchy)
     }
 
     private func label(_ content: Content) -> some View {
         content
             .style(font: .label, hierarchy: hierarchy)
-            .style(shapeStyle: .label, hierarchy: hierarchy)
+            .style(surface: .label, hierarchy: hierarchy)
     }
 
     private func value(_ content: Content) -> some View {
         content
             .style(font: .value, hierarchy: hierarchy)
-            .style(shapeStyle: .value, hierarchy: hierarchy)
+            .style(surface: .value, hierarchy: hierarchy)
     }
 
     private func cta(_ content: Content) -> some View {
         content
             .style(font: .cta, hierarchy: hierarchy)
-            .style(shapeStyle: .cta, hierarchy: hierarchy)
+            .style(surface: .cta, hierarchy: hierarchy)
     }
 
     private func indicator(_ content: Content) -> some View {
         content
             .style(font: .indicator, hierarchy: hierarchy)
-            .style(shapeStyle: .indicator, hierarchy: hierarchy)
+            .style(surface: .indicator, hierarchy: hierarchy)
     }
 
 }

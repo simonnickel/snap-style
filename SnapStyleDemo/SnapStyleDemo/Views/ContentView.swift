@@ -30,8 +30,8 @@ struct ContentView: View {
                         }
                     }
                     NavigationLink("Colors") {
-                        KeyScreen(keys: SnapStyle.ShapeStyleKey.allCases) { key in
-                            KeyRowColor(key: key)
+                        KeyScreen(keys: SnapStyle.SurfaceKey.allCases) { key in
+                            KeyRowSurface(key: key)
                         }
                     }
                 } header: {
