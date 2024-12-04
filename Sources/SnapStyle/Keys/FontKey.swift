@@ -13,13 +13,13 @@ extension SnapStyle {
         case fallback
         
         case title
-        case subtitle
         
         case label
         case block
         case value
         case note
-        
+
+        case cta
         case icon
         case indicator
         

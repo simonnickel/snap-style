@@ -23,13 +23,6 @@ class FontValues: DefaultValues {
                 ]
             )
                 
-            case .subtitle: ValuesForContext(
-                base: .definition(.init(size: 16)),
-                values: [
-                    .card: .reference(.label),
-                ]
-            )
-                
             case .label: ValuesForContext(
                 base: .font(.body)
             )
@@ -44,6 +37,10 @@ class FontValues: DefaultValues {
                 
             case .note: ValuesForContext(
                 base: .reference(.label)
+            )
+
+            case .cta: ValuesForContext(
+                base: .reference(.title)
             )
                 
             case .icon: ValuesForContext(

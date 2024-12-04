@@ -17,8 +17,8 @@ struct ContentView: View {
                     NavigationLink("Fonts") {
                         FontExampleScreen()
                     }
-                    NavigationLink("Colors") {
-                        ColorExampleScreen()
+                    NavigationLink("Components") {
+                        ComponentsScreen()
                     }
                 } header: {
                     Text("Examples")

@@ -4,7 +4,7 @@
 //
 
 extension SnapStyle {
-    
+
     public enum Context {
         
         case header
@@ -24,17 +24,10 @@ extension SnapStyle {
             case selected
             
         }
-        
-        public enum Hierarchy {
-            
-            case primary
-            case secondary
-            case tertiary
-            
-        }
+
         
     }
-    
+
     public struct ValuesForContext<Value> {
         private let base: Value
         private let values: [Context : Value]

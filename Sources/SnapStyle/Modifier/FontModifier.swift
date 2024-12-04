@@ -22,7 +22,7 @@ internal struct FontModifier: ViewModifier {
 
 extension View {
     
-    public func font(_ key: SnapStyle.FontKey) -> some View {
+    public func style(font key: SnapStyle.FontKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
         self.modifier(FontModifier(key: key))
     }
     
