@@ -31,24 +31,3 @@ internal struct FontModifier: ViewModifier {
     }
     
 }
-
-
-// MARK: - SnapStyle Getter
-
-extension SnapStyle {
-    
-    internal func font(for key: FontKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> Font? {
-        
-        guard let valueBuilder = fonts[key] else {
-            return fonts[.fallback]?(component, hierarchy)?.wrappedValue ?? FontValues.values(for: FontKey.fallback)(component, hierarchy)?.wrappedValue
-        }
-
-        let value = valueBuilder(component, hierarchy) ?? FontValues.defaultValues[key]?(component, hierarchy)
-
-        return switch value {
-            case .reference(let key): font(for: key, in: component, hierarchy: hierarchy)
-            default: value?.wrappedValue
-        }
-    }
-    
-}
