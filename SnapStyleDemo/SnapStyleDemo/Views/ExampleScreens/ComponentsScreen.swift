@@ -50,4 +50,13 @@ struct ComponentsScreen: View {
 
 #Preview {
     ComponentsScreen()
+//        .styleOverride(surfaces: [
+//            .title : { component, hierarchy in
+//                switch hierarchy {
+//                    case .primary: .surface(.init(foreground: Color.primary))
+//                    case .secondary: .surface(.init(foreground: Color.secondary))
+//                    case .tertiary: .surface(.init(foreground: Color.secondary))
+//                }
+//            }
+//        ])
 }
