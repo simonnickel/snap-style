@@ -14,9 +14,9 @@ extension SnapStyle {
         
         case highlight
         
-        case foreground
-        case background
-        case border
+//        case foreground
+//        case background
+//        case border
         
 //        case backgroundContainer
 //        case backgroundItemPrimary
