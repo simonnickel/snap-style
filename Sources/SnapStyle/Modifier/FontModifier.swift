@@ -8,12 +8,13 @@ import SwiftUI
 internal struct FontModifier: ViewModifier {
     
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
-    
+    @Environment(\.styleComponent) private var styleComponent
+
     let key: SnapStyle.FontKey
-    
+    let hierarchy: SnapStyle.Item.Hierarchy
+
     func body(content: Content) -> some View {
-        let value = style.font(for: key, in: styleContext)
+        let value = style.font(for: key, in: styleComponent, hierarchy: hierarchy)
         content
             .font(value)
     }
@@ -23,20 +24,22 @@ internal struct FontModifier: ViewModifier {
 extension View {
     
     public func style(font key: SnapStyle.FontKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self.modifier(FontModifier(key: key))
+        self.modifier(FontModifier(key: key, hierarchy: hierarchy))
     }
     
 }
 
 extension SnapStyle {
     
-    internal func font(for key: FontKey, in context: Context) -> Font {
-        guard let value = fonts[key]?.value(in: context) else {
-            return fonts[.fallback]?.value(in: context).wrappedValue ?? FontValues.values(for: FontKey.fallback).value(in: context).wrappedValue
+    internal func font(for key: FontKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> Font {
+        guard let valueBuilder = fonts[key] else {
+            return fonts[.fallback]?(component, hierarchy).wrappedValue ?? FontValues.values(for: FontKey.fallback)(component, hierarchy).wrappedValue
         }
-        
+
+        let value = valueBuilder(component, hierarchy)
+
         return switch value {
-            case .reference(let key): font(for: key, in: context)
+            case .reference(let key): font(for: key, in: component, hierarchy: hierarchy)
             default: value.wrappedValue
         }
     }

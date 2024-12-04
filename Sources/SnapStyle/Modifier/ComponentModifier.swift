@@ -23,12 +23,12 @@ extension SnapStyle {
 internal struct ComponentModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
 
     let component: SnapStyle.Component
 
     func body(content: Content) -> some View {
         content
+            .environment(\.styleComponent, component)
     }
 
 }

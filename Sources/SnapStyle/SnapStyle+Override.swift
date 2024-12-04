@@ -8,7 +8,7 @@ import SwiftUI
 extension SnapStyle {
     
     internal func replaced(
-        fonts: [FontKey : ValuesForContext<FontKey.Value>]? = nil
+        fonts: [FontKey : ValueBuilder<FontKey.Value>]? = nil
     ) -> Self {
         var style = self
         
@@ -25,7 +25,7 @@ internal struct StyleOverride: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let fonts: [SnapStyle.FontKey : SnapStyle.ValuesForContext<SnapStyle.FontKey.Value>]?
+    let fonts: [SnapStyle.FontKey : SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]?
 
     func body(content: Content) -> some View {
         content
@@ -37,7 +37,7 @@ internal struct StyleOverride: ViewModifier {
 extension View {
     
     public func styleOverride(
-        fonts: [SnapStyle.FontKey : SnapStyle.ValuesForContext<SnapStyle.FontKey.Value>]? = nil
+        fonts: [SnapStyle.FontKey : SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]? = nil
     ) -> some View {
         self.modifier(StyleOverride(fonts: fonts))
     }

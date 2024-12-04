@@ -22,5 +22,5 @@ struct KeyRowFont: View {
 }
 
 #Preview {
-    KeyRowFont(key: .block)
+    KeyRowFont(key: .content)
 }

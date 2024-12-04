@@ -11,23 +11,18 @@ extension SnapStyle {
         
         /// A key to indicate a missing value.
         case fallback
+
+        // Item
+        case title
+        case content
+        case label
+        case value
+        case cta
+        case indicator
         
-        case highlight
-        
-//        case foreground
-//        case background
-//        case border
-        
-//        case backgroundContainer
-//        case backgroundItemPrimary
-//        case backgroundItemSecondary
-//        case backgroundInteractivePrimary
-//        case backgroundInteractiveSecondary
-//        
-//        case foregroundPrimary
-//        case foregroundSecondary
-//        case foregroundDisabled
-        
+        // Highlight
+        case interactive
+        case navigation
     }
     
 }

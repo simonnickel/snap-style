@@ -11,11 +11,11 @@ struct FontExampleScreen: View {
     var body: some View {
         VStack {
             content
-                .environment(\.styleContext, .main)
-            
+                .environment(\.styleComponent, .content)
+
             content
-                .environment(\.styleContext, .card)
-                .styleOverride(fonts: [.block : .init(base: .definition(.init(size: 8)))])
+                .environment(\.styleComponent, .card)
+//                .styleOverride(fonts: [.block : .init(base: .definition(.init(size: 8)))])
         }
     }
     

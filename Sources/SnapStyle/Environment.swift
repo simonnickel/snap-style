@@ -9,6 +9,6 @@ extension EnvironmentValues {
     
     @Entry public var style: SnapStyle = SnapStyle()
     
-    @Entry public var styleContext: SnapStyle.Context = .main
-    
+    @Entry public var styleComponent: SnapStyle.Component = .content
+
 }

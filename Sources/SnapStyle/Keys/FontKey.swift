@@ -11,16 +11,13 @@ extension SnapStyle {
         
         /// A key to indicate a missing value.
         case fallback
-        
-        case title
-        
-        case label
-        case block
-        case value
-        case note
 
+        // Item
+        case title
+        case content
+        case label
+        case value
         case cta
-        case icon
         case indicator
         
     }

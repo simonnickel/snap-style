@@ -7,50 +7,46 @@ class FontValues: DefaultValues {
     
     typealias Key = SnapStyle.FontKey
     typealias Value = Key.Value
-    typealias ValuesForContext = SnapStyle.ValuesForContext<Key.Value>
-    
-    static func values(for key: Key) -> ValuesForContext {
+    typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
+
+    static func values(for key: Key) -> ValueBuilder {
         switch key {
                 
-            case .fallback: ValuesForContext(
-                base: .definition(.init(size: 1))
-            )
-                
-            case .title: ValuesForContext(
-                base: .definition(.init(size: 18)),
-                values: [
-                    .card: .reference(.label),
-                ]
-            )
-                
-            case .label: ValuesForContext(
-                base: .font(.body)
-            )
-                
-            case .block: ValuesForContext(
-                base: .reference(.label)
-            )
-                
-            case .value: ValuesForContext(
-                base: .reference(.label)
-            )
-                
-            case .note: ValuesForContext(
-                base: .reference(.label)
-            )
+            case .fallback: { component, hierarchy in
+                .definition(.init(size: 1))
+            }
 
-            case .cta: ValuesForContext(
-                base: .reference(.title)
-            )
-                
-            case .icon: ValuesForContext(
-                base: .reference(.label)
-            )
-                
-            case .indicator: ValuesForContext(
-                base: .reference(.label)
-            )
-                
+            case .title: { component, hierarchy in
+                switch hierarchy {
+                    case .primary: .definition(.init(size: 18))
+                    case .secondary: .definition(.init(size: 16))
+                    case .tertiary: .definition(.init(size: 14))
+                }
+            }
+
+            case .label: { component, hierarchy in
+                switch component {
+                case .card: .font(.caption)
+                    default: .font(.body)
+                }
+            }
+
+            case .content: { component, hierarchy in
+                .reference(.label)
+            }
+
+            case .value: { component, hierarchy in
+                .reference(.label)
+            }
+
+            case .cta: { component, hierarchy in
+                .reference(.title)
+            }
+
+            case .indicator: { component, hierarchy in
+                .reference(.label)
+            }
+
         }
     }
     

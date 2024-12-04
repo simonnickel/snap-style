@@ -8,12 +8,13 @@ import SwiftUI
 internal struct ColorModifier: ViewModifier {
     
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
-    
+    @Environment(\.styleComponent) private var styleComponent
+
     let key: SnapStyle.ColorKey
-    
+    let hierarchy: SnapStyle.Item.Hierarchy
+
     func body(content: Content) -> some View {
-        let value = style.color(for: key, in: styleContext)
+        let value = style.color(for: key, in: styleComponent, hierarchy: hierarchy)
         content
             .foregroundStyle(value)
     }
@@ -22,21 +23,23 @@ internal struct ColorModifier: ViewModifier {
 
 extension View {
     
-    public func color(_ key: SnapStyle.ColorKey) -> some View {
-        self.modifier(ColorModifier(key: key))
+    public func color(_ key: SnapStyle.ColorKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
+        self.modifier(ColorModifier(key: key, hierarchy: hierarchy))
     }
     
 }
 
 extension SnapStyle {
     
-    internal func color(for key: ColorKey, in context: Context) -> Color {
-        guard let value = colors[key]?.value(in: context) else {
-            return colors[.fallback]?.value(in: context).wrappedValue ?? ColorValues.values(for: ColorKey.fallback).value(in: context).wrappedValue
+    internal func color(for key: ColorKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> Color {
+        guard let valueBuilder = colors[key] else {
+            return colors[.fallback]?(component, hierarchy).wrappedValue ?? ColorValues.values(for: ColorKey.fallback)(component, hierarchy).wrappedValue
         }
-        
+
+        let value = valueBuilder(component, hierarchy)
+
         return switch value {
-            case .reference(let key): color(for: key, in: context)
+            case .reference(let key): color(for: key, in: component, hierarchy: hierarchy)
             default: value.wrappedValue
         }
     }

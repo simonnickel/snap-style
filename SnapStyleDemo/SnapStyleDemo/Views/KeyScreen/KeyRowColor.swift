@@ -17,5 +17,5 @@ struct KeyRowColor: View {
 }
 
 #Preview {
-    KeyRowColor(key: .highlight)
+    KeyRowColor(key: .interactive)
 }
