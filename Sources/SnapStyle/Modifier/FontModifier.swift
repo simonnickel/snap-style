@@ -5,6 +5,17 @@
 
 import SwiftUI
 
+extension View {
+
+    public func style(font key: SnapStyle.FontKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
+        self.modifier(FontModifier(key: key, hierarchy: hierarchy))
+    }
+
+}
+
+
+// MARK: - Modifier
+
 internal struct FontModifier: ViewModifier {
     
     @Environment(\.style) private var style
@@ -21,17 +32,13 @@ internal struct FontModifier: ViewModifier {
     
 }
 
-extension View {
-    
-    public func style(font key: SnapStyle.FontKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self.modifier(FontModifier(key: key, hierarchy: hierarchy))
-    }
-    
-}
+
+// MARK: - SnapStyle Getter
 
 extension SnapStyle {
     
     internal func font(for key: FontKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> Font {
+        
         guard let valueBuilder = fonts[key] else {
             return fonts[.fallback]?(component, hierarchy).wrappedValue ?? FontValues.values(for: FontKey.fallback)(component, hierarchy).wrappedValue
         }

@@ -19,7 +19,7 @@ struct KeyScreen<Key, ItemContent: View>: View where Key: Hashable, Key : Custom
 }
 
 #Preview {
-    KeyScreen(keys: SnapStyle.ColorKey.allCases) { key in
+    KeyScreen(keys: SnapStyle.ShapeStyleKey.allCases) { key in
         KeyRowColor(key: key)
     }
 }

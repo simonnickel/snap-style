@@ -7,8 +7,8 @@ import SwiftUI
 
 extension SnapStyle {
     
-    public enum ColorKey: String, StyleKey {
-        
+    public enum ShapeStyleKey: String, StyleKey {
+
         /// A key to indicate a missing value.
         case fallback
 
@@ -27,7 +27,7 @@ extension SnapStyle {
     
 }
 
-extension SnapStyle.ColorKey {
+extension SnapStyle.ShapeStyleKey {
 
     public enum Layer {
         case any
@@ -78,7 +78,7 @@ extension SnapStyle.ColorKey {
         }
 
         case set(Set)
-        case reference(SnapStyle.ColorKey)
+        case reference(SnapStyle.ShapeStyleKey)
 
         var wrappedValue: Set {
             switch self {

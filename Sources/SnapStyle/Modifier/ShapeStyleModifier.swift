@@ -5,12 +5,25 @@
 
 import SwiftUI
 
+extension View {
+
+    public func style(shapeStyle key: SnapStyle.ShapeStyleKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
+        self
+            .modifier(ForegroundModifier(key: key, hierarchy: hierarchy))
+            .modifier(BackgroundModifier(key: key, hierarchy: hierarchy))
+    }
+
+}
+
+
+// MARK: - Modifier
+
 internal struct ForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleComponent) private var styleComponent
 
-    let key: SnapStyle.ColorKey
+    let key: SnapStyle.ShapeStyleKey
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
@@ -29,7 +42,7 @@ internal struct BackgroundModifier: ViewModifier {
     @Environment(\.style) private var style
     @Environment(\.styleComponent) private var styleComponent
 
-    let key: SnapStyle.ColorKey
+    let key: SnapStyle.ShapeStyleKey
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
@@ -43,28 +56,22 @@ internal struct BackgroundModifier: ViewModifier {
 
 }
 
-extension View {
-    
-    public func style(shapeStyle key: SnapStyle.ColorKey, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self
-            .modifier(ForegroundModifier(key: key, hierarchy: hierarchy))
-            .modifier(BackgroundModifier(key: key, hierarchy: hierarchy))
-    }
-    
-}
+
+// MARK: - SnapStyle Getter
 
 extension SnapStyle {
 
-    internal func shapeStyle(layer: SnapStyle.ColorKey.Layer, for key: ColorKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
+    internal func shapeStyle(layer: SnapStyle.ShapeStyleKey.Layer, for key: ShapeStyleKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
+
         guard let valueBuilder = colors[key] else {
-            return colors[.fallback]?(component, hierarchy).wrappedValue.shapeStyle(for: layer) ?? ColorValues.values(for: ColorKey.fallback)(component, hierarchy).wrappedValue.shapeStyle(for: layer)
+            return colors[.fallback]?(component, hierarchy).wrappedValue.shapeStyle(for: layer) ?? ShapeStyleValues.values(for: ShapeStyleKey.fallback)(component, hierarchy).wrappedValue.shapeStyle(for: layer)
         }
 
         let value = valueBuilder(component, hierarchy)
 
         return switch value {
-        case .reference(let key): shapeStyle(layer: layer, for: key, in: component, hierarchy: hierarchy)
-        default: value.wrappedValue.shapeStyle(for: layer)
+            case .reference(let key): shapeStyle(layer: layer, for: key, in: component, hierarchy: hierarchy)
+            default: value.wrappedValue.shapeStyle(for: layer)
         }
     }
     

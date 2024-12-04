@@ -8,7 +8,7 @@ import SwiftUI
 
 struct KeyRowColor: View {
     
-    let key: SnapStyle.ColorKey
+    let key: SnapStyle.ShapeStyleKey
     
     var body: some View {
         Text(key.description)

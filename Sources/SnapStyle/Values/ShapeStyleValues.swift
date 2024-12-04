@@ -5,9 +5,9 @@
 
 import SwiftUI
 
-class ColorValues: DefaultValues {
-    
-    typealias Key = SnapStyle.ColorKey
+class ShapeStyleValues: DefaultValues {
+
+    typealias Key = SnapStyle.ShapeStyleKey
     typealias Value = Key.Value
     typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
 
@@ -15,21 +15,21 @@ class ColorValues: DefaultValues {
         switch key {
 
             case .fallback: { component, hierarchy in
-                    .set(.init(foreground: Color.pink, background: Color.yellow))
+                .set(.init(foreground: Color.pink, background: Color.yellow))
             }
 
 
             // MARK: - Item
 
             case .title: { component, hierarchy in
-                    .set(.init(foreground: .mint))
+                .set(.init(foreground: .mint))
             }
 
             case .content: { component, hierarchy in
                 switch hierarchy {
                     case .primary: .set(.init(foreground: Color.primary))
                     case .secondary: .set(.init(foreground: Color.secondary))
-                case .tertiary: .set(.init(foreground: Color.secondary))
+                    case .tertiary: .set(.init(foreground: Color.secondary))
                 }
             }
 
@@ -42,10 +42,10 @@ class ColorValues: DefaultValues {
             }
 
             case .cta: { component, hierarchy in
-                    .set(.init(
-                        foreground: .white,
-                        background: Gradient(colors: [.blue, .yellow])
-                    ))
+                .set(.init(
+                    foreground: .white,
+                    background: Gradient(colors: [.blue, .yellow])
+                ))
             }
 
             case .indicator: { component, hierarchy in
@@ -56,7 +56,7 @@ class ColorValues: DefaultValues {
             // MARK: - Highlight
 
             case .interactive: { component, hierarchy in
-                    .set(.init(foreground: Color.accentColor))
+                .set(.init(foreground: Color.accentColor))
             }
 
             case .navigation: { component, hierarchy in
