@@ -9,7 +9,7 @@ import SwiftUI
 @main
 struct SnapStyleDemoApp: App {
     
-    let style: SnapStyle = SnapStyle()
+    let style: SnapStyle = SnapStyle.defaults
     
     var body: some Scene {
         WindowGroup {

@@ -8,9 +8,6 @@ import SwiftUI
 extension SnapStyle {
 
     public enum FontKey: String, StyleKey {
-        
-        /// A key to indicate a missing value.
-        case fallback
 
         // Keys used for `Item`.
         case title
@@ -74,16 +71,17 @@ extension SnapStyle {
 
     internal func font(for key: FontKey, in context: SnapStyle.Context) -> Font? {
 
-        guard let valueBuilder = fonts[key] else {
-            return fonts[.fallback]?(context)?.wrappedValue ?? FontValues.values(for: FontKey.fallback)(context)?.wrappedValue
+        guard let values = fonts[key] else {
+            return nil
         }
 
-        let value = valueBuilder(context) ?? FontValues.defaultValues[key]?(context)
+        let value = values.value(for: context)
 
-        return switch value {
-            case .reference(let key): font(for: key, in: context)
-            default: value?.wrappedValue
+        switch value {
+            case .reference(let key): return font(for: key, in: context)
+            default: return value?.wrappedValue
         }
+        
     }
 
 }

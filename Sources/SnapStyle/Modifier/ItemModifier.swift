@@ -16,7 +16,7 @@ extension SnapStyle {
         case cta
         case indicator
 
-        public enum Hierarchy: CaseIterable {
+        public enum Hierarchy: Sendable, CaseIterable {
 
             case primary
             case secondary

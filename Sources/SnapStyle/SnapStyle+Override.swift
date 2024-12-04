@@ -12,13 +12,13 @@ extension SnapStyle {
         surfaces: [SurfaceKey : ValueBuilder<SurfaceKey.Value>]? = nil
     ) -> Self {
         var style = self
-        
-        for (key, valueBuilder) in fonts ?? [:] {
-            style.fonts[key] = valueBuilder
+
+        if let fonts {
+            style.apply(fontBuilder: fonts)
         }
 
-        for (key, valueBuilder) in surfaces ?? [:] {
-            style.surfaces[key] = valueBuilder
+        if let surfaces {
+            style.apply(surfaceBuilder: surfaces)
         }
         
         return style

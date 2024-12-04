@@ -14,10 +14,6 @@ class SurfaceValues: DefaultValues {
     static func values(for key: Key) -> ValueBuilder {
         switch key {
 
-            case .fallback: { context in
-                .surface(.init(foreground: Color.pink, background: Color.yellow))
-            }
-
 
             // MARK: - Item
 

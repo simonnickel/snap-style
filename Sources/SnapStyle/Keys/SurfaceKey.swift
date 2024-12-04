@@ -9,9 +9,6 @@ extension SnapStyle {
     
     public enum SurfaceKey: String, StyleKey {
 
-        /// A key to indicate a missing value.
-        case fallback
-
         // Keys used for `Item`.
         case title
         case content
@@ -103,16 +100,17 @@ extension SnapStyle {
 
     internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in context: Context) -> AnyShapeStyle? {
 
-        guard let valueBuilder = surfaces[key] else {
-            return surfaces[.fallback]?(context)?.wrappedValue.surface(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(context)?.wrappedValue.surface(for: layer)
+        guard let values = surfaces[key] else {
+            return nil
         }
 
-        let value = valueBuilder(context) ?? SurfaceValues.defaultValues[key]?(context)
+        let value = values.value(for: context)
 
         switch value {
-        case .reference(let key): return surface(layer: layer, for: key, in: context)
+            case .reference(let key): return surface(layer: layer, for: key, in: context)
             default: return value?.wrappedValue.surface(for: layer)
         }
+        
     }
 
 }

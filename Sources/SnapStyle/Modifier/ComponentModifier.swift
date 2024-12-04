@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum Component {
+    public enum Component: Sendable, CaseIterable {
         case screen, content, list, card
 
         public enum Hierarchy {

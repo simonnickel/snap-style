@@ -11,10 +11,6 @@ class FontValues: DefaultValues {
 
     static func values(for key: Key) -> ValueBuilder {
         switch key {
-                
-            case .fallback: { context in
-                .definition(.init(size: 1))
-            }
 
             case .title: { context in
                 switch context.hierarchy {
