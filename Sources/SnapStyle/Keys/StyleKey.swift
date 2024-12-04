@@ -4,7 +4,8 @@
 //
 
 protocol StyleKey: CaseIterable, Hashable, RawRepresentable, CustomStringConvertible where RawValue == String {
-    
+
+    static func key(for item: SnapStyle.Item) -> Self
 }
 
 extension StyleKey {

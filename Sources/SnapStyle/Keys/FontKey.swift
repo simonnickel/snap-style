@@ -12,14 +12,25 @@ extension SnapStyle {
         /// A key to indicate a missing value.
         case fallback
 
-        // Item
+        // Keys used for `Item`.
         case title
         case content
         case label
         case value
         case cta
         case indicator
-        
+
+        static func key(for item: SnapStyle.Item) -> SnapStyle.FontKey {
+            switch item {
+                case .title: .title
+                case .content: .content
+                case .label: .label
+                case .value: .value
+                case .cta: .cta
+                case .indicator: .indicator
+            }
+        }
+
     }
     
 }

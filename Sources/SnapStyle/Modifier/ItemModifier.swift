@@ -35,50 +35,11 @@ internal struct ItemModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        switch item {
-            case .title: title(content)
-            case .content: conten(content)
-            case .label: label(content)
-            case .value: value(content)
-            case .cta: cta(content)
-            case .indicator: indicator(content)
-        }
-    }
 
-    private func title(_ content: Content) -> some View {
         content
-            .style(font: .title, hierarchy: hierarchy)
-            .style(surface: .title, hierarchy: hierarchy)
-    }
+            .style(font: SnapStyle.FontKey.key(for: item), hierarchy: hierarchy)
+            .style(surface: SnapStyle.SurfaceKey.key(for: item), hierarchy: hierarchy)
 
-    private func conten(_ content: Content) -> some View {
-        content
-            .style(font: .content, hierarchy: hierarchy)
-            .style(surface: .content, hierarchy: hierarchy)
-    }
-
-    private func label(_ content: Content) -> some View {
-        content
-            .style(font: .label, hierarchy: hierarchy)
-            .style(surface: .label, hierarchy: hierarchy)
-    }
-
-    private func value(_ content: Content) -> some View {
-        content
-            .style(font: .value, hierarchy: hierarchy)
-            .style(surface: .value, hierarchy: hierarchy)
-    }
-
-    private func cta(_ content: Content) -> some View {
-        content
-            .style(font: .cta, hierarchy: hierarchy)
-            .style(surface: .cta, hierarchy: hierarchy)
-    }
-
-    private func indicator(_ content: Content) -> some View {
-        content
-            .style(font: .indicator, hierarchy: hierarchy)
-            .style(surface: .indicator, hierarchy: hierarchy)
     }
 
 }

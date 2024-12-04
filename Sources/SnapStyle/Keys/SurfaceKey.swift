@@ -12,7 +12,7 @@ extension SnapStyle {
         /// A key to indicate a missing value.
         case fallback
 
-        // Item
+        // Keys used for `Item`.
         case title
         case content
         case label
@@ -23,6 +23,17 @@ extension SnapStyle {
         // Highlight
         case interactive
         case navigation
+
+        static func key(for item: SnapStyle.Item) -> SnapStyle.SurfaceKey {
+            switch item {
+                case .title: .title
+                case .content: .content
+                case .label: .label
+                case .value: .value
+                case .cta: .cta
+                case .indicator: .indicator
+            }
+        }
     }
     
 }
