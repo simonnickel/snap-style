@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SwiftUI
 
 class ColorValues: DefaultValues {
     
@@ -14,21 +15,21 @@ class ColorValues: DefaultValues {
         switch key {
 
             case .fallback: { component, hierarchy in
-                .color(.pink)
+                    .set(.init(foreground: Color.pink, background: Color.yellow))
             }
 
 
             // MARK: - Item
 
             case .title: { component, hierarchy in
-                .reference(.content)
+                    .set(.init(foreground: .mint))
             }
 
             case .content: { component, hierarchy in
                 switch hierarchy {
-                    case .primary: .color(.primary)
-                    case .secondary: .color(.secondary)
-                    case .tertiary: .color(.secondary)
+                    case .primary: .set(.init(foreground: Color.primary))
+                    case .secondary: .set(.init(foreground: Color.secondary))
+                case .tertiary: .set(.init(foreground: Color.secondary))
                 }
             }
 
@@ -41,7 +42,10 @@ class ColorValues: DefaultValues {
             }
 
             case .cta: { component, hierarchy in
-                .reference(.interactive)
+                    .set(.init(
+                        foreground: .white,
+                        background: Gradient(colors: [.blue, .yellow])
+                    ))
             }
 
             case .indicator: { component, hierarchy in
@@ -52,7 +56,7 @@ class ColorValues: DefaultValues {
             // MARK: - Highlight
 
             case .interactive: { component, hierarchy in
-                .color(.accentColor)
+                    .set(.init(foreground: Color.accentColor))
             }
 
             case .navigation: { component, hierarchy in

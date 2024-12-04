@@ -12,7 +12,7 @@ struct KeyRowColor: View {
     
     var body: some View {
         Text(key.description)
-            .color(key)
+            .style(shapeStyle: key)
     }
 }
 

@@ -47,37 +47,37 @@ internal struct ItemModifier: ViewModifier {
     private func title(_ content: Content) -> some View {
         content
             .style(font: .title, hierarchy: hierarchy)
-            .color(.title, hierarchy: hierarchy)
+            .style(shapeStyle: .title, hierarchy: hierarchy)
     }
 
     private func conten(_ content: Content) -> some View {
         content
             .style(font: .content, hierarchy: hierarchy)
-            .color(.content, hierarchy: hierarchy)
+            .style(shapeStyle: .content, hierarchy: hierarchy)
     }
 
     private func label(_ content: Content) -> some View {
         content
             .style(font: .label, hierarchy: hierarchy)
-            .color(.label, hierarchy: hierarchy)
+            .style(shapeStyle: .label, hierarchy: hierarchy)
     }
 
     private func value(_ content: Content) -> some View {
         content
             .style(font: .value, hierarchy: hierarchy)
-            .color(.value, hierarchy: hierarchy)
+            .style(shapeStyle: .value, hierarchy: hierarchy)
     }
 
     private func cta(_ content: Content) -> some View {
         content
             .style(font: .cta, hierarchy: hierarchy)
-            .color(.cta, hierarchy: hierarchy)
+            .style(shapeStyle: .cta, hierarchy: hierarchy)
     }
 
     private func indicator(_ content: Content) -> some View {
         content
             .style(font: .indicator, hierarchy: hierarchy)
-            .color(.indicator, hierarchy: hierarchy)
+            .style(shapeStyle: .indicator, hierarchy: hierarchy)
     }
 
 }
