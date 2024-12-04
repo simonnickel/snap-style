@@ -27,7 +27,7 @@ internal struct ForegroundModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        if let foreground = style.shapeStyle(layer: .foreground, for: key, in: styleComponent, hierarchy: hierarchy) {
+        if let foreground = style.surface(layer: .foreground, for: key, in: styleComponent, hierarchy: hierarchy) {
             content
                 .foregroundStyle(foreground)
         } else {
@@ -46,7 +46,7 @@ internal struct BackgroundModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        if let background = style.shapeStyle(layer: .background, for: key, in: styleComponent, hierarchy: hierarchy) {
+        if let background = style.surface(layer: .background, for: key, in: styleComponent, hierarchy: hierarchy) {
             content
                 .background(background)
         } else {
@@ -61,17 +61,17 @@ internal struct BackgroundModifier: ViewModifier {
 
 extension SnapStyle {
 
-    internal func shapeStyle(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
+    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
 
         guard let valueBuilder = surfaces[key] else {
-            return surfaces[.fallback]?(component, hierarchy).wrappedValue.shapeStyle(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(component, hierarchy).wrappedValue.shapeStyle(for: layer)
+            return surfaces[.fallback]?(component, hierarchy).wrappedValue.surface(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(component, hierarchy).wrappedValue.surface(for: layer)
         }
 
         let value = valueBuilder(component, hierarchy)
 
-        return switch value {
-            case .reference(let key): shapeStyle(layer: layer, for: key, in: component, hierarchy: hierarchy)
-            default: value.wrappedValue.shapeStyle(for: layer)
+        switch value {
+            case .reference(let key): return surface(layer: layer, for: key, in: component, hierarchy: hierarchy)
+            default: return value.wrappedValue.surface(for: layer)
         }
     }
     

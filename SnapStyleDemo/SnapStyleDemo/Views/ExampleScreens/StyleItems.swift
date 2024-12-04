@@ -24,8 +24,14 @@ struct StyleItems: View {
             Text("Indicator")
                 .style(item: .indicator)
         }
-        Button {} label: { Text("Button") }
-            .style(item: .cta)
+        HStack {
+            Button {} label: { Text("Button") }
+                .style(item: .cta)
+            Button {} label: { Text("Button") }
+                .style(item: .cta, hierarchy: .secondary)
+            Button {} label: { Text("Button") }
+                .style(item: .cta, hierarchy: .tertiary)
+        }
     }
 }
 

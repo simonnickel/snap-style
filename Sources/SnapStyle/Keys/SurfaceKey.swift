@@ -52,7 +52,7 @@ extension SnapStyle.SurfaceKey {
             
             let values: [Layer: AnyShapeStyle]
 
-            public func shapeStyle(for layer: Layer) -> AnyShapeStyle? {
+            public func surface(for layer: Layer) -> AnyShapeStyle? {
                 values[layer] ?? values[.any]
             }
 
