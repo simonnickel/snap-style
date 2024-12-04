@@ -101,16 +101,16 @@ extension SnapStyle.SurfaceKey {
 
 extension SnapStyle {
 
-    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> AnyShapeStyle? {
+    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in context: Context) -> AnyShapeStyle? {
 
         guard let valueBuilder = surfaces[key] else {
-            return surfaces[.fallback]?(component, hierarchy)?.wrappedValue.surface(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(component, hierarchy)?.wrappedValue.surface(for: layer)
+            return surfaces[.fallback]?(context)?.wrappedValue.surface(for: layer) ?? SurfaceValues.values(for: SurfaceKey.fallback)(context)?.wrappedValue.surface(for: layer)
         }
 
-        let value = valueBuilder(component, hierarchy) ?? SurfaceValues.defaultValues[key]?(component, hierarchy)
+        let value = valueBuilder(context) ?? SurfaceValues.defaultValues[key]?(context)
 
         switch value {
-            case .reference(let key): return surface(layer: layer, for: key, in: component, hierarchy: hierarchy)
+        case .reference(let key): return surface(layer: layer, for: key, in: context)
             default: return value?.wrappedValue.surface(for: layer)
         }
     }

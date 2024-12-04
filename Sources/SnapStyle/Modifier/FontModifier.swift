@@ -25,7 +25,7 @@ internal struct FontModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        let value = style.font(for: key, in: styleComponent, hierarchy: hierarchy)
+        let value = style.font(for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy))
         content
             .font(value)
     }

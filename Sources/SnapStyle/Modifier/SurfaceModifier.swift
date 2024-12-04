@@ -27,7 +27,7 @@ internal struct ForegroundModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        if let foreground = style.surface(layer: .foreground, for: key, in: styleComponent, hierarchy: hierarchy) {
+        if let foreground = style.surface(layer: .foreground, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
             content
                 .foregroundStyle(foreground)
         } else {
@@ -46,7 +46,7 @@ internal struct BackgroundModifier: ViewModifier {
     let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
-        if let background = style.surface(layer: .background, for: key, in: styleComponent, hierarchy: hierarchy) {
+        if let background = style.surface(layer: .background, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
             content
                 .background(background)
         } else {

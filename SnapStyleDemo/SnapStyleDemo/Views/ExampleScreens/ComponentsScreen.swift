@@ -51,10 +51,10 @@ struct ComponentsScreen: View {
 #Preview {
     ComponentsScreen()
         .styleOverride(surfaces: [
-            .title : { component, hierarchy in
-                switch hierarchy {
+            .title : { context in
+                switch context.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
-                default: nil
+                    default: nil
                 }
             }
         ])

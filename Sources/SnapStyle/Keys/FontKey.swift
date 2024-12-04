@@ -72,16 +72,16 @@ extension SnapStyle.FontKey {
 
 extension SnapStyle {
 
-    internal func font(for key: FontKey, in component: SnapStyle.Component, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> Font? {
+    internal func font(for key: FontKey, in context: SnapStyle.Context) -> Font? {
 
         guard let valueBuilder = fonts[key] else {
-            return fonts[.fallback]?(component, hierarchy)?.wrappedValue ?? FontValues.values(for: FontKey.fallback)(component, hierarchy)?.wrappedValue
+            return fonts[.fallback]?(context)?.wrappedValue ?? FontValues.values(for: FontKey.fallback)(context)?.wrappedValue
         }
 
-        let value = valueBuilder(component, hierarchy) ?? FontValues.defaultValues[key]?(component, hierarchy)
+        let value = valueBuilder(context) ?? FontValues.defaultValues[key]?(context)
 
         return switch value {
-            case .reference(let key): font(for: key, in: component, hierarchy: hierarchy)
+            case .reference(let key): font(for: key, in: context)
             default: value?.wrappedValue
         }
     }

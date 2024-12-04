@@ -5,6 +5,7 @@
 
 extension SnapStyle {
 
-    public typealias ValueBuilder<Value> = (SnapStyle.Component, SnapStyle.Item.Hierarchy) -> Value?
-    
+    public typealias ValueBuilder<Value> = (Context) -> Value?
+
 }
+

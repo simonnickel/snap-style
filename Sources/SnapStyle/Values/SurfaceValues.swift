@@ -14,52 +14,52 @@ class SurfaceValues: DefaultValues {
     static func values(for key: Key) -> ValueBuilder {
         switch key {
 
-            case .fallback: { component, hierarchy in
+            case .fallback: { context in
                 .surface(.init(foreground: Color.pink, background: Color.yellow))
             }
 
 
             // MARK: - Item
 
-            case .title: { component, hierarchy in
+            case .title: { context in
                 .surface(.init(foreground: .mint))
             }
 
-            case .content: { component, hierarchy in
-                switch hierarchy {
+            case .content: { context in
+                switch context.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
                     case .secondary: .surface(.init(foreground: Color.secondary))
                     case .tertiary: .surface(.init(foreground: Color.secondary))
                 }
             }
 
-            case .label: { component, hierarchy in
+            case .label: { context in
                 .reference(.content)
             }
 
-            case .value: { component, hierarchy in
+            case .value: { context in
                 .reference(.interactive)
             }
 
-            case .cta: { component, hierarchy in
+            case .cta: { context in
                 .surface(.init(
                     foreground: .white,
                     background: Gradient(colors: [.blue, .yellow])
                 ))
             }
 
-            case .indicator: { component, hierarchy in
+            case .indicator: { context in
                 .reference(.content)
             }
 
 
             // MARK: - Highlight
 
-            case .interactive: { component, hierarchy in
+            case .interactive: { context in
                 .surface(.init(foreground: Color.accentColor))
             }
 
-            case .navigation: { component, hierarchy in
+            case .navigation: { context in
                 .reference(.interactive)
             }
 

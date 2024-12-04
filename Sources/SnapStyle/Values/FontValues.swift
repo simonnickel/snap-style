@@ -12,38 +12,38 @@ class FontValues: DefaultValues {
     static func values(for key: Key) -> ValueBuilder {
         switch key {
                 
-            case .fallback: { component, hierarchy in
+            case .fallback: { context in
                 .definition(.init(size: 1))
             }
 
-            case .title: { component, hierarchy in
-                switch hierarchy {
+            case .title: { context in
+                switch context.hierarchy {
                     case .primary: .definition(.init(size: 18))
                     case .secondary: .definition(.init(size: 16))
                     case .tertiary: .definition(.init(size: 14))
                 }
             }
 
-            case .label: { component, hierarchy in
-                switch component {
+            case .label: { context in
+                switch context.component {
                 case .card: .font(.caption)
                     default: .font(.body)
                 }
             }
 
-            case .content: { component, hierarchy in
+            case .content: { context in
                 .reference(.label)
             }
 
-            case .value: { component, hierarchy in
+            case .value: { context in
                 .reference(.label)
             }
 
-            case .cta: { component, hierarchy in
+            case .cta: { context in
                 .reference(.title)
             }
 
-            case .indicator: { component, hierarchy in
+            case .indicator: { context in
                 .reference(.label)
             }
 
