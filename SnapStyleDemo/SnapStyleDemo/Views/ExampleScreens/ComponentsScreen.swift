@@ -52,10 +52,10 @@ struct ComponentsScreen: View {
     ComponentsScreen()
         .styleOverride(
             fonts: [
-                .title : SnapStyle.ValueBuilder { context in
+                .title : SnapStyle.ValueBuilder(.definition(.init(size: 6))) { context in
                     switch context.item.hierarchy {
-                        case.primary: .definition(.init(size: 12))
-                        default: nil
+                        case .primary: .definition(.init(size: 16))
+                        default: .erase
                     }
 
                 }
@@ -63,28 +63,28 @@ struct ComponentsScreen: View {
             surfaces: [
                 .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
-                        case .primary: .surface(.init(foreground: Color.primary))
+                        case .secondary: .surface(.init(foreground: Color.primary))
                         default: nil
                     }
                 }
             ]
         )
-        .styleOverride(
-            fonts: [
-                .title : SnapStyle.ValueBuilder { context in
-                    switch context.item.hierarchy {
-                        case.secondary: .definition(.init(size: 10))
-                        default: nil
-                    }
-                }
-            ],
-            surfaces: [
-                .title : SnapStyle.ValueBuilder { context in
-                    switch context.item.hierarchy {
-                        case .primary: .surface(.init(foreground: Color.primary))
-                        default: nil
-                    }
-                }
-            ]
-        )
+//        .styleOverride(
+//            fonts: [
+//                .title : SnapStyle.ValueBuilder { context in
+//                    switch context.item.hierarchy {
+//                        case.secondary: .definition(.init(size: 10))
+//                        default: nil
+//                    }
+//                }
+//            ],
+//            surfaces: [
+//                .title : SnapStyle.ValueBuilder { context in
+//                    switch context.item.hierarchy {
+//                        case .primary: .surface(.init(foreground: Color.primary))
+//                        default: nil
+//                    }
+//                }
+//            ]
+//        )
 }

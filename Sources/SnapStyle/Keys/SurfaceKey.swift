@@ -82,11 +82,12 @@ extension SnapStyle.SurfaceKey {
 
         case surface(ForLayer)
         case reference(SnapStyle.SurfaceKey)
+        case erase
 
         var wrappedValue: ForLayer {
             switch self {
                 case .surface(let forLayer): forLayer
-                case .reference(let key):
+                case .reference, .erase:
                     fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
             }
         }

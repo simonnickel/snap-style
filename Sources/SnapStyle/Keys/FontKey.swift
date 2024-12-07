@@ -43,12 +43,13 @@ extension SnapStyle.FontKey {
         case definition(Definition)
         case font(Font)
         case reference(SnapStyle.FontKey)
-        
+        case erase
+
         var wrappedValue: Font {
             switch self {
                 case .definition(let definition): Font.system(size: definition.size)
                 case .font(let font): font
-                case .reference(let key):
+                case .reference, .erase:
                     fatalError("A `.reference` FontValue should never be used to generate a value.")
             }
         }
