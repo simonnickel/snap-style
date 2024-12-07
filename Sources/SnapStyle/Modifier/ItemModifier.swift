@@ -14,12 +14,15 @@ extension SnapStyle {
 
         public enum ItemType: String, Sendable, CaseIterable {
 
+            case any
+            
             case title
             case content
             case label
             case value
             case cta
             case indicator
+
         }
 
         public enum Hierarchy: String, Sendable, CaseIterable {

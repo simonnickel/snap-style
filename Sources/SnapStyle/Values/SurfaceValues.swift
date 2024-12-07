@@ -17,11 +17,9 @@ class SurfaceValues: DefaultValues {
 
             // MARK: - Item
 
-            case .title: { context in
-                .surface(.init(foreground: .mint))
-            }
+            case .title: ValueBuilder(.surface(.init(foreground: .mint)))
 
-            case .content: { context in
+            case .content: ValueBuilder { context in
                 switch context.item.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
                     case .secondary: .surface(.init(foreground: Color.secondary))
@@ -29,35 +27,24 @@ class SurfaceValues: DefaultValues {
                 }
             }
 
-            case .label: { context in
-                .reference(.content)
-            }
+            case .label: ValueBuilder(.reference(.content))
 
-            case .value: { context in
-                .reference(.interactive)
-            }
+            case .value: ValueBuilder(.reference(.interactive))
 
-            case .cta: { context in
+            case .cta: ValueBuilder { context in
                 .surface(.init(
                     foreground: .white,
                     background: Gradient(colors: [.blue, .yellow])
                 ))
             }
 
-            case .indicator: { context in
-                .reference(.content)
-            }
-
+            case .indicator: ValueBuilder(.reference(.content))
 
             // MARK: - Highlight
 
-            case .interactive: { context in
-                .surface(.init(foreground: Color.accentColor))
-            }
+            case .interactive: ValueBuilder(.surface(.init(foreground: Color.accentColor)))
 
-            case .navigation: { context in
-                .reference(.interactive)
-            }
+            case .navigation: ValueBuilder(.reference(.interactive))
 
         }
     }

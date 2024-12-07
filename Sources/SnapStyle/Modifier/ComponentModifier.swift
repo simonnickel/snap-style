@@ -13,11 +13,18 @@ extension SnapStyle {
         public let hierarchy: Hierarchy
         
         public enum ComponentType: String, Sendable, CaseIterable {
-            case screen, content, list, card
+
+            case any
+
+            case screen
+            case content
+            case list
+            case card
+            
         }
         
         public enum Hierarchy: String, Sendable, CaseIterable {
-            
+
             case primary
             case secondary
             

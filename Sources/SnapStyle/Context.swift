@@ -10,6 +10,8 @@ extension SnapStyle {
         public let component: Component
         public let item: Item
 
+        static let any: SnapStyle.Context = .init(component: .init(type: .any, hierarchy: .primary), item: .init(type: .any, hierarchy: .primary))
+
         public static let allCases: [SnapStyle.Context] = {
             var cases: [SnapStyle.Context] = []
             for component in Component.allCases {

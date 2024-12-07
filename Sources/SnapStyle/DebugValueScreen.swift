@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import SnapStyle
 
 public struct DebugValueScreen: View {
     @Environment(\.style) private var style
@@ -52,7 +51,7 @@ public struct DebugValueScreen: View {
     DebugValueScreen()
         .styleOverride(
             fonts: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case.primary: .definition(.init(size: 12))
                         default: nil
@@ -61,7 +60,7 @@ public struct DebugValueScreen: View {
                 }
             ],
             surfaces: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case .primary: .surface(.init(foreground: Color.primary))
                         default: nil

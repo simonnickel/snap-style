@@ -56,7 +56,7 @@ struct ContentView: View {
     ContentView()
         .styleOverride(
             fonts: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case.primary: .definition(.init(size: 12))
                         default: nil
@@ -65,7 +65,7 @@ struct ContentView: View {
                 }
             ],
             surfaces: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
                     default: nil

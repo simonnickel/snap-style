@@ -12,7 +12,7 @@ class FontValues: DefaultValues {
     static func values(for key: Key) -> ValueBuilder {
         switch key {
 
-            case .title: { context in
+            case .title: ValueBuilder { context in
                 switch context.item.hierarchy {
                     case .primary: .definition(.init(size: 18))
                     case .secondary: .definition(.init(size: 16))
@@ -20,28 +20,20 @@ class FontValues: DefaultValues {
                 }
             }
 
-            case .label: { context in
+            case .label: ValueBuilder(.font(.body)) { context in
                 switch context.component.type {
                     case .card: .font(.caption)
-                    default: .font(.body)
+                    default: nil
                 }
             }
 
-            case .content: { context in
-                .reference(.label)
-            }
+            case .content: ValueBuilder(.reference(.label))
 
-            case .value: { context in
-                .reference(.label)
-            }
+            case .value: ValueBuilder(.reference(.label))
 
-            case .cta: { context in
-                .reference(.title)
-            }
+            case .cta: ValueBuilder(.reference(.label))
 
-            case .indicator: { context in
-                .reference(.label)
-            }
+            case .indicator: ValueBuilder(.reference(.label))
 
         }
     }

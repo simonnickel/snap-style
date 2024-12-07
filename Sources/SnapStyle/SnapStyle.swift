@@ -22,10 +22,19 @@ public struct SnapStyle {
 
     mutating func apply(fontBuilder: [FontKey: SnapStyle.ValueBuilder<FontKey.Value>]) {
         for (key, valueBuilder) in fontBuilder {
-            let values: [Context: FontKey.Value] = Dictionary(uniqueKeysWithValues: Context.allCases.compactMap { context in
-                guard let value = valueBuilder(context) else { return nil }
-                return (context, value)
-            })
+            var values: [Context: FontKey.Value] = [:]
+            if let base = valueBuilder.base {
+                values[.any] = base
+            }
+
+            if let builder = valueBuilder.context {
+                for context in Context.allCases {
+                    if let value = builder(context) {
+                        values[context] = value
+                    }
+                }
+            }
+
             var current = fonts[key] ?? Values(valuesForContext: [:])
             current.override(with: values)
             fonts[key] = current
@@ -34,10 +43,19 @@ public struct SnapStyle {
 
     mutating func apply(surfaceBuilder: [SurfaceKey: SnapStyle.ValueBuilder<SurfaceKey.Value>]) {
         for (key, valueBuilder) in surfaceBuilder {
-            let values: [Context: SurfaceKey.Value] = Dictionary(uniqueKeysWithValues: Context.allCases.compactMap { context in
-                guard let value = valueBuilder(context) else { return nil }
-                return (context, value)
-            })
+            var values: [Context: SurfaceKey.Value] = [:]
+            if let base = valueBuilder.base {
+                values[.any] = base
+            }
+
+            if let builder = valueBuilder.context {
+                for context in Context.allCases {
+                    if let value = builder(context) { // TODO: Instead of nil, which could be used to remove a value, there could be a skip value.
+                        values[context] = value
+                    }
+                }
+            }
+
             var current = surfaces[key] ?? Values(valuesForContext: [:])
             current.override(with: values)
             surfaces[key] = current

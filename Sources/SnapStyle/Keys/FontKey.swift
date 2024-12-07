@@ -19,6 +19,8 @@ extension SnapStyle {
 
         static func key(for item: SnapStyle.Item.ItemType) -> SnapStyle.FontKey {
             switch item {
+                case .any: .content // TODO: Is there a better default?
+                    
                 case .title: .title
                 case .content: .content
                 case .label: .label

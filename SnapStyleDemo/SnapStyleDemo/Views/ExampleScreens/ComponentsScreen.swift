@@ -52,7 +52,7 @@ struct ComponentsScreen: View {
     ComponentsScreen()
         .styleOverride(
             fonts: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case.primary: .definition(.init(size: 12))
                         default: nil
@@ -61,7 +61,7 @@ struct ComponentsScreen: View {
                 }
             ],
             surfaces: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case .primary: .surface(.init(foreground: Color.primary))
                         default: nil
@@ -71,7 +71,7 @@ struct ComponentsScreen: View {
         )
         .styleOverride(
             fonts: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case.secondary: .definition(.init(size: 10))
                         default: nil
@@ -79,7 +79,7 @@ struct ComponentsScreen: View {
                 }
             ],
             surfaces: [
-                .title : { context in
+                .title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case .primary: .surface(.init(foreground: Color.primary))
                         default: nil
