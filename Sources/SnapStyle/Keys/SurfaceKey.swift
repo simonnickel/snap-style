@@ -21,7 +21,7 @@ extension SnapStyle {
         case interactive
         case navigation
 
-        static func key(for item: SnapStyle.Item) -> SnapStyle.SurfaceKey {
+        static func key(for item: SnapStyle.Item.ItemType) -> SnapStyle.SurfaceKey {
             switch item {
                 case .title: .title
                 case .content: .content

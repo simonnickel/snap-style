@@ -13,7 +13,7 @@ class FontValues: DefaultValues {
         switch key {
 
             case .title: { context in
-                switch context.hierarchy {
+                switch context.item.hierarchy {
                     case .primary: .definition(.init(size: 18))
                     case .secondary: .definition(.init(size: 16))
                     case .tertiary: .definition(.init(size: 14))
@@ -21,8 +21,8 @@ class FontValues: DefaultValues {
             }
 
             case .label: { context in
-                switch context.component {
-                case .card: .font(.caption)
+                switch context.component.type {
+                    case .card: .font(.caption)
                     default: .font(.body)
                 }
             }

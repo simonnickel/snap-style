@@ -34,6 +34,9 @@ struct ContentView: View {
                             KeyRowSurface(key: key)
                         }
                     }
+                    NavigationLink("Values") {
+                        DebugValueScreen()
+                    }
                 } header: {
                     Text("Keys")
                 }
@@ -51,4 +54,23 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .styleOverride(
+            fonts: [
+                .title : { context in
+                    switch context.item.hierarchy {
+                        case.primary: .definition(.init(size: 12))
+                        default: nil
+                    }
+
+                }
+            ],
+            surfaces: [
+                .title : { context in
+                    switch context.item.hierarchy {
+                    case .primary: .surface(.init(foreground: Color.primary))
+                    default: nil
+                    }
+                }
+            ]
+        )
 }

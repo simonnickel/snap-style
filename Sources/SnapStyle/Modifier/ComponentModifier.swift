@@ -7,36 +7,41 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum Component: Sendable, CaseIterable {
-        case screen, content, list, card
-
-        public enum Hierarchy {
-
+    public struct Component: Hashable, Sendable, CaseIterable {
+        
+        public let type: ComponentType
+        public let hierarchy: Hierarchy
+        
+        public enum ComponentType: String, Sendable, CaseIterable {
+            case screen, content, list, card
+        }
+        
+        public enum Hierarchy: String, Sendable, CaseIterable {
+            
             case primary
             case secondary
-
+            
         }
-    }
-
-}
-
-internal struct ComponentModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let component: SnapStyle.Component
-
-    func body(content: Content) -> some View {
-        content
-            .environment(\.styleComponent, component)
+        
+        public static let allCases: [Component] = {
+            var cases: [Component] = []
+            for component in ComponentType.allCases {
+                for hierarchy in Hierarchy.allCases {
+                    cases.append(Component(type: component, hierarchy: hierarchy))
+                }
+            }
+            
+            return cases
+        }()
+        
     }
 
 }
 
 extension View {
 
-    public func style(component: SnapStyle.Component) -> some View {
-        self.modifier(ComponentModifier(component: component))
+    public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary) -> some View {
+        self.environment(\.styleComponent, .init(type: component, hierarchy: hierarchy))
     }
 
 }

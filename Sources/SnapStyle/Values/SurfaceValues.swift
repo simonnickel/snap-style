@@ -22,7 +22,7 @@ class SurfaceValues: DefaultValues {
             }
 
             case .content: { context in
-                switch context.hierarchy {
+                switch context.item.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
                     case .secondary: .surface(.init(foreground: Color.secondary))
                     case .tertiary: .surface(.init(foreground: Color.secondary))

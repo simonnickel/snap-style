@@ -7,38 +7,51 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum Item {
-        
-        case title
-        case content
-        case label
-        case value
-        case cta
-        case indicator
+    public struct Item: Hashable, Sendable, CaseIterable {
 
-        public enum Hierarchy: Sendable, CaseIterable {
+        public let type: ItemType
+        public let hierarchy: Hierarchy
+
+        public enum ItemType: String, Sendable, CaseIterable {
+
+            case title
+            case content
+            case label
+            case value
+            case cta
+            case indicator
+        }
+
+        public enum Hierarchy: String, Sendable, CaseIterable {
 
             case primary
             case secondary
             case tertiary
 
         }
-    }
 
+        public static let allCases: [Item] = {
+            var cases: [Item] = []
+            for item in ItemType.allCases {
+                for hierarchy in Hierarchy.allCases {
+                    cases.append(Item(type: item, hierarchy: hierarchy))
+                }
+            }
+
+            return cases
+        }()
+
+    }
 }
 
 internal struct ItemModifier: ViewModifier {
 
-    @Environment(\.style) private var style
-
     let item: SnapStyle.Item
-    let hierarchy: SnapStyle.Item.Hierarchy
 
     func body(content: Content) -> some View {
 
         content
-            .style(font: SnapStyle.FontKey.key(for: item), hierarchy: hierarchy)
-            .style(surface: SnapStyle.SurfaceKey.key(for: item), hierarchy: hierarchy)
+            .environment(\.styleItem, item)
 
     }
 
@@ -46,8 +59,12 @@ internal struct ItemModifier: ViewModifier {
 
 extension View {
 
-    public func style(item: SnapStyle.Item, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self.modifier(ItemModifier(item: item, hierarchy: hierarchy))
+    public func style(item: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
+        self
+            .modifier(FontFromEnvironmentModifier())
+            .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
+            .modifier(SurfaceFromEnvironmentModifier(layer: .background))
+            .modifier(ItemModifier(item: SnapStyle.Item(type: item, hierarchy: hierarchy)))
     }
 
 }

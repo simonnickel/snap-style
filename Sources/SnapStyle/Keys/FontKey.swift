@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
 
-    public enum FontKey: String, StyleKey {
+    public enum FontKey: String, Hashable, StyleKey {
 
         // Keys used for `Item`.
         case title
@@ -17,7 +17,7 @@ extension SnapStyle {
         case cta
         case indicator
 
-        static func key(for item: SnapStyle.Item) -> SnapStyle.FontKey {
+        static func key(for item: SnapStyle.Item.ItemType) -> SnapStyle.FontKey {
             switch item {
                 case .title: .title
                 case .content: .content

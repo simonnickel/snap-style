@@ -6,7 +6,7 @@
 import SwiftUI
 
 public struct SnapStyle {
-    
+
     internal var fonts: [FontKey: Values<FontKey.Value>] = [:]
     internal var surfaces: [SurfaceKey: Values<SurfaceKey.Value>] = [:]
 
@@ -48,8 +48,8 @@ public struct SnapStyle {
 
 extension SnapStyle {
 
-    struct Values<Value> {
-        var valuesForContext: [SnapStyle.Context: Value]
+    internal struct Values<Value> {
+        public var valuesForContext: [SnapStyle.Context: Value]
 
         func value(for context: SnapStyle.Context) -> Value? {
             valuesForContext[context]

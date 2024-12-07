@@ -14,7 +14,7 @@ struct KeyRowFont: View {
         HStack {
             ForEach(SnapStyle.Item.Hierarchy.allCases, id: \.self) { hieararchy in
                 Text(key.description)
-                    .style(font: key, hierarchy: hieararchy)
+//                    .style(font: key, hierarchy: hieararchy)
 
             }
         }
