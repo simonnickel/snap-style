@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-class FontValues: DefaultValues {
+class FontValues: ValueProvider {
     
     typealias Key = SnapStyle.FontKey
     typealias Value = Key.Value

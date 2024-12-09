@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-protocol DefaultValues {
+protocol ValueProvider {
     
     associatedtype Key: StyleKey
     associatedtype Value
@@ -12,7 +12,7 @@ protocol DefaultValues {
 
 }
 
-extension DefaultValues {
+extension ValueProvider {
     
     static var defaultValues: [Key : SnapStyle.ValueBuilder<Value>] {
         var entries: [Key : SnapStyle.ValueBuilder<Value>] = [:]

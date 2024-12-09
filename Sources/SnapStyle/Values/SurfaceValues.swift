@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-class SurfaceValues: DefaultValues {
+class SurfaceValues: ValueProvider {
 
     typealias Key = SnapStyle.SurfaceKey
     typealias Value = Key.Value
