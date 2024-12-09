@@ -3,6 +3,8 @@
 //  Created by Simon Nickel
 //
 
+import SwiftUI
+
 class FontValues: ValueProvider {
     
     typealias Key = SnapStyle.FontKey

@@ -3,6 +3,8 @@
 //  Created by Simon Nickel
 //
 
+import SwiftUI
+
 extension SnapStyle.FontKey {
     
     public enum Value {

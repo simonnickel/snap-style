@@ -3,8 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-
 extension SnapStyle {
     
     public enum SurfaceKey: String, StyleKey {

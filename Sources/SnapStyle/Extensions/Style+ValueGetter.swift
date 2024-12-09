@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SwiftUI
 
 extension SnapStyle {
     
