@@ -5,11 +5,12 @@
 
 extension SnapStyle {
 
-    public struct Context: Hashable, Sendable, CaseIterable, CustomStringConvertible {
+    public struct Context: Hashable, Sendable, CaseIterable {
 
         public let component: Component
         public let item: Item
 
+        /// A context to use for default values.
         static let any: SnapStyle.Context = .init(component: .init(type: .any, hierarchy: .primary), item: .init(type: .any, hierarchy: .primary))
 
         public static let allCases: [SnapStyle.Context] = {
@@ -22,10 +23,6 @@ extension SnapStyle {
 
             return cases
         }()
-
-        public var description: String {
-            component.type.rawValue + "." + component.hierarchy.rawValue + " - " + item.type.rawValue + "." + item.hierarchy.rawValue
-        }
 
     }
 
