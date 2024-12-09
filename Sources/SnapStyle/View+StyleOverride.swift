@@ -8,8 +8,8 @@ import SwiftUI
 extension View {
     
     public func styleOverride(
-        fonts: [SnapStyle.FontKey : SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]? = nil,
-        surfaces: [SnapStyle.SurfaceKey : SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]? = nil
+        fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]? = nil,
+        surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]? = nil
     ) -> some View {
         self.modifier(
             StyleOverrideModifier(
@@ -28,8 +28,8 @@ private struct StyleOverrideModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let fonts: [SnapStyle.FontKey : SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]?
-    let surfaces: [SnapStyle.SurfaceKey : SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]?
+    let fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]?
+    let surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]?
 
     func body(content: Content) -> some View {
         
@@ -46,17 +46,17 @@ private struct StyleOverrideModifier: ViewModifier {
 extension SnapStyle {
     
     internal func replaced(
-        fonts: [FontKey : ValueBuilder<FontKey.Value>]? = nil,
-        surfaces: [SurfaceKey : ValueBuilder<SurfaceKey.Value>]? = nil
+        fonts: [FontKey.ValueKeyPath: ValueBuilder<FontKey.Value>]? = nil,
+        surfaces: [SurfaceKey.ValueKeyPath: ValueBuilder<SurfaceKey.Value>]? = nil
     ) -> Self {
         var style = self
 
         if let fonts {
-            style.apply(fonts, at: \.fonts)
+            style.applyWithValues(fonts, type: FontKey.self, at: \.fonts)
         }
 
         if let surfaces {
-            style.apply(surfaces, at: \.surfaces)
+            style.applyWithValues(surfaces, type: SurfaceKey.self, at: \.surfaces)
         }
         
         return style

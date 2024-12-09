@@ -10,9 +10,9 @@ extension SnapStyle {
     
     // MARK: - Font
     
-    internal func font(for key: FontKey, in context: SnapStyle.Context) -> Font? {
+    internal func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> Font? {
 
-        guard let values = fonts[key] else {
+        guard let values = fonts[keyPath] else {
             return nil
         }
 
@@ -28,9 +28,9 @@ extension SnapStyle {
     
     // MARK: - Surface
     
-    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in context: Context) -> AnyShapeStyle? {
+    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueKeyPath, in context: Context) -> AnyShapeStyle? {
 
-        guard let values = surfaces[key] else {
+        guard let values = surfaces[keyPath] else {
             return nil
         }
 

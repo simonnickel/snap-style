@@ -6,20 +6,26 @@
 import SnapStyle
 import SwiftUI
 
-struct KeyScreen<Key, ItemContent: View>: View where Key: Hashable, Key : CustomStringConvertible {
+struct KeyScreen<KeyType: StyleKey, Value, ValueKeyPath, ItemContent: View>: View where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
     
-    let keys: [Key]
+    @Environment(\.style) private var style
     
-    let content: (Key) -> ItemContent
+    let type: KeyType.Type
+
+    let keyPath: KeyPath<SnapStyle, [ValueKeyPath: SnapStyle.Values<Value>]>
+    
+    let content: (ValueKeyPath) -> ItemContent
     
     var body: some View {
-        List(keys, id: \.self, rowContent: content)
+        let items = Array(style[keyPath: keyPath].keys)
+        
+        return List(items, id: \.self, rowContent: content)
     }
     
 }
 
 #Preview {
-    KeyScreen(keys: SnapStyle.SurfaceKey.allCases) { key in
-        KeyRowSurface(key: key)
+    KeyScreen(type: SnapStyle.SurfaceKey.self, keyPath: \.surfaces) { keyPath in
+        KeyRowSurface(keyPath: keyPath)
     }
 }

@@ -25,13 +25,13 @@ struct ContentView: View {
                 }
                 Section {
                     NavigationLink("Fonts") {
-                        KeyScreen(keys: SnapStyle.FontKey.allCases) { key in
-                            KeyRowFont(key: key)
+                        KeyScreen(type: SnapStyle.FontKey.self, keyPath: \.fonts) { keyPath in
+                            KeyRowFont(keyPath: keyPath)
                         }
                     }
-                    NavigationLink("Colors") {
-                        KeyScreen(keys: SnapStyle.SurfaceKey.allCases) { key in
-                            KeyRowSurface(key: key)
+                    NavigationLink("Surfaces") {
+                        KeyScreen(type: SnapStyle.SurfaceKey.self, keyPath: \.surfaces) { keyPath in
+                            KeyRowSurface(keyPath: keyPath)
                         }
                     }
                     NavigationLink("Values") {
@@ -56,7 +56,7 @@ struct ContentView: View {
     ContentView()
         .styleOverride(
             fonts: [
-                .title : SnapStyle.ValueBuilder { context in
+                \.title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case.primary: .definition(.init(size: 12))
                         default: nil
@@ -65,7 +65,7 @@ struct ContentView: View {
                 }
             ],
             surfaces: [
-                .title : SnapStyle.ValueBuilder { context in
+                \.title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                     case .primary: .surface(.init(foreground: Color.primary))
                     default: nil

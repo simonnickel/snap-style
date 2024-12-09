@@ -10,7 +10,7 @@ extension SnapStyle.FontKey {
     public enum Value {
         case definition(Definition)
         case font(Font)
-        case reference(SnapStyle.FontKey)
+        case reference(SnapStyle.FontKey.ValueKeyPath)
         case erase
 
         var wrappedValue: Font {

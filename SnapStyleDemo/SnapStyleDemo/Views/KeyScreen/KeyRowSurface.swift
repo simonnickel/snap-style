@@ -8,14 +8,14 @@ import SwiftUI
 
 struct KeyRowSurface: View {
     
-    let key: SnapStyle.SurfaceKey
+    let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
     
     var body: some View {
-        Text(key.description)
+        Text(keyPath.debugDescription)
 //            .style(surface: key)
     }
 }
 
 #Preview {
-    KeyRowSurface(key: .interactive)
+    KeyRowSurface(keyPath: \.interactive)
 }

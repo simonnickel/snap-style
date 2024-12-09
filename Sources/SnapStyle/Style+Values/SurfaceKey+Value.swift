@@ -46,7 +46,7 @@ extension SnapStyle.SurfaceKey {
         }
 
         case surface(ForLayer)
-        case reference(SnapStyle.SurfaceKey)
+        case reference(SnapStyle.SurfaceKey.ValueKeyPath)
         case erase
 
         var wrappedValue: ForLayer {

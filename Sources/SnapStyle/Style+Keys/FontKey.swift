@@ -5,30 +5,53 @@
 
 extension SnapStyle {
 
-    public enum FontKey: String, Hashable, StyleKey {
-
-        // Keys used for `Item`.
-        case title
-        case content
-        case label
-        case value
-        case cta
-        case indicator
-
-        static func key(for item: SnapStyle.Item.ItemType) -> SnapStyle.FontKey {
-            switch item {
-                case .any: .content // TODO: Is there a better default?
-                    
-                case .title: .title
-                case .content: .content
-                case .label: .label
-                case .value: .value
-                case .cta: .cta
-                case .indicator: .indicator
+    public struct FontKey: StyleKey {
+        
+        public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
+        public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
+        
+        public let title = ValueBuilder { context in
+            switch context.item.hierarchy {
+                case .primary: .definition(.init(size: 18))
+                case .secondary: .definition(.init(size: 16))
+                case .tertiary: .definition(.init(size: 14))
             }
         }
         
-        static func isErase(_ value: Value) -> Bool {
+        public let label = ValueBuilder(.font(.body)) { context in
+            switch context.component.type {
+                case .card: .font(.caption)
+                default: nil
+            }
+        }
+
+        public let content = ValueBuilder(.reference(\.label))
+
+        public let value = ValueBuilder(.reference(\.label))
+
+        public let cta = ValueBuilder(.reference(\.label))
+
+        public let indicator = ValueBuilder(.reference(\.label))
+
+        internal static var defaultKeyPaths: [ValueKeyPath] {
+            return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
+        }
+        
+        internal static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath {
+            switch item {
+                case .any: \.content // TODO: Is there a better default?
+                    
+                case .title: \.title
+                case .content: \.content
+                case .label: \.label
+                case .value: \.value
+                case .cta: \.cta
+                case .indicator: \.indicator
+            }
+        }
+        
+        // TODO: Should be on Value
+        internal static func isErase(_ value: Value) -> Bool {
             if case .erase = value { return true }
             return false
         }

@@ -3,18 +3,15 @@
 //  Created by Simon Nickel
 //
 
-protocol StyleKey: CaseIterable, Hashable, RawRepresentable, CustomStringConvertible where RawValue == String {
+protocol StyleKey {
     
     associatedtype Value
+    associatedtype ValueKeyPath: KeyPath<Self, SnapStyle.ValueBuilder<Value>>
 
-    static func key(for item: SnapStyle.Item.ItemType) -> Self
+    init()
+    
+    static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath
     
     static func isErase(_ value: Value) -> Bool
-    
-}
-
-extension StyleKey {
-    
-    public var description: String { rawValue }
     
 }

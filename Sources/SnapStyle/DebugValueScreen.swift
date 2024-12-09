@@ -12,18 +12,18 @@ public struct DebugValueScreen: View {
     
     public var body: some View {
         List {
-            ForEach(Array(style.fonts.keys), id: \.self) { key in
+            ForEach(Array(style.fonts.keys), id: \.self) { keyPath in
 
-                section(key: key)
+                section(keyPath: keyPath)
 
             }
         }
     }
 
-    private func section(key: SnapStyle.FontKey) -> some View {
+    private func section(keyPath: SnapStyle.FontKey.ValueKeyPath) -> some View {
 
         Group {
-            if let values = style.fonts[key] {
+            if let values = style.fonts[keyPath] {
                 let contexts: [SnapStyle.Context] = Array(values.valuesForContext.keys)
 
                 Section {
@@ -31,7 +31,7 @@ public struct DebugValueScreen: View {
                         item(context: context, values: values)
                     }
                 } header: {
-                    Text("\(key) - \(contexts.count)")
+                    Text("\(keyPath) - \(contexts.count)")
                 }
             } else {
                 EmptyView()
@@ -51,7 +51,7 @@ public struct DebugValueScreen: View {
     DebugValueScreen()
         .styleOverride(
             fonts: [
-                .title : SnapStyle.ValueBuilder(.definition(.init(size: 6))) { context in
+                \.title : SnapStyle.ValueBuilder(.definition(.init(size: 6))) { context in
                     switch context.item.hierarchy {
                         case .primary: .definition(.init(size: 16))
                         default: .erase
@@ -60,7 +60,7 @@ public struct DebugValueScreen: View {
                 }
             ],
             surfaces: [
-                .title : SnapStyle.ValueBuilder { context in
+                \.title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
                         case .secondary: .surface(.init(foreground: Color.primary))
                         default: nil
