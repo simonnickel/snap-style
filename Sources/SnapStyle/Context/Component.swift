@@ -3,8 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-
 extension SnapStyle {
 
     public struct Component: Hashable, Sendable, CaseIterable {
@@ -41,14 +39,6 @@ extension SnapStyle {
             return cases
         }()
         
-    }
-
-}
-
-extension View {
-
-    public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary) -> some View {
-        self.environment(\.styleComponent, .init(type: component, hierarchy: hierarchy))
     }
 
 }

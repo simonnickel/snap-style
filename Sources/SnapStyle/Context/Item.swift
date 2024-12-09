@@ -3,8 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-
 extension SnapStyle {
 
     public struct Item: Hashable, Sendable, CaseIterable {
@@ -45,29 +43,4 @@ extension SnapStyle {
         }()
 
     }
-}
-
-internal struct ItemModifier: ViewModifier {
-
-    let item: SnapStyle.Item
-
-    func body(content: Content) -> some View {
-
-        content
-            .environment(\.styleItem, item)
-
-    }
-
-}
-
-extension View {
-
-    public func style(item: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self
-            .modifier(FontFromEnvironmentModifier())
-            .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
-            .modifier(SurfaceFromEnvironmentModifier(layer: .background))
-            .modifier(ItemModifier(item: SnapStyle.Item(type: item, hierarchy: hierarchy)))
-    }
-
 }
