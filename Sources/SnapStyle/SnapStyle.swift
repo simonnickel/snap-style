@@ -14,15 +14,15 @@ public struct SnapStyle {
 
     public static var defaults: Self {
         var style = SnapStyle()
-        style.apply(fontBuilder: FontValues.defaultValues)
-        style.apply(surfaceBuilder: SurfaceValues.defaultValues)
+        style.apply(FontValues.defaultValues, at: \.fonts)
+        style.apply(SurfaceValues.defaultValues, at: \.surfaces)
 
         return style
     }
-
-    mutating func apply(fontBuilder: [FontKey: SnapStyle.ValueBuilder<FontKey.Value>]) {
-        for (key, valueBuilder) in fontBuilder {
-            var values: [Context: FontKey.Value] = [:]
+    
+    mutating func apply<KeyType: StyleKey>(_ builder: [KeyType: SnapStyle.ValueBuilder<KeyType.Value>], at keyPath: WritableKeyPath<SnapStyle, [KeyType: Values<KeyType.Value>]>) {
+        for (key, valueBuilder) in builder {
+            var values: [Context: KeyType.Value] = [:]
             var erase: [Context] = []
 
             if let base = valueBuilder.base {
@@ -31,9 +31,9 @@ public struct SnapStyle {
 
             if let builder = valueBuilder.context {
                 for context in Context.allCases {
-                    guard key == FontKey.key(for: context.item.type) else { continue }
+                    guard key == KeyType.key(for: context.item.type) else { continue }
                     if let value = builder(context) {
-                        if case .erase = value {
+                        if KeyType.isErase(value) {
                             erase.append(context)
                         } else {
                             values[context] = value
@@ -41,40 +41,11 @@ public struct SnapStyle {
                     }
                 }
             }
-
-            var current = fonts[key] ?? Values(valuesForContext: [:])
+            
+            var current = self[keyPath: keyPath][key] ?? Values(valuesForContext: [:])
             current.erase(erase)
             current.override(with: values)
-            fonts[key] = current
-        }
-    }
-
-    mutating func apply(surfaceBuilder: [SurfaceKey: SnapStyle.ValueBuilder<SurfaceKey.Value>]) {
-        for (key, valueBuilder) in surfaceBuilder {
-            var values: [Context: SurfaceKey.Value] = [:]
-            var erase: [Context] = []
-
-            if let base = valueBuilder.base {
-                values[.any] = base
-            }
-
-            if let builder = valueBuilder.context {
-                for context in Context.allCases {
-                    guard key == SurfaceKey.key(for: context.item.type) else { continue }
-                    if let value = builder(context) {
-                        if case .erase = value {
-                            erase.append(context)
-                        } else {
-                            values[context] = value
-                        }
-                    }
-                }
-            }
-
-            var current = surfaces[key] ?? Values(valuesForContext: [:])
-//            current.erase(erase)
-            current.override(with: values)
-            surfaces[key] = current
+            self[keyPath: keyPath][key] = current
         }
     }
 

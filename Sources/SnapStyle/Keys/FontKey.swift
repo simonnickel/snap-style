@@ -29,6 +29,11 @@ extension SnapStyle {
                 case .indicator: .indicator
             }
         }
+        
+        static func isErase(_ value: Value) -> Bool {
+            if case .erase = value { return true }
+            return false
+        }
 
     }
     

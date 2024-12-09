@@ -52,11 +52,11 @@ extension SnapStyle {
         var style = self
 
         if let fonts {
-            style.apply(fontBuilder: fonts)
+            style.apply(fonts, at: \.fonts)
         }
 
         if let surfaces {
-            style.apply(surfaceBuilder: surfaces)
+            style.apply(surfaces, at: \.surfaces)
         }
         
         return style
