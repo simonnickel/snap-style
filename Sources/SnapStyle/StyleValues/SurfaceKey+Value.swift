@@ -3,49 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-
-extension SnapStyle {
-    
-    public enum SurfaceKey: String, StyleKey {
-
-        // Keys used for `Item`.
-        case title
-        case content
-        case label
-        case value
-        case cta
-        case indicator
-        
-        // Highlight
-        case interactive
-        case navigation
-
-        static func key(for item: SnapStyle.Item.ItemType) -> SnapStyle.SurfaceKey {
-            switch item {
-                case .any: .content // TODO: Is there a better default?
-
-                case .title: .title
-                case .content: .content
-                case .label: .label
-                case .value: .value
-                case .cta: .cta
-                case .indicator: .indicator
-            }
-        }
-        
-        static func isErase(_ value: Value) -> Bool {
-            if case .erase = value { return true }
-            return false
-        }
-        
-    }
-    
-}
-
-
-// MARK: - Value
-
 extension SnapStyle.SurfaceKey {
 
     public enum Layer {
@@ -100,26 +57,4 @@ extension SnapStyle.SurfaceKey {
 
     }
     
-}
-
-
-// MARK: - SnapStyle Getter
-
-extension SnapStyle {
-
-    internal func surface(layer: SnapStyle.SurfaceKey.Layer, for key: SurfaceKey, in context: Context) -> AnyShapeStyle? {
-
-        guard let values = surfaces[key] else {
-            return nil
-        }
-
-        let value = values.value(for: context)
-
-        switch value {
-            case .reference(let key): return surface(layer: layer, for: key, in: context)
-            default: return value?.wrappedValue.surface(for: layer)
-        }
-        
-    }
-
 }
