@@ -3,11 +3,12 @@
 //  Created by Simon Nickel
 //
 
-protocol StyleKey {
+public protocol StyleKey {
     
     associatedtype Value
     associatedtype ValueKeyPath: KeyPath<Self, SnapStyle.ValueBuilder<Value>>
 
+    /// Needs an init to access KeyPaths.
     init()
     
     static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath

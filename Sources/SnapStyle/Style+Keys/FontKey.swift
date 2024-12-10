@@ -7,6 +7,8 @@ extension SnapStyle {
 
     public struct FontKey: StyleKey {
         
+        public init() {}
+        
         public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
         public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
         
@@ -37,7 +39,7 @@ extension SnapStyle {
             return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
         }
         
-        internal static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath {
+        public static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath {
             switch item {
                 case .any: \.content // TODO: Is there a better default?
                     
@@ -51,7 +53,7 @@ extension SnapStyle {
         }
         
         // TODO: Should be on Value
-        internal static func isErase(_ value: Value) -> Bool {
+        public static func isErase(_ value: Value) -> Bool {
             if case .erase = value { return true }
             return false
         }
