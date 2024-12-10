@@ -12,7 +12,7 @@ struct KeyScreen<KeyType: StyleKey, Value, ValueKeyPath, ItemContent: View>: Vie
     
     let type: KeyType.Type
 
-    let keyPath: KeyPath<SnapStyle, [ValueKeyPath: SnapStyle.Values<Value>]>
+    let keyPath: KeyPath<SnapStyle, [ValueKeyPath: SnapStyle.ValueContainer<Value>]>
     
     let content: (ValueKeyPath) -> ItemContent
     

@@ -7,8 +7,8 @@ import SwiftUI
 
 public struct SnapStyle {
 
-    public var fonts: [FontKey.ValueKeyPath: Values<FontKey.Value>] = [:]
-    public var surfaces: [SurfaceKey.ValueKeyPath: Values<SurfaceKey.Value>] = [:]
+    public var fonts: [FontKey.ValueKeyPath: ValueContainer<FontKey.Value>] = [:]
+    public var surfaces: [SurfaceKey.ValueKeyPath: ValueContainer<SurfaceKey.Value>] = [:]
 
     private init() { }
 
@@ -20,7 +20,10 @@ public struct SnapStyle {
         return style
     }
     
-    mutating func apply<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: Values<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
+    
+    // MARK: - Apply
+    
+    mutating func apply<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: ValueContainer<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
         
         let object = type.init()
         let valueBuilderForKeyPath = Dictionary(uniqueKeysWithValues: keyPaths.map { ($0, object[keyPath: $0]) })
@@ -28,7 +31,7 @@ public struct SnapStyle {
         applyWithValues(valueBuilderForKeyPath, type: type, at: destination)
         
     }
-    mutating func applyWithValues<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath: SnapStyle.ValueBuilder<Value>], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: Values<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
+    mutating func applyWithValues<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath: SnapStyle.ValueBuilder<Value>], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: ValueContainer<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
         for (keyPath, valueBuilder) in keyPaths {
             var values: [Context: KeyType.Value] = [:]
             var erase: [Context] = []
@@ -50,34 +53,10 @@ public struct SnapStyle {
                 }
             }
             
-            var current = self[keyPath: destination][keyPath] ?? Values(valuesForContext: [:])
+            var current = self[keyPath: destination][keyPath] ?? ValueContainer(valuesForContext: [:])
             current.erase(erase)
             current.override(with: values)
             self[keyPath: destination][keyPath] = current
-        }
-    }
-
-}
-
-extension SnapStyle {
-
-    public struct Values<Value> {
-        public var valuesForContext: [SnapStyle.Context: Value]
-
-        func value(for context: SnapStyle.Context) -> Value? {
-            valuesForContext[context] ?? valuesForContext[.any]
-        }
-
-        mutating func override(with overrides: [SnapStyle.Context: Value]) {
-            for (context, value) in overrides {
-                valuesForContext[context] = value
-            }
-        }
-
-        mutating func erase(_ contexts: [SnapStyle.Context]) {
-            for context in contexts {
-                valuesForContext.removeValue(forKey: context)
-            }
         }
     }
 
