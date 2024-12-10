@@ -15,9 +15,9 @@ extension SnapStyle.SurfaceKey {
 
     public enum Value: StyleValue {
         
-        public typealias WrappedValue = ForLayer
+        public typealias WrappedValue = LayeredShapeStyle
 
-        public struct ForLayer {
+        public struct LayeredShapeStyle {
             
             let values: [Layer: AnyShapeStyle]
 
@@ -47,11 +47,11 @@ extension SnapStyle.SurfaceKey {
 
         }
 
-        case surface(ForLayer)
+        case surface(LayeredShapeStyle)
         case reference(SnapStyle.SurfaceKey.ValueKeyPath)
         case erase
 
-        public var wrappedValue: ForLayer {
+        public var wrappedValue: LayeredShapeStyle {
             switch self {
                 case .surface(let forLayer): forLayer
                 case .reference, .erase:
