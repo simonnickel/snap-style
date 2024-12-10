@@ -17,13 +17,13 @@ extension SnapStyle {
 
         // MARK: - Item
 
-        public let title = ValueBuilder(.surface(.init(foreground: .mint)))
+        public let title = ValueBuilder(.surface(.withColor(foreground: .mint)))
 
         public let content = ValueBuilder { context in
             switch context.item.hierarchy {
-                case .primary: .surface(.init(foreground: Color.primary))
-                case .secondary: .surface(.init(foreground: Color.secondary))
-                case .tertiary: .surface(.init(foreground: Color.secondary))
+                case .primary: .surface(.withColor(foreground: .primary))
+                case .secondary: .surface(.withColor(foreground: .secondary))
+                case .tertiary: .surface(.withColor(foreground: .secondary))
             }
         }
 
@@ -33,7 +33,7 @@ extension SnapStyle {
 
         public let cta = ValueBuilder { context in
             .surface(.init(
-                foreground: .white,
+                foreground: Color.white,
                 background: Gradient(colors: [.blue, .yellow])
             ))
         }
@@ -43,7 +43,7 @@ extension SnapStyle {
 
         // MARK: - Highlight
 
-        public let interactive = ValueBuilder(.surface(.init(foreground: Color.accentColor)))
+        public let interactive = ValueBuilder(.surface(.withColor(foreground: .accentColor)))
 
         public let navigation = ValueBuilder(.reference(\.interactive))
         

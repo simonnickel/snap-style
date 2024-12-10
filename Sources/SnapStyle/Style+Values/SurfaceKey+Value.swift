@@ -19,7 +19,9 @@ extension SnapStyle.SurfaceKey {
 
         public struct LayeredShapeStyle {
             
-            let values: [Layer: AnyShapeStyle]
+            typealias ShapeStyleForLayer = [Layer: AnyShapeStyle]
+            
+            let values: ShapeStyleForLayer
 
             public func surface(for layer: Layer) -> AnyShapeStyle? {
                 values[layer] ?? values[.any]
@@ -29,20 +31,24 @@ extension SnapStyle.SurfaceKey {
                 self.values = values
             }
 
-            public init<Foreground: ShapeStyle, Background: ShapeStyle>(foreground: Foreground, background: Background) {
-                values = [.foreground: AnyShapeStyle(foreground), .background: AnyShapeStyle(background)]
+            public init<Foreground: ShapeStyle, Background: ShapeStyle>(foreground: Foreground? = nil, background: Background? = nil) {
+                var values: ShapeStyleForLayer = [:]
+                if let foreground {
+                    values[.foreground] = AnyShapeStyle(foreground)
+                }
+                if let background {
+                    values[.background] = AnyShapeStyle(background)
+                }
+                
+                self.init(values)
             }
 
-            public init(_ color: Color) {
-                values = [.any: AnyShapeStyle(color)]
+            public static func withColor(foreground: Color? = nil, background: Color? = nil) -> Self {
+                self.init(foreground: foreground, background: background)
             }
-
-            public init(foreground: Color) {
-                values = [.foreground: AnyShapeStyle(foreground)]
-            }
-
-            public init(background: Color) {
-                values = [.background: AnyShapeStyle(background)]
+            
+            public static func withColor(any color: Color) -> Self {
+                Self([.any: AnyShapeStyle(color)])
             }
 
         }

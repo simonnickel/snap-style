@@ -67,7 +67,7 @@ struct ContentView: View {
             surfaces: [
                 \.title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
-                    case .primary: .surface(.init(foreground: Color.primary))
+                    case .primary: .surface(.withColor(foreground: .primary))
                     default: nil
                     }
                 }

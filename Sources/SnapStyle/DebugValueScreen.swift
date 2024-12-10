@@ -62,7 +62,7 @@ public struct DebugValueScreen: View {
             surfaces: [
                 \.title : SnapStyle.ValueBuilder { context in
                     switch context.item.hierarchy {
-                        case .secondary: .surface(.init(foreground: Color.primary))
+                        case .secondary: .surface(.withColor(foreground: .primary))
                         default: nil
                     }
                 }
