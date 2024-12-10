@@ -9,10 +9,10 @@ extension SnapStyle.SurfaceKey {
  
     // MARK: Item
 
-    public var title: ValueBuilder { .init(.surface(.withColor(foreground: .mint))) }
+    public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
 
     public var content: ValueBuilder {
-        .init { context in
+        .context { context in
             switch context.item.hierarchy {
                 case .primary: .surface(.withColor(foreground: .primary))
                 case .secondary: .surface(.withColor(foreground: .secondary))
@@ -21,12 +21,12 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
-    public var label: ValueBuilder { .init(.reference(\.content)) }
+    public var label: ValueBuilder { .base(.reference(\.content)) }
 
-    public var value: ValueBuilder { .init(.reference(\.interactive)) }
+    public var value: ValueBuilder { .base(.reference(\.interactive)) }
 
     public var cta: ValueBuilder {
-        .init { context in
+        .context { context in
                 .surface(.init(
                     foreground: Color.white,
                     background: Gradient(colors: [.blue, .yellow])
@@ -34,13 +34,13 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
-    public var indicator: ValueBuilder { .init(.reference(\.content)) }
+    public var indicator: ValueBuilder { .base(.reference(\.content)) }
     
 
     // MARK: Highlight
 
-    public var interactive: ValueBuilder {  .init(.surface(.withColor(foreground: .accentColor))) }
+    public var interactive: ValueBuilder {  .base(.surface(.withColor(foreground: .accentColor))) }
 
-    public var navigation: ValueBuilder { .init(.reference(\.interactive)) }
+    public var navigation: ValueBuilder { .base(.reference(\.interactive)) }
     
 }

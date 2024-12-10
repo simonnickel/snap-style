@@ -6,7 +6,7 @@
 extension SnapStyle.FontKey {
     
     public var title: ValueBuilder {
-        .init { context in
+        .context { context in
             switch context.item.hierarchy {
                 case .primary: .definition(.init(size: 18))
                 case .secondary: .definition(.init(size: 16))
@@ -16,7 +16,7 @@ extension SnapStyle.FontKey {
     }
     
     public var label: ValueBuilder {
-        .init(.font(.body)) { context in
+        .baseAnd(.font(.body)) { context in
             switch context.component.type {
                 case .card: .font(.caption)
                 default: nil
@@ -24,12 +24,12 @@ extension SnapStyle.FontKey {
         }
     }
     
-    public var content: ValueBuilder { .init(.reference(\.label)) }
+    public var content: ValueBuilder { .base(.reference(\.label)) }
     
-    public var value: ValueBuilder { .init(.reference(\.label)) }
+    public var value: ValueBuilder { .base(.reference(\.label)) }
     
-    public var cta: ValueBuilder { .init(.reference(\.label)) }
+    public var cta: ValueBuilder { .base(.reference(\.label)) }
     
-    public var indicator: ValueBuilder { .init(.reference(\.label)) }
+    public var indicator: ValueBuilder { .base(.reference(\.label)) }
     
 }

@@ -51,7 +51,7 @@ public struct DebugValueScreen: View {
     DebugValueScreen()
         .styleOverride(
             fonts: [
-                \.title : SnapStyle.ValueBuilder(.definition(.init(size: 6))) { context in
+                \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in
                     switch context.item.hierarchy {
                         case .primary: .definition(.init(size: 16))
                         default: .erase
@@ -60,7 +60,7 @@ public struct DebugValueScreen: View {
                 }
             ],
             surfaces: [
-                \.title : SnapStyle.ValueBuilder { context in
+                \.title : SnapStyle.ValueBuilder.context { context in
                     switch context.item.hierarchy {
                         case .secondary: .surface(.withColor(foreground: .primary))
                         default: nil

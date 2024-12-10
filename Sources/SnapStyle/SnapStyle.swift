@@ -36,11 +36,20 @@ public struct SnapStyle {
             var values: [Context: KeyType.Value] = [:]
             var erase: [Context] = []
 
-            if let base = valueBuilder.base {
-                values[.any] = base
+            var contextBuilder: SnapStyle.ValueBuilder<Value>.Builder? = nil
+            switch valueBuilder {
+                case .base(let value):
+                    values[.any] = value
+                    
+                case .baseAnd(let value, context: let builder):
+                    values[.any] = value
+                    contextBuilder = builder
+
+                case .context(let builder):
+                    contextBuilder = builder
             }
 
-            if let builder = valueBuilder.context {
+            if let builder = contextBuilder {
                 for context in Context.allCases {
                     guard keyPath == KeyType.keyPath(for: context.item.type) else { continue }
                     if let value = builder(context) {
