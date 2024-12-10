@@ -9,44 +9,6 @@ extension SnapStyle {
     
     public struct SurfaceKey: StyleKey {
         
-        
-        // MARK: - KeyPaths
-        
-        // MARK: Item
-
-        public let title = ValueBuilder(.surface(.withColor(foreground: .mint)))
-
-        public let content = ValueBuilder { context in
-            switch context.item.hierarchy {
-                case .primary: .surface(.withColor(foreground: .primary))
-                case .secondary: .surface(.withColor(foreground: .secondary))
-                case .tertiary: .surface(.withColor(foreground: .secondary))
-            }
-        }
-
-        public let label = ValueBuilder(.reference(\.content))
-
-        public let value = ValueBuilder(.reference(\.interactive))
-
-        public let cta = ValueBuilder { context in
-            .surface(.init(
-                foreground: Color.white,
-                background: Gradient(colors: [.blue, .yellow])
-            ))
-        }
-
-        public let indicator = ValueBuilder(.reference(\.content))
-        
-
-        // MARK: Highlight
-
-        public let interactive = ValueBuilder(.surface(.withColor(foreground: .accentColor)))
-
-        public let navigation = ValueBuilder(.reference(\.interactive))
-        
-        
-        // MARK: - Type
-        
         public init() {}
         
         public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>

@@ -7,35 +7,6 @@ extension SnapStyle {
 
     public struct FontKey: StyleKey {
         
-        
-        // MARK: - KeyPaths
-        
-        public let title = ValueBuilder { context in
-            switch context.item.hierarchy {
-                case .primary: .definition(.init(size: 18))
-                case .secondary: .definition(.init(size: 16))
-                case .tertiary: .definition(.init(size: 14))
-            }
-        }
-        
-        public let label = ValueBuilder(.font(.body)) { context in
-            switch context.component.type {
-                case .card: .font(.caption)
-                default: nil
-            }
-        }
-        
-        public let content = ValueBuilder(.reference(\.label))
-        
-        public let value = ValueBuilder(.reference(\.label))
-        
-        public let cta = ValueBuilder(.reference(\.label))
-        
-        public let indicator = ValueBuilder(.reference(\.label))
-        
-        
-        // MARK: - Type
-        
         public init() {}
         
         public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
