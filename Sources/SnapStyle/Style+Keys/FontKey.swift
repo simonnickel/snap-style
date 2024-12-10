@@ -7,10 +7,8 @@ extension SnapStyle {
 
     public struct FontKey: StyleKey {
         
-        public init() {}
         
-        public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
-        public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
+        // MARK: - KeyPaths
         
         public let title = ValueBuilder { context in
             switch context.item.hierarchy {
@@ -26,15 +24,23 @@ extension SnapStyle {
                 default: nil
             }
         }
-
+        
         public let content = ValueBuilder(.reference(\.label))
-
+        
         public let value = ValueBuilder(.reference(\.label))
-
+        
         public let cta = ValueBuilder(.reference(\.label))
-
+        
         public let indicator = ValueBuilder(.reference(\.label))
-
+        
+        
+        // MARK: - Type
+        
+        public init() {}
+        
+        public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
+        public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
+        
         internal static var defaultKeyPaths: [ValueKeyPath] {
             return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
         }

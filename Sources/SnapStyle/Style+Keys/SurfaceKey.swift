@@ -9,13 +9,10 @@ extension SnapStyle {
     
     public struct SurfaceKey: StyleKey {
         
-        public init() {}
         
-        public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
-        public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
+        // MARK: - KeyPaths
         
-
-        // MARK: - Item
+        // MARK: Item
 
         public let title = ValueBuilder(.surface(.withColor(foreground: .mint)))
 
@@ -41,12 +38,19 @@ extension SnapStyle {
         public let indicator = ValueBuilder(.reference(\.content))
         
 
-        // MARK: - Highlight
+        // MARK: Highlight
 
         public let interactive = ValueBuilder(.surface(.withColor(foreground: .accentColor)))
 
         public let navigation = ValueBuilder(.reference(\.interactive))
         
+        
+        // MARK: - Type
+        
+        public init() {}
+        
+        public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
+        public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
         
         internal static var defaultKeyPaths: [ValueKeyPath] {
             return [\.title, \.content, \.label, \.value, \.cta, \.indicator, \.interactive, \.navigation]
