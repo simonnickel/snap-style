@@ -7,13 +7,16 @@ import SwiftUI
 
 extension SnapStyle.FontKey {
     
-    public enum Value {
+    public enum Value: StyleValue {
+        
+        public typealias WrappedValue = Font
+        
         case definition(Definition)
         case font(Font)
         case reference(SnapStyle.FontKey.ValueKeyPath)
         case erase
 
-        var wrappedValue: Font {
+        public var wrappedValue: WrappedValue {
             switch self {
                 case .definition(let definition): Font.system(size: definition.size)
                 case .font(let font): font
@@ -21,6 +24,12 @@ extension SnapStyle.FontKey {
                     fatalError("A `.reference` FontValue should never be used to generate a value.")
             }
         }
+        
+        public var isErase: Bool {
+            if case .erase = self { return true }
+            return false
+        }
+        
     }
     
     public struct Definition {

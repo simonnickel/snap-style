@@ -13,7 +13,9 @@ extension SnapStyle.SurfaceKey {
         case background
     }
 
-    public enum Value {
+    public enum Value: StyleValue {
+        
+        public typealias WrappedValue = ForLayer
 
         public struct ForLayer {
             
@@ -49,12 +51,17 @@ extension SnapStyle.SurfaceKey {
         case reference(SnapStyle.SurfaceKey.ValueKeyPath)
         case erase
 
-        var wrappedValue: ForLayer {
+        public var wrappedValue: ForLayer {
             switch self {
                 case .surface(let forLayer): forLayer
                 case .reference, .erase:
                     fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
             }
+        }
+        
+        public var isErase: Bool {
+            if case .erase = self { return true }
+            return false
         }
 
     }
