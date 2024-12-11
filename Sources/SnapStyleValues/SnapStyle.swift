@@ -23,7 +23,7 @@ public struct SnapStyle {
     
     // MARK: - Apply
     
-    mutating func apply<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: ValueContainer<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
+    mutating func apply<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
         
         let object = type.init()
         let valueBuilderForKeyPath = Dictionary(uniqueKeysWithValues: keyPaths.map { ($0, object[keyPath: $0]) })
@@ -31,12 +31,12 @@ public struct SnapStyle {
         applyWithValues(valueBuilderForKeyPath, type: type, at: destination)
         
     }
-    mutating func applyWithValues<KeyType: StyleKey, Value, ValueKeyPath>(_ keyPaths: [ValueKeyPath: SnapStyle.ValueBuilder<Value>], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [ValueKeyPath: ValueContainer<Value>]>) where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
+    mutating func applyWithValues<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
         for (keyPath, valueBuilder) in keyPaths {
             var values: [Context: KeyType.Value] = [:]
             var erase: [Context] = []
 
-            var contextBuilder: SnapStyle.ValueBuilder<Value>.Builder? = nil
+            var contextBuilder: KeyType.ValueBuilder.Builder? = nil
             switch valueBuilder {
                 case .base(let value):
                     values[.any] = value

@@ -6,7 +6,9 @@
 public protocol StyleKey {
     
     associatedtype Value: StyleValue
-    associatedtype ValueKeyPath: KeyPath<Self, SnapStyle.ValueBuilder<Value>>
+    
+    typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
+    typealias ValueKeyPath = KeyPath<Self, Self.ValueBuilder>
 
     /// Needs an init to access KeyPaths.
     init()

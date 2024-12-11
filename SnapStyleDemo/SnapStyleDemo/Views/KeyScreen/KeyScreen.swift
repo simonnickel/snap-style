@@ -7,15 +7,15 @@ import SnapStyleValues
 import SwiftUI
 
 // TODO: Move to package?
-struct KeyScreen<KeyType: StyleKey, Value, ValueKeyPath, ItemContent: View>: View where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
+struct KeyScreen<KeyType: StyleKey, ItemContent: View>: View {
     
     @Environment(\.style) private var style
     
     let type: KeyType.Type
 
-    let keyPath: KeyPath<SnapStyle, [ValueKeyPath: SnapStyle.ValueContainer<Value>]>
+    let keyPath: KeyPath<SnapStyle, [KeyType.ValueKeyPath: SnapStyle.ValueContainer<KeyType.Value>]>
     
-    let content: (ValueKeyPath) -> ItemContent
+    let content: (KeyType.ValueKeyPath) -> ItemContent
     
     var body: some View {
         let items = Array(style[keyPath: keyPath].keys)
