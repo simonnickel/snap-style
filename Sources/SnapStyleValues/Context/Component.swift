@@ -6,9 +6,14 @@
 extension SnapStyle {
 
     public struct Component: Hashable, Sendable, CaseIterable {
-        
+                
         public let type: ComponentType
         public let hierarchy: Hierarchy
+
+        package init(type: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy) {
+            self.type = type
+            self.hierarchy = hierarchy
+        }
         
         public enum ComponentType: String, Sendable, CaseIterable {
 

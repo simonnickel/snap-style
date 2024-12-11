@@ -3,9 +3,10 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyle
+import SnapStyleValues
 import SwiftUI
 
+// TODO: Move to package?
 struct KeyScreen<KeyType: StyleKey, Value, ValueKeyPath, ItemContent: View>: View where Value == KeyType.Value, ValueKeyPath == KeyType.ValueKeyPath {
     
     @Environment(\.style) private var style

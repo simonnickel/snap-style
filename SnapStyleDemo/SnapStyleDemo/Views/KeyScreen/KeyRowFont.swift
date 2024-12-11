@@ -3,9 +3,10 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyle
+import SnapStyleValues
 import SwiftUI
 
+// TODO: Move to package?
 struct KeyRowFont: View {
     
     let keyPath: SnapStyle.FontKey.ValueKeyPath

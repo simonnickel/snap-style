@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle"]),
+            targets: ["SnapStyle", "SnapStyleValues"]),
     ],
     // TODO: Remove if not required.
 	dependencies: [
@@ -24,10 +24,14 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SnapStyle",
-            dependencies: [ // TODO: Remove if not required.
-				.product(name: "SnapFoundation", package: "snap-foundation"),
+            dependencies: [
+				.product(name: "SnapFoundation", package: "snap-foundation"), // TODO: Remove if not required.
+                "SnapStyleValues",
 			]
 		),
+        .target(
+            name: "SnapStyleValues"
+        ),
     ],
     swiftLanguageModes: [.version("6")]
 )

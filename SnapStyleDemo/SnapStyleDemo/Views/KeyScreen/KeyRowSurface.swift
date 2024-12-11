@@ -4,6 +4,7 @@
 //
 
 import SnapStyle
+import SnapStyleValues
 import SwiftUI
 
 struct KeyRowSurface: View {

@@ -10,6 +10,11 @@ extension SnapStyle {
         public let type: ItemType
         public let hierarchy: Hierarchy
 
+        package init(type: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy) {
+            self.type = type
+            self.hierarchy = hierarchy
+        }
+        
         public enum ItemType: String, Sendable, CaseIterable {
 
             case any
