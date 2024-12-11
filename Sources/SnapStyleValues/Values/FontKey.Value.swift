@@ -5,7 +5,14 @@
 
 import SwiftUI
 
+extension SnapStyle {
+    public struct FontKey: StyleKey { public init() {} }
+}
+
 extension SnapStyle.FontKey {
+    
+    
+    // MARK: - FontKey.Value
     
     public enum Value: StyleValue {
         

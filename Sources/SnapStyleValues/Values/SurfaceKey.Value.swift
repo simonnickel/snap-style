@@ -5,13 +5,23 @@
 
 import SwiftUI
 
-extension SnapStyle.SurfaceKey {
+extension SnapStyle {
+    public struct SurfaceKey: StyleKey { public init() {} }
+}
 
+extension SnapStyle.SurfaceKey {
+    
+    
+    // MARK: - Layer
+    
     public enum Layer {
         case any
         case foreground
         case background
     }
+    
+    
+    // MARK: - SurfaceKey.Value
 
     public enum Value: StyleValue {
         
