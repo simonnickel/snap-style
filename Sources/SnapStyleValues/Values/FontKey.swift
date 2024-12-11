@@ -11,10 +11,6 @@ extension SnapStyle {
         
         public typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
         public typealias ValueKeyPath = KeyPath<Self, ValueBuilder>
-        
-        internal static var defaultKeyPaths: [ValueKeyPath] {
-            return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
-        }
 
     }
     

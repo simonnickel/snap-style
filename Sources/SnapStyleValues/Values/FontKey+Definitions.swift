@@ -5,6 +5,13 @@
 
 extension SnapStyle.FontKey {
     
+    internal static var defaultKeyPaths: [ValueKeyPath] {
+        return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
+    }
+    
+ 
+    // MARK: - Item
+    
     public var title: ValueBuilder {
         .context { context in
             switch context.item.hierarchy {
@@ -15,6 +22,8 @@ extension SnapStyle.FontKey {
         }
     }
     
+    public var content: ValueBuilder { .base(.reference(\.label)) }
+    
     public var label: ValueBuilder {
         .baseAnd(.font(.body)) { context in
             switch context.component.type {
@@ -23,8 +32,6 @@ extension SnapStyle.FontKey {
             }
         }
     }
-    
-    public var content: ValueBuilder { .base(.reference(\.label)) }
     
     public var value: ValueBuilder { .base(.reference(\.label)) }
     

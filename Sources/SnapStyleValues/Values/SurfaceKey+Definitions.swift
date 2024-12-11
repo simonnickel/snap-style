@@ -6,8 +6,13 @@
 import SwiftUI
 
 extension SnapStyle.SurfaceKey {
+    
+    internal static var defaultKeyPaths: [ValueKeyPath] {
+        return [\.title, \.content, \.label, \.value, \.cta, \.indicator, \.interactive, \.navigation]
+    }
+    
  
-    // MARK: Item
+    // MARK: - Item
 
     public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
 
@@ -37,7 +42,7 @@ extension SnapStyle.SurfaceKey {
     public var indicator: ValueBuilder { .base(.reference(\.content)) }
     
 
-    // MARK: Highlight
+    // MARK: - Highlight
 
     public var interactive: ValueBuilder {  .base(.surface(.withColor(foreground: .accentColor))) }
 
