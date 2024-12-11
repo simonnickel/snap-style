@@ -27,6 +27,26 @@ extension SnapStyle.SurfaceKey {
         
         public typealias WrappedValue = LayeredShapeStyle
 
+        case surface(LayeredShapeStyle)
+        case reference(SnapStyle.SurfaceKey.ValueKeyPath)
+        case erase
+
+        public var wrappedValue: LayeredShapeStyle {
+            switch self {
+                case .surface(let forLayer): forLayer
+                case .reference, .erase:
+                    fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
+            }
+        }
+        
+        public var isErase: Bool {
+            if case .erase = self { return true }
+            return false
+        }
+        
+        
+        // MARK: LayeredShapeStyle
+        
         public struct LayeredShapeStyle {
             
             typealias ShapeStyleForLayer = [Layer: AnyShapeStyle]
@@ -61,23 +81,6 @@ extension SnapStyle.SurfaceKey {
                 Self([.any: AnyShapeStyle(color)])
             }
 
-        }
-
-        case surface(LayeredShapeStyle)
-        case reference(SnapStyle.SurfaceKey.ValueKeyPath)
-        case erase
-
-        public var wrappedValue: LayeredShapeStyle {
-            switch self {
-                case .surface(let forLayer): forLayer
-                case .reference, .erase:
-                    fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
-            }
-        }
-        
-        public var isErase: Bool {
-            if case .erase = self { return true }
-            return false
         }
 
     }

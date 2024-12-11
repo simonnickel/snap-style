@@ -37,16 +37,19 @@ extension SnapStyle.FontKey {
             return false
         }
         
-    }
-    
-    public struct Definition {
         
-        let size: CGFloat
-
-        public init(size: CGFloat) {
-            self.size = size
+        // MARK: - Definition
+        
+        public struct Definition {
+            
+            let size: CGFloat
+            
+            public init(size: CGFloat) {
+                self.size = size
+            }
+            
         }
-        
+    
     }
     
 }
