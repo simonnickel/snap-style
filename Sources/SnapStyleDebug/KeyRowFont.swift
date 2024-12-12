@@ -6,7 +6,6 @@
 import SnapStyleValues
 import SwiftUI
 
-// TODO: Move to package?
 struct KeyRowFont: View {
     
     let keyPath: SnapStyle.FontKey.ValueKeyPath
@@ -14,7 +13,7 @@ struct KeyRowFont: View {
     var body: some View {
         HStack {
             ForEach(SnapStyle.Item.Hierarchy.allCases, id: \.self) { hieararchy in
-                Text(keyPath.debugDescription)
+                Text("\(keyPath)")
 //                    .style(font: key, hierarchy: hieararchy)
 
             }

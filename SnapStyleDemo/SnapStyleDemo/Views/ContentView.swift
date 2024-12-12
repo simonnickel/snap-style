@@ -5,6 +5,7 @@
 
 import SnapStyle
 import SnapStyleValues
+import SnapStyleDebug
 import SwiftUI
 
 struct ContentView: View {
@@ -26,20 +27,20 @@ struct ContentView: View {
                 }
                 Section {
                     NavigationLink("Fonts") {
-                        KeyScreen(type: SnapStyle.FontKey.self, keyPath: \.fonts) { keyPath in
-                            KeyRowFont(keyPath: keyPath)
-                        }
+                        DebugKeyScreen(keyPath: \.fonts)
                     }
                     NavigationLink("Surfaces") {
-                        KeyScreen(type: SnapStyle.SurfaceKey.self, keyPath: \.surfaces) { keyPath in
-                            KeyRowSurface(keyPath: keyPath)
-                        }
+                        DebugKeyScreen(keyPath: \.surfaces)
                     }
+                } header: {
+                    Text("Keys")
+                }
+                Section {
                     NavigationLink("Values") {
                         DebugValueScreen()
                     }
                 } header: {
-                    Text("Keys")
+                    Text("Values")
                 }
             }
         }

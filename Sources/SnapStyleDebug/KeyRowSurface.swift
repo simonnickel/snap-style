@@ -12,7 +12,7 @@ struct KeyRowSurface: View {
     let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
     
     var body: some View {
-        Text(keyPath.debugDescription)
+        Text("\(keyPath)")
 //            .style(surface: key)
     }
 }
