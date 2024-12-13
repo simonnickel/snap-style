@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-public protocol StyleValue {
+public protocol StyleValue: CustomStringConvertible {
     
     associatedtype WrappedValue
     

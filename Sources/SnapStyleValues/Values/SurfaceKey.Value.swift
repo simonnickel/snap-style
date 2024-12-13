@@ -44,6 +44,13 @@ extension SnapStyle.SurfaceKey {
             return false
         }
         
+        public var description: String {
+            switch self {
+                case .surface(let definition): ".definition: \(definition)"
+                case .reference(let keyPath): ".reference: \(keyPath)"
+                case .erase: ".erase"
+            }
+        }
         
         // MARK: LayeredShapeStyle
         

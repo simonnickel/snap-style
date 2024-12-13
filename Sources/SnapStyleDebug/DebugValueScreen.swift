@@ -43,7 +43,7 @@ public struct DebugValueScreen: View {
     private func item(context: SnapStyle.Context, values:  SnapStyle.ValueContainer<SnapStyle.FontKey.Value>) -> some View {
         VStack(alignment: .leading) {
             Text(context.description)
-            Text(values.valuesForContext[context].debugDescription)
+            Text(values.valuesForContext[context]?.description ?? "")
         }
     }
 }

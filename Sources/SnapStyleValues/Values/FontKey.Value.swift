@@ -37,16 +37,26 @@ extension SnapStyle.FontKey {
             return false
         }
         
+        public var description: String {
+            switch self {
+                case .definition(let definition): ".definition: \(definition)"
+                case .font(let font): ".font"
+                case .reference(let keyPath): ".reference: \(keyPath)"
+                case .erase: ".erase"
+            }
+        }
         
         // MARK: - Definition
         
-        public struct Definition {
+        public struct Definition: CustomStringConvertible {
             
             let size: CGFloat
             
             public init(size: CGFloat) {
                 self.size = size
             }
+            
+            public var description: String { "size: \(size)" }
             
         }
     
