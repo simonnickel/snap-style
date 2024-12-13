@@ -6,7 +6,7 @@
 extension SnapStyle.FontKey {
     
     internal static var defaultKeyPaths: [ValueKeyPath] {
-        return [\.title, \.label, \.content, \.value, \.cta, \.indicator]
+        return [\.title, \.content, \.label, \.value, \.cta, \.indicator]
     }
     
  
