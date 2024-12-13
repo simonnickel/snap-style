@@ -6,14 +6,21 @@
 import SnapStyleValues
 import SwiftUI
 
-public struct DebugValueScreen: View {
+public struct DebugValueScreen<KeyType: StyleKey>: View {
+    
     @Environment(\.style) private var style
 
-    public init() {}
+    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: SnapStyle.ValueContainer<KeyType.Value>]>
+    
+    let itemKeyPath: ItemKeyPath
+    
+    public init(itemKeyPath: ItemKeyPath) {
+        self.itemKeyPath = itemKeyPath
+    }
     
     public var body: some View {
         List {
-            ForEach(Array(style.fonts.keys), id: \.self) { keyPath in
+            ForEach(Array(style[keyPath: itemKeyPath].keys), id: \.self) { keyPath in
 
                 section(keyPath: keyPath)
 
@@ -21,10 +28,10 @@ public struct DebugValueScreen: View {
         }
     }
 
-    private func section(keyPath: SnapStyle.FontKey.ValueKeyPath) -> some View {
+    private func section(keyPath: KeyType.ValueKeyPath) -> some View {
 
         Group {
-            if let values = style.fonts[keyPath] {
+            if let values = style[keyPath: itemKeyPath][keyPath] {
                 let contexts: [SnapStyle.Context] = Array(values.valuesForContext.keys)
 
                 Section {
@@ -40,7 +47,7 @@ public struct DebugValueScreen: View {
         }
     }
 
-    private func item(context: SnapStyle.Context, values:  SnapStyle.ValueContainer<SnapStyle.FontKey.Value>) -> some View {
+    private func item(context: SnapStyle.Context, values:  SnapStyle.ValueContainer<KeyType.Value>) -> some View {
         VStack(alignment: .leading) {
             Text(context.description)
             Text(values.valuesForContext[context]?.description ?? "")
@@ -49,7 +56,7 @@ public struct DebugValueScreen: View {
 }
 
 #Preview {
-    DebugValueScreen()
+    DebugValueScreen(itemKeyPath: \.fonts)
         .styleOverride(
             fonts: [
                 \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in

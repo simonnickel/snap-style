@@ -36,8 +36,11 @@ struct ContentView: View {
                     Text("Keys")
                 }
                 Section {
-                    NavigationLink("Values") {
-                        DebugValueScreen()
+                    NavigationLink("Fonts") {
+                        DebugValueScreen(itemKeyPath: \.fonts)
+                    }
+                    NavigationLink("Surfaces") {
+                        DebugValueScreen(itemKeyPath: \.surfaces)
                     }
                 } header: {
                     Text("Values")
