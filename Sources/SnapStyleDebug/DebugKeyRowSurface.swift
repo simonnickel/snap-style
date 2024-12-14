@@ -13,7 +13,7 @@ struct DebugKeyRowSurface: View {
     
     var body: some View {
         Text("\(keyPath)")
-//            .style(surface: key)
+            .style(surface: keyPath)
     }
 }
 
