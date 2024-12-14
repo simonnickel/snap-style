@@ -6,7 +6,7 @@
 import SnapStyleValues
 import SwiftUI
 
-struct KeyRowFont: View {
+struct DebugKeyRowFont: View {
     
     let keyPath: SnapStyle.FontKey.ValueKeyPath
     
@@ -22,5 +22,5 @@ struct KeyRowFont: View {
 }
 
 #Preview {
-    KeyRowFont(keyPath: \.content)
+    DebugKeyRowFont(keyPath: \.content)
 }

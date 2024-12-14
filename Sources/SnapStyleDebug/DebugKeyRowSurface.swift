@@ -7,7 +7,7 @@ import SnapStyle
 import SnapStyleValues
 import SwiftUI
 
-struct KeyRowSurface: View {
+struct DebugKeyRowSurface: View {
     
     let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
     
@@ -18,5 +18,5 @@ struct KeyRowSurface: View {
 }
 
 #Preview {
-    KeyRowSurface(keyPath: \.interactive)
+    DebugKeyRowSurface(keyPath: \.interactive)
 }

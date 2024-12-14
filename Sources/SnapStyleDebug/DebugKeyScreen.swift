@@ -37,8 +37,8 @@ extension StyleKey {
 
         // TODO: Is there a simpler solution without casting?
         switch self {
-            case is SnapStyle.FontKey.Type: KeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueKeyPath)
-            case is SnapStyle.SurfaceKey.Type: KeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueKeyPath)
+            case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueKeyPath)
+            case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueKeyPath)
             default: Text("Test")
         }
         
