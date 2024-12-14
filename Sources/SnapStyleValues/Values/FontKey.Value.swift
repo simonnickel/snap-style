@@ -46,6 +46,7 @@ extension SnapStyle.FontKey {
             }
         }
         
+        
         // MARK: - Definition
         
         public struct Definition: CustomStringConvertible {

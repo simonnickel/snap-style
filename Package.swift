@@ -35,6 +35,7 @@ let package = Package(
         .target(
             name: "SnapStyleDebug",
             dependencies: [
+                "SnapStyle",
                 "SnapStyleValues",
             ]
         ),

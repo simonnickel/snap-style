@@ -13,7 +13,7 @@ extension SnapStyle.FontKey {
     // MARK: - Item
     
     public var title: ValueBuilder {
-        .context { context in
+        .baseAnd(.font(.title)) { context in
             switch context.item.hierarchy {
                 case .primary: .definition(.init(size: 18))
                 case .secondary: .definition(.init(size: 16))

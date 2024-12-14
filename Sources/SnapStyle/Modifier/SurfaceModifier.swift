@@ -19,6 +19,47 @@ extension View {
 
 // MARK: - Modifier
 
+//internal struct ForegroundModifier: ViewModifier {
+//
+//    @Environment(\.style) private var style
+//    @Environment(\.styleContext) private var styleContext
+//
+//    let key: SnapStyle.SurfaceKey
+//    let hierarchy: SnapStyle.Item.Hierarchy
+//
+//    func body(content: Content) -> some View {
+//        if let foreground = style.surface(layer: .foreground, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
+//            content
+//                .foregroundStyle(foreground)
+//        } else {
+//            content
+//        }
+//    }
+//
+//}
+//
+//internal struct BackgroundModifier: ViewModifier {
+//
+//    @Environment(\.style) private var style
+//    @Environment(\.styleComponent) private var styleComponent
+//
+//    let key: SnapStyle.SurfaceKey
+//    let hierarchy: SnapStyle.Item.Hierarchy
+//
+//    func body(content: Content) -> some View {
+//        if let background = style.surface(layer: .background, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
+//            content
+//                .background(background)
+//        } else {
+//            content
+//        }
+//    }
+//
+//}
+
+
+// MARK: - FromEnvironmentModifier
+
 internal struct SurfaceFromEnvironmentModifier: ViewModifier {
 
     @Environment(\.style) private var style
@@ -43,48 +84,9 @@ internal struct SurfaceFromEnvironmentModifier: ViewModifier {
                     content
                         .background(value)
             }
-
         } else {
             content
         }
     }
 
 }
-
-//internal struct ForegroundModifier: ViewModifier {
-//
-//    @Environment(\.style) private var style
-//    @Environment(\.styleContext) private var styleContext
-//
-//    let key: SnapStyle.SurfaceKey
-//    let hierarchy: SnapStyle.Item.Hierarchy
-//
-//    func body(content: Content) -> some View {
-//        if let foreground = style.surface(layer: .foreground, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
-//            content
-//                .foregroundStyle(foreground)
-//        } else {
-//            content
-//        }
-//    }
-//    
-//}
-//
-//internal struct BackgroundModifier: ViewModifier {
-//
-//    @Environment(\.style) private var style
-//    @Environment(\.styleComponent) private var styleComponent
-//
-//    let key: SnapStyle.SurfaceKey
-//    let hierarchy: SnapStyle.Item.Hierarchy
-//
-//    func body(content: Content) -> some View {
-//        if let background = style.surface(layer: .background, for: key, in: SnapStyle.Context(component: styleComponent, hierarchy: hierarchy)) {
-//            content
-//                .background(background)
-//        } else {
-//            content
-//        }
-//    }
-//
-//}
