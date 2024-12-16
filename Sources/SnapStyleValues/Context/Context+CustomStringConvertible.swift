@@ -6,7 +6,7 @@
 extension SnapStyle.Context: CustomStringConvertible {
     
     public var description: String {
-        "Component: \(component.description) - Item: \(item.description)"
+        "Component: \(component.description) - Element: \(element.description)"
     }
     
 }
@@ -19,7 +19,7 @@ extension SnapStyle.Component: CustomStringConvertible {
     
 }
 
-extension SnapStyle.Item: CustomStringConvertible {
+extension SnapStyle.Element: CustomStringConvertible {
     
     public var description: String {
         type.rawValue + "." + hierarchy.rawValue

@@ -64,7 +64,7 @@ internal struct SurfaceFromEnvironmentModifier: ViewModifier {
     let layer: SnapStyle.SurfaceKey.Layer
 
     func body(content: Content) -> some View {
-        let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.item.type)
+        let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.element.type)
         let value = style.surface(layer: layer, for: keyPath, in: styleContext)
 
         if let value {

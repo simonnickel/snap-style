@@ -31,19 +31,19 @@ struct ComponentsScreen: View {
 
     private var card: some View {
         VStack(alignment: .leading) {
-            StyleItems()
+            StyleElements()
         }
     }
 
     private var content: some View {
         VStack(alignment: .leading) {
-            StyleItems()
+            StyleElements()
         }
     }
 
     private var list: some View {
         List {
-            StyleItems()
+            StyleElements()
         }
     }
 
@@ -54,7 +54,7 @@ struct ComponentsScreen: View {
         .styleOverride(
             fonts: [
                 \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in
-                    switch context.item.hierarchy {
+                    switch context.element.hierarchy {
                         case .primary: .definition(.init(size: 16))
                         default: .erase
                     }
@@ -63,7 +63,7 @@ struct ComponentsScreen: View {
             ],
             surfaces: [
                 \.title : SnapStyle.ValueBuilder.context { context in
-                    switch context.item.hierarchy {
+                    switch context.element.hierarchy {
                         case .secondary: .surface(.withColor(foreground: .primary))
                         default: nil
                     }
@@ -73,7 +73,7 @@ struct ComponentsScreen: View {
 //        .styleOverride(
 //            fonts: [
 //                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.item.hierarchy {
+//                    switch context.element.hierarchy {
 //                        case.secondary: .definition(.init(size: 10))
 //                        default: nil
 //                    }
@@ -81,7 +81,7 @@ struct ComponentsScreen: View {
 //            ],
 //            surfaces: [
 //                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.item.hierarchy {
+//                    switch context.element.hierarchy {
 //                        case .primary: .surface(.init(foreground: Color.primary))
 //                        default: nil
 //                    }

@@ -51,7 +51,7 @@ public struct SnapStyle {
 
             if let builder = contextBuilder {
                 for context in Context.allCases {
-                    guard keyPath == KeyType.keyPath(for: context.item.type) else { continue }
+                    guard keyPath == KeyType.keyPath(for: context.element.type) else { continue }
                     if let value = builder(context) {
                         if value.isErase {
                             erase.append(context)

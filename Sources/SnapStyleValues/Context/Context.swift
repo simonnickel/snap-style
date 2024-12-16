@@ -8,16 +8,16 @@ extension SnapStyle {
     public struct Context: Hashable, Sendable, CaseIterable {
 
         public let component: Component
-        public let item: Item
+        public let element: Element
 
         /// A context to use for default values.
-        public static let any: SnapStyle.Context = .init(component: .init(type: .any, hierarchy: .primary), item: .init(type: .any, hierarchy: .primary))
+        public static let any: SnapStyle.Context = .init(component: .init(type: .any, hierarchy: .primary), element: .init(type: .any, hierarchy: .primary))
 
         public static let allCases: [SnapStyle.Context] = {
             var cases: [SnapStyle.Context] = []
             for component in Component.allCases {
-                for item in Item.allCases {
-                    cases.append(.init(component: component, item: item))
+                for element in Element.allCases {
+                    cases.append(.init(component: component, element: element))
                 }
             }
 

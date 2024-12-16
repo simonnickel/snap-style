@@ -5,8 +5,8 @@
 
 extension SnapStyle.FontKey {
     
-    public static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath {
-        switch item {
+    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
+        switch element {
             case .any: \.content // TODO: Is there a better default?
                 
             case .title: \.title
@@ -22,8 +22,8 @@ extension SnapStyle.FontKey {
 
 extension SnapStyle.SurfaceKey {
     
-    public static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath {
-        switch item {
+    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
+        switch element {
             case .any: \.content // TODO: Is there a better default?
 
             case .title: \.title

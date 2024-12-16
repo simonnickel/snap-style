@@ -6,35 +6,35 @@
 import SnapStyle
 import SwiftUI
 
-struct StyleItems: View {
+struct StyleElements: View {
     var body: some View {
         Text("Title")
-            .style(item: .title)
+            .style(element: .title)
         Text("Secondary Title")
-            .style(item: .title, hierarchy: .secondary)
+            .style(element: .title, hierarchy: .secondary)
         Text("Tertiary Title")
-            .style(item: .title, hierarchy: .tertiary)
+            .style(element: .title, hierarchy: .tertiary)
         Text("Block with some more words to be like a paragraph with multiple lines.")
-            .style(item: .content)
+            .style(element: .content)
         HStack {
             Text("Label")
-                .style(item: .label)
+                .style(element: .label)
             Text("Value")
-                .style(item: .value)
+                .style(element: .value)
             Text("Indicator")
-                .style(item: .indicator)
+                .style(element: .indicator)
         }
         HStack {
             Button {} label: { Text("Button") }
-                .style(item: .cta)
+                .style(element: .cta)
             Button {} label: { Text("Button") }
-                .style(item: .cta, hierarchy: .secondary)
+                .style(element: .cta, hierarchy: .secondary)
             Button {} label: { Text("Button") }
-                .style(item: .cta, hierarchy: .tertiary)
+                .style(element: .cta, hierarchy: .tertiary)
         }
     }
 }
 
 #Preview {
-    StyleItems()
+    StyleElements()
 }

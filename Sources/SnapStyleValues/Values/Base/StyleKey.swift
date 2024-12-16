@@ -13,6 +13,6 @@ public protocol StyleKey {
     /// Needs an init to access KeyPaths.
     init()
         
-    static func keyPath(for item: SnapStyle.Item.ItemType) -> ValueKeyPath
+    static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath
     
 }

@@ -12,13 +12,13 @@ extension SnapStyle.SurfaceKey {
     }
     
  
-    // MARK: - Item
+    // MARK: - Element
 
     public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
 
     public var content: ValueBuilder {
         .context { context in
-            switch context.item.hierarchy {
+            switch context.element.hierarchy {
                 case .primary: .surface(.withColor(foreground: .primary))
                 case .secondary: .surface(.withColor(foreground: .secondary))
                 case .tertiary: .surface(.withColor(foreground: .secondary))

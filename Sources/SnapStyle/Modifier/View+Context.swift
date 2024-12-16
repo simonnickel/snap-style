@@ -17,9 +17,9 @@ extension View {
     }
     
     
-    // MARK: - Item
+    // MARK: - Element
     
-    public func style(item: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
+    public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
             if applyStyle {
                 self
@@ -30,7 +30,7 @@ extension View {
                 self
             }
         }
-        .environment(\.styleItem, SnapStyle.Item(type: item, hierarchy: hierarchy))
+        .environment(\.styleElement, SnapStyle.Element(type: element, hierarchy: hierarchy))
     }
 
 }

@@ -5,17 +5,17 @@
 
 extension SnapStyle {
 
-    public struct Item: Hashable, Sendable, CaseIterable {
+    public struct Element: Hashable, Sendable, CaseIterable {
 
-        public let type: ItemType
+        public let type: ElementType
         public let hierarchy: Hierarchy
 
-        package init(type: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy) {
+        package init(type: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy) {
             self.type = type
             self.hierarchy = hierarchy
         }
         
-        public enum ItemType: String, Sendable, CaseIterable {
+        public enum ElementType: String, Sendable, CaseIterable {
 
             case any
             
@@ -36,11 +36,11 @@ extension SnapStyle {
 
         }
 
-        public static let allCases: [Item] = {
-            var cases: [Item] = []
-            for item in ItemType.allCases {
+        public static let allCases: [Element] = {
+            var cases: [Element] = []
+            for element in ElementType.allCases {
                 for hierarchy in Hierarchy.allCases {
-                    cases.append(Item(type: item, hierarchy: hierarchy))
+                    cases.append(Element(type: element, hierarchy: hierarchy))
                 }
             }
 
