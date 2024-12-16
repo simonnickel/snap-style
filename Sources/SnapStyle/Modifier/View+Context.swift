@@ -19,12 +19,18 @@ extension View {
     
     // MARK: - Item
     
-    public func style(item: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy = .primary) -> some View {
-        self
-            .modifier(FontFromEnvironmentModifier())
-            .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
-            .modifier(SurfaceFromEnvironmentModifier(layer: .background))
-            .environment(\.styleItem, SnapStyle.Item(type: item, hierarchy: hierarchy))
+    public func style(item: SnapStyle.Item.ItemType, hierarchy: SnapStyle.Item.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
+        Group {
+            if applyStyle {
+                self
+                    .modifier(FontFromEnvironmentModifier())
+                    .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
+                    .modifier(SurfaceFromEnvironmentModifier(layer: .background))
+            } else {
+                self
+            }
+        }
+        .environment(\.styleItem, SnapStyle.Item(type: item, hierarchy: hierarchy))
     }
 
 }

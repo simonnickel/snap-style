@@ -65,7 +65,7 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
         return List(keyPaths, id: \.self) { keyPath in
             KeyType.row(keyPath: keyPath)
                 .style(component: componentType, hierarchy: componentHierarchy)
-                .style(item: itemType, hierarchy: itemHierarchy)
+                .style(item: itemType, hierarchy: itemHierarchy, applyStyle: false)
         }
     }
     
