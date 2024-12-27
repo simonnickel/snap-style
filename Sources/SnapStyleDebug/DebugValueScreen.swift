@@ -10,8 +10,8 @@ public struct DebugValueScreen<KeyType: StyleKey>: View {
     
     @Environment(\.style) private var style
 
-    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: SnapStyle.ValueContainer<KeyType.Value>]>
-    
+    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: [SnapStyle.ValueBuilder<KeyType.Value>]]>
+
     let itemKeyPath: ItemKeyPath
     
     public init(itemKeyPath: ItemKeyPath) {
@@ -32,15 +32,18 @@ public struct DebugValueScreen<KeyType: StyleKey>: View {
 
         Group {
             if let values = style[keyPath: itemKeyPath][keyPath] {
-                let contexts: [SnapStyle.Context] = Array(values.valuesForContext.keys)
+                EmptyView()
 
-                Section {
-                    ForEach(contexts, id: \.self) { context in
-                        item(context: context, values: values)
-                    }
-                } header: {
-                    Text("\(keyPath) - \(contexts.count)")
-                }
+                // TODO: Debug output
+//                let contexts: [SnapStyle.Context] = Array(values.valuesForContext.keys)
+//
+//                Section {
+//                    ForEach(contexts, id: \.self) { context in
+//                        item(context: context, values: values)
+//                    }
+//                } header: {
+//                    Text("\(keyPath) - \(contexts.count)")
+//                }
             } else {
                 EmptyView()
             }

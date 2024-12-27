@@ -5,67 +5,40 @@
 
 import SwiftUI
 
+// TODO: .erase does no longer have meaning
+
 public struct SnapStyle {
+    
+    public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]
+    public var surfaces: [SurfaceKey.ValueKeyPath: [SurfaceKey.ValueBuilder]] = [:]
+    
+    // TODO: This should be of reference type, to create new caches on append.
+//    private var cacheFonts: [FontKey.ValueKeyPath: ValueContainer<FontKey.Value>] = [:]
+//    private var cacheSurfaces: [SurfaceKey.ValueKeyPath: ValueContainer<SurfaceKey.Value>] = [:]
 
-    public var fonts: [FontKey.ValueKeyPath: ValueContainer<FontKey.Value>] = [:]
-    public var surfaces: [SurfaceKey.ValueKeyPath: ValueContainer<SurfaceKey.Value>] = [:]
-
-    private init() { }
-
-    public static var defaults: Self {
-        var style = SnapStyle()
-        style.apply(FontKey.defaultKeyPaths, type: FontKey.self, at: \.fonts)
-        style.apply(SurfaceKey.defaultKeyPaths, type: SurfaceKey.self, at: \.surfaces)
-
-        return style
+    // TODO: Hide behind private init?
+    public init() { }
+    
+    
+    // MARK: - Append
+    
+    internal mutating func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) {
+//        cacheFonts = [:] // TODO: Create new Cache instance.
+        append(fonts, type: FontKey.self, at: \.fonts)
     }
     
-    
-    // MARK: - Apply
-    
-    mutating func apply<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
-        
-        let object = type.init()
-        let valueBuilderForKeyPath = Dictionary(uniqueKeysWithValues: keyPaths.map { ($0, object[keyPath: $0]) })
-        
-        applyWithValues(valueBuilderForKeyPath, type: type, at: destination)
-        
+    internal mutating func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) {
+//        cacheSurfaces = [:] // TODO: Create new Cache instance.
+        append(surfaces, type: SurfaceKey.self, at: \.surfaces)
     }
-    mutating func applyWithValues<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
+    
+    private mutating func append<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>) {
         for (keyPath, valueBuilder) in keyPaths {
-            var values: [Context: KeyType.Value] = [:]
-            var erase: [Context] = []
-
-            var contextBuilder: KeyType.ValueBuilder.Builder? = nil
-            switch valueBuilder {
-                case .base(let value):
-                    values[.any] = value
-                    
-                case .baseAnd(let value, context: let builder):
-                    values[.any] = value
-                    contextBuilder = builder
-
-                case .context(let builder):
-                    contextBuilder = builder
-            }
-
-            if let builder = contextBuilder {
-                for context in Context.allCases {
-                    guard keyPath == KeyType.keyPath(for: context.element.type) else { continue }
-                    if let value = builder(context) {
-                        if value.isErase {
-                            erase.append(context)
-                        } else {
-                            values[context] = value
-                        }
-                    }
-                }
-            }
             
-            var current = self[keyPath: destination][keyPath] ?? ValueContainer(valuesForContext: [:])
-            current.erase(erase)
-            current.override(with: values)
-            self[keyPath: destination][keyPath] = current
+            var builders = self[keyPath: destination][keyPath] ?? []
+            builders.append(valueBuilder)
+            self[keyPath: destination][keyPath] = builders
+            
         }
     }
 

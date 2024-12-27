@@ -10,7 +10,7 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     
     @Environment(\.style) private var style
 
-    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: SnapStyle.ValueContainer<KeyType.Value>]>
+    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: [SnapStyle.ValueBuilder<KeyType.Value>]]>
     
     let keyPath: ItemKeyPath
     
