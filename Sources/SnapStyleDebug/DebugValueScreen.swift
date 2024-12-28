@@ -65,7 +65,7 @@ public struct DebugValueScreen<KeyType: StyleKey>: View {
                 \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in
                     switch context.element.hierarchy {
                         case .primary: .definition(.init(size: 16))
-                        default: .erase
+                        default: nil
                     }
 
                 }

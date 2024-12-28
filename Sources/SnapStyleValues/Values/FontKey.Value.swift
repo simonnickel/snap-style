@@ -21,20 +21,14 @@ extension SnapStyle.FontKey {
         case definition(Definition)
         case font(Font)
         case reference(SnapStyle.FontKey.ValueKeyPath)
-        case erase
 
         public var wrappedValue: WrappedValue {
             switch self {
                 case .definition(let definition): Font.system(size: definition.size)
                 case .font(let font): font
-                case .reference, .erase:
+                case .reference:
                     fatalError("A `.reference` FontValue should never be used to generate a value.")
             }
-        }
-        
-        public var isErase: Bool {
-            if case .erase = self { return true }
-            return false
         }
         
         public var description: String {
@@ -42,7 +36,6 @@ extension SnapStyle.FontKey {
                 case .definition(let definition): ".definition: \(definition)"
                 case .font(let font): ".font"
                 case .reference(let keyPath): ".reference: \(keyPath)"
-                case .erase: ".erase"
             }
         }
         

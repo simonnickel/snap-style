@@ -5,8 +5,6 @@
 
 import SwiftUI
 
-// TODO: .erase does no longer have meaning
-
 public struct SnapStyle {
     
     public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]

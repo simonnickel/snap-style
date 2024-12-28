@@ -6,6 +6,7 @@
 extension SnapStyle {
 
     public struct ValueContainer<Value> {
+        
         public var valuesForContext: [SnapStyle.Context: Value]
 
         func value(for context: SnapStyle.Context) -> Value? {
@@ -17,12 +18,7 @@ extension SnapStyle {
                 valuesForContext[context] = value
             }
         }
-
-        mutating func erase(_ contexts: [SnapStyle.Context]) {
-            for context in contexts {
-                valuesForContext.removeValue(forKey: context)
-            }
-        }
+        
     }
 
 }
