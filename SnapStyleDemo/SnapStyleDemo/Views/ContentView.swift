@@ -37,13 +37,13 @@ struct ContentView: View {
                 }
                 Section {
                     NavigationLink("Fonts") {
-                        DebugValueScreen(itemKeyPath: \.fonts)
+                        DebugCacheScreen<SnapStyle.FontKey>()
                     }
                     NavigationLink("Surfaces") {
-                        DebugValueScreen(itemKeyPath: \.surfaces)
+                        DebugCacheScreen<SnapStyle.SurfaceKey>()
                     }
                 } header: {
-                    Text("Values")
+                    Text("Caches")
                 }
             }
         }

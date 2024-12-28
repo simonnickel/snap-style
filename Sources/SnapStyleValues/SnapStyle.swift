@@ -10,9 +10,8 @@ public struct SnapStyle {
     public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]
     public var surfaces: [SurfaceKey.ValueKeyPath: [SurfaceKey.ValueBuilder]] = [:]
     
-    // TODO: This should be of reference type, to create new caches on append.
-//    private var cacheFonts: [FontKey.ValueKeyPath: ValueContainer<FontKey.Value>] = [:]
-//    private var cacheSurfaces: [SurfaceKey.ValueKeyPath: ValueContainer<SurfaceKey.Value>] = [:]
+    internal var cacheFonts: ValueCache<FontKey> = .init()
+    internal var cacheSurfaces: ValueCache<SurfaceKey> = .init()
 
     // TODO: Hide behind private init?
     public init() { }
@@ -21,12 +20,12 @@ public struct SnapStyle {
     // MARK: - Append
     
     internal mutating func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) {
-//        cacheFonts = [:] // TODO: Create new Cache instance.
+        cacheFonts = .init() // New cache for fonts
         append(fonts, type: FontKey.self, at: \.fonts)
     }
     
     internal mutating func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) {
-//        cacheSurfaces = [:] // TODO: Create new Cache instance.
+        cacheSurfaces = .init() // New cache for surfaces
         append(surfaces, type: SurfaceKey.self, at: \.surfaces)
     }
     

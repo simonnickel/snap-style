@@ -9,18 +9,33 @@ extension SnapStyle {
     
     package func value<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) -> Key.Value? {
         
-        // TODO: Caching
+        // Use value from cache if available
+        if let value = getValueFromCache(for: keyPath, in: context) {
+            return value
+        }
         
+        var result: Key.Value?
         let builders = builders(for: keyPath)
         
+        // Build value from overrides
         for builder in builders.reversed() {
             if let value = builder.value(in: context) {
-                return value                
+                result = value
             }
         }
         
-        let defaultBuilder = Key()[keyPath: keyPath]
-        return defaultBuilder.value(in: context)
+        // Use default value
+        if result == nil {
+            let defaultBuilder = Key()[keyPath: keyPath]
+            result = defaultBuilder.value(in: context)
+        }
+        
+        // Store result in cache
+        if let result {
+            setValueInCache(result, for: keyPath, in: context)
+        }
+        
+        return result
     }
     
     private func builders<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>) -> [Key.ValueBuilder] {
