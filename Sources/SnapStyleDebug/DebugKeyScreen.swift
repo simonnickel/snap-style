@@ -26,6 +26,7 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     public var body: some View {
         VStack {
             config
+            element
             list
         }
     }
@@ -57,6 +58,12 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
                 }
             }
         }
+    }
+    
+    private var element: some View {
+        Text("Element")
+            .style(component: componentType, hierarchy: componentHierarchy)
+            .style(element: elementType, hierarchy: elementHierarchy)
     }
     
     private var list: some View {

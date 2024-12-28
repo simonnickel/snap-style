@@ -5,6 +5,7 @@
 
 extension SnapStyle {
 
+    // TODO: Still useful? Should this be the Cache?
     public struct ValueContainer<Value> {
         
         public var valuesForContext: [SnapStyle.Context: Value]
