@@ -20,16 +20,17 @@ public struct SnapStyle {
     // MARK: - Append
     
     internal mutating func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) {
-        cacheFonts = .init() // New cache for fonts
+        cacheFonts = .init() // Reset cache
         append(fonts, type: FontKey.self, at: \.fonts)
     }
     
     internal mutating func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) {
-        cacheSurfaces = .init() // New cache for surfaces
+        cacheSurfaces = .init() // Reset cache
         append(surfaces, type: SurfaceKey.self, at: \.surfaces)
     }
     
     private mutating func append<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>) {
+        
         for (keyPath, valueBuilder) in keyPaths {
             
             var builders = self[keyPath: destination][keyPath] ?? []
@@ -37,6 +38,7 @@ public struct SnapStyle {
             self[keyPath: destination][keyPath] = builders
             
         }
+        
     }
 
 }

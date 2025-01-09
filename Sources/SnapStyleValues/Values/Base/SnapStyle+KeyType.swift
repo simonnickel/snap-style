@@ -14,6 +14,7 @@ extension SnapStyle {
             case let key as SurfaceKey.Type: return cacheSurfaces as? ValueCache<KeyType>
                 
             default: fatalError("Cache is not setup properly.")
+
         }
     }
      
