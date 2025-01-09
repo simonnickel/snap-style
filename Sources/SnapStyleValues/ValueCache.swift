@@ -9,11 +9,18 @@ extension SnapStyle {
     
     package class ValueCache<KeyType: StyleKey> {
         
-        package var cachesForKeyPath: [KeyType.ValueKeyPath: ContextCache<KeyType.Value>] = [:]
+        package typealias Cache = [KeyType.ValueKeyPath : ValueForContextCache<KeyType.Value>]
         
-        func getValue(for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>, in context: SnapStyle.Context) -> KeyType.Value? {
+        private var content: Cache = [:]
+        package var keys: Cache.Keys { content.keys }
+
+        package func getCache(for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>) -> ValueForContextCache<KeyType.Value>? {
+            return content[keyPath]
+        }
+        
+        package func getValue(for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>, in context: SnapStyle.Context) -> KeyType.Value? {
             
-            if let cache = cachesForKeyPath[keyPath] {
+            if let cache = content[keyPath] {
                 return cache.getValue(for: context)
             }
             
@@ -22,28 +29,31 @@ extension SnapStyle {
         
         func setValue(_ value: KeyType.Value, for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>, in context: SnapStyle.Context) {
             
-            if let cache = cachesForKeyPath[keyPath] {
+            if let cache = content[keyPath] {
                 cache.setValue(value, for: context)
             } else {
-                let cache: ContextCache<KeyType.Value> = .init()
+                let cache: ValueForContextCache<KeyType.Value> = .init()
                 cache.setValue(value, for: context)
-                cachesForKeyPath[keyPath] = cache
+                content[keyPath] = cache
             }
             
         }
         
     }
     
-    package class ContextCache<Value> {
+    package class ValueForContextCache<Value> {
         
-        package var valuesForContext: [SnapStyle.Context: Value] = [:]
+        package typealias Cache = [SnapStyle.Context : Value]
         
-        func getValue(for context: SnapStyle.Context) -> Value? {
-            valuesForContext[context] ?? valuesForContext[.any]
+        private var content: Cache = [:]
+        package var keys: Cache.Keys { content.keys }
+        
+        package func getValue(for context: SnapStyle.Context) -> Value? {
+            content[context] ?? content[.any]
         }
         
         func setValue(_ value: Value, for context: SnapStyle.Context) {
-            valuesForContext[context] = value
+            content[context] = value
         }
         
     }

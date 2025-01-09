@@ -15,7 +15,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     public var body: some View {
         if let cache: SnapStyle.ValueCache<KeyType> = style.cache() {
             List {
-                ForEach(Array(cache.cachesForKeyPath.keys), id: \.self) { keyPath in
+                ForEach(Array(cache.keys), id: \.self) { keyPath in
                     
                     section(for: keyPath, with: cache)
                     
@@ -29,12 +29,12 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     private func section(for keyPath: KeyType.ValueKeyPath, with cache: SnapStyle.ValueCache<KeyType>) -> some View {
 
         Group {
-            if let contextCache = cache.cachesForKeyPath[keyPath] {
-                let contexts = Array(contextCache.valuesForContext.keys)
+            if let contextCache = cache.getCache(for: keyPath) {
+                let contexts = Array(contextCache.keys)
 
                 Section {
                     ForEach(contexts, id: \.self) { context in
-                        item(context: context, value: contextCache.valuesForContext[context])
+                        item(context: context, value: contextCache.getValue(for: context))
                     }
                 } header: {
                     Text("\(keyPath) - \(contexts.count)")
