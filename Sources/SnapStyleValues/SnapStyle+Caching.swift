@@ -5,6 +5,9 @@
 
 extension SnapStyle {
     
+    
+    // MARK: - KeyTypeCache
+    
     package class KeyTypeCache<KeyType: StyleKey> {
         
         package typealias Cache = [KeyType.ValueKeyPath : ValueForContextCache<KeyType.Value>]
@@ -39,6 +42,9 @@ extension SnapStyle {
         
     }
     
+    
+    // MARK: - ValueForContextCache
+    
     package class ValueForContextCache<Value> {
         
         package typealias Cache = [SnapStyle.Context : Value]
@@ -63,40 +69,34 @@ extension SnapStyle {
 
 extension SnapStyle {
     
-    internal func getValueFromCache<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) -> Key.Value? {
-        
-        switch keyPath {
-            
-            case let keyPath as KeyPath<FontKey, FontKey.ValueBuilder>:
-                self.cacheFonts.getValue(for: keyPath, in: context)
-            
-            case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
-                self.cacheSurfaces.getValue(for: keyPath, in: context)
-
+    // TODO: Internal
+    package func cache<KeyType>() -> KeyTypeCache<KeyType>? where KeyType: StyleKey {
+        switch KeyType.self {
+                
+                // TODO: does casting work?
+            case let key as FontKey.Type: return cacheFonts as? KeyTypeCache<KeyType>
+                
+            case let key as SurfaceKey.Type: return cacheSurfaces as? KeyTypeCache<KeyType>
+                
             default: fatalError("Cache is not setup properly.")
 
         }
+    }
+    
+    internal func getValueFromCache<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) -> Key.Value? {
         
-        return nil
+        guard let cache: KeyTypeCache<Key> = cache() else { return nil }
+        
+        return cache.getValue(for: keyPath, in: context)
+        
     }
     
     internal func setValueInCache<Key: StyleKey>(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) {
         
-        switch keyPath {
-            
-            case let keyPath as KeyPath<FontKey, FontKey.ValueBuilder>:
-                if let v = value as? FontKey.Value {
-                    self.cacheFonts.setValue(v, for: keyPath, in: context)
-                }
-            
-            case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
-                if let v = value as? SurfaceKey.Value {
-                    self.cacheSurfaces.setValue(v, for: keyPath, in: context)
-                }
-            
-            default: fatalError("Cache is not setup properly.")
-                
-        }
+        guard let cache: KeyTypeCache<Key> = cache() else { return }
+
+        cache.setValue(value, for: keyPath, in: context)
+
     }
     
 }
