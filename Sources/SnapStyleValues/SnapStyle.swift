@@ -10,8 +10,8 @@ public struct SnapStyle {
     public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]
     public var surfaces: [SurfaceKey.ValueKeyPath: [SurfaceKey.ValueBuilder]] = [:]
     
-    internal var cacheFonts: ValueCache<FontKey> = .init()
-    internal var cacheSurfaces: ValueCache<SurfaceKey> = .init()
+    internal var cacheFonts: KeyTypeCache<FontKey> = .init()
+    internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
 
     // TODO: Hide behind private init?
     public init() { }

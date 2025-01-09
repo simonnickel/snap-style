@@ -3,18 +3,16 @@
 //  Created by Simon Nickel
 //
 
-// TODO: Naming
-
 extension SnapStyle {
     
-    package class ValueCache<KeyType: StyleKey> {
+    package class KeyTypeCache<KeyType: StyleKey> {
         
         package typealias Cache = [KeyType.ValueKeyPath : ValueForContextCache<KeyType.Value>]
         
         private var content: Cache = [:]
         package var keys: Cache.Keys { content.keys }
 
-        package func getCache(for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>) -> ValueForContextCache<KeyType.Value>? {
+        package func getValueCache(for keyPath: KeyPath<KeyType, KeyType.ValueBuilder>) -> ValueForContextCache<KeyType.Value>? {
             return content[keyPath]
         }
         
