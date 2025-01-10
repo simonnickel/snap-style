@@ -44,7 +44,7 @@ extension SnapStyle.SurfaceKey {
 
     // MARK: - Highlight
 
-    public var interactive: ValueBuilder {  .base(.surface(.withColor(foreground: .accentColor))) }
+    public var interactive: ValueBuilder { .base(.surface(.withColor(foreground: .accentColor))) }
 
     public var navigation: ValueBuilder { .base(.reference(\.interactive)) }
     

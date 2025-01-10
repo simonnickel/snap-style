@@ -5,6 +5,7 @@
 
 extension SnapStyle {
 
+    /// Is an enum instead of a struct to allow cleaner call-site: `.base(value) {} or .builder {}`, instead of `.init(base:) {}`.
     public enum ValueBuilder<Value> {
         
         public typealias Builder = (Context) -> Value?
