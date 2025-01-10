@@ -12,30 +12,32 @@ public struct SnapStyle {
     
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
-    
+
     
     // MARK: - Append
     
-    internal mutating func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) {
-        cacheFonts = .init() // Reset cache
-        append(fonts, at: \.fonts)
+    internal func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) -> Self {
+        appended(fonts, at: \.fonts)
     }
     
-    internal mutating func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) {
-        cacheSurfaces = .init() // Reset cache
-        append(surfaces, at: \.surfaces)
+    internal func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) -> Self {
+        appended(surfaces, at: \.surfaces)
     }
     
-    private mutating func append<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>) {
+    private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<SnapStyle, [Key.ValueKeyPath: [Key.ValueBuilder]]>) -> Self {
+        
+        var style = self
+        style.resetCache(for: Key.self)
         
         for (keyPath, valueBuilder) in keyPaths {
             
             var builders = self[keyPath: destination][keyPath] ?? []
             builders.append(valueBuilder)
-            self[keyPath: destination][keyPath] = builders
+            style[keyPath: destination][keyPath] = builders
             
         }
         
+        return style
     }
-
+    
 }
