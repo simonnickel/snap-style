@@ -12,24 +12,21 @@ public struct SnapStyle {
     
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
-
-    // TODO: Hide behind private init?
-    public init() { }
     
     
     // MARK: - Append
     
     internal mutating func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) {
         cacheFonts = .init() // Reset cache
-        append(fonts, type: FontKey.self, at: \.fonts)
+        append(fonts, at: \.fonts)
     }
     
     internal mutating func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) {
         cacheSurfaces = .init() // Reset cache
-        append(surfaces, type: SurfaceKey.self, at: \.surfaces)
+        append(surfaces, at: \.surfaces)
     }
     
-    private mutating func append<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>) {
+    private mutating func append<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>) {
         
         for (keyPath, valueBuilder) in keyPaths {
             
