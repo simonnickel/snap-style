@@ -9,23 +9,20 @@ extension SnapStyle {
         
         public typealias Builder = (Context) -> Value?
                 
-        case base(Value)
-        case baseAnd(Value, context: Builder?)
-        case context(Builder?)
+        case base(Value, builder: Builder? = nil)
+        case builder(Builder?)
         
         func value(in context: Context?) -> Value? {
             return switch self {
                     
-                case .base(let value): value
-                    
-                case .baseAnd(let value, let builder):
+                case .base(let value, let builder):
                     if let context {
                         builder?(context) ?? value
                     } else {
                         value
                     }
                     
-                case .context(let builder):
+                case .builder(let builder):
                     if let context {
                         builder?(context)
                     } else {

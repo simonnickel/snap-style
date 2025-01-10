@@ -13,7 +13,7 @@ extension SnapStyle.FontKey {
     // MARK: - Element
     
     public var title: ValueBuilder {
-        .baseAnd(.font(.title)) { context in
+        .base(.font(.title)) { context in
             switch context.element.hierarchy {
                 case .primary: .definition(.init(size: 20))
                 case .secondary: .definition(.init(size: 14))
@@ -25,7 +25,7 @@ extension SnapStyle.FontKey {
     public var content: ValueBuilder { .base(.reference(\.label)) }
     
     public var label: ValueBuilder {
-        .baseAnd(.font(.body)) { context in
+        .base(.font(.body)) { context in
             switch context.component.type {
                 case .card: .font(.caption)
                 default: nil

@@ -17,7 +17,7 @@ extension SnapStyle.SurfaceKey {
     public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
 
     public var content: ValueBuilder {
-        .context { context in
+        .builder { context in
             switch context.element.hierarchy {
                 case .primary: .surface(.withColor(foreground: .primary))
                 case .secondary: .surface(.withColor(foreground: .secondary))
@@ -31,7 +31,7 @@ extension SnapStyle.SurfaceKey {
     public var value: ValueBuilder { .base(.reference(\.interactive)) }
 
     public var cta: ValueBuilder {
-        .context { context in
+        .builder { context in
                 .surface(.init(
                     foreground: Color.white,
                     background: Gradient(colors: [.blue, .yellow])

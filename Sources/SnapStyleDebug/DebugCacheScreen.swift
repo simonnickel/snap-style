@@ -59,7 +59,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     DebugCacheScreen<SnapStyle.FontKey>()
         .styleOverride(
             fonts: [
-                \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in
+                \.title : SnapStyle.ValueBuilder.base(.definition(.init(size: 6))) { context in
                     switch context.element.hierarchy {
                         case .primary: .definition(.init(size: 16))
                         default: nil
@@ -68,7 +68,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
                 }
             ],
             surfaces: [
-                \.title : SnapStyle.ValueBuilder.context { context in
+                \.title : SnapStyle.ValueBuilder.builder { context in
                     switch context.element.hierarchy {
                         case .secondary: .surface(.withColor(foreground: .primary))
                         default: nil

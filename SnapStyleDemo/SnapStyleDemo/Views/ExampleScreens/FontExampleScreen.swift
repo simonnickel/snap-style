@@ -17,7 +17,7 @@ struct FontExampleScreen: View {
                 .style(component: .card)
                 .styleOverride(
                     fonts: [
-                        \.title : .context({ context in
+                        \.title : .builder({ context in
                             switch (context.component.type, context.element.hierarchy) {
                                 case (.card, .secondary): .definition(.init(size: 40))
                                 default: nil
@@ -28,7 +28,7 @@ struct FontExampleScreen: View {
         }
         .styleOverride(
             fonts: [
-                \.title : .context({ context in
+                \.title : .builder({ context in
                     switch (context.component.type, context.element.hierarchy) {
                         case (.card, .primary): .definition(.init(size: 9))
                         default: nil

@@ -12,7 +12,9 @@ public struct SnapStyle {
     
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
-
+    
+    public init() {}
+    
     
     // MARK: - Append
     
