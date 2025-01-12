@@ -37,13 +37,13 @@ struct ContentView: View {
                 }
                 Section {
                     NavigationLink("Fonts") {
-                        DebugValueScreen(itemKeyPath: \.fonts)
+                        DebugCacheScreen<SnapStyle.FontKey>()
                     }
                     NavigationLink("Surfaces") {
-                        DebugValueScreen(itemKeyPath: \.surfaces)
+                        DebugCacheScreen<SnapStyle.SurfaceKey>()
                     }
                 } header: {
-                    Text("Values")
+                    Text("Caches")
                 }
             }
         }
@@ -61,7 +61,7 @@ struct ContentView: View {
     ContentView()
         .styleOverride(
             fonts: [
-                \.title : SnapStyle.ValueBuilder.context { context in
+                \.title : SnapStyle.ValueBuilder.builder { context in
                     switch context.element.hierarchy {
                         case.primary: .definition(.init(size: 12))
                         default: nil
@@ -70,7 +70,7 @@ struct ContentView: View {
                 }
             ],
             surfaces: [
-                \.title : SnapStyle.ValueBuilder.context { context in
+                \.title : SnapStyle.ValueBuilder.builder { context in
                     switch context.element.hierarchy {
                     case .primary: .surface(.withColor(foreground: .primary))
                     default: nil

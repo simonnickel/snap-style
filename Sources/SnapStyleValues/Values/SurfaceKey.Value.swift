@@ -29,26 +29,19 @@ extension SnapStyle.SurfaceKey {
 
         case surface(LayeredShapeStyle)
         case reference(SnapStyle.SurfaceKey.ValueKeyPath)
-        case erase
 
         public var wrappedValue: LayeredShapeStyle {
             switch self {
                 case .surface(let forLayer): forLayer
-                case .reference, .erase:
+                case .reference:
                     fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
             }
-        }
-        
-        public var isErase: Bool {
-            if case .erase = self { return true }
-            return false
         }
         
         public var description: String {
             switch self {
                 case .surface(let definition): ".definition: \(definition)"
                 case .reference(let keyPath): ".reference: \(keyPath)"
-                case .erase: ".erase"
             }
         }
         

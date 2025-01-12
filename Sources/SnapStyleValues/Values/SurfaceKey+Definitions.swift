@@ -7,17 +7,13 @@ import SwiftUI
 
 extension SnapStyle.SurfaceKey {
     
-    internal static var defaultKeyPaths: [ValueKeyPath] {
-        return [\.title, \.content, \.label, \.value, \.cta, \.indicator, \.interactive, \.navigation]
-    }
-    
  
     // MARK: - Element
 
     public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
 
     public var content: ValueBuilder {
-        .context { context in
+        .builder { context in
             switch context.element.hierarchy {
                 case .primary: .surface(.withColor(foreground: .primary))
                 case .secondary: .surface(.withColor(foreground: .secondary))
@@ -31,7 +27,7 @@ extension SnapStyle.SurfaceKey {
     public var value: ValueBuilder { .base(.reference(\.interactive)) }
 
     public var cta: ValueBuilder {
-        .context { context in
+        .builder { context in
                 .surface(.init(
                     foreground: Color.white,
                     background: Gradient(colors: [.blue, .yellow])
@@ -44,7 +40,7 @@ extension SnapStyle.SurfaceKey {
 
     // MARK: - Highlight
 
-    public var interactive: ValueBuilder {  .base(.surface(.withColor(foreground: .accentColor))) }
+    public var interactive: ValueBuilder { .base(.surface(.withColor(foreground: .accentColor))) }
 
     public var navigation: ValueBuilder { .base(.reference(\.interactive)) }
     

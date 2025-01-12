@@ -9,6 +9,4 @@ public protocol StyleValue: CustomStringConvertible {
     
     var wrappedValue: WrappedValue { get }
     
-    var isErase: Bool { get }
-    
 }

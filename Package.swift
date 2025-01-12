@@ -14,30 +14,24 @@ let package = Package(
             name: "SnapStyle",
             targets: ["SnapStyle", "SnapStyleValues", "SnapStyleDebug"]),
     ],
-    // TODO: Remove if not required.
-	dependencies: [
-		// Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/simonnickel/snap-foundation.git", branch: "main"),
-	],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "SnapStyle",
-            dependencies: [
-				.product(name: "SnapFoundation", package: "snap-foundation"), // TODO: Remove if not required.
-                "SnapStyleValues",
-			]
-		),
-        .target(
-            name: "SnapStyleValues"
-        ),
         .target(
             name: "SnapStyleDebug",
             dependencies: [
                 "SnapStyle",
                 "SnapStyleValues",
             ]
+        ),
+        .target(
+            name: "SnapStyle",
+            dependencies: [
+                "SnapStyleValues",
+            ]
+        ),
+        .target(
+            name: "SnapStyleValues"
         ),
     ],
     swiftLanguageModes: [.version("6")]

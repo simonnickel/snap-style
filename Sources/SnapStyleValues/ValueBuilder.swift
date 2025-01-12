@@ -5,13 +5,33 @@
 
 extension SnapStyle {
 
+    /// Is an enum instead of a struct to allow cleaner call-site: `.base(value) {} or .builder {}`, instead of `.init(base:) {}`.
     public enum ValueBuilder<Value> {
         
         public typealias Builder = (Context) -> Value?
                 
-        case base(Value)
-        case baseAnd(Value, context: Builder?)
-        case context(Builder?)
+        case base(Value, builder: Builder? = nil)
+        case builder(Builder?)
+        
+        func value(in context: Context?) -> Value? {
+            return switch self {
+                    
+                case .base(let value, let builder):
+                    if let context {
+                        builder?(context) ?? value
+                    } else {
+                        value
+                    }
+                    
+                case .builder(let builder):
+                    if let context {
+                        builder?(context)
+                    } else {
+                        nil
+                    }
+                    
+            }
+        }
 
     }
 
