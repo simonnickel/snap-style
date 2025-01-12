@@ -4,6 +4,8 @@
 //
 
 extension SnapStyle {
+    
+    // TODO: Context could be dictionary with extensions to get actual properties.
 
     public struct Context: Hashable, Sendable, CaseIterable {
 

@@ -50,13 +50,13 @@ extension SnapStyle {
         surfaces: [SurfaceKey.ValueKeyPath: ValueBuilder<SurfaceKey.Value>]? = nil
     ) -> Self {
         var style = self
-
+        
         if let fonts {
-            style.applyWithValues(fonts, type: FontKey.self, at: \.fonts)
+            style.append(fonts: fonts)
         }
 
         if let surfaces {
-            style.applyWithValues(surfaces, type: SurfaceKey.self, at: \.surfaces)
+            style.append(surfaces: surfaces)
         }
         
         return style

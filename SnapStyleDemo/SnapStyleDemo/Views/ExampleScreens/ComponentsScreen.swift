@@ -53,16 +53,15 @@ struct ComponentsScreen: View {
     ComponentsScreen()
         .styleOverride(
             fonts: [
-                \.title : SnapStyle.ValueBuilder.baseAnd(.definition(.init(size: 6))) { context in
+                \.title : .base(.definition(.init(size: 6))) { context in
                     switch context.element.hierarchy {
                         case .primary: .definition(.init(size: 16))
-                        default: .erase
+                        default: nil
                     }
-
                 }
             ],
             surfaces: [
-                \.title : SnapStyle.ValueBuilder.context { context in
+                \.title : .builder { context in
                     switch context.element.hierarchy {
                         case .secondary: .surface(.withColor(foreground: .primary))
                         default: nil

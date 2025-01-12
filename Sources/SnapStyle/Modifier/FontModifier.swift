@@ -25,7 +25,7 @@ internal struct FontModifier: ViewModifier {
     let keyPath: SnapStyle.FontKey.ValueKeyPath
 
     func body(content: Content) -> some View {
-        let value = style.font(for: keyPath, in: .any) // TODO: .any? or base?
+        let value = style.font(for: keyPath, in: .any)
         content
             .font(value)
     }

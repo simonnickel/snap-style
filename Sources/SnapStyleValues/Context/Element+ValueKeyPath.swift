@@ -7,7 +7,7 @@ extension SnapStyle.FontKey {
     
     public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
         switch element {
-            case .any: \.content // TODO: Is there a better default?
+            case .any: \.content
                 
             case .title: \.title
             case .content: \.content
@@ -24,7 +24,7 @@ extension SnapStyle.SurfaceKey {
     
     public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
         switch element {
-            case .any: \.content // TODO: Is there a better default?
+            case .any: \.content
 
             case .title: \.title
             case .content: \.content

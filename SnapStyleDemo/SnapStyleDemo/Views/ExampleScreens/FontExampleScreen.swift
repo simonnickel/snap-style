@@ -14,17 +14,42 @@ struct FontExampleScreen: View {
                 .style(component: .content)
 
             content
-                .style(component: .card)
-//                .styleOverride(fonts: [.block : .init(base: .definition(.init(size: 8)))])
+                .style(component: .list)
+                .styleOverride(
+                    fonts: [
+                        \.title : .builder({ context in
+                            switch (context.component.type, context.element.hierarchy) {
+                                case (.card, .secondary): .definition(.init(size: 40))
+                                default: nil
+                            }
+                        })
+                    ]
+                )
         }
+//        .styleOverride(
+//            fonts: [
+//                \.title : .builder({ context in
+//                    switch (context.component.type, context.element.hierarchy) {
+//                        case (.card, .primary): .definition(.init(size: 9))
+//                        default: nil
+//                    }
+//                })
+//            ]
+//        )
     }
     
     private var content: some View {
         VStack(alignment: .leading) {
             Text("Title")
+                .style(element: .title)
             Text("Subtitle")
+                .style(element: .title, hierarchy: .secondary)
             Text("Block with some more words to be like a paragraph with multiple lines.")
+                .style(element: .content)
             Text("Label")
+                .style(element: .label)
+            Text("Font from Keypath")
+                .style(font: \.indicator)
         }
     }
     

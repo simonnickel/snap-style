@@ -6,67 +6,40 @@
 import SwiftUI
 
 public struct SnapStyle {
-
-    public var fonts: [FontKey.ValueKeyPath: ValueContainer<FontKey.Value>] = [:]
-    public var surfaces: [SurfaceKey.ValueKeyPath: ValueContainer<SurfaceKey.Value>] = [:]
-
-    private init() { }
-
-    public static var defaults: Self {
-        var style = SnapStyle()
-        style.apply(FontKey.defaultKeyPaths, type: FontKey.self, at: \.fonts)
-        style.apply(SurfaceKey.defaultKeyPaths, type: SurfaceKey.self, at: \.surfaces)
-
+    
+    public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]
+    public var surfaces: [SurfaceKey.ValueKeyPath: [SurfaceKey.ValueBuilder]] = [:]
+    
+    internal var cacheFonts: KeyTypeCache<FontKey> = .init()
+    internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
+    
+    public init() {}
+    
+    
+    // MARK: - Append
+    
+    internal func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) -> Self {
+        appended(fonts, at: \.fonts)
+    }
+    
+    internal func append(surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]) -> Self {
+        appended(surfaces, at: \.surfaces)
+    }
+    
+    private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<SnapStyle, [Key.ValueKeyPath: [Key.ValueBuilder]]>) -> Self {
+        
+        var style = self
+        style.resetCache(for: Key.self)
+        
+        for (keyPath, valueBuilder) in keyPaths {
+            
+            var builders = self[keyPath: destination][keyPath] ?? []
+            builders.append(valueBuilder)
+            style[keyPath: destination][keyPath] = builders
+            
+        }
+        
         return style
     }
     
-    
-    // MARK: - Apply
-    
-    mutating func apply<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
-        
-        let object = type.init()
-        let valueBuilderForKeyPath = Dictionary(uniqueKeysWithValues: keyPaths.map { ($0, object[keyPath: $0]) })
-        
-        applyWithValues(valueBuilderForKeyPath, type: type, at: destination)
-        
-    }
-    mutating func applyWithValues<KeyType: StyleKey>(_ keyPaths: [KeyType.ValueKeyPath: KeyType.ValueBuilder], type: KeyType.Type, at destination: WritableKeyPath<SnapStyle, [KeyType.ValueKeyPath: ValueContainer<KeyType.Value>]>) {
-        for (keyPath, valueBuilder) in keyPaths {
-            var values: [Context: KeyType.Value] = [:]
-            var erase: [Context] = []
-
-            var contextBuilder: KeyType.ValueBuilder.Builder? = nil
-            switch valueBuilder {
-                case .base(let value):
-                    values[.any] = value
-                    
-                case .baseAnd(let value, context: let builder):
-                    values[.any] = value
-                    contextBuilder = builder
-
-                case .context(let builder):
-                    contextBuilder = builder
-            }
-
-            if let builder = contextBuilder {
-                for context in Context.allCases {
-                    guard keyPath == KeyType.keyPath(for: context.element.type) else { continue }
-                    if let value = builder(context) {
-                        if value.isErase {
-                            erase.append(context)
-                        } else {
-                            values[context] = value
-                        }
-                    }
-                }
-            }
-            
-            var current = self[keyPath: destination][keyPath] ?? ValueContainer(valuesForContext: [:])
-            current.erase(erase)
-            current.override(with: values)
-            self[keyPath: destination][keyPath] = current
-        }
-    }
-
 }
