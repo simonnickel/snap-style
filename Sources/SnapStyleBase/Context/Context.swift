@@ -30,7 +30,7 @@ extension SnapStyle {
             }
         }
         
-        func withAttribute<Key: Hashable, Value: Hashable>(value: Value, for attribute: Attribute<Key, Value>) -> Self {
+        package func withAttribute<Key: Hashable, Value: Hashable>(value: Value, for attribute: Attribute<Key, Value>) -> Self {
             var result = self
             result.content[attribute.key] = value
             return result
