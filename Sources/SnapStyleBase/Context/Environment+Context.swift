@@ -24,16 +24,18 @@ extension View {
     
 }
 
-// TODO: Add Dark Mode etc.
 internal struct ContextModifier<Key: Hashable, Value: Hashable>: ViewModifier {
     
     @Environment(\.styleContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
 
     let attribute: SnapStyle.Context.Attribute<Key, Value>
     let value: Value
 
     func body(content: Content) -> some View {
-        let modified = context.withAttribute(value: value, for: attribute)
+        let modified = context
+            .withAttribute(value: value, for: attribute)
+            .withAttribute(value: colorScheme, for: SnapStyle.Context.colorScheme)
         content
             .environment(\.styleContext, modified)
     }
