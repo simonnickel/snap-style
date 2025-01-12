@@ -11,6 +11,7 @@ extension SnapStyle.FontKey {
     public var title: ValueBuilder {
         .base(.font(.title)) { context in
             switch context.element.hierarchy {
+                case .any: .definition(.init(size: 20))
                 case .primary: .definition(.init(size: 20))
                 case .secondary: .definition(.init(size: 14))
                 case .tertiary: .definition(.init(size: 12))

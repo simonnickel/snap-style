@@ -15,6 +15,7 @@ extension SnapStyle.SurfaceKey {
     public var content: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
+                case .any: .surface(.withColor(foreground: .primary))
                 case .primary: .surface(.withColor(foreground: .primary))
                 case .secondary: .surface(.withColor(foreground: .secondary))
                 case .tertiary: .surface(.withColor(foreground: .secondary))

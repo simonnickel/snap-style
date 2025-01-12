@@ -15,6 +15,8 @@ extension SnapStyle {
             self.hierarchy = hierarchy
         }
         
+        static var any: Self { .init(type: .any, hierarchy: .any) }
+        
         public enum ComponentType: String, Sendable, CaseIterable {
 
             case any
@@ -28,6 +30,8 @@ extension SnapStyle {
         
         public enum Hierarchy: String, Sendable, CaseIterable {
 
+            case any
+            
             case primary
             case secondary
             
