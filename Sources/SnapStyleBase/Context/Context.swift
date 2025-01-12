@@ -10,9 +10,9 @@ extension SnapStyle {
 
     public struct Context: Hashable {
         
-        private typealias Key = AnyHashable
-        private typealias Value = AnyHashable
-        private var content: [Key : Value] = [:]
+        internal typealias Key = AnyHashable
+        internal typealias Value = AnyHashable
+        internal var content: [Key : Value] = [:]
 
         /// A context to use for default values.
         public static var any: SnapStyle.Context { .init() }
