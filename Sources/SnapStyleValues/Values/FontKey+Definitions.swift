@@ -4,11 +4,7 @@
 //
 
 extension SnapStyle.FontKey {
-    
-    internal static var defaultKeyPaths: [ValueKeyPath] {
-        return [\.title, \.content, \.label, \.value, \.cta, \.indicator]
-    }
-    
+
  
     // MARK: - Element
     

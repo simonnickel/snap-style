@@ -7,10 +7,6 @@ import SwiftUI
 
 extension SnapStyle.SurfaceKey {
     
-    internal static var defaultKeyPaths: [ValueKeyPath] {
-        return [\.title, \.content, \.label, \.value, \.cta, \.indicator, \.interactive, \.navigation]
-    }
-    
  
     // MARK: - Element
 

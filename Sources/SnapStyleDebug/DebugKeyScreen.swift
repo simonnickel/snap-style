@@ -84,11 +84,11 @@ extension StyleKey {
     @ViewBuilder
     static func row(keyPath: ValueKeyPath) -> some View {
 
-        // TODO: Is there a simpler solution without casting?
+        // TODO: Is there a simpler solution without casting? This is not really used anymore anyway though.
         switch self {
             case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueKeyPath)
             case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueKeyPath)
-            default: Text("Test")
+            default: fatalError("No row defined for \(self)")
         }
         
     }
