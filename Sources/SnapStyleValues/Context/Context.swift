@@ -5,16 +5,35 @@
 
 extension SnapStyle {
     
-    // TODO: Context could be dictionary with extensions to get actual properties.
+    
+    // MARK: - Context
 
-    public struct Context: Hashable, Sendable {
-
-        public let component: Component
-        public let element: Element
+    public struct Context: Hashable {
+        
+        private typealias Key = AnyHashable
+        private typealias Value = AnyHashable
+        private var content: [Key : Value] = [:]
 
         /// A context to use for default values.
-        public static let any: SnapStyle.Context = .init(component: .init(type: .any, hierarchy: .primary), element: .init(type: .any, hierarchy: .primary))
-
+        public static var any: SnapStyle.Context { .init() }
+        
+        
+        // MARK: Attribute
+        
+        public struct Attribute<Key: Hashable, Value: Hashable> {
+            let key: Key
+            let valueDefault: Value?
+        }
+        
+        func withAttribute<Key: Hashable, Value: Hashable>(value: Value, for attribute: Attribute<Key, Value>) -> Self {
+            var result = self
+            result.content[attribute.key] = value
+            return result
+        }
+        
+        package func getValue<Key: Hashable, Value: Hashable>(for attribute: Attribute<Key, Value>) -> Value? {
+            content[attribute.key] as? Value ?? attribute.valueDefault
+        }
     }
 
 }

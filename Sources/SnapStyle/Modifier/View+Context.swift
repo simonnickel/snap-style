@@ -13,7 +13,7 @@ extension View {
 
     public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary) -> some View {
         self
-            .environment(\.styleComponent, .init(type: component, hierarchy: hierarchy))
+            .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
     }
     
     
@@ -30,7 +30,7 @@ extension View {
                 self
             }
         }
-        .environment(\.styleElement, SnapStyle.Element(type: element, hierarchy: hierarchy))
+        .style(attribute: SnapStyle.Context.element, value: SnapStyle.Element(type: element, hierarchy: hierarchy))
     }
 
 }

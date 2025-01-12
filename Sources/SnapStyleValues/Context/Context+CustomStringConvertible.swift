@@ -5,6 +5,7 @@
 
 extension SnapStyle.Context: CustomStringConvertible {
     
+    // TODO: Should output all entries in dictionary
     public var description: String {
         "Component: \(component.description) - Element: \(element.description)"
     }

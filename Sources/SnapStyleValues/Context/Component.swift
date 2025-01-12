@@ -51,3 +51,13 @@ extension SnapStyle {
     }
 
 }
+
+
+// MARK: - Context
+
+extension SnapStyle.Context {
+    
+    public var component: SnapStyle.Component { getValue(for: Self.component) ?? .any}
+    package static var component: Attribute<String, SnapStyle.Component> { .init(key: "component", valueDefault: .any) }
+    
+}
