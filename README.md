@@ -30,3 +30,15 @@ The [demo project](/PackageDemo) shows ...
 ## How to use
 
 Details about package content ...
+
+
+## Targets
+
+### SnapStyle
+The main target to import using the package in an app.
+
+### SnapStyleBase
+Base implementation of Values, Caching and Context.
+
+### SnapStyleDebug
+Some helper views to look into the setup and caches, prevents exposing implementation for accidental misuse.
