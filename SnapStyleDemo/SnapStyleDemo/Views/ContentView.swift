@@ -4,7 +4,7 @@
 //
 
 import SnapStyle
-import SnapStyleValues
+import SnapStyleBase
 import SnapStyleDebug
 import SwiftUI
 

@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyleValues
+import SnapStyleBase
 import SwiftUI
 
 @main
