@@ -4,6 +4,9 @@
 //
 
 extension SnapStyle {
+    
+    
+    // MARK: - Component
 
     public struct Component: Hashable, Sendable, CaseIterable {
                 
@@ -17,6 +20,9 @@ extension SnapStyle {
         
         static var any: Self { .init(type: .any, hierarchy: .any) }
         
+        
+        // MARK: ComponentType
+        
         public enum ComponentType: String, Sendable, CaseIterable {
 
             case any
@@ -28,6 +34,9 @@ extension SnapStyle {
             
         }
         
+        
+        // MARK: Hierarchy
+        
         public enum Hierarchy: String, Sendable, CaseIterable {
 
             case any
@@ -36,6 +45,9 @@ extension SnapStyle {
             case secondary
             
         }
+        
+        
+        // MARK: CaseIterable
         
         public static let allCases: [Component] = {
             var cases: [Component] = []

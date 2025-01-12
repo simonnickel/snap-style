@@ -6,6 +6,9 @@
 extension SnapStyle {
 
     public struct Element: Hashable, Sendable, CaseIterable {
+    
+    // MARK: Element
+    
 
         public let type: ElementType
         public let hierarchy: Hierarchy
@@ -16,6 +19,9 @@ extension SnapStyle {
         }
         
         static var any: Self { .init(type: .any, hierarchy: .any) }
+        
+        
+        // MARK: ElementType
         
         public enum ElementType: String, Sendable, CaseIterable {
 
@@ -30,6 +36,9 @@ extension SnapStyle {
 
         }
 
+        
+        // MARK: Hierarchy
+        
         public enum Hierarchy: String, Sendable, CaseIterable {
 
             case any
@@ -40,6 +49,9 @@ extension SnapStyle {
 
         }
 
+        
+        // MARK: CaseIterable
+        
         public static let allCases: [Element] = {
             var cases: [Element] = []
             for element in ElementType.allCases {
