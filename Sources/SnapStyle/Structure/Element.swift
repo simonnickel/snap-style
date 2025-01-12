@@ -3,6 +3,8 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleValues
+
 extension SnapStyle {
 
     public struct Element: Hashable, Sendable, CaseIterable {

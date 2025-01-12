@@ -23,6 +23,11 @@ extension SnapStyle {
         public struct Attribute<Key: Hashable, Value: Hashable> {
             let key: Key
             let valueDefault: Value?
+            
+            package init(key: Key, valueDefault: Value?) {
+                self.key = key
+                self.valueDefault = valueDefault
+            }
         }
         
         func withAttribute<Key: Hashable, Value: Hashable>(value: Value, for attribute: Attribute<Key, Value>) -> Self {
