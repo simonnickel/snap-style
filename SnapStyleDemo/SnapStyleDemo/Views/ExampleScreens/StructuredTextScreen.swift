@@ -9,8 +9,8 @@ import SwiftUI
 struct StructuredTextScreen: View {
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 0) {
+        StyleVStack(alignment: .leading) {
+            StyleVStack(alignment: .leading) {
                 Text("Title")
                 Text("Subitle")
                     .style(hierarchy: .secondary)
