@@ -22,15 +22,21 @@ extension View {
     public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
             if applyStyle {
-                self
-                    .modifier(FontFromEnvironmentModifier())
-                    .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
-                    .modifier(SurfaceFromEnvironmentModifier(layer: .background))
+                self.applyStyle()
             } else {
                 self
             }
         }
         .style(attribute: SnapStyle.Context.element, value: SnapStyle.Element(type: element, hierarchy: hierarchy))
     }
-
+    
+    
+    // MARK: - ApplyStyle
+    
+    private func applyStyle() -> some View {
+        self
+            .modifier(FontFromEnvironmentModifier())
+            .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
+            .modifier(SurfaceFromEnvironmentModifier(layer: .background))
+    }
 }
