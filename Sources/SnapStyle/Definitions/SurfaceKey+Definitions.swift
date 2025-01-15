@@ -11,7 +11,7 @@ extension SnapStyle.SurfaceKey {
  
     // MARK: - Element
 
-    public var title: ValueBuilder { .base(.surface(.withColor(foreground: .mint))) }
+    public var title: ValueBuilder { .base(.reference(\.content)) }
 
     public var content: ValueBuilder {
         .builder { context in

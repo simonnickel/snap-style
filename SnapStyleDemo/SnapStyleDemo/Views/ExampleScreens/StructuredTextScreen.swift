@@ -8,25 +8,34 @@ import SwiftUI
 
 struct StructuredTextScreen: View {
     
+    // TODO: Replace spacings with Style Values
+    
     var body: some View {
-        StyleVStack(alignment: .leading) {
-            StyleVStack(alignment: .leading) {
-                Text("Title")
-                Text("Subitle")
-                    .style(hierarchy: .secondary)
-            }
-            .style(element: .title)
-            
-            paragraph
-            
+        StyleVStack(spacing: 16) {
+            content
+        }
+        .style(component: .content)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        StyleVStack(spacing: 0) {
+            Text("Title")
+            Text("Subitle")
+                .style(hierarchy: .secondary)
+        }
+        .style(element: .title)
+
+        
+        paragraph
+        
+        StyleVStack(spacing: 8) {
             Text("Section Title")
                 .style(element: .title, hierarchy: .tertiary)
             
             paragraph
-            
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .style(component: .content)
     }
     
     private var paragraph: some View {
@@ -38,4 +47,5 @@ struct StructuredTextScreen: View {
 
 #Preview {
     StructuredTextScreen()
+        .padding() // TODO: Should not be necessary, could be part of component or screen definition
 }

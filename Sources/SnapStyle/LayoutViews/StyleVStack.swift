@@ -8,10 +8,14 @@ import SwiftUI
 public struct StyleVStack<Content>: View where Content : View {
     
     private let alignment: HorizontalAlignment
-    private let spacing: CGFloat? // TODO: Could be a Style Value
+    private let spacing: CGFloat? // TODO: Should be a Style Value
     private let content: () -> Content
     
-    public init(alignment: HorizontalAlignment, spacing: CGFloat? = 0, @ViewBuilder content: @escaping () -> Content) {
+    public init(
+        spacing: CGFloat? = 0,
+        alignment: HorizontalAlignment = .leading,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self.alignment = alignment
         self.spacing = spacing
         self.content = content

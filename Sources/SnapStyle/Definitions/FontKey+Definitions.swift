@@ -15,8 +15,8 @@ extension SnapStyle.FontKey {
             switch context.element.hierarchy {
                 case .any: .definition(.init(size: 20))
                 case .primary: .definition(.init(size: 20))
-                case .secondary: .definition(.init(size: 14))
-                case .tertiary: .definition(.init(size: 12))
+                case .secondary: .definition(.init(size: 16))
+                case .tertiary: .definition(.init(size: 16))
             }
         }
     }
