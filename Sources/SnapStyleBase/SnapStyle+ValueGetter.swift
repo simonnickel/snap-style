@@ -42,6 +42,11 @@ extension SnapStyle {
         
         switch keyPath {
             
+            case let keyPath as KeyPath<NumberKey, NumberKey.ValueBuilder>:
+                if let builders = self.numbers[keyPath] as? [Key.ValueBuilder] {
+                    return builders
+                }
+                
             case let keyPath as KeyPath<FontKey, FontKey.ValueBuilder>:
                 if let builders = self.fonts[keyPath] as? [Key.ValueBuilder] {
                     return builders
@@ -52,7 +57,7 @@ extension SnapStyle {
                     return builders
                 }
             
-            default: return []
+            default: fatalError("Note defined for \(Key.self)")
                 
         }
         
@@ -60,10 +65,25 @@ extension SnapStyle {
     }
     
     
+    // MARK: - Number
+    
+    package func number(for keyPath: NumberKey.ValueKeyPath, in context: SnapStyle.Context) -> NumberKey.Value.WrappedValue? {
+        
+        let value = value(for: keyPath, in: context)
+
+        switch value {
+            case .reference(let key): return number(for: key, in: context)
+            default: return value?.wrappedValue
+        }
+        
+    }
+    
+    
     // MARK: - Font
     
     package func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
         
+        // TODO: Wrapped Value for keypath
         let value = value(for: keyPath, in: context)
 
         switch value {
@@ -78,6 +98,7 @@ extension SnapStyle {
     
     package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueKeyPath, in context: Context) -> AnyShapeStyle? {
 
+        // TODO: Wrapped Value for keypath
         let value = value(for: keyPath, in: context)
 
         switch value {

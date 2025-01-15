@@ -83,6 +83,8 @@ extension SnapStyle {
     internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
         switch Key.self {
                 
+            case let key as NumberKey.Type: return cacheNumbers as? KeyTypeCache<Key>
+                
             case let key as FontKey.Type: return cacheFonts as? KeyTypeCache<Key>
                 
             case let key as SurfaceKey.Type: return cacheSurfaces as? KeyTypeCache<Key>
@@ -94,6 +96,8 @@ extension SnapStyle {
     
     internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
         switch Key.self {
+                
+            case let key as NumberKey.Type: cacheNumbers = .init()
                 
             case let key as FontKey.Type: cacheFonts = .init()
                 

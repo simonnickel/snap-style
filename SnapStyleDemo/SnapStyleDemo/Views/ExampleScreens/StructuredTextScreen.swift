@@ -12,7 +12,7 @@ struct StructuredTextScreen: View {
     
     var body: some View {
         ScrollView {
-            StyleVStack(spacing: 16) {
+            StyleVStack(spacing: \.spacingSections) {
                 contentCard
                 contentText
                 contentList
@@ -48,20 +48,22 @@ struct StructuredTextScreen: View {
     
     @ViewBuilder
     private var contentText: some View {
-        StyleVStack {
-            Text("Title")
-            Text("Subitle")
-                .style(hierarchy: .secondary)
-        }
-        .style(element: .title)
-        
-        paragraph
-        
-        StyleVStack(spacing: 8) {
-            Text("Section Title")
-                .style(element: .title, hierarchy: .tertiary)
+        StyleVStack(spacing: \.spacingGroups) {
+            StyleVStack {
+                Text("Title")
+                Text("Subitle")
+                    .style(hierarchy: .secondary)
+            }
+            .style(element: .title)
             
             paragraph
+            
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Section Title")
+                    .style(element: .title, hierarchy: .tertiary)
+                
+                paragraph
+            }
         }
     }
     

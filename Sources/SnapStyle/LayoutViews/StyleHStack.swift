@@ -3,16 +3,20 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleBase
 import SwiftUI
 
 public struct StyleHStack<Content>: View where Content : View {
     
+    @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
+    
     private let alignment: VerticalAlignment
-    private let spacing: CGFloat? // TODO: Should be a Style Value
+    private let spacing: SnapStyle.NumberKey.ValueKeyPath?
     private let content: () -> Content
     
     public init(
-        spacing: CGFloat? = 0,
+        spacing: SnapStyle.NumberKey.ValueKeyPath? = nil,
         alignment: VerticalAlignment = .center,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -22,8 +26,18 @@ public struct StyleHStack<Content>: View where Content : View {
     }
     
     public var body: some View {
-        HStack(alignment: alignment, spacing: spacing) {
+        HStack(alignment: alignment, spacing: CGFloat(spacing(for: spacing))) {
             content()
+        }
+    }
+    
+    private func spacing(for keyPath: SnapStyle.NumberKey.ValueKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
+        // TODO: Wrapped Value for keypath
+        guard let keyPath else { return 0 }
+        return switch style.value(for: keyPath, in: styleContext) {
+            case .definition(let value): value
+            case .reference(let keyPathReference): spacing(for: keyPathReference)
+            case .none: 0
         }
     }
     

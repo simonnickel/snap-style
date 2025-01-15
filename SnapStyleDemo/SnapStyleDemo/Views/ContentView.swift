@@ -29,6 +29,9 @@ struct ContentView: View {
                     Text("Examples")
                 }
                 Section {
+                    NavigationLink("Numbers") {
+                        DebugKeyScreen(keyPath: \.numbers)
+                    }
                     NavigationLink("Fonts") {
                         DebugKeyScreen(keyPath: \.fonts)
                     }
@@ -39,6 +42,9 @@ struct ContentView: View {
                     Text("Keys")
                 }
                 Section {
+                    NavigationLink("Numbers") {
+                        DebugCacheScreen<SnapStyle.NumberKey>()
+                    }
                     NavigationLink("Fonts") {
                         DebugCacheScreen<SnapStyle.FontKey>()
                     }

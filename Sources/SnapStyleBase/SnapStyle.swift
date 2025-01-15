@@ -7,9 +7,11 @@ import SwiftUI
 
 public struct SnapStyle {
     
+    public var numbers: [NumberKey.ValueKeyPath: [NumberKey.ValueBuilder]] = [:]
     public var fonts: [FontKey.ValueKeyPath: [FontKey.ValueBuilder]] = [:]
     public var surfaces: [SurfaceKey.ValueKeyPath: [SurfaceKey.ValueBuilder]] = [:]
     
+    internal var cacheNumbers: KeyTypeCache<NumberKey> = .init()
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
     
@@ -17,6 +19,10 @@ public struct SnapStyle {
     
     
     // MARK: - Append
+    
+    internal func append(numbers: [NumberKey.ValueKeyPath: NumberKey.ValueBuilder]) -> Self {
+        appended(numbers, at: \.numbers)
+    }
     
     internal func append(fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
