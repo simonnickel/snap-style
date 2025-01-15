@@ -8,6 +8,19 @@ import SwiftUI
 
 extension SnapStyle.SurfaceKey {
     
+    
+    // MARK: - Component
+    
+    public var card: ValueBuilder {
+        .builder { context in
+            switch context.component.hierarchy {
+                case .any: .surface(.withColor(foreground: .white, background: .secondary)) // TODO: Reference a different color for foreground?
+                case .primary: .surface(.withColor(foreground: .white, background: .secondary))
+                case .secondary: .surface(.withColor(foreground: .white, background: .primary))
+            }
+        }
+    }
+    
  
     // MARK: - Element
 
@@ -15,11 +28,15 @@ extension SnapStyle.SurfaceKey {
 
     public var content: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
-                case .any: .surface(.withColor(foreground: .primary))
-                case .primary: .surface(.withColor(foreground: .primary))
-                case .secondary: .surface(.withColor(foreground: .secondary))
-                case .tertiary: .surface(.withColor(foreground: .secondary))
+            if context.component.type == .card {
+                return nil // Defined by \.card
+            } else {
+                return switch context.element.hierarchy {
+                    case .any: .surface(.withColor(foreground: .primary))
+                    case .primary: .surface(.withColor(foreground: .primary))
+                    case .secondary: .surface(.withColor(foreground: .secondary))
+                    case .tertiary: .surface(.withColor(foreground: .secondary))
+                }
             }
         }
     }

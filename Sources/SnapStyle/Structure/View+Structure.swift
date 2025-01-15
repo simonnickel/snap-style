@@ -11,11 +11,26 @@ import SwiftUI
 
 extension View {
     
-    public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary) -> some View {
-        self
-            .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
+    public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
+        Group {
+            if applyStyle {
+                self.applyComponentStyle()
+            } else {
+                self
+            }
+        }
+        .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
     }
     
+    
+    // MARK: ApplyStyle
+    
+    private func applyComponentStyle() -> some View {
+        self
+            .modifier(ComponentFontFromEnvironmentModifier())
+            .modifier(ComponentSurfaceFromEnvironmentModifier(layer: .foreground))
+            .modifier(ComponentSurfaceFromEnvironmentModifier(layer: .background))
+    }
 }
     
 
@@ -26,7 +41,7 @@ extension View {
     public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
             if applyStyle {
-                self.applyStyle()
+                self.applyElementStyle()
             } else {
                 self
             }
@@ -37,18 +52,18 @@ extension View {
     /// Shortcut to adjust the elements hierarchy.
     public func style(hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
         self
-            .applyStyle()
+            .applyElementStyle()
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
     
     
     // MARK: ApplyStyle
     
-    private func applyStyle() -> some View {
+    private func applyElementStyle() -> some View {
         self
-            .modifier(FontFromEnvironmentModifier())
-            .modifier(SurfaceFromEnvironmentModifier(layer: .foreground))
-            .modifier(SurfaceFromEnvironmentModifier(layer: .background))
+            .modifier(ElementFontFromEnvironmentModifier())
+            .modifier(ElementSurfaceFromEnvironmentModifier(layer: .foreground))
+            .modifier(ElementSurfaceFromEnvironmentModifier(layer: .background))
     }
     
 }

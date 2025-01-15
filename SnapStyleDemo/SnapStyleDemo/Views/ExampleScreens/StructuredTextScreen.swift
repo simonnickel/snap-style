@@ -13,6 +13,7 @@ struct StructuredTextScreen: View {
     var body: some View {
         ScrollView {
             StyleVStack(spacing: 16) {
+                contentCard
                 contentText
                 contentList
                 contentButtons
@@ -23,14 +24,36 @@ struct StructuredTextScreen: View {
     }
     
     @ViewBuilder
+    private var contentCard: some View {
+        // TODO: Content Style with Shape
+        StyleHStack {
+            StyleVStack {
+                Text("Title")
+                Text("Subitle")
+                    .style(hierarchy: .secondary)
+            }
+            .style(element: .title)
+            
+            Spacer()
+            
+            StyleVStack {
+                Text("Value")
+                    .style(element: .value)
+                Image(systemName: "triangle")
+                    .style(element: .icon)
+            }
+        }
+        .style(component: .card)
+    }
+    
+    @ViewBuilder
     private var contentText: some View {
-        StyleVStack(spacing: 0) {
+        StyleVStack {
             Text("Title")
             Text("Subitle")
                 .style(hierarchy: .secondary)
         }
         .style(element: .title)
-
         
         paragraph
         
@@ -48,8 +71,12 @@ struct StructuredTextScreen: View {
         StyleVStack {
             ForEach(0..<3) { index in
                 StyleVStack {
-                    Label("Row \(index)", systemImage: "star")
-                        .padding(5)
+                    StyleHStack {
+                        Label("Row \(index)", systemImage: "star")
+                            .padding(5)
+                        Spacer()
+                        Text("\(index)")
+                    }
                     Rectangle()
                         .fill(Color.gray.secondary) // TODO: Style value
                         .frame(height: 1)

@@ -7,6 +7,12 @@ import SnapStyleBase
 
 extension SnapStyle.FontKey {
     
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueKeyPath? {
+        switch component {
+            default: nil
+        }
+    }
+    
     public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
         switch element {
             case .any: \.content
@@ -24,6 +30,14 @@ extension SnapStyle.FontKey {
 }
 
 extension SnapStyle.SurfaceKey {
+    
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueKeyPath? {
+        switch component {
+            case .card: \.card
+
+            default: nil
+        }
+    }
     
     public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
         switch element {

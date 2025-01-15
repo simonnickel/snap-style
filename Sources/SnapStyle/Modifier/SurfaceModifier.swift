@@ -56,7 +56,37 @@ internal struct BackgroundModifier: ViewModifier {
 
 // MARK: - FromEnvironmentModifier
 
-internal struct SurfaceFromEnvironmentModifier: ViewModifier {
+internal struct ComponentSurfaceFromEnvironmentModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
+
+    let layer: SnapStyle.SurfaceKey.Layer
+
+    func body(content: Content) -> some View {
+        if
+            let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.component.type),
+            let value = style.surface(layer: layer, for: keyPath, in: styleContext)
+        {
+            switch layer {
+                case .any:
+                    content
+                        .foregroundStyle(value)
+                        .background(value)
+                case .foreground:
+                    content
+                        .foregroundStyle(value)
+                case .background:
+                    content
+                        .background(value)
+            }
+        } else {
+            content
+        }
+    }
+
+}
+internal struct ElementSurfaceFromEnvironmentModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext

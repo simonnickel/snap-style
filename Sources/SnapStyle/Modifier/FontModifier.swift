@@ -35,7 +35,24 @@ internal struct FontModifier: ViewModifier {
 
 // MARK: - FromEnvironmentModifier
 
-internal struct FontFromEnvironmentModifier: ViewModifier {
+internal struct ComponentFontFromEnvironmentModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
+
+    func body(content: Content) -> some View {
+        if let keyPath = SnapStyle.FontKey.keyPath(for: styleContext.component.type) {
+            let value = style.font(for: keyPath, in: styleContext)
+            content
+                .font(value)
+        } else {
+            content
+        }
+    }
+
+}
+
+internal struct ElementFontFromEnvironmentModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext

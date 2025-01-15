@@ -12,11 +12,20 @@ extension SnapStyle.FontKey {
     
     public var title: ValueBuilder {
         .base(.font(.title)) { context in
-            switch context.element.hierarchy {
-                case .any: .definition(.init(size: 20))
-                case .primary: .definition(.init(size: 20))
-                case .secondary: .definition(.init(size: 16))
-                case .tertiary: .definition(.init(size: 16))
+            if context.component.type == .card {
+                return switch context.element.hierarchy {
+                    case .any: .definition(.init(size: 24))
+                    case .primary: .definition(.init(size: 24))
+                    case .secondary: .definition(.init(size: 20))
+                    case .tertiary: .definition(.init(size: 20))
+                }
+            } else {
+                return switch context.element.hierarchy {
+                    case .any: .definition(.init(size: 20))
+                    case .primary: .definition(.init(size: 20))
+                    case .secondary: .definition(.init(size: 16))
+                    case .tertiary: .definition(.init(size: 16))
+                }
             }
         }
     }
