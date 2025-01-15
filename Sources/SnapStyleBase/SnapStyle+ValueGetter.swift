@@ -62,7 +62,7 @@ extension SnapStyle {
     
     // MARK: - Font
     
-    package func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> Font? {
+    package func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
 
