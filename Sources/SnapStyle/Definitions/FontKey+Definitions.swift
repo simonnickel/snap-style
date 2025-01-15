@@ -32,6 +32,8 @@ extension SnapStyle.FontKey {
         }
     }
     
+    public var icon: ValueBuilder { .base(.reference(\.label)) }
+    
     public var value: ValueBuilder { .base(.reference(\.label)) }
     
     public var cta: ValueBuilder { .base(.reference(\.label)) }

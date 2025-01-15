@@ -14,6 +14,7 @@ extension SnapStyle.FontKey {
             case .title: \.title
             case .content: \.content
             case .label: \.label
+            case .icon: \.icon
             case .value: \.value
             case .cta: \.cta
             case .indicator: \.indicator
@@ -31,6 +32,7 @@ extension SnapStyle.SurfaceKey {
             case .title: \.title
             case .content: \.content
             case .label: \.label
+            case .icon: \.icon
             case .value: \.value
             case .cta: \.cta
             case .indicator: \.indicator

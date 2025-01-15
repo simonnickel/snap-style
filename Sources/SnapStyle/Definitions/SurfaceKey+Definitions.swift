@@ -26,7 +26,9 @@ extension SnapStyle.SurfaceKey {
 
     public var label: ValueBuilder { .base(.reference(\.content)) }
 
-    public var value: ValueBuilder { .base(.reference(\.interactive)) }
+    public var icon: ValueBuilder { .base(.reference(\.label)) }
+    
+    public var value: ValueBuilder { .base(.reference(\.label)) }
 
     public var cta: ValueBuilder {
         .builder { context in
