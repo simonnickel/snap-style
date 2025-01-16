@@ -8,9 +8,9 @@ import SwiftUI
 extension View {
     
     public func styleOverride(
-        numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.NumberKey.Value>]? = nil,
-        fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]? = nil,
-        surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]? = nil
+        numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.NumberKey.ValueBuilder]? = nil,
+        fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.FontKey.ValueBuilder]? = nil,
+        surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.SurfaceKey.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
             StyleOverrideModifier(
@@ -30,9 +30,9 @@ private struct StyleOverrideModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.NumberKey.Value>]?
-    let fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.FontKey.Value>]?
-    let surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.ValueBuilder<SnapStyle.SurfaceKey.Value>]?
+    let numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.NumberKey.ValueBuilder]?
+    let fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.FontKey.ValueBuilder]?
+    let surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.SurfaceKey.ValueBuilder]?
 
     func body(content: Content) -> some View {
         
@@ -49,9 +49,9 @@ private struct StyleOverrideModifier: ViewModifier {
 extension SnapStyle {
     
     internal func replaced(
-        numbers: [NumberKey.ValueKeyPath: ValueBuilder<NumberKey.Value>]? = nil,
-        fonts: [FontKey.ValueKeyPath: ValueBuilder<FontKey.Value>]? = nil,
-        surfaces: [SurfaceKey.ValueKeyPath: ValueBuilder<SurfaceKey.Value>]? = nil
+        numbers: [NumberKey.ValueKeyPath: NumberKey.ValueBuilder]? = nil,
+        fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]? = nil,
+        surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
         
