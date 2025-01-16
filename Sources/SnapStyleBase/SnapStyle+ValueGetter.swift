@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
     
-    package func value<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) -> Key.Value? {
+    package func value<Key: StyleKey>(for keyPath: Key.ValueKeyPath, in context: SnapStyle.Context) -> Key.Value? {
         
         // Use value from cache if available
         if let value = getValueFromCache(for: keyPath, in: context) {
@@ -38,7 +38,7 @@ extension SnapStyle {
         return result
     }
     
-    private func builders<Key: StyleKey>(for keyPath: KeyPath<Key, Key.ValueBuilder>) -> [Key.ValueBuilder] {
+    private func builders<Key: StyleKey>(for keyPath: Key.ValueKeyPath) -> [Key.ValueBuilder] {
         
         switch keyPath {
             
