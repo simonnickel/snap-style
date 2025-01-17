@@ -18,5 +18,5 @@ struct DebugKeyRowSurface: View {
 }
 
 #Preview {
-    DebugKeyRowSurface(keyPath: \.interactive)
+    DebugKeyRowSurface(keyPath: \.cta)
 }

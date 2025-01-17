@@ -27,9 +27,9 @@ extension SnapStyle.SurfaceKey {
         
         public typealias WrappedValue = LayeredShapeStyle
 
-        case surface(LayeredShapeStyle)
+        case surface(WrappedValue)
 
-        public var wrappedValue: LayeredShapeStyle {
+        public var wrappedValue: WrappedValue {
             switch self {
                 case .surface(let forLayer): forLayer
             }
@@ -40,6 +40,7 @@ extension SnapStyle.SurfaceKey {
                 case .surface(let definition): ".definition: \(definition)"
             }
         }
+        
         
         // MARK: LayeredShapeStyle
         

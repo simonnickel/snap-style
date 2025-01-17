@@ -55,14 +55,5 @@ extension SnapStyle.SurfaceKey {
                 )))
         }
     }
-
-    public var indicator: ValueBuilder { .base(.reference(\.content)) }
-    
-
-    // MARK: - Highlight
-
-    public var interactive: ValueBuilder { .base(.definition(.surface(.with(foreground: .accentColor)))) }
-
-    public var navigation: ValueBuilder { .base(.reference(\.interactive)) }
     
 }

@@ -47,6 +47,4 @@ extension SnapStyle.FontKey {
     
     public var cta: ValueBuilder { .base(.reference(\.label)) }
     
-    public var indicator: ValueBuilder { .base(.definition(.font(.footnote))) }
-    
 }

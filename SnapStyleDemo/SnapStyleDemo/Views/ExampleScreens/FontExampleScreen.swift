@@ -49,7 +49,7 @@ struct FontExampleScreen: View {
             Text("Label")
                 .style(element: .label)
             Text("Font from Keypath")
-                .style(font: \.indicator)
+                .style(font: \.cta)
         }
     }
     

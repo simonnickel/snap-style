@@ -21,8 +21,6 @@ struct StyleElements: View {
                 .style(element: .label)
             Text("Value")
                 .style(element: .value)
-            Text("Indicator")
-                .style(element: .indicator)
         }
         HStack {
             Button {} label: { Text("Button") }

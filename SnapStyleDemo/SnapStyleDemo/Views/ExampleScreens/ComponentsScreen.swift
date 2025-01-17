@@ -50,40 +50,4 @@ struct ComponentsScreen: View {
 
 #Preview {
     ComponentsScreen()
-        .styleOverride(
-            fonts: [
-                \.title : .base(.definition(.with(size: 6))) { context in
-                    switch context.element.hierarchy {
-                        case .primary: .definition(.with(size: 16))
-                        default: nil
-                    }
-                }
-            ],
-            surfaces: [
-                \.title : .builder { context in
-                    switch context.element.hierarchy {
-                        case .secondary: .definition(.surface(.with(foreground: .primary)))
-                        default: nil
-                    }
-                }
-            ]
-        )
-//        .styleOverride(
-//            fonts: [
-//                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.element.hierarchy {
-//                        case.secondary: .definition(.init(size: 10))
-//                        default: nil
-//                    }
-//                }
-//            ],
-//            surfaces: [
-//                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.element.hierarchy {
-//                        case .primary: .surface(.init(foreground: Color.primary))
-//                        default: nil
-//                    }
-//                }
-//            ]
-//        )
 }

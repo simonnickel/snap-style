@@ -83,14 +83,6 @@ struct ContentView: View {
                     }
 
                 }
-            ],
-            surfaces: [
-                \.title : SnapStyle.ValueBuilder.builder { context in
-                    switch context.element.hierarchy {
-                        case .primary: .definition(.surface(.with(foreground: .primary)))
-                    default: nil
-                    }
-                }
             ]
         )
 }

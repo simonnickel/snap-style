@@ -23,7 +23,6 @@ extension SnapStyle.FontKey {
             case .icon: \.icon
             case .value: \.value
             case .cta: \.cta
-            case .indicator: \.indicator
         }
     }
     
@@ -49,7 +48,6 @@ extension SnapStyle.SurfaceKey {
             case .icon: \.icon
             case .value: \.value
             case .cta: \.cta
-            case .indicator: \.indicator
         }
     }
     
