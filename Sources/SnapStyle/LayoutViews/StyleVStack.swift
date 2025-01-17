@@ -12,11 +12,11 @@ public struct StyleVStack<Content>: View where Content : View {
     @Environment(\.styleContext) private var styleContext
     
     private let alignment: HorizontalAlignment
-    private let spacing: SnapStyle.NumberKey.ValueKeyPath?
+    private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
     private let content: () -> Content
     
     public init(
-        spacing: SnapStyle.NumberKey.ValueKeyPath? = nil,
+        spacing: SnapStyle.NumberKey.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -31,7 +31,7 @@ public struct StyleVStack<Content>: View where Content : View {
         }
     }
     
-    private func spacing(for keyPath: SnapStyle.NumberKey.ValueKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
+    private func spacing(for keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
         guard let keyPath else { return 0 }
         
         return switch style.value(for: keyPath, in: styleContext) {

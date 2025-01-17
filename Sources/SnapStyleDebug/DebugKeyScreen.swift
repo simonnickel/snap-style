@@ -10,7 +10,7 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     
     @Environment(\.style) private var style
 
-    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueKeyPath: [KeyType.ValueBuilder]]>
+    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueBuilderKeyPath: [KeyType.ValueBuilder]]>
     
     let keyPath: ItemKeyPath
     
@@ -82,13 +82,13 @@ extension StyleKey {
     
     @MainActor
     @ViewBuilder
-    static func row(keyPath: ValueKeyPath) -> some View {
+    static func row(keyPath: ValueBuilderKeyPath) -> some View {
 
         // TODO: Is there a simpler solution without casting? This is not really used anymore anyway though.
         switch self {
-            case is SnapStyle.NumberKey.Type: DebugKeyRowNumber(keyPath: keyPath as! SnapStyle.NumberKey.ValueKeyPath)
-            case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueKeyPath)
-            case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueKeyPath)
+            case is SnapStyle.NumberKey.Type: DebugKeyRowNumber(keyPath: keyPath as! SnapStyle.NumberKey.ValueBuilderKeyPath)
+            case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueBuilderKeyPath)
+            case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueBuilderKeyPath)
             default: fatalError("No row defined for \(self)")
         }
         

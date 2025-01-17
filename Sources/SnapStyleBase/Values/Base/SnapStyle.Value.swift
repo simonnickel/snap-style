@@ -6,7 +6,7 @@
 extension SnapStyle {
     
     public enum Value<Key: StyleKey> {
-        case reference(Key.ValueKeyPath)
+        case reference(Key.ValueBuilderKeyPath)
         case definition(Key.Value)
     }
     

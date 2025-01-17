@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(font keyPath: SnapStyle.FontKey.ValueKeyPath) -> some View {
+    public func style(font keyPath: SnapStyle.FontKey.ValueBuilderKeyPath) -> some View {
         self
             .modifier(FontModifier(keyPath: keyPath))
     }
@@ -22,7 +22,7 @@ internal struct FontModifier: ViewModifier {
     
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.FontKey.ValueKeyPath
+    let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         let value = style.font(for: keyPath, in: .any)

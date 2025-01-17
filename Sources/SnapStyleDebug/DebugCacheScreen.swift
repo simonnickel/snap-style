@@ -27,7 +27,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
         }
     }
 
-    private func section(for keyPath: KeyType.ValueKeyPath) -> some View {
+    private func section(for keyPath: KeyType.ValueBuilderKeyPath) -> some View {
 
         Group {
             let contexts = style.cachedContexts(for: keyPath)

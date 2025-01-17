@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(surface keyPath: SnapStyle.SurfaceKey.ValueKeyPath) -> some View {
+    public func style(surface keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
         self
             .modifier(ForegroundModifier(keyPath: keyPath))
             .modifier(BackgroundModifier(keyPath: keyPath))
@@ -23,7 +23,7 @@ internal struct ForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if let foreground = style.surface(layer: .foreground, for: keyPath, in: .any) {
@@ -40,7 +40,7 @@ internal struct BackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if let background = style.surface(layer: .background, for: keyPath, in: .any) {

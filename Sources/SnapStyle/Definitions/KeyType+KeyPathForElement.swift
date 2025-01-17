@@ -7,13 +7,13 @@ import SnapStyleBase
 
 extension SnapStyle.FontKey {
     
-    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueKeyPath? {
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath? {
         switch component {
             default: nil
         }
     }
     
-    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
+    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueBuilderKeyPath {
         switch element {
             case .any: \.content
                 
@@ -31,7 +31,7 @@ extension SnapStyle.FontKey {
 
 extension SnapStyle.SurfaceKey {
     
-    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueKeyPath? {
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath? {
         switch component {
             case .card: \.card
 
@@ -39,7 +39,7 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
-    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueKeyPath {
+    public static func keyPath(for element: SnapStyle.Element.ElementType) -> ValueBuilderKeyPath {
         switch element {
             case .any: \.content
 

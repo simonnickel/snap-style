@@ -7,7 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
     
-    package func value<Key: StyleKey>(for keyPath: Key.ValueKeyPath, in context: SnapStyle.Context) -> Key.Value? {
+    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
         
         // Use value from cache if available
         if let value = getValueFromCache(for: keyPath, in: context) {
@@ -50,7 +50,7 @@ extension SnapStyle {
         return result
     }
     
-    private func builders<Key: StyleKey>(for keyPath: Key.ValueKeyPath) -> [Key.ValueBuilder] {
+    private func builders<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [Key.ValueBuilder] {
         
         switch keyPath {
             
@@ -79,7 +79,7 @@ extension SnapStyle {
     
     // MARK: - Number
     
-    package func number(for keyPath: NumberKey.ValueKeyPath, in context: SnapStyle.Context) -> NumberKey.Value.WrappedValue? {
+    package func number(for keyPath: NumberKey.ValueBuilderKeyPath, in context: SnapStyle.Context) -> NumberKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
         
@@ -92,7 +92,7 @@ extension SnapStyle {
     
     // MARK: - Font
     
-    package func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
+    package func font(for keyPath: FontKey.ValueBuilderKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
         
@@ -105,7 +105,7 @@ extension SnapStyle {
     
     // MARK: - Surface
     
-    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueKeyPath, in context: Context) -> AnyShapeStyle? {
+    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> AnyShapeStyle? {
 
         let value = value(for: keyPath, in: context)
 
