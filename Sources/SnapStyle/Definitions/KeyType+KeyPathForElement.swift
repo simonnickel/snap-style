@@ -7,7 +7,7 @@ import SnapStyleBase
 
 extension SnapStyle.FontKey {
     
-    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath? {
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath? { // TODO: Should not be optional. Return reference in definition instead, to allow override.
         switch component {
             default: nil
         }
@@ -30,11 +30,13 @@ extension SnapStyle.FontKey {
 
 extension SnapStyle.SurfaceKey {
     
-    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath? {
+    public static func keyPath(for component: SnapStyle.Component.ComponentType) -> ValueBuilderKeyPath {
         switch component {
+            case .any: \.contentComponent
+            case .screen: \.screen
+            case .content: \.contentComponent
+            case .list: \.list
             case .card: \.card
-
-            default: nil
         }
     }
     

@@ -120,9 +120,9 @@ extension SnapStyle {
 
     
     // MARK: - Surface
-    
-    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> AnyShapeStyle? {
 
+    // TODO: return type
+    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> SnapStyle.SurfaceKey.Value.LayeredShapeStyle.LayerValue? {
         let value = value(for: keyPath, in: context)
 
         return value?.wrappedValue.surface(for: layer)

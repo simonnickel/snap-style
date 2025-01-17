@@ -22,13 +22,17 @@ extension View {
 internal struct ForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if let foreground = style.surface(layer: .foreground, for: keyPath, in: .any) {
+        if
+            let foreground = style.surface(layer: .foreground, for: keyPath, in: .any),
+            let color = style.color(for: foreground, in: styleContext)
+        {
             content
-                .foregroundStyle(foreground)
+                .foregroundStyle(color)
         } else {
             content
         }
@@ -39,13 +43,17 @@ internal struct ForegroundModifier: ViewModifier {
 internal struct BackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if let background = style.surface(layer: .background, for: keyPath, in: .any) {
+        if
+            let background = style.surface(layer: .background, for: keyPath, in: .any),
+            let color = style.color(for: background, in: styleContext)
+        {
             content
-                .background(background)
+                .background(color)
         } else {
             content
         }
@@ -64,21 +72,22 @@ internal struct ComponentSurfaceFromEnvironmentModifier: ViewModifier {
     let layer: SnapStyle.SurfaceKey.Layer
 
     func body(content: Content) -> some View {
+        let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.component.type)
         if
-            let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.component.type),
-            let value = style.surface(layer: layer, for: keyPath, in: styleContext)
+            let value = style.surface(layer: layer, for: keyPath, in: styleContext),
+            let color = style.color(for: value, in: styleContext)
         {
             switch layer {
                 case .any:
                     content
-                        .foregroundStyle(value)
-                        .background(value)
+                        .foregroundStyle(color)
+                        .background(color)
                 case .foreground:
                     content
-                        .foregroundStyle(value)
+                        .foregroundStyle(color)
                 case .background:
                     content
-                        .background(value)
+                        .background(color)
             }
         } else {
             content
@@ -95,20 +104,21 @@ internal struct ElementSurfaceFromEnvironmentModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         let keyPath = SnapStyle.SurfaceKey.keyPath(for: styleContext.element.type)
-        let value = style.surface(layer: layer, for: keyPath, in: styleContext)
-
-        if let value {
+        if
+            let value = style.surface(layer: layer, for: keyPath, in: styleContext),
+            let color = style.color(for: value, in: styleContext)
+        {
             switch layer {
                 case .any:
                     content
-                        .foregroundStyle(value)
-                        .background(value)
+                        .foregroundStyle(color)
+                        .background(color)
                 case .foreground:
                     content
-                        .foregroundStyle(value)
+                        .foregroundStyle(color)
                 case .background:
                     content
-                        .background(value)
+                        .background(color)
             }
         } else {
             content
