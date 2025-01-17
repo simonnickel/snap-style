@@ -18,24 +18,20 @@ extension SnapStyle.FontKey {
         
         public typealias WrappedValue = Font
         
-        case definition(Definition)
+        case with(size: CGFloat)
         case font(Font)
-        case reference(SnapStyle.FontKey.ValueKeyPath)
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .definition(let definition): Font.system(size: definition.size)
+                case .with(size: let size): Definition(size: size).font
                 case .font(let font): font
-                case .reference:
-                    fatalError("A `.reference` FontValue should never be used to generate a value.")
             }
         }
         
         public var description: String {
             switch self {
-                case .definition(let definition): ".definition: \(definition)"
+                case .with(size: let size): ".definition: \(Definition(size: size))"
                 case .font(let font): ".font"
-                case .reference(let keyPath): ".reference: \(keyPath)"
             }
         }
         
@@ -48,6 +44,10 @@ extension SnapStyle.FontKey {
             
             public init(size: CGFloat) {
                 self.size = size
+            }
+            
+            var font: Font {
+                Font.system(size: size)
             }
             
             public var description: String { "size: \(size)" }

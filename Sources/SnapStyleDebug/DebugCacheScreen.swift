@@ -27,7 +27,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
         }
     }
 
-    private func section(for keyPath: KeyType.ValueKeyPath) -> some View {
+    private func section(for keyPath: KeyType.ValueBuilderKeyPath) -> some View {
 
         Group {
             let contexts = style.cachedContexts(for: keyPath)
@@ -59,9 +59,9 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     DebugCacheScreen<SnapStyle.FontKey>()
         .styleOverride(
             fonts: [
-                \.title : .base(.definition(.init(size: 6))) { context in
+                \.title : .base(.definition(.with(size: 6))) { context in
                     switch context.element.hierarchy {
-                        case .primary: .definition(.init(size: 16))
+                        case .primary: .definition(.with(size: 16))
                         default: nil
                     }
 
@@ -70,7 +70,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
             surfaces: [
                 \.title : .builder { context in
                     switch context.element.hierarchy {
-                        case .secondary: .surface(.withColor(foreground: .primary))
+                        case .secondary: .definition(.surface(.with(foreground: .primary)))
                         default: nil
                     }
                 }

@@ -8,9 +8,9 @@ import SwiftUI
 extension View {
     
     public func styleOverride(
-        numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.NumberKey.ValueBuilder]? = nil,
-        fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.FontKey.ValueBuilder]? = nil,
-        surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.SurfaceKey.ValueBuilder]? = nil
+        numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]? = nil,
+        fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]? = nil,
+        surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
             StyleOverrideModifier(
@@ -30,9 +30,9 @@ private struct StyleOverrideModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let numbers: [SnapStyle.NumberKey.ValueKeyPath: SnapStyle.NumberKey.ValueBuilder]?
-    let fonts: [SnapStyle.FontKey.ValueKeyPath: SnapStyle.FontKey.ValueBuilder]?
-    let surfaces: [SnapStyle.SurfaceKey.ValueKeyPath: SnapStyle.SurfaceKey.ValueBuilder]?
+    let numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]?
+    let fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]?
+    let surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]?
 
     func body(content: Content) -> some View {
         
@@ -49,9 +49,9 @@ private struct StyleOverrideModifier: ViewModifier {
 extension SnapStyle {
     
     internal func replaced(
-        numbers: [NumberKey.ValueKeyPath: NumberKey.ValueBuilder]? = nil,
-        fonts: [FontKey.ValueKeyPath: FontKey.ValueBuilder]? = nil,
-        surfaces: [SurfaceKey.ValueKeyPath: SurfaceKey.ValueBuilder]? = nil
+        numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]? = nil,
+        fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]? = nil,
+        surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
         

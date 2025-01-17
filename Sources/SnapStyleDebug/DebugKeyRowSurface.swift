@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DebugKeyRowSurface: View {
     
-    let keyPath: SnapStyle.SurfaceKey.ValueKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
     
     var body: some View {
         Text("\(keyPath)")

@@ -19,7 +19,7 @@ struct FontExampleScreen: View {
                     fonts: [
                         \.title : .builder({ context in
                             switch (context.component.type, context.element.hierarchy) {
-                                case (.card, .secondary): .definition(.init(size: 40))
+                                case (.card, .secondary): .definition(.with(size: 40))
                                 default: nil
                             }
                         })

@@ -7,10 +7,18 @@ public protocol StyleKey {
     
     associatedtype Value: StyleValue
     
-    typealias ValueBuilder = SnapStyle.ValueBuilder<Value>
-    typealias ValueKeyPath = KeyPath<Self, Self.ValueBuilder>
+    typealias ValueBuilderKeyPath = KeyPath<Self, Self.ValueBuilder>
+    typealias ValueBuilder = SnapStyle.ValueBuilder<SnapStyle.Value<Self>>
 
     /// Needs an init to access KeyPaths.
     init()
+    
+}
+
+public protocol StyleValue: CustomStringConvertible {
+    
+    associatedtype WrappedValue
+    
+    var wrappedValue: WrappedValue { get }
     
 }

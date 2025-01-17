@@ -28,20 +28,16 @@ extension SnapStyle.SurfaceKey {
         public typealias WrappedValue = LayeredShapeStyle
 
         case surface(LayeredShapeStyle)
-        case reference(SnapStyle.SurfaceKey.ValueKeyPath)
 
         public var wrappedValue: LayeredShapeStyle {
             switch self {
                 case .surface(let forLayer): forLayer
-                case .reference:
-                    fatalError("A `.reference` SurfaceValue should never be used to generate a value.")
             }
         }
         
         public var description: String {
             switch self {
                 case .surface(let definition): ".definition: \(definition)"
-                case .reference(let keyPath): ".reference: \(keyPath)"
             }
         }
         
@@ -73,12 +69,8 @@ extension SnapStyle.SurfaceKey {
                 self.init(values)
             }
 
-            public static func withColor(foreground: Color? = nil, background: Color? = nil) -> Self {
+            public static func with(foreground: Color? = nil, background: Color? = nil) -> Self {
                 self.init(foreground: foreground, background: background)
-            }
-            
-            public static func withColor(any color: Color) -> Self {
-                Self([.any: AnyShapeStyle(color)])
             }
 
         }

@@ -72,7 +72,7 @@ struct ContentView: View {
             fonts: [
                 \.title : SnapStyle.ValueBuilder.builder { context in
                     switch context.element.hierarchy {
-                        case.primary: .definition(.init(size: 12))
+                        case.primary: .definition(.with(size: 12))
                         default: nil
                     }
 
@@ -81,7 +81,7 @@ struct ContentView: View {
             surfaces: [
                 \.title : SnapStyle.ValueBuilder.builder { context in
                     switch context.element.hierarchy {
-                    case .primary: .surface(.withColor(foreground: .primary))
+                        case .primary: .definition(.surface(.with(foreground: .primary)))
                     default: nil
                     }
                 }

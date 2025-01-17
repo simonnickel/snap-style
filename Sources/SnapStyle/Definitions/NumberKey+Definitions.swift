@@ -7,9 +7,9 @@ import SnapStyleBase
 
 extension SnapStyle.NumberKey {
 
-    public var spacingSections: ValueBuilder { .base(.definition(32)) }
-    public var spacingGroups: ValueBuilder { .base(.definition(16)) }
-    public var spacingElements: ValueBuilder { .base(.definition(8)) }
-    public var spacingLines: ValueBuilder { .base(.definition(4)) }
+    public var spacingSections: ValueBuilder { .base(.definition(.value(32))) }
+    public var spacingGroups: ValueBuilder { .base(.definition(.value(16))) }
+    public var spacingElements: ValueBuilder { .base(.definition(.value(8))) }
+    public var spacingLines: ValueBuilder { .base(.definition(.value(4))) }
     
 }
