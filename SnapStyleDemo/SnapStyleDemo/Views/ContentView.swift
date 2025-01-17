@@ -16,14 +16,14 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
-                    NavigationLink("Fonts") {
-                        FontExampleScreen()
-                    }
                     NavigationLink("Components") {
                         ComponentsScreen()
                     }
                     NavigationLink("Structure Text") {
                         StructuredTextScreen()
+                    }
+                    NavigationLink("Fonts") {
+                        FontExampleScreen()
                     }
                 } header: {
                     Text("Examples")
