@@ -14,3 +14,11 @@ public protocol StyleKey {
     init()
     
 }
+
+public protocol StyleValue: CustomStringConvertible {
+    
+    associatedtype WrappedValue
+    
+    var wrappedValue: WrappedValue { get }
+    
+}
