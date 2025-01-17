@@ -88,6 +88,7 @@ extension StyleKey {
         switch self {
             case is SnapStyle.NumberKey.Type: DebugKeyRowNumber(keyPath: keyPath as! SnapStyle.NumberKey.ValueBuilderKeyPath)
             case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueBuilderKeyPath)
+            case is SnapStyle.ColorKey.Type: DebugKeyRowColor(keyPath: keyPath as! SnapStyle.ColorKey.ValueBuilderKeyPath)
             case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueBuilderKeyPath)
             default: fatalError("No row defined for \(self)")
         }

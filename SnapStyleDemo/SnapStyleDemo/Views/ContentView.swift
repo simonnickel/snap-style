@@ -35,6 +35,9 @@ struct ContentView: View {
                     NavigationLink("Fonts") {
                         DebugKeyScreen(keyPath: \.fonts)
                     }
+                    NavigationLink("Colors") {
+                        DebugKeyScreen(keyPath: \.colors)
+                    }
                     NavigationLink("Surfaces") {
                         DebugKeyScreen(keyPath: \.surfaces)
                     }
@@ -47,6 +50,9 @@ struct ContentView: View {
                     }
                     NavigationLink("Fonts") {
                         DebugCacheScreen<SnapStyle.FontKey>()
+                    }
+                    NavigationLink("Colors") {
+                        DebugCacheScreen<SnapStyle.ColorKey>()
                     }
                     NavigationLink("Surfaces") {
                         DebugCacheScreen<SnapStyle.SurfaceKey>()

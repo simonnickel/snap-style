@@ -64,12 +64,17 @@ extension SnapStyle {
                     return builders
                 }
             
+            case let keyPath as KeyPath<ColorKey, ColorKey.ValueBuilder>:
+                if let builders = self.colors[keyPath] as? [Key.ValueBuilder] {
+                    return builders
+                }
+            
             case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
                 if let builders = self.surfaces[keyPath] as? [Key.ValueBuilder] {
                     return builders
                 }
             
-            default: fatalError("Note defined for \(Key.self)")
+            default: fatalError("Not defined for \(Key.self)")
                 
         }
         
@@ -98,6 +103,17 @@ extension SnapStyle {
         
         // TODO: Font scaling?
 
+        return value?.wrappedValue
+        
+    }
+    
+    
+    // MARK: - Color
+    
+    package func color(for keyPath: ColorKey.ValueBuilderKeyPath, in context: Context) -> Color? {
+        
+        let value = value(for: keyPath, in: context)
+        
         return value?.wrappedValue
         
     }

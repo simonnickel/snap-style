@@ -9,10 +9,12 @@ public struct SnapStyle {
     
     public var numbers: [NumberKey.ValueBuilderKeyPath: [NumberKey.ValueBuilder]] = [:]
     public var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
+    public var colors: [ColorKey.ValueBuilderKeyPath: [ColorKey.ValueBuilder]] = [:]
     public var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
     
     internal var cacheNumbers: KeyTypeCache<NumberKey> = .init()
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
+    internal var cacheColors: KeyTypeCache<ColorKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
     
     public init() {}
@@ -26,6 +28,10 @@ public struct SnapStyle {
     
     internal func append(fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
+    }
+    
+    internal func append(colors: [ColorKey.ValueBuilderKeyPath: ColorKey.ValueBuilder]) -> Self {
+        appended(colors, at: \.colors)
     }
     
     internal func append(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
