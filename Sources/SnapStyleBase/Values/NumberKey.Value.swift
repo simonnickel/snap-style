@@ -16,21 +16,17 @@ extension SnapStyle.NumberKey {
         
         public typealias WrappedValue = Double
         
-        case definition(WrappedValue)
-        case reference(SnapStyle.NumberKey.ValueKeyPath)
+        case value(WrappedValue)
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .definition(let value): value
-                case .reference:
-                    fatalError("A `.reference` NumberKey should never be used to generate a value.")
+                case .value(let value): value
             }
         }
         
         public var description: String {
             switch self {
-                case .definition(let value): ".definition: \(value)"
-                case .reference(let keyPath): ".reference: \(keyPath)"
+                case .value(let value): ".value: \(value)"
             }
         }
     

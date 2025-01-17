@@ -32,11 +32,10 @@ public struct StyleVStack<Content>: View where Content : View {
     }
     
     private func spacing(for keyPath: SnapStyle.NumberKey.ValueKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
-        // TODO: Wrapped Value for keypath
         guard let keyPath else { return 0 }
+        
         return switch style.value(for: keyPath, in: styleContext) {
-            case .definition(let value): value
-            case .reference(let keyPathReference): spacing(for: keyPathReference)
+            case .value(let value): value
             case .none: 0
         }
     }

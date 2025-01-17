@@ -19,15 +19,27 @@ extension SnapStyle {
         
         // Build value from overrides
         for builder in builders.reversed() {
-            if let value = builder.value(in: context) {
-                result = value
+            if let buildValue = builder.value(in: context) {
+                switch buildValue {
+                    case .reference(let valueKeyPath):
+                        result = value(for: valueKeyPath, in: context)
+                    case .definition(let value):
+                        result = value
+                }
             }
         }
         
         // Use default value
         if result == nil {
             let defaultBuilder = Key()[keyPath: keyPath]
-            result = defaultBuilder.value(in: context)
+            if let buildValue = defaultBuilder.value(in: context) {
+                switch buildValue {
+                    case .reference(let valueKeyPath):
+                        result = value(for: valueKeyPath, in: context)
+                    case .definition(let value):
+                        result = value
+                }
+            }
         }
         
         // Store result in cache
@@ -70,11 +82,10 @@ extension SnapStyle {
     package func number(for keyPath: NumberKey.ValueKeyPath, in context: SnapStyle.Context) -> NumberKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
+        
+        // TODO: Scaling?
 
-        switch value {
-            case .reference(let key): return number(for: key, in: context)
-            default: return value?.wrappedValue
-        }
+        return value?.wrappedValue
         
     }
     
@@ -83,13 +94,11 @@ extension SnapStyle {
     
     package func font(for keyPath: FontKey.ValueKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
         
-        // TODO: Wrapped Value for keypath
         let value = value(for: keyPath, in: context)
+        
+        // TODO: Font scaling?
 
-        switch value {
-            case .reference(let key): return font(for: key, in: context)
-            default: return value?.wrappedValue
-        }
+        return value?.wrappedValue
         
     }
 
@@ -98,13 +107,9 @@ extension SnapStyle {
     
     package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueKeyPath, in context: Context) -> AnyShapeStyle? {
 
-        // TODO: Wrapped Value for keypath
         let value = value(for: keyPath, in: context)
 
-        switch value {
-            case .reference(let key): return surface(layer: layer, for: key, in: context)
-            default: return value?.wrappedValue.surface(for: layer)
-        }
+        return value?.wrappedValue.surface(for: layer)
         
     }
 

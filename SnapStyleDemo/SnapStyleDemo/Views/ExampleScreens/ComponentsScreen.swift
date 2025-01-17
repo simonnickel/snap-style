@@ -52,9 +52,9 @@ struct ComponentsScreen: View {
     ComponentsScreen()
         .styleOverride(
             fonts: [
-                \.title : .base(.definition(.init(size: 6))) { context in
+                \.title : .base(.definition(.with(size: 6))) { context in
                     switch context.element.hierarchy {
-                        case .primary: .definition(.init(size: 16))
+                        case .primary: .definition(.with(size: 16))
                         default: nil
                     }
                 }
@@ -62,7 +62,7 @@ struct ComponentsScreen: View {
             surfaces: [
                 \.title : .builder { context in
                     switch context.element.hierarchy {
-                        case .secondary: .surface(.withColor(foreground: .primary))
+                        case .secondary: .definition(.surface(.with(foreground: .primary)))
                         default: nil
                     }
                 }
