@@ -34,6 +34,7 @@ extension SnapStyle {
             case icon
             case value
             case cta
+            case separator
 
         }
 

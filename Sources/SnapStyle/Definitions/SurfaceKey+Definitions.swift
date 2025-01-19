@@ -64,6 +64,7 @@ extension SnapStyle.SurfaceKey {
                 case .icon: .reference(\.icon)
                 case .value: .reference(\.value)
                 case .cta: .reference(\.cta)
+                case .separator: .reference(\.separator)
             }
         }
     }
@@ -91,6 +92,8 @@ extension SnapStyle.SurfaceKey {
             }
         }
     }
+    
+    public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) }
     
     
     // MARK: - States

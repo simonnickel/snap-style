@@ -43,6 +43,7 @@ extension SnapStyle.FontKey {
                 case .icon: .reference(\.icon)
                 case .value: .reference(\.value)
                 case .cta: .reference(\.cta)
+                case .separator: .reference(\.separator)
             }
         }
     }
@@ -74,5 +75,7 @@ extension SnapStyle.FontKey {
     public var value: ValueBuilder { .base(nil) }
     
     public var cta: ValueBuilder { .base(nil) }
+    
+    public var separator: ValueBuilder { .base(nil) }
     
 }
