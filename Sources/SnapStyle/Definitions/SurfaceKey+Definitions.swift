@@ -21,8 +21,8 @@ extension SnapStyle.SurfaceKey {
     public var content: ValueBuilder {
         .builder { context in
             switch context.component.hierarchy {
-                case .any, .primary: .definition(.surface(.with(foreground: \.onContent, background: \.content0)))
-                case .secondary: .definition(.surface(.with(foreground: \.onContent, background: \.content1)))
+                case .any, .primary: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
+                case .secondary: .definition(.surface(.with(foreground: \.onContent0, background: \.content1)))
             }
         }
     }
@@ -67,4 +67,63 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
+    
+    // MARK: - States
+    
+    public var disabledContainer: ValueBuilder {
+        .builder { context in
+            if context.component.type == .card {
+                .definition(.surface(.init(
+                    background: \.content2
+                )))
+            } else {
+                .definition(.surface(.init(
+                    background: \.content1
+                )))
+            }
+        }
+    }
+    
+    public var disabledElement: ValueBuilder {
+        .builder { context in
+            if context.component.type == .card {
+                .definition(.surface(.init(
+                    foreground: \.content1
+                )))
+            } else {
+                .definition(.surface(.init(
+                    foreground: \.onContent1
+                )))
+            }
+        }
+    }
+    
+    public var highlightedContainer: ValueBuilder {
+        .builder { context in
+            return if context.component.type == .card {
+                .definition(.surface(.init(
+                    background: \.accentAlt
+                )))
+            } else {
+                .definition(.surface(.init(
+                    background: \.accentAlt
+                )))
+            }
+        }
+    }
+    
+    public var highlightedElement: ValueBuilder {
+        .builder { context in
+            if context.component.type == .card {
+                .definition(.surface(.init(
+                    foreground: \.accentAlt
+                )))
+            } else {
+                .definition(.surface(.init(
+                    foreground: \.accent0
+                )))
+            }
+        }
+    }
+
 }

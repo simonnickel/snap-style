@@ -16,12 +16,16 @@ extension SnapStyle.ColorKey {
     public var light2: ValueBuilder { .base(.definition(.value(Color.init(white: 0.7)))) }
     public var light3: ValueBuilder { .base(.definition(.value(Color.init(white: 0.6)))) }
     public var onLight0: ValueBuilder { .base(.definition(.value(Color.black))) }
+    public var onLight1: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var onLight2: ValueBuilder { .base(.definition(.value(Color.gray))) }
     
     public var dark0: ValueBuilder { .base(.definition(.value(Color.black))) }
     public var dark1: ValueBuilder { .base(.definition(.value(Color.init(white: 0.2)))) }
     public var dark2: ValueBuilder { .base(.definition(.value(Color.init(white: 0.35)))) }
     public var dark3: ValueBuilder { .base(.definition(.value(Color.init(white: 0.45)))) }
     public var onDark0: ValueBuilder { .base(.definition(.value(Color.white))) }
+    public var onDark1: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var onDark2: ValueBuilder { .base(.definition(.value(Color.gray))) }
 
     
     // MARK: - Accents
@@ -71,12 +75,26 @@ extension SnapStyle.ColorKey {
         }
     }}
     
-    public var onContent: ValueBuilder { .builder { context in
+    public var onContent0: ValueBuilder { .builder { context in
         switch context.colorScheme {
-                
             case .light: .reference(\.onLight0)
             case .dark: .reference(\.onDark0)
-                
+            default: nil
+        }
+    }}
+    
+    public var onContent1: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.onLight1)
+            case .dark: .reference(\.onDark1)
+            default: nil
+        }
+    }}
+    
+    public var onContent2: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.onLight2)
+            case .dark: .reference(\.onDark2)
             default: nil
         }
     }}

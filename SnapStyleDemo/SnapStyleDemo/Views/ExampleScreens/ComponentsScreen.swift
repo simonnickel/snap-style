@@ -29,6 +29,7 @@ struct ComponentsScreen: View {
             contentElements(hierarchy: .primary)
             contentElements(hierarchy: .secondary)
             contentComponentSecondary(type)
+            contentStates()
         }
         .padding() // TODO: Style?
         .style(component: type, hierarchy: .primary)
@@ -54,6 +55,30 @@ struct ComponentsScreen: View {
                 Text("\(elementType)")
                     .style(element: elementType, hierarchy: hierarchy)
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func contentStates() -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            VStack {
+                HStack {
+                    Text("Highlighted Element")
+                        .style(surface: \.highlightedElement)
+                    Text("Highlighted Container")
+                        .style(surface: \.highlightedContainer)
+                }
+            }
+            
+            VStack {
+                HStack {
+                    Text("Disabled Element")
+                        .style(surface: \.disabledElement)
+                    Text("Disabled Container")
+                        .style(surface: \.disabledContainer)
+                }
+            }
+            
         }
     }
 
