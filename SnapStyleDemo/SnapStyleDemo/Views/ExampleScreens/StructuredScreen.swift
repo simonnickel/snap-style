@@ -6,9 +6,7 @@
 import SnapStyle
 import SwiftUI
 
-struct StructuredTextScreen: View {
-    
-    // TODO: Replace spacings with Style Values
+struct StructuredScreen: View {
     
     var body: some View {
         ScrollView {
@@ -18,9 +16,9 @@ struct StructuredTextScreen: View {
                 contentList
                 contentButtons
             }
-            .padding() // TODO: Should not be necessary, could be part of component or screen definition
+            .style(component: .content)
         }
-        .style(component: .content)
+        .style(component: .screen)
     }
     
     @ViewBuilder
@@ -75,7 +73,7 @@ struct StructuredTextScreen: View {
                 StyleVStack {
                     StyleHStack {
                         Label("Row \(index)", systemImage: "star")
-                            .padding(5)
+                            .padding(5) // TODO: Element Padding
                         Spacer()
                         Text("\(index)")
                     }
@@ -117,5 +115,5 @@ struct StructuredTextScreen: View {
 }
 
 #Preview {
-    StructuredTextScreen()
+    StructuredScreen()
 }

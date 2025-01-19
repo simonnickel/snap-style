@@ -19,11 +19,8 @@ struct ContentView: View {
                     NavigationLink("Components") {
                         ComponentsScreen()
                     }
-                    NavigationLink("Structure Text") {
-                        StructuredTextScreen()
-                    }
-                    NavigationLink("Fonts") {
-                        FontExampleScreen()
+                    NavigationLink("Structured") {
+                        StructuredScreen()
                     }
                 } header: {
                     Text("Examples")
