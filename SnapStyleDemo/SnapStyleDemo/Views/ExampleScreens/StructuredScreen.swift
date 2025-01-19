@@ -80,7 +80,7 @@ struct StructuredScreen: View {
                 StyleVStack {
                     StyleHStack {
                         Label("Row \(index)", systemImage: "star")
-                            .padding(5) // TODO: Element Padding
+                            .padding(5) // TODO: Element Padding, ListRow as Component?
                         Spacer()
                         Text("\(index)")
                     }
