@@ -40,7 +40,12 @@ private struct StyleOverrideModifier: ViewModifier {
     func body(content: Content) -> some View {
         
         content
-            .environment(\.style, style.replaced(fonts: fonts, surfaces: surfaces))
+            .environment(\.style, style.replaced(
+                numbers: numbers,
+                fonts: fonts,
+                colors: colors,
+                surfaces: surfaces
+            ))
         
     }
     
@@ -54,6 +59,7 @@ extension SnapStyle {
     internal func replaced(
         numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]? = nil,
         fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]? = nil,
+        colors: [ColorKey.ValueBuilderKeyPath: ColorKey.ValueBuilder]? = nil,
         surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
@@ -66,6 +72,10 @@ extension SnapStyle {
             style.append(fonts: fonts)
         }
 
+        if let colors {
+            style.append(colors: colors)
+        }
+        
         if let surfaces {
             style.append(surfaces: surfaces)
         }
