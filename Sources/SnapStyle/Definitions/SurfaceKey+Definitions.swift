@@ -10,11 +10,11 @@ extension SnapStyle.SurfaceKey {
     
     // TODO: Highlighted states
     // TODO: Gradients
-    
-    public var any: ValueBuilder { .base(nil) }
 
     
     // MARK: - Component
+    
+    public var anyComponent: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
@@ -33,14 +33,16 @@ extension SnapStyle.SurfaceKey {
     
  
     // MARK: - Element
-
-    public var title: ValueBuilder { .base(nil) }
-
-    public var label: ValueBuilder { .base(nil) }
-
-    public var icon: ValueBuilder { .base(nil) }
     
-    public var value: ValueBuilder { .base(nil) }
+    public var anyElement: ValueBuilder { .base(nil) }
+
+    public var title: ValueBuilder { .base(.reference(\.anyElement)) }
+
+    public var label: ValueBuilder { .base(.reference(\.anyElement)) }
+
+    public var icon: ValueBuilder { .base(.reference(\.anyElement)) }
+    
+    public var value: ValueBuilder { .base(.reference(\.anyElement)) }
 
     public var cta: ValueBuilder {
         .builder { context in

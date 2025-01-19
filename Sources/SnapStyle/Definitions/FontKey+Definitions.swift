@@ -7,10 +7,10 @@ import SnapStyleBase
 
 extension SnapStyle.FontKey {
     
-    public var any: ValueBuilder { .base(nil) }
-    
-    
+
     // MARK: - Component
+    
+    public var anyComponent: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder { .base(nil) }
     
@@ -22,6 +22,8 @@ extension SnapStyle.FontKey {
 
  
     // MARK: - Element
+    
+    public var anyElement: ValueBuilder { .base(nil) }
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
