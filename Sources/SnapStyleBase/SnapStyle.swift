@@ -22,19 +22,19 @@ public struct SnapStyle {
     
     // MARK: - Append
     
-    internal func append(numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]) -> Self {
+    internal func appended(numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)
     }
     
-    internal func append(fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]) -> Self {
+    internal func appended(fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
     }
     
-    internal func append(colors: [ColorKey.ValueBuilderKeyPath: ColorKey.ValueBuilder]) -> Self {
+    internal func appended(colors: [ColorKey.ValueBuilderKeyPath: ColorKey.ValueBuilder]) -> Self {
         appended(colors, at: \.colors)
     }
     
-    internal func append(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
+    internal func appended(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
         appended(surfaces, at: \.surfaces)
     }
     

@@ -65,19 +65,19 @@ extension SnapStyle {
         var style = self
         
         if let numbers {
-            style.append(numbers: numbers)
+            style = style.appended(numbers: numbers)
         }
         
         if let fonts {
-            style.append(fonts: fonts)
+            style = style.appended(fonts: fonts)
         }
 
         if let colors {
-            style.append(colors: colors)
+            style = style.appended(colors: colors)
         }
         
         if let surfaces {
-            style.append(surfaces: surfaces)
+            style = style.appended(surfaces: surfaces)
         }
         
         return style
