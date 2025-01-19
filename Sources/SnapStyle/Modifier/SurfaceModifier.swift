@@ -10,8 +10,8 @@ extension View {
 
     public func style(surface keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
         self
-            .modifier(ForegroundModifier(keyPath: keyPath))
-            .modifier(BackgroundModifier(keyPath: keyPath))
+            .modifier(SurfaceForegroundModifier(keyPath: keyPath))
+            .modifier(SurfaceBackgroundModifier(keyPath: keyPath))
     }
 
 }
@@ -19,7 +19,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct ForegroundModifier: ViewModifier {
+internal struct SurfaceForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
@@ -40,7 +40,7 @@ internal struct ForegroundModifier: ViewModifier {
 
 }
 
-internal struct BackgroundModifier: ViewModifier {
+internal struct SurfaceBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
