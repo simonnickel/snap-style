@@ -9,16 +9,23 @@ import SwiftUI
 struct StructuredScreen: View {
     
     var body: some View {
-        ScrollView {
-            StyleVStack(spacing: \.spacingSections) {
-                contentCard
-                contentText
-                contentList
-                contentButtons
-            }
-            .style(component: .content)
+        StyleScreen {
+            content
+                .style(component: .content)
+            content
+                .style(component: .content)
         }
-        .style(component: .screen)
+        .navigationTitle("Structured")
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        StyleVStack(spacing: \.spacingSections) {
+            contentCard
+            contentText
+            contentList
+            contentButtons
+        }
     }
     
     @ViewBuilder
@@ -115,5 +122,7 @@ struct StructuredScreen: View {
 }
 
 #Preview {
-    StructuredScreen()
+    NavigationStack {
+        StructuredScreen()
+    }
 }

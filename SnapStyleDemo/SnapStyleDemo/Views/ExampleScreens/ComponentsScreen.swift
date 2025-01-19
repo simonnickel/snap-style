@@ -10,16 +10,16 @@ import SwiftUI
 struct ComponentsScreen: View {
     
     var body: some View {
-        ScrollView {
+        StyleScreen {
 
-            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any, .screen].contains($0) })
+            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any].contains($0) })
             
             ForEach(components, id: \.self) { component in
                 contentComponent(component)
             }
 
         }
-        .style(component: .screen)
+        .navigationTitle("Components")
     }
     
     @ViewBuilder
@@ -82,5 +82,7 @@ struct ComponentsScreen: View {
 }
 
 #Preview {
-    ComponentsScreen()
+    NavigationStack {
+        ComponentsScreen()
+    }
 }

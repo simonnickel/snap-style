@@ -19,7 +19,6 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             switch context.component.type {
                 case .any: .reference(\.anyComponent)
-                case .screen: .reference(\.screen)
                 case .content: .reference(\.content)
                 case .list: .reference(\.list)
                 case .card: .reference(\.card)
@@ -28,8 +27,6 @@ extension SnapStyle.SurfaceKey {
     }
     
     public var anyComponent: ValueBuilder { .base(nil) }
-    
-    public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
     public var content: ValueBuilder {
         .builder { context in

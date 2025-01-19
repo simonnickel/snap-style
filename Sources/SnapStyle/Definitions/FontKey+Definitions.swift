@@ -14,7 +14,6 @@ extension SnapStyle.FontKey {
         .builder { context in
             switch context.component.type {
                 case .any: .reference(\.anyComponent)
-                case .screen: .reference(\.screen)
                 case .content: .reference(\.content)
                 case .list: .reference(\.list)
                 case .card: .reference(\.card)
@@ -24,7 +23,6 @@ extension SnapStyle.FontKey {
     
     public var anyComponent: ValueBuilder { .base(nil) }
     
-    public var screen: ValueBuilder { .base(nil) }
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
     public var list: ValueBuilder { .base(.reference(\.content)) }
     public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
