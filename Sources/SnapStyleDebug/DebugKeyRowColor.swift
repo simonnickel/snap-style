@@ -22,5 +22,5 @@ struct DebugKeyRowColor: View {
 }
 
 #Preview {
-    DebugKeyRowColor(keyPath: \.content)
+    DebugKeyRowColor(keyPath: \.content0)
 }

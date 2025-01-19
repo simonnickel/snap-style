@@ -18,8 +18,15 @@ extension SnapStyle.SurfaceKey {
     
     public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
-    public var content: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent, background: \.content)))) }
-    
+    public var content: ValueBuilder {
+        .builder { context in
+            switch context.component.hierarchy {
+                case .any, .primary: .definition(.surface(.with(foreground: \.onContent, background: \.content0)))
+                case .secondary: .definition(.surface(.with(foreground: \.onContent, background: \.content1)))
+            }
+        }
+    }
+
     public var list: ValueBuilder { .base(.reference(\.content)) }
     
     public var card: ValueBuilder {
