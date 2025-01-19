@@ -11,13 +11,16 @@ extension SnapStyle.SurfaceKey {
     // TODO: Highlighted states
     // TODO: Gradients
     
+    public var any: ValueBuilder { .base(nil) }
+
+    
     // MARK: - Component
     
     public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
-    public var contentComponent: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent, background: \.content)))) }
+    public var content: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent, background: \.content)))) }
     
-    public var list: ValueBuilder { .base(.reference(\.contentComponent)) }
+    public var list: ValueBuilder { .base(.reference(\.content)) }
     
     public var card: ValueBuilder {
         .builder { context in
@@ -31,28 +34,13 @@ extension SnapStyle.SurfaceKey {
  
     // MARK: - Element
 
-    public var title: ValueBuilder { .base(.reference(\.content)) }
+    public var title: ValueBuilder { .base(nil) }
 
-    // TODO: Rename Content element to not conflict with Component
-    public var content: ValueBuilder {
-        .builder { context in
-            if context.component.type == .card {
-                return nil // Defined by \.card
-            } else {
-                return switch context.element.hierarchy {
-                    case .any, .primary: .definition(.surface(.with(foreground: \.onContent)))
-                    case .secondary: .definition(.surface(.with(foreground: \.onContent)))
-                    case .tertiary: .definition(.surface(.with(foreground: \.onContent)))
-                }
-            }
-        }
-    }
+    public var label: ValueBuilder { .base(nil) }
 
-    public var label: ValueBuilder { .base(.reference(\.content)) }
-
-    public var icon: ValueBuilder { .base(.reference(\.content)) }
+    public var icon: ValueBuilder { .base(nil) }
     
-    public var value: ValueBuilder { .base(.reference(\.content)) }
+    public var value: ValueBuilder { .base(nil) }
 
     public var cta: ValueBuilder {
         .builder { context in

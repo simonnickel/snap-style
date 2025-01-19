@@ -10,7 +10,7 @@ extension SnapStyle {
         
         public typealias Builder = (Context) -> Value?
                 
-        case base(Value, builder: Builder? = nil)
+        case base(Value?, builder: Builder? = nil)
         case builder(Builder?)
         
         func value(in context: Context?) -> Value? {

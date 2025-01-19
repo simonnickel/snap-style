@@ -6,6 +6,19 @@
 import SnapStyleBase
 
 extension SnapStyle.FontKey {
+    
+    public var any: ValueBuilder { .base(nil) }
+    
+    
+    // MARK: - Component
+    
+    public var screen: ValueBuilder { .base(nil) }
+    
+    public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
+    
+    public var list: ValueBuilder { .base(.reference(\.content)) }
+    
+    public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
  
     // MARK: - Element
@@ -30,21 +43,12 @@ extension SnapStyle.FontKey {
         }
     }
     
-    public var content: ValueBuilder { .base(.reference(\.label)) }
+    public var label: ValueBuilder { .base(nil) }
     
-    public var label: ValueBuilder {
-        .base(.definition(.font(.body))) { context in
-            switch context.component.type {
-                case .card: .definition(.font(.caption))
-                default: nil
-            }
-        }
-    }
+    public var icon: ValueBuilder { .base(nil) }
     
-    public var icon: ValueBuilder { .base(.reference(\.label)) }
+    public var value: ValueBuilder { .base(nil) }
     
-    public var value: ValueBuilder { .base(.reference(\.label)) }
-    
-    public var cta: ValueBuilder { .base(.reference(\.label)) }
+    public var cta: ValueBuilder { .base(nil) }
     
 }

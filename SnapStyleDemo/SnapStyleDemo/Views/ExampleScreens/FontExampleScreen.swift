@@ -45,7 +45,7 @@ struct FontExampleScreen: View {
             Text("Subtitle")
                 .style(element: .title, hierarchy: .secondary)
             Text("Block with some more words to be like a paragraph with multiple lines.")
-                .style(element: .content)
+                .style(element: .any)
             Text("Label")
                 .style(element: .label)
             Text("Font from Keypath")

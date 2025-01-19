@@ -39,7 +39,7 @@ extension SnapStyle.ColorKey {
                 
             case .light: .reference(\.light1)
                     
-            case .dark: .reference(\.dark1)
+            case .dark: .reference(\.dark0)
                 
             default: nil
         }
@@ -83,28 +83,6 @@ extension SnapStyle.ColorKey {
         }
     }}
     
-//    public var onContent: ValueBuilder { .builder { context in
-//        switch context.colorScheme {
-//                
-//            case .light:
-//                switch context.element.hierarchy {
-//                    case .any, .primary: .definition(.value(.black))
-//                    case .secondary: .reference(\.blackLevel1)
-//                    case .tertiary: .reference(\.blackLevel2)
-//                }
-//                    
-//            case .dark:
-//                switch context.element.hierarchy {
-//                    case .any, .primary: .definition(.value(.white))
-//                    case .secondary: .reference(\.whiteLevel1)
-//                    case .tertiary: .reference(\.whiteLevel2)
-//                }
-//                
-//            default: nil
-//        }
-//    }}
-    
-
 //    public var text: ValueBuilder {
 //        .base(.definition(.value(.primary))) { context in
 //            switch context.element.hierarchy {

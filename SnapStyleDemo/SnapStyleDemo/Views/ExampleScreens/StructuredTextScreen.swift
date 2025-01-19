@@ -111,7 +111,7 @@ struct StructuredTextScreen: View {
     
     private var paragraph: some View {
         Text("Paragraph with some text to fill a few lines. This is supposed to be a block of text that can be read properly. While the other elements are supposed to provide context and structure to it.")
-            .style(element: .content)
+            .style(element: .any)
     }
     
 }

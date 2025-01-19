@@ -15,7 +15,7 @@ struct StyleElements: View {
         Text("Tertiary Title")
             .style(element: .title, hierarchy: .tertiary)
         Text("Block with some more words to be like a paragraph with multiple lines.")
-            .style(element: .content)
+            .style(element: .any)
         HStack {
             Text("Label")
                 .style(element: .label)
