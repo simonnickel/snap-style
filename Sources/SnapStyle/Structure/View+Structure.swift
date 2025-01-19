@@ -22,15 +22,12 @@ extension View {
         .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
     }
     
-    
-    // MARK: ApplyStyle
-    
     private func applyComponentStyle() -> some View {
         self
-            .modifier(ComponentFontFromEnvironmentModifier())
-            .modifier(ComponentSurfaceFromEnvironmentModifier(layer: .foreground))
-            .modifier(ComponentSurfaceFromEnvironmentModifier(layer: .background))
+            .style(font: \.component)
+            .style(surface: \.component)
     }
+
 }
     
 
@@ -56,14 +53,10 @@ extension View {
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
     
-    
-    // MARK: ApplyStyle
-    
     private func applyElementStyle() -> some View {
         self
-            .modifier(ElementFontFromEnvironmentModifier())
-            .modifier(ElementSurfaceFromEnvironmentModifier(layer: .foreground))
-            .modifier(ElementSurfaceFromEnvironmentModifier(layer: .background))
+            .style(font: \.element)
+            .style(surface: \.element)
     }
     
 }

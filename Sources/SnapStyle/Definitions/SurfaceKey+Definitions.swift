@@ -10,11 +10,23 @@ extension SnapStyle.SurfaceKey {
     
     // TODO: Highlighted states
     // TODO: Gradients
-
+    
     
     // MARK: - Component
     
     public var anyComponent: ValueBuilder { .base(nil) }
+    
+    public var component: ValueBuilder {
+        .builder { context in
+            switch context.component.type {
+                case .any: .reference(\.anyComponent)
+                case .screen: .reference(\.screen)
+                case .content: .reference(\.content)
+                case .list: .reference(\.list)
+                case .card: .reference(\.card)
+            }
+        }
+    }
     
     public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
@@ -38,18 +50,31 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
- 
+
     // MARK: - Element
     
     public var anyElement: ValueBuilder { .base(nil) }
-
-    public var title: ValueBuilder { .base(.reference(\.anyElement)) }
-
-    public var label: ValueBuilder { .base(.reference(\.anyElement)) }
-
-    public var icon: ValueBuilder { .base(.reference(\.anyElement)) }
     
-    public var value: ValueBuilder { .base(.reference(\.anyElement)) }
+    public var element: ValueBuilder {
+        .builder { context in
+            switch context.element.type {
+                case .any: .reference(\.anyElement)
+                case .title: .reference(\.title)
+                case .label: .reference(\.label)
+                case .icon: .reference(\.icon)
+                case .value: .reference(\.value)
+                case .cta: .reference(\.cta)
+            }
+        }
+    }
+
+    public var title: ValueBuilder { .base(nil) }
+
+    public var label: ValueBuilder { .base(nil) }
+
+    public var icon: ValueBuilder { .base(nil) }
+    
+    public var value: ValueBuilder { .base(nil) }
 
     public var cta: ValueBuilder {
         .builder { context in

@@ -12,18 +12,40 @@ extension SnapStyle.FontKey {
     
     public var anyComponent: ValueBuilder { .base(nil) }
     
+    public var component: ValueBuilder {
+        .builder { context in
+            switch context.component.type {
+                case .any: .reference(\.anyComponent)
+                case .screen: .reference(\.screen)
+                case .content: .reference(\.content)
+                case .list: .reference(\.list)
+                case .card: .reference(\.card)
+            }
+        }
+    }
+    
     public var screen: ValueBuilder { .base(nil) }
-    
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
-    
     public var list: ValueBuilder { .base(.reference(\.content)) }
-    
     public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
  
     // MARK: - Element
     
     public var anyElement: ValueBuilder { .base(nil) }
+    
+    public var element: ValueBuilder {
+        .builder { context in
+            switch context.element.type {
+                case .any: .reference(\.anyElement)
+                case .title: .reference(\.title)
+                case .label: .reference(\.label)
+                case .icon: .reference(\.icon)
+                case .value: .reference(\.value)
+                case .cta: .reference(\.cta)
+            }
+        }
+    }
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
