@@ -10,8 +10,6 @@ extension SnapStyle.FontKey {
 
     // MARK: - Component
     
-    public var anyComponent: ValueBuilder { .base(nil) }
-    
     public var component: ValueBuilder {
         .builder { context in
             switch context.component.type {
@@ -24,6 +22,8 @@ extension SnapStyle.FontKey {
         }
     }
     
+    public var anyComponent: ValueBuilder { .base(nil) }
+    
     public var screen: ValueBuilder { .base(nil) }
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
     public var list: ValueBuilder { .base(.reference(\.content)) }
@@ -31,8 +31,6 @@ extension SnapStyle.FontKey {
 
  
     // MARK: - Element
-    
-    public var anyElement: ValueBuilder { .base(nil) }
     
     public var element: ValueBuilder {
         .builder { context in
@@ -47,6 +45,8 @@ extension SnapStyle.FontKey {
             }
         }
     }
+    
+    public var anyElement: ValueBuilder { .base(nil) }
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in

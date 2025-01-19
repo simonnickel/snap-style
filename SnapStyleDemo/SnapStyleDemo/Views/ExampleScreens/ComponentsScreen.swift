@@ -31,21 +31,18 @@ struct ComponentsScreen: View {
             contentComponentSecondary(type)
             contentStates()
         }
-        .padding() // TODO: Style?
         .style(component: type, hierarchy: .primary)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder
     private func contentComponentSecondary(_ type: SnapStyle.Component.ComponentType) -> some View {
         VStack(alignment: .leading) {
             Text("\(type), .secondary")
+                .frame(maxWidth: .infinity, alignment: .leading)
             contentElements(hierarchy: .primary)
             contentElements(hierarchy: .secondary)
         }
-        .padding() // TODO: Style?
         .style(component: type, hierarchy: .secondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder

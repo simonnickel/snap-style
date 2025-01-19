@@ -24,8 +24,9 @@ extension View {
     
     private func applyComponentStyle() -> some View {
         self
-            .style(font: \.component)
+            .style(padding: \.paddingComponent, .all)
             .style(surface: \.component)
+            .style(font: \.component)
     }
 
 }

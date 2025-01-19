@@ -15,8 +15,6 @@ extension SnapStyle.SurfaceKey {
     
     // MARK: - Component
     
-    public var anyComponent: ValueBuilder { .base(nil) }
-    
     public var component: ValueBuilder {
         .builder { context in
             switch context.component.type {
@@ -28,6 +26,8 @@ extension SnapStyle.SurfaceKey {
             }
         }
     }
+    
+    public var anyComponent: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder { .base(.definition(.surface(.with(background: \.screen)))) }
     
@@ -54,8 +54,6 @@ extension SnapStyle.SurfaceKey {
 
     // MARK: - Element
     
-    public var anyElement: ValueBuilder { .base(nil) }
-    
     public var element: ValueBuilder {
         .builder { context in
             switch context.element.type {
@@ -70,6 +68,8 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
+    public var anyElement: ValueBuilder { .base(nil) }
+    
     public var title: ValueBuilder { .base(nil) }
 
     public var label: ValueBuilder { .base(nil) }
