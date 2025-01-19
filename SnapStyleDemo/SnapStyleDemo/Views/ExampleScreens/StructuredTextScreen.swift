@@ -80,7 +80,7 @@ struct StructuredTextScreen: View {
                         Text("\(index)")
                     }
                     Rectangle()
-                        .fill(Color.gray.secondary) // TODO: Style value
+                        .fill(Color.gray.secondary) // TODO: Style value, by defining a StyleShape
                         .frame(height: 1)
                 }
             }
