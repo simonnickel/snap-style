@@ -49,7 +49,7 @@ extension SnapStyle {
         package var keys: [SnapStyle.Context] { Array(content.keys) }
         
         package func getValue(for context: SnapStyle.Context) -> Value? {
-            content[context] ?? content[.any]
+            content[context]
         }
         
         func setValue(_ value: Value, for context: SnapStyle.Context) {

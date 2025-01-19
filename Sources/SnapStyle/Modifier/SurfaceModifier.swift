@@ -28,7 +28,7 @@ internal struct ForegroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let foreground = style.surface(layer: .foreground, for: keyPath, in: .any),
+            let foreground = style.surface(layer: .foreground, for: keyPath, in: styleContext),
             let color = style.color(for: foreground, in: styleContext)
         {
             content
@@ -49,7 +49,7 @@ internal struct BackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let background = style.surface(layer: .background, for: keyPath, in: .any),
+            let background = style.surface(layer: .background, for: keyPath, in: styleContext),
             let color = style.color(for: background, in: styleContext)
         {
             content
