@@ -98,9 +98,8 @@ struct StructuredScreen: View {
                         Spacer()
                         Text("\(index)")
                     }
-                    Rectangle()
-                        .fill(Color.gray.secondary) // TODO: Style value, by defining a StyleShape
-                        .frame(height: 1)
+                    StyleShape(shape: .rectangle, surface: \.separator)
+                        .frame(height: 1) // TODO: Use number \.listSeparator
                 }
             }
         }

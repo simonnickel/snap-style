@@ -22,8 +22,8 @@ extension SnapStyle.ShapeKey {
     }
 
     public var containerAnyComponent: ValueBuilder { .base(nil) }
-    public var containerContent: ValueBuilder { .base(.definition(.value(.rectangle(cornerRadius: \.cornerRadiusContent)))) }
-    public var containerList: ValueBuilder { .base(.definition(.value(.rectangle(cornerRadius: \.cornerRadiusList)))) }
-    public var containerCard: ValueBuilder  { .base(.definition(.value(.rectangle(cornerRadius: \.cornerRadiusCard)))) }
+    public var containerContent: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusContent)))) }
+    public var containerList: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusList)))) }
+    public var containerCard: ValueBuilder  { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusCard)))) }
     
 }

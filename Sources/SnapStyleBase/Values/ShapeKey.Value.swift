@@ -16,7 +16,7 @@ extension SnapStyle.ShapeKey {
     
     public enum Value: StyleValue {
         
-        public typealias WrappedValue = StyleShape
+        public typealias WrappedValue = ShapeDefinition
         
         case value(WrappedValue)
 
@@ -37,10 +37,11 @@ extension SnapStyle.ShapeKey {
     
     // MARK: - Shape
     
-    public enum StyleShape: CustomStringConvertible {
+    public enum ShapeDefinition: CustomStringConvertible {
         
         case capsule
-        case rectangle(cornerRadius: SnapStyle.NumberKey.ValueBuilderKeyPath)
+        case rectangle
+        case rectangleRounded(radius: SnapStyle.NumberKey.ValueBuilderKeyPath)
         
         public func insettableShape(for style: SnapStyle, in context: SnapStyle.Context) -> StyleInsettableShape {
             
@@ -49,8 +50,11 @@ extension SnapStyle.ShapeKey {
                 case .capsule: StyleInsettableShape { rect in
                     Capsule().path(in: rect)
                 }
+                case .rectangle: StyleInsettableShape { rect in
+                    Rectangle().path(in: rect)
+                }
                     
-                case .rectangle(cornerRadius: let numberKey):
+                case .rectangleRounded(radius: let numberKey):
                     if let cornerRadius = style.number(for: numberKey, in: context) {
                         StyleInsettableShape { rect in
                             RoundedRectangle(cornerRadius: cornerRadius).path(in: rect)
@@ -67,7 +71,8 @@ extension SnapStyle.ShapeKey {
         public var description: String {
             switch self {
                 case .capsule: "Capsule"
-                case .rectangle(cornerRadius: let cornerRadius): "Rectangle, cornerRadius: \(cornerRadius)"
+                case .rectangle: "Rectangle"
+                case .rectangleRounded(radius: let radius): "RectangleRounded, radius: \(radius)"
             }
         }
         
