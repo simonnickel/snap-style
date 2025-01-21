@@ -66,14 +66,6 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
                     }
 
                 }
-            ],
-            surfaces: [
-                \.title : .builder { context in
-                    switch context.element.hierarchy {
-                        case .secondary: .definition(.surface(.with(foreground: .primary)))
-                        default: nil
-                    }
-                }
             ]
         )
 }

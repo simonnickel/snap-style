@@ -29,7 +29,6 @@ extension SnapStyle {
 
             case any
 
-            case screen
             case content
             case list
             case card

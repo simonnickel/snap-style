@@ -39,6 +39,7 @@ extension SnapStyle {
         package func getValue<Key: Hashable, Value: Hashable>(for attribute: Attribute<Key, Value>) -> Value? {
             content[attribute.key] as? Value ?? attribute.valueDefault
         }
+        
     }
 
 }

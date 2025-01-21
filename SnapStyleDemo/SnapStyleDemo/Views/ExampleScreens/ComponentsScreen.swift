@@ -4,86 +4,85 @@
 //
 
 import SnapStyle
+import SnapStyleBase
 import SwiftUI
 
 struct ComponentsScreen: View {
     
     var body: some View {
-        VStack {
-            HStack {
-                card
-                    .style(component: .card)
-                card
-                    .style(component: .card)
+        StyleScreen {
+
+            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any].contains($0) })
+            
+            ForEach(components, id: \.self) { component in
+                contentComponent(component)
             }
-            .style(component: .card)
-
-            content
-                .style(component: .content)
-
-            list
-                .style(component: .list)
 
         }
-        .style(component: .screen)
+        .navigationTitle("Components")
     }
-
-    private var card: some View {
+    
+    @ViewBuilder
+    private func contentComponent(_ type: SnapStyle.Component.ComponentType) -> some View {
         VStack(alignment: .leading) {
-            StyleElements()
+            Text("\(type), .primary")
+            contentElements(hierarchy: .primary)
+            contentElements(hierarchy: .secondary)
+            contentComponentSecondary(type)
+            contentStates()
         }
+        .style(component: type, hierarchy: .primary)
     }
-
-    private var content: some View {
+    
+    @ViewBuilder
+    private func contentComponentSecondary(_ type: SnapStyle.Component.ComponentType) -> some View {
         VStack(alignment: .leading) {
-            StyleElements()
+            Text("\(type), .secondary")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            contentElements(hierarchy: .primary)
+            contentElements(hierarchy: .secondary)
+        }
+        .style(component: type, hierarchy: .secondary)
+    }
+    
+    @ViewBuilder
+    private func contentElements(hierarchy: SnapStyle.Element.Hierarchy) -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { elementType in
+                Text("\(elementType)")
+                    .style(element: elementType, hierarchy: hierarchy)
+            }
         }
     }
-
-    private var list: some View {
-        List {
-            StyleElements()
+    
+    @ViewBuilder
+    private func contentStates() -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            VStack {
+                HStack {
+                    Text("Highlighted Element")
+                        .style(surface: \.highlightedElement)
+                    Text("Highlighted Container")
+                        .style(surface: \.highlightedContainer)
+                }
+            }
+            
+            VStack {
+                HStack {
+                    Text("Disabled Element")
+                        .style(surface: \.disabledElement)
+                    Text("Disabled Container")
+                        .style(surface: \.disabledContainer)
+                }
+            }
+            
         }
     }
 
 }
 
 #Preview {
-    ComponentsScreen()
-        .styleOverride(
-            fonts: [
-                \.title : .base(.definition(.with(size: 6))) { context in
-                    switch context.element.hierarchy {
-                        case .primary: .definition(.with(size: 16))
-                        default: nil
-                    }
-                }
-            ],
-            surfaces: [
-                \.title : .builder { context in
-                    switch context.element.hierarchy {
-                        case .secondary: .definition(.surface(.with(foreground: .primary)))
-                        default: nil
-                    }
-                }
-            ]
-        )
-//        .styleOverride(
-//            fonts: [
-//                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.element.hierarchy {
-//                        case.secondary: .definition(.init(size: 10))
-//                        default: nil
-//                    }
-//                }
-//            ],
-//            surfaces: [
-//                .title : SnapStyle.ValueBuilder { context in
-//                    switch context.element.hierarchy {
-//                        case .primary: .surface(.init(foreground: Color.primary))
-//                        default: nil
-//                    }
-//                }
-//            ]
-//        )
+    NavigationStack {
+        ComponentsScreen()
+    }
 }

@@ -6,39 +6,58 @@
 import SnapStyle
 import SwiftUI
 
-struct StructuredTextScreen: View {
-    
-    // TODO: Replace spacings with Style Values
+struct StructuredScreen: View {
     
     var body: some View {
-        ScrollView {
-            StyleVStack(spacing: \.spacingSections) {
-                contentCard
-                contentText
-                contentList
-                contentButtons
-            }
-            .padding() // TODO: Should not be necessary, could be part of component or screen definition
+        StyleScreen {
+            contentCards
+            
+            content
+                .style(component: .content)
+            
+            content
+                .style(component: .content)
         }
-        .style(component: .content)
+        .navigationTitle("Structured")
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        StyleVStack(spacing: \.spacingSections) {
+            contentCards
+            contentText
+            contentList
+            contentButtons
+        }
+    }
+    
+    @ViewBuilder
+    private var contentCards: some View {
+        StyleHStack(spacing: \.spacingElements) {
+            contentCard
+            contentCard
+        }
     }
     
     @ViewBuilder
     private var contentCard: some View {
         // TODO: Content Style with Shape
-        StyleHStack {
-            StyleVStack {
+        StyleVStack() {
+            StyleHStack(spacing: \.spacingElements, alignment: .top) {
                 Text("Title")
-                Text("Subitle")
-                    .style(hierarchy: .secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .style(element: .title, hierarchy: .primary)
+                Text("Value")
+                    .style(element: .value)
             }
-            .style(element: .title)
             
             Spacer()
             
-            StyleVStack {
-                Text("Value")
-                    .style(element: .value)
+            StyleHStack(spacing: \.spacingElements, alignment: .bottom) {
+                Text("Subitle")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .style(element: .title, hierarchy: .secondary)
+                Spacer()
                 Image(systemName: "triangle")
                     .style(element: .icon)
             }
@@ -75,12 +94,12 @@ struct StructuredTextScreen: View {
                 StyleVStack {
                     StyleHStack {
                         Label("Row \(index)", systemImage: "star")
-                            .padding(5)
+                            .padding(5) // TODO: Element Padding, ListRow as Component?
                         Spacer()
                         Text("\(index)")
                     }
                     Rectangle()
-                        .fill(Color.gray.secondary) // TODO: Style value
+                        .fill(Color.gray.secondary) // TODO: Style value, by defining a StyleShape
                         .frame(height: 1)
                 }
             }
@@ -111,11 +130,13 @@ struct StructuredTextScreen: View {
     
     private var paragraph: some View {
         Text("Paragraph with some text to fill a few lines. This is supposed to be a block of text that can be read properly. While the other elements are supposed to provide context and structure to it.")
-            .style(element: .content)
+            .style(element: .any)
     }
     
 }
 
 #Preview {
-    StructuredTextScreen()
+    NavigationStack {
+        StructuredScreen()
+    }
 }

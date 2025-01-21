@@ -6,9 +6,45 @@
 import SnapStyleBase
 
 extension SnapStyle.FontKey {
+    
+
+    // MARK: - Component
+    
+    public var component: ValueBuilder {
+        .builder { context in
+            switch context.component.type {
+                case .any: .reference(\.anyComponent)
+                case .content: .reference(\.content)
+                case .list: .reference(\.list)
+                case .card: .reference(\.card)
+            }
+        }
+    }
+    
+    public var anyComponent: ValueBuilder { .base(nil) }
+    
+    public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
+    public var list: ValueBuilder { .base(.reference(\.content)) }
+    public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
  
     // MARK: - Element
+    
+    public var element: ValueBuilder {
+        .builder { context in
+            switch context.element.type {
+                case .any: .reference(\.anyElement)
+                case .title: .reference(\.title)
+                case .label: .reference(\.label)
+                case .icon: .reference(\.icon)
+                case .value: .reference(\.value)
+                case .cta: .reference(\.cta)
+                case .separator: .reference(\.separator)
+            }
+        }
+    }
+    
+    public var anyElement: ValueBuilder { .base(nil) }
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
@@ -30,23 +66,14 @@ extension SnapStyle.FontKey {
         }
     }
     
-    public var content: ValueBuilder { .base(.reference(\.label)) }
+    public var label: ValueBuilder { .base(nil) }
     
-    public var label: ValueBuilder {
-        .base(.definition(.font(.body))) { context in
-            switch context.component.type {
-                case .card: .definition(.font(.caption))
-                default: nil
-            }
-        }
-    }
+    public var icon: ValueBuilder { .base(nil) }
     
-    public var icon: ValueBuilder { .base(.reference(\.label)) }
+    public var value: ValueBuilder { .base(nil) }
     
-    public var value: ValueBuilder { .base(.reference(\.label)) }
+    public var cta: ValueBuilder { .base(nil) }
     
-    public var cta: ValueBuilder { .base(.reference(\.label)) }
-    
-    public var indicator: ValueBuilder { .base(.definition(.font(.footnote))) }
+    public var separator: ValueBuilder { .base(nil) }
     
 }

@@ -49,7 +49,7 @@ extension SnapStyle {
         package var keys: [SnapStyle.Context] { Array(content.keys) }
         
         package func getValue(for context: SnapStyle.Context) -> Value? {
-            content[context] ?? content[.any]
+            content[context]
         }
         
         func setValue(_ value: Value, for context: SnapStyle.Context) {
@@ -87,7 +87,11 @@ extension SnapStyle {
                 
             case let key as FontKey.Type: return cacheFonts as? KeyTypeCache<Key>
                 
+            case let key as ColorKey.Type: return cacheColors as? KeyTypeCache<Key>
+                
             case let key as SurfaceKey.Type: return cacheSurfaces as? KeyTypeCache<Key>
+                
+            case let key as ShapeKey.Type: return cacheShapes as? KeyTypeCache<Key>
                 
             default: fatalError("Cache is not setup properly.")
 
@@ -101,7 +105,11 @@ extension SnapStyle {
                 
             case let key as FontKey.Type: cacheFonts = .init()
                 
+            case let key as ColorKey.Type: cacheColors = .init()
+                
             case let key as SurfaceKey.Type: cacheSurfaces = .init()
+                
+            case let key as ShapeKey.Type: cacheShapes = .init()
                 
             default: fatalError("Cache is not setup properly.")
 

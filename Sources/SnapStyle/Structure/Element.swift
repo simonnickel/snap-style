@@ -30,12 +30,11 @@ extension SnapStyle {
             case any
             
             case title
-            case content
             case label
             case icon
             case value
             case cta
-            case indicator
+            case separator
 
         }
 

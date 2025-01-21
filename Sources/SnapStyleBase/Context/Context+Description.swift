@@ -10,7 +10,7 @@ extension SnapStyle.Context: CustomStringConvertible {
             "\(key): \(value)"
         }
         
-        return entries.sorted().joined(separator: ", ")
+        return entries.sorted().joined(separator: ", ") + " (\(self.hashValue))"
     }
     
 }

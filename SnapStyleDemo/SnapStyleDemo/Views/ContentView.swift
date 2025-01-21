@@ -16,14 +16,11 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
-                    NavigationLink("Fonts") {
-                        FontExampleScreen()
-                    }
                     NavigationLink("Components") {
                         ComponentsScreen()
                     }
-                    NavigationLink("Structure Text") {
-                        StructuredTextScreen()
+                    NavigationLink("Structured") {
+                        StructuredScreen()
                     }
                 } header: {
                     Text("Examples")
@@ -34,6 +31,9 @@ struct ContentView: View {
                     }
                     NavigationLink("Fonts") {
                         DebugKeyScreen(keyPath: \.fonts)
+                    }
+                    NavigationLink("Colors") {
+                        DebugKeyScreen(keyPath: \.colors)
                     }
                     NavigationLink("Surfaces") {
                         DebugKeyScreen(keyPath: \.surfaces)
@@ -47,6 +47,9 @@ struct ContentView: View {
                     }
                     NavigationLink("Fonts") {
                         DebugCacheScreen<SnapStyle.FontKey>()
+                    }
+                    NavigationLink("Colors") {
+                        DebugCacheScreen<SnapStyle.ColorKey>()
                     }
                     NavigationLink("Surfaces") {
                         DebugCacheScreen<SnapStyle.SurfaceKey>()
@@ -76,14 +79,6 @@ struct ContentView: View {
                         default: nil
                     }
 
-                }
-            ],
-            surfaces: [
-                \.title : SnapStyle.ValueBuilder.builder { context in
-                    switch context.element.hierarchy {
-                        case .primary: .definition(.surface(.with(foreground: .primary)))
-                    default: nil
-                    }
                 }
             ]
         )

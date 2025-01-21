@@ -21,47 +21,14 @@ extension View {
 internal struct FontModifier: ViewModifier {
     
     @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        let value = style.font(for: keyPath, in: .any)
-        content
-            .font(value)
-    }
-    
-}
-
-
-// MARK: - FromEnvironmentModifier
-
-internal struct ComponentFontFromEnvironmentModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
-
-    func body(content: Content) -> some View {
-        if let keyPath = SnapStyle.FontKey.keyPath(for: styleContext.component.type) {
-            let value = style.font(for: keyPath, in: styleContext)
-            content
-                .font(value)
-        } else {
-            content
-        }
-    }
-
-}
-
-internal struct ElementFontFromEnvironmentModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
-
-    func body(content: Content) -> some View {
-        let keyPath = SnapStyle.FontKey.keyPath(for: styleContext.element.type)
         let value = style.font(for: keyPath, in: styleContext)
         content
             .font(value)
     }
-
+    
 }

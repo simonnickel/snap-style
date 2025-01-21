@@ -64,12 +64,22 @@ extension SnapStyle {
                     return builders
                 }
             
+            case let keyPath as KeyPath<ColorKey, ColorKey.ValueBuilder>:
+                if let builders = self.colors[keyPath] as? [Key.ValueBuilder] {
+                    return builders
+                }
+            
             case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
                 if let builders = self.surfaces[keyPath] as? [Key.ValueBuilder] {
                     return builders
                 }
             
-            default: fatalError("Note defined for \(Key.self)")
+            case let keyPath as KeyPath<ShapeKey, ShapeKey.ValueBuilder>:
+                if let builders = self.shapes[keyPath] as? [Key.ValueBuilder] {
+                    return builders
+                }
+            
+            default: fatalError("Not defined for \(Key.self)")
                 
         }
         
@@ -101,15 +111,36 @@ extension SnapStyle {
         return value?.wrappedValue
         
     }
+    
+    
+    // MARK: - Color
+    
+    package func color(for keyPath: ColorKey.ValueBuilderKeyPath, in context: Context) -> Color? {
+        
+        let value = value(for: keyPath, in: context)
+        
+        return value?.wrappedValue
+        
+    }
 
     
     // MARK: - Surface
-    
-    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> AnyShapeStyle? {
 
+    // TODO: return type
+    package func surface(layer: SnapStyle.SurfaceKey.Layer, for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> SnapStyle.SurfaceKey.Value.LayeredShapeStyle.LayerValue? {
         let value = value(for: keyPath, in: context)
 
         return value?.wrappedValue.surface(for: layer)
+        
+    }
+    
+    
+    // MARK: - Shape
+
+    package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath, in context: Context) -> ShapeKey.Value.WrappedValue? {
+        let value = value(for: keyPath, in: context)
+
+        return value?.wrappedValue
         
     }
 
