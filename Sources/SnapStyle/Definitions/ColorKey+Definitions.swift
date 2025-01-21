@@ -42,11 +42,8 @@ extension SnapStyle.ColorKey {
     
     public var screen: ValueBuilder { .builder { context in
         switch context.colorScheme {
-                
             case .light: .reference(\.light1)
-                    
             case .dark: .reference(\.dark0)
-                
             default: nil
         }
     }}

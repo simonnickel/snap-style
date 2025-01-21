@@ -91,7 +91,7 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
-    public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) }
+    public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) } // TODO: Better color definition
     
     
     // MARK: - States

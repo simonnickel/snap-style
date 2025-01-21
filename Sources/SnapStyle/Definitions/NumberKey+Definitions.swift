@@ -6,6 +6,9 @@
 import SnapStyleBase
 
 extension SnapStyle.NumberKey {
+    
+    
+    // MARK: - Spacing
 
     public var spacingSections: ValueBuilder { .base(.definition(.value(32))) }
     public var spacingGroups: ValueBuilder { .base(.definition(.value(16))) }
@@ -39,4 +42,10 @@ extension SnapStyle.NumberKey {
     public var cornerRadiusContent: ValueBuilder { .base(.definition(.value(20))) }
     public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusContent)) }
     public var cornerRadiusCard: ValueBuilder { .base(.definition(.value(8))) }
+    
+    
+    // MARK: - Elements
+    
+    public var listSeparator: ValueBuilder { .base(.definition(.value(1))) }
+    
 }
