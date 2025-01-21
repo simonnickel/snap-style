@@ -10,8 +10,11 @@ struct StructuredScreen: View {
     
     var body: some View {
         StyleScreen {
+            contentCards
+            
             content
                 .style(component: .content)
+            
             content
                 .style(component: .content)
         }
@@ -21,7 +24,7 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var content: some View {
         StyleVStack(spacing: \.spacingSections) {
-            contentCard
+            contentCards
             contentText
             contentList
             contentButtons
@@ -29,21 +32,32 @@ struct StructuredScreen: View {
     }
     
     @ViewBuilder
+    private var contentCards: some View {
+        StyleHStack(spacing: \.spacingElements) {
+            contentCard
+            contentCard
+        }
+    }
+    
+    @ViewBuilder
     private var contentCard: some View {
         // TODO: Content Style with Shape
-        StyleHStack {
-            StyleVStack {
+        StyleVStack() {
+            StyleHStack(spacing: \.spacingElements, alignment: .top) {
                 Text("Title")
-                Text("Subitle")
-                    .style(hierarchy: .secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .style(element: .title, hierarchy: .primary)
+                Text("Value")
+                    .style(element: .value)
             }
-            .style(element: .title)
             
             Spacer()
             
-            StyleVStack {
-                Text("Value")
-                    .style(element: .value)
+            StyleHStack(spacing: \.spacingElements, alignment: .bottom) {
+                Text("Subitle")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .style(element: .title, hierarchy: .secondary)
+                Spacer()
                 Image(systemName: "triangle")
                     .style(element: .icon)
             }
