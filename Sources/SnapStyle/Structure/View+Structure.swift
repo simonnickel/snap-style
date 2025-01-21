@@ -27,6 +27,7 @@ extension View {
             .style(padding: \.paddingComponent, .all)
             .style(surface: \.component)
             .style(font: \.component)
+            .style(shape: \.componentContainer)
     }
 
 }

@@ -11,11 +11,13 @@ public struct SnapStyle {
     public var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
     public var colors: [ColorKey.ValueBuilderKeyPath: [ColorKey.ValueBuilder]] = [:]
     public var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
+    public var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
     
     internal var cacheNumbers: KeyTypeCache<NumberKey> = .init()
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheColors: KeyTypeCache<ColorKey> = .init()
     internal var cacheSurfaces: KeyTypeCache<SurfaceKey> = .init()
+    internal var cacheShapes: KeyTypeCache<ShapeKey> = .init()
     
     public init() {}
     
@@ -36,6 +38,10 @@ public struct SnapStyle {
     
     internal func appended(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
         appended(surfaces, at: \.surfaces)
+    }
+    
+    internal func appended(shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]) -> Self {
+        appended(shapes, at: \.shapes)
     }
     
     private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueBuilderKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<SnapStyle, [Key.ValueBuilderKeyPath: [Key.ValueBuilder]]>) -> Self {

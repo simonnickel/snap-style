@@ -33,4 +33,10 @@ extension SnapStyle.NumberKey {
     public var paddingList: ValueBuilder { .base(.definition(.value(12))) }
     public var paddingCard: ValueBuilder { .base(.definition(.value(16))) }
     
+    
+    // MARK: - CornerRadius
+    
+    public var cornerRadiusContent: ValueBuilder { .base(.definition(.value(20))) }
+    public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusContent)) }
+    public var cornerRadiusCard: ValueBuilder { .base(.definition(.value(8))) }
 }

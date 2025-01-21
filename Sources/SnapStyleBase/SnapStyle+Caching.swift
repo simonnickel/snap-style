@@ -91,6 +91,8 @@ extension SnapStyle {
                 
             case let key as SurfaceKey.Type: return cacheSurfaces as? KeyTypeCache<Key>
                 
+            case let key as ShapeKey.Type: return cacheShapes as? KeyTypeCache<Key>
+                
             default: fatalError("Cache is not setup properly.")
 
         }
@@ -106,6 +108,8 @@ extension SnapStyle {
             case let key as ColorKey.Type: cacheColors = .init()
                 
             case let key as SurfaceKey.Type: cacheSurfaces = .init()
+                
+            case let key as ShapeKey.Type: cacheShapes = .init()
                 
             default: fatalError("Cache is not setup properly.")
 

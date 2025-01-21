@@ -74,6 +74,11 @@ extension SnapStyle {
                     return builders
                 }
             
+            case let keyPath as KeyPath<ShapeKey, ShapeKey.ValueBuilder>:
+                if let builders = self.shapes[keyPath] as? [Key.ValueBuilder] {
+                    return builders
+                }
+            
             default: fatalError("Not defined for \(Key.self)")
                 
         }
@@ -126,6 +131,16 @@ extension SnapStyle {
         let value = value(for: keyPath, in: context)
 
         return value?.wrappedValue.surface(for: layer)
+        
+    }
+    
+    
+    // MARK: - Shape
+
+    package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath, in context: Context) -> ShapeKey.Value.WrappedValue? {
+        let value = value(for: keyPath, in: context)
+
+        return value?.wrappedValue
         
     }
 
