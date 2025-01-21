@@ -21,7 +21,7 @@ public struct StyleScreen<Content>: View where Content : View {
     
     public var body: some View {
         ScrollView {
-            VStack {
+            StyleVStack(spacing: \.spacingSections) {
                 content()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
