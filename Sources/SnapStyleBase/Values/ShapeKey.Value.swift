@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapFoundation
 import SwiftUI
 
 extension SnapStyle {
@@ -94,7 +95,7 @@ extension SnapStyle.ShapeKey {
         }
         
         public func path(in rect: CGRect) -> Path {
-            base(rect.inset(by: .init(top: inset, left: inset, bottom: inset, right: inset)))
+            base(rect.inset(by: EdgeInsets(inset)))
         }
     }
     
