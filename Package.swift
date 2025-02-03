@@ -14,6 +14,10 @@ let package = Package(
             name: "SnapStyle",
             targets: ["SnapStyle", "SnapStyleBase", "SnapStyleDebug"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/simonnickel/snap-foundation.git", branch: "main"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
@@ -31,7 +35,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: "SnapStyleBase"
+            name: "SnapStyleBase",
+            dependencies: [
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ]
         ),
     ],
     swiftLanguageModes: [.version("6")]
