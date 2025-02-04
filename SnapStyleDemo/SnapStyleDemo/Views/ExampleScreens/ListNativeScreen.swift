@@ -12,6 +12,7 @@ struct ListNativeScreen: View {
             ListSectionView(data: .init(title: "Section A", count: 4))
             ListSectionView(data: .init(title: "Section B", count: 6))
         }
+        .style(component: .list, applyStyle: false) // TODO: Apply style or remove font/surface from component. Currently applyStyle overrides tint color.
     }
 }
 

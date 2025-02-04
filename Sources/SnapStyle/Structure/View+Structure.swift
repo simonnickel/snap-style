@@ -11,7 +11,13 @@ import SwiftUI
 
 extension View {
     
-    public func style(component: SnapStyle.Component.ComponentType, hierarchy: SnapStyle.Component.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
+    public func style(
+        component: SnapStyle.Component.ComponentType,
+        hierarchy: SnapStyle.Component.Hierarchy = .primary,
+        maxWidth: CGFloat? = .infinity,
+        alignment: Alignment = .leading,
+        applyStyle: Bool = true
+    ) -> some View {
         Group {
             if applyStyle {
                 self.applyComponentStyle()
@@ -22,9 +28,12 @@ extension View {
         .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
     }
     
-    private func applyComponentStyle() -> some View {
+    private func applyComponentStyle(
+        maxWidth: CGFloat? = .infinity,
+        alignment: Alignment = .leading
+    ) -> some View {
         self
-            .frame(maxWidth: .infinity, alignment: .leading) // TODO: Should only be applied on components that are a container. Should be controlled by param.
+            .frame(maxWidth: maxWidth, alignment: alignment)
             .style(padding: \.paddingComponent, .all)
             .style(surface: \.component)
             .style(font: \.component)
