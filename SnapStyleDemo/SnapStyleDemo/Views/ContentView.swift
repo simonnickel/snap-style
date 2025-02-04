@@ -22,6 +22,9 @@ struct ContentView: View {
                     NavigationLink("Structured") {
                         StructuredScreen()
                     }
+                    NavigationLink("List") {
+                        ListNativeScreen()
+                    }
                 } header: {
                     Text("Examples")
                 }

@@ -1,0 +1,63 @@
+//
+//  SNAP - https://github.com/simonnickel/snap
+//  Created by Simon Nickel
+//
+
+import SwiftUI
+
+struct ListSectionView: View {
+    
+    struct Data {
+        let title: String
+        let items: [ListSectionView.ListItemView.Data]
+        
+        init(title: String, items: [ListSectionView.ListItemView.Data]) {
+            self.title = title
+            self.items = items
+        }
+        
+        private let icons: [String] = ["circle", "triangle", "rectangle", "pentagon", "hexagon", "star"]
+        
+        init(title: String, count: Int) {
+            self.title = title
+            var data: [ListSectionView.ListItemView.Data] = []
+            for index in 0..<count {
+                data.append(.init(title: "Item \(index)", icon: icons[index % icons.count]))
+            }
+            self.items = data
+        }
+    }
+
+    let data: Data
+    
+    var body: some View {
+        Section {
+            ForEach(data.items) { item in
+                ListItemView(data: item)
+            }
+        } header: {
+            Label(data.title, systemImage: "star")
+        }
+    }
+    
+    struct ListItemView: View {
+        
+        struct Data: Identifiable {
+            let id: UUID = UUID()
+            let title: String
+            let icon: String
+        }
+        
+        let data: Data
+        
+        var body: some View {
+            Label(data.title, systemImage: data.icon)
+        }
+    }
+}
+
+#Preview {
+    List {
+        ListSectionView(data: .init(title: "Preview", count: 30))
+    }
+}
