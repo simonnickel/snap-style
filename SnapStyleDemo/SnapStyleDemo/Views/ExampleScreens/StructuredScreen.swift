@@ -41,7 +41,6 @@ struct StructuredScreen: View {
     
     @ViewBuilder
     private var contentCard: some View {
-        // TODO: Content Style with Shape
         StyleVStack() {
             StyleHStack(spacing: \.spacingElements, alignment: .top) {
                 Text("Title")
