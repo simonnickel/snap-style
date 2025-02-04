@@ -24,6 +24,7 @@ extension View {
     
     private func applyComponentStyle() -> some View {
         self
+            .frame(maxWidth: .infinity, alignment: .leading) // TODO: Should only be applied on components that are a container. Should be controlled by param.
             .style(padding: \.paddingComponent, .all)
             .style(surface: \.component)
             .style(font: \.component)
