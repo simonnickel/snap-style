@@ -63,11 +63,16 @@ extension SnapStyle.Context {
 
 extension View {
     
-    public func style(component: SnapStyle.Component, isContainer: Bool = true) -> some View {
+    /// Defines the View as a component to use it's style definition and draw the container.
+    /// - Parameters:
+    ///   - component: Definition to use for the component.
+    ///   - containerHierarchy: Level of container that should be used. Set to nil if no container should be visible.
+    /// - Returns: A modified View.
+    public func style(component: SnapStyle.Component, containerHierarchy: SnapStyle.Element.Hierarchy? = .primary) -> some View {
         Group {
-            if isContainer {
+            if let containerHierarchy {
                 self
-                    .style(element: .container)
+                    .style(element: .container, hierarchy: containerHierarchy)
             } else {
                 self
             }

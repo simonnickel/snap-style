@@ -8,33 +8,51 @@ import SwiftUI
 
 public struct StyleButtonStyle: ButtonStyle {
     
-    let state: [SnapStyle.Context.StateAttribute]
+    public enum Variant {
+        case primary
+        case secondary
+        
+        var hierarchy: SnapStyle.Element.Hierarchy {
+            switch self {
+                case .primary: .primary
+                case .secondary: .secondary
+            }
+        }
+    }
     
-    public init(state: [SnapStyle.Context.StateAttribute] = []) {
+    private let variant: Variant
+    private let state: [SnapStyle.Context.StateAttribute]
+    
+    public init(_ variant: Variant, state: [SnapStyle.Context.StateAttribute] = []) {
+        self.variant = variant
         self.state = state
     }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .style(component: .action)
+            .style(component: .action, containerHierarchy: variant.hierarchy)
             .style(state: .highlighted, value: configuration.isPressed || state.contains(.highlighted))
     }
     
 }
 
 public struct StyleButton<Content>: View where Content : View {
+
     
     // TODO: Bundle both together to just need a single var?
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
     
+    private let variant: StyleButtonStyle.Variant
     private let action: () -> Void
     private let content: () -> Content
     
     public init(
+        _ variant: StyleButtonStyle.Variant = .primary,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
+        self.variant = variant
         self.action = action
         self.content = content
     }
@@ -56,7 +74,7 @@ public struct StyleButton<Content>: View where Content : View {
         } label: {
             content()
         }
-        .buttonStyle(StyleButtonStyle(state: highlighted ? [.highlighted] : []))
+        .buttonStyle(StyleButtonStyle(variant, state: highlighted ? [.highlighted] : []))
     }
     
 }

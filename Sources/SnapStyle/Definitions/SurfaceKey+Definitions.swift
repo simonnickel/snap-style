@@ -56,7 +56,12 @@ extension SnapStyle.SurfaceKey {
                     } else {
                         .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
                     }
-                case .secondary, .tertiary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                case .secondary, .tertiary:
+                    if context.isHighlighted {
+                        .definition(.surface(.with(foreground: \.accent0, background: \.content1)))
+                    } else {
+                        .definition(.surface(.with(foreground: \.accent0, background: nil)))
+                    }
             }
         }
     }

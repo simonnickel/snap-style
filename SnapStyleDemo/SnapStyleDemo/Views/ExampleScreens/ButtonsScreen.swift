@@ -12,7 +12,7 @@ struct ButtonsScreen: View {
         StyleScreen {
             StyleVStack {
                 StyleHStack {
-                    StyleButton {} content: {
+                    StyleButton(.secondary) {} content: {
                         Label("Secondary", systemImage: "star")
                     }
                     
