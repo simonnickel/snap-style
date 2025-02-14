@@ -8,8 +8,12 @@ import SnapStyleBase
 extension SnapStyle.Component {
     
     public static let base: Self = .init("base",
-        numbers: { element in
-            nil
+        padding: { element in
+            switch element {
+                case .any: \.paddingAnyElement
+                case .container: \.paddingAnyContainer
+                default: nil
+            }
         },
         fonts: { element in
             switch element {
@@ -28,7 +32,7 @@ extension SnapStyle.Component {
         surfaces: { element in
             switch element {
                 case .any: \.anyElement
-                case .container: \.screen
+                case .container: \.anyContainer
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -45,9 +49,33 @@ extension SnapStyle.Component {
         }
     )
     
-    public static let content: Self = .init("card",
-        numbers: { element in
+    public static let screen: Self = .init("screen",
+        padding: { element in
+            nil // Padding can not be defined here, because of scroll indicator placement.
+        },
+        fonts: { element in
             nil
+        },
+        colors: { element in
+            nil
+        },
+        surfaces: { element in
+            switch element {
+                case .container: \.screen
+                default: nil
+            }
+        },
+        shapes: { element in
+            nil
+        }
+    )
+    
+    public static let content: Self = .init("content",
+        padding: { element in
+            switch element {
+                case .container: \.paddingContent
+                default: nil
+            }
         },
         fonts: { element in
             nil
@@ -70,8 +98,11 @@ extension SnapStyle.Component {
     )
     
     public static let card: Self = .init("card",
-        numbers: { element in
-            nil
+        padding: { element in
+            switch element {
+                case .container: \.paddingCard
+                default: nil
+            }
         },
         fonts: { element in
             switch element {

@@ -15,7 +15,7 @@ extension SnapStyle {
         public let id: String
         
         // TODO: Remove Keys that do not get applied to elements
-        internal let numbers: Mapping<NumberKey>
+        internal let padding: Mapping<NumberKey>
         internal let fonts: Mapping<FontKey>
         internal let colors: Mapping<ColorKey>
         internal let surfaces: Mapping<SurfaceKey>
@@ -23,14 +23,14 @@ extension SnapStyle {
         
         public init(
             _ id: ID,
-            numbers: @escaping SnapStyle.Component.Mapping<SnapStyle.NumberKey>,
+            padding: @escaping SnapStyle.Component.Mapping<SnapStyle.NumberKey>,
             fonts: @escaping SnapStyle.Component.Mapping<SnapStyle.FontKey>,
             colors: @escaping SnapStyle.Component.Mapping<SnapStyle.ColorKey>,
             surfaces: @escaping SnapStyle.Component.Mapping<SnapStyle.SurfaceKey>,
             shapes: @escaping SnapStyle.Component.Mapping<SnapStyle.ShapeKey>
         ) {
             self.id = id
-            self.numbers = numbers
+            self.padding = padding
             self.fonts = fonts
             self.colors = colors
             self.surfaces = surfaces

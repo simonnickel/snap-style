@@ -15,18 +15,7 @@ extension SnapStyle.SurfaceKey {
     
     // MARK: - Component
     
-//    public var component: ValueBuilder {
-//        .builder { context in
-//            switch context.component.type {
-//                case .any: .reference(\.anyComponent)
-//                case .content: .reference(\.content)
-//                case .list: .reference(\.list)
-//                case .card: .reference(\.card)
-//            }
-//        }
-//    }
-    
-    public var anyComponent: ValueBuilder { .base(nil) }
+    public var anyContainer: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder {
         .builder { context in

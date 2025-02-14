@@ -25,9 +25,10 @@ public struct StyleScreen<Content>: View where Content : View {
                 content()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            // Padding needs to be inside of the ScrollView for scroll indicator placement.
             .style(padding: \.paddingScreen)
         }
-        .style(element: .container)
+        .style(component: .screen)
         .styleContextBase()
     }
     
