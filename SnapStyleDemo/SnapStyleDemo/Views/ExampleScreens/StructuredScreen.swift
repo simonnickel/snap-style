@@ -13,12 +13,10 @@ struct StructuredScreen: View {
             contentCards
             
             content
-            // TODO: New style of component
-//                .style(component: .content)
+                .style(component: .content)
             
             content
-            // TODO: New style of component
-//                .style(component: .content)
+                .style(component: .content)
         }
         .navigationTitle("Structured")
     }

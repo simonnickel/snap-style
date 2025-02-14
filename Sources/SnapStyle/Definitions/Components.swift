@@ -13,7 +13,7 @@ extension SnapStyle.Component {
         },
         fonts: { element in
             switch element {
-                case .any: \.anyElement
+                case .any, .container: \.anyElement
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -28,6 +28,7 @@ extension SnapStyle.Component {
         surfaces: { element in
             switch element {
                 case .any: \.anyElement
+                case .container: \.screen
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -37,7 +38,34 @@ extension SnapStyle.Component {
             }
         },
         shapes: { element in
+            switch element {
+                case .container: \.containerAnyComponent
+                default: nil
+            }
+        }
+    )
+    
+    public static let content: Self = .init("card",
+        numbers: { element in
             nil
+        },
+        fonts: { element in
+            nil
+        },
+        colors: { element in
+            nil
+        },
+        surfaces: { element in
+            switch element {
+                case .container: \.content
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerContent
+                default: nil
+            }
         }
     )
     
@@ -55,10 +83,16 @@ extension SnapStyle.Component {
             nil
         },
         surfaces: { element in
-            nil
+            switch element {
+                case .container: \.card
+                default: nil
+            }
         },
         shapes: { element in
-            nil
+            switch element {
+                case .container: \.containerCard
+                default: nil
+            }
         }
     )
     

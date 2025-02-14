@@ -28,6 +28,12 @@ extension SnapStyle.SurfaceKey {
     
     public var anyComponent: ValueBuilder { .base(nil) }
     
+    public var screen: ValueBuilder {
+        .builder { context in
+            .definition(.surface(.with(foreground: nil, background: \.screen)))
+        }
+    }
+    
     public var content: ValueBuilder {
         .builder { context in
             .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))

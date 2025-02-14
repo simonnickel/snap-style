@@ -64,9 +64,16 @@ extension SnapStyle.Context {
 
 extension View {
     
-    public func style(component: SnapStyle.Component) -> some View {
-        self
-            .style(attribute: SnapStyle.Context.component, value: component)
+    public func style(component: SnapStyle.Component, isContainer: Bool = true) -> some View {
+        Group {
+            if isContainer {
+                self
+                    .style(element: .container)
+            } else {
+                self
+            }
+        }
+        .style(attribute: SnapStyle.Context.component, value: component)
     }
     
 }

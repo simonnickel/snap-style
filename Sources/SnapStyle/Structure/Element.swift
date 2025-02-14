@@ -29,7 +29,7 @@ extension SnapStyle {
 
             case any
             
-//            case container
+            case container
             
             case title
             case label
