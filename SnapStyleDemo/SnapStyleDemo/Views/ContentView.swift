@@ -32,6 +32,13 @@ struct ContentView: View {
                     Text("Examples")
                 }
                 Section {
+                    NavigationLink("Buttons") {
+                        ButtonsScreen()
+                    }
+                } header: {
+                    Text("Components")
+                }
+                Section {
                     NavigationLink("Numbers") {
                         DebugKeyScreen(keyPath: \.numbers)
                     }

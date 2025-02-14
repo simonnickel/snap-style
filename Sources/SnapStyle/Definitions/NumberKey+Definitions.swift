@@ -39,4 +39,9 @@ extension SnapStyle.NumberKey {
     
     public var listSeparator: ValueBuilder { .base(.definition(.value(1))) }
     
+    
+    // MARK: - Animation
+    
+    public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.2))) }
+    
 }
