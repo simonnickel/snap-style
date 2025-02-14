@@ -27,7 +27,7 @@ public struct StyleScreen<Content>: View where Content : View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .style(padding: \.paddingScreen)
         }
-        .style(background: \.screen)
+        .style(background: \.screen) // TODO: .style(element: \.container)
         .styleContextBase()
     }
     
