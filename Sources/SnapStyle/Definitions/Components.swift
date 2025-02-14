@@ -20,7 +20,8 @@ extension SnapStyle.Component {
         },
         fonts: { element in
             switch element {
-                case .any, .container: \.anyElement
+                case .any: \.anyElement
+                case .container: \.anyComponent
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -43,7 +44,7 @@ extension SnapStyle.Component {
         },
         shapes: { element in
             switch element {
-                case .container: \.containerAnyComponent
+                case .container: \.anyContainer
                 default: nil
             }
         }

@@ -18,5 +18,5 @@ struct DebugKeyRowShape: View {
 }
 
 #Preview {
-    DebugKeyRowShape(keyPath: \.containerAnyComponent)
+    DebugKeyRowShape(keyPath: \.anyContainer)
 }
