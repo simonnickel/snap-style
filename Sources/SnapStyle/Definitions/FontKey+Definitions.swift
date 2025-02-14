@@ -30,20 +30,6 @@ extension SnapStyle.FontKey {
  
     // MARK: - Element
     
-    public var element: ValueBuilder {
-        .builder { context in
-            switch context.element.type {
-                case .any: .reference(\.anyElement)
-                case .title: .reference(\.title)
-                case .label: .reference(\.label)
-                case .icon: .reference(\.icon)
-                case .value: .reference(\.value)
-                case .cta: .reference(\.cta)
-                case .separator: .reference(\.separator)
-            }
-        }
-    }
-    
     public var anyElement: ValueBuilder { .base(nil) }
     
     public var title: ValueBuilder {

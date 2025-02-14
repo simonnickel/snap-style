@@ -5,6 +5,14 @@
 
 import SnapStyleBase
 
+extension SnapStyle.Component: CustomStringConvertible {
+    
+    public var description: String {
+        id
+    }
+    
+}
+
 extension SnapStyle.Element: CustomStringConvertible {
     
     public var description: String {

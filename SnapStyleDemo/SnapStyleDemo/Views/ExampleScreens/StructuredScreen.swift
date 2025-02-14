@@ -63,8 +63,7 @@ struct StructuredScreen: View {
                     .style(element: .icon)
             }
         }
-        // TODO: New style of component
-//        .style(component: .card)
+        .style(component: .card)
     }
     
     @ViewBuilder

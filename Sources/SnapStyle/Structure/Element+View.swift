@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 import SwiftUI
-    
+
 
 // MARK: - Element
 
@@ -14,7 +14,7 @@ extension View {
     public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
             if applyStyle {
-                self.applyElementStyle()
+                self.modifier(ElementApplyStyleModifier())
             } else {
                 self
             }
@@ -25,14 +25,29 @@ extension View {
     /// Shortcut to adjust the elements hierarchy.
     public func style(hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
         self
-            .applyElementStyle()
+            .modifier(ElementApplyStyleModifier())
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
     
-    private func applyElementStyle() -> some View {
-        self
-            .style(font: \.element)
-            .style(surface: \.element)
+}
+
+
+// MARK: ElementApplyStyleModifier
+
+private struct ElementApplyStyleModifier: ViewModifier {
+    
+    @Environment(\.styleContext) private var context
+
+    func body(content: Content) -> some View {
+        let component = context.component
+        let element = context.element.type
+        
+        let fontKeyPath = component.fonts(element) ?? SnapStyle.Component.base.fonts(element) ?? \.anyElement
+        let surfaceKeyPath = component.surfaces(element) ?? SnapStyle.Component.base.surfaces(element) ?? \.anyElement
+        
+        content
+            .style(font: fontKeyPath)
+            .style(surface: surfaceKeyPath)
     }
     
 }

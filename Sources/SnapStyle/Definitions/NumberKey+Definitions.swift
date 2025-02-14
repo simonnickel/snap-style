@@ -20,6 +20,7 @@ extension SnapStyle.NumberKey {
     
     public var paddingScreen: ValueBuilder { .base(.definition(.value(10))) }
     
+    // TODO: How does that fit into components?
 //    public var paddingComponent: ValueBuilder {
 //        .builder { context in
 //            switch context.component.type {
