@@ -35,7 +35,6 @@ extension SnapStyle {
             case label
             case icon
             case value
-            case cta // TODO: Rename to ? interaction, navigation, activity
             case separator
 
         }

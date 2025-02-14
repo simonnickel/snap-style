@@ -47,6 +47,20 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
+    public var action: ValueBuilder {
+        .builder { context in
+            switch context.element.hierarchy {
+                case .any, .primary:
+                    if context.isHighlighted {
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                    } else {
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+                    }
+                case .secondary, .tertiary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+            }
+        }
+    }
+    
 
     // MARK: - Element
 

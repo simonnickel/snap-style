@@ -59,8 +59,6 @@ extension SnapStyle.FontKey {
     
     public var value: ValueBuilder { .base(nil) }
     
-    public var cta: ValueBuilder { .base(nil) }
-    
     public var separator: ValueBuilder { .base(nil) }
     
 }

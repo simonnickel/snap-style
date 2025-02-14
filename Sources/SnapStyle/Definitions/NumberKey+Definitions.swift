@@ -25,6 +25,7 @@ extension SnapStyle.NumberKey {
     public var paddingContent: ValueBuilder { .base(.definition(.value(12))) }
     public var paddingList: ValueBuilder { .base(.definition(.value(12))) }
     public var paddingCard: ValueBuilder { .base(.definition(.value(16))) }
+    public var paddingAction: ValueBuilder { .base(.definition(.value(16))) }
     
     
     // MARK: - Shape: CornerRadius

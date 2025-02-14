@@ -109,21 +109,15 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var contentButtons: some View {
         StyleHStack {
-            // TODO: Secondary Button Style
-            Button {} label: {
+            StyleButton {} content: {
                 Label("Action", systemImage: "star")
             }
-            .buttonStyle(.borderless)
-            .style(element: .cta, hierarchy: .secondary)
             
             Spacer()
             
-            // TODO: Primary Button Style
-            Button {} label: {
+            StyleButton {} content: {
                 Label("Action", systemImage: "star")
             }
-            .buttonStyle(.borderedProminent)
-            .style(element: .cta, hierarchy: .primary)
         }
     }
     

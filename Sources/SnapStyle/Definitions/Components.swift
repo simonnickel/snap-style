@@ -26,7 +26,6 @@ extension SnapStyle.Component {
                 case .label: \.label
                 case .icon: \.icon
                 case .value: \.value
-                case .cta: \.cta
                 case .separator: \.separator
             }
         },
@@ -38,7 +37,6 @@ extension SnapStyle.Component {
                 case .label: \.label
                 case .icon: \.icon
                 case .value: \.value
-                case .cta: \.cta
                 case .separator: \.separator
             }
         },
@@ -112,6 +110,30 @@ extension SnapStyle.Component {
         shapes: { element in
             switch element {
                 case .container: \.containerCard
+                default: nil
+            }
+        }
+    )
+    
+    
+    // MARK: - Action
+    
+    public static let action: Self = .init("action",
+        padding: { element in
+            switch element {
+                case .container: \.paddingAction
+                default: nil
+            }
+        },
+        surfaces: { element in
+            switch element {
+                case .container: \.action
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerAction
                 default: nil
             }
         }
