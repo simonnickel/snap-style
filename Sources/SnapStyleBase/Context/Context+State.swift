@@ -50,14 +50,12 @@ extension View {
 internal struct ContextStateModifier: ViewModifier {
     
     @Environment(\.styleContext) private var context
-    @Environment(\.colorScheme) private var colorScheme
     
     let state: SnapStyle.Context.StateAttribute
     let value: Bool
     
     func body(content: Content) -> some View {
-        let modified = context
-            .with(state: state, value: value)
+        let modified = context.with(state: state, value: value)
         content
             .environment(\.styleContext, modified)
     }
