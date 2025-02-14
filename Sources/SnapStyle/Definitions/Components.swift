@@ -7,6 +7,9 @@ import SnapStyleBase
 
 extension SnapStyle.Component {
     
+    
+    // MARK: - Base
+    
     public static let base: Self = .init("base",
         padding: { element in
             switch element {
@@ -25,9 +28,6 @@ extension SnapStyle.Component {
                 case .cta: \.cta
                 case .separator: \.separator
             }
-        },
-        colors: { element in
-            nil
         },
         surfaces: { element in
             switch element {
@@ -49,26 +49,21 @@ extension SnapStyle.Component {
         }
     )
     
+    
+    // MARK: - Screen
+    
     public static let screen: Self = .init("screen",
-        padding: { element in
-            nil // Padding can not be defined here, because of scroll indicator placement.
-        },
-        fonts: { element in
-            nil
-        },
-        colors: { element in
-            nil
-        },
+       // Padding can not be defined here, because of scroll indicator placement.
         surfaces: { element in
             switch element {
                 case .container: \.screen
                 default: nil
             }
-        },
-        shapes: { element in
-            nil
         }
     )
+    
+    
+    // MARK: - Content
     
     public static let content: Self = .init("content",
         padding: { element in
@@ -76,12 +71,6 @@ extension SnapStyle.Component {
                 case .container: \.paddingContent
                 default: nil
             }
-        },
-        fonts: { element in
-            nil
-        },
-        colors: { element in
-            nil
         },
         surfaces: { element in
             switch element {
@@ -97,6 +86,9 @@ extension SnapStyle.Component {
         }
     )
     
+    
+    // MARK: - Card
+    
     public static let card: Self = .init("card",
         padding: { element in
             switch element {
@@ -109,9 +101,6 @@ extension SnapStyle.Component {
                 case .title: \.label
                 default: nil
             }
-        },
-        colors: { element in
-            nil
         },
         surfaces: { element in
             switch element {
