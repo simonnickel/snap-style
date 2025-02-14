@@ -13,10 +13,12 @@ struct StructuredScreen: View {
             contentCards
             
             content
-                .style(component: .content)
+            // TODO: New style of component
+//                .style(component: .content)
             
             content
-                .style(component: .content)
+            // TODO: New style of component
+//                .style(component: .content)
         }
         .navigationTitle("Structured")
     }
@@ -61,7 +63,8 @@ struct StructuredScreen: View {
                     .style(element: .icon)
             }
         }
-        .style(component: .card)
+        // TODO: New style of component
+//        .style(component: .card)
     }
     
     @ViewBuilder
@@ -102,7 +105,8 @@ struct StructuredScreen: View {
                 }
             }
         }
-        .style(component: .list)
+        // TODO: New style of component
+//        .style(component: .list)
     }
     
     @ViewBuilder

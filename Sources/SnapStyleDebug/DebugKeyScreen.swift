@@ -14,8 +14,6 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     
     let keyPath: ItemKeyPath
     
-    @State private var componentType: SnapStyle.Component.ComponentType = .any
-    @State private var componentHierarchy: SnapStyle.Component.Hierarchy = .primary
     @State private var elementType: SnapStyle.Element.ElementType = .any
     @State private var elementHierarchy: SnapStyle.Element.Hierarchy = .primary
     
@@ -34,18 +32,6 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     private var config: some View {
         VStack {
             HStack {
-                Picker("Component", selection: $componentType) {
-                    ForEach(SnapStyle.Component.ComponentType.allCases, id: \.self) { component in
-                        Text("\(component)")
-                    }
-                }
-                Picker("Hierarchy", selection: $componentHierarchy) {
-                    ForEach(SnapStyle.Component.Hierarchy.allCases, id: \.self) { hierarchy in
-                        Text("\(hierarchy)")
-                    }
-                }
-            }
-            HStack {
                 Picker("Element", selection: $elementType) {
                     ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { element in
                         Text("\(element)")
@@ -62,7 +48,6 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
     
     private var element: some View {
         Text("Element")
-            .style(component: componentType, hierarchy: componentHierarchy)
             .style(element: elementType, hierarchy: elementHierarchy)
     }
     
@@ -71,7 +56,6 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
         
         return List(keyPaths, id: \.self) { keyPath in
             KeyType.row(keyPath: keyPath)
-                .style(component: componentType, hierarchy: componentHierarchy)
                 .style(element: elementType, hierarchy: elementHierarchy, applyStyle: false)
         }
     }

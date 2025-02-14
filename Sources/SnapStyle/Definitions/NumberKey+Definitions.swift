@@ -20,16 +20,16 @@ extension SnapStyle.NumberKey {
     
     public var paddingScreen: ValueBuilder { .base(.definition(.value(10))) }
     
-    public var paddingComponent: ValueBuilder {
-        .builder { context in
-            switch context.component.type {
-                case .any: .reference(\.paddingAnyComponent)
-                case .content: .reference(\.paddingContent)
-                case .list: .reference(\.paddingList)
-                case .card: .reference(\.paddingCard)
-            }
-        }
-    }
+//    public var paddingComponent: ValueBuilder {
+//        .builder { context in
+//            switch context.component.type {
+//                case .any: .reference(\.paddingAnyComponent)
+//                case .content: .reference(\.paddingContent)
+//                case .list: .reference(\.paddingList)
+//                case .card: .reference(\.paddingCard)
+//            }
+//        }
+//    }
 
     public var paddingAnyComponent: ValueBuilder { .base(nil) }
     public var paddingContent: ValueBuilder { .base(.definition(.value(12))) }

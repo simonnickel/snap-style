@@ -12,38 +12,39 @@ struct ComponentsScreen: View {
     var body: some View {
         StyleScreen {
 
-            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any].contains($0) })
-            
-            ForEach(components, id: \.self) { component in
-                contentComponent(component)
-            }
+            // TODO: Preview Example of new Components
+//            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any].contains($0) })
+//            
+//            ForEach(components, id: \.self) { component in
+//                contentComponent(component)
+//            }
 
         }
         .navigationTitle("Components")
     }
     
-    @ViewBuilder
-    private func contentComponent(_ type: SnapStyle.Component.ComponentType) -> some View {
-        VStack(alignment: .leading) {
-            Text("\(type), .primary")
-            contentElements(hierarchy: .primary)
-            contentElements(hierarchy: .secondary)
-            contentComponentSecondary(type)
-            contentStates()
-        }
-        .style(component: type, hierarchy: .primary)
-    }
-    
-    @ViewBuilder
-    private func contentComponentSecondary(_ type: SnapStyle.Component.ComponentType) -> some View {
-        VStack(alignment: .leading) {
-            Text("\(type), .secondary")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            contentElements(hierarchy: .primary)
-            contentElements(hierarchy: .secondary)
-        }
-        .style(component: type, hierarchy: .secondary)
-    }
+//    @ViewBuilder
+//    private func contentComponent(_ type: SnapStyle.Component.ComponentType) -> some View {
+//        VStack(alignment: .leading) {
+//            Text("\(type), .primary")
+//            contentElements(hierarchy: .primary)
+//            contentElements(hierarchy: .secondary)
+//            contentComponentSecondary(type)
+//            contentStates()
+//        }
+//        .style(component: type, hierarchy: .primary)
+//    }
+//    
+//    @ViewBuilder
+//    private func contentComponentSecondary(_ type: SnapStyle.Component.ComponentType) -> some View {
+//        VStack(alignment: .leading) {
+//            Text("\(type), .secondary")
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//            contentElements(hierarchy: .primary)
+//            contentElements(hierarchy: .secondary)
+//        }
+//        .style(component: type, hierarchy: .secondary)
+//    }
     
     @ViewBuilder
     private func contentElements(hierarchy: SnapStyle.Element.Hierarchy) -> some View {

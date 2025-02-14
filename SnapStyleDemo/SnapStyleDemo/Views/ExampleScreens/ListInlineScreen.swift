@@ -22,7 +22,8 @@ struct ListInlineScreen: View {
             ListSectionView(data: .init(title: "Section A", count: 4))
             ListSectionView(data: .init(title: "Section B", count: 6))
         }
-        .style(component: .list)
+        // TODO: New style of component
+//        .style(component: .list)
     }
     
 }

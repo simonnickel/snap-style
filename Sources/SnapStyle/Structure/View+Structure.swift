@@ -5,42 +5,6 @@
 
 import SnapStyleBase
 import SwiftUI
-
-
-// MARK: - Component
-
-extension View {
-    
-    public func style(
-        component: SnapStyle.Component.ComponentType,
-        hierarchy: SnapStyle.Component.Hierarchy = .primary,
-        maxWidth: CGFloat? = .infinity,
-        alignment: Alignment = .leading,
-        applyStyle: Bool = true
-    ) -> some View {
-        Group {
-            if applyStyle {
-                self.applyComponentStyle()
-            } else {
-                self
-            }
-        }
-        .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
-    }
-    
-    private func applyComponentStyle(
-        maxWidth: CGFloat? = .infinity,
-        alignment: Alignment = .leading
-    ) -> some View {
-        self
-            .frame(maxWidth: maxWidth, alignment: alignment)
-            .style(padding: \.paddingComponent, .all)
-            .style(surface: \.component)
-            .style(font: \.component)
-            .style(shape: \.componentContainer)
-    }
-
-}
     
 
 // MARK: - Element
