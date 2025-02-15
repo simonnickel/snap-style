@@ -7,11 +7,11 @@ import SwiftUI
 
 public struct SnapStyle {
     
-    public var numbers: [NumberKey.ValueBuilderKeyPath: [NumberKey.ValueBuilder]] = [:]
-    public var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
-    public var colors: [ColorKey.ValueBuilderKeyPath: [ColorKey.ValueBuilder]] = [:]
-    public var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
-    public var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
+    internal var numbers: [NumberKey.ValueBuilderKeyPath: [NumberKey.ValueBuilder]] = [:]
+    internal var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
+    internal var colors: [ColorKey.ValueBuilderKeyPath: [ColorKey.ValueBuilder]] = [:]
+    internal var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
+    internal var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
     
     // Refences to Caches
     internal var cacheNumbers: KeyTypeCache<NumberKey> = .init()

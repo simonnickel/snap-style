@@ -6,26 +6,17 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct DebugKeyScreen<KeyType: StyleKey>: View {
-    
-    @Environment(\.style) private var style
-
-    public typealias ItemKeyPath = KeyPath<SnapStyle, [KeyType.ValueBuilderKeyPath: [KeyType.ValueBuilder]]>
-    
-    let keyPath: ItemKeyPath
+public struct DebugKeyScreen: View {
     
     @State private var elementType: SnapStyle.Element.ElementType = .any
     @State private var elementHierarchy: SnapStyle.Element.Hierarchy = .primary
     
-    public init(keyPath: ItemKeyPath) {
-        self.keyPath = keyPath
-    }
+    public init() {}
         
     public var body: some View {
         VStack {
             config
             element
-            list
         }
     }
     
@@ -51,37 +42,8 @@ public struct DebugKeyScreen<KeyType: StyleKey>: View {
             .style(element: elementType, hierarchy: elementHierarchy)
     }
     
-    private var list: some View {
-        let keyPaths = Array(style[keyPath: keyPath].keys)
-        
-        return List(keyPaths, id: \.self) { keyPath in
-            KeyType.row(keyPath: keyPath)
-                .style(element: elementType, hierarchy: elementHierarchy, applyStyle: false)
-        }
-    }
-    
-}
-
-extension StyleKey {
-    
-    @MainActor
-    @ViewBuilder
-    static func row(keyPath: ValueBuilderKeyPath) -> some View {
-
-        // TODO: Is there a simpler solution without casting? This is not really used anymore anyway though.
-        switch self {
-            case is SnapStyle.NumberKey.Type: DebugKeyRowNumber(keyPath: keyPath as! SnapStyle.NumberKey.ValueBuilderKeyPath)
-            case is SnapStyle.FontKey.Type: DebugKeyRowFont(keyPath: keyPath as! SnapStyle.FontKey.ValueBuilderKeyPath)
-            case is SnapStyle.ColorKey.Type: DebugKeyRowColor(keyPath: keyPath as! SnapStyle.ColorKey.ValueBuilderKeyPath)
-            case is SnapStyle.SurfaceKey.Type: DebugKeyRowSurface(keyPath: keyPath as! SnapStyle.SurfaceKey.ValueBuilderKeyPath)
-            case is SnapStyle.ShapeKey.Type: DebugKeyRowShape(keyPath: keyPath as! SnapStyle.ShapeKey.ValueBuilderKeyPath)
-            default: fatalError("No row defined for \(self)")
-        }
-        
-    }
-    
 }
 
 #Preview {
-    DebugKeyScreen(keyPath: \.surfaces)
+    DebugKeyScreen()
 }
