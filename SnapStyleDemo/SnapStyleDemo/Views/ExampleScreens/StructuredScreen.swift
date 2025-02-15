@@ -87,22 +87,22 @@ struct StructuredScreen: View {
     
     @ViewBuilder
     private var contentList: some View {
-        // TODO: Style a List without using List
+        // TODO list: Style a List without using List
         StyleVStack {
             ForEach(0..<3) { index in
                 StyleVStack {
                     StyleHStack {
                         Label("Row \(index)", systemImage: "star")
-                            .padding(5) // TODO: Element Padding, ListRow as Component?
+                            .padding(5) // TODO list: Element Padding, ListRow as Component?
                         Spacer()
                         Text("\(index)")
                     }
                     StyleShape(shape: .rectangle, surface: \.separator)
-                        .frame(height: 1) // TODO: Use number \.listSeparator
+                        .frame(height: 1) // TODO list: Use number \.listSeparator
                 }
             }
         }
-        // TODO: New style of component
+        // TODO list: New style of component
 //        .style(component: .list)
     }
     

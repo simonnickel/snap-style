@@ -98,6 +98,7 @@ extension SnapStyle {
         }
     }
     
+    /// Creates a new cache, the old cache will still be in use for a different style definition.
     internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
         switch Key.self {
                 

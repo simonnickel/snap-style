@@ -13,6 +13,7 @@ public struct SnapStyle {
     public var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
     public var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
     
+    // Refences to Caches
     internal var cacheNumbers: KeyTypeCache<NumberKey> = .init()
     internal var cacheFonts: KeyTypeCache<FontKey> = .init()
     internal var cacheColors: KeyTypeCache<ColorKey> = .init()
