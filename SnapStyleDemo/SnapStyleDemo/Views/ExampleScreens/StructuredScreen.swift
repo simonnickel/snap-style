@@ -4,6 +4,7 @@
 //
 
 import SnapStyle
+import SnapStyleBase
 import SwiftUI
 
 struct StructuredScreen: View {
@@ -131,5 +132,12 @@ struct StructuredScreen: View {
 #Preview {
     NavigationStack {
         StructuredScreen()
+            .styleOverride(
+                colors: [
+                    \.onAccent : SnapStyle.ValueBuilder.builder { context in
+                            .definition(.value(.yellow))
+                    }
+                ]
+            )
     }
 }
