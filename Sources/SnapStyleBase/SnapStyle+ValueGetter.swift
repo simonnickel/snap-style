@@ -15,7 +15,7 @@ extension SnapStyle {
         }
         
         var result: Key.Value?
-        let builders = builders(for: keyPath)
+        let builders = builderContainer.builder(for: keyPath)
         
         // Build value from overrides
         for builder in builders.reversed() {
@@ -48,42 +48,6 @@ extension SnapStyle {
         }
         
         return result
-    }
-    
-    private func builders<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [Key.ValueBuilder] {
-        
-        switch keyPath {
-            
-            case let keyPath as KeyPath<NumberKey, NumberKey.ValueBuilder>:
-                if let builders = self.numbers[keyPath] as? [Key.ValueBuilder] {
-                    return builders
-                }
-                
-            case let keyPath as KeyPath<FontKey, FontKey.ValueBuilder>:
-                if let builders = self.fonts[keyPath] as? [Key.ValueBuilder] {
-                    return builders
-                }
-            
-            case let keyPath as KeyPath<ColorKey, ColorKey.ValueBuilder>:
-                if let builders = self.colors[keyPath] as? [Key.ValueBuilder] {
-                    return builders
-                }
-            
-            case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
-                if let builders = self.surfaces[keyPath] as? [Key.ValueBuilder] {
-                    return builders
-                }
-            
-            case let keyPath as KeyPath<ShapeKey, ShapeKey.ValueBuilder>:
-                if let builders = self.shapes[keyPath] as? [Key.ValueBuilder] {
-                    return builders
-                }
-            
-            default: fatalError("Not defined for \(Key.self)")
-                
-        }
-        
-        return []
     }
     
     
