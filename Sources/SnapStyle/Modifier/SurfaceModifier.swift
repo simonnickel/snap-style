@@ -53,7 +53,8 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
             let color = style.color(for: background, in: styleContext)
         {
             content
-                .background(color)
+                // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
+                .background(color, ignoresSafeAreaEdges: .vertical)
         } else {
             content
         }

@@ -11,7 +11,7 @@ struct StructuredScreen: View {
     
     var body: some View {
         StyleScreen {
-            contentCards
+            contentCardRow
             
             content
                 .style(component: .content)
@@ -20,6 +20,26 @@ struct StructuredScreen: View {
                 .style(component: .content)
         }
         .navigationTitle("Structured")
+    }
+    
+    @ViewBuilder
+    private var contentCardRow: some View {
+        // TODO: This could be a component
+        ScrollView(.horizontal) {
+            LazyHStack {
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .scrollTargetLayout()
+        }
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
     }
     
     @ViewBuilder
@@ -63,6 +83,7 @@ struct StructuredScreen: View {
             }
         }
         .style(component: .card)
+        .fixedSize(horizontal: false, vertical: true)
     }
     
     @ViewBuilder
