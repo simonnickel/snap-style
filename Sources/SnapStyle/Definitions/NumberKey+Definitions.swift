@@ -8,6 +8,11 @@ import SnapStyleBase
 extension SnapStyle.NumberKey {
     
     
+    // MARK: - Screen
+
+    public var widthReadableContent: ValueBuilder { .base(.definition(.value(750))) }
+    
+    
     // MARK: - Spacing
 
     public var spacingSections: ValueBuilder { .base(.definition(.value(32))) }
@@ -37,6 +42,7 @@ extension SnapStyle.NumberKey {
     
     // MARK: - Elements
     
+    // TODO: This should at least be named differently, if necessary at all.
     public var listSeparator: ValueBuilder { .base(.definition(.value(1))) }
     
     

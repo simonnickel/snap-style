@@ -13,9 +13,12 @@ extension View {
             .modifier(ColorForegroundModifier(keyPath: keyPath))
     }
     
-    public func style(background keyPath: SnapStyle.ColorKey.ValueBuilderKeyPath) -> some View {
+    public func style(
+        background keyPath: SnapStyle.ColorKey.ValueBuilderKeyPath,
+        ignoresSafeAreaEdges: Edge.Set = SnapStyle.SurfaceKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault
+    ) -> some View {
         self
-            .modifier(ColorBackgroundModifier(keyPath: keyPath))
+            .modifier(ColorBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
     }
 
 }
@@ -49,13 +52,14 @@ internal struct ColorBackgroundModifier: ViewModifier {
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.ColorKey.ValueBuilderKeyPath
+    let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
         if
             let color = style.color(for: keyPath, in: styleContext)
         {
             content
-                .background(color)
+                .background(color, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
         } else {
             content
         }

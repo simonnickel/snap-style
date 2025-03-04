@@ -19,7 +19,11 @@ extension SnapStyle.SurfaceKey {
     
     public var screen: ValueBuilder {
         .builder { context in
-            .definition(.surface(.with(foreground: nil, background: \.screen)))
+            .definition(.surface(.with(
+                foreground: nil,
+                background: \.screen,
+                ignoresSafeAreaEdges: .all // Background of screen should not respect .vertical safe area to stretch beyond \.`widthReadableContent`.
+            )))
         }
     }
     

@@ -50,16 +50,27 @@ extension SnapStyle.SurfaceKey {
             typealias ShapeStyleForLayer = [Layer: LayerValue]
             
             let values: ShapeStyleForLayer
+            public let ignoresSafeAreaEdges: Edge.Set
+            // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
+            public static let ignoresSafeAreaEdgesDefault: Edge.Set = .vertical
 
             public func surface(for layer: Layer) -> LayerValue? {
                 values[layer] ?? values[.any]
             }
 
-            public init(_ values: [Layer: LayerValue]) {
+            public init(
+                _ values: [Layer: LayerValue],
+                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
+            ) {
                 self.values = values
+                self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
             }
 
-            public init(foreground: LayerValue? = nil, background: LayerValue? = nil) {
+            public init(
+                foreground: LayerValue? = nil,
+                background: LayerValue? = nil,
+                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
+            ) {
                 var values: ShapeStyleForLayer = [:]
                 if let foreground {
                     values[.foreground] = foreground
@@ -68,11 +79,15 @@ extension SnapStyle.SurfaceKey {
                     values[.background] = background
                 }
                 
-                self.init(values)
+                self.init(values, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
             }
 
-            public static func with(foreground: LayerValue? = nil, background: LayerValue? = nil) -> Self {
-                self.init(foreground: foreground, background: background)
+            public static func with(
+                foreground: LayerValue? = nil,
+                background: LayerValue? = nil,
+                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
+            ) -> Self {
+                self.init(foreground: foreground, background: background, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
             }
 
         }

@@ -49,12 +49,12 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let background = style.surface(layer: .background, for: keyPath, in: styleContext),
+            let surface = style.surface(for: keyPath, in: styleContext),
+            let background = surface.surface(for: .background),
             let color = style.color(for: background, in: styleContext)
         {
             content
-                // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
-                .background(color, ignoresSafeAreaEdges: .vertical)
+                .background(color, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }

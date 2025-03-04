@@ -3,15 +3,18 @@
 //  Created by Simon Nickel
 //
 
+// TODO: Debug modifier that overlays a GeometryReader and displays the values.
+
 import SnapStyleBase
 import SwiftUI
-
-// TODO: Limit width similar to UIKit's readableContentGuide
 
 /// A container to define a Screen.
 /// - Content is stacked vertically in a ScrollView.
 /// - Elements are spaced by`NumberKey.spacingSections`.
-/// - Uses safeAreaPadding to inset content from the edges, using `NumberKey.paddingScreen`.
+/// - Insets content from .horizontal edges using safeAreaPadding:
+///     - by `NumberKey.paddingScreen`
+///     - to limit width to `NumberKey.widthReadableContent`
+///     - *Caution: content (and background) needs to respect .horizontal safe area insets to comply.*
 /// - By default `Component.screen` is used for styling.
 public struct StyleScreen<Content>: View where Content : View {
     
@@ -30,15 +33,41 @@ public struct StyleScreen<Content>: View where Content : View {
     }
     
     public var body: some View {
-        ScrollView {
-            StyleVStack(spacing: \.spacingSections) {
-                content()
+        GeometryReader { geometry in
+            ScrollView {
+                StyleVStack {
+                    containerContent(geometry: geometry)
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .center)
         }
+        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets (see SurfaceKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault).
         .style(safeAreaPadding: \.paddingScreen, .horizontal)
         .style(component: component)
         .styleContextBase()
+    }
+    
+    // TODO: Consider moving this into a separate View. Provide Geometry via environment.
+    @ViewBuilder
+    private func containerContent(geometry: GeometryProxy) -> some View {
+        if let maxWidth = maxWidthContent {
+            StyleVStack(spacing: \.spacingSections) {
+                content()
+            }
+            .style(maxWidth: keyPathMaxWidthContent)
+            .safeAreaPadding(.init(horizontal: (geometry.size.width - maxWidth) / 2, vertical: 0))
+        } else {
+            content()
+        }
+    }
+    
+    private let keyPathMaxWidthContent: SnapStyle.NumberKey.ValueBuilderKeyPath = \.widthReadableContent
+    private var maxWidthContent: CGFloat? {
+        switch style.value(for: keyPathMaxWidthContent, in: styleContext) {
+            case .value(let value): value
+            case .none: nil
+        }
+        
     }
     
 }
@@ -72,9 +101,15 @@ public struct StyleScreen<Content>: View where Content : View {
             ScrollView(.horizontal) {
                 LazyHStack {
                     Text("ScrollView automatically allows to scroll behind safe area!")
+                        .font(.system(size: 60))
                 }
                 .background(.green)
             }
         }
     }
+//    .styleOverride(
+//        numbers: [
+//            \.widthReadableContent: .base(.definition(.value(200)))
+//        ]
+//    )
 }
