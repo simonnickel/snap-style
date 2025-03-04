@@ -42,3 +42,7 @@ Base implementation of Values, Caching and Context.
 
 ### SnapStyleDebug
 Some helper views to look into the setup and caches, prevents exposing implementation for accidental misuse.
+
+
+## Features
+ - Screen definition limiting the content to \.widthReadableContent (UIKits readableContentGuide is not available in SwiftUI).
