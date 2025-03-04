@@ -71,7 +71,6 @@ public struct StyleScreen<Content>: View where Content : View {
                 StyleVStack(spacing: \.spacingSections) {
                     content()
                 }
-                .style(maxWidth: Constants.keyPathMaxWidthContent)
                 .safeAreaPadding(.init(horizontal: (screenGeometrySize.width - maxWidth) / 2, vertical: 0))
             } else {
                 content()
