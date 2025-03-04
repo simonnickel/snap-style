@@ -8,6 +8,9 @@
 import SnapStyleBase
 import SwiftUI
 
+
+// MARK: - StyleScreen
+
 /// A container to define a Screen.
 /// - Content is stacked vertically in a ScrollView.
 /// - Elements are spaced by`NumberKey.spacingSections`.
@@ -36,7 +39,8 @@ public struct StyleScreen<Content>: View where Content : View {
         GeometryReader { geometry in
             ScrollView {
                 StyleVStack {
-                    containerContent(geometry: geometry)
+                    ReadableContentContainer(content: content)
+                        .environment(\.screenGeometrySize, geometry.size)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .center)
@@ -47,29 +51,44 @@ public struct StyleScreen<Content>: View where Content : View {
         .styleContextBase()
     }
     
-    // TODO: Consider moving this into a separate View. Provide Geometry via environment.
-    @ViewBuilder
-    private func containerContent(geometry: GeometryProxy) -> some View {
-        if let maxWidth = maxWidthContent {
-            StyleVStack(spacing: \.spacingSections) {
+    
+    // MARK: Container
+    
+    struct ReadableContentContainer: View {
+        
+        private struct Constants {
+            static var keyPathMaxWidthContent: SnapStyle.NumberKey.ValueBuilderKeyPath { \.widthReadableContent }
+        }
+        
+        @Environment(\.style) private var style
+        @Environment(\.styleContext) private var styleContext
+        @Environment(\.screenGeometrySize) private var screenGeometrySize
+        
+        let content: () -> Content
+        
+        var body: some View {
+            if let maxWidth = style.number(for: Constants.keyPathMaxWidthContent, in: styleContext) {
+                StyleVStack(spacing: \.spacingSections) {
+                    content()
+                }
+                .style(maxWidth: Constants.keyPathMaxWidthContent)
+                .safeAreaPadding(.init(horizontal: (screenGeometrySize.width - maxWidth) / 2, vertical: 0))
+            } else {
                 content()
             }
-            .style(maxWidth: keyPathMaxWidthContent)
-            .safeAreaPadding(.init(horizontal: (geometry.size.width - maxWidth) / 2, vertical: 0))
-        } else {
-            content()
-        }
-    }
-    
-    private let keyPathMaxWidthContent: SnapStyle.NumberKey.ValueBuilderKeyPath = \.widthReadableContent
-    private var maxWidthContent: CGFloat? {
-        switch style.value(for: keyPathMaxWidthContent, in: styleContext) {
-            case .value(let value): value
-            case .none: nil
         }
         
     }
     
+}
+
+
+// MARK: - Environment
+
+extension EnvironmentValues {
+    
+    @Entry public var screenGeometrySize: CGSize = .zero
+
 }
 
 
