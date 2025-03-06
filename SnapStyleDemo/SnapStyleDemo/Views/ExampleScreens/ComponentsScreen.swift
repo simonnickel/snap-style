@@ -12,31 +12,32 @@ struct ComponentsScreen: View {
     var body: some View {
         StyleScreen {
 
-            // TODO: Preview Example of new Components
-//            let components = SnapStyle.Component.ComponentType.allCases.filter({ ![.any].contains($0) })
-//            
-//            ForEach(components, id: \.self) { component in
-//                contentComponent(component)
-//            }
+            let components: [SnapStyle.Component] = [.screen, .content, .card, .action]
+            
+            ForEach(components, id: \.self) { component in
+                contentComponent(component)
+            }
 
         }
         .navigationTitle("Components")
     }
     
-//    @ViewBuilder
-//    private func contentComponent(_ type: SnapStyle.Component.ComponentType) -> some View {
-//        VStack(alignment: .leading) {
-//            Text("\(type), .primary")
-//            contentElements(hierarchy: .primary)
-//            contentElements(hierarchy: .secondary)
+    @ViewBuilder
+    private func contentComponent(_ component: SnapStyle.Component) -> some View {
+        VStack(alignment: .leading) {
+            Text("\(component.id), .primary")
+            HStack {
+                contentElements(hierarchy: .primary)
+                contentElements(hierarchy: .secondary)
+                contentStates()
+            }
 //            contentComponentSecondary(type)
-//            contentStates()
-//        }
-//        .style(component: type, hierarchy: .primary)
-//    }
-//    
+        }
+        .style(component: component, containerHierarchy: .primary)
+    }
+    
 //    @ViewBuilder
-//    private func contentComponentSecondary(_ type: SnapStyle.Component.ComponentType) -> some View {
+//    private func contentComponentSecondary(_ type: SnapStyle.Component) -> some View {
 //        VStack(alignment: .leading) {
 //            Text("\(type), .secondary")
 //                .frame(maxWidth: .infinity, alignment: .leading)
@@ -48,7 +49,7 @@ struct ComponentsScreen: View {
     
     @ViewBuilder
     private func contentElements(hierarchy: SnapStyle.Element.Hierarchy) -> some View {
-        HStack(alignment: .firstTextBaseline) {
+        VStack(alignment: .leading) {
             ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { elementType in
                 Text("\(elementType)")
                     .style(element: elementType, hierarchy: hierarchy)
@@ -58,25 +59,15 @@ struct ComponentsScreen: View {
     
     @ViewBuilder
     private func contentStates() -> some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack {
-                HStack {
-                    Text("Highlighted Element")
-                        .style(surface: \.highlightedElement)
-                    Text("Highlighted Container")
-                        .style(surface: \.highlightedContainer)
-                }
-            }
-            
-            VStack {
-                HStack {
-                    Text("Disabled Element")
-                        .style(surface: \.disabledElement)
-                    Text("Disabled Container")
-                        .style(surface: \.disabledContainer)
-                }
-            }
-            
+        VStack(alignment: .leading) {
+            Text("Highlighted Element")
+                .style(surface: \.highlightedElement)
+            Text("Highlighted Container")
+                .style(surface: \.highlightedContainer)
+            Text("Disabled Element")
+                .style(surface: \.disabledElement)
+            Text("Disabled Container")
+                .style(surface: \.disabledContainer)
         }
     }
 
