@@ -22,7 +22,7 @@ extension SnapStyle.SurfaceKey {
             .definition(.surface(.with(
                 foreground: nil,
                 background: \.screen,
-                ignoresSafeAreaEdges: .all // Background of screen should not respect .vertical safe area to stretch beyond \.`widthReadableContent`.
+                ignoresSafeAreaEdges: .all // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
             )))
         }
     }
@@ -85,18 +85,10 @@ extension SnapStyle.SurfaceKey {
 
     public var cta: ValueBuilder {
         .builder { context in
-            // TODO: Define as component
-//            if context.component.type == .card {
-//                .definition(.surface(.init(
-//                    foreground: \.onAccentAlt,
-//                    background: \.accentAlt
-//                )))
-//            } else {
-                .definition(.surface(.init(
-                    foreground: \.onAccent,
-                    background: \.accent0
-                )))
-//            }
+            .definition(.surface(.init(
+                foreground: \.onAccent,
+                background: \.accent0
+            )))
         }
     }
     
@@ -107,61 +99,33 @@ extension SnapStyle.SurfaceKey {
     
     public var disabledContainer: ValueBuilder {
         .builder { context in
-            // TODO: Define in component
-//            if context.component.type == .card {
-//                .definition(.surface(.init(
-//                    background: \.content2
-//                )))
-//            } else {
-                .definition(.surface(.init(
-                    background: \.content1
-                )))
-//            }
+            .definition(.surface(.init(
+                background: \.content1
+            )))
         }
     }
     
     public var disabledElement: ValueBuilder {
         .builder { context in
-            // TODO: Define in component
-//            if context.component.type == .card {
-//                .definition(.surface(.init(
-//                    foreground: \.content1
-//                )))
-//            } else {
-                .definition(.surface(.init(
-                    foreground: \.onContent1
-                )))
-//            }
+            .definition(.surface(.init(
+                foreground: \.onContent1
+            )))
         }
     }
     
     public var highlightedContainer: ValueBuilder {
         .builder { context in
-            // TODO: Define in component
-//            return if context.component.type == .card {
-//                .definition(.surface(.init(
-//                    background: \.accentAlt
-//                )))
-//            } else {
-                .definition(.surface(.init(
-                    background: \.accentAlt
-                )))
-//            }
+            .definition(.surface(.init(
+                background: \.accentAlt
+            )))
         }
     }
     
     public var highlightedElement: ValueBuilder {
         .builder { context in
-            // TODO: Define in component
-//            if context.component.type == .card {
-//                .definition(.surface(.init(
-//                    foreground: \.accentAlt
-//                )))
-//            } else {
-                .definition(.surface(.init(
-                    foreground: \.accent0
-                )))
-//            }
+            .definition(.surface(.init(
+                foreground: \.accent0
+            )))
         }
     }
 
