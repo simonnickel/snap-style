@@ -24,22 +24,15 @@ struct StructuredScreen: View {
     
     @ViewBuilder
     private var contentCardRow: some View {
-        // TODO: This could be a component
-        ScrollView(.horizontal) {
-            LazyHStack {
-                contentCard
-                contentCard
-                contentCard
-                contentCard
-                contentCard
-                contentCard
-                contentCard
-            }
-            .fixedSize(horizontal: false, vertical: true)
-            .scrollTargetLayout()
+        ScrollingHStack {
+            contentCard
+            contentCard
+            contentCard
+            contentCard
+            contentCard
+            contentCard
+            contentCard
         }
-        .scrollIndicators(.hidden)
-        .scrollTargetBehavior(.viewAligned)
     }
     
     @ViewBuilder
