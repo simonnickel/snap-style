@@ -46,7 +46,8 @@ public struct StyleScreen<Content>: View where Content : View {
             .frame(maxWidth: .infinity, alignment: .center)
         }
         // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets (see SurfaceKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault).
-        .style(safeAreaPadding: \.paddingScreen, .horizontal)
+        .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
+        .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
         .style(component: component)
         .styleContextBase()
     }
@@ -124,6 +125,8 @@ extension EnvironmentValues {
                 .background(.green)
             }
         }
+        .navigationTitle("Preview")
+        .navigationBarTitleDisplayMode(.inline)
     }
 //    .styleOverride(
 //        numbers: [

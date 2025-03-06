@@ -26,7 +26,8 @@ extension SnapStyle.NumberKey {
     public var paddingAnyElement: ValueBuilder { .base(nil) }
 
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
-    public var paddingScreen: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
     public var paddingContent: ValueBuilder { .base(.definition(.value(12))) }
     public var paddingList: ValueBuilder { .base(.definition(.value(12))) }
     public var paddingCard: ValueBuilder { .base(.definition(.value(16))) }

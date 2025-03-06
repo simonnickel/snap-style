@@ -77,5 +77,5 @@ internal struct SafeAreaPaddingModifier: ViewModifier {
             .background(.green)
         }
     }
-    .style(safeAreaPadding: \.paddingScreen)
+    .style(safeAreaPadding: \.paddingScreenHorizontal)
 }
