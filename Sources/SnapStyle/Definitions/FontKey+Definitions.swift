@@ -10,21 +10,9 @@ extension SnapStyle.FontKey {
 
     // MARK: - Component
     
-//    public var component: ValueBuilder {
-//        .builder { context in
-//            switch context.component.type {
-//                case .any: .reference(\.anyComponent)
-//                case .content: .reference(\.content)
-//                case .list: .reference(\.list)
-//                case .card: .reference(\.card)
-//            }
-//        }
-//    }
-    
     public var anyComponent: ValueBuilder { .base(nil) }
     
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
-    public var list: ValueBuilder { .base(.reference(\.content)) }
     public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
  
@@ -34,22 +22,12 @@ extension SnapStyle.FontKey {
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
-            // TODO: Define card title in card component
-//            if context.component.type == .card {
-//                return switch context.element.hierarchy {
-//                    case .any: .definition(.with(size: 24))
-//                    case .primary: .definition(.with(size: 24))
-//                    case .secondary: .definition(.with(size: 20))
-//                    case .tertiary: .definition(.with(size: 20))
-//                }
-//            } else {
-                return switch context.element.hierarchy {
-                    case .any: .definition(.with(size: 20))
-                    case .primary: .definition(.with(size: 20))
-                    case .secondary: .definition(.with(size: 16))
-                    case .tertiary: .definition(.with(size: 16))
-                }
-//            }
+            return switch context.element.hierarchy {
+                case .any: .definition(.with(size: 20))
+                case .primary: .definition(.with(size: 20))
+                case .secondary: .definition(.with(size: 16))
+                case .tertiary: .definition(.with(size: 16))
+            }
         }
     }
     

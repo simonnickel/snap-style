@@ -43,7 +43,7 @@ extension SnapStyle.NumberKey {
     
     // MARK: - Elements
     
-    // TODO: This should at least be named differently, if necessary at all.
+    // TODO list: This should at least be named differently, if necessary at all.
     public var listSeparator: ValueBuilder { .base(.definition(.value(1))) }
     
     

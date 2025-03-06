@@ -13,7 +13,7 @@ extension SnapStyle.SurfaceKey {
     // TODO: Materials
 
     
-    // MARK: - Component
+    // MARK: - Component: Container
     
     public var anyContainer: ValueBuilder { .base(nil) }
     
@@ -27,7 +27,7 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
-    public var content: ValueBuilder {
+    public var containerContent: ValueBuilder {
         .builder { context in
             .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
             // TODO: How to define hierarchy of components?
@@ -38,9 +38,9 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
-    public var list: ValueBuilder { .base(.reference(\.content)) }
+    public var containerList: ValueBuilder { .base(.reference(\.containerContent)) }
     
-    public var card: ValueBuilder {
+    public var containerCard: ValueBuilder {
         .builder { context in
             .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
             // TODO: How to define hierarchy of components?
@@ -51,7 +51,7 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
-    public var action: ValueBuilder {
+    public var containerAction: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
                 case .any, .primary:

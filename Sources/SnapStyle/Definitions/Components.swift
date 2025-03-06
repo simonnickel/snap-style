@@ -71,9 +71,14 @@ extension SnapStyle.Component {
                 default: nil
             }
         },
+        fonts: { element in
+            switch element {
+                default: \.content
+            }
+        },
         surfaces: { element in
             switch element {
-                case .container: \.content
+                case .container: \.containerContent
                 default: nil
             }
         },
@@ -97,13 +102,12 @@ extension SnapStyle.Component {
         },
         fonts: { element in
             switch element {
-                case .title: \.label
-                default: nil
+                default: \.card
             }
         },
         surfaces: { element in
             switch element {
-                case .container: \.card
+                case .container: \.containerCard
                 default: nil
             }
         },
@@ -127,7 +131,7 @@ extension SnapStyle.Component {
         },
         surfaces: { element in
             switch element {
-                case .container: \.action
+                case .container: \.containerAction
                 default: nil
             }
         },
