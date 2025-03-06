@@ -15,25 +15,26 @@ extension SnapStyle.SurfaceKey {
     
     // MARK: - Component
     
-    public var component: ValueBuilder {
+    public var anyContainer: ValueBuilder { .base(nil) }
+    
+    public var screen: ValueBuilder {
         .builder { context in
-            switch context.component.type {
-                case .any: .reference(\.anyComponent)
-                case .content: .reference(\.content)
-                case .list: .reference(\.list)
-                case .card: .reference(\.card)
-            }
+            .definition(.surface(.with(
+                foreground: nil,
+                background: \.screen,
+                ignoresSafeAreaEdges: .all // Background of screen should not respect .vertical safe area to stretch beyond \.`widthReadableContent`.
+            )))
         }
     }
     
-    public var anyComponent: ValueBuilder { .base(nil) }
-    
     public var content: ValueBuilder {
         .builder { context in
-            switch context.component.hierarchy {
-                case .any, .primary: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-                case .secondary: .definition(.surface(.with(foreground: \.onContent0, background: \.content1)))
-            }
+            .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
+            // TODO: How to define hierarchy of components?
+//            switch context.component.hierarchy {
+//                case .any, .primary: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
+//                case .secondary: .definition(.surface(.with(foreground: \.onContent0, background: \.content1)))
+//            }
         }
     }
 
@@ -41,29 +42,36 @@ extension SnapStyle.SurfaceKey {
     
     public var card: ValueBuilder {
         .builder { context in
-            switch context.component.hierarchy {
-                case .any, .primary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
-                case .secondary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+            .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+            // TODO: How to define hierarchy of components?
+//            switch context.component.hierarchy {
+//                case .any, .primary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+//                case .secondary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+//            }
+        }
+    }
+    
+    public var action: ValueBuilder {
+        .builder { context in
+            switch context.element.hierarchy {
+                case .any, .primary:
+                    if context.isHighlighted {
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                    } else {
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+                    }
+                case .secondary, .tertiary:
+                    if context.isHighlighted {
+                        .definition(.surface(.with(foreground: \.accent0, background: \.content1)))
+                    } else {
+                        .definition(.surface(.with(foreground: \.accent0, background: nil)))
+                    }
             }
         }
     }
     
 
     // MARK: - Element
-    
-    public var element: ValueBuilder {
-        .builder { context in
-            switch context.element.type {
-                case .any: .reference(\.anyElement)
-                case .title: .reference(\.title)
-                case .label: .reference(\.label)
-                case .icon: .reference(\.icon)
-                case .value: .reference(\.value)
-                case .cta: .reference(\.cta)
-                case .separator: .reference(\.separator)
-            }
-        }
-    }
 
     public var anyElement: ValueBuilder { .base(nil) }
     
@@ -77,17 +85,18 @@ extension SnapStyle.SurfaceKey {
 
     public var cta: ValueBuilder {
         .builder { context in
-            if context.component.type == .card {
-                .definition(.surface(.init(
-                    foreground: \.onAccentAlt,
-                    background: \.accentAlt
-                )))
-            } else {
+            // TODO: Define as component
+//            if context.component.type == .card {
+//                .definition(.surface(.init(
+//                    foreground: \.onAccentAlt,
+//                    background: \.accentAlt
+//                )))
+//            } else {
                 .definition(.surface(.init(
                     foreground: \.onAccent,
                     background: \.accent0
                 )))
-            }
+//            }
         }
     }
     
@@ -98,57 +107,61 @@ extension SnapStyle.SurfaceKey {
     
     public var disabledContainer: ValueBuilder {
         .builder { context in
-            if context.component.type == .card {
-                .definition(.surface(.init(
-                    background: \.content2
-                )))
-            } else {
+            // TODO: Define in component
+//            if context.component.type == .card {
+//                .definition(.surface(.init(
+//                    background: \.content2
+//                )))
+//            } else {
                 .definition(.surface(.init(
                     background: \.content1
                 )))
-            }
+//            }
         }
     }
     
     public var disabledElement: ValueBuilder {
         .builder { context in
-            if context.component.type == .card {
-                .definition(.surface(.init(
-                    foreground: \.content1
-                )))
-            } else {
+            // TODO: Define in component
+//            if context.component.type == .card {
+//                .definition(.surface(.init(
+//                    foreground: \.content1
+//                )))
+//            } else {
                 .definition(.surface(.init(
                     foreground: \.onContent1
                 )))
-            }
+//            }
         }
     }
     
     public var highlightedContainer: ValueBuilder {
         .builder { context in
-            return if context.component.type == .card {
+            // TODO: Define in component
+//            return if context.component.type == .card {
+//                .definition(.surface(.init(
+//                    background: \.accentAlt
+//                )))
+//            } else {
                 .definition(.surface(.init(
                     background: \.accentAlt
                 )))
-            } else {
-                .definition(.surface(.init(
-                    background: \.accentAlt
-                )))
-            }
+//            }
         }
     }
     
     public var highlightedElement: ValueBuilder {
         .builder { context in
-            if context.component.type == .card {
-                .definition(.surface(.init(
-                    foreground: \.accentAlt
-                )))
-            } else {
+            // TODO: Define in component
+//            if context.component.type == .card {
+//                .definition(.surface(.init(
+//                    foreground: \.accentAlt
+//                )))
+//            } else {
                 .definition(.surface(.init(
                     foreground: \.accent0
                 )))
-            }
+//            }
         }
     }
 

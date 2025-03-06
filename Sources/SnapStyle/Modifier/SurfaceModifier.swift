@@ -49,11 +49,12 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let background = style.surface(layer: .background, for: keyPath, in: styleContext),
+            let surface = style.surface(for: keyPath, in: styleContext),
+            let background = surface.surface(for: .background),
             let color = style.color(for: background, in: styleContext)
         {
             content
-                .background(color)
+                .background(color, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }

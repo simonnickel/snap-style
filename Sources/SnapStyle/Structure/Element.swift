@@ -9,8 +9,8 @@ extension SnapStyle {
 
     public struct Element: Hashable, Sendable, CaseIterable {
     
+        
     // MARK: Element
-    
 
         public let type: ElementType
         public let hierarchy: Hierarchy
@@ -29,11 +29,12 @@ extension SnapStyle {
 
             case any
             
+            case container
+            
             case title
             case label
             case icon
             case value
-            case cta
             case separator
 
         }

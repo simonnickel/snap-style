@@ -6,6 +6,58 @@
 extension SnapStyle {
     
     
+    // MARK: - CacheContainer
+    
+    /// A value type Container to bundle references to `StyleKey` specific caches.
+    internal struct CacheContainer {
+        
+        // References to `StyleKey` specific caches.
+        internal var numbers: KeyTypeCache<NumberKey> = .init()
+        internal var fonts: KeyTypeCache<FontKey> = .init()
+        internal var colors: KeyTypeCache<ColorKey> = .init()
+        internal var surfaces: KeyTypeCache<SurfaceKey> = .init()
+        internal var shapes: KeyTypeCache<ShapeKey> = .init()
+        
+        internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
+            switch Key.self {
+                    
+                case let key as NumberKey.Type: return numbers as? KeyTypeCache<Key>
+                    
+                case let key as FontKey.Type: return fonts as? KeyTypeCache<Key>
+                    
+                case let key as ColorKey.Type: return colors as? KeyTypeCache<Key>
+                    
+                case let key as SurfaceKey.Type: return surfaces as? KeyTypeCache<Key>
+                    
+                case let key as ShapeKey.Type: return shapes as? KeyTypeCache<Key>
+                    
+                default: fatalError("Cache is not setup properly.")
+
+            }
+        }
+        
+        /// Creates a new cache, the old cache will still be in use for a different style definition.
+        internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
+            switch Key.self {
+                    
+                case let key as NumberKey.Type: numbers = .init()
+                    
+                case let key as FontKey.Type: fonts = .init()
+                    
+                case let key as ColorKey.Type: colors = .init()
+                    
+                case let key as SurfaceKey.Type: surfaces = .init()
+                    
+                case let key as ShapeKey.Type: shapes = .init()
+                    
+                default: fatalError("Cache is not setup properly.")
+
+            }
+        }
+        
+    }
+    
+    
     // MARK: - KeyTypeCache
     
     package class KeyTypeCache<Key: StyleKey> {
@@ -69,51 +121,15 @@ extension SnapStyle {
     // MARK: Get & Set
     
     internal func getValueFromCache<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
-        guard let cache: KeyTypeCache<Key> = getCache() else { return nil }
+        guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return nil }
         
         return cache.getValue(for: keyPath, in: context)
     }
     
     internal func setValueInCache<Key: StyleKey>(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) {
-        guard let cache: KeyTypeCache<Key> = getCache() else { return }
+        guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return }
 
         cache.setValue(value, for: keyPath, in: context)
-    }
-    
-    internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
-        switch Key.self {
-                
-            case let key as NumberKey.Type: return cacheNumbers as? KeyTypeCache<Key>
-                
-            case let key as FontKey.Type: return cacheFonts as? KeyTypeCache<Key>
-                
-            case let key as ColorKey.Type: return cacheColors as? KeyTypeCache<Key>
-                
-            case let key as SurfaceKey.Type: return cacheSurfaces as? KeyTypeCache<Key>
-                
-            case let key as ShapeKey.Type: return cacheShapes as? KeyTypeCache<Key>
-                
-            default: fatalError("Cache is not setup properly.")
-
-        }
-    }
-    
-    internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
-        switch Key.self {
-                
-            case let key as NumberKey.Type: cacheNumbers = .init()
-                
-            case let key as FontKey.Type: cacheFonts = .init()
-                
-            case let key as ColorKey.Type: cacheColors = .init()
-                
-            case let key as SurfaceKey.Type: cacheSurfaces = .init()
-                
-            case let key as ShapeKey.Type: cacheShapes = .init()
-                
-            default: fatalError("Cache is not setup properly.")
-
-        }
     }
     
     
@@ -122,7 +138,7 @@ extension SnapStyle {
     /// For debug purposes.
     package func cachedKeyPaths<Key: StyleKey>(for: Key.Type) -> [Key.ValueBuilderKeyPath] {
         guard
-            let cache: KeyTypeCache<Key> = getCache()
+            let cache: KeyTypeCache<Key> = cacheContainer.getCache()
         else { return [] }
         
         return cache.keys
@@ -131,7 +147,7 @@ extension SnapStyle {
     /// For debug purposes.
     package func cachedContexts<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [SnapStyle.Context] {
         guard
-            let cache: KeyTypeCache<Key> = getCache(),
+            let cache: KeyTypeCache<Key> = cacheContainer.getCache(),
             let valueCache = cache.getValueCache(for: keyPath)
         else { return [] }
 
@@ -141,7 +157,7 @@ extension SnapStyle {
     /// For debug purposes.
     package func cachedValue<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
         guard
-            let cache: KeyTypeCache<Key> = getCache(),
+            let cache: KeyTypeCache<Key> = cacheContainer.getCache(),
             let valueCache = cache.getValueCache(for: keyPath)
         else { return nil }
 

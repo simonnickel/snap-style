@@ -4,13 +4,14 @@
 //
 
 import SnapStyle
+import SnapStyleBase
 import SwiftUI
 
 struct StructuredScreen: View {
     
     var body: some View {
         StyleScreen {
-            contentCards
+            contentCardRow
             
             content
                 .style(component: .content)
@@ -19,6 +20,26 @@ struct StructuredScreen: View {
                 .style(component: .content)
         }
         .navigationTitle("Structured")
+    }
+    
+    @ViewBuilder
+    private var contentCardRow: some View {
+        // TODO: This could be a component
+        ScrollView(.horizontal) {
+            LazyHStack {
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+                contentCard
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .scrollTargetLayout()
+        }
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
     }
     
     @ViewBuilder
@@ -62,6 +83,7 @@ struct StructuredScreen: View {
             }
         }
         .style(component: .card)
+        .fixedSize(horizontal: false, vertical: true)
     }
     
     @ViewBuilder
@@ -87,42 +109,37 @@ struct StructuredScreen: View {
     
     @ViewBuilder
     private var contentList: some View {
-        // TODO: Style a List without using List
+        // TODO list: Style a List without using List
         StyleVStack {
             ForEach(0..<3) { index in
                 StyleVStack {
                     StyleHStack {
                         Label("Row \(index)", systemImage: "star")
-                            .padding(5) // TODO: Element Padding, ListRow as Component?
+                            .padding(5) // TODO list: Element Padding, ListRow as Component?
                         Spacer()
                         Text("\(index)")
                     }
                     StyleShape(shape: .rectangle, surface: \.separator)
-                        .frame(height: 1) // TODO: Use number \.listSeparator
+                        .frame(height: 1) // TODO list: Use number \.listSeparator
                 }
             }
         }
-        .style(component: .list)
+        // TODO list: New style of component
+//        .style(component: .list)
     }
     
     @ViewBuilder
     private var contentButtons: some View {
         StyleHStack {
-            // TODO: Secondary Button Style
-            Button {} label: {
+            StyleButton {} content: {
                 Label("Action", systemImage: "star")
             }
-            .buttonStyle(.borderless)
-            .style(element: .cta, hierarchy: .secondary)
             
             Spacer()
             
-            // TODO: Primary Button Style
-            Button {} label: {
+            StyleButton {} content: {
                 Label("Action", systemImage: "star")
             }
-            .buttonStyle(.borderedProminent)
-            .style(element: .cta, hierarchy: .primary)
         }
     }
     
@@ -136,5 +153,12 @@ struct StructuredScreen: View {
 #Preview {
     NavigationStack {
         StructuredScreen()
+            .styleOverride(
+                colors: [
+                    \.onAccent : SnapStyle.ValueBuilder.builder { context in
+                            .definition(.value(.yellow))
+                    }
+                ]
+            )
     }
 }

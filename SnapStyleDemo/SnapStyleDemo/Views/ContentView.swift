@@ -32,20 +32,14 @@ struct ContentView: View {
                     Text("Examples")
                 }
                 Section {
-                    NavigationLink("Numbers") {
-                        DebugKeyScreen(keyPath: \.numbers)
+                    NavigationLink("Buttons") {
+                        ButtonsScreen()
                     }
-                    NavigationLink("Fonts") {
-                        DebugKeyScreen(keyPath: \.fonts)
-                    }
-                    NavigationLink("Colors") {
-                        DebugKeyScreen(keyPath: \.colors)
-                    }
-                    NavigationLink("Surfaces") {
-                        DebugKeyScreen(keyPath: \.surfaces)
+                    NavigationLink("Elements") {
+                        DebugKeyScreen()
                     }
                 } header: {
-                    Text("Keys")
+                    Text("Components")
                 }
                 Section {
                     NavigationLink("Numbers") {

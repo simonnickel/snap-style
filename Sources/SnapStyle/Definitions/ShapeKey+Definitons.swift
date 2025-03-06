@@ -8,22 +8,17 @@ import SnapStyleBase
 extension SnapStyle.ShapeKey {
     
     
-    // MARK: - Container
+    // MARK: - Component
     
-    public var componentContainer: ValueBuilder {
-        .builder { context in
-            switch context.component.type {
-                case .any: .reference(\.containerAnyComponent)
-                case .content: .reference(\.containerContent)
-                case .list: .reference(\.containerList)
-                case .card: .reference(\.containerCard)
-            }
-        }
-    }
-
-    public var containerAnyComponent: ValueBuilder { .base(nil) }
+    public var anyContainer: ValueBuilder { .base(nil) }
     public var containerContent: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusContent)))) }
     public var containerList: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusList)))) }
     public var containerCard: ValueBuilder  { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusCard)))) }
+    public var containerAction: ValueBuilder  { .base(.definition(.value(.capsule))) }
+    
+    
+    // MARK: - Element
+    
+    public var anyElement: ValueBuilder { .base(nil) }
     
 }

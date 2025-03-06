@@ -7,42 +7,6 @@ import SnapStyleBase
 import SwiftUI
 
 
-// MARK: - Component
-
-extension View {
-    
-    public func style(
-        component: SnapStyle.Component.ComponentType,
-        hierarchy: SnapStyle.Component.Hierarchy = .primary,
-        maxWidth: CGFloat? = .infinity,
-        alignment: Alignment = .leading,
-        applyStyle: Bool = true
-    ) -> some View {
-        Group {
-            if applyStyle {
-                self.applyComponentStyle()
-            } else {
-                self
-            }
-        }
-        .style(attribute: SnapStyle.Context.component, value: SnapStyle.Component(type: component, hierarchy: hierarchy))
-    }
-    
-    private func applyComponentStyle(
-        maxWidth: CGFloat? = .infinity,
-        alignment: Alignment = .leading
-    ) -> some View {
-        self
-            .frame(maxWidth: maxWidth, alignment: alignment)
-            .style(padding: \.paddingComponent, .all)
-            .style(surface: \.component)
-            .style(font: \.component)
-            .style(shape: \.componentContainer)
-    }
-
-}
-    
-
 // MARK: - Element
 
 extension View {
@@ -50,7 +14,7 @@ extension View {
     public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
             if applyStyle {
-                self.applyElementStyle()
+                self.modifier(ElementApplyStyleModifier())
             } else {
                 self
             }
@@ -61,14 +25,35 @@ extension View {
     /// Shortcut to adjust the elements hierarchy.
     public func style(hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
         self
-            .applyElementStyle()
+            .modifier(ElementApplyStyleModifier())
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
     
-    private func applyElementStyle() -> some View {
-        self
-            .style(font: \.element)
-            .style(surface: \.element)
+}
+
+
+// MARK: ElementApplyStyleModifier
+
+private struct ElementApplyStyleModifier: ViewModifier {
+    
+    @Environment(\.styleContext) private var context
+
+    func body(content: Content) -> some View {
+        let component = context.component
+        let element = context.element.type
+        
+        let base = SnapStyle.Component.base
+        
+        let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
+        let paddingKeyPath = component.padding?(element) ?? base.padding?(element) ?? \.paddingAnyElement
+        let surfaceKeyPath = component.surfaces?(element) ?? base.surfaces?(element) ?? \.anyElement
+        let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
+        
+        content
+            .style(font: fontKeyPath)
+            .style(padding: paddingKeyPath)
+            .style(surface: surfaceKeyPath)
+            .style(shape: shapeKeyPath)
     }
     
 }

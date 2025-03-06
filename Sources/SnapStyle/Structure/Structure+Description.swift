@@ -8,7 +8,7 @@ import SnapStyleBase
 extension SnapStyle.Component: CustomStringConvertible {
     
     public var description: String {
-        type.rawValue + "." + hierarchy.rawValue
+        id
     }
     
 }

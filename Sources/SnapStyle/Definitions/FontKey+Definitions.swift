@@ -10,16 +10,16 @@ extension SnapStyle.FontKey {
 
     // MARK: - Component
     
-    public var component: ValueBuilder {
-        .builder { context in
-            switch context.component.type {
-                case .any: .reference(\.anyComponent)
-                case .content: .reference(\.content)
-                case .list: .reference(\.list)
-                case .card: .reference(\.card)
-            }
-        }
-    }
+//    public var component: ValueBuilder {
+//        .builder { context in
+//            switch context.component.type {
+//                case .any: .reference(\.anyComponent)
+//                case .content: .reference(\.content)
+//                case .list: .reference(\.list)
+//                case .card: .reference(\.card)
+//            }
+//        }
+//    }
     
     public var anyComponent: ValueBuilder { .base(nil) }
     
@@ -30,39 +30,26 @@ extension SnapStyle.FontKey {
  
     // MARK: - Element
     
-    public var element: ValueBuilder {
-        .builder { context in
-            switch context.element.type {
-                case .any: .reference(\.anyElement)
-                case .title: .reference(\.title)
-                case .label: .reference(\.label)
-                case .icon: .reference(\.icon)
-                case .value: .reference(\.value)
-                case .cta: .reference(\.cta)
-                case .separator: .reference(\.separator)
-            }
-        }
-    }
-    
     public var anyElement: ValueBuilder { .base(nil) }
     
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
-            if context.component.type == .card {
-                return switch context.element.hierarchy {
-                    case .any: .definition(.with(size: 24))
-                    case .primary: .definition(.with(size: 24))
-                    case .secondary: .definition(.with(size: 20))
-                    case .tertiary: .definition(.with(size: 20))
-                }
-            } else {
+            // TODO: Define card title in card component
+//            if context.component.type == .card {
+//                return switch context.element.hierarchy {
+//                    case .any: .definition(.with(size: 24))
+//                    case .primary: .definition(.with(size: 24))
+//                    case .secondary: .definition(.with(size: 20))
+//                    case .tertiary: .definition(.with(size: 20))
+//                }
+//            } else {
                 return switch context.element.hierarchy {
                     case .any: .definition(.with(size: 20))
                     case .primary: .definition(.with(size: 20))
                     case .secondary: .definition(.with(size: 16))
                     case .tertiary: .definition(.with(size: 16))
                 }
-            }
+//            }
         }
     }
     
@@ -71,8 +58,6 @@ extension SnapStyle.FontKey {
     public var icon: ValueBuilder { .base(nil) }
     
     public var value: ValueBuilder { .base(nil) }
-    
-    public var cta: ValueBuilder { .base(nil) }
     
     public var separator: ValueBuilder { .base(nil) }
     
