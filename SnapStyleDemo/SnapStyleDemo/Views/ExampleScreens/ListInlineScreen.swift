@@ -17,7 +17,6 @@ struct ListInlineScreen: View {
     
     @ViewBuilder
     private var content: some View {
-        // TODO: Lazy
         StyleVStack(spacing: \.spacingSections) {
             ListSectionView(data: .init(title: "Section A", count: 4))
             ListSectionView(data: .init(title: "Section B", count: 6))

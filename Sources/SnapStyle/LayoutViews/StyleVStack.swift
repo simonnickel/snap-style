@@ -13,21 +13,31 @@ public struct StyleVStack<Content>: View where Content : View {
     
     private let alignment: HorizontalAlignment
     private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
+    private let isLazy: Bool
     private let content: () -> Content
     
     public init(
         spacing: SnapStyle.NumberKey.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
+        isLazy: Bool = false,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.alignment = alignment
         self.spacing = spacing
+        self.isLazy = isLazy
         self.content = content
     }
     
     public var body: some View {
-        VStack(alignment: alignment, spacing: CGFloat(spacing(for: spacing))) {
-            content()
+        let spacing = CGFloat(spacing(for: spacing))
+        if isLazy {
+            LazyVStack(alignment: alignment, spacing: spacing) {
+                content()
+            }
+        } else {
+            VStack(alignment: alignment, spacing: spacing) {
+                content()
+            }
         }
     }
     
@@ -40,4 +50,27 @@ public struct StyleVStack<Content>: View where Content : View {
         }
     }
     
+}
+
+
+// MARK: - Preview
+
+#Preview {
+    StyleVStack {
+        Text("Test 1")
+            .background(.green)
+        Text("Test Row 2")
+            .background(.mint)
+    }
+    .background(.yellow)
+}
+
+#Preview("Lazy") {
+    StyleVStack(isLazy: true) {
+        Text("Test Row 1")
+            .background(.green)
+        Text("Test Row 2")
+            .background(.mint)
+    }
+    .background(.yellow)
 }
