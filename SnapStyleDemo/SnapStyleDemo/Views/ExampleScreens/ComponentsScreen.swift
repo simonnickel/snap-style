@@ -27,8 +27,8 @@ struct ComponentsScreen: View {
         VStack(alignment: .leading) {
             Text("\(component.id), .primary")
             HStack {
-                ElementStack(hierarchy: .primary)
-                ElementStack(hierarchy: .secondary)
+                ElementStackView(hierarchy: .primary)
+                ElementStackView(hierarchy: .secondary)
                 contentStates()
             }
 //            contentComponentSecondary(type)

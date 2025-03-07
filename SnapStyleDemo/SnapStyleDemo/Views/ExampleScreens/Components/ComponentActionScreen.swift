@@ -11,12 +11,12 @@ struct ComponentActionScreen: View {
         StyleScreen {
             
             StyleVStack(isStretching: false) {
-                ElementStack(axis: .horizontal)
+                ElementStackView(axis: .horizontal)
             }
             .style(component: .action)
             
             StyleVStack(isStretching: false) {
-                ElementStack(axis: .horizontal, hierarchy: .secondary)
+                ElementStackView(axis: .horizontal, hierarchy: .secondary)
             }
             .style(component: .action)
             

@@ -11,12 +11,12 @@ struct ComponentCardScreen: View {
         StyleScreen {
             
             StyleVStack {
-                ElementStack(axis: .horizontal)
+                ElementStackView(axis: .horizontal)
             }
             .style(component: .card)
             
             StyleVStack {
-                ElementStack(axis: .horizontal, hierarchy: .secondary)
+                ElementStackView(axis: .horizontal, hierarchy: .secondary)
             }
             .style(component: .card)
             

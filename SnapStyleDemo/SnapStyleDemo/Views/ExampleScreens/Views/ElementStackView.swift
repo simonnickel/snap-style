@@ -7,7 +7,7 @@ import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
-struct ElementStack: View {
+struct ElementStackView: View {
     
     let axis: Axis
     let hierarchy: SnapStyle.Element.Hierarchy
@@ -31,7 +31,6 @@ struct ElementStack: View {
                 }
         }
         
-        
     }
     
     private var content: some View {
@@ -47,5 +46,5 @@ struct ElementStack: View {
 // MARK: - Preview
 
 #Preview {
-    ElementStack(hierarchy: .primary)
+    ElementStackView(hierarchy: .primary)
 }
