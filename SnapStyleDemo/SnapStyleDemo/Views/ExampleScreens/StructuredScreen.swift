@@ -39,7 +39,7 @@ struct StructuredScreen: View {
     private var content: some View {
         StyleVStack(spacing: \.spacingSections) {
             contentCards
-            contentText
+            StructuredTextView()
             contentList
             contentButtons
         }
@@ -80,27 +80,6 @@ struct StructuredScreen: View {
     }
     
     @ViewBuilder
-    private var contentText: some View {
-        StyleVStack(spacing: \.spacingGroups) {
-            StyleVStack {
-                Text("Title")
-                Text("Subitle")
-                    .style(hierarchy: .secondary)
-            }
-            .style(element: .title)
-            
-            paragraph
-            
-            StyleVStack(spacing: \.spacingElements) {
-                Text("Section Title")
-                    .style(element: .title, hierarchy: .tertiary)
-                
-                paragraph
-            }
-        }
-    }
-    
-    @ViewBuilder
     private var contentList: some View {
         // TODO list: Style a List without using List
         StyleVStack {
@@ -134,11 +113,6 @@ struct StructuredScreen: View {
                 Label("Action", systemImage: "star")
             }
         }
-    }
-    
-    private var paragraph: some View {
-        Text("Paragraph with some text to fill a few lines. This is supposed to be a block of text that can be read properly. While the other elements are supposed to provide context and structure to it.")
-            .style(element: .any)
     }
     
 }

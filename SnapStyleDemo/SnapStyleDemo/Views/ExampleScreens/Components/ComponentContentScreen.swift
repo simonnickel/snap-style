@@ -19,9 +19,13 @@ struct ComponentContentScreen: View {
                 ElementStackView(axis: .horizontal, hierarchy: .secondary)
             }
             .style(component: .content)
-            
+         
+            StructuredTextView()
+                .style(component: .content)
+
         }
     }
+
 }
 
 
