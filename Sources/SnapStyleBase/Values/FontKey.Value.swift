@@ -18,19 +18,19 @@ extension SnapStyle.FontKey {
         
         public typealias WrappedValue = Font
         
-        case with(size: CGFloat)
+        case with(size: CGFloat, weight: Font.Weight = .regular)
         case font(Font)
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .with(size: let size): Definition(size: size).font
+                case .with(size: let size, let weight): Definition(size: size, weight: weight).font
                 case .font(let font): font
             }
         }
         
         public var description: String {
             switch self {
-                case .with(size: let size): ".definition: \(Definition(size: size))"
+                case .with(size: let size, weight: let weight): ".definition: \(Definition(size: size, weight: weight))"
                 case .font(let font): ".font"
             }
         }
@@ -41,16 +41,18 @@ extension SnapStyle.FontKey {
         public struct Definition: CustomStringConvertible {
             
             let size: CGFloat
+            let weight: Font.Weight
             
-            public init(size: CGFloat) {
+            public init(size: CGFloat, weight: Font.Weight) {
                 self.size = size
+                self.weight = weight
             }
             
             var font: Font {
-                Font.system(size: size)
+                Font.system(size: size, weight: weight)
             }
             
-            public var description: String { "size: \(size)" }
+            public var description: String { "size: \(size), weight: \(weight)" }
             
         }
     
