@@ -13,22 +13,35 @@ public struct StyleVStack<Content>: View where Content : View {
     
     private let alignment: HorizontalAlignment
     private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
+    private let isStretching: Bool
     private let isLazy: Bool
     private let content: () -> Content
     
     public init(
         spacing: SnapStyle.NumberKey.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
+        isStretching: Bool = true,
         isLazy: Bool = false,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.alignment = alignment
         self.spacing = spacing
+        self.isStretching = isStretching
         self.isLazy = isLazy
         self.content = content
     }
     
     public var body: some View {
+        if isStretching {
+            contentStack
+                .frame(maxWidth: .infinity, alignment: Alignment(horizontal: alignment, vertical: .center))
+        } else {
+            contentStack
+        }
+    }
+    
+    @ViewBuilder
+    private var contentStack: some View {
         let spacing = CGFloat(spacing(for: spacing))
         if isLazy {
             LazyVStack(alignment: alignment, spacing: spacing) {
