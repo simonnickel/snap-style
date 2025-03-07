@@ -16,6 +16,20 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
+                    NavigationLink("Content") {
+                        ComponentContentScreen()
+                    }
+                    NavigationLink("Card") {
+                        ComponentCardScreen()
+                    }
+                    NavigationLink("Action") {
+                        ComponentActionScreen()
+                    }
+                } header: {
+                    Text("Components")
+                }
+                
+                Section {
                     NavigationLink("Components") {
                         ComponentsScreen()
                     }

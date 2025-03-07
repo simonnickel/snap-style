@@ -27,8 +27,8 @@ struct ComponentsScreen: View {
         VStack(alignment: .leading) {
             Text("\(component.id), .primary")
             HStack {
-                contentElements(hierarchy: .primary)
-                contentElements(hierarchy: .secondary)
+                ElementStack(hierarchy: .primary)
+                ElementStack(hierarchy: .secondary)
                 contentStates()
             }
 //            contentComponentSecondary(type)
@@ -46,16 +46,6 @@ struct ComponentsScreen: View {
 //        }
 //        .style(component: type, hierarchy: .secondary)
 //    }
-    
-    @ViewBuilder
-    private func contentElements(hierarchy: SnapStyle.Element.Hierarchy) -> some View {
-        VStack(alignment: .leading) {
-            ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { elementType in
-                Text("\(elementType)")
-                    .style(element: elementType, hierarchy: hierarchy)
-            }
-        }
-    }
     
     @ViewBuilder
     private func contentStates() -> some View {
