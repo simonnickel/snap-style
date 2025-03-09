@@ -20,29 +20,43 @@ struct ComponentCardScreen: View {
             }
             .style(component: .card)
             
-            StyleHStack {
-                contentCornerView
-            }
-            .style(component: .card)
+            contentCornerValueCard
             
             ScrollingHStack {
-                contentCornerView
-                    .style(component: .card)
-                contentCornerView
-                    .style(component: .card)
-                contentCornerView
-                    .style(component: .card)
-                contentCornerView
-                    .style(component: .card)
-                contentCornerView
-                    .style(component: .card)
+                contentCornerValueCard
+                contentCornerValueCard
+                contentCornerValueCard
+                contentCornerValueCard
+                contentCornerValueCard
+                contentCornerValueCard
             }
             
+            contentCardView
+                .style(component: .card)
         }
     }
     
-    // TODO: Should this be a specific Component? Like Value/Stats Card.
-    private var contentCornerView: some View {
+    private var contentCardView: some View {
+        StyleVStack {
+            StructuredTextView()
+            StyleHStack {
+                // TODO: Should be .secondary, but is not visible. Could be automatically detected to use different accen style.
+                StyleButton(.primary) { } content: {
+                    Text("Primary")
+                        .style(element: .title)
+                }
+                .style(component: .action)
+                StyleSpacer()
+                StyleButton(.primary) { } content: {
+                    Text("Primary")
+                        .style(element: .title)
+                }
+                .style(component: .action)
+            }
+        }
+    }
+    
+    private var contentCornerValueCard: some View {
         CornerContainer(
             topLeading: {
                 Image(systemName: "star")
@@ -53,13 +67,18 @@ struct ComponentCardScreen: View {
                     .style(element: .value)
             },
             bottomLeading: {
-                Text("Title")
-                    .style(element: .title)
+                StyleVStack {
+                    Text("Title")
+                        .style(element: .title)
+                    Text("Subtitle")
+                        .style(element: .title, hierarchy: .secondary)
+                }
             },
             bottomTrailing: {
                 EmptyView()
             }
         )
+        .style(component: .valueCard)
     }
 }
 

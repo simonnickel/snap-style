@@ -121,6 +121,35 @@ extension SnapStyle.Component {
         }
     )
     
+    public static let valueCard: Self = .init("valueCard",
+        padding: { element in
+            switch element {
+                case .container: \.paddingCard
+                default: nil
+            }
+        },
+        fonts: { element in
+            switch element {
+                case .title: \.title
+                case .icon: \.title
+                case .value: \.title
+                default: \.card
+            }
+        },
+        surfaces: { element in
+            switch element {
+                case .container: \.containerCard
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerCard
+                default: nil
+            }
+        }
+    )
+    
     
     // MARK: - Action
     
