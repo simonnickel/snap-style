@@ -103,6 +103,7 @@ extension SnapStyle.Component {
         },
         fonts: { element in
             switch element {
+                case .title: \.title
                 default: \.card
             }
         },
