@@ -5,13 +5,20 @@
 
 import SwiftUI
 
-public struct StyleList<Content: View>: View {
+public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     
     // TODO: Add support for data based inits
     
+    private let selection: Binding<SelectionValue?>?
     private let content: () -> Content
     
-    public init(@ViewBuilder content: @escaping () -> Content) {
+    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: @escaping () -> Content) {
+        self.selection = selection
+        self.content = content
+    }
+    
+    public init(@ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+        self.selection = nil
         self.content = content
     }
     
