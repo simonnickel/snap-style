@@ -39,4 +39,11 @@ extension SnapStyle.FontKey {
     
     public var separator: ValueBuilder { .base(nil) }
     
+    
+    // MARK: - Label
+    
+    public var listSectionheader: ValueBuilder {
+        .base(.definition(.font(.system(size: 16, weight: .medium)))) // TODO: re-use the title.secondary value. Either by extracting it into a seperate var or by .reference with hierarchy adjustment.
+    }
+    
 }

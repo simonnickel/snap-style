@@ -92,6 +92,24 @@ extension SnapStyle.Component {
     )
     
     
+    // MARK: - List
+    
+    public static let list: Self = .init("list",
+        fonts: { element in
+            switch element {
+                case .title: \.listSectionheader
+                default: nil
+            }
+        },
+        surfaces: { element in
+            switch element {
+                case .container: \.screen
+                default: nil
+            }
+        }
+    )
+    
+    
     // MARK: - Card
     
     public static let card: Self = .init("card",
