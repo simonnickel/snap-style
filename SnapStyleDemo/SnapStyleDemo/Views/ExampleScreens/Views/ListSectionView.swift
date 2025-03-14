@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SwiftUI
 
 struct ListSectionView: View {
@@ -36,7 +37,7 @@ struct ListSectionView: View {
                 ListItemView(data: item)
             }
         } header: {
-            Label(data.title, systemImage: "star")
+            StyleLabel(title: data.title, icon: "star")
         }
     }
     
@@ -51,7 +52,7 @@ struct ListSectionView: View {
         let data: Data
         
         var body: some View {
-            Label(data.title, systemImage: data.icon)
+            StyleLabel(title: data.title, icon: data.icon)
         }
     }
 }
