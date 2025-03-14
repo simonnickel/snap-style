@@ -37,7 +37,8 @@ struct ListSectionView: View {
                 ListItemView(data: item)
             }
         } header: {
-            StyleLabel(title: data.title, icon: "star")
+            StyleLabel(title: data.title)
+                .style(element: .title)
         }
     }
     
@@ -55,10 +56,14 @@ struct ListSectionView: View {
             StyleLabel(title: data.title, icon: data.icon)
         }
     }
+
 }
 
+
+// MARK: - Preview
+
 #Preview {
-    List {
+    StyleList {
         ListSectionView(data: .init(title: "Preview", count: 30))
     }
 }

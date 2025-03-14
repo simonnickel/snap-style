@@ -22,6 +22,9 @@ struct ContentView: View {
                     NavigationLink("Card") {
                         ComponentCardScreen()
                     }
+                    NavigationLink("List") {
+                        ComponentListScreen()
+                    }
                     NavigationLink("Action") {
                         ComponentActionScreen()
                     }
