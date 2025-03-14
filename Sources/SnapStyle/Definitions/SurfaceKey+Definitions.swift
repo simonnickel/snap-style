@@ -37,8 +37,6 @@ extension SnapStyle.SurfaceKey {
 //            }
         }
     }
-
-    public var containerList: ValueBuilder { .base(.reference(\.containerContent)) }
     
     public var containerCard: ValueBuilder {
         .builder { context in

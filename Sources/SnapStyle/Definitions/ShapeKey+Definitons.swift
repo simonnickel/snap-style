@@ -12,7 +12,6 @@ extension SnapStyle.ShapeKey {
     
     public var anyContainer: ValueBuilder { .base(nil) }
     public var containerContent: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusContent)))) }
-    public var containerList: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusList)))) } // TODO list: Is this needed?
     public var containerCard: ValueBuilder  { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusCard)))) }
     public var containerAction: ValueBuilder  { .base(.definition(.value(.capsule))) }
     

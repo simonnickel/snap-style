@@ -39,12 +39,6 @@ struct ContentView: View {
                     NavigationLink("Structured") {
                         StructuredScreen()
                     }
-                    NavigationLink("List Native") {
-                        ListNativeScreen()
-                    }
-                    NavigationLink("List Inline") {
-                        ListInlineScreen()
-                    }
                 } header: {
                     Text("Examples")
                 }

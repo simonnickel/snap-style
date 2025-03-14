@@ -41,12 +41,6 @@ extension SnapStyle.NumberKey {
     public var cornerRadiusCard: ValueBuilder { .base(.definition(.value(8))) }
     
     
-    // MARK: - Elements
-    
-    // TODO list: This should at least be named differently, if necessary at all.
-    public var listSeparator: ValueBuilder { .base(.definition(.value(1))) }
-    
-    
     // MARK: - Animation
     
     public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.2))) }

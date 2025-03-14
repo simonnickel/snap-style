@@ -40,7 +40,6 @@ struct StructuredScreen: View {
         StyleVStack(spacing: \.spacingSections) {
             contentCards
             StructuredTextView()
-            contentList
             contentButtons
         }
     }
@@ -77,27 +76,6 @@ struct StructuredScreen: View {
         }
         .style(component: .card)
         .fixedSize(horizontal: false, vertical: true)
-    }
-    
-    @ViewBuilder
-    private var contentList: some View {
-        // TODO list: Style a List without using List
-        StyleVStack {
-            ForEach(0..<3) { index in
-                StyleVStack {
-                    StyleHStack {
-                        Label("Row \(index)", systemImage: "star")
-                            .padding(5) // TODO list: Element Padding, ListRow as Component?
-                        Spacer()
-                        Text("\(index)")
-                    }
-                    StyleShape(shape: .rectangle, surface: \.separator)
-                        .frame(height: 1) // TODO list: Use number \.listSeparator
-                }
-            }
-        }
-        // TODO list: New style of component
-//        .style(component: .list)
     }
     
     @ViewBuilder
