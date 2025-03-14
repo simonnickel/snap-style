@@ -38,6 +38,10 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
+    public var containerList: ValueBuilder {
+        .base(.reference(\.containerContent))
+    }
+    
     public var containerCard: ValueBuilder {
         .builder { context in
             .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))

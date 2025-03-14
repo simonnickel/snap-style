@@ -25,6 +25,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     public var body: some View {
         List {
             content()
+                .style(listRowBackground: \.containerList)
         }
         .scrollContentBackground(.hidden)
         .style(component: .list)
