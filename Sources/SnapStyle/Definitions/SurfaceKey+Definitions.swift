@@ -29,12 +29,12 @@ extension SnapStyle.SurfaceKey {
     
     public var containerContent: ValueBuilder {
         .builder { context in
-            .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-            // TODO: How to define hierarchy of components?
-//            switch context.component.hierarchy {
-//                case .any, .primary: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-//                case .secondary: .definition(.surface(.with(foreground: \.onContent0, background: \.content1)))
-//            }
+            switch context.componentStack.level {
+                case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
+                case 2: .definition(.surface(.with(background: \.content1)))
+                case 3: .definition(.surface(.with(background: \.content2)))
+                default: nil
+            }
         }
     }
     
@@ -44,12 +44,12 @@ extension SnapStyle.SurfaceKey {
     
     public var containerCard: ValueBuilder {
         .builder { context in
-            .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
-            // TODO: How to define hierarchy of components?
-//            switch context.component.hierarchy {
-//                case .any, .primary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
-//                case .secondary: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
-//            }
+            switch context.componentStack.level {
+                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+                case 2: .definition(.surface(.with(background: \.accent1)))
+                case 3: .definition(.surface(.with(background: \.accent2)))
+                default: nil
+            }
         }
     }
     

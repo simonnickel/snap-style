@@ -23,6 +23,13 @@ struct ComponentContentScreen: View {
             StructuredTextView()
                 .style(component: .content)
 
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Secondary")
+                    .style(element: .title)
+                StructuredTextView()
+                    .style(component: .content)
+            }
+            .style(component: .content)
         }
     }
 

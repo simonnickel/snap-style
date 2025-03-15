@@ -46,6 +46,46 @@ extension SnapStyle {
         
     }
     
+    
+    // MARK: ComponentStack
+    
+    package struct ComponentStack: Hashable {
+        
+        private var components: [SnapStyle.Component] = []
+        
+        var current: Component? { components.last }
+        
+        /// Level of components independent of `Component`.
+        var levelOverall: Int {
+            components.count - 1
+        }
+        
+        /// Level of consistent `Component` stacked without interruption.
+        var level: Int {
+            var result = 1
+            var index = components.count - 1
+            var continueLoop: Bool = true
+            while continueLoop && index > 0 {
+                index -= 1
+                let parentComponent = components[index]
+                if parentComponent == current {
+                    result += 1
+                } else {
+                    continueLoop = false
+                }
+            }
+            
+            return result
+        }
+        
+        func appended(_ component: SnapStyle.Component) -> Self {
+            var result = self
+            result.components.append(component)
+            return result
+        }
+        
+    }
+    
 }
 
 
@@ -53,8 +93,10 @@ extension SnapStyle {
 
 extension SnapStyle.Context {
     
-    public var component: SnapStyle.Component { getValue(for: Self.component) ?? .base }
-    package static var component: Attribute<String, SnapStyle.Component> { .init(key: "component", valueDefault: .base) }
+    package var componentStack: SnapStyle.ComponentStack { getValue(for: Self.componentStack) ?? .init() }
+    package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
+    
+    public var component: SnapStyle.Component { componentStack.current ?? .base }
     
 }
 
@@ -70,6 +112,7 @@ extension View {
     /// - Returns: A modified View.
     public func style(component: SnapStyle.Component, containerHierarchy: SnapStyle.Element.Hierarchy? = .primary) -> some View {
         Group {
+            // TODO: Should containerHierarchy still be a thing?
             if let containerHierarchy {
                 self
                     .style(element: .container, hierarchy: containerHierarchy)
@@ -77,7 +120,22 @@ extension View {
                 self
             }
         }
-        .style(attribute: SnapStyle.Context.component, value: component)
+        .modifier(ComponentModifier(component: component))
     }
     
+}
+
+internal struct ComponentModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
+    
+    let component: SnapStyle.Component
+
+    func body(content: Content) -> some View {
+        var componentStack = styleContext.componentStack.appended(component)
+        content
+            .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
+    }
+
 }

@@ -28,6 +28,9 @@ struct ContentView: View {
                     NavigationLink("Action") {
                         ComponentActionScreen()
                     }
+                    NavigationLink("Component Stack") {
+                        ComponentStackScreen()
+                    }
                 } header: {
                     Text("Components")
                 }

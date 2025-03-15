@@ -31,7 +31,9 @@ extension SnapStyle.ColorKey {
     // MARK: - Accents
     
     public var accent0: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
-    public var accent1: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) } // TODO: Modify other key. .reference(\.key, modified: ...)
+    // TODO: Modify other key. .reference(\.key, modified: ...)
+    public var accent1: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
+    public var accent2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
 
     public var accentAlt: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified accent

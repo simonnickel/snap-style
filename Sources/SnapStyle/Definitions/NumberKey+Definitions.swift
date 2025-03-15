@@ -28,17 +28,42 @@ extension SnapStyle.NumberKey {
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
     public var paddingScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
     public var paddingScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
-    public var paddingContent: ValueBuilder { .base(.definition(.value(12))) }
-    public var paddingList: ValueBuilder { .base(.definition(.value(12))) }
-    public var paddingCard: ValueBuilder { .base(.definition(.value(16))) }
+    
+    /// A padding definition based on the level in the component stack.
+    public var paddingComponent: ValueBuilder {
+        .builder { context in
+            switch context.componentStack.levelOverall {
+                case 1: .definition(.value(12))
+                case 2: .definition(.value(10))
+                case 3: .definition(.value(8))
+                default: nil
+            }
+        }
+    }
+    
+    public var paddingContent: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingList: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingAction: ValueBuilder { .base(.definition(.value(10))) }
     
     
     // MARK: - Shape: CornerRadius
     
-    public var cornerRadiusContent: ValueBuilder { .base(.definition(.value(20))) }
-    public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusContent)) }
-    public var cornerRadiusCard: ValueBuilder { .base(.definition(.value(8))) }
+    /// A corner radius definition based on the level in the component stack.
+    public var cornerRadiusComponent: ValueBuilder {
+        .builder { context in
+            switch context.componentStack.levelOverall {
+                case 1: .definition(.value(20))
+                case 2: .definition(.value(8)) // Outer corner radius - gap // TODO: this could be calculated from references
+                case 3: .definition(.value(4))
+                default: nil
+            }
+        }
+    }
+    
+    public var cornerRadiusContent: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
+    public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
+    public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
     
     
     // MARK: - Animation
