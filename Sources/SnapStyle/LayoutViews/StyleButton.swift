@@ -30,6 +30,7 @@ public struct StyleButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
             .style(component: .action, containerHierarchy: variant.hierarchy)
             .style(state: .highlighted, value: configuration.isPressed || state.contains(.highlighted))
     }

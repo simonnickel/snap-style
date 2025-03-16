@@ -44,7 +44,8 @@ extension SnapStyle.NumberKey {
     public var paddingContent: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingList: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
-    public var paddingAction: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingAction: ValueBuilder { .base(.definition(.value(8))) }
+    public var paddingActionButtonHorizontalAdditional: ValueBuilder { .base(.definition(.value(8))) }
     
     
     // MARK: - Shape: CornerRadius

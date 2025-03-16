@@ -13,8 +13,9 @@ struct ActionButtonsView: View {
                 Text("Secondary")
                     .style(element: .title)
             }
-            .style(component: .action)
+            
             StyleSpacer()
+            
             StyleButton(.primary) { } content: {
                 StyleVStack(isStretching: false) {
                     Text("Primary")
@@ -23,7 +24,6 @@ struct ActionButtonsView: View {
                         .style(element: .title, hierarchy: .secondary)
                 }
             }
-            .style(component: .action)
         }
     }
 }

@@ -23,10 +23,10 @@ extension SnapStyle.FontKey {
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
             return switch context.element.hierarchy {
-                case .any: .definition(.with(size: 20, weight: .bold))
-                case .primary: .definition(.with(size: 20, weight: .bold))
-                case .secondary: .definition(.with(size: 16, weight: .medium))
-                case .tertiary: .definition(.with(size: 16, weight: .medium))
+                case .any: .definition(.with(size: 16, weight: .bold))
+                case .primary: .definition(.with(size: 16, weight: .bold))
+                case .secondary: .definition(.with(size: 14, weight: .medium))
+                case .tertiary: .definition(.with(size: 12, weight: .medium))
             }
         }
     }
