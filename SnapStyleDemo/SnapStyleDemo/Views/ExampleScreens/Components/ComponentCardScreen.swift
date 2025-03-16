@@ -39,20 +39,7 @@ struct ComponentCardScreen: View {
     private var contentCardView: some View {
         StyleVStack {
             StructuredTextView()
-            StyleHStack {
-                // TODO: Should be .secondary, but is not visible. Could be automatically detected to use different accen style.
-                StyleButton(.primary) { } content: {
-                    Text("Primary")
-                        .style(element: .title)
-                }
-                .style(component: .action)
-                StyleSpacer()
-                StyleButton(.primary) { } content: {
-                    Text("Primary")
-                        .style(element: .title)
-                }
-                .style(component: .action)
-            }
+            ActionButtonsView()
         }
     }
     

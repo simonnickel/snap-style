@@ -20,8 +20,12 @@ struct ComponentContentScreen: View {
             }
             .style(component: .content)
          
-            StructuredTextView()
-                .style(component: .content)
+            StyleVStack(spacing: \.spacingGroups) {
+                StructuredTextView()
+                
+                ActionButtonsView()
+            }
+            .style(component: .content)
 
             StyleVStack(spacing: \.spacingElements) {
                 Text("Secondary")
