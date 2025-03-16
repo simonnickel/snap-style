@@ -31,21 +31,9 @@ struct ComponentsScreen: View {
                 ElementStackView(hierarchy: .secondary)
                 contentStates()
             }
-//            contentComponentSecondary(type)
         }
-        .style(component: component, containerHierarchy: .primary)
+        .style(component: component)
     }
-    
-//    @ViewBuilder
-//    private func contentComponentSecondary(_ type: SnapStyle.Component) -> some View {
-//        VStack(alignment: .leading) {
-//            Text("\(type), .secondary")
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//            contentElements(hierarchy: .primary)
-//            contentElements(hierarchy: .secondary)
-//        }
-//        .style(component: type, hierarchy: .secondary)
-//    }
     
     @ViewBuilder
     private func contentStates() -> some View {

@@ -9,8 +9,8 @@ extension SnapStyle.Context {
     
     public enum StateAttribute {
         case disabled
-        case selected
         case highlighted
+        case selected
     }
     
     public var stateAttributes: Set<StateAttribute> { getValue(for: Self.stateAttributes) ?? [] }
