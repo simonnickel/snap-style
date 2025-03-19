@@ -84,19 +84,11 @@ extension SnapStyle.SurfaceKey {
     public var icon: ValueBuilder { .base(nil) }
     
     public var value: ValueBuilder { .base(nil) }
-
-    public var cta: ValueBuilder {
-        .builder { context in
-            .definition(.surface(.init(
-                foreground: \.onAccent,
-                background: \.accent0
-            )))
-        }
-    }
     
     public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) } // TODO: Better color definition
     
     
+    // TODO: Not sure if they make sense this way
     // MARK: - States
     
     public var disabledContainer: ValueBuilder {
