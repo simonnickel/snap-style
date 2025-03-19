@@ -11,6 +11,41 @@ extension SnapStyle.SurfaceKey {
     // TODO: Highlighted states
     // TODO: Gradients
     // TODO: Materials
+    
+    // MARK: - Generic Surfaces
+    
+    public var accentElement: ValueBuilder {
+        .builder { context in
+            // TODO: Component State (disabled, normal, highlighted, selected) instead of isHighlighted.
+            if context.isHighlighted {
+                .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
+            } else {
+                .definition(.surface(.with(foreground: \.accent, background: nil)))
+            }
+        }
+    }
+    
+    public var accentContainer: ValueBuilder {
+        .builder { context in
+            switch context.componentStack.level {
+                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
+                case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accent2)))
+                default: nil
+            }
+        }
+    }
+    
+    public var contentContainer: ValueBuilder {
+        .builder { context in
+            switch context.componentStack.level {
+                case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
+                case 2: .definition(.surface(.with(background: \.content1)))
+                case 3: .definition(.surface(.with(background: \.content2)))
+                default: nil
+            }
+        }
+    }
 
     
     // MARK: - Component: Container
@@ -28,14 +63,7 @@ extension SnapStyle.SurfaceKey {
     }
     
     public var containerContent: ValueBuilder {
-        .builder { context in
-            switch context.componentStack.level {
-                case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-                case 2: .definition(.surface(.with(background: \.content1)))
-                case 3: .definition(.surface(.with(background: \.content2)))
-                default: nil
-            }
-        }
+        .base(.reference(\.contentContainer))
     }
     
     public var containerList: ValueBuilder {
@@ -43,31 +71,16 @@ extension SnapStyle.SurfaceKey {
     }
     
     public var containerCard: ValueBuilder {
-        .builder { context in
-            switch context.componentStack.level {
-                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                case 2: .definition(.surface(.with(background: \.accent1)))
-                case 3: .definition(.surface(.with(background: \.accent2)))
-                default: nil
-            }
-        }
+        .base(.reference(\.accentContainer))
     }
     
     public var containerAction: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
                 case .any, .primary:
-                    if context.isHighlighted {
-                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent))) // TODO: accent color should be a set
-                    } else {
-                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                    }
+                    .reference(\.accentContainer)
                 case .secondary, .tertiary:
-                    if context.isHighlighted {
-                        .definition(.surface(.with(foreground: \.accent, background: \.content1)))
-                    } else {
-                        .definition(.surface(.with(foreground: \.accent, background: nil)))
-                    }
+                    .reference(\.accentElement)
             }
         }
     }

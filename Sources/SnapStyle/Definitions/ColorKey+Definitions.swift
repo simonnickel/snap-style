@@ -30,6 +30,7 @@ extension SnapStyle.ColorKey {
     
     // MARK: - Accents
     
+    // TODO: accent color could be a set?
     public var accent: ValueBuilder {
         .builder { context in
             return .reference(context.useAlternativeAccent ? \.accentAlt : \.accent0)
