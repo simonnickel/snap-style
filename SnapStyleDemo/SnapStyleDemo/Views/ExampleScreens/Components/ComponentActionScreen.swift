@@ -20,6 +20,20 @@ struct ComponentActionScreen: View {
             }
             .style(component: .action)
             
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Content")
+                    .style(element: .title)
+                ActionButtonsView()
+            }
+            .style(component: .content)
+            
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Card")
+                    .style(element: .title)
+                ActionButtonsView()
+            }
+            .style(component: .card)
+            
         }
     }
 }
