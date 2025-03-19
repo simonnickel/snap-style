@@ -45,7 +45,7 @@ extension SnapStyle.SurfaceKey {
     public var containerCard: ValueBuilder {
         .builder { context in
             switch context.componentStack.level {
-                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
                 case 2: .definition(.surface(.with(background: \.accent1)))
                 case 3: .definition(.surface(.with(background: \.accent2)))
                 default: nil
@@ -58,15 +58,15 @@ extension SnapStyle.SurfaceKey {
             switch context.element.hierarchy {
                 case .any, .primary:
                     if context.isHighlighted {
-                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent))) // TODO: accent color should be a set
                     } else {
-                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent0)))
+                        .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
                     }
                 case .secondary, .tertiary:
                     if context.isHighlighted {
-                        .definition(.surface(.with(foreground: \.accent0, background: \.content1)))
+                        .definition(.surface(.with(foreground: \.accent, background: \.content1)))
                     } else {
-                        .definition(.surface(.with(foreground: \.accent0, background: nil)))
+                        .definition(.surface(.with(foreground: \.accent, background: nil)))
                     }
             }
         }

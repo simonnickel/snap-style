@@ -30,6 +30,12 @@ extension SnapStyle.ColorKey {
     
     // MARK: - Accents
     
+    public var accent: ValueBuilder {
+        .builder { context in
+            return .reference(context.useAlternativeAccent ? \.accentAlt : \.accent0)
+        }
+    }
+    
     public var accent0: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
     // TODO: Modify other key. .reference(\.key, modified: ...)
     public var accent1: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }

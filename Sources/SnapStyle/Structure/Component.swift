@@ -12,7 +12,9 @@ extension SnapStyle {
         
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
         
+        // TODO: Merge into a Config struct?
         public let id: String
+        public let requiresAlternativeAccent: Bool
         
         internal let padding: Mapping<NumberKey>?
         internal let fonts: Mapping<FontKey>?
@@ -22,6 +24,7 @@ extension SnapStyle {
         
         public init(
             _ id: ID,
+            requiresAlternativeAccent: Bool = false,
             padding: SnapStyle.Component.Mapping<SnapStyle.NumberKey>? = nil,
             fonts: SnapStyle.Component.Mapping<SnapStyle.FontKey>? = nil,
             colors: SnapStyle.Component.Mapping<SnapStyle.ColorKey>? = nil,
@@ -29,6 +32,7 @@ extension SnapStyle {
             shapes: SnapStyle.Component.Mapping<SnapStyle.ShapeKey>? = nil
         ) {
             self.id = id
+            self.requiresAlternativeAccent = requiresAlternativeAccent
             self.padding = padding
             self.fonts = fonts
             self.colors = colors
@@ -54,6 +58,11 @@ extension SnapStyle {
         private var components: [SnapStyle.Component] = []
         
         var current: Component? { components.last }
+        var parent: Component? {
+            let parentIndex = components.count - 2
+            guard parentIndex >= 0 else { return nil }
+            return components[parentIndex]
+        }
         
         /// Level of components independent of `Component`.
         var levelOverall: Int {
@@ -97,6 +106,7 @@ extension SnapStyle.Context {
     package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
     
     public var component: SnapStyle.Component { componentStack.current ?? .base }
+    public var useAlternativeAccent: Bool { componentStack.parent?.requiresAlternativeAccent ?? false }
     
 }
 

@@ -113,6 +113,7 @@ extension SnapStyle.Component {
     // MARK: - Card
     
     public static let card: Self = .init("card",
+        requiresAlternativeAccent: true,
         padding: { element in
             switch element {
                 case .container: \.paddingCard
