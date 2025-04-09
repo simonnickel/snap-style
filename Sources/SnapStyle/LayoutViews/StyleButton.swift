@@ -83,6 +83,7 @@ public struct StyleButton<Content>: View where Content : View {
         } label: {
             content()
         }
+        .disabled(state == .disabled)
         .buttonStyle(StyleButtonStyle(variant, state: state))
     }
     
