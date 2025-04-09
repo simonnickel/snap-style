@@ -7,9 +7,9 @@ import SnapStyleBase
 
 extension SnapStyle.ComponentDefinition {
 
+    // TODO: Continue
     // - Extend Surface to hold values for ComponentState for foreground and background.
     // - SurfaceBackgroundModifier and SurfaceForgroundModifier have to apply those based on the context.
-    // - Remove context.isHighlighted
 
     public enum InteractionState {
         case disabled
