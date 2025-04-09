@@ -13,7 +13,7 @@ extension SnapStyle {
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
 
         // TODO: Merge into a Config struct?
-        public let id: String
+        public let id: String // TODO: This ID is not really robust
         public let requiresAlternativeAccent: Bool
 
         internal let padding: Mapping<NumberKey>?
@@ -45,7 +45,7 @@ extension SnapStyle {
         }
 
         public static func == (lhs: SnapStyleBase.SnapStyle.Component, rhs: SnapStyleBase.SnapStyle.Component) -> Bool {
-            lhs.id == rhs.id
+            lhs.id == rhs.id // TODO: Necessary? Not robust.
         }
 
     }
@@ -59,8 +59,10 @@ extension SnapStyle.Context {
     
     package var componentStack: SnapStyle.ComponentStack { getValue(for: Self.componentStack) ?? .init() }
     package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
-    
+
+    // TODO: Should return a struct (state, level, definition) to allow if context.component.state
     public var component: SnapStyle.Component { componentStack.current ?? .base }
+    public var componentState: SnapStyle.Component.InteractionState { componentStack.currentState ?? .normal }
     public var useAlternativeAccent: Bool { componentStack.parent?.requiresAlternativeAccent ?? false }
     
 }
@@ -103,7 +105,7 @@ internal struct ComponentModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         // TODO: Apply State
-        var componentStack = styleContext.componentStack.appended(component)
+        var componentStack = styleContext.componentStack.appended(component, state: state)
         content
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
     }

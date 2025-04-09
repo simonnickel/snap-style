@@ -31,9 +31,15 @@ extension SnapStyle.ColorKey {
     // MARK: - Accents
     
     // TODO: accent color could be a set?
+    // Normal, Disabled, Highlighted, Selected
+    // Main, Alternative, Contrast
     public var accent: ValueBuilder {
         .builder { context in
-            return .reference(context.useAlternativeAccent ? \.accentAlt : \.accent0)
+            switch context.componentState {
+                case .disabled: .reference(\.onLight2) // TODO: Proper disabled color
+
+                default: .reference(context.useAlternativeAccent ? \.accentAlt : \.accent0)
+            }
         }
     }
     

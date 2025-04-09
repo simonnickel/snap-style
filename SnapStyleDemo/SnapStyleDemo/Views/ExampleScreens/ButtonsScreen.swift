@@ -10,6 +10,7 @@ struct ButtonsScreen: View {
     
     var body: some View {
         StyleScreen {
+
             StyleVStack {
                 StyleHStack {
                     StyleButton(.secondary) {} content: {
@@ -25,6 +26,25 @@ struct ButtonsScreen: View {
             }
             .frame(maxWidth: .infinity)
             .style(component: .content)
+
+            StyleVStack {
+                Text("Disabled")
+                    .style(element: .title)
+                StyleHStack {
+                    StyleButton(.secondary, state: .disabled) {} content: {
+                        Label("Secondary", systemImage: "star")
+                    }
+                    
+                    Spacer()
+                    
+                    StyleButton(state: .disabled) {} content: {
+                        Label("Primary", systemImage: "star")
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .style(component: .content)
+
         }
         .navigationTitle("Buttons")
     }
