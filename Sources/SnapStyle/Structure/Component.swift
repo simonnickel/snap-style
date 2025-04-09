@@ -9,19 +9,19 @@ import SwiftUI
 extension SnapStyle {
     
     public struct Component: Identifiable, Hashable, Equatable, Sendable {
-        
+
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
-        
+
         // TODO: Merge into a Config struct?
         public let id: String
         public let requiresAlternativeAccent: Bool
-        
+
         internal let padding: Mapping<NumberKey>?
         internal let fonts: Mapping<FontKey>?
         internal let colors: Mapping<ColorKey>?
         internal let surfaces: Mapping<SurfaceKey>?
         internal let shapes: Mapping<ShapeKey>?
-        
+
         public init(
             _ id: ID,
             requiresAlternativeAccent: Bool = false,
@@ -39,62 +39,17 @@ extension SnapStyle {
             self.surfaces = surfaces
             self.shapes = shapes
         }
-        
+
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
         }
-        
+
         public static func == (lhs: SnapStyleBase.SnapStyle.Component, rhs: SnapStyleBase.SnapStyle.Component) -> Bool {
             lhs.id == rhs.id
         }
-        
+
     }
-    
-    
-    // MARK: ComponentStack
-    
-    package struct ComponentStack: Hashable {
-        
-        private var components: [SnapStyle.Component] = []
-        
-        var current: Component? { components.last }
-        var parent: Component? {
-            let parentIndex = components.count - 2
-            guard parentIndex >= 0 else { return nil }
-            return components[parentIndex]
-        }
-        
-        /// Level of components independent of `Component`.
-        var levelOverall: Int {
-            components.count - 1
-        }
-        
-        /// Level of consistent `Component` stacked without interruption.
-        var level: Int {
-            var result = 1
-            var index = components.count - 1
-            var continueLoop: Bool = true
-            while continueLoop && index > 0 {
-                index -= 1
-                let parentComponent = components[index]
-                if parentComponent == current {
-                    result += 1
-                } else {
-                    continueLoop = false
-                }
-            }
-            
-            return result
-        }
-        
-        func appended(_ component: SnapStyle.Component) -> Self {
-            var result = self
-            result.components.append(component)
-            return result
-        }
-        
-    }
-    
+
 }
 
 
