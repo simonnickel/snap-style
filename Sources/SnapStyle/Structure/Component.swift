@@ -120,7 +120,11 @@ extension View {
     ///   - component: Definition to use for the component.
     ///   - containerHierarchy: Level of `.container` that should be used. Set to nil if no container should be visible.
     /// - Returns: A modified View.
-    public func style(component: SnapStyle.Component, containerHierarchy: SnapStyle.Element.Hierarchy? = .primary) -> some View {
+    public func style(
+        component: SnapStyle.Component,
+        containerHierarchy: SnapStyle.Element.Hierarchy? = .primary,
+        state: SnapStyle.Component.InteractionState = .normal
+    ) -> some View {
         Group {
             if let containerHierarchy {
                 self
@@ -129,7 +133,7 @@ extension View {
                 self
             }
         }
-        .modifier(ComponentModifier(component: component))
+        .modifier(ComponentModifier(component: component, state: state))
     }
     
 }
@@ -140,8 +144,10 @@ internal struct ComponentModifier: ViewModifier {
     @Environment(\.styleContext) private var styleContext
     
     let component: SnapStyle.Component
+    let state: SnapStyle.Component.InteractionState
 
     func body(content: Content) -> some View {
+        // TODO: Apply State
         var componentStack = styleContext.componentStack.appended(component)
         content
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
