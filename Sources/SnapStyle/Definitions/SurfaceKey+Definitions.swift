@@ -20,7 +20,7 @@ extension SnapStyle.SurfaceKey {
     public var accentElement: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.content1)))
+                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.accentOverlay)))
 
                 case .disabled: .definition(.surface(.with(foreground: \.accent, background: nil)))
                     
@@ -31,12 +31,18 @@ extension SnapStyle.SurfaceKey {
     
     public var accentContainer: ValueBuilder {
         .builder { context in
-            switch context.component.level {
-                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
-                case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accent2)))
-                default: nil
+            switch context.component.state {
+                case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accentOverlay)))
+
+                default:
+                    switch context.component.level {
+                        case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
+                        case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
+                        case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accent2)))
+                        default: nil
+                    }
             }
+
         }
     }
     

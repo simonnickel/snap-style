@@ -49,6 +49,16 @@ extension SnapStyle.ColorKey {
     public var accent2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
 
+    public var accentOverlay: ValueBuilder {
+        .builder { context in
+            if context.component.useAlternativeAccent { // TODO: Naming does not fit here. Just checks if is on context.
+                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.5).opacity(0.3)))
+            } else {
+                .definition(.value(Color.accentColor.opacity(0.3)))
+            }
+        }
+    }
+
     public var accentAlt: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified accent
     public var onAccentAlt: ValueBuilder { .base(.reference(\.onDark0)) }
     
