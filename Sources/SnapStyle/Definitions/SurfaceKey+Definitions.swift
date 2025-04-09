@@ -15,11 +15,13 @@ extension SnapStyle.SurfaceKey {
     
     public var accentElement: ValueBuilder {
         .builder { context in
-//            if context.isHighlighted {
-//                .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
-//            } else {
-                .definition(.surface(.with(foreground: \.accent, background: nil)))
-//            }
+            switch context.componentState {
+                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
+
+                case .disabled: .definition(.surface(.with(foreground: \.accent, background: nil)))
+                    
+                default: .definition(.surface(.with(foreground: \.accent, background: nil)))
+            }
         }
     }
     
