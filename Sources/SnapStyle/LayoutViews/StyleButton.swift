@@ -21,18 +21,18 @@ public struct StyleButtonStyle: ButtonStyle {
     }
     
     private let variant: Variant
-    private let state: [SnapStyle.Context.StateAttribute]
-    
-    public init(_ variant: Variant, state: [SnapStyle.Context.StateAttribute] = []) {
+    private let isHighlighted: Bool
+
+    public init(_ variant: Variant, isHighlighted: Bool) {
         self.variant = variant
-        self.state = state
+        self.isHighlighted = isHighlighted
     }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
-            .style(component: .action, containerHierarchy: variant.hierarchy)
-            .style(state: .highlighted, value: configuration.isPressed || state.contains(.highlighted))
+            .style(component: .action, containerHierarchy: variant.hierarchy) // TODO: Apply highlight
+//            .style(state: .highlighted, value: configuration.isPressed || state.contains(.highlighted))
     }
     
 }
@@ -75,7 +75,7 @@ public struct StyleButton<Content>: View where Content : View {
         } label: {
             content()
         }
-        .buttonStyle(StyleButtonStyle(variant, state: highlighted ? [.highlighted] : []))
+        .buttonStyle(StyleButtonStyle(variant, isHighlighted: highlighted))
     }
     
 }

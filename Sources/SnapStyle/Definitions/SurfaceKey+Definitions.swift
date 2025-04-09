@@ -8,25 +8,18 @@ import SwiftUI
 
 extension SnapStyle.SurfaceKey {
     
-    // TODO: Highlighted states
     // TODO: Gradients
     // TODO: Materials
-    
-    
-    // TODO: Component State (disabled, normal, highlighted, selected) instead of isHighlighted.
-    // - Extend Surface to hold values for ComponentState for foreground and background.
-    // - SurfaceBackgroundModifier and SurfaceForgroundModifier have to apply those based on the context.
-    // - Remove context.isHighlighted
     
     // MARK: - Generic Surfaces
     
     public var accentElement: ValueBuilder {
         .builder { context in
-            if context.isHighlighted {
-                .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
-            } else {
+//            if context.isHighlighted {
+//                .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
+//            } else {
                 .definition(.surface(.with(foreground: \.accent, background: nil)))
-            }
+//            }
         }
     }
     
