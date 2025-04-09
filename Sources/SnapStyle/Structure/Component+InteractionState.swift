@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle.Component {
+extension SnapStyle.ComponentDefinition {
 
     // - Extend Surface to hold values for ComponentState for foreground and background.
     // - SurfaceBackgroundModifier and SurfaceForgroundModifier have to apply those based on the context.

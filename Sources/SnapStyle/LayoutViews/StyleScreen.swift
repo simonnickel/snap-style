@@ -24,11 +24,11 @@ public struct StyleScreen<Content>: View where Content : View {
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
     
-    private let component: SnapStyle.Component
+    private let component: SnapStyle.ComponentDefinition
     private let content: () -> Content
     
     public init(
-        component: SnapStyle.Component = .screen,
+        component: SnapStyle.ComponentDefinition = .screen,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.component = component

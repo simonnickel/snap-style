@@ -12,10 +12,10 @@ extension SnapStyle {
 
         // MARK: Components
 
-        private var components: [SnapStyle.Component] = []
+        private var components: [SnapStyle.ComponentDefinition] = []
 
-        var current: Component? { components.last }
-        var parent: Component? {
+        var current: ComponentDefinition? { components.last }
+        var parent: ComponentDefinition? {
             let parentIndex = components.count - 2
             guard parentIndex >= 0 else { return nil }
             return components[parentIndex]
@@ -24,9 +24,9 @@ extension SnapStyle {
 
         // MARK: State
 
-        private var stateByComponent: [SnapStyle.Component : SnapStyle.Component.InteractionState] = [:]
+        private var stateByComponent: [SnapStyle.ComponentDefinition : SnapStyle.ComponentDefinition.InteractionState] = [:]
 
-        var currentState: SnapStyle.Component.InteractionState? {
+        var currentState: SnapStyle.ComponentDefinition.InteractionState? {
             guard let current else { return nil }
             return stateByComponent[current]
         }
@@ -60,7 +60,7 @@ extension SnapStyle {
 
         // MARK: Update
 
-        func appended(_ component: SnapStyle.Component, state: SnapStyle.Component.InteractionState) -> Self {
+        func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.ComponentDefinition.InteractionState) -> Self {
             var result = self
             result.components.append(component)
             result.stateByComponent[component] = state

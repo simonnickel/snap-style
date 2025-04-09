@@ -12,7 +12,7 @@ struct ComponentsScreen: View {
     var body: some View {
         StyleScreen {
 
-            let components: [SnapStyle.Component] = [.screen, .content, .card, .action]
+            let components: [SnapStyle.ComponentDefinition] = [.screen, .content, .card, .action]
             
             ForEach(components, id: \.self) { component in
                 contentComponent(component)
@@ -23,7 +23,7 @@ struct ComponentsScreen: View {
     }
     
     @ViewBuilder
-    private func contentComponent(_ component: SnapStyle.Component) -> some View {
+    private func contentComponent(_ component: SnapStyle.ComponentDefinition) -> some View {
         VStack(alignment: .leading) {
             Text("\(component.id), .primary")
             HStack {

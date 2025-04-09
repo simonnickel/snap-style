@@ -42,7 +42,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let component = context.component
         let element = context.element.type
         
-        let base = SnapStyle.Component.base
+        let base = SnapStyle.ComponentDefinition.base
         
         let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
         let paddingKeyPath = component.padding?(element) ?? base.padding?(element) ?? \.paddingAnyElement

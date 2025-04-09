@@ -21,7 +21,7 @@ struct ComponentStackScreen: View {
     }
     
     @ViewBuilder
-    private func content(component: [SnapStyle.Component]) -> some View {
+    private func content(component: [SnapStyle.ComponentDefinition]) -> some View {
         StyleVStack(spacing: \.spacingElements) {
             Text(component.description).style(element: .title)
             

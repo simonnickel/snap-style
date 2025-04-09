@@ -8,7 +8,7 @@ import SwiftUI
 
 extension SnapStyle {
     
-    public struct Component: Identifiable, Hashable, Equatable, Sendable {
+    public struct ComponentDefinition: Identifiable, Hashable, Equatable, Sendable {
 
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
 
@@ -25,11 +25,11 @@ extension SnapStyle {
         public init(
             _ id: ID,
             requiresAlternativeAccent: Bool = false,
-            padding: SnapStyle.Component.Mapping<SnapStyle.NumberKey>? = nil,
-            fonts: SnapStyle.Component.Mapping<SnapStyle.FontKey>? = nil,
-            colors: SnapStyle.Component.Mapping<SnapStyle.ColorKey>? = nil,
-            surfaces: SnapStyle.Component.Mapping<SnapStyle.SurfaceKey>? = nil,
-            shapes: SnapStyle.Component.Mapping<SnapStyle.ShapeKey>? = nil
+            padding: SnapStyle.ComponentDefinition.Mapping<SnapStyle.NumberKey>? = nil,
+            fonts: SnapStyle.ComponentDefinition.Mapping<SnapStyle.FontKey>? = nil,
+            colors: SnapStyle.ComponentDefinition.Mapping<SnapStyle.ColorKey>? = nil,
+            surfaces: SnapStyle.ComponentDefinition.Mapping<SnapStyle.SurfaceKey>? = nil,
+            shapes: SnapStyle.ComponentDefinition.Mapping<SnapStyle.ShapeKey>? = nil
         ) {
             self.id = id
             self.requiresAlternativeAccent = requiresAlternativeAccent
@@ -44,7 +44,7 @@ extension SnapStyle {
             hasher.combine(id)
         }
 
-        public static func == (lhs: SnapStyleBase.SnapStyle.Component, rhs: SnapStyleBase.SnapStyle.Component) -> Bool {
+        public static func == (lhs: SnapStyleBase.SnapStyle.ComponentDefinition, rhs: SnapStyleBase.SnapStyle.ComponentDefinition) -> Bool {
             lhs.id == rhs.id // TODO: Necessary? Not robust.
         }
 
@@ -61,8 +61,8 @@ extension SnapStyle.Context {
     package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
 
     // TODO: Should return a struct (state, level, definition) to allow if context.component.state
-    public var component: SnapStyle.Component { componentStack.current ?? .base }
-    public var componentState: SnapStyle.Component.InteractionState { componentStack.currentState ?? .normal }
+    public var component: SnapStyle.ComponentDefinition { componentStack.current ?? .base }
+    public var componentState: SnapStyle.ComponentDefinition.InteractionState { componentStack.currentState ?? .normal }
     public var useAlternativeAccent: Bool { componentStack.parent?.requiresAlternativeAccent ?? false }
     
 }
@@ -78,9 +78,9 @@ extension View {
     ///   - containerHierarchy: Level of `.container` that should be used. Set to nil if no container should be visible.
     /// - Returns: A modified View.
     public func style(
-        component: SnapStyle.Component,
+        component: SnapStyle.ComponentDefinition,
         containerHierarchy: SnapStyle.Element.Hierarchy? = .primary,
-        state: SnapStyle.Component.InteractionState = .normal
+        state: SnapStyle.ComponentDefinition.InteractionState = .normal
     ) -> some View {
         Group {
             if let containerHierarchy {
@@ -100,8 +100,8 @@ internal struct ComponentModifier: ViewModifier {
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
     
-    let component: SnapStyle.Component
-    let state: SnapStyle.Component.InteractionState
+    let component: SnapStyle.ComponentDefinition
+    let state: SnapStyle.ComponentDefinition.InteractionState
 
     func body(content: Content) -> some View {
         var componentStack = styleContext.componentStack.appended(component, state: state)

@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle.Component {
+extension SnapStyle.ComponentDefinition {
     
     
     // MARK: - Base
