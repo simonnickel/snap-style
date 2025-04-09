@@ -15,6 +15,16 @@ extension SnapStyle.FontKey {
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
     public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
+    public var screenTitle: ValueBuilder {
+        .base(.definition(.font(.title))) { context in
+            return switch context.element.hierarchy {
+                case .any, .primary: .definition(.with(size: 32, weight: .bold))
+                case .secondary: .definition(.with(size: 26, weight: .bold))
+                case .tertiary: .definition(.with(size: 20, weight: .bold))
+            }
+        }
+    }
+
  
     // MARK: - Element
     

@@ -5,6 +5,9 @@
 
 import SnapStyleBase
 
+// ComponentDefinition is used to:
+// - assign KeyPaths to elements
+
 extension SnapStyle.ComponentDefinition {
     
     
@@ -55,6 +58,12 @@ extension SnapStyle.ComponentDefinition {
     
     public static let screen: Self = .init("screen",
        // Padding can not be defined here, because of scroll indicator placement.
+        fonts: { element in
+            switch element {
+                case .title: \.screenTitle
+                default: nil
+            }
+        },
         surfaces: { element in
             switch element {
                 case .container: \.screen
@@ -180,6 +189,12 @@ extension SnapStyle.ComponentDefinition {
                 case .container: \.paddingAction
                 default: nil
             }
+        },
+        fonts: { element in
+           switch element {
+               case .action: \.action
+               default: \.action
+           }
         },
         surfaces: { element in
             switch element {

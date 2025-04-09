@@ -46,9 +46,6 @@ struct ContentView: View {
                     Text("Examples")
                 }
                 Section {
-                    NavigationLink("Buttons") {
-                        ButtonsScreen()
-                    }
                     NavigationLink("Elements") {
                         DebugKeyScreen()
                     }

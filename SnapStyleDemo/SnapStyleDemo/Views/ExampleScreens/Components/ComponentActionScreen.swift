@@ -9,31 +9,41 @@ import SwiftUI
 struct ComponentActionScreen: View {
     var body: some View {
         StyleScreen {
-            
-            StyleVStack(isStretching: false) {
-                ElementStackView(axis: .horizontal)
-            }
-            .style(component: .action)
-            
-            StyleVStack(isStretching: false) {
-                ElementStackView(axis: .horizontal, hierarchy: .secondary)
-            }
-            .style(component: .action)
-            
-            StyleVStack(spacing: \.spacingElements) {
-                Text("Content")
-                    .style(element: .title)
+
+            ComponentContainer(title: "Content", component: .content) {
                 ActionButtonsView()
             }
-            .style(component: .content)
-            
-            StyleVStack(spacing: \.spacingElements) {
-                Text("Card")
-                    .style(element: .title)
+
+            ComponentContainer(title: "Subtitles", component: .content) {
+                ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
+            }
+
+            ComponentContainer(title: "Disabled", component: .content) {
+                ActionButtonsView(state: .disabled)
+            }
+
+            ComponentContainer(title: "Content", component: .card) {
                 ActionButtonsView()
             }
-            .style(component: .card)
-            
+
+
+            // MARK: Elements
+
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Elements")
+                    .style(element: .title, hierarchy: .secondary)
+
+                StyleVStack(isStretching: false) {
+                    ElementStackView(axis: .horizontal)
+                }
+                .style(component: .action)
+
+                StyleVStack(isStretching: false) {
+                    ElementStackView(axis: .horizontal, hierarchy: .secondary)
+                }
+                .style(component: .action)
+            }
+
         }
     }
 }
