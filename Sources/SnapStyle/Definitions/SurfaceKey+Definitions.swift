@@ -15,7 +15,7 @@ extension SnapStyle.SurfaceKey {
     
     public var accentElement: ValueBuilder {
         .builder { context in
-            switch context.componentState {
+            switch context.component.state {
                 case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
 
                 case .disabled: .definition(.surface(.with(foreground: \.accent, background: nil)))

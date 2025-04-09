@@ -53,21 +53,6 @@ extension SnapStyle {
 }
 
 
-// MARK: - Context
-
-extension SnapStyle.Context {
-    
-    package var componentStack: SnapStyle.ComponentStack { getValue(for: Self.componentStack) ?? .init() }
-    package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
-
-    // TODO: Should return a struct (state, level, definition) to allow if context.component.state
-    public var component: SnapStyle.ComponentDefinition { componentStack.current ?? .base }
-    public var componentState: SnapStyle.ComponentDefinition.InteractionState { componentStack.currentState ?? .normal }
-    public var useAlternativeAccent: Bool { componentStack.parent?.requiresAlternativeAccent ?? false }
-    
-}
-
-
 // MARK: - Component+View
 
 extension View {
@@ -80,7 +65,7 @@ extension View {
     public func style(
         component: SnapStyle.ComponentDefinition,
         containerHierarchy: SnapStyle.Element.Hierarchy? = .primary,
-        state: SnapStyle.ComponentDefinition.InteractionState = .normal
+        state: SnapStyle.Component.InteractionState = .normal
     ) -> some View {
         Group {
             if let containerHierarchy {
@@ -101,7 +86,7 @@ internal struct ComponentModifier: ViewModifier {
     @Environment(\.styleContext) private var styleContext
     
     let component: SnapStyle.ComponentDefinition
-    let state: SnapStyle.ComponentDefinition.InteractionState
+    let state: SnapStyle.Component.InteractionState
 
     func body(content: Content) -> some View {
         var componentStack = styleContext.componentStack.appended(component, state: state)

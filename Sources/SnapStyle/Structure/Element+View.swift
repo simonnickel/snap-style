@@ -39,7 +39,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
     @Environment(\.styleContext) private var context
 
     func body(content: Content) -> some View {
-        let component = context.component
+        let component = context.component.definition
         let element = context.element.type
         
         let base = SnapStyle.ComponentDefinition.base

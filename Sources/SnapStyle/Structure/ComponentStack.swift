@@ -24,9 +24,9 @@ extension SnapStyle {
 
         // MARK: State
 
-        private var stateByComponent: [SnapStyle.ComponentDefinition : SnapStyle.ComponentDefinition.InteractionState] = [:]
+        private var stateByComponent: [SnapStyle.ComponentDefinition : SnapStyle.Component.InteractionState] = [:]
 
-        var currentState: SnapStyle.ComponentDefinition.InteractionState? {
+        var currentState: SnapStyle.Component.InteractionState? {
             guard let current else { return nil }
             return stateByComponent[current]
         }
@@ -60,7 +60,7 @@ extension SnapStyle {
 
         // MARK: Update
 
-        func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.ComponentDefinition.InteractionState) -> Self {
+        func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.Component.InteractionState) -> Self {
             var result = self
             result.components.append(component)
             result.stateByComponent[component] = state

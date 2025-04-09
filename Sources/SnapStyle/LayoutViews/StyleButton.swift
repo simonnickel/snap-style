@@ -21,9 +21,9 @@ public struct StyleButtonStyle: ButtonStyle {
     }
     
     private let variant: Variant
-    private let state: SnapStyle.ComponentDefinition.InteractionState
+    private let state: SnapStyle.Component.InteractionState
 
-    public init(_ variant: Variant, state: SnapStyle.ComponentDefinition.InteractionState) {
+    public init(_ variant: Variant, state: SnapStyle.Component.InteractionState) {
         self.variant = variant
         self.state = state
     }
@@ -48,13 +48,13 @@ public struct StyleButton<Content>: View where Content : View {
     @Environment(\.styleContext) private var styleContext
     
     private let variant: StyleButtonStyle.Variant
-    @State private var state: SnapStyle.ComponentDefinition.InteractionState
+    @State private var state: SnapStyle.Component.InteractionState
     private let action: () -> Void
     private let content: () -> Content
     
     public init(
         _ variant: StyleButtonStyle.Variant = .primary,
-        state: SnapStyle.ComponentDefinition.InteractionState = .normal,
+        state: SnapStyle.Component.InteractionState = .normal,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
