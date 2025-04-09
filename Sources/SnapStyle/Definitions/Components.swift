@@ -26,6 +26,7 @@ extension SnapStyle.ComponentDefinition {
                 case .label: \.label
                 case .icon: \.icon
                 case .value: \.value
+                case .action: \.action
                 case .separator: \.separator
             }
         },
@@ -37,6 +38,7 @@ extension SnapStyle.ComponentDefinition {
                 case .label: \.label
                 case .icon: \.icon
                 case .value: \.value
+                case .action: \.action
                 case .separator: \.separator
             }
         },

@@ -102,6 +102,8 @@ extension SnapStyle.SurfaceKey {
     
     public var value: ValueBuilder { .base(nil) }
     
+    public var action: ValueBuilder { .base(nil) }
+
     public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) } // TODO: Better color definition
     
     

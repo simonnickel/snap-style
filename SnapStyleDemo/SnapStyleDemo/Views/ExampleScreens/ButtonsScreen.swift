@@ -15,12 +15,14 @@ struct ButtonsScreen: View {
                 StyleHStack {
                     StyleButton(.secondary) {} content: {
                         Label("Secondary", systemImage: "star")
+                            .style(element: .action)
                     }
-                    
+
                     Spacer()
-                    
+
                     StyleButton {} content: {
                         Label("Primary", systemImage: "star")
+                            .style(element: .action)
                     }
                 }
             }
