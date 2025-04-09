@@ -5,9 +5,6 @@
 
 import SnapStyleBase
 
-// TODO: Continue
-// - Extend Surface to hold values for ComponentState for foreground and background.
-// - SurfaceBackgroundModifier and SurfaceForgroundModifier have to apply those based on the context.
 extension SnapStyle {
 
     /// An actual `Component` instance for a specific View.

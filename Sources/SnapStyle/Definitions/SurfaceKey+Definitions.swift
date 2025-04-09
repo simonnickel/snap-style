@@ -6,8 +6,12 @@
 import SnapStyleBase
 import SwiftUI
 
+// Surface is used to:
+// - combine foreground and background color
+// - select colors based on the component (state, level)
+
 extension SnapStyle.SurfaceKey {
-    
+
     // TODO: Gradients
     // TODO: Materials
     
@@ -16,7 +20,7 @@ extension SnapStyle.SurfaceKey {
     public var accentElement: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.content1))) // TODO: Could be a transparent highlight instead of \.content1
+                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.content1)))
 
                 case .disabled: .definition(.surface(.with(foreground: \.accent, background: nil)))
                     
@@ -27,7 +31,7 @@ extension SnapStyle.SurfaceKey {
     
     public var accentContainer: ValueBuilder {
         .builder { context in
-            switch context.componentStack.level {
+            switch context.component.level {
                 case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
                 case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
                 case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accent2)))
@@ -38,7 +42,7 @@ extension SnapStyle.SurfaceKey {
     
     public var contentContainer: ValueBuilder {
         .builder { context in
-            switch context.componentStack.level {
+            switch context.component.level {
                 case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
                 case 2: .definition(.surface(.with(background: \.content1)))
                 case 3: .definition(.surface(.with(background: \.content2)))

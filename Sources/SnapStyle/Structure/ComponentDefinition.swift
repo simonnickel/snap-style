@@ -8,12 +8,12 @@ import SwiftUI
 
 extension SnapStyle {
     
-    public struct ComponentDefinition: Identifiable, Hashable, Equatable, Sendable {
+    public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
 
         // TODO: Merge into a Config struct?
-        public let id: String // TODO: This ID is not really robust
+        public let id: String
         public let requiresAlternativeAccent: Bool
 
         internal let padding: Mapping<NumberKey>?
@@ -23,7 +23,7 @@ extension SnapStyle {
         internal let shapes: Mapping<ShapeKey>?
 
         public init(
-            _ id: ID,
+            _ id: String,
             requiresAlternativeAccent: Bool = false,
             padding: SnapStyle.ComponentDefinition.Mapping<SnapStyle.NumberKey>? = nil,
             fonts: SnapStyle.ComponentDefinition.Mapping<SnapStyle.FontKey>? = nil,
@@ -42,10 +42,11 @@ extension SnapStyle {
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
+            hasher.combine(requiresAlternativeAccent)
         }
 
         public static func == (lhs: SnapStyleBase.SnapStyle.ComponentDefinition, rhs: SnapStyleBase.SnapStyle.ComponentDefinition) -> Bool {
-            lhs.id == rhs.id // TODO: Necessary? Not robust.
+            lhs.hashValue == rhs.hashValue
         }
 
     }
