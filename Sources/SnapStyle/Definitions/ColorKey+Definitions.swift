@@ -45,7 +45,6 @@ extension SnapStyle.ColorKey {
     public var interactive: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified / selected accent
     public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
 
-    // TODO: Could be a Material
     public var accentOverlay: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
@@ -56,7 +55,6 @@ extension SnapStyle.ColorKey {
         }
     }
 
-    // TODO: Could be a Material
     public var accentMuted: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
@@ -66,8 +64,8 @@ extension SnapStyle.ColorKey {
             }
         }
     }
-
     
+
     // MARK: - Components
     
     public var screen: ValueBuilder { .builder { context in
