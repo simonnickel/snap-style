@@ -27,64 +27,74 @@ public struct StyleButtonStyle: ButtonStyle {
         self.variant = variant
         self.state = state
     }
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
             .style(
                 component: .action,
                 containerHierarchy: variant.hierarchy,
-                state: configuration.isPressed ? .highlighted : state
+                state: configuration.isPressed ? .selected : state
             )
     }
-    
+
 }
 
 public struct StyleButton<Content>: View where Content : View {
 
-    
+
     // TODO: Bundle both together to just need a single var?
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
-    
+
     private let variant: StyleButtonStyle.Variant
-    @State private var state: SnapStyle.Component.InteractionState
+    @State private var isEnabled: Bool
     private let action: () -> Void
     private let content: () -> Content
-    
+
     public init(
         _ variant: StyleButtonStyle.Variant = .primary,
-        state: SnapStyle.Component.InteractionState = .normal,
+        enabled: Bool = true,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.variant = variant
-        self.state = state
+        self.isEnabled = enabled
         self.action = action
         self.content = content
     }
-    
-    @State private var highlighted: Bool = false
-    
+
+    @State private var isPressed: Bool = false
+    @State private var isHovering: Bool = false
+
     public var body: some View {
         Button {
-            guard state != .disabled else { return }
+            guard isEnabled else { return }
 
             action()
-            
+
             // TODO FB: It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
-            state = .highlighted
+            isPressed = true
             let delay = style.number(for: \.animationInteractionHighlightDuration, in: styleContext) ?? 0
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 withAnimation(.smooth) {
-                    state = .normal
+                    isPressed = false
                 }
             }
         } label: {
             content()
         }
-        .disabled(state == .disabled)
-        .buttonStyle(StyleButtonStyle(variant, state: state))
+        .disabled(!isEnabled)
+        .buttonStyle(
+            StyleButtonStyle(variant, state: [
+                isEnabled ? .normal : .disabled,
+                isPressed ? .selected : .normal,
+                isHovering ? .highlighted : .normal,
+            ].max() ?? .normal)
+        )
+        .onHover(perform: { isHovering in
+            self.isHovering = isHovering
+        })
     }
-    
+
 }

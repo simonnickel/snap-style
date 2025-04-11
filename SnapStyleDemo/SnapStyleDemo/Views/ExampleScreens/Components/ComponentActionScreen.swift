@@ -19,7 +19,7 @@ struct ComponentActionScreen: View {
             }
 
             ComponentContainer(title: "Disabled", component: .content) {
-                ActionButtonsView(state: .disabled)
+                ActionButtonsView(enabled: false)
             }
 
             ComponentContainer(title: "Content", component: .card) {

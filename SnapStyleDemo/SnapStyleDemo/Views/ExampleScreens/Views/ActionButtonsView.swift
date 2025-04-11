@@ -14,16 +14,16 @@ struct ActionButtonsView: View {
     }
 
     let elements: [Element]
-    let state: SnapStyle.Component.InteractionState
+    let isEnabled: Bool
 
-    internal init(elements: [Element] = [], state: SnapStyle.Component.InteractionState = .normal) {
+    internal init(elements: [Element] = [], enabled: Bool = true) {
         self.elements = elements
-        self.state = state
+        self.isEnabled = enabled
     }
 
     var body: some View {
         StyleHStack {
-            StyleButton(.secondary, state: state) { } content: {
+            StyleButton(.secondary, enabled: isEnabled) { } content: {
                 StyleVStack(isStretching: false) {
                     Text("Secondary")
                         .style(element: .action)
@@ -36,7 +36,7 @@ struct ActionButtonsView: View {
             
             StyleSpacer()
             
-            StyleButton(.primary, state: state) { } content: {
+            StyleButton(.primary, enabled: isEnabled) { } content: {
                 StyleVStack(isStretching: false) {
                     Text("Primary")
                         .style(element: .action)
