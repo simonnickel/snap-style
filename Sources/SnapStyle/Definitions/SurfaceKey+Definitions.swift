@@ -17,7 +17,7 @@ extension SnapStyle.SurfaceKey {
     
     // MARK: - Generic Surfaces
     
-    public var accentElement: ValueBuilder {
+    public var interactiveElement: ValueBuilder {
         .builder { context in
             switch context.component.state {
                 case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.accentOverlay)))
@@ -31,7 +31,7 @@ extension SnapStyle.SurfaceKey {
         }
     }
     
-    public var accentContainer: ValueBuilder {
+    public var interactiveContainer: ValueBuilder {
         .builder { context in
             switch context.component.state {
                 case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accentOverlay)))
@@ -57,6 +57,17 @@ extension SnapStyle.SurfaceKey {
                 case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
                 case 2: .definition(.surface(.with(background: \.content1)))
                 case 3: .definition(.surface(.with(background: \.content2)))
+                default: nil
+            }
+        }
+    }
+
+    public var accentContainer: ValueBuilder {
+        .builder { context in
+            switch context.component.level {
+                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
+                case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel2)))
+                case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel3)))
                 default: nil
             }
         }
@@ -93,9 +104,9 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             switch context.element.hierarchy {
                 case .any, .primary:
-                    .reference(\.accentContainer)
+                    .reference(\.interactiveContainer)
                 case .secondary, .tertiary:
-                    .reference(\.accentElement)
+                    .reference(\.interactiveElement)
             }
         }
     }
