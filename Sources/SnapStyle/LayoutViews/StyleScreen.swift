@@ -126,7 +126,9 @@ extension EnvironmentValues {
             }
         }
         .navigationTitle("Preview")
+#if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
     }
 //    .styleOverride(
 //        numbers: [
