@@ -22,7 +22,7 @@ extension SnapStyle.SurfaceKey {
             switch context.component.state {
                 case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.accentOverlay)))
 
-                case .selected: .definition(.surface(.with(foreground: \.accent, background: \.accentAlt)))
+                case .selected: .definition(.surface(.with(foreground: \.accent, background: \.accentBaseAlt)))
 
                 case .disabled: .definition(.surface(.with(foreground: \.onLight2, background: nil)))
 
@@ -36,19 +36,18 @@ extension SnapStyle.SurfaceKey {
             switch context.component.state {
                 case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accentOverlay)))
 
-                case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentAlt)))
+                case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentBaseAlt)))
 
                 case .disabled: .definition(.surface(.with(foreground: \.onAccent, background: \.onLight2)))
 
                 default:
                     switch context.component.level {
                         case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                        case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accent1)))
-                        case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accent2)))
+                        case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel2)))
+                        case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel3)))
                         default: nil
                     }
             }
-
         }
     }
     
@@ -117,41 +116,5 @@ extension SnapStyle.SurfaceKey {
     public var action: ValueBuilder { .base(nil) }
 
     public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) } // TODO: Better color definition
-    
-    
-    // TODO: Not sure if they make sense this way
-    // MARK: - States
-    
-    public var disabledContainer: ValueBuilder {
-        .builder { context in
-            .definition(.surface(.init(
-                background: \.content1
-            )))
-        }
-    }
-    
-    public var disabledElement: ValueBuilder {
-        .builder { context in
-            .definition(.surface(.init(
-                foreground: \.onContent1
-            )))
-        }
-    }
-    
-    public var highlightedContainer: ValueBuilder {
-        .builder { context in
-            .definition(.surface(.init(
-                background: \.accentAlt
-            )))
-        }
-    }
-    
-    public var highlightedElement: ValueBuilder {
-        .builder { context in
-            .definition(.surface(.init(
-                foreground: \.accent0
-            )))
-        }
-    }
 
 }

@@ -29,24 +29,9 @@ struct ComponentsScreen: View {
             HStack {
                 ElementStackView(hierarchy: .primary)
                 ElementStackView(hierarchy: .secondary)
-                contentStates()
             }
         }
         .style(component: component)
-    }
-    
-    @ViewBuilder
-    private func contentStates() -> some View {
-        VStack(alignment: .leading) {
-            Text("Highlighted Element")
-                .style(surface: \.highlightedElement)
-            Text("Highlighted Container")
-                .style(surface: \.highlightedContainer)
-            Text("Disabled Element")
-                .style(surface: \.disabledElement)
-            Text("Disabled Container")
-                .style(surface: \.disabledContainer)
-        }
     }
 
 }

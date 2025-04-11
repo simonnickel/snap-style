@@ -34,15 +34,19 @@ extension SnapStyle.ColorKey {
     // Main, Alternative, Contrast
     public var accent: ValueBuilder {
         .builder { context in
-            .reference(context.component.useAlternativeAccent ? \.accentAlt : \.accent0)
+            .reference(context.component.useAlternativeAccent ? \.accentBaseAlt : \.accentBase)
         }
     }
     
-    public var accent0: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
+    public var accentBase: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
+    public var accentBaseAlt: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified / selected accent
+
     // TODO: Modify other key. .reference(\.key, modified: ...)
-    public var accent1: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
-    public var accent2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
+    public var accentLevel2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
+    public var accentLevel3: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
+
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
+    public var onAccentAlt: ValueBuilder { .base(.reference(\.onDark0)) }
 
     public var accentOverlay: ValueBuilder {
         .builder { context in
@@ -54,9 +58,6 @@ extension SnapStyle.ColorKey {
         }
     }
 
-    public var accentAlt: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified accent
-    public var onAccentAlt: ValueBuilder { .base(.reference(\.onDark0)) }
-    
     
     // MARK: - Components
     
