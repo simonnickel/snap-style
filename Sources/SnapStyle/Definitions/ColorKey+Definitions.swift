@@ -27,33 +27,42 @@ extension SnapStyle.ColorKey {
     public var onDark1: ValueBuilder { .base(.definition(.value(Color.gray))) }
     public var onDark2: ValueBuilder { .base(.definition(.value(Color.gray))) }
 
+    public var disabled: ValueBuilder { .base(.definition(.value(Color.gray))) }
+
     
     // MARK: - Accents
-    
-    // TODO: accent color could be a set?
-    // Main, Alternative, Contrast
-    public var accent: ValueBuilder {
-        .builder { context in
-            .reference(context.component.useAlternativeAccent ? \.accentBaseAlt : \.accentBase)
-        }
-    }
-    
-    public var accentBase: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
-    public var accentBaseAlt: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified / selected accent
 
+    public var accent: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
     // TODO: Modify other key. .reference(\.key, modified: ...)
     public var accentLevel2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
     public var accentLevel3: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
 
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
-    public var onAccentAlt: ValueBuilder { .base(.reference(\.onDark0)) }
 
+
+    // MARK: Interactive
+
+    public var interactive: ValueBuilder { .base(.definition(.value(Color.mint))) } // TODO: Modified / selected accent
+    public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
+
+    // TODO: Could be a Material
     public var accentOverlay: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent { // TODO: Naming does not fit here. Just checks if is on context.
-                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.5).opacity(0.3)))
+            if context.component.useAlternativeAccent {
+                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.4).opacity(0.2)))
             } else {
-                .definition(.value(Color.accentColor.opacity(0.3)))
+                .definition(.value(Color.accentColor.opacity(0.2)))
+            }
+        }
+    }
+
+    // TODO: Could be a Material
+    public var accentMuted: ValueBuilder {
+        .builder { context in
+            if context.component.useAlternativeAccent {
+                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.4).opacity(0.8)))
+            } else {
+                .definition(.value(Color.accentColor.opacity(0.8)))
             }
         }
     }

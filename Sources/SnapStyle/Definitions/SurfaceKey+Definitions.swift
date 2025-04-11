@@ -19,34 +19,40 @@ extension SnapStyle.SurfaceKey {
     
     public var interactiveElement: ValueBuilder {
         .builder { context in
-            switch context.component.state {
-                case .highlighted: .definition(.surface(.with(foreground: \.accent, background: \.accentOverlay)))
-
-                case .selected: .definition(.surface(.with(foreground: \.accent, background: \.accentBaseAlt)))
-
-                case .disabled: .definition(.surface(.with(foreground: \.onLight2, background: nil)))
-
-                default: .definition(.surface(.with(foreground: \.accent, background: nil)))
+            if context.component.useAlternativeAccent {
+                switch context.component.state {
+                    case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
+                    case .selected: .definition(.surface(.with(foreground: \.onDark0, background: \.accentMuted)))
+                    case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
+                    default: .definition(.surface(.with(foreground: \.onDark0, background: nil)))
+                }
+            } else {
+                switch context.component.state {
+                    case .highlighted: .definition(.surface(.with(foreground: \.interactive, background: \.accentOverlay)))
+                    case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentMuted)))
+                    case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
+                    default: .definition(.surface(.with(foreground: \.interactive, background: nil)))
+                }
             }
         }
     }
     
     public var interactiveContainer: ValueBuilder {
         .builder { context in
-            switch context.component.state {
-                case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accentOverlay)))
-
-                case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentBaseAlt)))
-
-                case .disabled: .definition(.surface(.with(foreground: \.onAccent, background: \.onLight2)))
-
-                default:
-                    switch context.component.level {
-                        case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                        case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel2)))
-                        case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel3)))
-                        default: nil
-                    }
+            if context.component.useAlternativeAccent {
+                switch context.component.state {
+                    case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
+                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
+                    case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
+                    default: .definition(.surface(.with(foreground: \.accent, background: \.content0)))
+                }
+            } else {
+                switch context.component.state {
+                    case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
+                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
+                    case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
+                    default: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
+                }
             }
         }
     }
