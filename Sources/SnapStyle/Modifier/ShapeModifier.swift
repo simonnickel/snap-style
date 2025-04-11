@@ -30,6 +30,9 @@ internal struct ShapeModifier: ViewModifier {
             let shape = style.shape(for: keyPath, in: styleContext)?.insettableShape(for: style, in: styleContext)
         {
             content
+#if !os(macOS)
+                .contentShape(.hoverEffect, shape)
+#endif
                 .containerShape(shape)
         } else {
             content

@@ -92,9 +92,13 @@ public struct StyleButton<Content>: View where Content : View {
                 isHovering ? .highlighted : .normal,
             ].max() ?? .normal)
         )
+#if os(macOS)
         .onHover(perform: { isHovering in
             self.isHovering = isHovering
         })
+#else
+        .hoverEffect(.highlight, isEnabled: isEnabled)
+#endif
     }
 
 }
