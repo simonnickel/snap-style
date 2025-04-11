@@ -24,8 +24,8 @@ extension SnapStyle.SurfaceKey {
 
                 case .selected: .definition(.surface(.with(foreground: \.accent, background: \.accentAlt)))
 
-                case .disabled: .definition(.surface(.with(foreground: \.accent, background: nil)))
-                    
+                case .disabled: .definition(.surface(.with(foreground: \.onLight2, background: nil)))
+
                 default: .definition(.surface(.with(foreground: \.accent, background: nil)))
             }
         }
@@ -37,6 +37,8 @@ extension SnapStyle.SurfaceKey {
                 case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accentOverlay)))
 
                 case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentAlt)))
+
+                case .disabled: .definition(.surface(.with(foreground: \.onAccent, background: \.onLight2)))
 
                 default:
                     switch context.component.level {
