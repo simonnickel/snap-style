@@ -15,9 +15,14 @@ extension SnapStyle.NumberKey {
     public enum Value: StyleValue {
         
         public typealias WrappedValue = Double
-        
+        public typealias Adjustment = SnapStyle.NumberKey.Adjustment
+
         case value(WrappedValue)
 
+        public func create(with: WrappedValue) -> Self {
+            .value(wrappedValue)
+        }
+        
         public var wrappedValue: WrappedValue {
             switch self {
                 case .value(let value): value
@@ -31,5 +36,17 @@ extension SnapStyle.NumberKey {
         }
     
     }
-    
+
+
+    // MARK: - Adjustment
+
+    public enum Adjustment: StyleAdjustment {
+
+        public typealias Value = SnapStyle.NumberKey.Value
+
+        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+            value
+        }
+    }
+
 }

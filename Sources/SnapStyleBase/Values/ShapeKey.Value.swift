@@ -18,9 +18,14 @@ extension SnapStyle.ShapeKey {
     public enum Value: StyleValue {
         
         public typealias WrappedValue = ShapeDefinition
-        
+        public typealias Adjustment = SnapStyle.ShapeKey.Adjustment
+
         case value(WrappedValue)
 
+        public func create(with: WrappedValue) -> Self {
+            .value(wrappedValue)
+        }
+        
         public var wrappedValue: WrappedValue {
             switch self {
                 case .value(let value): value
@@ -34,8 +39,20 @@ extension SnapStyle.ShapeKey {
         }
     
     }
-    
-    
+
+
+    // MARK: - Adjustment
+
+    public enum Adjustment: StyleAdjustment {
+
+        public typealias Value = SnapStyle.ShapeKey.Value
+
+        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+            value
+        }
+    }
+
+
     // MARK: - Shape
     
     public enum ShapeDefinition: CustomStringConvertible {

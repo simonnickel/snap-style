@@ -7,8 +7,8 @@ import SwiftUI
 
 extension SnapStyle {
     
-    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
-        
+    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = [], in context: SnapStyle.Context) -> Key.Value? {
+
         // Use value from cache if available
         if let value = getValueFromCache(for: keyPath, in: context) {
             return value
@@ -21,8 +21,8 @@ extension SnapStyle {
         for builder in builders.reversed() {
             if let buildValue = builder.value(in: context) {
                 switch buildValue {
-                    case .reference(let valueKeyPath):
-                        result = value(for: valueKeyPath, in: context)
+                    case .reference(let valueKeyPath, let adjustments):
+                        result = value(for: valueKeyPath, with: adjustments, in: context)
                     case .definition(let value):
                         result = value
                 }
@@ -34,14 +34,17 @@ extension SnapStyle {
             let defaultBuilder = Key()[keyPath: keyPath]
             if let buildValue = defaultBuilder.value(in: context) {
                 switch buildValue {
-                    case .reference(let valueKeyPath):
-                        result = value(for: valueKeyPath, in: context)
+                    case .reference(let valueKeyPath, let adjustments):
+                        result = value(for: valueKeyPath, with: adjustments, in: context)
                     case .definition(let value):
                         result = value
                 }
             }
         }
-        
+
+        // Apply Adjustments
+        result = result?.value(with: adjustments)
+
         // Store result in cache
         if let result {
             setValueInCache(result, for: keyPath, in: context)
@@ -60,7 +63,7 @@ extension SnapStyle {
         // TODO: Scaling?
 
         return value?.wrappedValue
-        
+
     }
     
     
@@ -73,7 +76,7 @@ extension SnapStyle {
         // TODO: Font scaling?
 
         return value?.wrappedValue
-        
+
     }
     
     
@@ -84,7 +87,7 @@ extension SnapStyle {
         let value = value(for: keyPath, in: context)
         
         return value?.wrappedValue
-        
+
     }
 
     
@@ -98,7 +101,7 @@ extension SnapStyle {
         let value = value(for: keyPath, in: context)
 
         return value?.wrappedValue
-        
+
     }
 
     package func surface(

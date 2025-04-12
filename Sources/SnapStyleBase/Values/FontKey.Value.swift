@@ -17,9 +17,14 @@ extension SnapStyle.FontKey {
     public enum Value: StyleValue {
         
         public typealias WrappedValue = Font
-        
+        public typealias Adjustment = SnapStyle.FontKey.Adjustment
+
         case with(size: CGFloat, weight: Font.Weight = .regular)
         case font(Font)
+
+        public func create(with: WrappedValue) -> Self {
+            .font(wrappedValue)
+        }
 
         public var wrappedValue: WrappedValue {
             switch self {
@@ -36,7 +41,7 @@ extension SnapStyle.FontKey {
         }
         
         
-        // MARK: - Definition
+        // MARK: Definition
         
         public struct Definition: CustomStringConvertible {
             
@@ -57,5 +62,17 @@ extension SnapStyle.FontKey {
         }
     
     }
-    
+
+
+    // MARK: - Adjustment
+
+    public enum Adjustment: StyleAdjustment {
+
+        public typealias Value = SnapStyle.FontKey.Value
+
+        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+            value
+        }
+    }
+
 }

@@ -32,7 +32,8 @@ extension SnapStyle.ColorKey {
     
     // MARK: - Accents
 
-    public var accent: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
+    public var accent: ValueBuilder { .base(.reference(\.accentBase, adjustments: [.opacity(0.5)])) }
+    public var accentBase: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
     // TODO: Modify other key. .reference(\.key, modified: ...)
     public var accentLevel2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
     public var accentLevel3: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
@@ -50,7 +51,7 @@ extension SnapStyle.ColorKey {
             if context.component.useAlternativeAccent {
                  .definition(.value(Color.accentColor.mix(with: .black, by: 0.4).opacity(0.2)))
             } else {
-                .definition(.value(Color.accentColor.opacity(0.2)))
+                .reference(\.accent, adjustments: [.opacity(0.2)])
             }
         }
     }
@@ -60,11 +61,11 @@ extension SnapStyle.ColorKey {
             if context.component.useAlternativeAccent {
                  .definition(.value(Color.accentColor.mix(with: .black, by: 0.4).opacity(0.8)))
             } else {
-                .definition(.value(Color.accentColor.opacity(0.8)))
+                .reference(\.accent, adjustments: [.opacity(0.8)])
             }
         }
     }
-    
+
 
     // MARK: - Components
     

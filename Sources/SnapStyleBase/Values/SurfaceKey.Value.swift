@@ -26,8 +26,13 @@ extension SnapStyle.SurfaceKey {
     public enum Value: StyleValue {
         
         public typealias WrappedValue = LayeredShapeStyle
+        public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 
         case surface(WrappedValue)
+
+        public func create(with: WrappedValue) -> Self {
+            .surface(wrappedValue)
+        }
 
         public var wrappedValue: WrappedValue {
             switch self {
@@ -93,5 +98,17 @@ extension SnapStyle.SurfaceKey {
         }
 
     }
-    
+
+
+    // MARK: - Adjustment
+
+    public enum Adjustment: StyleAdjustment {
+
+        public typealias Value = SnapStyle.SurfaceKey.Value
+
+        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+            value
+        }
+    }
+
 }
