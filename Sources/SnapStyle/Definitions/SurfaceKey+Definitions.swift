@@ -41,7 +41,7 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             if context.component.useAlternativeAccent {
                 switch context.component.state {
-                    case .normal: .definition(.surface(.with(foreground: \.accent, background: \.content0)))
+                    case .normal: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
                     case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
                     case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
@@ -49,8 +49,8 @@ extension SnapStyle.SurfaceKey {
             } else {
                 switch context.component.state {
                     case .normal: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
-                    case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
+                    case .highlighted: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactiveHighlighted)))
+                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactiveSelected)))
                     case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
                 }
             }
