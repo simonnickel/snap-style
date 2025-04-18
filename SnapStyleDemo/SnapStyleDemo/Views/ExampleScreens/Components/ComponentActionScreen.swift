@@ -14,16 +14,16 @@ struct ComponentActionScreen: View {
                 ActionButtonsView()
             }
 
-            ComponentContainer(title: "Subtitles", component: .content) {
-                ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
+            ComponentContainer(title: "Content", component: .card) {
+                ActionButtonsView()
             }
-
+            
             ComponentContainer(title: "Disabled", component: .content) {
                 ActionButtonsView(enabled: false)
             }
-
-            ComponentContainer(title: "Content", component: .card) {
-                ActionButtonsView()
+            
+            ComponentContainer(title: "Subtitles", component: .content) {
+                ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
             }
 
 

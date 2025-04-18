@@ -21,17 +21,17 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             if context.component.useAlternativeAccent {
                 switch context.component.state {
+                    case .normal: .definition(.surface(.with(foreground: \.onDark0, background: nil)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
                     case .selected: .definition(.surface(.with(foreground: \.onDark0, background: \.accentMuted)))
                     case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
-                    default: .definition(.surface(.with(foreground: \.onDark0, background: nil)))
                 }
             } else {
                 switch context.component.state {
+                    case .normal: .definition(.surface(.with(foreground: \.interactive, background: nil)))
                     case .highlighted: .definition(.surface(.with(foreground: \.interactive, background: \.accentOverlay)))
                     case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentMuted)))
                     case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
-                    default: .definition(.surface(.with(foreground: \.interactive, background: nil)))
                 }
             }
         }
@@ -41,17 +41,17 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             if context.component.useAlternativeAccent {
                 switch context.component.state {
+                    case .normal: .definition(.surface(.with(foreground: \.accent, background: \.content0)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
                     case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
                     case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
-                    default: .definition(.surface(.with(foreground: \.accent, background: \.content0)))
                 }
             } else {
                 switch context.component.state {
+                    case .normal: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
                     case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
                     case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
-                    default: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
                 }
             }
         }
