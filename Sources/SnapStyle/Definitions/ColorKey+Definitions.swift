@@ -28,6 +28,7 @@ extension SnapStyle.ColorKey {
     public var onDark2: ValueBuilder { .base(.definition(.value(Color.gray))) }
 
     public var disabled: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
     
     // MARK: - Accents

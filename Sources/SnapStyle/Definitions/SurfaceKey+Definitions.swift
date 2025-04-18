@@ -44,14 +44,14 @@ extension SnapStyle.SurfaceKey {
                     case .normal: .definition(.surface(.with(foreground: \.accent, background: \.content0)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
                     case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
-                    case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
+                    case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
                 }
             } else {
                 switch context.component.state {
                     case .normal: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
                     case .highlighted: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
                     case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
-                    case .disabled: .definition(.surface(.with(foreground: \.onDark0, background: \.disabled)))
+                    case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
                 }
             }
         }
