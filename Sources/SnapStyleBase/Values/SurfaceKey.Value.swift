@@ -18,6 +18,7 @@ extension SnapStyle.SurfaceKey {
         case any
         case foreground
         case background
+        case backgroundOverlay
     }
     
     
