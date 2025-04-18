@@ -28,6 +28,9 @@ extension SnapStyle.SurfaceKey {
         public typealias WrappedValue = LayeredShapeStyle
         public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 
+        case background(LayeredShapeStyle.LayerValue)
+        case foreground(LayeredShapeStyle.LayerValue)
+        case layers([Layer: LayeredShapeStyle.LayerValue])
         case surface(WrappedValue)
 
         public static func create(with value: WrappedValue) -> Self {
@@ -36,14 +39,15 @@ extension SnapStyle.SurfaceKey {
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .surface(let forLayer): forLayer
+                case .background(let layerValue): LayeredShapeStyle([.background : layerValue])
+                case .foreground(let layerValue): LayeredShapeStyle([.foreground : layerValue])
+                case .layers(let valueForLayer): LayeredShapeStyle(valueForLayer)
+                case .surface(let layeredShapeStyle): layeredShapeStyle
             }
         }
         
         public var description: String {
-            switch self {
-                case .surface(let definition): ".definition: \(definition)"
-            }
+            "\(wrappedValue)"
         }
         
         
@@ -71,28 +75,11 @@ extension SnapStyle.SurfaceKey {
                 self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
             }
 
-            public init(
-                foreground: LayerValue? = nil,
-                background: LayerValue? = nil,
-                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
-            ) {
-                var values: ShapeStyleForLayer = [:]
-                if let foreground {
-                    values[.foreground] = foreground
-                }
-                if let background {
-                    values[.background] = background
-                }
-                
-                self.init(values, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
-            }
-
             public static func with(
-                foreground: LayerValue? = nil,
-                background: LayerValue? = nil,
+                _ values: [Layer: LayerValue],
                 ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
             ) -> Self {
-                self.init(foreground: foreground, background: background, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
+                self.init(values, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
             }
 
         }

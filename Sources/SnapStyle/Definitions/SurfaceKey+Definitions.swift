@@ -21,17 +21,17 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             if context.component.useAlternativeAccent {
                 switch context.component.state {
-                    case .normal: .definition(.surface(.with(foreground: \.onDark0, background: nil)))
-                    case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
-                    case .selected: .definition(.surface(.with(foreground: \.onDark0, background: \.accentMuted)))
-                    case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
+                    case .normal: .definition(.foreground(\.onDark0))
+                    case .highlighted: .definition(.layers([.foreground: \.onDark0, .background: \.accentOverlay]))
+                    case .selected: .definition(.layers([.foreground: \.onDark0, .background: \.accentMuted]))
+                    case .disabled: .definition(.foreground(\.disabled))
                 }
             } else {
                 switch context.component.state {
-                    case .normal: .definition(.surface(.with(foreground: \.interactive, background: nil)))
-                    case .highlighted: .definition(.surface(.with(foreground: \.interactive, background: \.accentOverlay)))
-                    case .selected: .definition(.surface(.with(foreground: \.onAccent, background: \.accentMuted)))
-                    case .disabled: .definition(.surface(.with(foreground: \.disabled, background: nil)))
+                    case .normal: .definition(.foreground(\.interactive))
+                    case .highlighted: .definition(.layers([.foreground: \.interactive, .background: \.accentOverlay]))
+                    case .selected: .definition(.layers([.foreground: \.onAccent, .background: \.accentMuted]))
+                    case .disabled: .definition(.foreground(\.disabled))
                 }
             }
         }
@@ -41,17 +41,17 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             if context.component.useAlternativeAccent {
                 switch context.component.state {
-                    case .normal: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-                    case .highlighted: .definition(.surface(.with(foreground: \.onDark0, background: \.accentOverlay)))
-                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.accentMuted)))
-                    case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
+                    case .normal: .definition(.layers([.foreground: \.onContent0, .background: \.content0]))
+                    case .highlighted: .definition(.layers([.foreground: \.onDark0, .background: \.accentOverlay]))
+                    case .selected: .definition(.layers([.foreground: \.onInteractive, .background: \.accentMuted]))
+                    case .disabled: .definition(.layers([.foreground: \.onDisabled, .background: \.disabled]))
                 }
             } else {
                 switch context.component.state {
-                    case .normal: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactive)))
-                    case .highlighted: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactiveHighlighted)))
-                    case .selected: .definition(.surface(.with(foreground: \.onInteractive, background: \.interactiveSelected)))
-                    case .disabled: .definition(.surface(.with(foreground: \.onDisabled, background: \.disabled)))
+                    case .normal: .definition(.layers([.foreground: \.onInteractive, .background: \.interactive]))
+                    case .highlighted: .definition(.layers([.foreground: \.onInteractive, .background: \.interactiveHighlighted]))
+                    case .selected: .definition(.layers([.foreground: \.onInteractive, .background: \.interactiveSelected]))
+                    case .disabled: .definition(.layers([.foreground: \.onDisabled, .background: \.disabled]))
                 }
             }
         }
@@ -60,9 +60,9 @@ extension SnapStyle.SurfaceKey {
     public var contentContainer: ValueBuilder {
         .builder { context in
             switch context.component.level {
-                case 1: .definition(.surface(.with(foreground: \.onContent0, background: \.content0)))
-                case 2: .definition(.surface(.with(background: \.content1)))
-                case 3: .definition(.surface(.with(background: \.content2)))
+                case 1: .definition(.layers([.foreground: \.onContent0, .background: \.content0]))
+                case 2: .definition(.background(\.content1))
+                case 3: .definition(.background(\.content2))
                 default: nil
             }
         }
@@ -71,9 +71,9 @@ extension SnapStyle.SurfaceKey {
     public var accentContainer: ValueBuilder {
         .builder { context in
             switch context.component.level {
-                case 1: .definition(.surface(.with(foreground: \.onAccent, background: \.accent)))
-                case 2: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel2)))
-                case 3: .definition(.surface(.with(foreground: \.onAccent, background: \.accentLevel3)))
+                case 1: .definition(.layers([.foreground: \.onAccent, .background: \.accent]))
+                case 2: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel2]))
+                case 3: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel3]))
                 default: nil
             }
         }
@@ -87,8 +87,7 @@ extension SnapStyle.SurfaceKey {
     public var screen: ValueBuilder {
         .builder { context in
             .definition(.surface(.with(
-                foreground: nil,
-                background: \.screen,
+                [.background: \.screen],
                 ignoresSafeAreaEdges: .all // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
             )))
         }
@@ -132,6 +131,6 @@ extension SnapStyle.SurfaceKey {
     
     public var action: ValueBuilder { .base(nil) }
 
-    public var separator: ValueBuilder { .base(.definition(.surface(.with(foreground: \.onContent1)))) } // TODO: Better color definition
+    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContent1))) } // TODO: Better color definition
 
 }
