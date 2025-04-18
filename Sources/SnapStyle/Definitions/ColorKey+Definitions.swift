@@ -32,7 +32,7 @@ extension SnapStyle.ColorKey {
     
     // MARK: - Accents
 
-    public var accent: ValueBuilder { .base(.reference(\.accentBase, adjustments: [.opacity(0.5)])) }
+    public var accent: ValueBuilder { .base(.reference(\.accentBase)) }
     public var accentBase: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
     // TODO: Modify other key. .reference(\.key, modified: ...)
     public var accentLevel2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }

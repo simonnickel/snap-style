@@ -22,8 +22,8 @@ extension SnapStyle.ShapeKey {
 
         case value(WrappedValue)
 
-        public func create(with: WrappedValue) -> Self {
-            .value(wrappedValue)
+        public static func create(with value: WrappedValue) -> Self {
+            .value(value)
         }
         
         public var wrappedValue: WrappedValue {

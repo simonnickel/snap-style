@@ -30,8 +30,8 @@ extension SnapStyle.SurfaceKey {
 
         case surface(WrappedValue)
 
-        public func create(with: WrappedValue) -> Self {
-            .surface(wrappedValue)
+        public static func create(with value: WrappedValue) -> Self {
+            .surface(value)
         }
 
         public var wrappedValue: WrappedValue {

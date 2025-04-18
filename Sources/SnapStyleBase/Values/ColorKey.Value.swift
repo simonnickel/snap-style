@@ -21,8 +21,8 @@ extension SnapStyle.ColorKey {
 
         case value(WrappedValue)
 
-        public func create(with: WrappedValue) -> Self {
-            .value(wrappedValue)
+        public static func create(with value: WrappedValue) -> Self {
+            .value(value)
         }
 
         public var wrappedValue: WrappedValue {
@@ -50,9 +50,7 @@ extension SnapStyle.ColorKey {
 
         public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
             switch self {
-                case .opacity(let opacity):
-                    let result = Color.yellow// value.opacity(opacity)
-                    return result
+                case .opacity(let opacity): value.opacity(opacity)
             }
         }
     }

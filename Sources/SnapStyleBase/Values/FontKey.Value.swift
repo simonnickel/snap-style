@@ -22,8 +22,8 @@ extension SnapStyle.FontKey {
         case with(size: CGFloat, weight: Font.Weight = .regular)
         case font(Font)
 
-        public func create(with: WrappedValue) -> Self {
-            .font(wrappedValue)
+        public static func create(with value: WrappedValue) -> Self {
+            .font(value)
         }
 
         public var wrappedValue: WrappedValue {
