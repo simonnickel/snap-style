@@ -45,30 +45,30 @@ extension SnapStyle.ColorKey {
     // MARK: Interactive
 
     public var interactive: ValueBuilder { .base(.reference(\.accent)) } // TODO: Modified / selected accent
-    public var interactiveHighlighted: ValueBuilder { .base(.reference(\.accent, adjustments: [.opacity(0.85)])) }
-    public var interactiveSelected: ValueBuilder { .base(.reference(\.accent, adjustments: [.opacity(0.65)])) }
     public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
-
-    public var accentOverlay: ValueBuilder {
+    
+    
+    // MARK: Overlay
+    
+    public var interactionStateOverlay: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.5).opacity(0.4)))
-            } else {
-                .reference(\.accent, adjustments: [.opacity(0.2)])
+            switch context.component.state {
+                case .normal, .disabled: nil
+                case .highlighted: .definition(.value(Color.black.opacity(0.2)))
+                case .selected: .definition(.value(Color.black.opacity(0.3)))
             }
         }
     }
-
-    public var accentMuted: ValueBuilder {
+    public var interactionStateOverlayAccent: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                 .definition(.value(Color.accentColor.mix(with: .black, by: 0.5).opacity(0.8)))
-            } else {
-                .reference(\.accent, adjustments: [.opacity(0.8)])
+            switch context.component.state {
+                case .normal, .disabled: nil
+                case .highlighted: .reference(\.accent, adjustments: [.opacity(0.2)])
+                case .selected: .reference(\.accent, adjustments: [.opacity(0.3)])
             }
         }
     }
-
+    
 
     // MARK: - Components
     
