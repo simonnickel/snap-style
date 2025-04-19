@@ -117,7 +117,7 @@ internal struct ColorListRowBackgroundSurfaceModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let background = style.surface(for: keyPath, in: styleContext)?.surface(for: .background),
+            let background = style.surface(for: keyPath, in: styleContext)?.colorKey(for: .background),
             let color = style.color(for: background, in: styleContext)
         {
             content
