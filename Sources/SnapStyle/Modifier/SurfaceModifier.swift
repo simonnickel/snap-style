@@ -49,13 +49,11 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if
-            let surface = style.surface(for: keyPath, in: styleContext),
-            let background = surface.surface(for: .background),
-            let color = style.color(for: background, in: styleContext)
-        {
+        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
+        if let surface = style.surface(for: keyPath, in: styleContext) {
+            let color = style.color(layer: .background, surface: surface, in: styleContext)
             content
-                .background(color, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? .clear, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }
@@ -71,13 +69,11 @@ internal struct SurfaceBackgroundOverlayModifier: ViewModifier {
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if
-            let surface = style.surface(for: keyPath, in: styleContext),
-            let background = surface.surface(for: .backgroundOverlay),
-            let color = style.color(for: background, in: styleContext)
-        {
+        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
+        if let surface = style.surface(for: keyPath, in: styleContext) {
+            let color = style.color(layer: .backgroundOverlay, surface: surface, in: styleContext)
             content
-                .background(color, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? .clear, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }

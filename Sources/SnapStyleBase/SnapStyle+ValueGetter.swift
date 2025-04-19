@@ -82,7 +82,7 @@ extension SnapStyle {
     
     // MARK: - Color
     
-    package func color(for keyPath: ColorKey.ValueBuilderKeyPath, in context: Context) -> Color? {
+    package func color(for keyPath: ColorKey.ValueBuilderKeyPath, in context: Context) -> ColorKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
         
@@ -105,14 +105,40 @@ extension SnapStyle {
     }
 
     package func surface(
-        layer: SnapStyle.SurfaceKey.Layer,
+        layer: SurfaceKey.Layer,
         for keyPath: SurfaceKey.ValueBuilderKeyPath,
         in context: Context
-    ) -> SnapStyle.SurfaceKey.Value.LayeredShapeStyle.LayerValue? {
+    ) -> SurfaceKey.Value.LayeredShapeStyle.LayerValue? {
         
         let value = surface(for: keyPath, in: context)
 
         return value?.surface(for: layer)
+        
+    }
+
+    /// Get the color of a layer for a `SurfaceKey.ValueBuilderKeyPath`.
+    package func color(
+        layer: SurfaceKey.Layer,
+        for keyPath: SurfaceKey.ValueBuilderKeyPath,
+        in context: Context
+    ) -> ColorKey.Value.WrappedValue? {
+        
+        guard let layer = surface(layer: layer, for: keyPath, in: context) else { return nil }
+        
+        return color(for: layer, in: context)
+        
+    }
+
+    /// Get the color of a layer for a `LayeredShapeStyle` (aka `Surface`).
+    package func color(
+        layer: SurfaceKey.Layer,
+        surface: SurfaceKey.Value.LayeredShapeStyle,
+        in context: Context
+    ) -> ColorKey.Value.WrappedValue? {
+        
+        guard let layer = surface.surface(for: layer) else { return nil }
+        
+        return color(for: layer, in: context)
         
     }
     
@@ -120,6 +146,7 @@ extension SnapStyle {
     // MARK: - Shape
 
     package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath, in context: Context) -> ShapeKey.Value.WrappedValue? {
+
         let value = value(for: keyPath, in: context)
 
         return value?.wrappedValue
