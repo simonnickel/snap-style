@@ -64,7 +64,8 @@ extension SnapStyle.SurfaceKey {
             // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
             public static let ignoresSafeAreaEdgesDefault: Edge.Set = .vertical
 
-            public func surface(for layer: Layer) -> LayerValue? {
+            // TODO: Rename
+            public func colorKey(for layer: Layer) -> LayerValue? {
                 values[layer] ?? values[.any]
             }
 

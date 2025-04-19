@@ -112,7 +112,7 @@ extension SnapStyle {
         
         let value = surface(for: keyPath, in: context)
 
-        return value?.surface(for: layer)
+        return value?.colorKey(for: layer)
         
     }
 
@@ -136,9 +136,9 @@ extension SnapStyle {
         in context: Context
     ) -> ColorKey.Value.WrappedValue? {
         
-        guard let layer = surface.surface(for: layer) else { return nil }
+        guard let key = surface.colorKey(for: layer) else { return nil }
         
-        return color(for: layer, in: context)
+        return color(for: key, in: context)
         
     }
     
