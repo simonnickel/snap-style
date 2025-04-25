@@ -11,33 +11,33 @@ extension SnapStyle.ColorKey {
     
     // MARK: - Generic Colors
 
-    public var light0: ValueBuilder { .base(.definition(.value(Color.white))) }
-    public var light1: ValueBuilder { .base(.definition(.value(Color.init(white: 0.85)))) }
-    public var light2: ValueBuilder { .base(.definition(.value(Color.init(white: 0.7)))) }
-    public var light3: ValueBuilder { .base(.definition(.value(Color.init(white: 0.6)))) }
-    public var onLight0: ValueBuilder { .base(.definition(.value(Color.black))) }
-    public var onLight1: ValueBuilder { .base(.definition(.value(Color.gray))) }
-    public var onLight2: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var light0: ValueBuilder { .base(.definition(.value(.color(.white)))) }
+    public var light1: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.85))))) }
+    public var light2: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.7))))) }
+    public var light3: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.6))))) }
+    public var onLight0: ValueBuilder { .base(.definition(.value(.color(.black)))) }
+    public var onLight1: ValueBuilder { .base(.definition(.value(.color(.gray)))) }
+    public var onLight2: ValueBuilder { .base(.definition(.value(.color(.gray)))) }
     
-    public var dark0: ValueBuilder { .base(.definition(.value(Color.black))) }
-    public var dark1: ValueBuilder { .base(.definition(.value(Color.init(white: 0.2)))) }
-    public var dark2: ValueBuilder { .base(.definition(.value(Color.init(white: 0.35)))) }
-    public var dark3: ValueBuilder { .base(.definition(.value(Color.init(white: 0.45)))) }
-    public var onDark0: ValueBuilder { .base(.definition(.value(Color.white))) }
-    public var onDark1: ValueBuilder { .base(.definition(.value(Color.gray))) }
-    public var onDark2: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var dark0: ValueBuilder { .base(.definition(.value(.color(.black)))) }
+    public var dark1: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.2))))) }
+    public var dark2: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.35))))) }
+    public var dark3: ValueBuilder { .base(.definition(.value(.color(.init(white: 0.45))))) }
+    public var onDark0: ValueBuilder { .base(.definition(.value(.color(.white)))) }
+    public var onDark1: ValueBuilder { .base(.definition(.value(.color(.gray)))) }
+    public var onDark2: ValueBuilder { .base(.definition(.value(.color(.gray)))) }
 
-    public var disabled: ValueBuilder { .base(.definition(.value(Color.gray))) }
+    public var disabled: ValueBuilder { .base(.definition(.value(.color(.gray)))) }
     public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
     
     // MARK: - Accents
 
     public var accent: ValueBuilder { .base(.reference(\.accentBase)) }
-    public var accentBase: ValueBuilder { .base(.definition(.value(Color.accentColor))) }
+    public var accentBase: ValueBuilder { .base(.definition(.value(.color(.accentColor)))) }
     // TODO: Modify other key. .reference(\.key, modified: ...)
-    public var accentLevel2: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.2)))) }
-    public var accentLevel3: ValueBuilder { .base(.definition(.value(Color.accentColor.mix(with: .black, by: 0.4)))) }
+    public var accentLevel2: ValueBuilder { .base(.definition(.value(.color(.accentColor.mix(with: .black, by: 0.2))))) }
+    public var accentLevel3: ValueBuilder { .base(.definition(.value(.color(.accentColor.mix(with: .black, by: 0.4))))) }
 
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
 
@@ -54,8 +54,8 @@ extension SnapStyle.ColorKey {
         .builder { context in
             switch context.component.state {
                 case .normal, .disabled: nil
-                case .highlighted: .definition(.value(Color.black.opacity(0.2)))
-                case .selected: .definition(.value(Color.black.opacity(0.3)))
+                case .highlighted: .definition(.value(.color(.black.opacity(0.2))))
+                case .selected: .definition(.value(.color(.black.opacity(0.3))))
             }
         }
     }

@@ -16,7 +16,7 @@ extension SnapStyle.ColorKey {
 
     public enum Value: StyleValue {
 
-        public typealias WrappedValue = Color
+        public typealias WrappedValue = SnapShapeStyle
         public typealias Adjustment = SnapStyle.ColorKey.Adjustment
 
         case value(WrappedValue)
@@ -36,6 +36,18 @@ extension SnapStyle.ColorKey {
                 case .value(let value): ".value: \(value)"
             }
         }
+        
+        public enum SnapShapeStyle: ShapeStyle {
+            case color(Color)
+            case gradient(Gradient)
+            
+            public func resolve(in environment: EnvironmentValues) -> AnyShapeStyle {
+                switch self {
+                    case .color(let color): AnyShapeStyle(color)
+                    case .gradient(let gradient): AnyShapeStyle(gradient)
+                }
+            }
+        }
 
     }
     
@@ -49,8 +61,15 @@ extension SnapStyle.ColorKey {
         case opacity(Double)
 
         public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
-            switch self {
-                case .opacity(let opacity): value.opacity(opacity)
+            switch value {
+                case .color(let color):
+                    switch self {
+                        case .opacity(let opacity): .color(color.opacity(opacity))
+                    }
+                    
+                case .gradient(let gradient):
+                    // TODO: Add Adjustments
+                    .gradient(gradient)
             }
         }
     }

@@ -17,7 +17,7 @@ struct DebugKeyRowColor: View {
     var body: some View {
         let color = style.color(for: keyPath, in: styleContext)
         Text("\(keyPath)")
-            .foregroundStyle(color ?? .white)
+            .foregroundStyle(color ?? .color(.white))
     }
 }
 

@@ -100,7 +100,8 @@ internal struct ColorListRowBackgroundColorModifier: ViewModifier {
             let color = style.color(for: keyPath, in: styleContext)
         {
             content
-                .listRowBackground(color)
+            // TODO: How to apply a generic shape style?
+//                .listRowBackground(color)
         } else {
             content
         }
@@ -121,7 +122,8 @@ internal struct ColorListRowBackgroundSurfaceModifier: ViewModifier {
             let color = style.color(for: background, in: styleContext)
         {
             content
-                .listRowBackground(color)
+            // TODO: How to apply a generic shape style?
+//                .listRowBackground(color)
         } else {
             content
         }
