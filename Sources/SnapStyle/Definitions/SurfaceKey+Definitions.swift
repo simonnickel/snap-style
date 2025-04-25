@@ -24,9 +24,7 @@ extension SnapStyle.SurfaceKey {
             let background: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlay : \.interactionStateOverlayAccent
             
             return switch context.component.state {
-                case .normal: .definition(
-                    .foreground(foreground)
-                )
+                case .normal: .definition(.foreground(foreground))
                     
                 case .disabled: .definition(.foreground(\.disabled))
                     
