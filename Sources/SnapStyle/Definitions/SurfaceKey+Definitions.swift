@@ -11,9 +11,7 @@ import SwiftUI
 // - select colors based on the component (state, level)
 
 extension SnapStyle.SurfaceKey {
-
-    // TODO: Gradients
-    // TODO: Materials
+    
     
     // MARK: - Generic Surfaces
     

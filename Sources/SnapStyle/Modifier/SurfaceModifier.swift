@@ -53,7 +53,7 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
         if let surface = style.surface(for: keyPath, in: styleContext) {
             let color = style.color(layer: .background, surface: surface, in: styleContext)
             content
-                .background(color ?? .color(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }
@@ -73,7 +73,7 @@ internal struct SurfaceBackgroundOverlayModifier: ViewModifier {
         if let surface = style.surface(for: keyPath, in: styleContext) {
             let color = style.color(layer: .backgroundOverlay, surface: surface, in: styleContext)
             content
-                .background(color ?? .color(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
         } else {
             content
         }

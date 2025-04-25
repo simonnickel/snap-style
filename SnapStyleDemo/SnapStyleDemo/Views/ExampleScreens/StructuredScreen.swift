@@ -101,7 +101,7 @@ struct StructuredScreen: View {
             .styleOverride(
                 colors: [
                     \.onAccent : SnapStyle.ValueBuilder.builder { context in
-                            .definition(.value(.color(.yellow)))
+                        .definition(.color(.yellow))
                     }
                 ]
             )

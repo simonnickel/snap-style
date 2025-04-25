@@ -16,36 +16,33 @@ extension SnapStyle.ColorKey {
 
     public enum Value: StyleValue {
 
-        public typealias WrappedValue = SnapShapeStyle
+        public typealias WrappedValue = AnyShapeStyle
         public typealias Adjustment = SnapStyle.ColorKey.Adjustment
 
-        case value(WrappedValue)
+        case color(Color)
+        case gradient(AnyShapeStyle)
+        case material(Material)
+        case any(AnyShapeStyle)
 
         public static func create(with value: WrappedValue) -> Self {
-            .value(value)
+            .any(value)
         }
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .value(let value): value
+                case .color(let value): AnyShapeStyle(value)
+                case .gradient(let value): value
+                case .material(let value): AnyShapeStyle(value)
+                case .any(let value): value
             }
         }
         
         public var description: String {
             switch self {
-                case .value(let value): ".value: \(value)"
-            }
-        }
-        
-        public enum SnapShapeStyle: ShapeStyle {
-            case color(Color)
-            case gradient(Gradient)
-            
-            public func resolve(in environment: EnvironmentValues) -> AnyShapeStyle {
-                switch self {
-                    case .color(let color): AnyShapeStyle(color)
-                    case .gradient(let gradient): AnyShapeStyle(gradient)
-                }
+                case .color(let value): ".color: \(value)"
+                case .gradient(let value): ".gradient: \(value)"
+                case .material(let value): ".material: \(value)"
+                case .any(let value): ".any: \(value)"
             }
         }
 
@@ -61,15 +58,8 @@ extension SnapStyle.ColorKey {
         case opacity(Double)
 
         public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
-            switch value {
-                case .color(let color):
-                    switch self {
-                        case .opacity(let opacity): .color(color.opacity(opacity))
-                    }
-                    
-                case .gradient(let gradient):
-                    // TODO: Add Adjustments
-                    .gradient(gradient)
+            switch self {
+                case .opacity(let opacity): AnyShapeStyle(value.opacity(opacity))
             }
         }
     }
