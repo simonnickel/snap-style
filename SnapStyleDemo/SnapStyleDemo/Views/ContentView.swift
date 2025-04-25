@@ -62,8 +62,8 @@ struct ContentView: View {
                     NavigationLink("Colors") {
                         DebugCacheScreen<SnapStyle.ColorKey>()
                     }
-                    NavigationLink("Surfaces") {
-                        DebugCacheScreen<SnapStyle.SurfaceKey>()
+                    NavigationLink("Compositions") {
+                        DebugCacheScreen<SnapStyle.CompositionKey>()
                     }
                 } header: {
                     Text("Caches")

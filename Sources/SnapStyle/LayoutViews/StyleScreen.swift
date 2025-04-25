@@ -45,7 +45,7 @@ public struct StyleScreen<Content>: View where Content : View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
-        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets (see SurfaceKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault).
+        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets (see CompositionKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault).
         .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
         .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
         .style(component: component)

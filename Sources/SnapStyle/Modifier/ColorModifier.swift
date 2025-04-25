@@ -15,7 +15,7 @@ extension View {
     
     public func style(
         background keyPath: SnapStyle.ColorKey.ValueBuilderKeyPath,
-        ignoresSafeAreaEdges: Edge.Set = SnapStyle.SurfaceKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault
+        ignoresSafeAreaEdges: Edge.Set = SnapStyle.CompositionKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault
     ) -> some View {
         self
             .modifier(ColorBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
@@ -31,14 +31,14 @@ extension View {
             .modifier(ColorListRowBackgroundColorModifier(keyPath: keyPath))
     }
     
-    /// Applies the background layer of the given `SurfaceKey` as listRowBackground.
-    /// - Parameter keyPath: The `SurfaceKey` to use.
+    /// Applies the background layer of the given `CompositionKey` as listRowBackground.
+    /// - Parameter keyPath: The `CompositionKey` to use.
     /// - Returns: A modified view.
     public func style(
-        listRowBackground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+        listRowBackground keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
     ) -> some View {
         self
-            .modifier(ColorListRowBackgroundSurfaceModifier(keyPath: keyPath))
+            .modifier(ColorListRowBackgroundCompositionModifier(keyPath: keyPath))
     }
 
 }
@@ -109,16 +109,17 @@ internal struct ColorListRowBackgroundColorModifier: ViewModifier {
 
 }
 
-internal struct ColorListRowBackgroundSurfaceModifier: ViewModifier {
+// TODO: Should this be renamed?
+internal struct ColorListRowBackgroundCompositionModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let background = style.surface(for: keyPath, in: styleContext)?.colorKey(for: .background),
+            let background = style.composition(for: keyPath, in: styleContext)?.colorKey(for: .background),
             let color = style.color(for: background, in: styleContext)
         {
             content

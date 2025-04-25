@@ -10,7 +10,7 @@ extension SnapStyle {
         internal var numbers: [NumberKey.ValueBuilderKeyPath: [NumberKey.ValueBuilder]] = [:]
         internal var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
         internal var colors: [ColorKey.ValueBuilderKeyPath: [ColorKey.ValueBuilder]] = [:]
-        internal var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
+        internal var compositions: [CompositionKey.ValueBuilderKeyPath: [CompositionKey.ValueBuilder]] = [:]
         internal var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
         
         internal func builder<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [Key.ValueBuilder] {
@@ -32,8 +32,8 @@ extension SnapStyle {
                         return builders
                     }
                 
-                case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
-                    if let builders = surfaces[keyPath] as? [Key.ValueBuilder] {
+                case let keyPath as KeyPath<CompositionKey, CompositionKey.ValueBuilder>:
+                    if let builders = compositions[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
                 
@@ -66,8 +66,8 @@ extension SnapStyle {
         appended(colors, at: \.colors)
     }
     
-    internal func appended(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
-        appended(surfaces, at: \.surfaces)
+    internal func appended(compositions: [CompositionKey.ValueBuilderKeyPath: CompositionKey.ValueBuilder]) -> Self {
+        appended(compositions, at: \.compositions)
     }
     
     internal func appended(shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]) -> Self {

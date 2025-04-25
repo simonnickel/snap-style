@@ -33,7 +33,7 @@ extension SnapStyle.ComponentDefinition {
                 case .separator: \.separator
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .any: \.anyElement
                 case .container: \.anyContainer
@@ -64,7 +64,7 @@ extension SnapStyle.ComponentDefinition {
                 default: nil
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.screen
                 default: nil
@@ -88,7 +88,7 @@ extension SnapStyle.ComponentDefinition {
                 default: \.content
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.containerContent
                 default: nil
@@ -112,7 +112,7 @@ extension SnapStyle.ComponentDefinition {
                 default: nil
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.screen
                 default: nil
@@ -137,7 +137,7 @@ extension SnapStyle.ComponentDefinition {
                 default: \.card
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.containerCard
                 default: nil
@@ -166,7 +166,7 @@ extension SnapStyle.ComponentDefinition {
                 default: \.card
             }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.containerCard
                 default: nil
@@ -196,7 +196,7 @@ extension SnapStyle.ComponentDefinition {
                default: \.action
            }
         },
-        surfaces: { element in
+        compositions: { element in
             switch element {
                 case .container: \.containerAction
                 default: nil

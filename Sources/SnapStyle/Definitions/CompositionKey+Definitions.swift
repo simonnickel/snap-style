@@ -6,14 +6,14 @@
 import SnapStyleBase
 import SwiftUI
 
-// Surface is used to:
-// - combine foreground and background color
-// - select colors based on the component (state, level)
+// Composition is used to:
+// - define colors for different layers
+// - select colors based on the component state and level
 
-extension SnapStyle.SurfaceKey {
+extension SnapStyle.CompositionKey {
     
     
-    // MARK: - Generic Surfaces
+    // MARK: - Generic Compositions
     
     public var interactiveElement: ValueBuilder {
         .builder { context in
@@ -78,7 +78,7 @@ extension SnapStyle.SurfaceKey {
     
     public var screen: ValueBuilder {
         .builder { context in
-            .definition(.surface(.with(
+            .definition(.composition(.with(
                 [.background: \.screen],
                 ignoresSafeAreaEdges: .all // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
             )))

@@ -15,7 +15,7 @@ extension SnapStyle {
         internal var numbers: KeyTypeCache<NumberKey> = .init()
         internal var fonts: KeyTypeCache<FontKey> = .init()
         internal var colors: KeyTypeCache<ColorKey> = .init()
-        internal var surfaces: KeyTypeCache<SurfaceKey> = .init()
+        internal var compositions: KeyTypeCache<CompositionKey> = .init()
         internal var shapes: KeyTypeCache<ShapeKey> = .init()
         
         internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
@@ -27,7 +27,7 @@ extension SnapStyle {
                     
                 case let key as ColorKey.Type: return colors as? KeyTypeCache<Key>
                     
-                case let key as SurfaceKey.Type: return surfaces as? KeyTypeCache<Key>
+                case let key as CompositionKey.Type: return compositions as? KeyTypeCache<Key>
                     
                 case let key as ShapeKey.Type: return shapes as? KeyTypeCache<Key>
                     
@@ -46,7 +46,7 @@ extension SnapStyle {
                     
                 case let key as ColorKey.Type: colors = .init()
                     
-                case let key as SurfaceKey.Type: surfaces = .init()
+                case let key as CompositionKey.Type: compositions = .init()
                     
                 case let key as ShapeKey.Type: shapes = .init()
                     

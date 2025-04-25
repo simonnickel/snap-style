@@ -7,16 +7,16 @@ import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
-struct DebugKeyRowSurface: View {
+struct DebugKeyRowComposition: View {
     
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
     
     var body: some View {
         Text("\(keyPath)")
-            .style(surface: keyPath)
+            .style(composition: keyPath)
     }
 }
 
 #Preview {
-    DebugKeyRowSurface(keyPath: \.containerContent)
+    DebugKeyRowComposition(keyPath: \.containerContent)
 }

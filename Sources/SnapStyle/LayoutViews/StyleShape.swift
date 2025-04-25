@@ -12,21 +12,21 @@ public struct StyleShape: View { // TODO: Should this be a Shape? or rename to S
     @Environment(\.styleContext) private var styleContext
     
     let shape: SnapStyle.ShapeKey.ShapeDefinition
-    let surface: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let composition: SnapStyle.CompositionKey.ValueBuilderKeyPath
     
-    public init(shape: SnapStyle.ShapeKey.ShapeDefinition, surface: SnapStyle.SurfaceKey.ValueBuilderKeyPath) {
+    public init(shape: SnapStyle.ShapeKey.ShapeDefinition, composition: SnapStyle.CompositionKey.ValueBuilderKeyPath) {
         self.shape = shape
-        self.surface = surface
+        self.composition = composition
     }
     
     public var body: some View {
         shape.insettableShape(for: style, in: styleContext)
-            .style(surface: surface) // TODO: Fill? Use Surface layer?
+            .style(composition: composition) // TODO: Fill? Use Composition layer?
     }
     
 }
 
 #Preview {
-    StyleShape(shape: .capsule, surface: \.separator)
+    StyleShape(shape: .capsule, composition: \.separator)
         .frame(width: 200, height: 100)
 }

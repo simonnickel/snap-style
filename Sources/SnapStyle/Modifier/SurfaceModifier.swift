@@ -8,11 +8,11 @@ import SwiftUI
 
 extension View {
 
-    public func style(surface keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
+    public func style(composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath) -> some View {
         self
-            .modifier(SurfaceForegroundModifier(keyPath: keyPath))
-            .modifier(SurfaceBackgroundOverlayModifier(keyPath: keyPath))
-            .modifier(SurfaceBackgroundModifier(keyPath: keyPath))
+            .modifier(CompositionForegroundModifier(keyPath: keyPath))
+            .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+            .modifier(CompositionBackgroundModifier(keyPath: keyPath))
     }
 
 }
@@ -20,16 +20,16 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct SurfaceForegroundModifier: ViewModifier {
+internal struct CompositionForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let foreground = style.surface(layer: .foreground, for: keyPath, in: styleContext),
+            let foreground = style.composition(layer: .foreground, for: keyPath, in: styleContext),
             let color = style.color(for: foreground, in: styleContext)
         {
             content
@@ -41,19 +41,19 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
 }
 
-internal struct SurfaceBackgroundModifier: ViewModifier {
+internal struct CompositionBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
-        if let surface = style.surface(for: keyPath, in: styleContext) {
-            let color = style.color(layer: .background, surface: surface, in: styleContext)
+        // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
+        if let composition = style.composition(for: keyPath, in: styleContext) {
+            let color = style.color(layer: .background, composition: composition, in: styleContext)
             content
-                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {
             content
         }
@@ -61,19 +61,19 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
 }
 
-internal struct SurfaceBackgroundOverlayModifier: ViewModifier {
+internal struct CompositionBackgroundOverlayModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
-        if let surface = style.surface(for: keyPath, in: styleContext) {
-            let color = style.color(layer: .backgroundOverlay, surface: surface, in: styleContext)
+        // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
+        if let composition = style.composition(for: keyPath, in: styleContext) {
+            let color = style.color(layer: .backgroundOverlay, composition: composition, in: styleContext)
             content
-                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(color ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {
             content
         }
