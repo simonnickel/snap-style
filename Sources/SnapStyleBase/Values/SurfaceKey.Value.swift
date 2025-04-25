@@ -6,18 +6,18 @@
 import SwiftUI
 
 extension SnapStyle {
-    public struct ColorKey: StyleKey { public init() {} }
+    public struct SurfaceKey: StyleKey { public init() {} }
 }
 
-extension SnapStyle.ColorKey {
+extension SnapStyle.SurfaceKey {
 
 
-    // MARK: - ColorKey.Value
+    // MARK: - SurfaceKey.Value
 
     public enum Value: StyleValue {
 
         public typealias WrappedValue = AnyShapeStyle
-        public typealias Adjustment = SnapStyle.ColorKey.Adjustment
+        public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 
         case color(Color)
         case gradient(AnyShapeStyle)
@@ -53,7 +53,7 @@ extension SnapStyle.ColorKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = SnapStyle.ColorKey.Value
+        public typealias Value = SnapStyle.SurfaceKey.Value
 
         case opacity(Double)
 

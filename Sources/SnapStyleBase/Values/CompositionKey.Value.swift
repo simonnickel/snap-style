@@ -56,7 +56,7 @@ extension SnapStyle.CompositionKey {
         
         public struct LayeredShapeStyle {
             
-            public typealias LayerValue = SnapStyle.ColorKey.ValueBuilderKeyPath
+            public typealias LayerValue = SnapStyle.SurfaceKey.ValueBuilderKeyPath
             typealias ShapeStyleForLayer = [Layer: LayerValue]
             
             let values: ShapeStyleForLayer
@@ -65,7 +65,7 @@ extension SnapStyle.CompositionKey {
             public static let ignoresSafeAreaEdgesDefault: Edge.Set = .vertical
 
             // TODO: Rename
-            public func colorKey(for layer: Layer) -> LayerValue? {
+            public func surfaceKey(for layer: Layer) -> LayerValue? {
                 values[layer] ?? values[.any]
             }
 

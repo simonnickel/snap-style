@@ -7,8 +7,8 @@ import SnapStyleBase
 import SwiftUI
 
 // Composition is used to:
-// - define colors for different layers
-// - select colors based on the component state and level
+// - define surfaces for different layers
+// - select surfaces based on the component state and level
 
 extension SnapStyle.CompositionKey {
     
@@ -18,8 +18,8 @@ extension SnapStyle.CompositionKey {
     public var interactiveElement: ValueBuilder {
         .builder { context in
             
-            let foreground: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onAccent : \.interactive
-            let background: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlay : \.interactionStateOverlayAccent
+            let foreground: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onAccent : \.interactive
+            let background: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlay : \.interactionStateOverlayAccent
             
             return switch context.component.state {
                 case .normal: .definition(.foreground(foreground))
@@ -36,9 +36,9 @@ extension SnapStyle.CompositionKey {
     public var interactiveContainer: ValueBuilder {
         .builder { context in
             
-            let foreground: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onContent0 : \.onInteractive
-            let background: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.content0 : \.interactive
-            let overlay: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlayAccent : \.interactionStateOverlay
+            let foreground: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onContent0 : \.onInteractive
+            let background: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.content0 : \.interactive
+            let overlay: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlayAccent : \.interactionStateOverlay
 
             return switch context.component.state {
                 case .disabled: .definition(.layers([.foreground: \.onDisabled, .background: \.disabled]))

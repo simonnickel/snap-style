@@ -80,9 +80,9 @@ extension SnapStyle {
     }
     
     
-    // MARK: - Color
+    // MARK: - Surface
     
-    package func color(for keyPath: ColorKey.ValueBuilderKeyPath, in context: Context) -> ColorKey.Value.WrappedValue? {
+    package func surface(for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> SurfaceKey.Value.WrappedValue? {
         
         let value = value(for: keyPath, in: context)
         
@@ -112,33 +112,33 @@ extension SnapStyle {
         
         let value = composition(for: keyPath, in: context)
 
-        return value?.colorKey(for: layer)
+        return value?.surfaceKey(for: layer)
         
     }
 
-    /// Get the color of a layer for a `CompositionKey.ValueBuilderKeyPath`.
-    package func color(
+    /// Get the surface of a layer for a `CompositionKey.ValueBuilderKeyPath`.
+    package func surface(
         layer: CompositionKey.Layer,
         for keyPath: CompositionKey.ValueBuilderKeyPath,
         in context: Context
-    ) -> ColorKey.Value.WrappedValue? {
+    ) -> SurfaceKey.Value.WrappedValue? {
         
         guard let layer = composition(layer: layer, for: keyPath, in: context) else { return nil }
         
-        return color(for: layer, in: context)
+        return surface(for: layer, in: context)
         
     }
 
-    /// Get the color of a layer for a `LayeredShapeStyle` (aka `Composition`).
-    package func color(
+    /// Get the surface of a layer for a `LayeredShapeStyle` (aka `Composition`).
+    package func surface(
         layer: CompositionKey.Layer,
         composition: CompositionKey.Value.LayeredShapeStyle,
         in context: Context
-    ) -> ColorKey.Value.WrappedValue? {
+    ) -> SurfaceKey.Value.WrappedValue? {
         
-        guard let key = composition.colorKey(for: layer) else { return nil }
+        guard let key = composition.surfaceKey(for: layer) else { return nil }
         
-        return color(for: key, in: context)
+        return surface(for: key, in: context)
         
     }
     

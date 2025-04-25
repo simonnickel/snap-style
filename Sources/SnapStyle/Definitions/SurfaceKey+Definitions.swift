@@ -6,10 +6,10 @@
 import SnapStyleBase
 import SwiftUI
 
-extension SnapStyle.ColorKey {
+extension SnapStyle.SurfaceKey {
     
     
-    // MARK: - Generic Colors
+    // MARK: - Generic Surfaces
 
     public var clear: ValueBuilder { .base(.definition(.color(.clear))) }
 

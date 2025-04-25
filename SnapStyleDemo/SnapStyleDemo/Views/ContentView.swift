@@ -59,8 +59,8 @@ struct ContentView: View {
                     NavigationLink("Fonts") {
                         DebugCacheScreen<SnapStyle.FontKey>()
                     }
-                    NavigationLink("Colors") {
-                        DebugCacheScreen<SnapStyle.ColorKey>()
+                    NavigationLink("Surfaces") {
+                        DebugCacheScreen<SnapStyle.SurfaceKey>()
                     }
                     NavigationLink("Compositions") {
                         DebugCacheScreen<SnapStyle.CompositionKey>()

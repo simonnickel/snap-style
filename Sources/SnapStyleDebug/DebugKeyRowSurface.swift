@@ -7,20 +7,20 @@ import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
-struct DebugKeyRowColor: View {
+struct DebugKeyRowSurface: View {
     
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
     
-    let keyPath: SnapStyle.ColorKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
     
     var body: some View {
-        let color = style.color(for: keyPath, in: styleContext)
+        let surface = style.surface(for: keyPath, in: styleContext)
         Text("\(keyPath)")
-            .foregroundStyle(color ?? AnyShapeStyle(.white))
+            .foregroundStyle(surface ?? AnyShapeStyle(.white))
     }
 }
 
 #Preview {
-    DebugKeyRowColor(keyPath: \.content0)
+    DebugKeyRowSurface(keyPath: \.content0)
 }
