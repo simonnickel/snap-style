@@ -100,8 +100,10 @@ internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
             let surface = style.surface(for: keyPath, in: styleContext)
         {
             content
-            // TODO: How to apply a generic shape style?
-//                .listRowBackground(surface)
+                .listRowBackground(
+                    Rectangle()
+                        .fill(surface)
+                )
         } else {
             content
         }
@@ -118,12 +120,10 @@ internal struct SurfaceListRowBackgroundCompositionModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let background = style.composition(for: keyPath, in: styleContext)?.surfaceKey(for: .background),
-            let surface = style.surface(for: background, in: styleContext)
+            let background = style.composition(for: keyPath, in: styleContext)?.surfaceKey(for: .background)
         {
             content
-            // TODO: How to apply a generic shape style?
-//                .listRowBackground(surface)
+                .modifier(SurfaceListRowBackgroundSurfaceModifier(keyPath: background))
         } else {
             content
         }
