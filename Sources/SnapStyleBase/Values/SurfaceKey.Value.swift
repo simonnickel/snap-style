@@ -68,13 +68,12 @@ extension SnapStyle.SurfaceKey {
                         default: .gradient(gradient)
                     }
                     
-                    // TODO: Is this useful?
-                    // Material does get converted to some ShapeStyle
-                    //                case .material(let material):
-                    //                    switch adjustment {
-                    //                        case .opacity(let opacity): .material(material.opacity(opacity))
-                    //                        default: .material(material)
-                    //                    }
+                    // Material gets converted to some ShapeStyle and can no longer be applied as .material
+                    // case .material(let material):
+                    //     switch adjustment {
+                    //         case .opacity(let opacity): .material(material.opacity(opacity))
+                    //         default: .material(material)
+                    //     }
                     
                 case .any(let any):
                     switch self {
