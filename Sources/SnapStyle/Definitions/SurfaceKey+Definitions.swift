@@ -46,7 +46,7 @@ extension SnapStyle.SurfaceKey {
 
     // MARK: Interactive
 
-    public var interactive: ValueBuilder { .base(.reference(\.accent)) } // TODO: Modified / selected accent
+    public var interactive: ValueBuilder { .base(.reference(\.accent)) }
     public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
     
     

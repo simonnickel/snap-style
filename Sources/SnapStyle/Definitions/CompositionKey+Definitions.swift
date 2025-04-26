@@ -123,6 +123,6 @@ extension SnapStyle.CompositionKey {
     
     public var action: ValueBuilder { .base(nil) }
 
-    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContent1))) } // TODO: Better color definition
+    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContent1))) }
 
 }
