@@ -22,10 +22,6 @@ extension SnapStyle.FontKey {
         case with(size: CGFloat, weight: Font.Weight = .regular)
         case font(Font)
 
-        public static func create(with value: WrappedValue) -> Self {
-            .font(value)
-        }
-
         public var wrappedValue: WrappedValue {
             switch self {
                 case .with(size: let size, let weight): Definition(size: size, weight: weight).font
@@ -69,10 +65,11 @@ extension SnapStyle.FontKey {
     public enum Adjustment: StyleAdjustment {
 
         public typealias Value = SnapStyle.FontKey.Value
-
-        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+        
+        public func applied(on value: Value) -> Value {
             value
         }
+
     }
 
 }

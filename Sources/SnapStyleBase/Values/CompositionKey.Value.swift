@@ -33,11 +33,7 @@ extension SnapStyle.CompositionKey {
         case foreground(LayeredShapeStyle.LayerValue)
         case layers([Layer: LayeredShapeStyle.LayerValue])
         case composition(WrappedValue)
-
-        public static func create(with value: WrappedValue) -> Self {
-            .composition(value)
-        }
-
+        
         public var wrappedValue: WrappedValue {
             switch self {
                 case .background(let layerValue): LayeredShapeStyle([.background : layerValue])
@@ -94,9 +90,10 @@ extension SnapStyle.CompositionKey {
 
         public typealias Value = SnapStyle.CompositionKey.Value
 
-        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
+        public func applied(on value: Value) -> Value {
             value
         }
+        
     }
 
 }

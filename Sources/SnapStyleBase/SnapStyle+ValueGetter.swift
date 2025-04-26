@@ -43,7 +43,7 @@ extension SnapStyle {
         }
 
         // Apply Adjustments
-        result = result?.value(with: adjustments)
+        result = result?.adjusted(with: adjustments)
 
         // Store result in cache
         if let result {

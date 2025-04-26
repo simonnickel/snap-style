@@ -37,9 +37,8 @@ extension SnapStyle.SurfaceKey {
 
     public var accent: ValueBuilder { .base(.reference(\.accentBase)) }
     public var accentBase: ValueBuilder { .base(.definition(.color(.accentColor))) }
-    // TODO: Modify other key. .reference(\.key, modified: ...)
-    public var accentLevel2: ValueBuilder { .base(.definition(.color(.accentColor.mix(with: .black, by: 0.2)))) }
-    public var accentLevel3: ValueBuilder { .base(.definition(.color(.accentColor.mix(with: .black, by: 0.4)))) }
+    public var accentLevel2: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.2)])) }
+    public var accentLevel3: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.4)])) }
 
     public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
 
