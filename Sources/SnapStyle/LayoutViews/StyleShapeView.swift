@@ -6,27 +6,28 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleShape: View { // TODO: Should this be a Shape? or rename to StyleShapeView
+public struct StyleShapeView: View {
     
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
     
     let shape: SnapStyle.ShapeKey.ShapeDefinition
-    let composition: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    let surface: SnapStyle.SurfaceKey.ValueBuilderKeyPath
     
-    public init(shape: SnapStyle.ShapeKey.ShapeDefinition, composition: SnapStyle.CompositionKey.ValueBuilderKeyPath) {
+    public init(shape: SnapStyle.ShapeKey.ShapeDefinition, surface: SnapStyle.SurfaceKey.ValueBuilderKeyPath) {
         self.shape = shape
-        self.composition = composition
+        self.surface = surface
     }
     
     public var body: some View {
+        let value = style.surface(for: surface, in: styleContext)
         shape.insettableShape(for: style, in: styleContext)
-            .style(composition: composition) // TODO: Fill? Use Composition layer?
+            .fill(value ?? AnyShapeStyle(.clear))
     }
     
 }
 
 #Preview {
-    StyleShape(shape: .capsule, composition: \.separator)
+    StyleShapeView(shape: .capsule, surface: \.accent)
         .frame(width: 200, height: 100)
 }
