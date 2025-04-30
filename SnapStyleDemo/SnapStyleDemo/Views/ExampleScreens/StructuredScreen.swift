@@ -99,9 +99,9 @@ struct StructuredScreen: View {
     NavigationStack {
         StructuredScreen()
             .styleOverride(
-                colors: [
+                surfaces: [
                     \.onAccent : SnapStyle.ValueBuilder.builder { context in
-                            .definition(.value(.yellow))
+                        .definition(.color(.yellow))
                     }
                 ]
             )

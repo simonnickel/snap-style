@@ -22,12 +22,9 @@ public protocol StyleKey {
 public protocol StyleValue: CustomStringConvertible {
 
     associatedtype WrappedValue
-    associatedtype Adjustment: StyleAdjustment where WrappedValue == Adjustment.Value.WrappedValue
+    associatedtype Adjustment: StyleAdjustment where Self == Adjustment.Value
 
-    static func create(with: WrappedValue) -> Self
     var wrappedValue: WrappedValue { get }
-
-    func value(with adjustments: [Self.Adjustment]) -> Self
 
 }
 
@@ -37,19 +34,23 @@ public protocol StyleValue: CustomStringConvertible {
 public protocol StyleAdjustment {
 
     associatedtype Value: StyleValue
-
-    func applied(on value: Value.WrappedValue) -> Value.WrappedValue
+    
+    func applied(on value: Value) -> Value
 
 }
 
 extension StyleValue {
 
-    public func value(with adjustments: [Self.Adjustment]) -> Self {
-        var result = wrappedValue
+    public func adjusted(with adjustments: [Self.Adjustment]) -> Self {
+        var result = self
         for adjustment in adjustments {
-            result = adjustment.applied(on: result)
+            result = result.adjusted(with: adjustment)
         }
-        return Self.create(with: result)
+        return result
+    }
+    
+    func adjusted(with adjustment: Adjustment) -> Self {
+        adjustment.applied(on: self)
     }
 
 }

@@ -10,84 +10,40 @@ extension SnapStyle {
 }
 
 extension SnapStyle.SurfaceKey {
-    
-    
-    // MARK: - Layer
-    
-    public enum Layer {
-        case any
-        case foreground
-        case background
-        case backgroundOverlay
-    }
-    
-    
+
+
     // MARK: - SurfaceKey.Value
 
     public enum Value: StyleValue {
-        
-        public typealias WrappedValue = LayeredShapeStyle
+
+        public typealias WrappedValue = AnyShapeStyle
         public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 
-        case background(LayeredShapeStyle.LayerValue)
-        case foreground(LayeredShapeStyle.LayerValue)
-        case layers([Layer: LayeredShapeStyle.LayerValue])
-        case surface(WrappedValue)
-
-        public static func create(with value: WrappedValue) -> Self {
-            .surface(value)
-        }
-
+        case color(Color)
+        case gradient(AnyShapeStyle)
+        case material(Material)
+        case any(AnyShapeStyle)
+        
         public var wrappedValue: WrappedValue {
             switch self {
-                case .background(let layerValue): LayeredShapeStyle([.background : layerValue])
-                case .foreground(let layerValue): LayeredShapeStyle([.foreground : layerValue])
-                case .layers(let valueForLayer): LayeredShapeStyle(valueForLayer)
-                case .surface(let layeredShapeStyle): layeredShapeStyle
+                case .color(let value): AnyShapeStyle(value)
+                case .gradient(let value): value
+                case .material(let value): AnyShapeStyle(value)
+                case .any(let value): value
             }
         }
         
         public var description: String {
-            "\(wrappedValue)"
-        }
-        
-        
-        // MARK: LayeredShapeStyle
-        
-        public struct LayeredShapeStyle {
-            
-            public typealias LayerValue = SnapStyle.ColorKey.ValueBuilderKeyPath
-            typealias ShapeStyleForLayer = [Layer: LayerValue]
-            
-            let values: ShapeStyleForLayer
-            public let ignoresSafeAreaEdges: Edge.Set
-            // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
-            public static let ignoresSafeAreaEdgesDefault: Edge.Set = .vertical
-
-            // TODO: Rename
-            public func colorKey(for layer: Layer) -> LayerValue? {
-                values[layer] ?? values[.any]
+            switch self {
+                case .color(let value): ".color: \(value)"
+                case .gradient(let value): ".gradient: \(value)"
+                case .material(let value): ".material: \(value)"
+                case .any(let value): ".any: \(value)"
             }
-
-            public init(
-                _ values: [Layer: LayerValue],
-                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
-            ) {
-                self.values = values
-                self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
-            }
-
-            public static func with(
-                _ values: [Layer: LayerValue],
-                ignoresSafeAreaEdges: Edge.Set = Self.ignoresSafeAreaEdgesDefault
-            ) -> Self {
-                self.init(values, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
-            }
-
         }
 
     }
-
+    
 
     // MARK: - Adjustment
 
@@ -95,9 +51,40 @@ extension SnapStyle.SurfaceKey {
 
         public typealias Value = SnapStyle.SurfaceKey.Value
 
-        public func applied(on value: Value.WrappedValue) -> Value.WrappedValue {
-            value
+        case opacity(Double)
+        case mix(Color, Double)
+        
+        public func applied(on value: Value) -> Value {
+            switch value {
+                case .color(let color):
+                    switch self {
+                        case .opacity(let opacity): .color(color.opacity(opacity))
+                        case .mix(let mix, let amount): .color(color.mix(with: mix, by: amount))
+                    }
+                    
+                case .gradient(let gradient):
+                    switch self {
+                        case .opacity(let opacity): .gradient(AnyShapeStyle(gradient.opacity(opacity)))
+                        default: .gradient(gradient)
+                    }
+                    
+                    // Material gets converted to some ShapeStyle and can no longer be applied as .material
+                    // case .material(let material):
+                    //     switch adjustment {
+                    //         case .opacity(let opacity): .material(material.opacity(opacity))
+                    //         default: .material(material)
+                    //     }
+                    
+                case .any(let any):
+                    switch self {
+                        case .opacity(let opacity): .any(AnyShapeStyle(any.opacity(opacity)))
+                        default: .any(any)
+                    }
+                    
+                default: value
+            }
         }
+
     }
 
 }

@@ -46,13 +46,13 @@ private struct ElementApplyStyleModifier: ViewModifier {
         
         let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
         let paddingKeyPath = component.padding?(element) ?? base.padding?(element) ?? \.paddingAnyElement
-        let surfaceKeyPath = component.surfaces?(element) ?? base.surfaces?(element) ?? \.anyElement
+        let compositionKeyPath = component.compositions?(element) ?? base.compositions?(element) ?? \.anyElement
         let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
         
         content
             .style(font: fontKeyPath)
             .style(padding: paddingKeyPath)
-            .style(surface: surfaceKeyPath)
+            .style(composition: compositionKeyPath)
             .style(shape: shapeKeyPath)
     }
     

@@ -18,8 +18,8 @@ extension SnapStyle {
 
         internal let padding: Mapping<NumberKey>?
         internal let fonts: Mapping<FontKey>?
-        internal let colors: Mapping<ColorKey>?
         internal let surfaces: Mapping<SurfaceKey>?
+        internal let compositions: Mapping<CompositionKey>?
         internal let shapes: Mapping<ShapeKey>?
 
         public init(
@@ -27,16 +27,16 @@ extension SnapStyle {
             requiresAlternativeAccent: Bool = false,
             padding: SnapStyle.ComponentDefinition.Mapping<SnapStyle.NumberKey>? = nil,
             fonts: SnapStyle.ComponentDefinition.Mapping<SnapStyle.FontKey>? = nil,
-            colors: SnapStyle.ComponentDefinition.Mapping<SnapStyle.ColorKey>? = nil,
             surfaces: SnapStyle.ComponentDefinition.Mapping<SnapStyle.SurfaceKey>? = nil,
+            compositions: SnapStyle.ComponentDefinition.Mapping<SnapStyle.CompositionKey>? = nil,
             shapes: SnapStyle.ComponentDefinition.Mapping<SnapStyle.ShapeKey>? = nil
         ) {
             self.id = id
             self.requiresAlternativeAccent = requiresAlternativeAccent
             self.padding = padding
             self.fonts = fonts
-            self.colors = colors
             self.surfaces = surfaces
+            self.compositions = compositions
             self.shapes = shapes
         }
 

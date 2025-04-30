@@ -6,125 +6,138 @@
 import SnapStyleBase
 import SwiftUI
 
-// Surface is used to:
-// - combine foreground and background color
-// - select colors based on the component (state, level)
-
 extension SnapStyle.SurfaceKey {
-
-    // TODO: Gradients
-    // TODO: Materials
+    
     
     // MARK: - Generic Surfaces
-    
-    public var interactiveElement: ValueBuilder {
-        .builder { context in
-            
-            let foreground: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onAccent : \.interactive
-            let background: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlay : \.interactionStateOverlayAccent
-            
-            return switch context.component.state {
-                case .normal: .definition(.foreground(foreground))
-                    
-                case .disabled: .definition(.foreground(\.disabled))
-                    
-                default: .definition(.layers([
-                    .foreground: foreground, .background: background
-                ]))
-            }
-        }
-    }
-    
-    public var interactiveContainer: ValueBuilder {
-        .builder { context in
-            
-            let foreground: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onContent0 : \.onInteractive
-            let background: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.content0 : \.interactive
-            let overlay: SnapStyle.ColorKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlayAccent : \.interactionStateOverlay
 
-            return switch context.component.state {
-                case .disabled: .definition(.layers([.foreground: \.onDisabled, .background: \.disabled]))
-                default: .definition(.layers([
-                    .foreground: foreground, .background: background, .backgroundOverlay: overlay
-                ]))
-            }
-        }
-    }
-    
-    public var contentContainer: ValueBuilder {
-        .builder { context in
-            switch context.component.level {
-                case 1: .definition(.layers([.foreground: \.onContent0, .background: \.content0]))
-                case 2: .definition(.background(\.content1))
-                case 3: .definition(.background(\.content2))
-                default: nil
-            }
-        }
-    }
+    public var clear: ValueBuilder { .base(.definition(.color(.clear))) }
 
-    public var accentContainer: ValueBuilder {
-        .builder { context in
-            switch context.component.level {
-                case 1: .definition(.layers([.foreground: \.onAccent, .background: \.accent]))
-                case 2: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel2]))
-                case 3: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel3]))
-                default: nil
-            }
-        }
-    }
+    public var light0: ValueBuilder { .base(.definition(.color(.white))) }
+    public var light1: ValueBuilder { .base(.definition(.color(.init(white: 0.85)))) }
+    public var light2: ValueBuilder { .base(.definition(.color(.init(white: 0.7)))) }
+    public var light3: ValueBuilder { .base(.definition(.color(.init(white: 0.6)))) }
+    public var onLight0: ValueBuilder { .base(.definition(.color(.black))) }
+    public var onLight1: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var onLight2: ValueBuilder { .base(.definition(.color(.gray))) }
+    
+    public var dark0: ValueBuilder { .base(.definition(.color(.black))) }
+    public var dark1: ValueBuilder { .base(.definition(.color(.init(white: 0.2)))) }
+    public var dark2: ValueBuilder { .base(.definition(.color(.init(white: 0.35)))) }
+    public var dark3: ValueBuilder { .base(.definition(.color(.init(white: 0.45)))) }
+    public var onDark0: ValueBuilder { .base(.definition(.color(.white))) }
+    public var onDark1: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var onDark2: ValueBuilder { .base(.definition(.color(.gray))) }
+
+    public var disabled: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
     
-    // MARK: - Component: Container
+    // MARK: - Accents
+
+    public var accent: ValueBuilder { .base(.reference(\.accentBase)) }
+    public var accentBase: ValueBuilder { .base(.definition(.color(.accentColor))) }
+    public var accentLevel2: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.2)])) }
+    public var accentLevel3: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.4)])) }
+
+    public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
+
+
+    // MARK: Interactive
+
+    public var interactive: ValueBuilder { .base(.reference(\.accent)) }
+    public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
     
-    public var anyContainer: ValueBuilder { .base(nil) }
     
-    public var screen: ValueBuilder {
+    // MARK: Overlay
+    
+    public var interactionStateOverlay: ValueBuilder {
         .builder { context in
-            .definition(.surface(.with(
-                [.background: \.screen],
-                ignoresSafeAreaEdges: .all // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
-            )))
+            switch context.component.state {
+                case .normal, .disabled: nil
+                case .highlighted: .definition(.color(.black.opacity(0.2)))
+                case .selected: .definition(.color(.black.opacity(0.3)))
+            }
         }
     }
-    
-    public var containerContent: ValueBuilder {
-        .base(.reference(\.contentContainer))
-    }
-    
-    public var containerList: ValueBuilder {
-        .base(.reference(\.containerContent))
-    }
-    
-    public var containerCard: ValueBuilder {
-        .base(.reference(\.accentContainer))
-    }
-    
-    public var containerAction: ValueBuilder {
+    public var interactionStateOverlayAccent: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
-                case .any, .primary:
-                    .reference(\.interactiveContainer)
-                case .secondary, .tertiary:
-                    .reference(\.interactiveElement)
+            switch context.component.state {
+                case .normal, .disabled: nil
+                case .highlighted: .reference(\.accent, adjustments: [.opacity(0.2)])
+                case .selected: .reference(\.accent, adjustments: [.opacity(0.3)])
             }
         }
     }
     
 
-    // MARK: - Element
-
-    public var anyElement: ValueBuilder { .base(nil) }
+    // MARK: - Components
     
-    public var title: ValueBuilder { .base(nil) }
-
-    public var label: ValueBuilder { .base(nil) }
-
-    public var icon: ValueBuilder { .base(nil) }
+    public var screen: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.light1)
+            case .dark: .reference(\.dark0)
+            default: nil
+        }
+    }}
     
-    public var value: ValueBuilder { .base(nil) }
+    public var content0: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.light0)
+            case .dark: .reference(\.dark1)
+            default: nil
+        }
+    }}
     
-    public var action: ValueBuilder { .base(nil) }
-
-    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContent1))) } // TODO: Better color definition
-
+    public var content1: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.light1)
+            case .dark: .reference(\.dark2)
+            default: nil
+        }
+    }}
+    
+    public var content2: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.light2)
+            case .dark: .reference(\.dark3)
+            default: nil
+        }
+    }}
+    
+    public var onContent0: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.onLight0)
+            case .dark: .reference(\.onDark0)
+            default: nil
+        }
+    }}
+    
+    public var onContent1: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.onLight1)
+            case .dark: .reference(\.onDark1)
+            default: nil
+        }
+    }}
+    
+    public var onContent2: ValueBuilder { .builder { context in
+        switch context.colorScheme {
+            case .light: .reference(\.onLight2)
+            case .dark: .reference(\.onDark2)
+            default: nil
+        }
+    }}
+    
+//    public var text: ValueBuilder {
+//        .base(.definition(.value(.primary))) { context in
+//            switch context.element.hierarchy {
+//                case .any: .definition(.value(.primary))
+//                case .primary: .definition(.value(.primary))
+//                case .secondary: .definition(.value(.secondary))
+//                case .tertiary: .definition(.value(.secondary))
+//            }
+//        }
+//    }
+    
 }

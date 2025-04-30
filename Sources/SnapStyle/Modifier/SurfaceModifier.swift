@@ -7,16 +7,43 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-
-    public func style(surface keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
+    
+    public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
         self
             .modifier(SurfaceForegroundModifier(keyPath: keyPath))
-            .modifier(SurfaceBackgroundOverlayModifier(keyPath: keyPath))
-            .modifier(SurfaceBackgroundModifier(keyPath: keyPath))
+    }
+    
+    public func style(
+        background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath,
+        ignoresSafeAreaEdges: Edge.Set = SnapStyle.CompositionKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault
+    ) -> some View {
+        self
+            .modifier(SurfaceBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
+    }
+    
+    /// Applies the given `SurfaceKey` as listRowBackground.
+    /// - Parameter listRowBackground: The `SurfaceKey` to use.
+    /// - Returns: A modified view.
+    public func style(
+        listRowBackground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    ) -> some View {
+        self
+            .modifier(SurfaceListRowBackgroundSurfaceModifier(keyPath: keyPath))
+    }
+    
+    /// Applies the background layer of the given `CompositionKey` as listRowBackground.
+    /// - Parameter listRowBackground: The `CompositionKey` to use.
+    /// - Returns: A modified view.
+    public func style(
+        listRowBackground keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    ) -> some View {
+        self
+            .modifier(SurfaceListRowBackgroundCompositionModifier(keyPath: keyPath))
     }
 
 }
 
+// TODO: These Modifier are the perfect use case for a .if() modifier.
 
 // MARK: - Modifier
 
@@ -29,11 +56,10 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if
-            let foreground = style.surface(layer: .foreground, for: keyPath, in: styleContext),
-            let color = style.color(for: foreground, in: styleContext)
+            let surface = style.surface(for: keyPath, in: styleContext)
         {
             content
-                .foregroundStyle(color)
+                .foregroundStyle(surface)
         } else {
             content
         }
@@ -47,13 +73,14 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
-        if let surface = style.surface(for: keyPath, in: styleContext) {
-            let color = style.color(layer: .background, surface: surface, in: styleContext)
+        if
+            let surface = style.surface(for: keyPath, in: styleContext)
+        {
             content
-                .background(color ?? .clear, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .background(surface, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
         } else {
             content
         }
@@ -61,7 +88,7 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
 }
 
-internal struct SurfaceBackgroundOverlayModifier: ViewModifier {
+internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
@@ -69,11 +96,34 @@ internal struct SurfaceBackgroundOverlayModifier: ViewModifier {
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a surface is available. Even if no value is present, to allow animation of appearing value.
-        if let surface = style.surface(for: keyPath, in: styleContext) {
-            let color = style.color(layer: .backgroundOverlay, surface: surface, in: styleContext)
+        if
+            let surface = style.surface(for: keyPath, in: styleContext)
+        {
             content
-                .background(color ?? .clear, ignoresSafeAreaEdges: surface.ignoresSafeAreaEdges)
+                .listRowBackground(
+                    Rectangle()
+                        .fill(surface)
+                )
+        } else {
+            content
+        }
+    }
+
+}
+
+internal struct SurfaceListRowBackgroundCompositionModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+    @Environment(\.styleContext) private var styleContext
+
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+
+    func body(content: Content) -> some View {
+        if
+            let background = style.composition(for: keyPath, in: styleContext)?.surfaceKey(for: .background)
+        {
+            content
+                .modifier(SurfaceListRowBackgroundSurfaceModifier(keyPath: background))
         } else {
             content
         }

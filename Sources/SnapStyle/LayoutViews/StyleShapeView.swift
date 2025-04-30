@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleShape: View { // TODO: Should this be a Shape? or rename to StyleShapeView
+public struct StyleShapeView: View {
     
     @Environment(\.style) private var style
     @Environment(\.styleContext) private var styleContext
@@ -20,13 +20,14 @@ public struct StyleShape: View { // TODO: Should this be a Shape? or rename to S
     }
     
     public var body: some View {
+        let value = style.surface(for: surface, in: styleContext)
         shape.insettableShape(for: style, in: styleContext)
-            .style(surface: surface) // TODO: Fill? Use Surface layer?
+            .fill(value ?? AnyShapeStyle(.clear))
     }
     
 }
 
 #Preview {
-    StyleShape(shape: .capsule, surface: \.separator)
+    StyleShapeView(shape: .capsule, surface: \.accent)
         .frame(width: 200, height: 100)
 }
