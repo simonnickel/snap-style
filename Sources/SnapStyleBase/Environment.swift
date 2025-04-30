@@ -7,6 +7,6 @@ import SwiftUI
 
 extension EnvironmentValues {
     
-    @Entry public var style: SnapStyle = SnapStyle()
+    @Entry public var styleDefinition: SnapStyle = SnapStyle()
 
 }

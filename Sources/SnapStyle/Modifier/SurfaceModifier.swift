@@ -49,7 +49,7 @@ extension View {
 
 internal struct SurfaceForegroundModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
@@ -69,7 +69,7 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
 internal struct SurfaceBackgroundModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
@@ -90,7 +90,7 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
 internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
@@ -113,7 +113,7 @@ internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
 
 internal struct SurfaceListRowBackgroundCompositionModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath

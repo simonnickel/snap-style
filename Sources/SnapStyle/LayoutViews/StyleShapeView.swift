@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct StyleShapeView: View {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
     
     let shape: SnapStyle.ShapeKey.ShapeDefinition

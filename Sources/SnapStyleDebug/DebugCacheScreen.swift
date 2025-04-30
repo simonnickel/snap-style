@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct DebugCacheScreen<KeyType: StyleKey>: View {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     
     public init() {}
     

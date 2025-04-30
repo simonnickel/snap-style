@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct StyleVStack<Content>: View where Content : View {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
     
     private let alignment: HorizontalAlignment

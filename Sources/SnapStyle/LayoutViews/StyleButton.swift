@@ -44,7 +44,7 @@ public struct StyleButton<Content>: View where Content : View {
 
 
     // TODO: Bundle both together to just need a single var?
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     private let variant: StyleButtonStyle.Variant

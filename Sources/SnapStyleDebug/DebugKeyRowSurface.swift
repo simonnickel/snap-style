@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DebugKeyRowSurface: View {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
     
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath

@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct StyleSpacer: View {
     
-    @Environment(\.style) var style
+    @Environment(\.styleDefinition) var style
     @Environment(\.styleContext) var styleContext
     
     private let minLength: SnapStyle.NumberKey.ValueBuilderKeyPath

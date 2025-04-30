@@ -20,7 +20,7 @@ extension View {
 
 internal struct PaddingModifier: ViewModifier {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
     
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath

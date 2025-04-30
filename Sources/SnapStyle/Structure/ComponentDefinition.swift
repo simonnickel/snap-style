@@ -83,7 +83,7 @@ extension View {
 
 internal struct ComponentModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
     
     let component: SnapStyle.ComponentDefinition

@@ -22,7 +22,7 @@ extension View {
 
 internal struct CompositionForegroundModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
@@ -43,7 +43,7 @@ internal struct CompositionForegroundModifier: ViewModifier {
 
 internal struct CompositionBackgroundModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
@@ -63,7 +63,7 @@ internal struct CompositionBackgroundModifier: ViewModifier {
 
 internal struct CompositionBackgroundOverlayModifier: ViewModifier {
 
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath

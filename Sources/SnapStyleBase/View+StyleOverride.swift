@@ -32,7 +32,7 @@ extension View {
 
 private struct StyleOverrideModifier: ViewModifier {
     
-    @Environment(\.style) private var style
+    @Environment(\.styleDefinition) private var style
     
     let numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]?
     let fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]?
@@ -42,8 +42,9 @@ private struct StyleOverrideModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         
+        // TODO: Update context with new definition
         content
-            .environment(\.style, style.replaced(
+            .environment(\.styleDefinition, style.replaced(
                 numbers: numbers,
                 fonts: fonts,
                 surfaces: surfaces,

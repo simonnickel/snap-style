@@ -32,6 +32,7 @@ extension View {
 
 internal struct ContextBaseModifier: ViewModifier {
     
+    @Environment(\.styleDefinition) private var styleDefinition
     @Environment(\.styleContext) private var context
     @Environment(\.colorScheme) private var colorScheme
     
