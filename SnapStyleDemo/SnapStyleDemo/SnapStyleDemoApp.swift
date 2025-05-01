@@ -13,7 +13,7 @@ struct SnapStyleDemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentFlow()
                 .style(update: style)
         }
     }
