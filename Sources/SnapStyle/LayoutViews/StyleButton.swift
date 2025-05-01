@@ -42,10 +42,7 @@ public struct StyleButtonStyle: ButtonStyle {
 
 public struct StyleButton<Content>: View where Content : View {
 
-
-    // TODO: Bundle both together to just need a single var?
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     private let variant: StyleButtonStyle.Variant
     @State private var isEnabled: Bool
@@ -75,7 +72,7 @@ public struct StyleButton<Content>: View where Content : View {
 
             // TODO FB: It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
             isPressed = true
-            let delay = style.number(for: \.animationInteractionHighlightDuration, in: styleContext) ?? 0
+            let delay = style.number(for: \.animationInteractionHighlightDuration) ?? 0
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 withAnimation(.smooth) {
                     isPressed = false

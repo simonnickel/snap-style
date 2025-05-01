@@ -10,8 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @Environment(\.styleDefinition) private var style
-    
     var body: some View {
         NavigationStack {
             List {

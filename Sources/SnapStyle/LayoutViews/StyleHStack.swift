@@ -8,8 +8,7 @@ import SwiftUI
 
 public struct StyleHStack<Content>: View where Content : View {
     
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
     
     private let alignment: VerticalAlignment
     private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
@@ -44,7 +43,7 @@ public struct StyleHStack<Content>: View where Content : View {
     private func spacing(for keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
         guard let keyPath else { return 0 }
         
-        return switch style.value(for: keyPath, in: styleContext) {
+        return switch style.value(for: keyPath) {
             case .value(let value): value
             case .none: 0
         }

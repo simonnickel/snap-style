@@ -36,11 +36,11 @@ extension View {
 
 private struct ElementApplyStyleModifier: ViewModifier {
     
-    @Environment(\.styleContext) private var context
+    @Environment(\.style) private var style
 
     func body(content: Content) -> some View {
-        let component = context.component.definition
-        let element = context.element.type
+        let component = style.context.component.definition
+        let element = style.context.element.type
         
         let base = SnapStyle.ComponentDefinition.base
         
@@ -63,19 +63,19 @@ private struct ElementApplyStyleModifier: ViewModifier {
 
 private struct ElementHierarchyModifier: ViewModifier {
     
-    @Environment(\.styleContext) private var context
+    @Environment(\.style) private var style
 
     let hierarchy: SnapStyle.Element.Hierarchy
 
     func body(content: Content) -> some View {
-        let current = context.getValue(for: SnapStyle.Context.element) ?? .any
+        let current = style.context.getValue(for: SnapStyle.Context.element) ?? .any
         let element = SnapStyle.Element(type: current.type, hierarchy: hierarchy)
         
-        let modified = context
+        let context = style.context
             .withAttribute(value: element, for: SnapStyle.Context.element)
         
         content
-            .environment(\.styleContext, modified)
+            .style(update: context)
     }
     
 }

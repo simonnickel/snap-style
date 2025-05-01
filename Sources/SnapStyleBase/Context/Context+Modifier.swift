@@ -5,12 +5,6 @@
 
 import SwiftUI
 
-extension EnvironmentValues {
-    
-    @Entry public var styleContext: SnapStyle.Context = .init()
-
-}
-
 
 // MARK: - ViewModifier
 
@@ -25,38 +19,37 @@ extension View {
     /// Set value of a `Context` attribute for use in Environment.
     public func style<Key: Hashable, Value: Hashable>(attribute: SnapStyle.Context.Attribute<Key, Value>, value: Value) -> some View {
         self
-            .modifier(ContextModifier(attribute: attribute, value: value))
+            .modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
     
 }
 
 internal struct ContextBaseModifier: ViewModifier {
     
-    @Environment(\.styleDefinition) private var styleDefinition
-    @Environment(\.styleContext) private var context
+    @Environment(\.style) private var style
     @Environment(\.colorScheme) private var colorScheme
     
     func body(content: Content) -> some View {
-        let modified = context
+        let context = style.context
             .withAttribute(value: colorScheme, for: SnapStyle.Context.colorScheme)
         content
-            .environment(\.styleContext, modified)
+            .style(update: context)
     }
     
 }
 
-internal struct ContextModifier<Key: Hashable, Value: Hashable>: ViewModifier {
+internal struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewModifier {
     
-    @Environment(\.styleContext) private var context
+    @Environment(\.style) private var style
 
     let attribute: SnapStyle.Context.Attribute<Key, Value>
     let value: Value
 
     func body(content: Content) -> some View {
-        let modified = context
+        let context = style.context
             .withAttribute(value: value, for: attribute)
         content
-            .environment(\.styleContext, modified)
+            .style(update: context)
     }
     
 }

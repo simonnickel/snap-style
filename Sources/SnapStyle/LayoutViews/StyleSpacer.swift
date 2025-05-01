@@ -8,8 +8,7 @@ import SwiftUI
 
 public struct StyleSpacer: View {
     
-    @Environment(\.styleDefinition) var style
-    @Environment(\.styleContext) var styleContext
+    @Environment(\.style) var style
     
     private let minLength: SnapStyle.NumberKey.ValueBuilderKeyPath
     
@@ -18,7 +17,7 @@ public struct StyleSpacer: View {
     }
     
     public var body: some View {
-        let value = style.number(for: minLength, in: styleContext)
+        let value = style.number(for: minLength)
         Spacer(minLength: CGFloat(value ?? 0))
     }
     

@@ -20,13 +20,12 @@ extension View {
 
 internal struct FontModifier: ViewModifier {
     
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        let value = style.font(for: keyPath, in: styleContext)
+        let value = style.font(for: keyPath)
         content
             .font(value)
     }

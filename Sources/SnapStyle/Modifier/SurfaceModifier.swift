@@ -49,14 +49,13 @@ extension View {
 
 internal struct SurfaceForegroundModifier: ViewModifier {
 
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let surface = style.surface(for: keyPath, in: styleContext)
+            let surface = style.surface(for: keyPath)
         {
             content
                 .foregroundStyle(surface)
@@ -69,15 +68,14 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
 internal struct SurfaceBackgroundModifier: ViewModifier {
 
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
         if
-            let surface = style.surface(for: keyPath, in: styleContext)
+            let surface = style.surface(for: keyPath)
         {
             content
                 .background(surface, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
@@ -90,14 +88,13 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
 internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
 
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let surface = style.surface(for: keyPath, in: styleContext)
+            let surface = style.surface(for: keyPath)
         {
             content
                 .listRowBackground(
@@ -113,14 +110,13 @@ internal struct SurfaceListRowBackgroundSurfaceModifier: ViewModifier {
 
 internal struct SurfaceListRowBackgroundCompositionModifier: ViewModifier {
 
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let background = style.composition(for: keyPath, in: styleContext)?.surfaceKey(for: .background)
+            let background = style.composition(for: keyPath)?.surfaceKey(for: .background)
         {
             content
                 .modifier(SurfaceListRowBackgroundSurfaceModifier(keyPath: background))

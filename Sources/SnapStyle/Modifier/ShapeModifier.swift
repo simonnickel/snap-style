@@ -20,14 +20,13 @@ extension View {
 
 internal struct ShapeModifier: ViewModifier {
     
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
     
     let keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath
     
     func body(content: Content) -> some View {
         if
-            let shape = style.shape(for: keyPath, in: styleContext)?.insettableShape(for: style, in: styleContext)
+            let shape = style.shape(for: keyPath)?.insettableShape(for: style)
         {
             content
 #if !os(macOS)

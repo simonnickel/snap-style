@@ -8,8 +8,7 @@ import SwiftUI
 
 public struct StyleShapeView: View {
     
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
     
     let shape: SnapStyle.ShapeKey.ShapeDefinition
     let surface: SnapStyle.SurfaceKey.ValueBuilderKeyPath
@@ -20,8 +19,8 @@ public struct StyleShapeView: View {
     }
     
     public var body: some View {
-        let value = style.surface(for: surface, in: styleContext)
-        shape.insettableShape(for: style, in: styleContext)
+        let value = style.surface(for: surface)
+        shape.insettableShape(for: style)
             .fill(value ?? AnyShapeStyle(.clear))
     }
     

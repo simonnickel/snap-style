@@ -20,15 +20,14 @@ extension View {
 
 internal struct FrameMaxWidthModifier: ViewModifier {
     
-    @Environment(\.styleDefinition) private var style
-    @Environment(\.styleContext) private var styleContext
+    @Environment(\.style) private var style
     
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
     let alignment: HorizontalAlignment
     
     func body(content: Content) -> some View {
         if
-            let value = style.number(for: keyPath, in: styleContext)
+            let value = style.number(for: keyPath)
         {
             content
                 .frame(maxWidth: value, alignment: Alignment(horizontal: alignment, vertical: .center))
