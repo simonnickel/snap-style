@@ -21,9 +21,6 @@ import SwiftUI
 /// - By default `Component.screen` is used for styling.
 public struct StyleScreen<Content>: View where Content : View {
     
-    @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
-    
     private let component: SnapStyle.ComponentDefinition
     private let content: () -> Content
     
@@ -62,13 +59,12 @@ public struct StyleScreen<Content>: View where Content : View {
         }
         
         @Environment(\.style) private var style
-        @Environment(\.styleContext) private var styleContext
         @Environment(\.screenGeometrySize) private var screenGeometrySize
         
         let content: () -> Content
         
         var body: some View {
-            if let maxWidth = style.number(for: Constants.keyPathMaxWidthContent, in: styleContext) {
+            if let maxWidth = style.number(for: Constants.keyPathMaxWidthContent) {
                 StyleVStack(spacing: \.spacingSections) {
                     content()
                 }

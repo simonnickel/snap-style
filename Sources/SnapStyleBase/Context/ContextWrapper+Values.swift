@@ -5,24 +5,30 @@
 
 import SwiftUI
 
-extension SnapStyle {
+extension SnapStyle.ContextWrapper {
     
-    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = [], in context: SnapStyle.Context) -> Key.Value? {
+    package typealias NumberKey = SnapStyle.NumberKey
+    package typealias FontKey = SnapStyle.FontKey
+    package typealias SurfaceKey = SnapStyle.SurfaceKey
+    package typealias CompositionKey = SnapStyle.CompositionKey
+    package typealias ShapeKey = SnapStyle.ShapeKey
+    
+    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
 
         // Use value from cache if available
-        if let value = getValueFromCache(for: keyPath, in: context) {
+        if let value = definition.getValueFromCache(for: keyPath, in: context) {
             return value
         }
         
         var result: Key.Value?
-        let builders = builderContainer.builder(for: keyPath)
+        let builders = definition.builderContainer.builder(for: keyPath)
         
         // Build value from overrides
         for builder in builders.reversed() {
             if let buildValue = builder.value(in: context) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
-                        result = value(for: valueKeyPath, with: adjustments, in: context)
+                        result = value(for: valueKeyPath, with: adjustments)
                     case .definition(let value):
                         result = value
                 }
@@ -35,7 +41,7 @@ extension SnapStyle {
             if let buildValue = defaultBuilder.value(in: context) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
-                        result = value(for: valueKeyPath, with: adjustments, in: context)
+                        result = value(for: valueKeyPath, with: adjustments)
                     case .definition(let value):
                         result = value
                 }
@@ -47,7 +53,7 @@ extension SnapStyle {
 
         // Store result in cache
         if let result {
-            setValueInCache(result, for: keyPath, in: context)
+            definition.setValueInCache(result, for: keyPath, in: context)
         }
         
         return result
@@ -56,9 +62,9 @@ extension SnapStyle {
     
     // MARK: - Number
     
-    package func number(for keyPath: NumberKey.ValueBuilderKeyPath, in context: SnapStyle.Context) -> NumberKey.Value.WrappedValue? {
+    package func number(for keyPath: NumberKey.ValueBuilderKeyPath) -> NumberKey.Value.WrappedValue? {
         
-        let value = value(for: keyPath, in: context)
+        let value = value(for: keyPath)
         
         // TODO: Scaling?
 
@@ -69,9 +75,9 @@ extension SnapStyle {
     
     // MARK: - Font
     
-    package func font(for keyPath: FontKey.ValueBuilderKeyPath, in context: SnapStyle.Context) -> FontKey.Value.WrappedValue? {
+    package func font(for keyPath: FontKey.ValueBuilderKeyPath) -> FontKey.Value.WrappedValue? {
         
-        let value = value(for: keyPath, in: context)
+        let value = value(for: keyPath)
         
         // TODO: Font scaling?
 
@@ -82,9 +88,9 @@ extension SnapStyle {
     
     // MARK: - Surface
     
-    package func surface(for keyPath: SurfaceKey.ValueBuilderKeyPath, in context: Context) -> SurfaceKey.Value.WrappedValue? {
+    package func surface(for keyPath: SurfaceKey.ValueBuilderKeyPath) -> SurfaceKey.Value.WrappedValue? {
         
-        let value = value(for: keyPath, in: context)
+        let value = value(for: keyPath)
         
         return value?.wrappedValue
 
@@ -94,11 +100,10 @@ extension SnapStyle {
     // MARK: - Composition
 
     package func composition(
-        for keyPath: CompositionKey.ValueBuilderKeyPath,
-        in context: Context
+        for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> SnapStyle.CompositionKey.Value.LayeredShapeStyle? {
         
-        let value = value(for: keyPath, in: context)
+        let value = value(for: keyPath)
 
         return value?.wrappedValue
 
@@ -106,11 +111,10 @@ extension SnapStyle {
 
     package func composition(
         layer: CompositionKey.Layer,
-        for keyPath: CompositionKey.ValueBuilderKeyPath,
-        in context: Context
+        for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> CompositionKey.Value.LayeredShapeStyle.LayerValue? {
         
-        let value = composition(for: keyPath, in: context)
+        let value = composition(for: keyPath)
 
         return value?.surfaceKey(for: layer)
         
@@ -119,35 +123,33 @@ extension SnapStyle {
     /// Get the surface of a layer for a `CompositionKey.ValueBuilderKeyPath`.
     package func surface(
         layer: CompositionKey.Layer,
-        for keyPath: CompositionKey.ValueBuilderKeyPath,
-        in context: Context
+        for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> SurfaceKey.Value.WrappedValue? {
         
-        guard let layer = composition(layer: layer, for: keyPath, in: context) else { return nil }
+        guard let layer = composition(layer: layer, for: keyPath) else { return nil }
         
-        return surface(for: layer, in: context)
+        return surface(for: layer)
         
     }
 
     /// Get the surface of a layer for a `LayeredShapeStyle` (aka `Composition`).
     package func surface(
         layer: CompositionKey.Layer,
-        composition: CompositionKey.Value.LayeredShapeStyle,
-        in context: Context
+        composition: CompositionKey.Value.LayeredShapeStyle
     ) -> SurfaceKey.Value.WrappedValue? {
         
         guard let key = composition.surfaceKey(for: layer) else { return nil }
         
-        return surface(for: key, in: context)
+        return surface(for: key)
         
     }
     
     
     // MARK: - Shape
 
-    package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath, in context: Context) -> ShapeKey.Value.WrappedValue? {
+    package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath) -> ShapeKey.Value.WrappedValue? {
 
-        let value = value(for: keyPath, in: context)
+        let value = value(for: keyPath)
 
         return value?.wrappedValue
         

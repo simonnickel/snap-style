@@ -58,7 +58,7 @@ extension SnapStyle.ShapeKey {
         case rectangle
         case rectangleRounded(radius: SnapStyle.NumberKey.ValueBuilderKeyPath)
         
-        public func insettableShape(for style: SnapStyle, in context: SnapStyle.Context) -> StyleInsettableShape {
+        public func insettableShape(for style: SnapStyle.ContextWrapper) -> StyleInsettableShape {
             
             switch self {
                 
@@ -70,7 +70,7 @@ extension SnapStyle.ShapeKey {
                 }
                     
                 case .rectangleRounded(radius: let numberKey):
-                    if let cornerRadius = style.number(for: numberKey, in: context) {
+                    if let cornerRadius = style.number(for: numberKey) {
                         StyleInsettableShape { rect in
                             RoundedRectangle(cornerRadius: cornerRadius).path(in: rect)
                         }

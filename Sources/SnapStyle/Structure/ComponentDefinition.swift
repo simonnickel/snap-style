@@ -84,13 +84,12 @@ extension View {
 internal struct ComponentModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
     
     let component: SnapStyle.ComponentDefinition
     let state: SnapStyle.Component.InteractionState
 
     func body(content: Content) -> some View {
-        var componentStack = styleContext.componentStack.appended(component, state: state)
+        var componentStack = style.context.componentStack.appended(component, state: state)
         content
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
     }

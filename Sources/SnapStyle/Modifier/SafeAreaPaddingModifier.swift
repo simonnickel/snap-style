@@ -27,14 +27,13 @@ extension View {
 internal struct SafeAreaPaddingModifier: ViewModifier {
     
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
     
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
     let edges: Edge.Set
     
     func body(content: Content) -> some View {
         if
-            let padding = style.number(for: keyPath, in: styleContext)
+            let padding = style.number(for: keyPath)
         {
             content
                 .safeAreaPadding(edges, padding)

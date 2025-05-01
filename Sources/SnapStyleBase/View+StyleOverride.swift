@@ -42,14 +42,16 @@ private struct StyleOverrideModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         
+        let definition = style.definition.replaced(
+            numbers: numbers,
+            fonts: fonts,
+            surfaces: surfaces,
+            compositions: compositions,
+            shapes: shapes
+        )
+        
         content
-            .environment(\.style, style.replaced(
-                numbers: numbers,
-                fonts: fonts,
-                surfaces: surfaces,
-                compositions: compositions,
-                shapes: shapes
-            ))
+            .style(update: definition)
         
     }
     

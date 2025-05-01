@@ -23,14 +23,13 @@ extension View {
 internal struct CompositionForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         if
-            let foreground = style.composition(layer: .foreground, for: keyPath, in: styleContext),
-            let surface = style.surface(for: foreground, in: styleContext)
+            let foreground = style.composition(layer: .foreground, for: keyPath),
+            let surface = style.surface(for: foreground)
         {
             content
                 .foregroundStyle(surface)
@@ -44,14 +43,13 @@ internal struct CompositionForegroundModifier: ViewModifier {
 internal struct CompositionBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
-        if let composition = style.composition(for: keyPath, in: styleContext) {
-            let surface = style.surface(layer: .background, composition: composition, in: styleContext)
+        if let composition = style.composition(for: keyPath) {
+            let surface = style.surface(layer: .background, composition: composition)
             content
                 .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {
@@ -64,14 +62,13 @@ internal struct CompositionBackgroundModifier: ViewModifier {
 internal struct CompositionBackgroundOverlayModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    @Environment(\.styleContext) private var styleContext
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
-        if let composition = style.composition(for: keyPath, in: styleContext) {
-            let surface = style.surface(layer: .backgroundOverlay, composition: composition, in: styleContext)
+        if let composition = style.composition(for: keyPath) {
+            let surface = style.surface(layer: .backgroundOverlay, composition: composition)
             content
                 .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {

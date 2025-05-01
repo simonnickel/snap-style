@@ -13,7 +13,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     public init() {}
     
     public var body: some View {
-        let keyPaths = style.cachedKeyPaths(for: KeyType.self)
+        let keyPaths = style.definition.cachedKeyPaths(for: KeyType.self)
         if !keyPaths.isEmpty {
             List {
                 ForEach(keyPaths, id: \.self) { keyPath in
@@ -30,12 +30,12 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     private func section(for keyPath: KeyType.ValueBuilderKeyPath) -> some View {
 
         Group {
-            let contexts = style.cachedContexts(for: keyPath)
+            let contexts = style.definition.cachedContexts(for: keyPath)
 
             if !contexts.isEmpty {
                 Section {
                     ForEach(contexts, id: \.self) { context in
-                        let value = style.cachedValue(for: keyPath, in: context)
+                        let value = style.definition.cachedValue(for: keyPath, in: context)
                         item(context: context, value: value)
                     }
                 } header: {
