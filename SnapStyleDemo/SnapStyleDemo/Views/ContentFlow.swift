@@ -61,9 +61,11 @@ struct ContentFlow: View {
                 ListSection(title: "Compon", screens: [.elements])
                 ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
             }
+            .setupNavigationToolbar()
             .navigationDestination(for: Screen.self) { screen in
                 screen.screen
                     .navigationTitle(screen.title)
+                    .setupNavigationToolbar()
             }
         }
     }
@@ -101,6 +103,9 @@ struct ContentFlow: View {
         }
     }
 }
+
+
+// MARK: - Preview
 
 #Preview {
     ContentFlow()
