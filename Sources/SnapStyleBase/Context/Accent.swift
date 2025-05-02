@@ -43,7 +43,6 @@ extension View {
     
     public func style(accent: SnapStyle.Accent) -> some View {
         self
-            .tint(accent.base)
             .style(attribute: SnapStyle.Context.accent, value: accent)
     }
     

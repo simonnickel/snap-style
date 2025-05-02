@@ -22,6 +22,7 @@ struct ConfigurationFlow: View {
                 }
             }
             .navigationTitle(rawValue.uppercased())
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -30,7 +31,6 @@ struct ConfigurationFlow: View {
     var body: some View {
         NavigationStack {
             Screen.configuration.screen
-                .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
                 }
