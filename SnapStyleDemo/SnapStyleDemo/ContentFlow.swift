@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyle
 import SnapStyleBase
 import SnapStyleDebug
@@ -12,6 +13,8 @@ struct ContentFlow: View {
     
     @MainActor
     enum Screen: String {
+        case root = "SnapStyle"
+        
         case content
         case card
         case list
@@ -29,25 +32,30 @@ struct ContentFlow: View {
         case cacheComposition = "Composition"
         
         var title: String {
-            rawValue.capitalized
+            rawValue.uppercasedFirstLetter
         }
         
         @ViewBuilder
         var screen: some View {
-            switch self {
-                case .content: ComponentContentScreen()
-                case .card: ComponentCardScreen()
-                case .list: ComponentListScreen()
-                case .action: ComponentActionScreen()
-                case .componentStack: ComponentStackScreen()
-                case .components: ComponentsScreen()
-                case .structured: StructuredScreen()
-                case .elements: DebugKeyScreen()
-                case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
-                case .cacheFont: DebugCacheScreen<SnapStyle.FontKey>()
-                case .cacheSurface: DebugCacheScreen<SnapStyle.SurfaceKey>()
-                case .cacheComposition: DebugCacheScreen<SnapStyle.CompositionKey>()
+            Group {
+                switch self {
+                    case .root: ContentListScreen()
+                    case .content: ComponentContentScreen()
+                    case .card: ComponentCardScreen()
+                    case .list: ComponentListScreen()
+                    case .action: ComponentActionScreen()
+                    case .componentStack: ComponentStackScreen()
+                    case .components: ComponentsScreen()
+                    case .structured: StructuredScreen()
+                    case .elements: DebugKeyScreen()
+                    case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
+                    case .cacheFont: DebugCacheScreen<SnapStyle.FontKey>()
+                    case .cacheSurface: DebugCacheScreen<SnapStyle.SurfaceKey>()
+                    case .cacheComposition: DebugCacheScreen<SnapStyle.CompositionKey>()
+                }
             }
+            .navigationTitle(title)
+            .setupNavigationToolbar()
         }
     }
     
@@ -55,53 +63,13 @@ struct ContentFlow: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ListSection(title: "Components", screens: [.content, .card, .list, .action, .componentStack])
-                ListSection(title: "Examples", screens: [.components, .structured])
-                ListSection(title: "Compon", screens: [.elements])
-                ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
-            }
-            .setupNavigationToolbar()
-            .navigationDestination(for: Screen.self) { screen in
-                screen.screen
-                    .navigationTitle(screen.title)
-                    .setupNavigationToolbar()
-            }
-        }
-    }
-    
-    
-    // MARK: - ListSection
-    
-    struct ListSection: View {
-        
-        let title: String
-        let screens: [Screen]
-        
-        var body: some View {
-            Section {
-                ForEach(screens, id: \.self) { screen in
-                    ListRow(screen: screen)
+            Screen.root.screen
+                .navigationDestination(for: Screen.self) { screen in
+                    screen.screen
                 }
-            } header: {
-                Text(title)
-            }
         }
     }
     
-    
-    // MARK: - ListRow
-    
-    struct ListRow: View {
-        
-        let screen: Screen
-        
-        var body: some View {
-            NavigationLink(value: screen) {
-                Text(screen.title)
-            }
-        }
-    }
 }
 
 

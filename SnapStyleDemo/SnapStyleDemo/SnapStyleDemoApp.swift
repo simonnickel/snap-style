@@ -15,9 +15,9 @@ struct SnapStyleDemoApp: App {
         WindowGroup {
             AppContainer()
                 .style(update: style)
-                
         }
     }
+
 }
 
 struct AppContainer: View {
@@ -26,7 +26,8 @@ struct AppContainer: View {
     
     var body: some View {
         ContentFlow()
-            .style(attribute: SnapStyle.Context.accent, value: configuration.accent)
+            .style(accent: configuration.accent)
             .environment(configuration)
     }
+
 }
