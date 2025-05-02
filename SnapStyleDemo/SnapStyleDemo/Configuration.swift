@@ -6,6 +6,7 @@
 import SwiftUI
 import SnapCore
 import SnapStyleBase
+import Observation
 
 @Observable
 class Configuration: Hashable, Equatable {
@@ -23,14 +24,5 @@ class Configuration: Hashable, Equatable {
     static func == (lhs: Configuration, rhs: Configuration) -> Bool {
         lhs.hashValue == rhs.hashValue
     }
-    
-}
-
-
-// MARK: - Environment
-
-extension EnvironmentValues {
-    
-    @Entry var configuration: Configuration = Configuration()
     
 }

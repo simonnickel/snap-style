@@ -35,12 +35,32 @@ extension SnapStyle.SurfaceKey {
     
     // MARK: - Accents
 
-    public var accent: ValueBuilder { .base(.reference(\.accentBase)) }
-    public var accentBase: ValueBuilder { .base(.definition(.color(.accentColor))) }
+    public var accent: ValueBuilder {
+        .builder { context in
+            .definition(.color(context.accent.base))
+        }
+    }
+    public var accentComplementary: ValueBuilder {
+        .builder { context in
+            .definition(.color(context.accent.complementary))
+        }
+    }
+    public var accentContrast: ValueBuilder {
+        .builder { context in
+            .definition(.color(context.accent.contrast))
+        }
+    }
     public var accentLevel2: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.2)])) }
     public var accentLevel3: ValueBuilder { .base(.reference(\.accent, adjustments: [.mix(.black, 0.4)])) }
 
-    public var onAccent: ValueBuilder { .base(.reference(\.onDark0)) }
+    public var onAccent: ValueBuilder {
+        .builder { context in
+            switch context.accent.brightness {
+                case .dark: .reference(\.onDark0)
+                case .light: .reference(\.onLight0)
+            }
+        }
+    }
 
 
     // MARK: Interactive

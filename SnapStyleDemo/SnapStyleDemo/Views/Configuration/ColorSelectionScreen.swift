@@ -9,16 +9,31 @@ import SnapStyleBase
 
 struct ColorSelectionScreen: View {
     
-    @Environment(\.self) var environment
-    @Environment(\.configuration) private var configuration
+    @Environment(\.self) private var environment
+    @Environment(Configuration.self) private var configuration
     
     var body: some View {
         
         let accents: [SnapStyle.Accent] = [
             .fallback,
-            .init(base: .green, complementary: .green.adjusted(hue: .add(0.06), in: environment), contrast: .green.adjusted(hue: .add(0.5), in: environment)),
-            .init(base: .blue, complementary: .blue.adjusted(hue: .add(0.06), in: environment), contrast: .blue.adjusted(hue: .add(0.5), in: environment)),
-            .init(base: .red, complementary: .red.adjusted(hue: .add(0.06), in: environment), contrast: .red.adjusted(hue: .add(0.5), in: environment))
+            .init(
+                base: .green,
+                complementary: .green.adjusted(hue: .add(0.06), in: environment),
+                contrast: .green.adjusted(hue: .add(0.5), in: environment),
+                brightness: .dark
+            ),
+            .init(
+                base: .blue,
+                complementary: .blue.adjusted(hue: .add(0.06), in: environment),
+                contrast: .blue.adjusted(hue: .add(0.5), in: environment),
+                brightness: .dark
+            ),
+            .init(
+                base: .red,
+                complementary: .red.adjusted(hue: .add(0.06), in: environment),
+                contrast: .red.adjusted(hue: .add(0.5), in: environment),
+                brightness: .dark
+            )
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
         

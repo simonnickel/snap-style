@@ -10,19 +10,23 @@ import SwiftUI
 struct SnapStyleDemoApp: App {
     
     let style: SnapStyle = SnapStyle()
-    let configuration: Configuration = .init()
-    
-    @State private var accent: SnapStyle.Accent = .fallback
     
     var body: some Scene {
         WindowGroup {
-            ContentFlow()
+            AppContainer()
                 .style(update: style)
-                .style(attribute: SnapStyle.Context.accent, value: accent)
-                .environment(\.configuration, configuration)
-                .onChange(of: configuration) { oldValue, newValue in
-                    accent = newValue.accent
-                }
+                
         }
+    }
+}
+
+struct AppContainer: View {
+    
+    @State private var configuration = Configuration()
+    
+    var body: some View {
+        ContentFlow()
+            .style(attribute: SnapStyle.Context.accent, value: configuration.accent)
+            .environment(configuration)
     }
 }
