@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A2959D32DC007EA002E1EEB /* ContentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2959C62DC007EA002E1EEB /* ContentFlow.swift */; };
+		5A2959D62DC409BB002E1EEB /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2959D42DC409B7002E1EEB /* Toolbar.swift */; };
+		5A2959E02DC5155D002E1EEB /* SnapCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5A2959DF2DC5155D002E1EEB /* SnapCore */; };
 		5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */; };
 		5A29F0992CFB229900942934 /* SnapStyle in Frameworks */ = {isa = PBXBuildFile; productRef = 5A29F0982CFB229900942934 /* SnapStyle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A2959C62DC007EA002E1EEB /* ContentFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFlow.swift; sourceTree = "<group>"; };
+		5A2959D42DC409B7002E1EEB /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		5A29F06A2CFB1FC000942934 /* SnapStyleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapStyleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnapStyleDemo.entitlements; sourceTree = "<group>"; };
 		5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapStyleDemoApp.swift; sourceTree = "<group>"; };
@@ -31,6 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A29F0992CFB229900942934 /* SnapStyle in Frameworks */,
+				5A2959E02DC5155D002E1EEB /* SnapCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */,
+				5A2959C62DC007EA002E1EEB /* ContentFlow.swift */,
+				5A2959D42DC409B7002E1EEB /* Toolbar.swift */,
 				5A29F0922CFB221200942934 /* Views */,
 				5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */,
 			);
@@ -84,6 +92,7 @@
 			name = SnapStyleDemo;
 			packageProductDependencies = (
 				5A29F0982CFB229900942934 /* SnapStyle */,
+				5A2959DF2DC5155D002E1EEB /* SnapCore */,
 			);
 			productName = SnapStyleDemo;
 			productReference = 5A29F06A2CFB1FC000942934 /* SnapStyleDemo.app */;
@@ -115,6 +124,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5A29F0972CFB229900942934 /* XCLocalSwiftPackageReference "../../snap-style" */,
+				5A2959DE2DC5155D002E1EEB /* XCRemoteSwiftPackageReference "snap-core" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5A29F06B2CFB1FC000942934 /* Products */;
@@ -141,6 +151,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A2959D62DC409BB002E1EEB /* Toolbar.swift in Sources */,
+				5A2959D32DC007EA002E1EEB /* ContentFlow.swift in Sources */,
 				5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +382,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		5A2959DE2DC5155D002E1EEB /* XCRemoteSwiftPackageReference "snap-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simonnickel/snap-core";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		5A2959DF2DC5155D002E1EEB /* SnapCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A2959DE2DC5155D002E1EEB /* XCRemoteSwiftPackageReference "snap-core" */;
+			productName = SnapCore;
+		};
 		5A29F0982CFB229900942934 /* SnapStyle */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SnapStyle;

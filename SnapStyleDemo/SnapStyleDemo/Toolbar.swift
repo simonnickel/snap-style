@@ -28,7 +28,7 @@ internal struct ToolbarModifier: ViewModifier {
                         Label("Style", systemImage: "slider.horizontal.3")
                     }
                     .popover(isPresented: $isPresented, attachmentAnchor: .point(.bottom), arrowEdge: .bottom) {
-                        PopoverContentView()
+                        ConfigurationFlow()
                             .presentationCompactAdaptation(.popover)
                     }
                     
@@ -36,12 +36,4 @@ internal struct ToolbarModifier: ViewModifier {
             }
     }
     
-}
-
-
-struct PopoverContentView: View {
-    var body: some View {
-        Text("Popover content")
-            .padding()
-    }
 }

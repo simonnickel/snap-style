@@ -1,6 +1,15 @@
 {
-  "originHash" : "77ab0c71e3f83a825b63a4d55b2495206d56378083f50e8ff904c902acb6b5cf",
+  "originHash" : "5a05b8b1e351200938ae81773f7b8796f51571fe8ed3ab45868c8a2115bb6b70",
   "pins" : [
+    {
+      "identity" : "snap-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simonnickel/snap-core",
+      "state" : {
+        "revision" : "4c6c2451a96a893e68385148b8f72d41c6df7996",
+        "version" : "0.1.0"
+      }
+    },
     {
       "identity" : "snap-foundation",
       "kind" : "remoteSourceControl",
