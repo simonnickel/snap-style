@@ -26,6 +26,7 @@ struct AppContainer: View {
     
     var body: some View {
         ContentFlow()
+            .styleBase()
             .style(accent: configuration.accent)
             .environment(configuration)
     }
