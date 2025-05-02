@@ -8,7 +8,7 @@ import SnapCore
 
 struct ColorSelectionScreen: View {
     
-    @State private var selectedColor: Color = .green
+    @Environment(\.configuration) private var configuration
     
     let colors: [Color] = [.red, .green, .blue, .mint, .purple, .pink, .teal, .yellow]
     
@@ -19,7 +19,11 @@ struct ColorSelectionScreen: View {
         ScrollView {
             LazyVGrid(columns: [gridItem, gridItem]) {
                 ForEach(colors, id: \.self) { color in
-                    ColorItemView(color: color, selected: color == selectedColor)
+                    Button {
+                        configuration.accent = color
+                    } label: {
+                        ColorItemView(color: color, selected: color == configuration.accent)
+                    }
                 }
             }
             .padding()

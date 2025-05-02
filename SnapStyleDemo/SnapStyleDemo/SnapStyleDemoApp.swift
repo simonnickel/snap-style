@@ -10,11 +10,13 @@ import SwiftUI
 struct SnapStyleDemoApp: App {
     
     let style: SnapStyle = SnapStyle()
+    let configuration: Configuration = .init()
     
     var body: some Scene {
         WindowGroup {
             ContentFlow()
                 .style(update: style)
+                .environment(\.configuration, configuration)
         }
     }
 }

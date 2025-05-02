@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct ConfigurationFlow: View {
+    
+    @MainActor
     enum Screen: String {
         case configuration
         
