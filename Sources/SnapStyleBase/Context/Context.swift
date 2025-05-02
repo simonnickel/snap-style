@@ -12,6 +12,7 @@ extension SnapStyle {
         
         internal typealias Key = AnyHashable
         internal typealias Value = AnyHashable
+        
         internal var content: [Key : Value] = [:]
 
         /// A context to use for default values.
