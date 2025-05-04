@@ -21,7 +21,7 @@ struct ConfigurationFlow: View {
                     case .color: ColorSelectionScreen()
                 }
             }
-            .navigationTitle(rawValue.uppercased())
+            .navigationTitle(rawValue.capitalized)
             .navigationBarTitleDisplayMode(.inline)
         }
     }
