@@ -9,20 +9,12 @@ import SnapStyleBase
 import Observation
 
 @Observable
-class Configuration: Hashable, Equatable {
+class Configuration {
     
     var accent: SnapStyle.Accent
     
     init(accent: SnapStyle.Accent = SnapStyle.Accent.fallback) {
         self.accent = accent
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(accent)
-    }
-    
-    static func == (lhs: Configuration, rhs: Configuration) -> Bool {
-        lhs.hashValue == rhs.hashValue
     }
     
 }
