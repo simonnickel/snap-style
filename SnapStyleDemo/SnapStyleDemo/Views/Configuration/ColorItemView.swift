@@ -8,8 +8,6 @@ import SnapStyleBase
 
 struct ColorItemView: View {
     
-    @Environment(\.self) var environment
-    
     let accent: SnapStyle.Accent
     let selected: Bool
     
