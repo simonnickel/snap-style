@@ -55,7 +55,6 @@ struct ContentFlow: View {
                 }
             }
             .navigationTitle(title)
-            .setupNavigationToolbar()
         }
     }
     

@@ -35,7 +35,6 @@ struct ConfigurationFlow: View {
                     screen.screen
                 }
         }
-        .frame(width: 250, height: 400)
     }
 }
 

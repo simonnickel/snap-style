@@ -14,7 +14,7 @@ struct SnapStyleDemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentFlow()
+            ContentContainer()
                 .style(setup: style)
                 .style(accent: configuration.accent)
                 .environment(configuration)
