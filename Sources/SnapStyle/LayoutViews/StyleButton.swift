@@ -23,6 +23,7 @@ public struct StyleButtonStyle: ButtonStyle {
     private let variant: Variant
     private let state: SnapStyle.Component.InteractionState
 
+    // TODO: init with custom component and hierarchy
     public init(_ variant: Variant, state: SnapStyle.Component.InteractionState) {
         self.variant = variant
         self.state = state
@@ -30,6 +31,7 @@ public struct StyleButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            // TODO: This additional padding should be part of the container padding.
             .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
             .style(
                 component: .action,
