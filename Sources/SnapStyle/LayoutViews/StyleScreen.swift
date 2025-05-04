@@ -46,7 +46,6 @@ public struct StyleScreen<Content>: View where Content : View {
         .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
         .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
         .style(component: component)
-        .styleBase()
     }
     
     

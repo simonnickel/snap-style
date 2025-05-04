@@ -7,15 +7,16 @@ import SwiftUI
 
 extension View {
     
-    /// Set value of a `Context` attribute for use in Environment.
-    public func styleBase() -> some View {
+    /// Setup the view hierarchy and `Context` to use the styling.
+    public func style(setup definition: SnapStyle) -> some View {
         self
-            .modifier(BaseModifier())
+            .modifier(SetupModifier())
+            .style(update: definition)
     }
     
 }
 
-internal struct BaseModifier: ViewModifier {
+internal struct SetupModifier: ViewModifier {
     
     @Environment(\.style) private var style
     @Environment(\.colorScheme) private var colorScheme
@@ -24,7 +25,6 @@ internal struct BaseModifier: ViewModifier {
         let context = style.context
             .withAttribute(value: colorScheme, for: SnapStyle.Context.colorScheme)
         content
-            .tint(context.accent.base)
             .style(update: context)
     }
     

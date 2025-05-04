@@ -43,6 +43,20 @@ extension View {
     
     public func style(accent: SnapStyle.Accent) -> some View {
         self
+            .modifier(UpdateAccentModifier(accent: accent))
+    }
+    
+}
+
+internal struct UpdateAccentModifier: ViewModifier {
+    
+    @Environment(\.style) private var style
+    
+    let accent: SnapStyle.Accent
+    
+    func body(content: Content) -> some View {
+        content
+            .tint(accent.base)
             .style(attribute: SnapStyle.Context.accent, value: accent)
     }
     
