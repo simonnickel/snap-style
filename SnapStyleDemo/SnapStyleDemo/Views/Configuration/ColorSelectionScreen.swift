@@ -10,7 +10,7 @@ import SnapStyleBase
 struct ColorSelectionScreen: View {
     
     @Environment(\.self) private var environment
-    @Environment(Configuration.self) private var configuration
+    @Environment(\.configuration) private var configuration
     
     var body: some View {
         

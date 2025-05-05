@@ -18,3 +18,12 @@ class Configuration {
     }
     
 }
+
+
+// MARK: - Environment
+
+extension EnvironmentValues {
+    
+    @Entry var configuration: Configuration = Configuration()
+    
+}

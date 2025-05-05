@@ -17,7 +17,7 @@ struct SnapStyleDemoApp: App {
             ContentContainer()
                 .style(setup: style)
                 .style(accent: configuration.accent)
-                .environment(configuration)
+                .environment(\.configuration, configuration)
         }
     }
 
