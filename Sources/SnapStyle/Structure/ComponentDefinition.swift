@@ -25,11 +25,11 @@ extension SnapStyle {
         public init(
             _ id: String,
             requiresAlternativeAccent: Bool = false,
-            padding: SnapStyle.ComponentDefinition.Mapping<SnapStyle.NumberKey>? = nil,
-            fonts: SnapStyle.ComponentDefinition.Mapping<SnapStyle.FontKey>? = nil,
-            surfaces: SnapStyle.ComponentDefinition.Mapping<SnapStyle.SurfaceKey>? = nil,
-            compositions: SnapStyle.ComponentDefinition.Mapping<SnapStyle.CompositionKey>? = nil,
-            shapes: SnapStyle.ComponentDefinition.Mapping<SnapStyle.ShapeKey>? = nil
+            padding: Mapping<SnapStyle.NumberKey>? = nil,
+            fonts: Mapping<SnapStyle.FontKey>? = nil,
+            surfaces: Mapping<SnapStyle.SurfaceKey>? = nil,
+            compositions: Mapping<SnapStyle.CompositionKey>? = nil,
+            shapes: Mapping<SnapStyle.ShapeKey>? = nil
         ) {
             self.id = id
             self.requiresAlternativeAccent = requiresAlternativeAccent

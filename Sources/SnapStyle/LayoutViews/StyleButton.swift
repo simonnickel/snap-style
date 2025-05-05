@@ -32,7 +32,6 @@ public struct StyleButtonStyle: ButtonStyle {
     private let variant: Variant
     private let state: SnapStyle.Component.InteractionState
 
-    // TODO: init with custom component and hierarchy
     public init(_ variant: Variant, state: SnapStyle.Component.InteractionState) {
         self.variant = variant
         self.state = state
