@@ -115,15 +115,18 @@ public struct StyleButton<Content>: View where Content : View {
 // MARK: - Preview
 
 #Preview {
-    VStack {
-        StyleButton(.primary, enabled: true) { } content: {
-            Label("Primary", systemImage: "star")
+    StyleScreen {
+        StyleVStack(spacing: \.spacingElements, alignment: .center) {
+            StyleButton(.primary, enabled: true) { } content: {
+                Label("Primary", systemImage: "star")
+            }
+            StyleButton(.secondary, enabled: true) { } content: {
+                Label("Secondary", systemImage: "star")
+            }
+            StyleButton(.component(.content), enabled: true) { } content: {
+                Label("Secondary", systemImage: "star")
+            }
         }
-        StyleButton(.secondary, enabled: true) { } content: {
-            Label("Secondary", systemImage: "star")
-        }
-        StyleButton(.component(.content), enabled: true) { } content: {
-            Label("Secondary", systemImage: "star")
-        }
+        .style(component: .content)
     }
 }
