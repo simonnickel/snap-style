@@ -11,12 +11,13 @@ extension SnapStyle {
     public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
+        public typealias MappingPadding = @Sendable (SnapStyle.Element.ElementType) -> Padding?
 
         // TODO: Merge into a Config struct?
         public let id: String
         public let requiresAlternativeAccent: Bool
 
-        internal let padding: Mapping<NumberKey>?
+        internal let padding: MappingPadding?
         internal let fonts: Mapping<FontKey>?
         internal let surfaces: Mapping<SurfaceKey>?
         internal let compositions: Mapping<CompositionKey>?
@@ -25,7 +26,7 @@ extension SnapStyle {
         public init(
             _ id: String,
             requiresAlternativeAccent: Bool = false,
-            padding: Mapping<SnapStyle.NumberKey>? = nil,
+            padding: MappingPadding? = nil,
             fonts: Mapping<SnapStyle.FontKey>? = nil,
             surfaces: Mapping<SnapStyle.SurfaceKey>? = nil,
             compositions: Mapping<SnapStyle.CompositionKey>? = nil,
@@ -39,6 +40,44 @@ extension SnapStyle {
             self.compositions = compositions
             self.shapes = shapes
         }
+        
+        
+        // MARK: Padding
+        
+        public struct Padding {
+            
+            typealias Value = SnapStyle.NumberKey.ValueBuilderKeyPath
+            
+            let leading: Value?
+            let top: Value?
+            let trailing: Value?
+            let bottom: Value?
+            
+            init(_ value: Value, edges: Edge.Set = .all) {
+                self.leading = edges.contains(.leading) ? value : nil
+                self.top = edges.contains(.top) ? value : nil
+                self.trailing = edges.contains(.trailing) ? value : nil
+                self.bottom = edges.contains(.bottom) ? value : nil
+            }
+            
+            init(horizontal: Value? = nil, vertical: Value? = nil) {
+                self.leading = horizontal
+                self.top = vertical
+                self.trailing = horizontal
+                self.bottom = vertical
+            }
+
+            init(leading: Value? = nil, top: Value? = nil, trailing: Value? = nil, bottom: Value? = nil) {
+                self.leading = leading
+                self.top = top
+                self.trailing = trailing
+                self.bottom = bottom
+            }
+            
+        }
+        
+        
+        // MARK: Protocols
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)

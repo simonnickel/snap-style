@@ -39,8 +39,6 @@ public struct StyleButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            // TODO: This additional padding should be part of the container padding.
-            .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
             .style(
                 component: variant.component,
                 containerHierarchy: variant.hierarchy,

@@ -16,8 +16,8 @@ extension SnapStyle.ComponentDefinition {
     public static let base: Self = .init("base",
         padding: { element in
             switch element {
-                case .any: \.paddingAnyElement
-                case .container: \.paddingAnyContainer
+                case .any: Padding(\.paddingAnyElement)
+                case .container: Padding(\.paddingAnyContainer)
                 default: nil
             }
         },
@@ -78,7 +78,7 @@ extension SnapStyle.ComponentDefinition {
     public static let content: Self = .init("content",
         padding: { element in
             switch element {
-                case .container: \.paddingContent
+                case .container: Padding(\.paddingContent)
                 default: nil
             }
         },
@@ -127,7 +127,7 @@ extension SnapStyle.ComponentDefinition {
         requiresAlternativeAccent: true,
         padding: { element in
             switch element {
-                case .container: \.paddingCard
+                case .container: Padding(\.paddingCard)
                 default: nil
             }
         },
@@ -154,7 +154,7 @@ extension SnapStyle.ComponentDefinition {
     public static let valueCard: Self = .init("valueCard",
         padding: { element in
             switch element {
-                case .container: \.paddingCard
+                case .container: Padding(\.paddingCard)
                 default: nil
             }
         },
@@ -186,7 +186,7 @@ extension SnapStyle.ComponentDefinition {
     public static let action: Self = .init("action",
         padding: { element in
             switch element {
-                case .container: \.paddingAction
+                case .container: Padding(horizontal: \.paddingActionHorizontal, vertical: \.paddingActionVertical)
                 default: nil
             }
         },

@@ -45,13 +45,16 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let base = SnapStyle.ComponentDefinition.base
         
         let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
-        let paddingKeyPath = component.padding?(element) ?? base.padding?(element) ?? \.paddingAnyElement
+        let padding = component.padding?(element) ?? base.padding?(element) ?? SnapStyle.ComponentDefinition.Padding(\.paddingAnyElement)
         let compositionKeyPath = component.compositions?(element) ?? base.compositions?(element) ?? \.anyElement
         let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
         
         content
             .style(font: fontKeyPath)
-            .style(padding: paddingKeyPath)
+            .style(padding: padding.leading ?? \.paddingAnyElement, .leading)
+            .style(padding: padding.top ?? \.paddingAnyElement, .top)
+            .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
+            .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
             .style(composition: compositionKeyPath)
             .style(shape: shapeKeyPath)
     }
