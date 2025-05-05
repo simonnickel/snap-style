@@ -11,11 +11,20 @@ public struct StyleButtonStyle: ButtonStyle {
     public enum Variant {
         case primary
         case secondary
+        case component(SnapStyle.ComponentDefinition, hierarchy: SnapStyle.Element.Hierarchy = .primary)
+        
+        var component: SnapStyle.ComponentDefinition {
+            switch self {
+                case .primary, .secondary: .action
+                case .component(let component, hierarchy: _): component
+            }
+        }
         
         var hierarchy: SnapStyle.Element.Hierarchy {
             switch self {
                 case .primary: .primary
                 case .secondary: .secondary
+                case .component(_, hierarchy: let hierarchy): hierarchy
             }
         }
     }
@@ -34,7 +43,7 @@ public struct StyleButtonStyle: ButtonStyle {
             // TODO: This additional padding should be part of the container padding.
             .style(padding: \.paddingActionButtonHorizontalAdditional, .horizontal)
             .style(
-                component: .action,
+                component: variant.component,
                 containerHierarchy: variant.hierarchy,
                 state: configuration.isPressed ? .selected : state
             )
@@ -100,4 +109,21 @@ public struct StyleButton<Content>: View where Content : View {
 #endif
     }
 
+}
+
+
+// MARK: - Preview
+
+#Preview {
+    VStack {
+        StyleButton(.primary, enabled: true) { } content: {
+            Label("Primary", systemImage: "star")
+        }
+        StyleButton(.secondary, enabled: true) { } content: {
+            Label("Secondary", systemImage: "star")
+        }
+        StyleButton(.component(.content), enabled: true) { } content: {
+            Label("Secondary", systemImage: "star")
+        }
+    }
 }
