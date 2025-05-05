@@ -46,3 +46,6 @@ Some helper views to look into the setup and caches, prevents exposing implement
 
 ## Features
  - Screen definition limiting the content to \.widthReadableContent (UIKits readableContentGuide is not available in SwiftUI).
+
+## Not supported
+- The iOS default behaviour of .accentColor shows as grayed out when a popover or sheet is presented. Seems to be not possible to replicate for custom tint colors. 
