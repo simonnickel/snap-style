@@ -14,6 +14,7 @@ extension SnapStyle {
         // References to `StyleKey` specific caches.
         internal var numbers: KeyTypeCache<NumberKey> = .init()
         internal var fonts: KeyTypeCache<FontKey> = .init()
+        internal var icons: KeyTypeCache<IconKey> = .init()
         internal var surfaces: KeyTypeCache<SurfaceKey> = .init()
         internal var compositions: KeyTypeCache<CompositionKey> = .init()
         internal var shapes: KeyTypeCache<ShapeKey> = .init()
@@ -24,6 +25,8 @@ extension SnapStyle {
                 case let key as NumberKey.Type: return numbers as? KeyTypeCache<Key>
                     
                 case let key as FontKey.Type: return fonts as? KeyTypeCache<Key>
+                    
+                case let key as IconKey.Type: return icons as? KeyTypeCache<Key>
                     
                 case let key as SurfaceKey.Type: return surfaces as? KeyTypeCache<Key>
                     
@@ -43,6 +46,8 @@ extension SnapStyle {
                 case let key as NumberKey.Type: numbers = .init()
                     
                 case let key as FontKey.Type: fonts = .init()
+                    
+                case let key as IconKey.Type: icons = .init()
                     
                 case let key as SurfaceKey.Type: surfaces = .init()
                     

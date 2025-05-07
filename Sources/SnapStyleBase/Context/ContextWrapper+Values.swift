@@ -9,6 +9,7 @@ extension SnapStyle.ContextWrapper {
     
     package typealias NumberKey = SnapStyle.NumberKey
     package typealias FontKey = SnapStyle.FontKey
+    package typealias IconKey = SnapStyle.IconKey
     package typealias SurfaceKey = SnapStyle.SurfaceKey
     package typealias CompositionKey = SnapStyle.CompositionKey
     package typealias ShapeKey = SnapStyle.ShapeKey
@@ -80,6 +81,17 @@ extension SnapStyle.ContextWrapper {
         let value = value(for: keyPath)
         
         // TODO: Font scaling?
+
+        return value?.wrappedValue
+
+    }
+    
+    
+    // MARK: - Icon
+    
+    package func icon(for keyPath: IconKey.ValueBuilderKeyPath) -> IconKey.Value.WrappedValue? {
+        
+        let value = value(for: keyPath)
 
         return value?.wrappedValue
 

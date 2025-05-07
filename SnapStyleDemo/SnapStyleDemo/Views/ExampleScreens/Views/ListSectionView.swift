@@ -53,7 +53,7 @@ struct ListSectionView: View {
         let data: Data
         
         var body: some View {
-            StyleLabel(title: data.title, icon: data.icon)
+            StyleLabel(title: data.title, systemImage: data.icon)
         }
     }
 

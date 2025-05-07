@@ -3,33 +3,51 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleBase
 import SwiftUI
 
 public struct StyleLabel<Content: View>: View {
     
-    private let content: () -> Content
-    // TODO: Icon as Style value
-    private let icon: String?
+    public typealias Icon = SnapStyle.IconKey.ValueBuilderKeyPath
     
-    public init(content: @escaping () -> Content, icon: String? = nil) {
+    @Environment(\.style) private var style
+    
+    private let content: () -> Content
+    private let icon: Icon?
+    private let systemImage: String?
+    
+    public init(content: @escaping () -> Content, icon: Icon? = nil, systemImage: String? = nil) {
         self.content = content
         self.icon = icon
+        self.systemImage = systemImage
     }
     
-    public init(title: String, icon: String? = nil) where Content == Text {
+    public init(title: String, icon: Icon? = nil, systemImage: String? = nil) where Content == Text {
         self.content = { Text(title) }
         self.icon = icon
+        self.systemImage = systemImage
     }
 
-    public init(icon: String? = nil) where Content == EmptyView {
+    public init(icon: Icon? = nil) where Content == EmptyView {
         self.content = { EmptyView() }
         self.icon = icon
+        self.systemImage = nil
+    }
+
+    public init(systemImage: String? = nil) where Content == EmptyView {
+        self.content = { EmptyView() }
+        self.icon = nil
+        self.systemImage = systemImage
     }
     
     public var body: some View {
         Label(title: content, icon: {
             if let icon {
-                Image(systemName: icon)
+                if let iconName = style.value(for: icon)?.wrappedValue {
+                    Image(systemName: iconName)
+                }
+            } else if let systemImage {
+                Image(systemName: systemImage)
             } else {
                 EmptyView()
             }
@@ -46,15 +64,17 @@ public struct StyleLabel<Content: View>: View {
         
         StyleLabel(content: {
             Text("Content")
-        }, icon: "star")
+        }, icon: \.favorite)
         
         StyleLabel(content: {
             Text("Content")
         })
         
-        StyleLabel(icon: "star")
+        StyleLabel(icon: \.favorite)
         
-        StyleLabel(title: "Title", icon: "star")
+        StyleLabel(systemImage: "rectangle")
+        
+        StyleLabel(title: "Title", icon: \.favorite)
         
     }
 }
