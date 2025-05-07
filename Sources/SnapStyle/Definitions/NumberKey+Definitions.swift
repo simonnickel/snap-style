@@ -55,7 +55,7 @@ extension SnapStyle.NumberKey {
         .builder { context in
             switch context.componentStack.levelOverall {
                 case 1: .definition(.value(20))
-                case 2: .definition(.value(8)) // Outer corner radius - gap // TODO: this could be calculated from references
+                case 2: .definition(.value(8)) // Outer corner radius - gap
                 case 3: .definition(.value(4))
                 default: nil
             }

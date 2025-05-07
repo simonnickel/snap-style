@@ -3,8 +3,6 @@
 //  Created by Simon Nickel
 //
 
-// TODO: Debug modifier that overlays a GeometryReader and displays the values.
-
 import SnapStyleBase
 import SwiftUI
 

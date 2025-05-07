@@ -13,7 +13,6 @@ extension SnapStyle {
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
         public typealias MappingPadding = @Sendable (SnapStyle.Element.ElementType) -> Padding?
 
-        // TODO: Merge into a Config struct?
         public let id: String
         public let requiresAlternativeAccent: Bool
 

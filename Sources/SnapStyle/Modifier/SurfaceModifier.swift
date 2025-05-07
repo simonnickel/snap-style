@@ -43,7 +43,6 @@ extension View {
 
 }
 
-// TODO: These Modifier are the perfect use case for a .if() modifier.
 
 // MARK: - Modifier
 
