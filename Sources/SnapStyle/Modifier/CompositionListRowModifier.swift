@@ -37,7 +37,7 @@ internal struct CompositionListRowModifier: ViewModifier {
                     .fill(.clear)
                     // Apply with .component here, because this is inside of the listRowBackground.
                     .style(composition: keyPath, layer: .any, scope: .component)
-                // TODO FB: (iOS 18.1) Content in .listRowBackground() does not get the environment.
+                    // TODO FB: (iOS 18.1) Content in .listRowBackground() does not get the environment.
                     .environment(\.style, style)
             )
     }
