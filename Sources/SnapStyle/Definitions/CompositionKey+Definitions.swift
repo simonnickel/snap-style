@@ -33,6 +33,22 @@ extension SnapStyle.CompositionKey {
         }
     }
     
+    public var interactiveListRow: ValueBuilder {
+        .builder { context in
+            return switch context.component.state {
+                case .normal: .definition(.layers([
+                    .foreground: \.onContent0, .background: \.content0
+                ]))
+                    
+                case .disabled: .definition(.foreground(\.disabled))
+                    
+                default: .definition(.layers([
+                    .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
+                ]))
+            }
+        }
+    }
+    
     public var interactiveContainer: ValueBuilder {
         .builder { context in
             
