@@ -14,7 +14,7 @@ extension SnapStyle.CompositionKey {
     
     // MARK: - Layer
     
-    public enum Layer {
+    public enum Layer: CaseIterable {
         case any
         case foreground
         case background

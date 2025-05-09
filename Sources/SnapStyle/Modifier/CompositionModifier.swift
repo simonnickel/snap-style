@@ -3,19 +3,19 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SwiftUI
 
 extension View {
 
-    // TODO: .if modifier, insert array
     @ViewBuilder
     public func style(
         composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath,
-        layer: SnapStyle.CompositionKey.Layer = .any,
+        layers: [SnapStyle.CompositionKey.Layer] = SnapStyle.CompositionKey.Layer.allCases,
         scope: SnapStyle.ComponentDefinition.ContainerScope = .component
     ) -> some View {
-        self.modifier(CompositionModifier(keyPath: keyPath, layer: layer, scope: scope))
+        self.modifier(CompositionModifier(keyPath: keyPath, layers: layers, scope: scope))
     }
 
 }
@@ -28,26 +28,23 @@ internal struct CompositionModifier: ViewModifier {
     @Environment(\.style) private var style
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
-    let layer: SnapStyle.CompositionKey.Layer
+    let layers: [SnapStyle.CompositionKey.Layer]
     let scope: SnapStyle.ComponentDefinition.ContainerScope
 
     func body(content: Content) -> some View {
         if scope == .listRow {
             content.style(listRowBackground: keyPath)
         } else {
-            switch layer {
-                case .background:
-                    content.modifier(CompositionBackgroundModifier(keyPath: keyPath))
-                case .backgroundOverlay:
+            content
+                .if(layers.contains(.backgroundOverlay)) { content in
                     content.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-                case .foreground:
+                }
+                .if(layers.contains(.background)) { content in
+                    content.modifier(CompositionBackgroundModifier(keyPath: keyPath))
+                }
+                .if(layers.contains(.foreground)) { content in
                     content.modifier(CompositionForegroundModifier(keyPath: keyPath))
-                case .any:
-                    content
-                        .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-                        .modifier(CompositionBackgroundModifier(keyPath: keyPath))
-                        .modifier(CompositionForegroundModifier(keyPath: keyPath))
-            }
+                }
         }
     }
 
