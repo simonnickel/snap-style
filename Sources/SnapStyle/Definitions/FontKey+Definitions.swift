@@ -59,7 +59,7 @@ extension SnapStyle.FontKey {
     public var separator: ValueBuilder { .base(nil) }
     
     
-    // MARK: - Label
+    // MARK: - List
     
     public var listSectionheader: ValueBuilder {
         .base(.definition(.font(.system(size: 16, weight: .medium))))

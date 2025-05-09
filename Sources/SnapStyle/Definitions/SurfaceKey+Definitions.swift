@@ -95,7 +95,7 @@ extension SnapStyle.SurfaceKey {
     
     public var screen: ValueBuilder { .builder { context in
         switch context.colorScheme {
-            case .light: .reference(\.light1)
+            case .light: .definition(.color(Color(red: 242/255, green: 242/255, blue: 242/247)))
             case .dark: .reference(\.dark0)
             default: nil
         }
