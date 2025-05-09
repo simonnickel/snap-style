@@ -9,10 +9,24 @@ import SwiftUI
 extension View {
 
     public func style(composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath) -> some View {
-        self
-            .modifier(CompositionForegroundModifier(keyPath: keyPath))
-            .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-            .modifier(CompositionBackgroundModifier(keyPath: keyPath))
+        self.style(composition: keyPath, layer: .any)
+    }
+    
+    @ViewBuilder
+    public func style(composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath, layer: SnapStyle.CompositionKey.Layer) -> some View {
+        switch layer {
+            case .background:
+                self.modifier(CompositionBackgroundModifier(keyPath: keyPath))
+            case .backgroundOverlay:
+                self.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+            case .foreground:
+                self.modifier(CompositionForegroundModifier(keyPath: keyPath))
+            case .any:
+                self
+                    .modifier(CompositionForegroundModifier(keyPath: keyPath))
+                    .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+                    .modifier(CompositionBackgroundModifier(keyPath: keyPath))
+        }
     }
 
 }
@@ -51,6 +65,10 @@ internal struct CompositionBackgroundModifier: ViewModifier {
         if let composition = style.composition(for: keyPath) {
             let surface = style.surface(layer: .background, composition: composition)
             content
+                .listRowBackground(
+                    Rectangle().fill(.clear)
+                        .style(composition: keyPath)
+                )
                 .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {
             content

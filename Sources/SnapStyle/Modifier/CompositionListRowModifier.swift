@@ -31,6 +31,7 @@ internal struct CompositionListRowModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .style(composition: keyPath, layer: .foreground)
             .listRowBackground(
                 Rectangle()
                     .fill(.clear)
@@ -67,7 +68,7 @@ internal struct CompositionListRowModifier: ViewModifier {
     
     List {
         Text("Disabled List Row")
-            .style(listRowBackground: \.interactiveListRow) // TODO: Disabled list row needs different color.
+            .style(listRowBackground: \.interactiveListRow)
     }
     .style(component: .list, state: .disabled)
     

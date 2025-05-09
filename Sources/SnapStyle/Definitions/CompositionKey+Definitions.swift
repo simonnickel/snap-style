@@ -40,7 +40,9 @@ extension SnapStyle.CompositionKey {
                     .foreground: \.onContent0, .background: \.content0
                 ]))
                     
-                case .disabled: .definition(.foreground(\.disabled))
+                case .disabled: .definition(.layers([
+                    .foreground: \.disabled, .background: \.content0
+                ]))
                     
                 default: .definition(.layers([
                     .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
