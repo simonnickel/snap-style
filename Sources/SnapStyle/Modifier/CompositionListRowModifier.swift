@@ -46,30 +46,28 @@ internal struct CompositionListRowModifier: ViewModifier {
 
 #Preview {
     
-    // Sets component state on outer List, to use listRowBackground without an interfering component.
-    
     List {
         Text("Normal List Row")
             .style(listRowBackground: \.interactiveListRow)
+            .style(component: .listRow, containerHierarchy: nil, state: .normal)
     }
-    .style(component: .list, state: .normal)
     
     List {
         Text("Highlighted List Row")
             .style(listRowBackground: \.interactiveListRow)
+            .style(component: .listRow, containerHierarchy: nil, state: .highlighted)
     }
-    .style(component: .list, state: .highlighted)
     
     List {
         Text("Selected List Row")
             .style(listRowBackground: \.interactiveListRow)
+            .style(component: .listRow, containerHierarchy: nil, state: .selected)
     }
-    .style(component: .list, state: .selected)
     
     List {
         Text("Disabled List Row")
             .style(listRowBackground: \.interactiveListRow)
+            .style(component: .listRow, containerHierarchy: nil, state: .disabled)
     }
-    .style(component: .list, state: .disabled)
     
 }

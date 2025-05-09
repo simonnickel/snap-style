@@ -7,8 +7,6 @@ import SwiftUI
 
 public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     
-    // TODO: Add support for data based inits
-    
     private let selection: Binding<SelectionValue?>?
     private let content: () -> Content
     

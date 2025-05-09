@@ -26,9 +26,10 @@ extension SnapStyle.CompositionKey {
                     
                 case .disabled: .definition(.foreground(\.disabled))
                     
-                default: .definition(.layers([
-                    .foreground: foreground, .background: background
-                ]))
+                case .highlighted, .selected:
+                        .definition(.layers([
+                            .foreground: foreground, .background: background
+                        ]))
             }
         }
     }
@@ -36,17 +37,20 @@ extension SnapStyle.CompositionKey {
     public var interactiveListRow: ValueBuilder {
         .builder { context in
             return switch context.component.state {
-                case .normal: .definition(.layers([
-                    .foreground: \.onContent0, .background: \.content0
-                ]))
+                case .normal:
+                        .definition(.layers([
+                            .foreground: \.onContent0, .background: \.content0
+                        ]))
                     
-                case .disabled: .definition(.layers([
-                    .foreground: \.disabled, .background: \.content0
-                ]))
+                case .disabled:
+                        .definition(.layers([
+                            .foreground: \.disabled, .background: \.content0
+                        ]))
                     
-                default: .definition(.layers([
-                    .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
-                ]))
+                case .highlighted, .selected:
+                        .definition(.layers([
+                            .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
+                        ]))
             }
         }
     }
@@ -59,10 +63,15 @@ extension SnapStyle.CompositionKey {
             let overlay: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlayAccent : \.interactionStateOverlay
 
             return switch context.component.state {
-                case .disabled: .definition(.layers([.foreground: \.onDisabled, .background: \.disabled]))
-                default: .definition(.layers([
-                    .foreground: foreground, .background: background, .backgroundOverlay: overlay
-                ]))
+                case .disabled:
+                        .definition(.layers([
+                            .foreground: \.onDisabled, .background: \.disabled
+                        ]))
+                    
+                case .normal, .highlighted, .selected:
+                        .definition(.layers([
+                            .foreground: foreground, .background: background, .backgroundOverlay: overlay
+                        ]))
             }
         }
     }
