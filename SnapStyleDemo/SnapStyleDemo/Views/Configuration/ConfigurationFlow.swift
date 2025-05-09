@@ -22,7 +22,9 @@ struct ConfigurationFlow: View {
                 }
             }
             .navigationTitle(rawValue.capitalized)
+#if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+#endif
         }
     }
     

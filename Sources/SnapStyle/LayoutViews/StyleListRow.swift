@@ -34,6 +34,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 content()
             }
         }
+        // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, state: isSelected ? .selected : .normal)
     }
 }
