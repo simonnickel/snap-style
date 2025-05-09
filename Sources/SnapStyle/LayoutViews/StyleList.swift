@@ -23,7 +23,6 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     public var body: some View {
         List {
             content()
-                .style(listRowBackground: \.containerList)
         }
         .scrollContentBackground(.hidden)
         .style(component: .list)
@@ -34,14 +33,23 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
 // MARK: - Preview
 
 #Preview {
-    StyleList {
-        Section {
-            Label("Circle", systemImage: "circle")
-            Label("Triangle", systemImage: "triangle")
-            Label("Rectangle", systemImage: "rectangle")
-        } header: {
-            Label("Section", systemImage: "star")
-                .style(element: .title)
+    @Previewable @State var selection: String? = "Circle"
+    
+    NavigationStack {
+        StyleList(selection: $selection) {
+            Section {
+                StyleListRow(value: "Circle", isSelected: true) {
+                    Label("Circle", systemImage: "circle")
+                }
+                StyleListRow(value: "Circle", isSelected: false) {
+                    Label("Circle", systemImage: "circle")
+                }
+                Label("Triangle", systemImage: "triangle")
+                Label("Rectangle", systemImage: "rectangle")
+            } header: {
+                Label("Section", systemImage: "star")
+                    .style(element: .title)
+            }
         }
     }
 }

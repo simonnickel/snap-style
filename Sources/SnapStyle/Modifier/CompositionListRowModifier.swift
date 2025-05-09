@@ -31,11 +31,14 @@ internal struct CompositionListRowModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .style(composition: keyPath, layer: .foreground)
+            .style(composition: keyPath, layer: .foreground, scope: .component)
             .listRowBackground(
                 Rectangle()
                     .fill(.clear)
-                    .style(composition: keyPath)
+                    // Apply with .component here, because this is inside of the listRowBackground.
+                    .style(composition: keyPath, layer: .any, scope: .component)
+                // TODO FB: (iOS 18.1) Content in .listRowBackground() does not get the environment.
+                    .environment(\.style, style)
             )
     }
 

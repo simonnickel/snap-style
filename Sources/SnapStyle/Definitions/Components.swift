@@ -115,6 +115,17 @@ extension SnapStyle.ComponentDefinition {
         compositions: { element in
             switch element {
                 case .container: \.screen
+                case .icon: \.icon // TODO: Should be Indicator? Or something with accent?
+                default: nil
+            }
+        }
+    )
+    
+    public static let listRow: Self = .init("listRow",
+        containerScope: .listRow,
+        compositions: { element in
+            switch element {
+                case .container: \.interactiveListRow
                 default: nil
             }
         }

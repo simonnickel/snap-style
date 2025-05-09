@@ -30,15 +30,20 @@ struct ListSectionView: View {
     }
 
     let data: Data
+    @State private var selected: UUID?
     
     var body: some View {
         Section {
             ForEach(data.items) { item in
-                ListItemView(data: item)
+                ListItemView(data: item, isSelected: item.id == selected)
             }
         } header: {
             StyleLabel(title: data.title)
                 .style(element: .title)
+        }
+        // TODO: Selection
+        .onAppear {
+            selected = data.items.first?.id
         }
     }
     
@@ -51,9 +56,11 @@ struct ListSectionView: View {
         }
         
         let data: Data
+        let isSelected: Bool
         
         var body: some View {
             StyleLabel(title: data.title, systemImage: data.icon)
+                .style(component: .listRow, state: isSelected ? .selected : .normal)
         }
     }
 

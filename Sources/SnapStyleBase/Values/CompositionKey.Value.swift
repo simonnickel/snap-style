@@ -56,6 +56,7 @@ extension SnapStyle.CompositionKey {
             typealias ShapeStyleForLayer = [Layer: LayerValue]
             
             let values: ShapeStyleForLayer
+            // TODO: SafeArea compliance should be defined by Component, not the Composition.
             public let ignoresSafeAreaEdges: Edge.Set
             // Respecting .horizontal safe area is necessary to allow StyleScreen to use safe area padding to inset content horizontally.
             public static let ignoresSafeAreaEdgesDefault: Edge.Set = .vertical

@@ -8,31 +8,50 @@ import SwiftUI
 
 extension View {
 
-    public func style(composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath) -> some View {
-        self.style(composition: keyPath, layer: .any)
-    }
-    
+    // TODO: .if modifier, insert array
     @ViewBuilder
-    public func style(composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath, layer: SnapStyle.CompositionKey.Layer) -> some View {
-        switch layer {
-            case .background:
-                self.modifier(CompositionBackgroundModifier(keyPath: keyPath))
-            case .backgroundOverlay:
-                self.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-            case .foreground:
-                self.modifier(CompositionForegroundModifier(keyPath: keyPath))
-            case .any:
-                self
-                    .modifier(CompositionForegroundModifier(keyPath: keyPath))
-                    .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-                    .modifier(CompositionBackgroundModifier(keyPath: keyPath))
-        }
+    public func style(
+        composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath,
+        layer: SnapStyle.CompositionKey.Layer = .any,
+        scope: SnapStyle.ComponentDefinition.ContainerScope = .component
+    ) -> some View {
+        self.modifier(CompositionModifier(keyPath: keyPath, layer: layer, scope: scope))
     }
 
 }
 
 
 // MARK: - Modifier
+
+internal struct CompositionModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    let layer: SnapStyle.CompositionKey.Layer
+    let scope: SnapStyle.ComponentDefinition.ContainerScope
+
+    func body(content: Content) -> some View {
+        if scope == .listRow {
+            content.style(listRowBackground: keyPath)
+        } else {
+            switch layer {
+                case .background:
+                    content.modifier(CompositionBackgroundModifier(keyPath: keyPath))
+                case .backgroundOverlay:
+                    content.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+                case .foreground:
+                    content.modifier(CompositionForegroundModifier(keyPath: keyPath))
+                case .any:
+                    content
+                        .modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+                        .modifier(CompositionBackgroundModifier(keyPath: keyPath))
+                        .modifier(CompositionForegroundModifier(keyPath: keyPath))
+            }
+        }
+    }
+
+}
 
 internal struct CompositionForegroundModifier: ViewModifier {
 
@@ -65,10 +84,6 @@ internal struct CompositionBackgroundModifier: ViewModifier {
         if let composition = style.composition(for: keyPath) {
             let surface = style.surface(layer: .background, composition: composition)
             content
-                .listRowBackground(
-                    Rectangle().fill(.clear)
-                        .style(composition: keyPath)
-                )
                 .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
         } else {
             content
