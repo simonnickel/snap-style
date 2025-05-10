@@ -41,7 +41,7 @@ public struct StyleButtonStyle: ButtonStyle {
         configuration.label
             .style(
                 component: variant.component,
-                containerHierarchy: variant.hierarchy,
+                applyContainer: variant.hierarchy,
                 state: configuration.isPressed ? .selected : state
             )
     }

@@ -115,13 +115,13 @@ extension View {
     /// - Returns: A modified View.
     public func style(
         component: SnapStyle.ComponentDefinition,
-        containerHierarchy: SnapStyle.Element.Hierarchy? = .primary,
+        applyContainer: SnapStyle.Element.Hierarchy? = .primary,
         state: SnapStyle.Component.InteractionState = .normal
     ) -> some View {
         Group {
-            if let containerHierarchy {
+            if let applyContainer {
                 self
-                    .style(element: .container, hierarchy: containerHierarchy)
+                    .style(element: .container, hierarchy: applyContainer)
             } else {
                 self
             }

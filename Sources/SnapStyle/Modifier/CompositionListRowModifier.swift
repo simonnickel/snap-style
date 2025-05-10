@@ -52,25 +52,25 @@ internal struct CompositionListRowModifier: ViewModifier {
     List {
         Text("Normal List Row")
             .style(listRowBackground: \.interactiveListRow)
-            .style(component: .listRow, containerHierarchy: nil, state: .normal)
+            .style(component: .listRow, applyContainer: nil, state: .normal)
     }
     
     List {
         Text("Highlighted List Row")
             .style(listRowBackground: \.interactiveListRow)
-            .style(component: .listRow, containerHierarchy: nil, state: .highlighted)
+            .style(component: .listRow, applyContainer: nil, state: .highlighted)
     }
     
     List {
         Text("Selected List Row")
             .style(listRowBackground: \.interactiveListRow)
-            .style(component: .listRow, containerHierarchy: nil, state: .selected)
+            .style(component: .listRow, applyContainer: nil, state: .selected)
     }
     
     List {
         Text("Disabled List Row")
             .style(listRowBackground: \.interactiveListRow)
-            .style(component: .listRow, containerHierarchy: nil, state: .disabled)
+            .style(component: .listRow, applyContainer: nil, state: .disabled)
     }
     
 }
