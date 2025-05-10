@@ -30,20 +30,15 @@ struct ListSectionView: View {
     }
 
     let data: Data
-    @State private var selected: UUID?
     
     var body: some View {
         Section {
             ForEach(data.items) { item in
-                ListItemView(data: item, isSelected: item.id == selected)
+                ListItemView(data: item, isSelected: item.id == data.items.first?.id) // TODO: Selection
             }
         } header: {
             StyleLabel(title: data.title)
                 .style(element: .title)
-        }
-        // TODO: Selection
-        .onAppear {
-            selected = data.items.first?.id
         }
     }
     
