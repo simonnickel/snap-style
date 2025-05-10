@@ -10,7 +10,7 @@ extension View {
     
     public func style(
         background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath,
-        ignoresSafeAreaEdges: Edge.Set = SnapStyle.CompositionKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault
+        ignoresSafeAreaEdges: Edge.Set = []
     ) -> some View {
         self
             .modifier(SurfaceBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))

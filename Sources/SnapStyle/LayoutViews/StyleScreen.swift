@@ -40,10 +40,12 @@ public struct StyleScreen<Content>: View where Content : View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
-        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets (see CompositionKey.Value.LayeredShapeStyle.ignoresSafeAreaEdgesDefault).
+        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets.
         .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
         .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
-        .style(component: component)
+        // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
+        .style(composition: \.screen, ignoreSafeAreaEdges: .vertical)
+        .style(component: component, applyContainer: nil)
     }
     
     

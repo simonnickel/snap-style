@@ -106,8 +106,7 @@ extension SnapStyle.CompositionKey {
     public var screen: ValueBuilder {
         .builder { context in
             .definition(.composition(.with(
-                [.background: \.screen],
-                ignoresSafeAreaEdges: .all // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
+                [.background: \.screen]
             )))
         }
     }
