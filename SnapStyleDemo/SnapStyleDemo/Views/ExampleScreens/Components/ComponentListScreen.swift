@@ -12,6 +12,7 @@ struct ComponentListScreen: View {
         StyleList {
             ListSectionView(data: .init(title: "Section 1", count: 3))
             ListSectionView(data: .init(title: "Section 2", count: 8))
+            ListSectionView(data: .init(title: "Section 3", count: 18))
         }
         
     }

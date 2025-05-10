@@ -21,15 +21,12 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     }
     
     public var body: some View {
-        List {
-            content()
+        StyleScreen(component: .list, configuration: [.readableContentWidthFixed]) {
+            List {
+                content()
+            }
+            .scrollContentBackground(.hidden)
         }
-        .scrollContentBackground(.hidden)
-        // TODO: Should only apply .screen() and component .list
-//        .style(component: .list)
-        // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
-        .style(composition: \.screen, ignoreSafeAreaEdges: .vertical)
-        .style(component: .list, applyContainer: nil)
     }
 }
 

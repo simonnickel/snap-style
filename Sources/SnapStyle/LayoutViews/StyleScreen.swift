@@ -45,7 +45,13 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets.
-        .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
+        .if(configuration.contains(.readableContentWidthFixed)) { content in
+            content
+                .contentMargins(.horizontal, 10, for: .automatic)
+        } else: { content in
+            content
+                .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
+        }
         .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
         // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
         .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component.
@@ -57,6 +63,11 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
     
     public enum Configuration {
         case readableContentWidth
+        
+        // TODO: Better describe whats going on.
+        /// Does not allow content to overflow the ReadableContentWidth.
+        /// Uses contentMargin instead of safeAreaPadding, necessary for List to get rid of system inset and use `\.paddingScreenHorizontal`.
+        case readableContentWidthFixed
         case scrollView
         case verticalSections // TODO: Could be .vertical(spacing:)
     }
