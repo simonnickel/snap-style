@@ -33,10 +33,8 @@ public struct StyleScreen<Content>: View where Content : View {
     public var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                StyleVStack {
-                    ReadableContentContainer(content: content)
-                        .environment(\.screenGeometrySize, geometry.size)
-                }
+                ReadableContentContainer(content: content)
+                    .environment(\.screenGeometrySize, geometry.size)
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
@@ -51,6 +49,7 @@ public struct StyleScreen<Content>: View where Content : View {
     
     // MARK: Container
     
+    // TODO: Causes the scrollview to put space on top and cut texts, if the inset causes multi line text to change line numbers.
     struct ReadableContentContainer: View {
         
         private struct Constants {
@@ -105,11 +104,19 @@ extension EnvironmentValues {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.green)
+            
             VStack {
                 Text("Needs to be handled manually.")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.green, ignoresSafeAreaEdges: .vertical)
+            
+            VStack {
+                Text("Or put inside another container.")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.green, ignoresSafeAreaEdges: .vertical)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             // Scroll view automatic behaviour.
             ScrollView(.horizontal) {
