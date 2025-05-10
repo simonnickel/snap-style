@@ -25,9 +25,7 @@ internal struct SurfaceForegroundModifier: ViewModifier {
     let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if
-            let surface = style.surface(for: keyPath)
-        {
+        if let surface = style.surface(for: keyPath) {
             content
                 .foregroundStyle(surface)
         } else {

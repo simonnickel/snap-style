@@ -29,14 +29,10 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        if
-            let surface = style.surface(for: keyPath)
-        {
-            content
-                .background(surface, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
-        } else {
-            content
-        }
+        // Background has to be applied if a key is available. Even if no value is present, to allow animation of appearing value.
+        let surface = style.surface(for: keyPath)
+        content
+            .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }
 
 }

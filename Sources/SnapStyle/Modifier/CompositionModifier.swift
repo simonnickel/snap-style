@@ -51,12 +51,9 @@ internal struct CompositionForegroundModifier: ViewModifier {
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        if
-            let foreground = style.composition(layer: .foreground, for: keyPath),
-            let surface = style.surface(for: foreground)
-        {
+        if let surfaceKey = style.surfaceKey(layer: .foreground, for: keyPath) {
             content
-                .foregroundStyle(surface)
+                .style(foreground: surfaceKey)
         } else {
             content
         }
@@ -71,11 +68,9 @@ internal struct CompositionBackgroundModifier: ViewModifier {
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
-        if let composition = style.composition(for: keyPath) {
-            let surface = style.surface(layer: .background, composition: composition)
+        if let surfaceKey = style.surfaceKey(layer: .background, for: keyPath) {
             content
-                .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
+                .style(background: surfaceKey, ignoresSafeAreaEdges: .vertical) // TODO: Get edges as param
         } else {
             content
         }
@@ -90,11 +85,9 @@ internal struct CompositionBackgroundOverlayModifier: ViewModifier {
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a composition is available. Even if no value is present, to allow animation of appearing value.
-        if let composition = style.composition(for: keyPath) {
-            let surface = style.surface(layer: .backgroundOverlay, composition: composition)
+        if let surfaceKey = style.surfaceKey(layer: .backgroundOverlay, for: keyPath) {
             content
-                .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: composition.ignoresSafeAreaEdges)
+                .style(background: surfaceKey, ignoresSafeAreaEdges: .vertical) // TODO: Get edges as param
         } else {
             content
         }

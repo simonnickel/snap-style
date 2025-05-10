@@ -111,6 +111,7 @@ extension SnapStyle.ContextWrapper {
     
     // MARK: - Composition
 
+    /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
         for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> SnapStyle.CompositionKey.Value.LayeredShapeStyle? {
@@ -121,7 +122,8 @@ extension SnapStyle.ContextWrapper {
 
     }
 
-    package func composition(
+    /// Get the Surface KeyPath of a layer for a `Composition` KeyPath.
+    package func surfaceKey(
         layer: CompositionKey.Layer,
         for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> CompositionKey.Value.LayeredShapeStyle.LayerValue? {
@@ -131,6 +133,16 @@ extension SnapStyle.ContextWrapper {
         return value?.surfaceKey(for: layer)
         
     }
+    
+    /// Get the Surface KeyPath of a layer for a `LayeredShapeStyle` (aka `Composition`).
+    package func surfaceKey(
+        layer: CompositionKey.Layer,
+        composition: CompositionKey.Value.LayeredShapeStyle
+    ) -> SurfaceKey.ValueBuilderKeyPath? {
+        
+        return composition.surfaceKey(for: layer)
+        
+    }
 
     /// Get the surface of a layer for a `CompositionKey.ValueBuilderKeyPath`.
     package func surface(
@@ -138,7 +150,7 @@ extension SnapStyle.ContextWrapper {
         for keyPath: CompositionKey.ValueBuilderKeyPath
     ) -> SurfaceKey.Value.WrappedValue? {
         
-        guard let layer = composition(layer: layer, for: keyPath) else { return nil }
+        guard let layer = surfaceKey(layer: layer, for: keyPath) else { return nil }
         
         return surface(for: layer)
         
