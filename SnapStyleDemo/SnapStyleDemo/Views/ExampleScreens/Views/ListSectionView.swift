@@ -59,8 +59,9 @@ struct ListSectionView: View {
         let isSelected: Bool
         
         var body: some View {
-            StyleLabel(title: data.title, systemImage: data.icon)
-                .style(component: .listRow, state: isSelected ? .selected : .normal)
+            StyleListRow(isSelected: isSelected) {
+                StyleLabel(title: data.title, systemImage: data.icon)
+            }
         }
     }
 

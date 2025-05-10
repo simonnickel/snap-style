@@ -12,10 +12,9 @@ extension View {
     @ViewBuilder
     public func style(
         composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath,
-        layers: [SnapStyle.CompositionKey.Layer] = SnapStyle.CompositionKey.Layer.allCases,
-        scope: SnapStyle.ComponentDefinition.ContainerScope = .component
+        layers: [SnapStyle.CompositionKey.Layer] = SnapStyle.CompositionKey.Layer.allCases
     ) -> some View {
-        self.modifier(CompositionModifier(keyPath: keyPath, layers: layers, scope: scope))
+        self.modifier(CompositionModifier(keyPath: keyPath, layers: layers))
     }
 
 }
@@ -29,23 +28,18 @@ internal struct CompositionModifier: ViewModifier {
 
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
     let layers: [SnapStyle.CompositionKey.Layer]
-    let scope: SnapStyle.ComponentDefinition.ContainerScope
 
     func body(content: Content) -> some View {
-        if scope == .listRow {
-            content.style(listRowBackground: keyPath)
-        } else {
-            content
-                .if(layers.contains(.backgroundOverlay)) { content in
-                    content.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
-                }
-                .if(layers.contains(.background)) { content in
-                    content.modifier(CompositionBackgroundModifier(keyPath: keyPath))
-                }
-                .if(layers.contains(.foreground)) { content in
-                    content.modifier(CompositionForegroundModifier(keyPath: keyPath))
-                }
-        }
+        content
+            .if(layers.contains(.backgroundOverlay)) { content in
+                content.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath))
+            }
+            .if(layers.contains(.background)) { content in
+                content.modifier(CompositionBackgroundModifier(keyPath: keyPath))
+            }
+            .if(layers.contains(.foreground)) { content in
+                content.modifier(CompositionForegroundModifier(keyPath: keyPath))
+            }
     }
 
 }

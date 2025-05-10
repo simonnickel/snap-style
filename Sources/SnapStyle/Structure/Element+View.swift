@@ -55,7 +55,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
             .style(padding: padding.top ?? \.paddingAnyElement, .top)
             .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
             .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
-            .style(composition: compositionKeyPath, scope: component.containerScope)
+            .style(composition: compositionKeyPath)
             .style(shape: shapeKeyPath)
     }
     

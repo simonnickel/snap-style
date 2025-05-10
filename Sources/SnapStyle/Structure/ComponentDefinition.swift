@@ -15,7 +15,6 @@ extension SnapStyle {
 
         public let id: String
         public let requiresAlternativeAccent: Bool
-        public let containerScope: ContainerScope
 
         internal let padding: MappingPadding?
         internal let fonts: Mapping<FontKey>?
@@ -26,7 +25,6 @@ extension SnapStyle {
         public init(
             _ id: String,
             requiresAlternativeAccent: Bool = false,
-            containerScope: ContainerScope = .component,
             padding: MappingPadding? = nil,
             fonts: Mapping<SnapStyle.FontKey>? = nil,
             surfaces: Mapping<SnapStyle.SurfaceKey>? = nil,
@@ -35,21 +33,11 @@ extension SnapStyle {
         ) {
             self.id = id
             self.requiresAlternativeAccent = requiresAlternativeAccent
-            self.containerScope = containerScope
             self.padding = padding
             self.fonts = fonts
             self.surfaces = surfaces
             self.compositions = compositions
             self.shapes = shapes
-        }
-        
-        
-        // MARK: ContainerScope
-        
-        public enum ContainerScope: Sendable {
-            case component
-            case listRow
-            // TODO: case safeArea
         }
         
         

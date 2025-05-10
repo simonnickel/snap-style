@@ -122,7 +122,6 @@ extension SnapStyle.ComponentDefinition {
     )
     
     public static let listRow: Self = .init("listRow",
-        containerScope: .listRow,
         compositions: { element in
             switch element {
                 case .container: \.interactiveListRow
