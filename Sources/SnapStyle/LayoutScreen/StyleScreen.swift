@@ -44,29 +44,9 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 .environment(\.screenGeometrySize, geometry.size) // TODO: Also calculate contentSize?
                 .frame(maxWidth: .infinity, alignment: .center)
         }
-        .modifier(ModifierScreenInset(allowOverflow: configuration.contains(.readableContentWidth(allowOverflow: true))))
         // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
         .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component. // TODO: should ignore all edges, for phone landscape.
         .style(component: component, applyContainer: nil)
-    }
-    
-    // TODO: Could this move into readable content container?
-    internal struct ModifierScreenInset: ViewModifier {
-        
-        let allowOverflow: Bool
-        
-        func body(content: Content) -> some View {
-            content
-                .if(allowOverflow) { content in
-                    // Using safe area padding to inset the content.
-                    // Requires the contents background to respect .horizontal safe area insets.
-                    content.style(safeAreaPadding: \.insetScreenHorizontal, .horizontal)
-                } else: { content in
-                    // Using content margins to inset the content.
-                    content.style(contentMargins: \.insetScreenHorizontal, .horizontal, placement: .scrollContent)
-                }
-                .style(safeAreaPadding: \.insetScreenVertical, .vertical)
-        }
     }
     
     @ViewBuilder
@@ -78,12 +58,10 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
             .if(configuration.contains(.scrollView)) { content in
                 content.modifier(ConfigurationModifierScrollView())
             }
-            .if(configuration.contains(.readableContentWidth(allowOverflow: true))) { content in
-                content.modifier(ConfigurationModifierReadableContentContainer(allowOverflow: true))
-            }
-            .if(configuration.contains(.readableContentWidth(allowOverflow: false))) { content in
-                content.modifier(ConfigurationModifierReadableContentContainer(allowOverflow: false))
-            }
+            .modifier(ConfigurationModifierInset(
+                applyReadableWidth: configuration.contains(.readableContentWidth),
+                allowOverflow: configuration.contains(.allowReadableContentOverflow)
+            ))
     }
     
 }
@@ -93,7 +71,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
 
 #Preview {
     NavigationStack {
-        StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .readableContentWidth(allowOverflow: true)]) {
+        StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .readableContentWidth, .allowReadableContentOverflow]) {
             // Default placement inside of safe area
             Rectangle()
             
