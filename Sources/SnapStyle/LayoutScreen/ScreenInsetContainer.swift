@@ -37,6 +37,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
             
             content()
+                //.debugOverlay(info: "Inset: \(inset)")
                 .environment(\.geometrySizeContent, CGSize(
                     width: geometrySizeScreen.width - (inset * 2),
                     height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
