@@ -37,7 +37,10 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
             
             content()
-                .environment(\.geometryWidthContent, geometrySizeScreen.width - (inset * 2))
+                .environment(\.geometrySizeContent, CGSize(
+                    width: geometrySizeScreen.width - (inset * 2),
+                    height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
+                ))
                 .if(allowOverflow) { content in
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
