@@ -25,7 +25,7 @@ extension [StyleScreenConfiguration] {
     public static var content: Self { [.scrollView, .readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
     
     /// A default set of configurations for a system list screen.
-    public static var list: Self { [.readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
+    public static var list: Self { [.readableContentWidth(allowOverflow: false), .verticalSectionSpacing] }
 }
 
 

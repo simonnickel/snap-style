@@ -46,7 +46,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
         }
         .modifier(ModifierScreenInset(allowOverflow: configuration.contains(.readableContentWidth(allowOverflow: true))))
         // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
-        .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component.
+        .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component. // TODO: should ignore all edges, for phone landscape.
         .style(component: component, applyContainer: nil)
     }
     
