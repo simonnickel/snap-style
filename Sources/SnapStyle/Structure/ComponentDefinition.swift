@@ -127,7 +127,7 @@ internal struct ComponentModifier: ViewModifier {
     let state: SnapStyle.Component.InteractionState
 
     func body(content: Content) -> some View {
-        var componentStack = style.context.componentStack.appended(component, state: state)
+        let componentStack = style.context.componentStack.appended(component, state: state)
         content
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
     }

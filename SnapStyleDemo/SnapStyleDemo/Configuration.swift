@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import SnapCore
 import SnapStyleBase
 import Observation
 
