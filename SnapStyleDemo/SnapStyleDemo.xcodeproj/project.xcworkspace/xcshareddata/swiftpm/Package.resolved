@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/simonnickel/snap-core.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "3b0e3b35e441151582220237cbfc2135f898a42d"
+        "revision" : "4c6c2451a96a893e68385148b8f72d41c6df7996",
+        "version" : "0.1.0"
       }
     },
     {
