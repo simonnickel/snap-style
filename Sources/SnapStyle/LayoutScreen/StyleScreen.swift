@@ -39,8 +39,8 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 .environment(\.screenGeometrySize, geometry.size) // TODO: Also calculate contentSize?
                 .frame(maxWidth: .infinity, alignment: .center)
         }
-        // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
-        .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component. // TODO: should ignore all edges, for phone landscape.
+        // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
+        .style(composition: \.screen, ignoreSafeAreaEdges: .all) // TODO: Should be the .container composition from given component.
         .style(component: component, applyContainer: nil)
     }
     
