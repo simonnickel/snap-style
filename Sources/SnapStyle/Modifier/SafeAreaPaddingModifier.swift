@@ -32,11 +32,9 @@ internal struct SafeAreaPaddingModifier: ViewModifier {
     let edges: Edge.Set
     
     func body(content: Content) -> some View {
-        if
-            let padding = style.number(for: keyPath)
-        {
+        if let value = style.number(for: keyPath) {
             content
-                .safeAreaPadding(edges, padding)
+                .safeAreaPadding(edges, value)
         } else {
             content
         }
