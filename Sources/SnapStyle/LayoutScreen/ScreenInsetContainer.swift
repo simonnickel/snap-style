@@ -15,6 +15,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     
     @Environment(\.style) private var style
     @Environment(\.geometrySizeScreen) private var geometrySizeScreen
+    @Environment(\.geometrySafeAreaInsets) private var geometrySafeAreaInsets
     
     let insetHorizontalEdges: Bool
     let applyReadableWidth: Bool
@@ -26,8 +27,10 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let maxWidth = style.number(for: Constants.keyPathMaxWidth),
             let minInset = style.number(for: Constants.keyPathInset)
         {
+            // All insets have to be based on the safe area.
+            let availableWidth = geometrySizeScreen.width - geometrySafeAreaInsets.leading - geometrySafeAreaInsets.trailing
             // The available width for the content to fill.
-            let widthForContent = applyReadableWidth ? min(maxWidth, geometrySizeScreen.width) : geometrySizeScreen.width
+            let widthForContent = applyReadableWidth ? min(availableWidth, maxWidth) : geometrySizeScreen.width
             // Margin to restrict to readable width.
             let marginWithoutInset = (geometrySizeScreen.width - widthForContent) / 2
             // Apply inset, if margin is not already large enough.

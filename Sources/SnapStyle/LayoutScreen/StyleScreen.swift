@@ -41,6 +41,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
         GeometryReader { geometry in
             createContent()
                 .environment(\.geometrySizeScreen, geometry.size)
+                .environment(\.geometrySafeAreaInsets, geometry.safeAreaInsets)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
