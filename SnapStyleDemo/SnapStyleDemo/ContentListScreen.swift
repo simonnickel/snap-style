@@ -3,12 +3,13 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SwiftUI
 
 struct ContentListScreen: View {
     
     var body: some View {
-        List {
+        StyleList {
             ListSection(title: "Components", screens: [.content, .card, .list, .action, .componentStack])
             ListSection(title: "Examples", screens: [.components, .structured])
             ListSection(title: "Compon", screens: [.elements])
