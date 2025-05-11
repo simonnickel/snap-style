@@ -21,7 +21,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     }
     
     public var body: some View {
-        StyleScreen(component: .list, configuration: [.readableContentWidthFixed]) {
+        StyleScreen(component: .list, configuration: .list) {
             List {
                 content()
             }

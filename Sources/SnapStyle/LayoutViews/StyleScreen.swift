@@ -19,18 +19,18 @@ import SwiftUI
 ///     - to limit width to `NumberKey.widthReadableContent`
 ///     - *Caution: content (and background) needs to respect .horizontal safe area insets to comply.*
 /// - By default `Component.screen` is used for styling.
-public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
+public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
     private let component: SnapStyle.ComponentDefinition
     
-    private let configuration: [Configuration]
+    private let configuration: [StyleScreenConfiguration]
     
     public typealias ContentBuilder = () -> ScreenContent
     private let content: ContentBuilder
     
     public init(
         component: SnapStyle.ComponentDefinition = .screen,
-        configuration: [Configuration] = [.scrollView, .readableContentWidth, .verticalSections],
+        configuration: [StyleScreenConfiguration] = .content,
         @ViewBuilder content: @escaping () -> ScreenContent
     ) {
         self.component = component
@@ -41,55 +41,61 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
     public var body: some View {
         GeometryReader { geometry in
             createContent()
-                .environment(\.screenGeometrySize, geometry.size)
+                .environment(\.screenGeometrySize, geometry.size) // TODO: Also calculate contentSize?
                 .frame(maxWidth: .infinity, alignment: .center)
         }
-        // Using safe area padding to inset the content. Requires the contents background to respect .horizontal safe area insets.
-        .if(configuration.contains(.readableContentWidthFixed)) { content in
-            content
-                .contentMargins(.horizontal, 10, for: .automatic)
-        } else: { content in
-            content
-                .style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
-        }
-        .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
+        .modifier(ModifierScreenInset(allowOverflow: configuration.contains(.readableContentWidth(allowOverflow: true))))
         // Background of screen should ignore .vertical safe area to stretch beyond \.`widthReadableContent`.
         .style(composition: \.screen, ignoreSafeAreaEdges: .vertical) // TODO: Should be the .container composition from given component.
         .style(component: component, applyContainer: nil)
     }
     
+    // TODO: Could this move into readable content container?
+    internal struct ModifierScreenInset: ViewModifier {
+        
+        let allowOverflow: Bool
+        
+        func body(content: Content) -> some View {
+            content
+                .if(allowOverflow) { content in
+                    // Using safe area padding to inset the content.
+                    // Requires the contents background to respect .horizontal safe area insets.
+                    content.style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
+                } else: { content in
+                    // TODO: Use NumberKey
+                    // Using content margins to inset the content.
+                    content.contentMargins(.horizontal, 10, for: .scrollContent)
+                }
+                .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
+        }
+    }
+    
     
     // MARK: Configuration
     
-    public enum Configuration {
-        case readableContentWidth
-        
-        // TODO: Better describe whats going on.
-        /// Does not allow content to overflow the ReadableContentWidth.
-        /// Uses contentMargin instead of safeAreaPadding, necessary for List to get rid of system inset and use `\.paddingScreenHorizontal`.
-        case readableContentWidthFixed
-        case scrollView
-        case verticalSections // TODO: Could be .vertical(spacing:)
-    }
-    
     @ViewBuilder
     private func createContent() -> some View {
-        
         content()
-            .if(configuration.contains(.verticalSections)) { content in
+            .if(configuration.contains(.verticalSectionSpacing)) { content in
                 content.modifier(ConfigurationModifierVerticalSections())
             }
             .if(configuration.contains(.scrollView)) { content in
                 content.modifier(ConfigurationModifierScrollView())
             }
-            .if(configuration.contains(.readableContentWidth)) { content in
-                content.modifier(ConfigurationModifierReadableContentContainer())
+            .if(configuration.contains(.readableContentWidth(allowOverflow: true))) { content in
+                content.modifier(ConfigurationModifierReadableContentContainer(allowOverflow: true))
+            }
+            .if(configuration.contains(.readableContentWidth(allowOverflow: false))) { content in
+                content.modifier(ConfigurationModifierReadableContentContainer(allowOverflow: false))
             }
     }
     
     internal struct ConfigurationModifierReadableContentContainer: ViewModifier {
+        
+        let allowOverflow: Bool
+        
         func body(content: Content) -> some View {
-            ReadableContentContainer {
+            ReadableContentContainer(allowOverflow: allowOverflow) {
                 content
             }
         }
@@ -123,6 +129,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
         @Environment(\.style) private var style
         @Environment(\.screenGeometrySize) private var screenGeometrySize
         
+        let allowOverflow: Bool
         let content: () -> ReadableContent
         
         var body: some View {
@@ -130,7 +137,13 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
                 StyleVStack(spacing: \.spacingSections) {
                     content()
                 }
-                .safeAreaPadding(.init(horizontal: (screenGeometrySize.width - maxWidth) / 2, vertical: 0))
+                .if(allowOverflow) { content in
+                    content
+                        .safeAreaPadding(.init(horizontal: (screenGeometrySize.width - maxWidth) / 2, vertical: 0))
+                } else: { content in
+                    content
+                        .contentMargins(.horizontal, (screenGeometrySize.width - maxWidth) / 2, for: .scrollContent)
+                }
             } else {
                 content()
             }
@@ -138,6 +151,32 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent : View {
         
     }
     
+}
+
+
+// MARK: - StyleScreenConfiguration
+
+public enum StyleScreenConfiguration: Equatable {
+    /// Restricts screen width to fit `\.widthReadableContent`
+    ///
+    /// - Parameters:
+    ///   - allowOverflow: controls if scroll views and backgrounds are allowed to overflow the restriction.
+    ///   Value`false` uses contentMargin instead of safeAreaPadding, e.g. necessary for ListStyle `.insetGrouped` to get rid of system inset and use `\.paddingScreenHorizontal`.
+    case readableContentWidth(allowOverflow: Bool)
+    
+    /// Wraps content in a ScrollView.
+    case scrollView
+    
+    /// Wraps content in a VStack with `\.spacingSections`.
+    case verticalSectionSpacing
+}
+
+extension [StyleScreenConfiguration] {
+    /// A default set of configurations for a typical content screen.
+    public static var content: Self { [.scrollView, .readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
+    
+    /// A default set of configurations for a system list screen.
+    public static var list: Self { [.readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
 }
 
 
@@ -154,7 +193,7 @@ extension EnvironmentValues {
 
 #Preview {
     NavigationStack {
-        StyleScreen {
+        StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .readableContentWidth(allowOverflow: true)]) {
             // Default placement inside of safe area
             Rectangle()
             
