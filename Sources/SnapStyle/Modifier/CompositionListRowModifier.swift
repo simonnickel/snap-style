@@ -36,7 +36,7 @@ internal struct CompositionListRowModifier: ViewModifier {
                 Rectangle()
                     .fill(.clear)
                     .style(composition: keyPath, layers: [.background, .backgroundOverlay])
-                    // TODO FB: (iOS 18.1) Content in .listRowBackground() does not get the environment.
+                    // TODO FB: (iOS 18.4) Content in .listRowBackground() does not get the environment.
                     .environment(\.style, style)
             )
     }
