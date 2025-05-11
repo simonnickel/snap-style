@@ -33,16 +33,14 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             // Apply inset, if margin is not already large enough.
             let value = insetHorizontalEdges ? max(marginWithoutInset, inset) : marginWithoutInset
             
-            StyleVStack(spacing: \.spacingSections) {
-                content()
-            }
-            .if(allowOverflow) { content in
-                content
-                    .safeAreaPadding(.init(horizontal: value, vertical: 0))
-            } else: { content in
-                content
-                    .contentMargins(.horizontal, value, for: .scrollContent)
-            }
+            content()
+                .if(allowOverflow) { content in
+                    content
+                        .safeAreaPadding(.init(horizontal: inset, vertical: 0))
+                } else: { content in
+                    content
+                        .contentMargins(.horizontal, inset, for: .scrollContent)
+                }
         } else {
             content()
         }
