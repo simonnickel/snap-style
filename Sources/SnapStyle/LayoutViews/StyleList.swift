@@ -21,7 +21,6 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     }
     
     public var body: some View {
-        // TODO: is component .list necessary?
         StyleScreen(component: .list, configuration: .list) {
             List {
                 content()

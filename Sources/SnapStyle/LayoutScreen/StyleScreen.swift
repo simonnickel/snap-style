@@ -34,13 +34,15 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     }
     
     public var body: some View {
+        let composition = component.compositions?(.container) ?? \.screen
+
         GeometryReader { geometry in
             createContent()
                 .environment(\.screenGeometrySize, geometry.size) // TODO: Also calculate contentSize?
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
-        .style(composition: \.screen, ignoreSafeAreaEdges: .all) // TODO: Should be the .container composition from given component.
+        .style(composition: composition, ignoreSafeAreaEdges: .all)
         .style(component: component, applyContainer: nil)
     }
     
