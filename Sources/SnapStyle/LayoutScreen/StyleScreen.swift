@@ -60,12 +60,12 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 .if(allowOverflow) { content in
                     // Using safe area padding to inset the content.
                     // Requires the contents background to respect .horizontal safe area insets.
-                    content.style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
+                    content.style(safeAreaPadding: \.insetScreenHorizontal, .horizontal)
                 } else: { content in
                     // Using content margins to inset the content.
-                    content.style(contentMargins: \.paddingScreenHorizontal, .horizontal, placement: .scrollContent)
+                    content.style(contentMargins: \.insetScreenHorizontal, .horizontal, placement: .scrollContent)
                 }
-                .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
+                .style(safeAreaPadding: \.insetScreenVertical, .vertical)
         }
     }
     

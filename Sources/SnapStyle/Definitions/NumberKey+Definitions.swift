@@ -24,10 +24,7 @@ extension SnapStyle.NumberKey {
     // MARK: - Container: Padding
     
     public var paddingAnyElement: ValueBuilder { .base(nil) }
-
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
-    public var paddingScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
-    public var paddingScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
     
     /// A padding definition based on the level in the component stack.
     public var paddingComponent: ValueBuilder {
@@ -47,6 +44,9 @@ extension SnapStyle.NumberKey {
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(18))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
     
+    public var insetScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
+    public var insetScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
+
     
     // MARK: - Shape: CornerRadius
     

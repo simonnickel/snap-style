@@ -25,7 +25,7 @@ struct ContentContainer: View {
                         Image(systemName: "slider.horizontal.3")
                     }
                 }
-                .style(padding: \.paddingScreenHorizontal)
+                .style(padding: \.insetScreenHorizontal)
             }
         }
         .sheet(isPresented: $isPresented) {

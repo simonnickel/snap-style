@@ -74,5 +74,5 @@ internal struct ContentMarginModifier: ViewModifier {
             }
         }
     }
-    .style(contentMargins: \.paddingScreenHorizontal, .all, placement: .automatic)
+    .style(contentMargins: \.insetScreenHorizontal, .all, placement: .automatic)
 }
