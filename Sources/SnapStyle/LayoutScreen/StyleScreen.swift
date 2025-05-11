@@ -70,9 +70,6 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
         }
     }
     
-    
-    // MARK: Configuration
-    
     @ViewBuilder
     private func createContent() -> some View {
         content()
@@ -90,102 +87,6 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
             }
     }
     
-    internal struct ConfigurationModifierReadableContentContainer: ViewModifier {
-        
-        let allowOverflow: Bool
-        
-        func body(content: Content) -> some View {
-            ReadableContentContainer(allowOverflow: allowOverflow) {
-                content
-            }
-        }
-    }
-    
-    internal struct ConfigurationModifierScrollView: ViewModifier {
-        func body(content: Content) -> some View {
-            ScrollView {
-                content
-            }
-        }
-    }
-    
-    internal struct ConfigurationModifierVerticalSections: ViewModifier {
-        func body(content: Content) -> some View {
-            StyleVStack(spacing: \.spacingSections) {
-                content
-            }
-        }
-    }
-    
-    
-    // MARK: ReadableContentContainer
-    
-    struct ReadableContentContainer<ReadableContent: View>: View {
-        
-        private struct Constants {
-            static var keyPathMaxWidthContent: SnapStyle.NumberKey.ValueBuilderKeyPath { \.widthReadableContent }
-        }
-        
-        @Environment(\.style) private var style
-        @Environment(\.screenGeometrySize) private var screenGeometrySize
-        
-        let allowOverflow: Bool
-        let content: () -> ReadableContent
-        
-        var body: some View {
-            if let maxWidth = style.number(for: Constants.keyPathMaxWidthContent) {
-                StyleVStack(spacing: \.spacingSections) {
-                    content()
-                }
-                .if(allowOverflow) { content in
-                    content
-                        .safeAreaPadding(.init(horizontal: (screenGeometrySize.width - maxWidth) / 2, vertical: 0))
-                } else: { content in
-                    content
-                        .contentMargins(.horizontal, (screenGeometrySize.width - maxWidth) / 2, for: .scrollContent)
-                }
-            } else {
-                content()
-            }
-        }
-        
-    }
-    
-}
-
-
-// MARK: - StyleScreenConfiguration
-
-public enum StyleScreenConfiguration: Equatable {
-    /// Restricts screen width to fit `\.widthReadableContent`
-    ///
-    /// - Parameters:
-    ///   - allowOverflow: controls if scroll views and backgrounds are allowed to overflow the restriction.
-    ///   Value`false` uses contentMargin instead of safeAreaPadding, e.g. necessary for ListStyle `.insetGrouped` to get rid of system inset and use `\.paddingScreenHorizontal`.
-    case readableContentWidth(allowOverflow: Bool)
-    
-    /// Wraps content in a ScrollView.
-    case scrollView
-    
-    /// Wraps content in a VStack with `\.spacingSections`.
-    case verticalSectionSpacing
-}
-
-extension [StyleScreenConfiguration] {
-    /// A default set of configurations for a typical content screen.
-    public static var content: Self { [.scrollView, .readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
-    
-    /// A default set of configurations for a system list screen.
-    public static var list: Self { [.readableContentWidth(allowOverflow: true), .verticalSectionSpacing] }
-}
-
-
-// MARK: - Environment
-
-extension EnvironmentValues {
-    
-    @Entry public var screenGeometrySize: CGSize = .zero
-
 }
 
 
