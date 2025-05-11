@@ -62,9 +62,8 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                     // Requires the contents background to respect .horizontal safe area insets.
                     content.style(safeAreaPadding: \.paddingScreenHorizontal, .horizontal)
                 } else: { content in
-                    // TODO: Use NumberKey
                     // Using content margins to inset the content.
-                    content.contentMargins(.horizontal, 10, for: .scrollContent)
+                    content.style(contentMargins: \.paddingScreenHorizontal, .horizontal, placement: .scrollContent)
                 }
                 .style(safeAreaPadding: \.paddingScreenVertical, .vertical)
         }
