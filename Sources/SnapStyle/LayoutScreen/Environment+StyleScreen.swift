@@ -7,6 +7,7 @@ import SwiftUI
 
 extension EnvironmentValues {
     
-    @Entry public var screenGeometrySize: CGSize = .zero
+    @Entry public var geometrySizeScreen: CGSize = .zero
+    @Entry public var geometryWidthContent: CGFloat = .zero
 
 }

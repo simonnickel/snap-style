@@ -14,7 +14,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     }
     
     @Environment(\.style) private var style
-    @Environment(\.screenGeometrySize) private var screenGeometrySize
+    @Environment(\.geometrySizeScreen) private var screenGeometrySize
     
     let insetHorizontalEdges: Bool
     let applyReadableWidth: Bool
@@ -24,16 +24,17 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     var body: some View {
         if
             let maxWidth = style.number(for: Constants.keyPathMaxWidth),
-            let inset = style.number(for: Constants.keyPathInset)
+            let minInset = style.number(for: Constants.keyPathInset)
         {
             // The available width for the content to fill.
             let widthForContent = applyReadableWidth ? min(maxWidth, screenGeometrySize.width) : screenGeometrySize.width
             // Margin to restrict to readable width.
             let marginWithoutInset = (screenGeometrySize.width - widthForContent) / 2
             // Apply inset, if margin is not already large enough.
-            let value = insetHorizontalEdges ? max(marginWithoutInset, inset) : marginWithoutInset
+            let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
             
             content()
+                .environment(\.geometryWidthContent, screenGeometrySize.width - (inset * 2))
                 .if(allowOverflow) { content in
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))

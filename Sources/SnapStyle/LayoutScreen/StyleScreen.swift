@@ -11,6 +11,8 @@ import SwiftUI
 // MARK: - StyleScreen
 
 /// A container to define a Screen.
+///
+/// Also exposes some geometry metrics via environment: `\.geometrySizeScreen`, `\geometryWidthContent`.
 /// - Parameters:
 ///     - component: The component to use as screen container, by default `Component.screen` is used.
 ///     - configuration: An array of `StyleScreenConfiguration` to define the behaviour of the screen.
@@ -38,7 +40,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
 
         GeometryReader { geometry in
             createContent()
-                .environment(\.screenGeometrySize, geometry.size) // TODO: Also calculate contentSize?
+                .environment(\.geometrySizeScreen, geometry.size)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
