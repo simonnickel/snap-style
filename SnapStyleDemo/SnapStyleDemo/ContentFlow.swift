@@ -3,7 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SnapCore
 import SnapStyle
 import SnapStyleBase
 import SnapStyleDebug
