@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-import SnapCore
+import SnapFoundation
 import SnapStyleBase
 import SwiftUI
 

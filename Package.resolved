@@ -1,0 +1,15 @@
+{
+  "originHash" : "fff71a3bfcab3c631de41b1d9681bc17b1f2fabf9cc20f75eb21bd7be3e02423",
+  "pins" : [
+    {
+      "identity" : "snap-foundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simonnickel/snap-foundation.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6faf393b1c799062db464e9108208b52a538619c"
+      }
+    }
+  ],
+  "version" : 3
+}
