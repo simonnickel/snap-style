@@ -69,7 +69,6 @@ internal struct DebugOverlayModifier: ViewModifier {
         .cornerRadius(10)
     }
 }
-#endif
 
 
 // MARK: - Preview
@@ -89,3 +88,4 @@ internal struct DebugOverlayModifier: ViewModifier {
         }
     }
 }
+#endif
