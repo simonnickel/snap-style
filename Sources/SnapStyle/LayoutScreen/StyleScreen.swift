@@ -10,15 +10,10 @@ import SwiftUI
 
 // MARK: - StyleScreen
 
-// TODO: Docu no longer fits.
 /// A container to define a Screen.
-/// - Content is stacked vertically in a ScrollView.
-/// - Elements are spaced by`NumberKey.spacingSections`.
-/// - Insets content from .horizontal edges using safeAreaPadding:
-///     - by `NumberKey.paddingScreen`
-///     - to limit width to `NumberKey.widthReadableContent`
-///     - *Caution: content (and background) needs to respect .horizontal safe area insets to comply.*
-/// - By default `Component.screen` is used for styling.
+/// - Parameters:
+///     - component: The component to use as screen container, by default `Component.screen` is used.
+///     - configuration: An array of `StyleScreenConfiguration` to define the behaviour of the screen.
 public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
     private let component: SnapStyle.ComponentDefinition
@@ -27,7 +22,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
     public typealias ContentBuilder = () -> ScreenContent
     private let content: ContentBuilder
-    
+
     public init(
         component: SnapStyle.ComponentDefinition = .screen,
         configuration: [StyleScreenConfiguration] = .content,
@@ -59,6 +54,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 content.modifier(ConfigurationModifierScrollView())
             }
             .modifier(ConfigurationModifierInset(
+                insetHorizontalEdges: configuration.contains(.insetHorizontalEdges),
                 applyReadableWidth: configuration.contains(.readableContentWidth),
                 allowOverflow: configuration.contains(.allowReadableContentOverflow)
             ))
@@ -71,7 +67,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
 
 #Preview {
     NavigationStack {
-        StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .readableContentWidth, .allowReadableContentOverflow]) {
+        StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .readableContentWidth, .allowReadableContentOverflow]) {
             // Default placement inside of safe area
             Rectangle()
             

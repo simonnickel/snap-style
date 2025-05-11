@@ -16,6 +16,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     @Environment(\.style) private var style
     @Environment(\.screenGeometrySize) private var screenGeometrySize
     
+    let insetHorizontalEdges: Bool
     let applyReadableWidth: Bool
     let allowOverflow: Bool
     let content: () -> ReadableContent
@@ -25,9 +26,12 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let maxWidth = style.number(for: Constants.keyPathMaxWidth),
             let inset = style.number(for: Constants.keyPathInset)
         {
-            let width = applyReadableWidth ? min(maxWidth, screenGeometrySize.width) : screenGeometrySize.width
-            let widthInset = width - (inset * 2)
-            let value = (screenGeometrySize.width - widthInset) / 2
+            // The available width for the content to fill.
+            let widthForContent = applyReadableWidth ? min(maxWidth, screenGeometrySize.width) : screenGeometrySize.width
+            // Margin to restrict to readable width.
+            let marginWithoutInset = (screenGeometrySize.width - widthForContent) / 2
+            // Apply inset, if margin is not already large enough.
+            let value = insetHorizontalEdges ? max(marginWithoutInset, inset) : marginWithoutInset
             
             StyleVStack(spacing: \.spacingSections) {
                 content()
