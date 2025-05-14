@@ -12,6 +12,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         case plain
         case navigate(_ value: SelectionValue)
         case selected(Bool)
+        case enabled(Binding<Bool>)
     }
     
     private let mode: Mode
@@ -31,30 +32,52 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     }
     
     public var body: some View {
-        // TODO: Customize Label to use \.spacingElements
         Group {
-            switch mode {
-                case .plain:
-                    content()
-                    
-                case .navigate(value: let value):
-                    NavigationLink(value: value) {
-                        content()
-                    }
-                    
-                case .selected(let isSelected):
-                    StyleHStack(spacing: \.spacingElements) {
-                        content()
-                        Spacer()
-                        // TODO: Apply font and color
-                        StyleIcon(isSelected ? \.selectionOn : \.selectionOff)
-                    }
+            if case let .navigate(value) = mode {
+                NavigationLink(value: value) {
+                    viewContent(content, mode: mode)
+                }
+            } else {
+                viewContent(content, mode: mode)
             }
         }
         // .listRowInsets(.zero) // TODO: Configure ListRow inset.
         .style(listRowBackground: \.interactiveListRow)
         // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
+    }
+    
+    private func viewContent(_ content: @escaping () -> Content, mode: Mode) -> some View {
+        // TODO: Customize Label to use \.spacingElements
+        StyleHStack(spacing: \.spacingElements) {
+            
+            content()
+            
+            Spacer()
+            
+            viewAccessory(for: mode)
+            
+        }
+    }
+    
+    @ViewBuilder
+    private func viewAccessory(for mode: Mode) -> some View {
+        switch mode {
+            case .plain: EmptyView()
+                
+            case .navigate(value: _): EmptyView()
+                
+            case .selected(let isSelected):
+                // TODO: Apply font and color
+                StyleIcon(isSelected ? \.selectionOn : \.selectionOff)
+                
+            case .enabled(let isOn):
+                // TODO: Use styled toggle and enable full row interaction
+                Toggle(isOn: isOn) {
+                    EmptyView()
+                }
+                
+        }
     }
 }
 
@@ -77,8 +100,14 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             StyleListRow(.selected(false), isSelected: false) {
                 Label("Circle", systemImage: "circle")
             }
-            StyleListRow(.plain, isSelected: true) {
+            StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: true) {
+                Label("Star", systemImage: "star")
+            }
+            StyleListRow(.enabled(Binding(get: { false }, set: { _ in })), isSelected: true) {
                 Label("Circle", systemImage: "circle")
+            }
+            StyleListRow(.plain, isSelected: true) {
+                Label("Star", systemImage: "star")
             }
             StyleListRow(.plain, isSelected: false) {
                 Label("Circle", systemImage: "circle")
