@@ -8,37 +8,37 @@ import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
-    public enum Mode {
+    public enum Variant {
         case plain
         case navigate(_ value: SelectionValue)
         case selected(Bool)
         case enabled(Binding<Bool>)
     }
     
-    private let mode: Mode
+    private let variant: Variant
     private let isSelected: Bool
     private let content: () -> Content
     
-    public init(_ mode: Mode = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) {
-        self.mode = mode
+    public init(_ variant: Variant = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+        self.variant = variant
         self.isSelected = isSelected
         self.content = content
     }
-    /// An alternative init is required for mode not specifying a `SelectionValue`.
-    public init(_ mode: Mode = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
-        self.mode = mode
+    /// An alternative init is required for variant that does not specify a `SelectionValue`.
+    public init(_ variant: Variant = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+        self.variant = variant
         self.isSelected = isSelected
         self.content = content
     }
     
     public var body: some View {
         Group {
-            if case let .navigate(value) = mode {
+            if case let .navigate(value) = variant {
                 NavigationLink(value: value) {
-                    viewContent(content, mode: mode)
+                    viewContent(content, variant: variant)
                 }
             } else {
-                viewContent(content, mode: mode)
+                viewContent(content, variant: variant)
             }
         }
         // .listRowInsets(.zero) // TODO: Configure ListRow inset.
@@ -47,7 +47,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
     }
     
-    private func viewContent(_ content: @escaping () -> Content, mode: Mode) -> some View {
+    private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
         // TODO: Customize Label to use \.spacingElements
         StyleHStack(spacing: \.spacingElements) {
             
@@ -55,14 +55,14 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             
             Spacer()
             
-            viewAccessory(for: mode)
+            viewAccessory(for: variant)
             
         }
     }
     
     @ViewBuilder
-    private func viewAccessory(for mode: Mode) -> some View {
-        switch mode {
+    private func viewAccessory(for variant: Variant) -> some View {
+        switch variant {
             case .plain: EmptyView()
                 
             case .navigate(value: _): EmptyView()

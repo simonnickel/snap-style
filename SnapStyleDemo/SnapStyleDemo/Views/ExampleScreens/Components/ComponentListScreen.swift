@@ -14,9 +14,9 @@ struct ComponentListScreen: View {
         
         StyleList(selection: $selected) {
             ListSectionView(data: .init(title: "Section 1", count: 3), selection: $selected)
-            SectionModeNavigate()
-            SectionModeSelected()
-            SectionModeEnabled()
+            SectionVariantNavigate()
+            SectionVariantSelected()
+            SectionVariantEnabled()
             ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
             ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected)
         }
@@ -27,9 +27,9 @@ struct ComponentListScreen: View {
     }
     
     
-    // MARK: - SectionModeNavigat
+    // MARK: - SectionVariantNavigat
     
-    struct SectionModeNavigate: View {
+    struct SectionVariantNavigate: View {
         
         var body: some View {
             Section {
@@ -43,16 +43,16 @@ struct ComponentListScreen: View {
                     StyleLabel(title: "Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Mode .selected")
+                StyleLabel(title: "Variant .selected")
                     .style(element: .title)
             }
         }
     }
     
     
-    // MARK: - SectionModeSelected
+    // MARK: - SectionVariantSelected
     
-    struct SectionModeSelected: View {
+    struct SectionVariantSelected: View {
         
         @State private var selected: String? = "Star"
         
@@ -68,16 +68,16 @@ struct ComponentListScreen: View {
                     StyleLabel(title: "Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Mode .selected")
+                StyleLabel(title: "Variant .selected")
                     .style(element: .title)
             }
         }
     }
     
     
-    // MARK: - SectionModeEnabled
+    // MARK: - SectionVariantEnabled
     
-    struct SectionModeEnabled: View {
+    struct SectionVariantEnabled: View {
         
         @State private var enabledStar: Bool = false
         @State private var enabledRectangle: Bool = false
@@ -95,7 +95,7 @@ struct ComponentListScreen: View {
                     StyleLabel(title: "Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Mode .enabled")
+                StyleLabel(title: "Variant .enabled")
                     .style(element: .title)
             }
         }
@@ -103,6 +103,7 @@ struct ComponentListScreen: View {
     
     
     // MARK: - ListSectionView
+    
     struct ListSectionView: View {
         
         struct Data {
