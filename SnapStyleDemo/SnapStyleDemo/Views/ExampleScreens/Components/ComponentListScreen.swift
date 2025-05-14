@@ -14,12 +14,95 @@ struct ComponentListScreen: View {
         
         StyleList(selection: $selected) {
             ListSectionView(data: .init(title: "Section 1", count: 3), selection: $selected)
+            SectionModeNavigate()
+            SectionModeSelected()
+            SectionModeEnabled()
             ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
             ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected)
+        }
+        .navigationDestination(for: String.self) { value in
+            Text(value)
         }
         
     }
     
+    
+    // MARK: - SectionModeNavigat
+    
+    struct SectionModeNavigate: View {
+        
+        var body: some View {
+            Section {
+                StyleListRow(.navigate("Star")) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.navigate("Rectangle")) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.navigate("Triangle")) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Mode .selected")
+                    .style(element: .title)
+            }
+        }
+    }
+    
+    
+    // MARK: - SectionModeSelected
+    
+    struct SectionModeSelected: View {
+        
+        @State private var selected: String? = "Star"
+        
+        var body: some View {
+            Section {
+                StyleListRow(.selected(selected == "Star")) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.selected(selected == "Rectangle")) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.selected(selected == "Triangle")) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Mode .selected")
+                    .style(element: .title)
+            }
+        }
+    }
+    
+    
+    // MARK: - SectionModeEnabled
+    
+    struct SectionModeEnabled: View {
+        
+        @State private var enabledStar: Bool = false
+        @State private var enabledRectangle: Bool = false
+        @State private var enabledTriangle: Bool = false
+        
+        var body: some View {
+            Section {
+                StyleListRow(.enabled($enabledStar)) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.enabled($enabledRectangle)) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.enabled($enabledTriangle)) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Mode .enabled")
+                    .style(element: .title)
+            }
+        }
+    }
+    
+    
+    // MARK: - ListSectionView
     struct ListSectionView: View {
         
         struct Data {
@@ -56,6 +139,9 @@ struct ComponentListScreen: View {
                     .style(element: .title)
             }
         }
+        
+        
+        // MARK: ListItemView
         
         struct ListItemView: View {
             
