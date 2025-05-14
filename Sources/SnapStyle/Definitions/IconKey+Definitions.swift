@@ -12,4 +12,10 @@ extension SnapStyle.IconKey {
 
     public var favorite: ValueBuilder { .base(.definition(.value("star"))) }
     
+    
+    // MARK: - Controls
+    
+    public var selectionOff: ValueBuilder { .base(.definition(.value("circle"))) }
+    public var selectionOn: ValueBuilder { .base(.definition(.value("checkmark.circle.fill"))) }
+    
 }

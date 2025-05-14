@@ -8,32 +8,50 @@ import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
-    private let value: SelectionValue?
+    public enum Mode {
+        case plain
+        case navigate(_ value: SelectionValue)
+        case selected(Bool)
+    }
+    
+    private let mode: Mode
     private let isSelected: Bool
     private let content: () -> Content
     
-    public init(value: SelectionValue?, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) {
-        self.value = value
+    public init(_ mode: Mode = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+        self.mode = mode
         self.isSelected = isSelected
         self.content = content
     }
-    
-    public init(isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
-        self.value = nil
+    /// An alternative init is required for mode not specifying a `SelectionValue`.
+    public init(_ mode: Mode = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+        self.mode = mode
         self.isSelected = isSelected
         self.content = content
     }
     
     public var body: some View {
+        // TODO: Customize Label to use \.spacingElements
         Group {
-            if let value {
-                NavigationLink(value: value) {
+            switch mode {
+                case .plain:
                     content()
-                }
-            } else {
-                content()
+                    
+                case .navigate(value: let value):
+                    NavigationLink(value: value) {
+                        content()
+                    }
+                    
+                case .selected(let isSelected):
+                    StyleHStack(spacing: \.spacingElements) {
+                        content()
+                        Spacer()
+                        // TODO: Apply font and color
+                        StyleIcon(isSelected ? \.selectionOn : \.selectionOff)
+                    }
             }
         }
+        // .listRowInsets(.zero) // TODO: Configure ListRow inset.
         .style(listRowBackground: \.interactiveListRow)
         // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
@@ -47,12 +65,26 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
     NavigationStack {
         List {
-            StyleListRow(value: "Circle", isSelected: true) {
+            StyleListRow(.navigate("Star"), isSelected: true) {
+                Label("Star", systemImage: "star")
+            }
+            StyleListRow(.navigate("Circle"), isSelected: false) {
                 Label("Circle", systemImage: "circle")
             }
-            StyleListRow(value: "Circle", isSelected: false) {
+            StyleListRow(.selected(true), isSelected: true) {
+                Label("Star", systemImage: "star")
+            }
+            StyleListRow(.selected(false), isSelected: false) {
                 Label("Circle", systemImage: "circle")
             }
+            StyleListRow(.plain, isSelected: true) {
+                Label("Circle", systemImage: "circle")
+            }
+            StyleListRow(.plain, isSelected: false) {
+                Label("Circle", systemImage: "circle")
+            }
+            
+            // System Rows for reference
             Label("Triangle", systemImage: "triangle")
             Label("Rectangle", systemImage: "rectangle")
         }
