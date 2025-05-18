@@ -49,6 +49,8 @@ struct ConfigurationListView: View {
             NavigationLink(value: ConfigurationFlow.Screen.color) {
                 Label("Color", systemImage: "swatchpalette")
             }
+
+            ScaleFactorConfigurationRow()
         }
         .listStyle(.sidebar)
     }

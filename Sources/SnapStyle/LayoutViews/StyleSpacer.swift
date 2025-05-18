@@ -27,9 +27,18 @@ public struct StyleSpacer: View {
 // MARK: - Preview
 
 #Preview {
-    HStack {
-        Rectangle()
-        StyleSpacer(minLength: \.spacingElements)
-        Rectangle()
+    VStack {
+        HStack {
+            Rectangle()
+            StyleSpacer(minLength: \.spacingElements)
+            Rectangle()
+        }
+
+        HStack {
+            Rectangle()
+            StyleSpacer(minLength: \.spacingElements)
+            Rectangle()
+        }
+        .style(scaleFactor: 5)
     }
 }

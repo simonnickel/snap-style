@@ -11,9 +11,15 @@ import Observation
 class Configuration {
     
     var accent: SnapStyle.Accent
-    
-    init(accent: SnapStyle.Accent = SnapStyle.Accent.fallback) {
+
+    var scaleFactor: SnapStyle.Context.ScaleFactor
+
+    init(
+        accent: SnapStyle.Accent = SnapStyle.Accent.fallback,
+        scaleFactor: SnapStyle.Context.ScaleFactor = SnapStyle.Context.scaleFactorDefault
+    ) {
         self.accent = accent
+        self.scaleFactor = scaleFactor
     }
     
 }
