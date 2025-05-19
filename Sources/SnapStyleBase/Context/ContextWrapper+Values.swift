@@ -18,7 +18,7 @@ extension SnapStyle.ContextWrapper {
 
         // Use value from cache if available
         if let value = definition.getValueFromCache(for: keyPath, in: context) {
-            return value
+            return value.adjusted(with: adjustments)
         }
         
         var result: Key.Value?
@@ -49,13 +49,13 @@ extension SnapStyle.ContextWrapper {
             }
         }
 
-        // Apply Adjustments
-        result = result?.adjusted(with: adjustments)
-
         // Store result in cache
         if let result {
             definition.setValueInCache(result, for: keyPath, in: context)
         }
+        
+        // Apply Adjustments
+        result = result?.adjusted(with: adjustments)
         
         return result
     }
