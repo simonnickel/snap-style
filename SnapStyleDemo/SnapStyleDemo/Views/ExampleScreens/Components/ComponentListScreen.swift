@@ -157,6 +157,7 @@ struct ComponentListScreen: View {
             
             var body: some View {
                 StyleListRow(isSelected: selection ?? "" == data.id) {
+                    // TODO: Button should have no styling here.
                     Button {
                         selection = data.id
                     } label: {
