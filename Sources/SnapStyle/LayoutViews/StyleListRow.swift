@@ -68,8 +68,9 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             case .navigate(value: _): EmptyView()
                 
             case .selected(let isSelected):
-                // TODO: Apply font and color
+                // TODO: Apply font
                 StyleIcon(isSelected ? \.selectionOn : \.selectionOff)
+                    .style(foreground: \.interactive)
                 
             case .enabled(let isOn):
                 // TODO: Use styled toggle and enable full row interaction
