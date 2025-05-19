@@ -11,7 +11,7 @@ extension SnapStyle.IconKey {
     // MARK: - Common
 
     public var favorite: ValueBuilder { .base(.definition(.value("star"))) }
-    public var scaleFactor: ValueBuilder { .base(.definition(.value("arrow.down.backward.and.arrow.up.forward"))) }
+    public var scaleFactor: ValueBuilder { .base(.definition(.value("square.resize"))) }
 
     
     // MARK: - Controls
