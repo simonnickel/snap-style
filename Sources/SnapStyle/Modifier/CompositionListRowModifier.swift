@@ -31,7 +31,6 @@ internal struct CompositionListRowModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .style(composition: keyPath, layers: [.foreground])
             .listRowBackground(
                 Rectangle()
                     .fill(.clear)
