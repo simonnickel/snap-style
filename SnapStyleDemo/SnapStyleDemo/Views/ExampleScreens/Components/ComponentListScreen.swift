@@ -27,7 +27,7 @@ struct ComponentListScreen: View {
     }
     
     
-    // MARK: - SectionVariantNavigat
+    // MARK: - SectionVariantNavigate
     
     struct SectionVariantNavigate: View {
         
@@ -43,7 +43,7 @@ struct ComponentListScreen: View {
                     StyleLabel(title: "Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .selected")
+                StyleLabel(title: "Variant .navigate")
                     .style(element: .title)
             }
         }
@@ -174,5 +174,7 @@ struct ComponentListScreen: View {
 // MARK: - Previews
 
 #Preview {
-    ComponentListScreen()
+    NavigationStack {
+        ComponentListScreen()
+    }
 }
