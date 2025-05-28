@@ -10,24 +10,51 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
     public enum Variant {
         case plain
+        
+        /// Navigation style.
         case navigate(_ value: SelectionValue)
-        case selected(Bool)
+        
+        /// Selection style to choose a single value.
+        case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
+        
+        /// Select style to choose multiple values.
+        case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
+        
+        /// Selection style, controlled via binding.
+        case selected(Binding<Bool>) // TODO: Is this Variant necessary? Should use enabled instead?
+        
+        /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
     }
+    
+    public typealias Action = () -> Void
     
     private let variant: Variant
     private let isSelected: Bool
     private let content: () -> Content
+    private let action: Action?
     
-    public init(_ variant: Variant = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+    public init(
+        _ variant: Variant = .plain,
+        isSelected: Bool = false,
+        action: Action? = nil,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self.variant = variant
         self.isSelected = isSelected
+        self.action = action
         self.content = content
     }
     /// An alternative init is required for variant that does not specify a `SelectionValue`.
-    public init(_ variant: Variant = .plain, isSelected: Bool = false, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+    public init(
+        _ variant: Variant = .plain,
+        isSelected: Bool = false,
+        action: Action? = nil,
+        @ViewBuilder content: @escaping () -> Content
+    ) where SelectionValue == Never {
         self.variant = variant
         self.isSelected = isSelected
+        self.action = action
         self.content = content
     }
     
@@ -38,7 +65,33 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                     viewContent(content, variant: variant)
                 }
             } else {
-                viewContent(content, variant: variant)
+                // TODO: Button Style
+                Button {
+                    if let action {
+                        action()
+                    } else {
+                        // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
+                        switch variant {
+                            case .plain: break
+                            case .navigate(let _): break
+                                
+                            case .selectValue(let value, selection: let selection):
+                                selection.wrappedValue = value
+                                
+                            case .selectValues(let value, selection: let selection):
+                                if selection.wrappedValue.contains(value) {
+                                    selection.wrappedValue.removeAll { $0 == value }
+                                } else {
+                                    selection.wrappedValue.append(value)
+                                }
+                                
+                            case .selected(let isSelected): isSelected.wrappedValue.toggle()
+                            case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
+                        }
+                    }
+                } label: {
+                    viewContent(content, variant: variant)
+                }
             }
         }
         // .listRowInsets(.zero) // TODO: Configure ListRow inset.
@@ -67,9 +120,19 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 
             case .navigate(value: _): EmptyView()
                 
+            case .selectValue(let value, selection: let selection):
+                // TODO: Apply font
+                StyleIcon(value == selection.wrappedValue ? \.selectionOn : \.selectionOff)
+                    .style(foreground: \.interactive)
+                
+            case .selectValues(let value, selection: let selection):
+                // TODO: Apply font
+                StyleIcon(selection.wrappedValue.contains(value) ? \.selectionOn : \.selectionOff)
+                    .style(foreground: \.interactive)
+                
             case .selected(let isSelected):
                 // TODO: Apply font
-                StyleIcon(isSelected ? \.selectionOn : \.selectionOff)
+                StyleIcon(isSelected.wrappedValue ? \.selectionOn : \.selectionOff)
                     .style(foreground: \.interactive)
                 
             case .enabled(let isOn):
@@ -95,10 +158,10 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             StyleListRow(.navigate("Circle"), isSelected: false) {
                 Label("Circle", systemImage: "circle")
             }
-            StyleListRow(.selected(true), isSelected: true) {
+            StyleListRow(.selectValue("Star", selection: .constant("Star")), isSelected: true) {
                 Label("Star", systemImage: "star")
             }
-            StyleListRow(.selected(false), isSelected: false) {
+            StyleListRow(.selectValue("Circle", selection: .constant("Star")), isSelected: false) {
                 Label("Circle", systemImage: "circle")
             }
             StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: true) {

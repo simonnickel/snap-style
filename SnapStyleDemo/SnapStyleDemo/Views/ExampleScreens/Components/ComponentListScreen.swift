@@ -13,8 +13,10 @@ struct ComponentListScreen: View {
     var body: some View {
         
         StyleList(selection: $selected) {
-            ListSectionView(data: .init(title: "Section 1", count: 3), selection: $selected)
+            SectionVariantPlain()
             SectionVariantNavigate()
+            SectionVariantSelectValue()
+            SectionVariantSelectValues()
             SectionVariantSelected()
             SectionVariantEnabled()
             ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
@@ -24,6 +26,29 @@ struct ComponentListScreen: View {
             Text(value)
         }
         
+    }
+    
+    
+    // MARK: - SectionVariantPlain
+    
+    struct SectionVariantPlain: View {
+        
+        var body: some View {
+            Section {
+                StyleListRow(.plain) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.plain) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.plain) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Variant .plain")
+                    .style(element: .title)
+            }
+        }
     }
     
     
@@ -50,22 +75,74 @@ struct ComponentListScreen: View {
     }
     
     
+    // MARK: - SectionVariantSelectValue
+    
+    struct SectionVariantSelectValue: View {
+        
+        @State private var selection: String = "Star"
+        
+        var body: some View {
+            Section {
+                StyleListRow(.selectValue("Star", selection: $selection)) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.selectValue("Rectangle", selection: $selection)) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.selectValue("Triangle", selection: $selection)) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Variant .selectValue")
+                    .style(element: .title)
+            }
+        }
+    }
+    
+    
+    // MARK: - SectionVariantSelectValues
+    
+    struct SectionVariantSelectValues: View {
+        
+        @State private var selection: [String] = []
+        
+        var body: some View {
+            Section {
+                StyleListRow(.selectValues("Star", selection: $selection)) {
+                    StyleLabel(title: "Star", systemImage: "star")
+                }
+                StyleListRow(.selectValues("Rectangle", selection: $selection)) {
+                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                }
+                StyleListRow(.selectValues("Triangle", selection: $selection)) {
+                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                }
+            } header: {
+                StyleLabel(title: "Variant .selectValues")
+                    .style(element: .title)
+            }
+        }
+    }
+    
+    
     // MARK: - SectionVariantSelected
     
     struct SectionVariantSelected: View {
         
-        @State private var selected: String? = "Star"
+        @State private var isSelectedStar: Bool = false
+        @State private var isSelectedRectangle: Bool = false
+        @State private var isSelectedTriangle: Bool = false
         
         var body: some View {
             Section {
-                StyleListRow(.selected(selected == "Star")) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                StyleListRow(.selected($isSelectedStar)) {
+                    StyleLabel(title: "Star (Binding)", systemImage: "star")
                 }
-                StyleListRow(.selected(selected == "Rectangle")) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                StyleListRow(.selected($isSelectedRectangle)) {
+                    StyleLabel(title: "Rectangle (Binding)", systemImage: "rectangle")
                 }
-                StyleListRow(.selected(selected == "Triangle")) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                StyleListRow(.selected($isSelectedTriangle)) {
+                    StyleLabel(title: "Triangle (Binding)", systemImage: "triangle")
                 }
             } header: {
                 StyleLabel(title: "Variant .selected")
