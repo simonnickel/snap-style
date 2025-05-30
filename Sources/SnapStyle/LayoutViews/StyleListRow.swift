@@ -153,32 +153,32 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     NavigationStack {
         List {
             StyleListRow(.navigate("Star"), isSelected: true) {
-                Label("Star", systemImage: "star")
+                StyleLabel("Star", systemImage: "star")
             }
             StyleListRow(.navigate("Circle"), isSelected: false) {
-                Label("Circle", systemImage: "circle")
+                StyleLabel("Circle", systemImage: "circle")
             }
             StyleListRow(.selectValue("Star", selection: .constant("Star")), isSelected: true) {
-                Label("Star", systemImage: "star")
+                StyleLabel("Star", systemImage: "star")
             }
             StyleListRow(.selectValue("Circle", selection: .constant("Star")), isSelected: false) {
-                Label("Circle", systemImage: "circle")
+                StyleLabel("Circle", systemImage: "circle")
             }
             StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: true) {
-                Label("Star", systemImage: "star")
+                StyleLabel("Star", systemImage: "star")
             }
             StyleListRow(.enabled(Binding(get: { false }, set: { _ in })), isSelected: true) {
-                Label("Circle", systemImage: "circle")
+                StyleLabel("Circle", systemImage: "circle")
             }
             StyleListRow(.plain, isSelected: true) {
-                Label("Star", systemImage: "star")
+                StyleLabel("Star", systemImage: "star")
             }
             StyleListRow(.plain, isSelected: false) {
-                Label("Circle", systemImage: "circle")
+                StyleLabel("Circle", systemImage: "circle")
             }
             
             // System Rows for reference
-            Label("Triangle", systemImage: "triangle")
+            StyleLabel("Triangle", systemImage: "triangle")
             Label("Rectangle", systemImage: "rectangle")
         }
     }

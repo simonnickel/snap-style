@@ -39,14 +39,14 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     NavigationStack {
         StyleList(selection: $selection) {
             Section {
-                StyleListRow(.navigate("Circle"), isSelected: true) {
-                    Label("Circle", systemImage: "circle")
+                StyleListRow(.navigate("Star"), isSelected: true) {
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.navigate("Circle"), isSelected: false) {
-                    Label("Circle", systemImage: "circle")
+                    StyleLabel("Circle", systemImage: "circle")
                 }
-                Label("Triangle", systemImage: "triangle")
-                Label("Rectangle", systemImage: "rectangle")
+                StyleLabel("Triangle", systemImage: "triangle")
+                StyleLabel("Rectangle", systemImage: "rectangle")
             } header: {
                 Label("Section", systemImage: "star")
                     .style(element: .title)
