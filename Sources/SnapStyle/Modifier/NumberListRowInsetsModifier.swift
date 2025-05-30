@@ -8,6 +8,18 @@ import SwiftUI
 
 extension View {
 
+    public func styleListRowInsets(_ valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath) -> some View {
+        self
+            .modifier(
+                ListRowInsetsModifier(
+                    top: valueKeyPath,
+                    leading: valueKeyPath,
+                    bottom: valueKeyPath,
+                    trailing: valueKeyPath
+                )
+            )
+    }
+
     public func styleListRowInsets(
         top: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowTop,
         leading: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowLeading,
