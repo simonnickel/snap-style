@@ -65,33 +65,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                     viewContent(content, variant: variant)
                 }
             } else {
-                // TODO: Button Style
-                Button {
-                    if let action {
-                        action()
-                    } else {
-                        // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
-                        switch variant {
-                            case .plain: break
-                            case .navigate(let _): break
-                                
-                            case .selectValue(let value, selection: let selection):
-                                selection.wrappedValue = value
-                                
-                            case .selectValues(let value, selection: let selection):
-                                if selection.wrappedValue.contains(value) {
-                                    selection.wrappedValue.removeAll { $0 == value }
-                                } else {
-                                    selection.wrappedValue.append(value)
-                                }
-                                
-                            case .selected(let isSelected): isSelected.wrappedValue.toggle()
-                            case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
-                        }
-                    }
-                } label: {
-                    viewContent(content, variant: variant)
-                }
+                viewButtonContainer(content, variant: variant)
             }
         }
 //         .listRowInsets(.zero) // TODO: Configure ListRow inset.
@@ -100,6 +74,36 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
     }
     
+    private func viewButtonContainer(_ content: @escaping () -> Content, variant: Variant) -> some View {
+        // TODO: Button Style
+        Button {
+            if let action {
+                action()
+            } else {
+                // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
+                switch variant {
+                    case .plain: break
+                    case .navigate(let _): break
+                        
+                    case .selectValue(let value, selection: let selection):
+                        selection.wrappedValue = value
+                        
+                    case .selectValues(let value, selection: let selection):
+                        if selection.wrappedValue.contains(value) {
+                            selection.wrappedValue.removeAll { $0 == value }
+                        } else {
+                            selection.wrappedValue.append(value)
+                        }
+                        
+                    case .selected(let isSelected): isSelected.wrappedValue.toggle()
+                    case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
+                }
+            }
+        } label: {
+            viewContent(content, variant: variant)
+        }
+    }
+
     private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
         // TODO: Customize Label to use \.spacingElements
         StyleHStack {
