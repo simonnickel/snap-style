@@ -62,5 +62,10 @@ extension StyleIcon {
 // MARK: - Preview
 
 #Preview {
-    StyleIcon(\.favorite)
+    VStack(alignment: .leading) {
+        StyleIcon(\.favorite)
+        StyleIcon("rectangle")
+        StyleIcon("circle")
+    }
+    .font(.system(size: 200))
 }
