@@ -102,11 +102,11 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
     private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
         // TODO: Customize Label to use \.spacingElements
-        StyleHStack(spacing: \.spacingElements) {
+        StyleHStack {
             
             content()
             
-            Spacer()
+            StyleSpacer(minLength: \.spacingElements)
             
             viewAccessory(for: variant)
             
@@ -179,14 +179,17 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     }
     
     return NavigationStack {
-        List {
+        StyleList {
             createSection(isSelected: false)
             createSection(isSelected: true)
             
+        }
+        List {
             // System Rows for reference
             Section {
-                StyleLabel("Triangle", systemImage: "triangle")
+                Label("Pentagon", systemImage: "pentagon")
                 Label("Rectangle", systemImage: "rectangle")
+                Label("Triangle", systemImage: "triangle")
             } header: {
                 StyleLabel("System Rows")
                     .styleListSectionHeaderLabel()
