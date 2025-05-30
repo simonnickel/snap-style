@@ -19,6 +19,7 @@ struct ComponentListScreen: View {
             SectionVariantSelectValue()
             SectionVariantSelectValues()
             SectionVariantSelected()
+            SectionVariantNoIcon()
             ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
             ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected)
         }
@@ -173,6 +174,35 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .selected")
+                    .styleListSectionHeaderLabel()
+            }
+        }
+    }
+    
+    
+    // MARK: - SectionVariantPlain
+    
+    struct SectionVariantNoIcon: View {
+        
+        @State private var enabledTriangle: Bool = false
+        @State private var enabledCircle: [String] = []
+        
+        var body: some View {
+            Section {
+                StyleListRow(.plain) {
+                    Text("Star")
+                }
+                StyleListRow(.navigate("Rectangle")) {
+                    Text("Rectangle")
+                }
+                StyleListRow(.enabled($enabledTriangle)) {
+                    Text("Triangle")
+                }
+                StyleListRow(.selectValues("Circle", selection: $enabledCircle)) {
+                    Text("Circle")
+                }
+            } header: {
+                StyleLabel("No Icons")
                     .styleListSectionHeaderLabel()
             }
         }
