@@ -15,10 +15,10 @@ struct ComponentListScreen: View {
         StyleList(selection: $selected) {
             SectionVariantPlain()
             SectionVariantNavigate()
+            SectionVariantEnabled()
             SectionVariantSelectValue()
             SectionVariantSelectValues()
             SectionVariantSelected()
-            SectionVariantEnabled()
             ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
             ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected)
         }
@@ -69,6 +69,33 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .navigate")
+                    .styleListSectionHeaderLabel()
+            }
+        }
+    }
+    
+    
+    // MARK: - SectionVariantEnabled
+    
+    struct SectionVariantEnabled: View {
+        
+        @State private var enabledStar: Bool = false
+        @State private var enabledRectangle: Bool = false
+        @State private var enabledTriangle: Bool = false
+        
+        var body: some View {
+            Section {
+                StyleListRow(.enabled($enabledStar), systemImage: "star") {
+                    Text("Star")
+                }
+                StyleListRow(.enabled($enabledRectangle), systemImage: "rectangle") {
+                    Text("Rectangle")
+                }
+                StyleListRow(.enabled($enabledTriangle), systemImage: "triangle") {
+                    Text("Triangle")
+                }
+            } header: {
+                StyleLabel("Variant .enabled")
                     .styleListSectionHeaderLabel()
             }
         }
@@ -146,33 +173,6 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .selected")
-                    .styleListSectionHeaderLabel()
-            }
-        }
-    }
-    
-    
-    // MARK: - SectionVariantEnabled
-    
-    struct SectionVariantEnabled: View {
-        
-        @State private var enabledStar: Bool = false
-        @State private var enabledRectangle: Bool = false
-        @State private var enabledTriangle: Bool = false
-        
-        var body: some View {
-            Section {
-                StyleListRow(.enabled($enabledStar), systemImage: "star") {
-                    Text("Star")
-                }
-                StyleListRow(.enabled($enabledRectangle), systemImage: "rectangle") {
-                    Text("Rectangle")
-                }
-                StyleListRow(.enabled($enabledTriangle), systemImage: "triangle") {
-                    Text("Triangle")
-                }
-            } header: {
-                StyleLabel("Variant .enabled")
                     .styleListSectionHeaderLabel()
             }
         }
