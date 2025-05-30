@@ -10,59 +10,47 @@ public struct StyleLabel<Content: View>: View {
     
     public typealias Icon = SnapStyle.IconKey.ValueBuilderKeyPath
     
-    public enum Constants {
-        public static var defaultSpacing: SnapStyle.NumberKey.ValueBuilderKeyPath { \.spacingLabel }
-    }
-    
     @Environment(\.style) private var style
+    @Environment(\.styleLabelSpacing) private var styleLabelSpacing
     
     private let content: () -> Content
     private let icon: Icon?
     private let systemImage: String?
-    private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath
     
     public init(
         content: @escaping () -> Content,
         icon: Icon? = nil,
-        systemImage: String? = nil,
-        spacing: SnapStyle.NumberKey.ValueBuilderKeyPath = Constants.defaultSpacing
+        systemImage: String? = nil
     ) {
         self.content = content
         self.icon = icon
         self.systemImage = systemImage
-        self.spacing = spacing
     }
     
     public init(
         _ title: String,
         icon: Icon? = nil,
-        systemImage: String? = nil,
-        spacing: SnapStyle.NumberKey.ValueBuilderKeyPath = Constants.defaultSpacing
+        systemImage: String? = nil
     ) where Content == Text {
         self.content = { Text(title) }
         self.icon = icon
         self.systemImage = systemImage
-        self.spacing = spacing
     }
 
     public init(
-        icon: Icon? = nil,
-        spacing: SnapStyle.NumberKey.ValueBuilderKeyPath = Constants.defaultSpacing
+        icon: Icon? = nil
     ) where Content == EmptyView {
         self.content = { EmptyView() }
         self.icon = icon
         self.systemImage = nil
-        self.spacing = spacing
     }
 
     public init(
-        systemImage: String? = nil,
-        spacing: SnapStyle.NumberKey.ValueBuilderKeyPath = Constants.defaultSpacing
+        systemImage: String? = nil
     ) where Content == EmptyView {
         self.content = { EmptyView() }
         self.icon = nil
         self.systemImage = systemImage
-        self.spacing = spacing
     }
     
     public var body: some View {
@@ -77,9 +65,16 @@ public struct StyleLabel<Content: View>: View {
                 EmptyView()
             }
         })
-        .labelStyle(.style(spacing: spacing))
+        .labelStyle(.style(spacing: styleLabelSpacing))
     }
     
+}
+
+
+// MARK: - Environment
+
+extension EnvironmentValues {
+    @Entry var styleLabelSpacing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingLabel
 }
 
 
@@ -123,7 +118,8 @@ struct CustomSpacingLabelStyle: LabelStyle {
             StyleLabel(systemImage: "rectangle")
             
             StyleLabel("Title", icon: \.favorite)
-            StyleLabel("Custom Spacing", icon: \.favorite, spacing: \.spacingSections)
+            StyleLabel("Custom Spacing", icon: \.favorite)
+                .environment(\.styleLabelSpacing, \.spacingSections)
         }
 
         
