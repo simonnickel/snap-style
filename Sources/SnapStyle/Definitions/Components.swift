@@ -28,6 +28,7 @@ extension SnapStyle.ComponentDefinition {
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
+                case .accessory: \.accessory
                 case .value: \.value
                 case .action: \.action
                 case .separator: \.separator
@@ -40,6 +41,7 @@ extension SnapStyle.ComponentDefinition {
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
+                case .accessory: \.accessory
                 case .value: \.value
                 case .action: \.action
                 case .separator: \.separator
@@ -123,14 +125,14 @@ extension SnapStyle.ComponentDefinition {
     public static let listRow: Self = .init("listRow",
         fonts: { element in
             switch element {
-                case .icon: \.listIcon // TODO: Could be an adjustment to content (content + 2 ?)
+                case .icon, .accessory: \.listIcon // TODO: Could be an adjustment to content (content + 2 ?)
                 default: nil
             }
         },
         compositions: { element in
             switch element {
                 case .container: \.listRow
-                case .icon: \.interactiveIndicator
+                case .icon, .accessory: \.interactiveIndicator
                 default: nil
             }
         }

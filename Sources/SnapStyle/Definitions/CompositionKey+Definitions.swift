@@ -161,6 +161,8 @@ extension SnapStyle.CompositionKey {
 
     public var icon: ValueBuilder { .base(nil) }
     
+    public var accessory: ValueBuilder { .base(.reference(\.icon)) }
+    
     public var value: ValueBuilder { .base(nil) }
     
     public var action: ValueBuilder { .base(nil) }

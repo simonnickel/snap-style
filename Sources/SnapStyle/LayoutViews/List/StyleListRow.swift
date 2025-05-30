@@ -141,22 +141,16 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             case .navigate(value: _): EmptyView()
                 
             case .selectValue(let value, selection: let selection):
-                // TODO: Apply font
                 StyleIcon(value == selection.wrappedValue ? \.selectionOn : \.selectionOff)
-                    .style(foreground: \.interactive)
-                    .style(element: .icon)
+                    .style(element: .accessory)
                 
             case .selectValues(let value, selection: let selection):
-                // TODO: Apply font
                 StyleIcon(selection.wrappedValue.contains(value) ? \.selectionOn : \.selectionOff)
-                    .style(foreground: \.interactive)
-                    .style(element: .icon)
+                    .style(element: .accessory)
                 
             case .selected(let isSelected):
-                // TODO: Apply font
                 StyleIcon(isSelected.wrappedValue ? \.selectionOn : \.selectionOff)
-                    .style(foreground: \.interactive)
-                    .style(element: .icon)
+                    .style(element: .accessory)
                 
             case .enabled(let isOn):
                 // Placed in an overlay to not influence the rows height.
