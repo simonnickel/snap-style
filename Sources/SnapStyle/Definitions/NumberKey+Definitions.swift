@@ -20,6 +20,8 @@ extension SnapStyle.NumberKey {
     public var spacingElements: ValueBuilder { .base(.definition(.value(8))) }
     public var spacingLines: ValueBuilder { .base(.definition(.value(4))) }
     
+    public var spacingLabel: ValueBuilder { .base(.definition(.value(8))) } // System default is 8 (iOS 18)
+    
     
     // MARK: - Container: Padding
     
