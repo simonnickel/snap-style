@@ -24,8 +24,12 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
         StyleScreen(component: .list, configuration: .list) {
             List {
                 content()
+                    .styleListRowInsets()
             }
+            // Need to disable to use custom background.
             .scrollContentBackground(.hidden)
+            // SwiftUI prevents too small list rows, this messes with .listRowInsets though.
+            .environment(\.defaultMinListRowHeight, 0)
         }
     }
 }
