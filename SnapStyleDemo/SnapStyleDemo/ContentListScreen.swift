@@ -31,7 +31,8 @@ struct ContentListScreen: View {
                     ListRow(screen: screen)
                 }
             } header: {
-                Text(title)
+                StyleLabel(title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -44,7 +45,7 @@ struct ContentListScreen: View {
         let screen: ContentFlow.Screen
         
         var body: some View {
-            NavigationLink(value: screen) {
+            StyleListRow(.navigate(screen)) {
                 Text(screen.title)
             }
         }
