@@ -8,25 +8,6 @@ import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
-    public enum Variant {
-        case plain
-        
-        /// Navigation style.
-        case navigate(_ value: SelectionValue)
-        
-        /// Selection style to choose a single value.
-        case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
-        
-        /// Select style to choose multiple values.
-        case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
-        
-        /// Selection style, controlled via binding.
-        case selected(Binding<Bool>) // TODO: Is this Variant necessary? Should use enabled instead?
-        
-        /// Switch style, controlled via binding.
-        case enabled(Binding<Bool>)
-    }
-    
     public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
     
@@ -83,6 +64,9 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .highlighted : .normal)
     }
     
+    
+    // MARK: Action
+    
     private func viewButtonContainer(_ content: @escaping () -> Content, variant: Variant) -> some View {
         // TODO: Button Style
         Button {
@@ -113,6 +97,9 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         }
     }
 
+    
+    // MARK: Content
+    
     private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
         StyleHStack {
             
@@ -133,6 +120,9 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         }
         .style(composition: \.listRow, layers: [.foreground])
     }
+    
+    
+    // MARK: Accessory
     
     @ViewBuilder
     private func viewAccessory(for variant: Variant) -> some View {
@@ -161,8 +151,29 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                             EmptyView()
                         }
                     }
-                
         }
+    }
+    
+    
+    // MARK: Variant
+    
+    public enum Variant {
+        case plain
+        
+        /// Navigation style.
+        case navigate(_ value: SelectionValue)
+        
+        /// Selection style to choose a single value.
+        case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
+        
+        /// Select style to choose multiple values.
+        case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
+        
+        /// Selection style, controlled via binding.
+        case selected(Binding<Bool>) // TODO: Is this Variant necessary? Should use enabled instead?
+        
+        /// Switch style, controlled via binding.
+        case enabled(Binding<Bool>)
     }
 }
 
