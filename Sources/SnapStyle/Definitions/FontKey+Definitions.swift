@@ -61,8 +61,14 @@ extension SnapStyle.FontKey {
     
     // MARK: - List
     
-    public var listSectionheader: ValueBuilder {
-        .base(.definition(.font(.system(size: 16, weight: .medium))))
+    public var listSectionHeader: ValueBuilder {
+        .builder { context in
+            switch context.element.hierarchy {
+                case .any, .primary: .definition(.font(.system(size: 15, weight: .bold)))
+                case .secondary: .definition(.font(.system(size: 15, weight: .medium)))
+                case .tertiary: .definition(.font(.system(size: 15, weight: .regular)))
+            }
+        }
     }
     
 }

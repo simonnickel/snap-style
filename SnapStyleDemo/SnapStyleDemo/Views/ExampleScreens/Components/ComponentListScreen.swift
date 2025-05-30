@@ -46,7 +46,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .plain")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -69,7 +69,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .navigate")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -94,7 +94,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .selectValue")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -119,7 +119,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .selectValues")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -146,7 +146,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .selected")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -173,7 +173,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .enabled")
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
     }
@@ -214,7 +214,7 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel(data.title)
-                    .style(element: .title)
+                    .styleListSectionHeaderLabel()
             }
         }
         

@@ -108,7 +108,7 @@ extension SnapStyle.ComponentDefinition {
     public static let list: Self = .init("list",
         fonts: { element in
             switch element {
-                case .title: \.listSectionheader
+                case .title: \.listSectionHeader
                 default: nil
             }
         },

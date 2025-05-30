@@ -48,8 +48,8 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 StyleLabel("Triangle", systemImage: "triangle")
                 StyleLabel("Rectangle", systemImage: "rectangle")
             } header: {
-                Label("Section", systemImage: "star")
-                    .style(element: .title)
+                StyleLabel("Section", systemImage: "star")
+                    .styleListSectionHeaderLabel()
             }
         }
     }
