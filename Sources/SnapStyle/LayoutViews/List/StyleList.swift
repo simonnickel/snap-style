@@ -26,6 +26,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 content()
                     .styleListRowInsets()
             }
+            .listIconWidthScope()
             // Need to disable to use custom background.
             .scrollContentBackground(.hidden)
             // SwiftUI prevents too small list rows, this messes with .listRowInsets though.
@@ -52,7 +53,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 StyleLabel("Triangle", systemImage: "triangle")
                 StyleLabel("Rectangle", systemImage: "rectangle")
             } header: {
-                StyleLabel("Section", systemImage: "star")
+                Text("Section")
                     .styleListSectionHeaderLabel()
             }
         }

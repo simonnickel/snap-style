@@ -27,7 +27,7 @@ extension SnapStyle.NumberKey {
     public var spacingListRowTop: ValueBuilder { .base(.definition(.value(12))) }
     public var spacingListRowBottom: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
     public var spacingListRowLeading: ValueBuilder { .base(.definition(.value(20))) }
-    public var spacingListRowTrailing: ValueBuilder { .base(.definition(.value(12))) }
+    public var spacingListRowTrailing: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
     
     
     // MARK: - Container: Padding

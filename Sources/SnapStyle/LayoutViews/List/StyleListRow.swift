@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-
+import SnapStyleBase
 import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
@@ -27,20 +27,25 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         case enabled(Binding<Bool>)
     }
     
+    public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
     
     private let variant: Variant
+    private let icon: StyleIcon.Definition?
     private let isSelected: Bool
     private let content: () -> Content
     private let action: Action?
     
     public init(
         _ variant: Variant = .plain,
+        icon: IconKeyPath? = nil,
+        systemImage: String? = nil,
         isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.variant = variant
+        self.icon = .init(icon: icon, systemImage: systemImage)
         self.isSelected = isSelected
         self.action = action
         self.content = content
@@ -48,11 +53,14 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     /// An alternative init is required for variant that does not specify a `SelectionValue`.
     public init(
         _ variant: Variant = .plain,
+        icon: IconKeyPath? = nil,
+        systemImage: String? = nil,
         isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) where SelectionValue == Never {
         self.variant = variant
+        self.icon = .init(icon: icon, systemImage: systemImage)
         self.isSelected = isSelected
         self.action = action
         self.content = content
@@ -105,10 +113,17 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     }
 
     private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
-        // TODO: Customize Label to use \.spacingElements
         StyleHStack {
             
-            content()
+            StyleHStack(spacing: \.spacingListRowLeading) {
+                if let icon {
+                    StyleIcon(icon)
+                        .style(element: .icon)
+                        .listIconWidthSynchronized()
+                }
+                
+                content()
+            }
             
             StyleSpacer(minLength: \.spacingElements)
             
@@ -141,10 +156,13 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                     .style(foreground: \.interactive)
                 
             case .enabled(let isOn):
-                // TODO: Use styled toggle and enable full row interaction
-                Toggle(isOn: isOn) {
-                    EmptyView()
-                }
+                // Placed in an overlay to not influence the rows height.
+                ZStack {}
+                    .overlay(alignment: .trailing) {
+                        Toggle(isOn: isOn) {
+                            EmptyView()
+                        }
+                    }
                 
         }
     }
@@ -158,23 +176,47 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     @ViewBuilder @MainActor
     func createSection(isSelected: Bool) -> some View {
         Section {
-            StyleListRow(.navigate("Star"), isSelected: isSelected) {
-                StyleLabel("Star", systemImage: "star")
+            StyleListRow(
+                .navigate("Star"),
+                systemImage: "star",
+                isSelected: isSelected
+            ) {
+                Text("Star")
             }
-            StyleListRow(.selectValue("Rectangle", selection: .constant("Rectangle")), isSelected: isSelected) {
-                StyleLabel("Rectangle", systemImage: "rectangle")
+            StyleListRow(
+                .selectValue("Rectangle", selection: .constant("Rectangle")),
+                systemImage: "rectangle",
+                isSelected: isSelected
+            ) {
+                Text("Rectangle")
             }
-            StyleListRow(.selectValue("Circle", selection: .constant("Star")), isSelected: isSelected) {
-                StyleLabel("Circle", systemImage: "circle")
+            StyleListRow(
+                .selectValue("Circle", selection: .constant("Star")),
+                systemImage: "circle",
+                isSelected: isSelected
+            ) {
+                Text("Circle")
             }
-            StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: isSelected) {
-                StyleLabel("Triangle", systemImage: "triangle")
+            StyleListRow(
+                .enabled(Binding(get: { true }, set: { _ in })),
+                systemImage: "triangle",
+                isSelected: isSelected
+            ) {
+                Text("Triangle")
             }
-            StyleListRow(.enabled(Binding(get: { false }, set: { _ in })), isSelected: isSelected) {
-                StyleLabel("Pentagon", systemImage: "pentagon")
+            StyleListRow(
+                .enabled(Binding(get: { false }, set: { _ in })),
+                systemImage: "pentagon",
+                isSelected: isSelected
+            ) {
+                Text("Pentagon")
             }
-            StyleListRow(.plain, isSelected: isSelected) {
-                StyleLabel("Lines", systemImage: "line.horizontal.3")
+            StyleListRow(
+                .plain,
+                systemImage: "line.horizontal.3",
+                isSelected: isSelected
+            ) {
+                Text("Lines")
             }
         } header: {
             StyleLabel("isSelected: \(isSelected)")
