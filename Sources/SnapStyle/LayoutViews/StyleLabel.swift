@@ -22,7 +22,7 @@ public struct StyleLabel<Content: View>: View {
         self.systemImage = systemImage
     }
     
-    public init(title: String, icon: Icon? = nil, systemImage: String? = nil) where Content == Text {
+    public init(_ title: String, icon: Icon? = nil, systemImage: String? = nil) where Content == Text {
         self.content = { Text(title) }
         self.icon = icon
         self.systemImage = systemImage
@@ -74,7 +74,7 @@ public struct StyleLabel<Content: View>: View {
         
         StyleLabel(systemImage: "rectangle")
         
-        StyleLabel(title: "Title", icon: \.favorite)
+        StyleLabel("Title", icon: \.favorite)
         
     }
 }

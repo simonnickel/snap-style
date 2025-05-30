@@ -36,16 +36,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.plain) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.plain) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
                 }
                 StyleListRow(.plain) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                    StyleLabel("Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .plain")
+                StyleLabel("Variant .plain")
                     .style(element: .title)
             }
         }
@@ -59,16 +59,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.navigate("Star")) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.navigate("Rectangle")) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
                 }
                 StyleListRow(.navigate("Triangle")) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                    StyleLabel("Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .navigate")
+                StyleLabel("Variant .navigate")
                     .style(element: .title)
             }
         }
@@ -84,16 +84,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.selectValue("Star", selection: $selection)) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.selectValue("Rectangle", selection: $selection)) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
                 }
                 StyleListRow(.selectValue("Triangle", selection: $selection)) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                    StyleLabel("Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .selectValue")
+                StyleLabel("Variant .selectValue")
                     .style(element: .title)
             }
         }
@@ -109,16 +109,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.selectValues("Star", selection: $selection)) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.selectValues("Rectangle", selection: $selection)) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
                 }
                 StyleListRow(.selectValues("Triangle", selection: $selection)) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                    StyleLabel("Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .selectValues")
+                StyleLabel("Variant .selectValues")
                     .style(element: .title)
             }
         }
@@ -136,16 +136,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.selected($isSelectedStar)) {
-                    StyleLabel(title: "Star (Binding)", systemImage: "star")
+                    StyleLabel("Star (Binding)", systemImage: "star")
                 }
                 StyleListRow(.selected($isSelectedRectangle)) {
-                    StyleLabel(title: "Rectangle (Binding)", systemImage: "rectangle")
+                    StyleLabel("Rectangle (Binding)", systemImage: "rectangle")
                 }
                 StyleListRow(.selected($isSelectedTriangle)) {
-                    StyleLabel(title: "Triangle (Binding)", systemImage: "triangle")
+                    StyleLabel("Triangle (Binding)", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .selected")
+                StyleLabel("Variant .selected")
                     .style(element: .title)
             }
         }
@@ -163,16 +163,16 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(.enabled($enabledStar)) {
-                    StyleLabel(title: "Star", systemImage: "star")
+                    StyleLabel("Star", systemImage: "star")
                 }
                 StyleListRow(.enabled($enabledRectangle)) {
-                    StyleLabel(title: "Rectangle", systemImage: "rectangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
                 }
                 StyleListRow(.enabled($enabledTriangle)) {
-                    StyleLabel(title: "Triangle", systemImage: "triangle")
+                    StyleLabel("Triangle", systemImage: "triangle")
                 }
             } header: {
-                StyleLabel(title: "Variant .enabled")
+                StyleLabel("Variant .enabled")
                     .style(element: .title)
             }
         }
@@ -213,7 +213,7 @@ struct ComponentListScreen: View {
                     ListItemView(data: item, selection: $selection)
                 }
             } header: {
-                StyleLabel(title: data.title)
+                StyleLabel(data.title)
                     .style(element: .title)
             }
         }
@@ -238,7 +238,7 @@ struct ComponentListScreen: View {
                     Button {
                         selection = data.id
                     } label: {
-                        StyleLabel(title: data.title, systemImage: data.icon)
+                        StyleLabel(data.title, systemImage: data.icon)
                     }
                 }
             }
