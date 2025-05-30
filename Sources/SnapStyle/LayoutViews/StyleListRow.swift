@@ -94,7 +94,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 }
             }
         }
-        // .listRowInsets(.zero) // TODO: Configure ListRow inset.
+//         .listRowInsets(.zero) // TODO: Configure ListRow inset.
         .style(listRowBackground: \.listRow)
         // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
@@ -151,36 +151,46 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
 
 #Preview {
     
-    NavigationStack {
+    @ViewBuilder @MainActor
+    func createSection(isSelected: Bool) -> some View {
+        Section {
+            StyleListRow(.navigate("Star"), isSelected: isSelected) {
+                StyleLabel("Star", systemImage: "star")
+            }
+            StyleListRow(.selectValue("Rectangle", selection: .constant("Rectangle")), isSelected: isSelected) {
+                StyleLabel("Rectangle", systemImage: "rectangle")
+            }
+            StyleListRow(.selectValue("Circle", selection: .constant("Star")), isSelected: isSelected) {
+                StyleLabel("Circle", systemImage: "circle")
+            }
+            StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: isSelected) {
+                StyleLabel("Triangle", systemImage: "triangle")
+            }
+            StyleListRow(.enabled(Binding(get: { false }, set: { _ in })), isSelected: isSelected) {
+                StyleLabel("Pentagon", systemImage: "pentagon")
+            }
+            StyleListRow(.plain, isSelected: isSelected) {
+                StyleLabel("Lines", systemImage: "line.horizontal.3")
+            }
+        } header: {
+            StyleLabel("isSelected: \(isSelected)")
+                .styleListSectionHeaderLabel()
+        }
+    }
+    
+    return NavigationStack {
         List {
-            StyleListRow(.navigate("Star"), isSelected: true) {
-                StyleLabel("Star", systemImage: "star")
-            }
-            StyleListRow(.navigate("Circle"), isSelected: false) {
-                StyleLabel("Circle", systemImage: "circle")
-            }
-            StyleListRow(.selectValue("Star", selection: .constant("Star")), isSelected: true) {
-                StyleLabel("Star", systemImage: "star")
-            }
-            StyleListRow(.selectValue("Circle", selection: .constant("Star")), isSelected: false) {
-                StyleLabel("Circle", systemImage: "circle")
-            }
-            StyleListRow(.enabled(Binding(get: { true }, set: { _ in })), isSelected: true) {
-                StyleLabel("Star", systemImage: "star")
-            }
-            StyleListRow(.enabled(Binding(get: { false }, set: { _ in })), isSelected: true) {
-                StyleLabel("Circle", systemImage: "circle")
-            }
-            StyleListRow(.plain, isSelected: true) {
-                StyleLabel("Star", systemImage: "star")
-            }
-            StyleListRow(.plain, isSelected: false) {
-                StyleLabel("Circle", systemImage: "circle")
-            }
+            createSection(isSelected: false)
+            createSection(isSelected: true)
             
             // System Rows for reference
-            StyleLabel("Triangle", systemImage: "triangle")
-            Label("Rectangle", systemImage: "rectangle")
+            Section {
+                StyleLabel("Triangle", systemImage: "triangle")
+                Label("Rectangle", systemImage: "rectangle")
+            } header: {
+                StyleLabel("System Rows")
+                    .styleListSectionHeaderLabel()
+            }
         }
     }
 
