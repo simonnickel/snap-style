@@ -121,6 +121,12 @@ extension SnapStyle.ComponentDefinition {
     )
     
     public static let listRow: Self = .init("listRow",
+        fonts: { element in
+            switch element {
+                case .icon: \.listIcon // TODO: Could be an adjustment to content (content + 2 ?)
+                default: nil
+            }
+        },
         compositions: { element in
             switch element {
                 case .container: \.listRow

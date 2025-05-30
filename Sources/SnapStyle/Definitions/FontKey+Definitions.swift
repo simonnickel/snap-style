@@ -42,7 +42,7 @@ extension SnapStyle.FontKey {
     
     public var label: ValueBuilder { .base(nil) }
     
-    public var icon: ValueBuilder { .base(nil) }
+    public var icon: ValueBuilder { .base(nil) } // TODO: Could be an adjustment to content (content + 2 ?)
     
     public var value: ValueBuilder { .base(nil) }
 
@@ -70,5 +70,7 @@ extension SnapStyle.FontKey {
             }
         }
     }
+    
+    public var listIcon: ValueBuilder { .base(.definition(.font(.system(size: 20)))) }
     
 }
