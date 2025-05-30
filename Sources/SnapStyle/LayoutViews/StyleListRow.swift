@@ -68,7 +68,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 viewButtonContainer(content, variant: variant)
             }
         }
-//         .listRowInsets(.zero) // TODO: Configure ListRow inset.
+        .environment(\.styleLabelSpacing, \.spacingListRowLeading)
         .style(listRowBackground: \.listRow)
         // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
