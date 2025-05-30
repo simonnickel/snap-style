@@ -6,9 +6,15 @@
 import SnapStyle
 import SwiftUI
 
+extension EnvironmentValues {
+    @Entry var navigationState: [String] = []
+}
+
 struct ComponentListScreen: View {
     
     @State private var selected: String? = nil
+    
+    @State private var navigationState: [String] = []
     
     var body: some View {
         
@@ -25,7 +31,14 @@ struct ComponentListScreen: View {
         }
         .navigationDestination(for: String.self) { value in
             Text(value)
+                .onAppear {
+                    navigationState.append(value)
+                }
+                .onDisappear {
+                    navigationState.removeLast()
+                }
         }
+        .environment(\.navigationState, navigationState)
         
     }
     
@@ -57,15 +70,29 @@ struct ComponentListScreen: View {
     
     struct SectionVariantNavigate: View {
         
+        @Environment(\.navigationState) private var navgationState
+        
         var body: some View {
             Section {
-                StyleListRow(.navigate("Star"), systemImage: "star") {
+                StyleListRow(
+                    .navigate("Star"),
+                    systemImage: "star",
+                    isSelected: navgationState.contains("Star")
+                ) {
                     Text("Star")
                 }
-                StyleListRow(.navigate("Rectangle"), systemImage: "rectangle") {
+                StyleListRow(
+                    .navigate("Rectangle"),
+                    systemImage: "rectangle",
+                    isSelected: navgationState.contains("Rectangle")
+                ) {
                     Text("Rectangle")
                 }
-                StyleListRow(.navigate("Triangle"), systemImage: "triangle") {
+                StyleListRow(
+                    .navigate("Triangle"),
+                    systemImage: "triangle",
+                    isSelected: navgationState.contains("Triangle")
+                ) {
                     Text("Triangle")
                 }
             } header: {

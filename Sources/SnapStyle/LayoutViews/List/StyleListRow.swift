@@ -78,8 +78,9 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         }
         .environment(\.styleLabelSpacing, \.spacingListRowLeading)
         .style(listRowBackground: \.listRow)
-        // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
-        .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
+        // TODO: Highlight on hover.
+        // TODO: Highlight on control interaction?
+        .style(component: .listRow, applyContainer: nil, state: isSelected ? .highlighted : .normal)
     }
     
     private func viewButtonContainer(_ content: @escaping () -> Content, variant: Variant) -> some View {
