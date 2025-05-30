@@ -95,7 +95,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             }
         }
         // .listRowInsets(.zero) // TODO: Configure ListRow inset.
-        .style(listRowBackground: \.interactiveListRow)
+        .style(listRowBackground: \.listRow)
         // TODO: Highlight on hover and navigation selection. Only use selected for actual selection.
         .style(component: .listRow, applyContainer: nil, state: isSelected ? .selected : .normal)
     }

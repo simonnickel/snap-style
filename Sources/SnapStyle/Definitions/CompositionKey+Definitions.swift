@@ -34,7 +34,7 @@ extension SnapStyle.CompositionKey {
         }
     }
     
-    public var interactiveListRow: ValueBuilder {
+    public var listRow: ValueBuilder {
         .builder { context in
             return switch context.component.state {
                 case .normal:

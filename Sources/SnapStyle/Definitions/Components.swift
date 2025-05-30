@@ -124,7 +124,7 @@ extension SnapStyle.ComponentDefinition {
     public static let listRow: Self = .init("listRow",
         compositions: { element in
             switch element {
-                case .container: \.interactiveListRow
+                case .container: \.listRow
                 default: nil
             }
         }
