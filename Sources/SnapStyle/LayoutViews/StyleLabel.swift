@@ -45,9 +45,11 @@ public struct StyleLabel<Content: View>: View {
             if let icon {
                 if let iconName = style.value(for: icon)?.wrappedValue {
                     Image(systemName: iconName)
+                        .style(element: .icon)
                 }
             } else if let systemImage {
                 Image(systemName: systemImage)
+                    .style(element: .icon)
             } else {
                 EmptyView()
             }

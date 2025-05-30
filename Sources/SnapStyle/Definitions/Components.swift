@@ -115,7 +115,6 @@ extension SnapStyle.ComponentDefinition {
         compositions: { element in
             switch element {
                 case .container: \.screen
-                case .icon: \.icon // TODO: Should be Indicator? Or something with accent?
                 default: nil
             }
         }
@@ -125,6 +124,7 @@ extension SnapStyle.ComponentDefinition {
         compositions: { element in
             switch element {
                 case .container: \.listRow
+                case .icon: \.interactiveIndicator
                 default: nil
             }
         }

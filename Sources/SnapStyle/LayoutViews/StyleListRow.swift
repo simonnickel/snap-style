@@ -111,6 +111,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
             viewAccessory(for: variant)
             
         }
+        .style(composition: \.listRow, layers: [.foreground])
     }
     
     @ViewBuilder

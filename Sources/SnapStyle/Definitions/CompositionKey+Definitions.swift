@@ -34,6 +34,22 @@ extension SnapStyle.CompositionKey {
         }
     }
     
+    /// An indicator on an interactive Component, like an icon in a list row.
+    public var interactiveIndicator: ValueBuilder {
+        .builder { context in
+            
+            let foreground: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onAccent : \.interactive
+            
+            return switch context.component.state {
+                case .normal: .definition(.foreground(foreground))
+                    
+                case .disabled: .definition(.foreground(\.disabled))
+                    
+                case .highlighted, .selected: .definition(.foreground(foreground))
+            }
+        }
+    }
+    
     public var listRow: ValueBuilder {
         .builder { context in
             return switch context.component.state {
