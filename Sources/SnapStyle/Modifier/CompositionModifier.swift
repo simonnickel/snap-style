@@ -89,12 +89,10 @@ internal struct CompositionBackgroundOverlayModifier: ViewModifier {
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        if let surfaceKey = style.surfaceKey(layer: .backgroundOverlay, for: keyPath) {
-            content
-                .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
-        } else {
-            content
-        }
+        // Has to be applied even if no surface a key is available, to allow animation of appearing value.
+        let surfaceKey = style.surfaceKey(layer: .backgroundOverlay, for: keyPath)
+        content
+            .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }
 
 }

@@ -74,7 +74,7 @@ extension SnapStyle.SurfaceKey {
     public var interactionStateOverlay: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .normal, .disabled: nil
+                case .normal, .disabled: .reference(\.clear)
                 case .highlighted: .definition(.color(.black.opacity(0.2)))
                 case .selected: .definition(.color(.black.opacity(0.3)))
             }
@@ -83,7 +83,7 @@ extension SnapStyle.SurfaceKey {
     public var interactionStateOverlayAccent: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .normal, .disabled: nil
+                case .normal, .disabled: .reference(\.clear)
                 case .highlighted: .reference(\.accent, adjustments: [.opacity(0.2)])
                 case .selected: .reference(\.accent, adjustments: [.opacity(0.3)])
             }

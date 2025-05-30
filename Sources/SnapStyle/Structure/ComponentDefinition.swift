@@ -125,11 +125,22 @@ internal struct ComponentModifier: ViewModifier {
     
     let component: SnapStyle.ComponentDefinition
     let state: SnapStyle.Component.InteractionState
+    
+    /// Internal copy to apply animation on changes.
+    @State private var stateInternal: SnapStyle.Component.InteractionState = .normal
 
     func body(content: Content) -> some View {
-        let componentStack = style.context.componentStack.appended(component, state: state)
+        let componentStack = style.context.componentStack.appended(component, state: stateInternal)
         content
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
+            .onChange(of: state, initial: true) { oldValue, newValue in
+                // TODO FB: (iOS 18) Need to delay to prevent from SwiftUI skipping animations. Happens e.g. when pushing a screen on a NavigationStack.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    withAnimation {
+                        stateInternal = newValue
+                    }
+                }
+            }
     }
 
 }

@@ -123,6 +123,12 @@ extension SnapStyle.ComponentDefinition {
     )
     
     public static let listRow: Self = .init("listRow",
+        padding: { element in
+            switch element {
+                case .container: .listRow
+                default: nil
+            }
+        },
         fonts: { element in
             switch element {
                 case .icon, .accessory: \.listIcon // TODO: Could be an adjustment to content (content + 2 ?)

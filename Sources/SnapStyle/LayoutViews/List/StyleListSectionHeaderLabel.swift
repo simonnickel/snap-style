@@ -24,6 +24,7 @@ internal struct ListSectionHeaderLabel: ViewModifier {
     
     func body(content: Content) -> some View {
         content
+            .style(padding: \.spacingListRowLeading, .leading)
             .style(element: .title, hierarchy: hieararchy)
             .textCase(nil)
     }
@@ -36,32 +37,32 @@ internal struct ListSectionHeaderLabel: ViewModifier {
 #Preview {
     StyleList {
         Section {
-            StyleLabel("Row")
-            StyleLabel("Row")
+            StyleListRow { Text("Row") }
+            StyleListRow { Text("Row") }
         } header: {
             StyleLabel("Header .primary")
                 .styleListSectionHeaderLabel(hierarchy: .primary)
         }
 
         Section {
-            StyleLabel("Row")
-            StyleLabel("Row")
+            StyleListRow { Text("Row") }
+            StyleListRow { Text("Row") }
         } header: {
             StyleLabel("Header .secondary (default)")
                 .styleListSectionHeaderLabel()
         }
         
         Section {
-            StyleLabel("Row")
-            StyleLabel("Row")
+            StyleListRow { Text("Row") }
+            StyleListRow { Text("Row") }
         } header: {
             StyleLabel("Header .tertiary")
                 .styleListSectionHeaderLabel(hierarchy: .tertiary)
         }
         
         Section {
-            StyleLabel("Row")
-            StyleLabel("Row")
+            StyleListRow { Text("Row") }
+            StyleListRow { Text("Row") }
         } header: {
             StyleLabel("Header")
         }

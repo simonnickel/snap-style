@@ -24,7 +24,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
         StyleScreen(component: .list, configuration: .list) {
             List {
                 content()
-                    .styleListRowInsets()
+                    .styleListRowInsets(\.zero)
             }
             .listIconWidthScope()
             // Need to disable to use custom background.

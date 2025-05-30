@@ -53,17 +53,12 @@ extension SnapStyle.CompositionKey {
     public var listRow: ValueBuilder {
         .builder { context in
             return switch context.component.state {
-                case .normal:
-                        .definition(.layers([
-                            .foreground: \.onContent0, .background: \.content0
-                        ]))
-                    
                 case .disabled:
                         .definition(.layers([
-                            .foreground: \.disabled, .background: \.content0
+                            .foreground: \.disabled, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
                         ]))
                     
-                case .highlighted, .selected:
+                case .normal, .highlighted, .selected:
                         .definition(.layers([
                             .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
                         ]))

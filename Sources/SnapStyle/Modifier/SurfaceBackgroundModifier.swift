@@ -9,7 +9,7 @@ import SwiftUI
 extension View {
     
     public func style(
-        background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath,
+        background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?,
         ignoresSafeAreaEdges: Edge.Set = []
     ) -> some View {
         self
@@ -25,12 +25,12 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        // Background has to be applied if a key is available. Even if no value is present, to allow animation of appearing value.
-        let surface = style.surface(for: keyPath)
+        // Has to be applied even if no value is present, to allow animation of appearing value.
+        let surface = style.surface(for: keyPath ?? \.clear)
         content
             .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }

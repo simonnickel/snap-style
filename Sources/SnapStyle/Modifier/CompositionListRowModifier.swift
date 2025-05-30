@@ -11,6 +11,7 @@ extension View {
     /// Applies the background layer of the given `CompositionKey` as listRowBackground.
     /// - Parameter listRowBackground: The `CompositionKey` to use.
     /// - Returns: A modified view.
+    @available(*, deprecated, message: "`style(listRowBackground:)` is not recommended to use. Has issues with environment and does not properly animate component state changes. (iOS 18) - Should use `.styleListRowInsets(.zero)` instead and `.style(component: .listRow)`")
     public func style(
         listRowBackground keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
     ) -> some View {
