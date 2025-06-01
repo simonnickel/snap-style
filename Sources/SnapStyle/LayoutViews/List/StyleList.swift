@@ -26,6 +26,10 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 content()
                     .styleListRowInsets(\.zero)
             }
+            .styleModify(with: \.spacingSections, transform: { content, value in
+                content
+                    .listSectionSpacing(value)
+            })
             .listIconWidthScope()
             // Need to disable to use custom background.
             .scrollContentBackground(.hidden)
@@ -54,6 +58,19 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 StyleLabel("Rectangle", systemImage: "rectangle")
             } header: {
                 Text("Section")
+                    .styleListSectionHeaderLabel()
+            }
+            Section {
+                StyleListRow(.navigate("Star"), isSelected: true) {
+                    StyleLabel("Star", systemImage: "star")
+                }
+                StyleListRow(.navigate("Circle"), isSelected: false) {
+                    StyleLabel("Circle", systemImage: "circle")
+                }
+                StyleLabel("Triangle", systemImage: "triangle")
+                StyleLabel("Rectangle", systemImage: "rectangle")
+            } header: {
+                Text("Section 2")
                     .styleListSectionHeaderLabel()
             }
         }
