@@ -26,17 +26,22 @@ struct ComponentListScreen: View {
             SectionVariantSelectValues()
             SectionVariantSelected()
             SectionVariantNoIcon()
-            ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected)
-            ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected)
+            ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected, applyStyle: true)
+            ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected, applyStyle: true)
         }
         .navigationDestination(for: String.self) { value in
-            Text(value)
-                .onAppear {
-                    navigationState.append(value)
-                }
-                .onDisappear {
-                    navigationState.removeLast()
-                }
+            List {
+                ListSectionView(data: .init(title: "Section 1", count: 3), selection: $selected, applyStyle: false)
+                ListSectionView(data: .init(title: "Section 2", count: 4), selection: $selected, applyStyle: false)
+                ListSectionView(data: .init(title: "Section 2", count: 30), selection: $selected, applyStyle: false)
+            }
+            .navigationTitle(value)
+            .onAppear {
+                navigationState.append(value)
+            }
+            .onDisappear {
+                navigationState.removeLast()
+            }
         }
         .environment(\.navigationState, navigationState)
         
@@ -263,15 +268,20 @@ struct ComponentListScreen: View {
 
         let data: Data
         @Binding var selection: String?
+        let applyStyle: Bool
         
         var body: some View {
             Section {
                 ForEach(data.items) { item in
-                    ListItemView(data: item, selection: $selection)
+                    ListItemView(data: item, selection: $selection, applyStyle: applyStyle)
                 }
             } header: {
-                StyleLabel(data.title)
-                    .styleListSectionHeaderLabel()
+                if applyStyle {
+                    StyleLabel(data.title)
+                        .styleListSectionHeaderLabel()
+                } else {
+                    Text(data.title)
+                }
             }
         }
         
@@ -288,14 +298,23 @@ struct ComponentListScreen: View {
             
             let data: Data
             @Binding var selection: String?
+            let applyStyle: Bool
             
             var body: some View {
-                StyleListRow(systemImage: data.icon, isSelected: selection ?? "" == data.id) {
-                    // TODO: Button should have no styling here.
+                if applyStyle {
+                    StyleListRow(systemImage: data.icon, isSelected: selection ?? "" == data.id) {
+                        // TODO: Button should have no styling here.
+                        Button {
+                            selection = data.id
+                        } label: {
+                            Text(data.title)
+                        }
+                    }
+                } else {
                     Button {
                         selection = data.id
                     } label: {
-                        Text(data.title)
+                        Label(data.title, systemImage: data.icon)
                     }
                 }
             }
