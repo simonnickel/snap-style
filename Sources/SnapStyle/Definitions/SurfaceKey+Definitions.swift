@@ -22,7 +22,7 @@ extension SnapStyle.SurfaceKey {
     public var onLight2: ValueBuilder { .base(.definition(.color(.gray))) }
     
     public var dark0: ValueBuilder { .base(.definition(.color(.black))) }
-    public var dark1: ValueBuilder { .base(.definition(.color(.init(white: 0.2)))) }
+    public var dark1: ValueBuilder { .base(.definition(.color(Color(red: 28/255, green: 28/255, blue: 30/255)))) }
     public var dark2: ValueBuilder { .base(.definition(.color(.init(white: 0.35)))) }
     public var dark3: ValueBuilder { .base(.definition(.color(.init(white: 0.45)))) }
     public var onDark0: ValueBuilder { .base(.definition(.color(.white))) }
@@ -95,7 +95,7 @@ extension SnapStyle.SurfaceKey {
     
     public var screen: ValueBuilder { .builder { context in
         switch context.colorScheme {
-            case .light: .definition(.color(Color(red: 242/255, green: 242/255, blue: 242/247)))
+            case .light: .definition(.color(Color(red: 242/255, green: 242/255, blue: 247/255)))
             case .dark: .reference(\.dark0)
             default: nil
         }
