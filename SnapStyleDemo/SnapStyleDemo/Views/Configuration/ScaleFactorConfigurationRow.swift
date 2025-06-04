@@ -14,10 +14,11 @@ struct ScaleFactorConfigurationRow: View {
     @State private var scaleFactor: CGFloat = 1.0
 
     var body: some View {
-        StyleVStack(spacing: \.spacingElements) {
-            StyleLabel("Scale Factor")
-
-            // TODO: Inset to match ListRow label inset.
+        StyleListRow(icon: \.scaleFactor) {
+            StyleVStack(spacing: \.spacingElements) {
+                StyleLabel("Scale Factor")
+            }
+        } content: {
             Slider(value: $scaleFactor, in: 0.5...2)
                 .onAppear {
                     scaleFactor = configuration.scaleFactor
@@ -34,6 +35,8 @@ struct ScaleFactorConfigurationRow: View {
 
 #Preview {
 
-    ScaleFactorConfigurationRow()
+    StyleList {
+        ScaleFactorConfigurationRow()
+    }
 
 }

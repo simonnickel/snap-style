@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
+public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>: View {
     
     public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
@@ -14,7 +14,8 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     private let variant: Variant
     private let icon: StyleIcon.Definition?
     private let isSelected: Bool
-    private let content: () -> Content
+    private let title: () -> Title
+    private let content: (() -> Content)?
     private let action: Action?
     
     public init(
@@ -23,14 +24,34 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         systemImage: String? = nil,
         isSelected: Bool = false,
         action: Action? = nil,
+        @ViewBuilder title: @escaping () -> Title,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
         self.isSelected = isSelected
         self.action = action
+        self.title = title
         self.content = content
     }
+    
+    /// An alternative init is required for variant that does not specify a `Content`.
+    public init(
+        _ variant: Variant = .plain,
+        icon: IconKeyPath? = nil,
+        systemImage: String? = nil,
+        isSelected: Bool = false,
+        action: Action? = nil,
+        @ViewBuilder title: @escaping () -> Title
+    ) where Content == Never {
+        self.variant = variant
+        self.icon = .init(icon: icon, systemImage: systemImage)
+        self.isSelected = isSelected
+        self.action = action
+        self.title = title
+        self.content = nil
+    }
+    
     /// An alternative init is required for variant that does not specify a `SelectionValue`.
     public init(
         _ variant: Variant = .plain,
@@ -38,24 +59,45 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
         systemImage: String? = nil,
         isSelected: Bool = false,
         action: Action? = nil,
+        @ViewBuilder title: @escaping () -> Title,
         @ViewBuilder content: @escaping () -> Content
     ) where SelectionValue == Never {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
         self.isSelected = isSelected
         self.action = action
+        self.title = title
         self.content = content
     }
     
+    /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of Content.
+    public init(
+        _ variant: Variant = .plain,
+        icon: IconKeyPath? = nil,
+        systemImage: String? = nil,
+        isSelected: Bool = false,
+        action: Action? = nil,
+        @ViewBuilder title: @escaping () -> Title
+    ) where SelectionValue == Never, Content == Never {
+        self.variant = variant
+        self.icon = .init(icon: icon, systemImage: systemImage)
+        self.isSelected = isSelected
+        self.action = action
+        self.title = title
+        self.content = nil
+    }
+    
     public var body: some View {
-        Group {
+        StyleVStack(spacing: \.spacingElements) {
             if case let .navigate(value) = variant {
                 NavigationLink(value: value) {
-                    viewContent(content, variant: variant)
+                    viewTitle(title, variant: variant)
                 }
             } else {
-                viewButtonContainer(content, variant: variant)
+                viewButtonContainer(title, variant: variant)
             }
+            
+            content?()
         }
         .environment(\.styleLabelSpacing, \.spacingListRowLeading)
         // TODO: Highlight on hover.
@@ -66,7 +108,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
     
     // MARK: Action
     
-    private func viewButtonContainer(_ content: @escaping () -> Content, variant: Variant) -> some View {
+    private func viewButtonContainer(_ content: @escaping () -> Title, variant: Variant) -> some View {
         // TODO: Button Style
         Button {
             if let action {
@@ -92,14 +134,14 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 }
             }
         } label: {
-            viewContent(content, variant: variant)
+            viewTitle(title, variant: variant)
         }
     }
 
     
     // MARK: Content
     
-    private func viewContent(_ content: @escaping () -> Content, variant: Variant) -> some View {
+    private func viewTitle(_ title: @escaping () -> Title, variant: Variant) -> some View {
         StyleHStack {
             
             StyleHStack(spacing: \.spacingListRowLeading) {
@@ -109,7 +151,7 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                         .listIconWidthSynchronized()
                 }
                 
-                content()
+                title()
             }
             
             StyleSpacer(minLength: \.spacingElements)
@@ -225,6 +267,15 @@ public struct StyleListRow<SelectionValue: Hashable, Content: View>: View {
                 isSelected: isSelected
             ) {
                 Text("Lines")
+            }
+            StyleListRow(
+                .plain,
+                systemImage: "square",
+                isSelected: isSelected
+            ) {
+                Text("With Content")
+            } content: {
+                Rectangle()
             }
         } header: {
             StyleLabel("isSelected: \(isSelected)")

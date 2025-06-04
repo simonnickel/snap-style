@@ -51,9 +51,7 @@ struct ConfigurationListView: View {
                 Text("Color")
             }
 
-            StyleListRow(icon: \.scaleFactor) {
-                ScaleFactorConfigurationRow()
-            }
+            ScaleFactorConfigurationRow()
         }
     }
 }
