@@ -15,7 +15,7 @@ struct ScaleFactorConfigurationRow: View {
 
     var body: some View {
         StyleVStack(spacing: \.spacingElements) {
-            StyleLabel("Scale Factor", icon: \.scaleFactor)
+            StyleLabel("Scale Factor")
 
             // TODO: Inset to match ListRow label inset.
             Slider(value: $scaleFactor, in: 0.5...2)

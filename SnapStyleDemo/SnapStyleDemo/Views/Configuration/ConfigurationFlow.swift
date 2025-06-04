@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SwiftUI
 
 struct ConfigurationFlow: View {
@@ -45,14 +46,15 @@ struct ConfigurationFlow: View {
 
 struct ConfigurationListView: View {
     var body: some View {
-        List {
-            NavigationLink(value: ConfigurationFlow.Screen.color) {
-                Label("Color", systemImage: "swatchpalette")
+        StyleList {
+            StyleListRow(.navigate(ConfigurationFlow.Screen.color), systemImage: "swatchpalette") {
+                Text("Color")
             }
 
-            ScaleFactorConfigurationRow()
+            StyleListRow(icon: \.scaleFactor) {
+                ScaleFactorConfigurationRow()
+            }
         }
-        .listStyle(.sidebar)
     }
 }
 
