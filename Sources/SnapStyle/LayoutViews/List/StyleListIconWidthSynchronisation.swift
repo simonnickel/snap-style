@@ -41,6 +41,28 @@ private struct ListIconWidthSynchronisationModifier: ViewModifier {
 }
 
 
+// MARK: - Inset
+
+extension View {
+    
+    func insetListContent() -> some View {
+        modifier(ListContentInsetModifier())
+    }
+}
+
+private struct ListContentInsetModifier: ViewModifier {
+    
+    @Environment(\.listIconWidth) private var listIconWidth
+    
+    func body(content: Content) -> some View {
+        content
+            .padding(.leading, listIconWidth)
+            .style(padding: \.spacingListRowLeading, .leading)
+    }
+    
+}
+
+
 // MARK: - Scope
 
 extension View {

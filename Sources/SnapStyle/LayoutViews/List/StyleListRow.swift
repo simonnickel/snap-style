@@ -98,6 +98,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
             }
             
             content?()
+                .insetListContent()
         }
         .environment(\.styleLabelSpacing, \.spacingListRowLeading)
         // TODO: Highlight on hover.
