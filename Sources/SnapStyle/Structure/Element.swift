@@ -8,9 +8,9 @@ import SnapStyleBase
 extension SnapStyle {
 
     public struct Element: Hashable, Sendable, CaseIterable {
-    
-        
-    // MARK: Element
+
+
+        // MARK: Element
 
         public let type: ElementType
         public let hierarchy: Hierarchy
@@ -19,18 +19,18 @@ extension SnapStyle {
             self.type = type
             self.hierarchy = hierarchy
         }
-        
+
         static var any: Self { .init(type: .any, hierarchy: .any) }
-        
-        
+
+
         // MARK: ElementType
-        
+
         public enum ElementType: String, Sendable, CaseIterable {
 
             case any
-            
+
             case container
-            
+
             case title
             case label
             case icon
@@ -41,22 +41,22 @@ extension SnapStyle {
 
         }
 
-        
+
         // MARK: Hierarchy
-        
+
         public enum Hierarchy: String, Sendable, CaseIterable {
 
             case any
-            
+
             case primary
             case secondary
             case tertiary
 
         }
 
-        
+
         // MARK: CaseIterable
-        
+
         public static let allCases: [Element] = {
             var cases: [Element] = []
             for element in ElementType.allCases {
@@ -75,8 +75,8 @@ extension SnapStyle {
 // MARK: - Context
 
 extension SnapStyle.Context {
-    
-    public var element: SnapStyle.Element { getValue(for: Self.element) ?? .any}
+
+    public var element: SnapStyle.Element { getValue(for: Self.element) ?? .any }
     package static var element: Attribute<String, SnapStyle.Element> { .init(key: "element", valueDefault: .any) }
-    
+
 }

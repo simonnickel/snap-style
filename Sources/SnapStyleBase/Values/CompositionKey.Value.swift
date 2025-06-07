@@ -10,22 +10,22 @@ extension SnapStyle {
 }
 
 extension SnapStyle.CompositionKey {
-    
-    
+
+
     // MARK: - Layer
-    
+
     public enum Layer: CaseIterable {
         case any
         case foreground
         case background
         case backgroundOverlay
     }
-    
-    
+
+
     // MARK: - CompositionKey.Value
 
     public enum Value: StyleValue {
-        
+
         public typealias WrappedValue = LayeredShapeStyle
         public typealias Adjustment = SnapStyle.CompositionKey.Adjustment
 
@@ -33,28 +33,28 @@ extension SnapStyle.CompositionKey {
         case foreground(LayeredShapeStyle.LayerValue)
         case layers([Layer: LayeredShapeStyle.LayerValue])
         case composition(WrappedValue)
-        
+
         public var wrappedValue: WrappedValue {
             switch self {
-                case .background(let layerValue): LayeredShapeStyle([.background : layerValue])
-                case .foreground(let layerValue): LayeredShapeStyle([.foreground : layerValue])
+                case .background(let layerValue): LayeredShapeStyle([.background: layerValue])
+                case .foreground(let layerValue): LayeredShapeStyle([.foreground: layerValue])
                 case .layers(let valueForLayer): LayeredShapeStyle(valueForLayer)
                 case .composition(let layeredShapeStyle): layeredShapeStyle
             }
         }
-        
+
         public var description: String {
             "\(wrappedValue)"
         }
-        
-        
+
+
         // MARK: LayeredShapeStyle
-        
+
         public struct LayeredShapeStyle {
-            
+
             public typealias LayerValue = SnapStyle.SurfaceKey.ValueBuilderKeyPath
             typealias ShapeStyleForLayer = [Layer: LayerValue]
-            
+
             let values: ShapeStyleForLayer
 
             public func surfaceKey(for layer: Layer) -> LayerValue? {
@@ -83,7 +83,7 @@ extension SnapStyle.CompositionKey {
         public func applied(on value: Value) -> Value {
             value
         }
-        
+
     }
 
 }

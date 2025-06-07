@@ -9,19 +9,19 @@ import SwiftUI
 struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
-            
+
             StyleVStack {
                 ElementStackView(axis: .horizontal)
             }
             .style(component: .card)
-            
+
             StyleVStack {
                 ElementStackView(axis: .horizontal, hierarchy: .secondary)
             }
             .style(component: .card)
-            
+
             contentCornerValueCard
-            
+
             ScrollingHStack {
                 contentCornerValueCard
                 contentCornerValueCard
@@ -30,19 +30,19 @@ struct ComponentCardScreen: View {
                 contentCornerValueCard
                 contentCornerValueCard
             }
-            
+
             contentCardView
                 .style(component: .card)
         }
     }
-    
+
     private var contentCardView: some View {
         StyleVStack {
             StructuredTextView()
             ActionButtonsView()
         }
     }
-    
+
     private var contentCornerValueCard: some View {
         CornerContainer(
             topLeading: {

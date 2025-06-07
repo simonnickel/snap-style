@@ -7,19 +7,19 @@ import SnapStyleBase
 import SwiftUI
 
 public struct DebugKeyScreen: View {
-    
+
     @State private var elementType: SnapStyle.Element.ElementType = .any
     @State private var elementHierarchy: SnapStyle.Element.Hierarchy = .primary
-    
+
     public init() {}
-        
+
     public var body: some View {
         VStack {
             config
             element
         }
     }
-    
+
     private var config: some View {
         VStack {
             HStack {
@@ -36,12 +36,12 @@ public struct DebugKeyScreen: View {
             }
         }
     }
-    
+
     private var element: some View {
         Text("Element")
             .style(element: elementType, hierarchy: elementHierarchy)
     }
-    
+
 }
 
 #Preview {

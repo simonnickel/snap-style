@@ -6,12 +6,12 @@
 import SnapStyleBase
 
 extension SnapStyle.FontKey {
-    
+
 
     // MARK: - Component
-    
+
     public var anyComponent: ValueBuilder { .base(nil) }
-    
+
     public var content: ValueBuilder { .base(.definition(.font(.system(size: 16)))) }
     public var card: ValueBuilder { .base(.definition(.font(.system(size: 18)))) }
 
@@ -25,11 +25,11 @@ extension SnapStyle.FontKey {
         }
     }
 
- 
+
     // MARK: - Element
-    
+
     public var anyElement: ValueBuilder { .base(nil) }
-    
+
     public var title: ValueBuilder {
         .base(.definition(.font(.title))) { context in
             return switch context.element.hierarchy {
@@ -39,13 +39,13 @@ extension SnapStyle.FontKey {
             }
         }
     }
-    
+
     public var label: ValueBuilder { .base(nil) }
-    
+
     public var icon: ValueBuilder { .base(nil) } // TODO: Could be an adjustment to content (content + 2 ?)
-    
+
     public var accessory: ValueBuilder { .base(.reference(\.icon)) }
-    
+
     public var value: ValueBuilder { .base(nil) }
 
     public var action: ValueBuilder {
@@ -59,10 +59,10 @@ extension SnapStyle.FontKey {
     }
 
     public var separator: ValueBuilder { .base(nil) }
-    
-    
+
+
     // MARK: - List
-    
+
     public var listSectionHeader: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
@@ -72,7 +72,7 @@ extension SnapStyle.FontKey {
             }
         }
     }
-    
+
     public var listIcon: ValueBuilder { .base(.definition(.font(.system(size: 20)))) }
-    
+
 }

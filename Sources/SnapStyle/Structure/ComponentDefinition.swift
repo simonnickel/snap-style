@@ -7,7 +7,7 @@ import SnapStyleBase
 import SwiftUI
 
 extension SnapStyle {
-    
+
     public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
         public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
@@ -39,26 +39,26 @@ extension SnapStyle {
             self.compositions = compositions
             self.shapes = shapes
         }
-        
-        
+
+
         // MARK: Padding
-        
+
         public struct Padding {
-            
+
             typealias Value = SnapStyle.NumberKey.ValueBuilderKeyPath
-            
+
             let leading: Value?
             let top: Value?
             let trailing: Value?
             let bottom: Value?
-            
+
             init(_ value: Value, edges: Edge.Set = .all) {
                 self.leading = edges.contains(.leading) ? value : nil
                 self.top = edges.contains(.top) ? value : nil
                 self.trailing = edges.contains(.trailing) ? value : nil
                 self.bottom = edges.contains(.bottom) ? value : nil
             }
-            
+
             init(horizontal: Value? = nil, vertical: Value? = nil) {
                 self.leading = horizontal
                 self.top = vertical
@@ -72,10 +72,10 @@ extension SnapStyle {
                 self.trailing = trailing
                 self.bottom = bottom
             }
-            
+
         }
-        
-        
+
+
         // MARK: Protocols
 
         public func hash(into hasher: inout Hasher) {
@@ -95,7 +95,7 @@ extension SnapStyle {
 // MARK: - Component+View
 
 extension View {
-    
+
     /// Defines the View as a component to use it's style definition and draw the container.
     /// - Parameters:
     ///   - component: Definition to use for the component.
@@ -116,16 +116,16 @@ extension View {
         }
         .modifier(ComponentModifier(component: component, state: state))
     }
-    
+
 }
 
 internal struct ComponentModifier: ViewModifier {
 
     @Environment(\.style) private var style
-    
+
     let component: SnapStyle.ComponentDefinition
     let state: SnapStyle.Component.InteractionState
-    
+
     /// Internal copy to apply animation on changes.
     @State private var stateInternal: SnapStyle.Component.InteractionState = .normal
 

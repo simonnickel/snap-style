@@ -7,19 +7,19 @@ import SnapStyleBase
 import SwiftUI
 
 public struct DebugCacheScreen<KeyType: StyleKey>: View {
-    
+
     @Environment(\.style) private var style
-    
+
     public init() {}
-    
+
     public var body: some View {
         let keyPaths = style.definition.cachedKeyPaths(for: KeyType.self)
         if !keyPaths.isEmpty {
             List {
                 ForEach(keyPaths, id: \.self) { keyPath in
-                    
+
                     section(for: keyPath)
-                    
+
                 }
             }
         } else {
@@ -59,7 +59,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
     DebugCacheScreen<SnapStyle.FontKey>()
         .styleOverride(
             fonts: [
-                \.title : .base(.definition(.with(size: 6))) { context in
+                \.title: .base(.definition(.with(size: 6))) { context in
                     switch context.element.hierarchy {
                         case .primary: .definition(.with(size: 16))
                         default: nil

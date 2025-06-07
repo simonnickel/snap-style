@@ -7,28 +7,28 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-    
+
     public func styleListSectionHeaderLabel(hierarchy: SnapStyle.Element.Hierarchy = .secondary) -> some View {
         self
             .modifier(ListSectionHeaderLabel(hieararchy: hierarchy))
     }
-    
+
 }
 
 
 // MARK: - Modifier
 
 internal struct ListSectionHeaderLabel: ViewModifier {
-    
+
     let hieararchy: SnapStyle.Element.Hierarchy
-    
+
     func body(content: Content) -> some View {
         content
             .style(padding: \.spacingListRowLeading, .leading)
             .style(element: .title, hierarchy: hieararchy)
             .textCase(nil)
     }
-    
+
 }
 
 
@@ -51,7 +51,7 @@ internal struct ListSectionHeaderLabel: ViewModifier {
             StyleLabel("Header .secondary (default)")
                 .styleListSectionHeaderLabel()
         }
-        
+
         Section {
             StyleListRow { Text("Row") }
             StyleListRow { Text("Row") }
@@ -59,7 +59,7 @@ internal struct ListSectionHeaderLabel: ViewModifier {
             StyleLabel("Header .tertiary")
                 .styleListSectionHeaderLabel(hierarchy: .tertiary)
         }
-        
+
         Section {
             StyleListRow { Text("Row") }
             StyleListRow { Text("Row") }

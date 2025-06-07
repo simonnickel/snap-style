@@ -8,12 +8,12 @@ import SnapStyleBase
 import SwiftUI
 
 struct ComponentsScreen: View {
-    
+
     var body: some View {
         StyleScreen {
 
             let components: [SnapStyle.ComponentDefinition] = [.screen, .content, .card, .action]
-            
+
             ForEach(components, id: \.self) { component in
                 contentComponent(component)
             }
@@ -21,7 +21,7 @@ struct ComponentsScreen: View {
         }
         .navigationTitle("Components")
     }
-    
+
     @ViewBuilder
     private func contentComponent(_ component: SnapStyle.ComponentDefinition) -> some View {
         VStack(alignment: .leading) {

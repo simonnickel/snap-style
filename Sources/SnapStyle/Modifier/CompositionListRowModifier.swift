@@ -7,7 +7,7 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-    
+
     /// Applies the background layer of the given `CompositionKey` as listRowBackground.
     /// - Parameter listRowBackground: The `CompositionKey` to use.
     /// - Returns: A modified view.
@@ -18,7 +18,7 @@ extension View {
         self
             .modifier(CompositionListRowModifier(keyPath: keyPath))
     }
-    
+
 }
 
 
@@ -47,29 +47,29 @@ internal struct CompositionListRowModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview {
-    
+
     List {
         Text("Normal List Row")
             .style(listRowBackground: \.listRow)
             .style(component: .listRow, applyContainer: nil, state: .normal)
     }
-    
+
     List {
         Text("Highlighted List Row")
             .style(listRowBackground: \.listRow)
             .style(component: .listRow, applyContainer: nil, state: .highlighted)
     }
-    
+
     List {
         Text("Selected List Row")
             .style(listRowBackground: \.listRow)
             .style(component: .listRow, applyContainer: nil, state: .selected)
     }
-    
+
     List {
         Text("Disabled List Row")
             .style(listRowBackground: \.listRow)
             .style(component: .listRow, applyContainer: nil, state: .disabled)
     }
-    
+
 }

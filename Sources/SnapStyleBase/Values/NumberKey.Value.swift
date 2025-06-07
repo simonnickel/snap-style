@@ -8,29 +8,29 @@ extension SnapStyle {
 }
 
 extension SnapStyle.NumberKey {
-    
-    
+
+
     // MARK: - NumberKey.Value
-    
+
     public enum Value: StyleValue {
-        
+
         public typealias WrappedValue = Double
         public typealias Adjustment = SnapStyle.NumberKey.Adjustment
 
         case value(WrappedValue)
-        
+
         public var wrappedValue: WrappedValue {
             switch self {
                 case .value(let value): value
             }
         }
-        
+
         public var description: String {
             switch self {
                 case .value(let value): ".value: \(value)"
             }
         }
-    
+
     }
 
 
@@ -43,7 +43,7 @@ extension SnapStyle.NumberKey {
         public func applied(on value: Value) -> Value {
             value
         }
-        
+
     }
 
 }

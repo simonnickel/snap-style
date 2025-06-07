@@ -6,7 +6,7 @@
 import SnapStyleBase
 
 extension SnapStyle.ComponentDefinition.Padding {
-    
+
     static var listRow: Self {
         .init(
             leading: \.spacingListRowLeading,
@@ -15,5 +15,5 @@ extension SnapStyle.ComponentDefinition.Padding {
             bottom: \.spacingListRowBottom
         )
     }
-    
+
 }

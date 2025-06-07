@@ -25,12 +25,12 @@ extension View {
 // MARK: - Modifier
 
 internal struct SafeAreaPaddingModifier: ViewModifier {
-    
+
     @Environment(\.style) private var style
-    
+
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
     let edges: Edge.Set
-    
+
     func body(content: Content) -> some View {
         if let value = style.number(for: keyPath) {
             content
@@ -39,7 +39,7 @@ internal struct SafeAreaPaddingModifier: ViewModifier {
             content
         }
     }
-    
+
 }
 
 
@@ -49,11 +49,11 @@ internal struct SafeAreaPaddingModifier: ViewModifier {
     VStack {
         // Default placement inside of safe area
         Rectangle()
-        
+
         // Ignore safe area
         Rectangle()
             .ignoresSafeArea(.container, edges: .horizontal)
-        
+
         // Background has to handle safe area.
         VStack {
             Text("Background ignores safe area by default!")
@@ -65,7 +65,7 @@ internal struct SafeAreaPaddingModifier: ViewModifier {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.green, ignoresSafeAreaEdges: .vertical)
-        
+
         // Scroll view automatic behaviour.
         ScrollView(.horizontal) {
             LazyHStack {

@@ -19,7 +19,7 @@ extension View {
 // MARK: - Modifier
 
 internal struct FontModifier: ViewModifier {
-    
+
     @Environment(\.style) private var style
 
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
@@ -29,5 +29,5 @@ internal struct FontModifier: ViewModifier {
         content
             .font(value)
     }
-    
+
 }

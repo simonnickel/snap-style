@@ -4,13 +4,13 @@
 //
 
 extension SnapStyle {
-    
-    
+
+
     // MARK: - CacheContainer
-    
+
     /// A value type Container to bundle references to `StyleKey` specific caches.
     internal struct CacheContainer {
-        
+
         // References to `StyleKey` specific caches.
         internal var numbers: KeyTypeCache<NumberKey> = .init()
         internal var fonts: KeyTypeCache<FontKey> = .init()
@@ -18,73 +18,73 @@ extension SnapStyle {
         internal var surfaces: KeyTypeCache<SurfaceKey> = .init()
         internal var compositions: KeyTypeCache<CompositionKey> = .init()
         internal var shapes: KeyTypeCache<ShapeKey> = .init()
-        
+
         internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
             switch Key.self {
-                    
+
                 case let key as NumberKey.Type: return numbers as? KeyTypeCache<Key>
-                    
+
                 case let key as FontKey.Type: return fonts as? KeyTypeCache<Key>
-                    
+
                 case let key as IconKey.Type: return icons as? KeyTypeCache<Key>
-                    
+
                 case let key as SurfaceKey.Type: return surfaces as? KeyTypeCache<Key>
-                    
+
                 case let key as CompositionKey.Type: return compositions as? KeyTypeCache<Key>
-                    
+
                 case let key as ShapeKey.Type: return shapes as? KeyTypeCache<Key>
-                    
+
                 default: fatalError("Cache is not setup properly.")
 
             }
         }
-        
+
         /// Creates a new cache, the old cache will still be in use for a different style definition.
         internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
             switch Key.self {
-                    
+
                 case let key as NumberKey.Type: numbers = .init()
-                    
+
                 case let key as FontKey.Type: fonts = .init()
-                    
+
                 case let key as IconKey.Type: icons = .init()
-                    
+
                 case let key as SurfaceKey.Type: surfaces = .init()
-                    
+
                 case let key as CompositionKey.Type: compositions = .init()
-                    
+
                 case let key as ShapeKey.Type: shapes = .init()
-                    
+
                 default: fatalError("Cache is not setup properly.")
 
             }
         }
-        
+
     }
-    
-    
+
+
     // MARK: - KeyTypeCache
-    
+
     package class KeyTypeCache<Key: StyleKey> {
-        
-        private var content: [Key.ValueBuilderKeyPath : ValueForContextCache<Key.Value>] = [:]
+
+        private var content: [Key.ValueBuilderKeyPath: ValueForContextCache<Key.Value>] = [:]
         package var keys: [Key.ValueBuilderKeyPath] { Array(content.keys) }
 
         package func getValueCache(for keyPath: KeyPath<Key, Key.ValueBuilder>) -> ValueForContextCache<Key.Value>? {
             return content[keyPath]
         }
-        
+
         package func getValue(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) -> Key.Value? {
-            
+
             if let cache = content[keyPath] {
                 return cache.getValue(for: context)
             }
-            
+
             return nil
         }
-        
+
         func setValue(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) {
-            
+
             if let cache = content[keyPath] {
                 cache.setValue(value, for: context)
             } else {
@@ -92,63 +92,63 @@ extension SnapStyle {
                 cache.setValue(value, for: context)
                 content[keyPath] = cache
             }
-            
+
         }
-        
+
     }
-    
-    
+
+
     // MARK: - ValueForContextCache
-    
+
     package class ValueForContextCache<Value> {
-        
-        private var content: [SnapStyle.Context : Value] = [:]
+
+        private var content: [SnapStyle.Context: Value] = [:]
         package var keys: [SnapStyle.Context] { Array(content.keys) }
-        
+
         package func getValue(for context: SnapStyle.Context) -> Value? {
             content[context]
         }
-        
+
         func setValue(_ value: Value, for context: SnapStyle.Context) {
             content[context] = value
         }
-        
+
     }
-    
+
 }
 
 
 // MARK: - SnapStyle + Cache
 
 extension SnapStyle {
-    
-    
+
+
     // MARK: Get & Set
-    
+
     internal func getValueFromCache<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
         guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return nil }
-        
+
         return cache.getValue(for: keyPath, in: context)
     }
-    
+
     internal func setValueInCache<Key: StyleKey>(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: SnapStyle.Context) {
         guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return }
 
         cache.setValue(value, for: keyPath, in: context)
     }
-    
-    
+
+
     // MARK: Debug
-    
+
     /// For debug purposes.
     package func cachedKeyPaths<Key: StyleKey>(for: Key.Type) -> [Key.ValueBuilderKeyPath] {
         guard
             let cache: KeyTypeCache<Key> = cacheContainer.getCache()
         else { return [] }
-        
+
         return cache.keys
     }
-    
+
     /// For debug purposes.
     package func cachedContexts<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [SnapStyle.Context] {
         guard
@@ -158,7 +158,7 @@ extension SnapStyle {
 
         return valueCache.keys
     }
-    
+
     /// For debug purposes.
     package func cachedValue<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: SnapStyle.Context) -> Key.Value? {
         guard
@@ -168,5 +168,5 @@ extension SnapStyle {
 
         return valueCache.getValue(for: context)
     }
-    
+
 }

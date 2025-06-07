@@ -8,20 +8,20 @@ import SnapStyleBase
 import SwiftUI
 
 struct StructuredScreen: View {
-    
+
     var body: some View {
         StyleScreen {
             contentCardRow
-            
+
             content
                 .style(component: .content)
-            
+
             content
                 .style(component: .content)
         }
         .navigationTitle("Structured")
     }
-    
+
     @ViewBuilder
     private var contentCardRow: some View {
         ScrollingHStack {
@@ -34,7 +34,7 @@ struct StructuredScreen: View {
             contentCard
         }
     }
-    
+
     @ViewBuilder
     private var content: some View {
         StyleVStack(spacing: \.spacingSections) {
@@ -43,7 +43,7 @@ struct StructuredScreen: View {
             contentButtons
         }
     }
-    
+
     @ViewBuilder
     private var contentCards: some View {
         StyleHStack(spacing: \.spacingElements) {
@@ -51,10 +51,10 @@ struct StructuredScreen: View {
             contentCard
         }
     }
-    
+
     @ViewBuilder
     private var contentCard: some View {
-        StyleVStack() {
+        StyleVStack {
             StyleHStack(spacing: \.spacingElements, alignment: .top) {
                 Text("Title")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,9 +62,9 @@ struct StructuredScreen: View {
                 Text("Value")
                     .style(element: .value)
             }
-            
+
             Spacer()
-            
+
             StyleHStack(spacing: \.spacingElements, alignment: .bottom) {
                 Text("Subitle")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,22 +77,24 @@ struct StructuredScreen: View {
         .style(component: .card)
         .fixedSize(horizontal: false, vertical: true)
     }
-    
+
     @ViewBuilder
     private var contentButtons: some View {
         StyleHStack {
-            StyleButton {} content: {
+            StyleButton {
+            } content: {
                 Label("Action", systemImage: "star")
             }
-            
+
             Spacer()
-            
-            StyleButton {} content: {
+
+            StyleButton {
+            } content: {
                 Label("Action", systemImage: "star")
             }
         }
     }
-    
+
 }
 
 #Preview {
@@ -100,7 +102,7 @@ struct StructuredScreen: View {
         StructuredScreen()
             .styleOverride(
                 surfaces: [
-                    \.onAccent : SnapStyle.ValueBuilder.builder { context in
+                    \.onAccent: SnapStyle.ValueBuilder.builder { context in
                         .definition(.color(.yellow))
                     }
                 ]

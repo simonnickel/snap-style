@@ -4,7 +4,7 @@
 //
 
 public protocol StyleKey {
-    
+
     associatedtype Value: StyleValue
     associatedtype Adjustment: StyleAdjustment where Value.WrappedValue == Adjustment.Value.WrappedValue
 
@@ -34,7 +34,7 @@ public protocol StyleValue: CustomStringConvertible {
 public protocol StyleAdjustment {
 
     associatedtype Value: StyleValue
-    
+
     func applied(on value: Value) -> Value
 
 }
@@ -48,7 +48,7 @@ extension StyleValue {
         }
         return result
     }
-    
+
     func adjusted(with adjustment: Adjustment) -> Self {
         adjustment.applied(on: self)
     }

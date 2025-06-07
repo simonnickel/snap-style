@@ -7,14 +7,14 @@ import SnapStyle
 import SwiftUI
 
 struct ContentContainer: View {
-    
+
     @State private var isPresented: Bool = false
     @State private var presentationDetentSelected: PresentationDetent = .medium
-    
+
     var body: some View {
         ZStack {
             ContentFlow()
-            
+
             VStack {
                 Spacer()
                 HStack {
@@ -33,7 +33,7 @@ struct ContentContainer: View {
                 .presentationDetents([.medium, .height(50), .large], selection: $presentationDetentSelected)
         }
     }
-    
+
 }
 
 

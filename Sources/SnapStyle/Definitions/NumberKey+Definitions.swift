@@ -8,33 +8,33 @@ import SnapStyleBase
 extension SnapStyle.NumberKey {
 
     public var zero: ValueBuilder { .base(.definition(.value(0))) }
-    
-    
+
+
     // MARK: - Screen
 
     public var widthReadableContent: ValueBuilder { .base(.definition(.value(750))) }
-    
-    
+
+
     // MARK: - Spacing
 
     public var spacingSections: ValueBuilder { .base(.definition(.value(32))) }
     public var spacingGroups: ValueBuilder { .base(.definition(.value(16))) }
     public var spacingElements: ValueBuilder { .base(.definition(.value(8))) }
     public var spacingLines: ValueBuilder { .base(.definition(.value(4))) }
-    
+
     public var spacingLabel: ValueBuilder { .base(.definition(.value(8))) } // System default is 8 (iOS 18)
-    
+
     public var spacingListRowTop: ValueBuilder { .base(.definition(.value(12))) }
     public var spacingListRowBottom: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
     public var spacingListRowLeading: ValueBuilder { .base(.definition(.value(20))) }
     public var spacingListRowTrailing: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
-    
-    
+
+
     // MARK: - Container: Padding
-    
+
     public var paddingAnyElement: ValueBuilder { .base(nil) }
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
-    
+
     /// A padding definition based on the level in the component stack.
     public var paddingComponent: ValueBuilder {
         .builder { context in
@@ -46,19 +46,19 @@ extension SnapStyle.NumberKey {
             }
         }
     }
-    
+
     public var paddingContent: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingList: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(18))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
-    
+
     public var insetScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
     public var insetScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
 
-    
+
     // MARK: - Shape: CornerRadius
-    
+
     /// A corner radius definition based on the level in the component stack.
     public var cornerRadiusComponent: ValueBuilder {
         .builder { context in
@@ -70,14 +70,14 @@ extension SnapStyle.NumberKey {
             }
         }
     }
-    
+
     public var cornerRadiusContent: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
     public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
     public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
-    
-    
+
+
     // MARK: - Animation
-    
+
     public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.1))) }
-    
+
 }

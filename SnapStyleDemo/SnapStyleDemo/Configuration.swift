@@ -3,13 +3,13 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-import SnapStyleBase
 import Observation
+import SnapStyleBase
+import SwiftUI
 
 @Observable
 class Configuration {
-    
+
     var accent: SnapStyle.Accent
 
     var scaleFactor: SnapStyle.Context.ScaleFactor
@@ -21,14 +21,14 @@ class Configuration {
         self.accent = accent
         self.scaleFactor = scaleFactor
     }
-    
+
 }
 
 
 // MARK: - Environment
 
 extension EnvironmentValues {
-    
+
     @Entry var configuration: Configuration = Configuration()
-    
+
 }

@@ -12,11 +12,11 @@ extension View {
         self
             .modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
-    
+
 }
 
 internal struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewModifier {
-    
+
     @Environment(\.style) private var style
 
     let attribute: SnapStyle.Context.Attribute<Key, Value>
@@ -28,5 +28,5 @@ internal struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewMo
         content
             .style(update: context)
     }
-    
+
 }

@@ -3,14 +3,14 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
 import SnapStyleBase
+import SwiftUI
 
 struct ColorItemView: View {
-    
+
     let accent: SnapStyle.Accent
     let selected: Bool
-    
+
     var body: some View {
         VStack {
             HStack {

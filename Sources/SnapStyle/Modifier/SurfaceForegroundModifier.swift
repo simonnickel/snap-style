@@ -7,7 +7,7 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-    
+
     public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
         self
             .modifier(SurfaceForegroundModifier(keyPath: keyPath))
@@ -42,5 +42,5 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
     Text("Preview Example View")
         .style(foreground: \.accent)
-    
+
 }

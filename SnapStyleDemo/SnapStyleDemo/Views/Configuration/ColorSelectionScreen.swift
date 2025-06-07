@@ -3,17 +3,17 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
 import SnapCore
 import SnapStyleBase
+import SwiftUI
 
 struct ColorSelectionScreen: View {
-    
+
     @Environment(\.self) private var environment
     @Environment(\.configuration) private var configuration
-    
+
     var body: some View {
-        
+
         let accents: [SnapStyle.Accent] = [
             .fallback,
             .init(
@@ -33,10 +33,10 @@ struct ColorSelectionScreen: View {
                 complementary: .red.adjusted(hue: .add(0.06), in: environment),
                 contrast: .red.adjusted(hue: .add(0.5), in: environment),
                 brightness: .dark
-            )
+            ),
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
-        
+
         ScrollView {
             LazyVGrid(columns: [gridItem, gridItem]) {
                 ForEach(accents, id: \.self) { accent in
@@ -49,7 +49,7 @@ struct ColorSelectionScreen: View {
             }
             .padding()
         }
-        
+
     }
 }
 

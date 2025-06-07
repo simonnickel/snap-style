@@ -6,7 +6,7 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    
+
     @Entry public var geometrySizeScreen: CGSize = .zero
     @Entry public var geometrySizeContent: CGSize = .zero
     @Entry public var geometrySafeAreaInsets: EdgeInsets = .zero

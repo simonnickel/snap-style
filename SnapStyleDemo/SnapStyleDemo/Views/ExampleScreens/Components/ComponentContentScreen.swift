@@ -9,20 +9,20 @@ import SwiftUI
 struct ComponentContentScreen: View {
     var body: some View {
         StyleScreen {
-            
+
             StyleVStack {
                 ElementStackView(axis: .horizontal)
             }
             .style(component: .content)
-            
+
             StyleVStack {
                 ElementStackView(axis: .horizontal, hierarchy: .secondary)
             }
             .style(component: .content)
-         
+
             StyleVStack(spacing: \.spacingGroups) {
                 StructuredTextView()
-                
+
                 ActionButtonsView()
             }
             .style(component: .content)

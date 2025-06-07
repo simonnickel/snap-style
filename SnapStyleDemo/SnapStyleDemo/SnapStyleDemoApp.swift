@@ -8,10 +8,10 @@ import SwiftUI
 
 @main
 struct SnapStyleDemoApp: App {
-    
+
     let configuration = Configuration()
     let style: SnapStyle = SnapStyle()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentContainer()

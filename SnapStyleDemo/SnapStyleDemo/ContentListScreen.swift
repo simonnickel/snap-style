@@ -7,7 +7,7 @@ import SnapStyle
 import SwiftUI
 
 struct ContentListScreen: View {
-    
+
     var body: some View {
         StyleList {
             ListSection(title: "Components", screens: [.content, .card, .list, .action, .componentStack])
@@ -16,15 +16,15 @@ struct ContentListScreen: View {
             ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
         }
     }
-    
-    
+
+
     // MARK: - ListSection
-    
+
     struct ListSection: View {
-        
+
         let title: String
         let screens: [ContentFlow.Screen]
-        
+
         var body: some View {
             Section {
                 ForEach(screens, id: \.self) { screen in
@@ -36,14 +36,14 @@ struct ContentListScreen: View {
             }
         }
     }
-    
-    
+
+
     // MARK: - ListRow
-    
+
     struct ListRow: View {
-        
+
         let screen: ContentFlow.Screen
-        
+
         var body: some View {
             StyleListRow(.navigate(screen)) {
                 Text(screen.title)

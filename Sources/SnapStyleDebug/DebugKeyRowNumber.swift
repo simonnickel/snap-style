@@ -7,9 +7,9 @@ import SnapStyleBase
 import SwiftUI
 
 struct DebugKeyRowNumber: View {
-    
+
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
-    
+
     var body: some View {
         HStack {
             Text("\(keyPath)")

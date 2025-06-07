@@ -6,7 +6,7 @@
 import SnapStyleBase
 
 extension SnapStyle {
-    
+
     package struct ComponentStack: Hashable {
 
 
@@ -24,7 +24,7 @@ extension SnapStyle {
 
         // MARK: State
 
-        private var stateByComponent: [SnapStyle.ComponentDefinition : SnapStyle.Component.InteractionState] = [:]
+        private var stateByComponent: [SnapStyle.ComponentDefinition: SnapStyle.Component.InteractionState] = [:]
 
         var currentState: SnapStyle.Component.InteractionState? {
             guard let current else { return nil }

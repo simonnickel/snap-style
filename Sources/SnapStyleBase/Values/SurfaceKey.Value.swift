@@ -23,7 +23,7 @@ extension SnapStyle.SurfaceKey {
         case gradient(AnyShapeStyle)
         case material(Material)
         case any(AnyShapeStyle)
-        
+
         public var wrappedValue: WrappedValue {
             switch self {
                 case .color(let value): AnyShapeStyle(value)
@@ -32,7 +32,7 @@ extension SnapStyle.SurfaceKey {
                 case .any(let value): value
             }
         }
-        
+
         public var description: String {
             switch self {
                 case .color(let value): ".color: \(value)"
@@ -43,7 +43,7 @@ extension SnapStyle.SurfaceKey {
         }
 
     }
-    
+
 
     // MARK: - Adjustment
 
@@ -53,7 +53,7 @@ extension SnapStyle.SurfaceKey {
 
         case opacity(Double)
         case mix(Color, Double)
-        
+
         public func applied(on value: Value) -> Value {
             switch value {
                 case .color(let color):
@@ -61,26 +61,26 @@ extension SnapStyle.SurfaceKey {
                         case .opacity(let opacity): .color(color.opacity(opacity))
                         case .mix(let mix, let amount): .color(color.mix(with: mix, by: amount))
                     }
-                    
+
                 case .gradient(let gradient):
                     switch self {
                         case .opacity(let opacity): .gradient(AnyShapeStyle(gradient.opacity(opacity)))
                         default: .gradient(gradient)
                     }
-                    
-                    // Material gets converted to some ShapeStyle and can no longer be applied as .material
-                    // case .material(let material):
-                    //     switch adjustment {
-                    //         case .opacity(let opacity): .material(material.opacity(opacity))
-                    //         default: .material(material)
-                    //     }
-                    
+
+                // Material gets converted to some ShapeStyle and can no longer be applied as .material
+                // case .material(let material):
+                //     switch adjustment {
+                //         case .opacity(let opacity): .material(material.opacity(opacity))
+                //         default: .material(material)
+                //     }
+
                 case .any(let any):
                     switch self {
                         case .opacity(let opacity): .any(AnyShapeStyle(any.opacity(opacity)))
                         default: .any(any)
                     }
-                    
+
                 default: value
             }
         }

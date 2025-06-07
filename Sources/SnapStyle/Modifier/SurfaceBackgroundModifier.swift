@@ -7,7 +7,7 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-    
+
     public func style(
         background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?,
         ignoresSafeAreaEdges: Edge.Set = []
@@ -41,9 +41,9 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview {
-    
+
     Text("Preview Example View")
         .padding()
         .style(background: \.accent)
-    
+
 }

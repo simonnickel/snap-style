@@ -7,17 +7,17 @@ import SnapStyleBase
 import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>: View {
-    
+
     public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
-    
+
     private let variant: Variant
     private let icon: StyleIcon.Definition?
     private let isSelected: Bool
     private let title: () -> Title
     private let content: (() -> Content)?
     private let action: Action?
-    
+
     public init(
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
@@ -34,7 +34,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.title = title
         self.content = content
     }
-    
+
     /// An alternative init is required for variant that does not specify a `Content`.
     public init(
         _ variant: Variant = .plain,
@@ -51,7 +51,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.title = title
         self.content = nil
     }
-    
+
     /// An alternative init is required for variant that does not specify a `SelectionValue`.
     public init(
         _ variant: Variant = .plain,
@@ -69,7 +69,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.title = title
         self.content = content
     }
-    
+
     /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of Content.
     public init(
         _ variant: Variant = .plain,
@@ -86,7 +86,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.title = title
         self.content = nil
     }
-    
+
     public var body: some View {
         StyleVStack(spacing: \.spacingElements) {
             if case .navigate(let value) = variant {
@@ -96,7 +96,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
             } else {
                 viewButtonContainer(title, variant: variant)
             }
-            
+
             content?()
                 .insetListContent()
         }
@@ -105,10 +105,10 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         // TODO: Highlight on control interaction?
         .style(component: .listRow, state: isSelected ? .highlighted : .normal)
     }
-    
-    
+
+
     // MARK: Action
-    
+
     private func viewButtonContainer(_ content: @escaping () -> Title, variant: Variant) -> some View {
         // TODO: Button Style
         Button {
@@ -119,17 +119,17 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 switch variant {
                     case .plain: break
                     case .navigate(let _): break
-                        
+
                     case .selectValue(let value, selection: let selection):
                         selection.wrappedValue = value
-                        
+
                     case .selectValues(let value, selection: let selection):
                         if selection.wrappedValue.contains(value) {
                             selection.wrappedValue.removeAll { $0 == value }
                         } else {
                             selection.wrappedValue.append(value)
                         }
-                        
+
                     case .selected(let isSelected): isSelected.wrappedValue.toggle()
                     case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
                 }
@@ -139,52 +139,52 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         }
     }
 
-    
+
     // MARK: Content
-    
+
     private func viewTitle(_ title: @escaping () -> Title, variant: Variant) -> some View {
         StyleHStack {
-            
+
             StyleHStack(spacing: \.spacingListRowLeading) {
                 if let icon {
                     StyleIcon(icon)
                         .style(element: .icon)
                         .listIconWidthSynchronized()
                 }
-                
+
                 title()
             }
-            
+
             StyleSpacer(minLength: \.spacingElements)
-            
+
             viewAccessory(for: variant)
-            
+
         }
         .style(composition: \.listRow, layers: [.foreground])
     }
-    
-    
+
+
     // MARK: Accessory
-    
+
     @ViewBuilder
     private func viewAccessory(for variant: Variant) -> some View {
         switch variant {
             case .plain: EmptyView()
-                
+
             case .navigate(value: _): EmptyView()
-                
+
             case .selectValue(let value, selection: let selection):
                 StyleIcon(value == selection.wrappedValue ? \.selectionOn : \.selectionOff)
                     .style(element: .accessory)
-                
+
             case .selectValues(let value, selection: let selection):
                 StyleIcon(selection.wrappedValue.contains(value) ? \.selectionOn : \.selectionOff)
                     .style(element: .accessory)
-                
+
             case .selected(let isSelected):
                 StyleIcon(isSelected.wrappedValue ? \.selectionOn : \.selectionOff)
                     .style(element: .accessory)
-                
+
             case .enabled(let isOn):
                 // Placed in an overlay to not influence the rows height.
                 ZStack {}
@@ -195,25 +195,25 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     }
         }
     }
-    
-    
+
+
     // MARK: Variant
-    
+
     public enum Variant {
         case plain
-        
+
         /// Navigation style.
         case navigate(_ value: SelectionValue)
-        
+
         /// Selection style to choose a single value.
         case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
-        
+
         /// Select style to choose multiple values.
         case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
-        
+
         /// Selection style, controlled via binding.
         case selected(Binding<Bool>) // TODO: Is this Variant necessary? Should use enabled instead?
-        
+
         /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
     }
@@ -223,7 +223,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 // MARK: - Preview
 
 #Preview {
-    
+
     @ViewBuilder @MainActor
     func createSection(isSelected: Bool) -> some View {
         Section {
@@ -283,12 +283,12 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 .styleListSectionHeaderLabel()
         }
     }
-    
+
     return NavigationStack {
         StyleList {
             createSection(isSelected: false)
             createSection(isSelected: true)
-            
+
         }
         List {
             // System Rows for reference

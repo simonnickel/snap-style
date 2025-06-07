@@ -6,7 +6,7 @@
 import SwiftUI
 
 extension View {
-    
+
     public func styleOverride(
         numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]? = nil,
         fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]? = nil,
@@ -26,16 +26,16 @@ extension View {
             )
         )
     }
-    
+
 }
 
 
 // MARK: - Modifier
 
 private struct StyleOverrideModifier: ViewModifier {
-    
+
     @Environment(\.style) private var style
-    
+
     let numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]?
     let fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]?
     let icons: [SnapStyle.IconKey.ValueBuilderKeyPath: SnapStyle.IconKey.ValueBuilder]?
@@ -44,7 +44,7 @@ private struct StyleOverrideModifier: ViewModifier {
     let shapes: [SnapStyle.ShapeKey.ValueBuilderKeyPath: SnapStyle.ShapeKey.ValueBuilder]?
 
     func body(content: Content) -> some View {
-        
+
         let definition = style.definition.replaced(
             numbers: numbers,
             fonts: fonts,
@@ -53,19 +53,19 @@ private struct StyleOverrideModifier: ViewModifier {
             compositions: compositions,
             shapes: shapes
         )
-        
+
         content
             .style(update: definition)
-        
+
     }
-    
+
 }
 
 
 // MARK: - SnapStyle: replaced
 
 extension SnapStyle {
-    
+
     internal func replaced(
         numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]? = nil,
         fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]? = nil,
@@ -75,15 +75,15 @@ extension SnapStyle {
         shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
-        
+
         if let numbers {
             style = style.appended(numbers: numbers)
         }
-        
+
         if let fonts {
             style = style.appended(fonts: fonts)
         }
-        
+
         if let icons {
             style = style.appended(icons: icons)
         }
@@ -91,16 +91,16 @@ extension SnapStyle {
         if let surfaces {
             style = style.appended(surfaces: surfaces)
         }
-        
+
         if let compositions {
             style = style.appended(compositions: compositions)
         }
-        
+
         if let shapes {
             style = style.appended(shapes: shapes)
         }
-        
+
         return style
     }
-    
+
 }

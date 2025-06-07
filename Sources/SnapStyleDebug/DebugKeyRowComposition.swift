@@ -8,9 +8,9 @@ import SnapStyleBase
 import SwiftUI
 
 struct DebugKeyRowComposition: View {
-    
+
     let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
-    
+
     var body: some View {
         Text("\(keyPath)")
             .style(composition: keyPath)

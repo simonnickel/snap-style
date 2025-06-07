@@ -6,16 +6,16 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleVStack<Content>: View where Content : View {
-    
+public struct StyleVStack<Content>: View where Content: View {
+
     @Environment(\.style) private var style
-    
+
     private let alignment: HorizontalAlignment
     private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
     private let isStretching: Bool
     private let isLazy: Bool
     private let content: () -> Content
-    
+
     public init(
         spacing: SnapStyle.NumberKey.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
@@ -29,7 +29,7 @@ public struct StyleVStack<Content>: View where Content : View {
         self.isLazy = isLazy
         self.content = content
     }
-    
+
     public var body: some View {
         if isStretching {
             contentStack
@@ -38,7 +38,7 @@ public struct StyleVStack<Content>: View where Content : View {
             contentStack
         }
     }
-    
+
     @ViewBuilder
     private var contentStack: some View {
         let spacing = CGFloat(spacing(for: spacing))
@@ -52,16 +52,16 @@ public struct StyleVStack<Content>: View where Content : View {
             }
         }
     }
-    
+
     private func spacing(for keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?) -> SnapStyle.NumberKey.Value.WrappedValue {
         guard let keyPath else { return 0 }
-        
+
         return switch style.value(for: keyPath) {
             case .value(let value): value
             case .none: 0
         }
     }
-    
+
 }
 
 
