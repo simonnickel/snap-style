@@ -59,9 +59,15 @@ extension SnapStyle.CompositionKey {
                         ]))
                     
                 case .normal, .highlighted, .selected:
+#if os(macOS)
+                        .definition(.layers([
+                            .foreground: \.onContent0, .backgroundOverlay: \.interactionStateOverlayAccent
+                        ]))
+#else
                         .definition(.layers([
                             .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.interactionStateOverlayAccent
                         ]))
+#endif
             }
         }
     }

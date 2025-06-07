@@ -90,31 +90,30 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
     @State private var interactionState: SnapStyle.Component.InteractionState = .normal
 
     public var body: some View {
-        StyleVStack(spacing: \.spacingElements) {
-            switch variant {
-                case .plain:
-                    viewTitle(title, variant: variant)
-                    
-                case .navigate(let value):
-                    NavigationLink(value: value) {
-                        viewTitle(title, variant: variant)
-                    }
-                    
-                default:
-                    viewButtonContainer(title, variant: variant)
-            }
-
-            content?()
-                .insetListContent()
+        switch variant {
+            case .plain:
+                viewRow()
+                    .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                
+                // TODO: macOS navigation style and hover highlight.
+            case .navigate(let value):
+                NavigationLink(value: value) {
+                    viewRow()
+                }
+                .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                
+            default:
+                viewButtonContainer {
+                    viewRow()
+                        .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                }
         }
-        .environment(\.styleLabelSpacing, \.spacingListRowLeading)
-        .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
     }
 
 
     // MARK: Action
 
-    private func viewButtonContainer(_ title: @escaping () -> Title, variant: Variant) -> some View {
+    private func viewButtonContainer<ContainerContent: View>(containerContent: @escaping () -> ContainerContent) -> some View {
         StyleButtonInteractionState($interactionState) {
             if let action {
                 action()
@@ -139,32 +138,40 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 }
             }
         } content: {
-            viewTitle(title, variant: variant)
+            containerContent()
+                .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
     }
 
 
     // MARK: Content
 
-    private func viewTitle(_ title: @escaping () -> Title, variant: Variant) -> some View {
-        StyleHStack {
+    private func viewRow() -> some View {
+        StyleVStack(spacing: \.spacingElements) {
+            StyleHStack {
 
-            StyleHStack(spacing: \.spacingListRowLeading) {
-                if let icon {
-                    StyleIcon(icon)
-                        .style(element: .icon)
-                        .listIconWidthSynchronized()
+                StyleHStack(spacing: \.spacingListRowLeading) {
+                    if let icon {
+                        StyleIcon(icon)
+                            .style(element: .icon)
+                            .listIconWidthSynchronized()
+                    }
+
+                    title()
                 }
 
-                title()
+                StyleSpacer(minLength: \.spacingElements)
+
+                viewAccessory(for: variant)
+
             }
-
-            StyleSpacer(minLength: \.spacingElements)
-
-            viewAccessory(for: variant)
-
+            .style(composition: \.listRow, layers: [.foreground])
+                
+            content?()
+                .insetListContent()
         }
-        .style(composition: \.listRow, layers: [.foreground])
+        .environment(\.styleLabelSpacing, \.spacingListRowLeading)
     }
 
 
