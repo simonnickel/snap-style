@@ -70,7 +70,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.content = content
     }
 
-    /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of Content.
+    /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of `Content`.
     public init(
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
@@ -86,32 +86,36 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.title = title
         self.content = nil
     }
+    
+    @State private var interactionState: SnapStyle.Component.InteractionState = .normal
 
     public var body: some View {
         StyleVStack(spacing: \.spacingElements) {
-            if case .navigate(let value) = variant {
-                NavigationLink(value: value) {
+            switch variant {
+                case .plain:
                     viewTitle(title, variant: variant)
-                }
-            } else {
-                viewButtonContainer(title, variant: variant)
+                    
+                case .navigate(let value):
+                    NavigationLink(value: value) {
+                        viewTitle(title, variant: variant)
+                    }
+                    
+                default:
+                    viewButtonContainer(title, variant: variant)
             }
 
             content?()
                 .insetListContent()
         }
         .environment(\.styleLabelSpacing, \.spacingListRowLeading)
-        // TODO: Highlight on hover.
-        // TODO: Highlight on control interaction?
-        .style(component: .listRow, state: isSelected ? .highlighted : .normal)
+        .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
     }
 
 
     // MARK: Action
 
-    private func viewButtonContainer(_ content: @escaping () -> Title, variant: Variant) -> some View {
-        // TODO: Button Style
-        Button {
+    private func viewButtonContainer(_ title: @escaping () -> Title, variant: Variant) -> some View {
+        StyleButtonInteractionState($interactionState) {
             if let action {
                 action()
             } else {
@@ -134,7 +138,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
                 }
             }
-        } label: {
+        } content: {
             viewTitle(title, variant: variant)
         }
     }

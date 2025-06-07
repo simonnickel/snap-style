@@ -6,6 +6,9 @@
 import SnapStyleBase
 import SwiftUI
 
+
+// MARK: - StyleButtonStyle
+
 public struct StyleButtonStyle: ButtonStyle {
     
     public enum Variant {
@@ -48,12 +51,18 @@ public struct StyleButtonStyle: ButtonStyle {
 
 }
 
+
+// MARK: - StyleButton
+
 public struct StyleButton<Content>: View where Content : View {
 
     @Environment(\.style) private var style
 
     private let variant: StyleButtonStyle.Variant
-    @State private var isEnabled: Bool
+    
+    private let isEnabled: Bool
+    @State private var interactionState: SnapStyle.Component.InteractionState = .normal
+
     private let action: () -> Void
     private let content: () -> Content
 
@@ -69,41 +78,11 @@ public struct StyleButton<Content>: View where Content : View {
         self.content = content
     }
 
-    @State private var isPressed: Bool = false
-    @State private var isHovering: Bool = false
-
     public var body: some View {
-        Button {
-            guard isEnabled else { return }
-
-            action()
-
-            // TODO FB: It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
-            isPressed = true
-            let delay = style.number(for: \.animationInteractionHighlightDuration) ?? 0
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                withAnimation(.smooth) {
-                    isPressed = false
-                }
-            }
-        } label: {
-            content()
-        }
-        .disabled(!isEnabled)
-        .buttonStyle(
-            StyleButtonStyle(variant, state: [
-                isEnabled ? .normal : .disabled,
-                isPressed ? .selected : .normal,
-                isHovering ? .highlighted : .normal,
-            ].max() ?? .normal)
-        )
-#if os(macOS)
-        .onHover(perform: { isHovering in
-            self.isHovering = isHovering
-        })
-#else
-        .hoverEffect(.highlight, isEnabled: isEnabled)
-#endif
+        StyleButtonInteractionState($interactionState, enabled: isEnabled, action: action, content: content)
+            .buttonStyle(
+                StyleButtonStyle(variant, state: interactionState)
+            )
     }
 
 }

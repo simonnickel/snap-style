@@ -78,6 +78,6 @@ extension SnapStyle.NumberKey {
 
     // MARK: - Animation
 
-    public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.1))) }
+    public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.3))) }
 
 }
