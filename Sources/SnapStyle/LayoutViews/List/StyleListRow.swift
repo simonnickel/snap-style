@@ -89,7 +89,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
     
     public var body: some View {
         StyleVStack(spacing: \.spacingElements) {
-            if case let .navigate(value) = variant {
+            if case .navigate(let value) = variant {
                 NavigationLink(value: value) {
                     viewTitle(title, variant: variant)
                 }
