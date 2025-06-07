@@ -303,12 +303,9 @@ struct ComponentListScreen: View {
             var body: some View {
                 if applyStyle {
                     StyleListRow(systemImage: data.icon, isSelected: selection ?? "" == data.id) {
-                        // TODO: Button should have no styling here.
-                        Button {
-                            selection = data.id
-                        } label: {
-                            Text(data.title)
-                        }
+                        selection = data.id
+                    } title: {
+                        Text(data.title)
                     }
                 } else {
                     Button {
