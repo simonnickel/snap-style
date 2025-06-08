@@ -22,13 +22,14 @@ extension SnapStyle.FontKey {
         case with(
             size: CGFloat,
             weight: Font.Weight = .regular,
-            textStyle: Font.TextStyle = .body
+            textStyle: Font.TextStyle = .body,
+            design: Font.Design? = nil
         )
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .with(let size, let weight, let textStyle):
-                    Definition(size: size, weight: weight, textStyle: textStyle)
+                case .with(let size, let weight, let textStyle, let design):
+                    Definition(size: size, weight: weight, textStyle: textStyle, design: design)
             }
         }
 
@@ -44,14 +45,21 @@ extension SnapStyle.FontKey {
             package let size: CGFloat
             package let weight: Font.Weight
             package let textStyle: Font.TextStyle
+            package let design: Font.Design?
 
-            public init(size: CGFloat, weight: Font.Weight, textStyle: Font.TextStyle) {
+            public init(
+                size: CGFloat,
+                weight: Font.Weight,
+                textStyle: Font.TextStyle,
+                design: Font.Design?
+            ) {
                 self.size = size
                 self.weight = weight
                 self.textStyle = textStyle
+                self.design = design
             }
 
-            public var description: String { "size: \(size), weight: \(weight), textStyle: \(textStyle)" }
+            public var description: String { "size: \(size), weight: \(weight), textStyle: \(textStyle), design: \(design)" }
 
         }
 

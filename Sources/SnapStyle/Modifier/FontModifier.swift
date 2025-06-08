@@ -49,7 +49,8 @@ struct ScaledFont: ViewModifier {
     
     func body(content: Content) -> some View {
         let size = scaled.wrappedValue * style.context.scaleFactor
-        let font: Font = .system(size: size, weight: definition.weight)
+        let font: Font = .system(size: size, weight: definition.weight, design: definition.design)
+
         return content
             .font(font)
     }
