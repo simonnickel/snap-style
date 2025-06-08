@@ -16,24 +16,24 @@ extension SnapStyle.FontKey {
 
     public enum Value: StyleValue {
 
-        public typealias WrappedValue = Font
+        public typealias WrappedValue = Definition
         public typealias Adjustment = SnapStyle.FontKey.Adjustment
 
-        case with(size: CGFloat, weight: Font.Weight = .regular)
-        case font(Font)
+        case with(
+            size: CGFloat,
+            weight: Font.Weight = .regular,
+            textStyle: Font.TextStyle = .body
+        )
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .with(size: let size, let weight): Definition(size: size, weight: weight).font
-                case .font(let font): font
+                case .with(let size, let weight, let textStyle):
+                    Definition(size: size, weight: weight, textStyle: textStyle)
             }
         }
 
         public var description: String {
-            switch self {
-                case .with(size: let size, weight: let weight): ".definition: \(Definition(size: size, weight: weight))"
-                case .font(let font): ".font"
-            }
+            ".definition: \(wrappedValue)"
         }
 
 
@@ -41,19 +41,17 @@ extension SnapStyle.FontKey {
 
         public struct Definition: CustomStringConvertible {
 
-            let size: CGFloat
-            let weight: Font.Weight
+            package let size: CGFloat
+            package let weight: Font.Weight
+            package let textStyle: Font.TextStyle
 
-            public init(size: CGFloat, weight: Font.Weight) {
+            public init(size: CGFloat, weight: Font.Weight, textStyle: Font.TextStyle) {
                 self.size = size
                 self.weight = weight
+                self.textStyle = textStyle
             }
 
-            var font: Font {
-                Font.system(size: size, weight: weight)
-            }
-
-            public var description: String { "size: \(size), weight: \(weight)" }
+            public var description: String { "size: \(size), weight: \(weight), textStyle: \(textStyle)" }
 
         }
 

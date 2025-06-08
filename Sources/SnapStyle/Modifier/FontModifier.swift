@@ -18,16 +18,39 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct FontModifier: ViewModifier {
+struct FontModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        let value = style.font(for: keyPath)
-        content
-            .font(value)
+        if let definition = style.font(for: keyPath) {
+            content
+                .modifier(ScaledFont(definition: definition))
+        } else {
+            content
+        }
     }
 
+}
+
+struct ScaledFont: ViewModifier {
+    
+    @Environment(\.style) private var style
+    
+    private let definition: SnapStyle.FontKey.Value.Definition
+    private let scaled: ScaledMetric<Double>
+    
+    init(definition: SnapStyle.FontKey.Value.Definition) {
+        self.definition = definition
+        self.scaled = ScaledMetric(wrappedValue: definition.size, relativeTo: definition.textStyle)
+    }
+    
+    func body(content: Content) -> some View {
+        let size = scaled.wrappedValue * style.context.scaleFactor
+        let font: Font = .system(size: size, weight: definition.weight)
+        return content
+            .font(font)
+    }
 }
