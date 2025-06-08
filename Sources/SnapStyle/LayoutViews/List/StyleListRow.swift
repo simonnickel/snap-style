@@ -223,7 +223,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
 
         /// Selection style, controlled via binding.
-        case selected(Binding<Bool>) // TODO: Is this Variant necessary? Should use enabled instead?
+        case selected(Binding<Bool>)
 
         /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
