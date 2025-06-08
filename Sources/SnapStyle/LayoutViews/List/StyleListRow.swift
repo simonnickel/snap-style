@@ -207,11 +207,14 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     }
                 
             case .pick(let values, selection: let selection):
+                // TODO FB: Picker does ignore font styling.
                 Picker("", selection: selection) {
                     ForEach(values, id: \.self) { value in
                         Text("\(value)")
                     }
                 }
+                .pickerStyle(.menu)
+                .labelsHidden()
                 // Removed padding to not influence the rows height.
                 .padding(.vertical, -10)
         }
