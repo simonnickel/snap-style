@@ -52,6 +52,8 @@ struct ConfigurationListView: View {
             }
 
             ScaleFactorConfigurationRow()
+            
+            FontDesignConfigurationRow()
         }
     }
 }
