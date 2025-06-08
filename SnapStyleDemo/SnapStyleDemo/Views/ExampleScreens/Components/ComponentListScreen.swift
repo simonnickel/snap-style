@@ -21,6 +21,7 @@ struct ComponentListScreen: View {
         StyleList(selection: $selected) {
             SectionVariantPlain()
             SectionVariantNavigate()
+            SectionVariantPick()
             SectionVariantEnabled()
             SectionVariantSelectValue()
             SectionVariantSelectValues()
@@ -102,6 +103,25 @@ struct ComponentListScreen: View {
                 }
             } header: {
                 StyleLabel("Variant .navigate")
+                    .styleListSectionHeaderLabel()
+            }
+        }
+    }
+
+
+    // MARK: - SectionVariantPick
+
+    struct SectionVariantPick: View {
+
+        @State private var selected: String = "A"
+
+        var body: some View {
+            Section {
+                StyleListRow(.pick(["A", "B", "C"], selection: $selected), systemImage: "star") {
+                    Text("Star")
+                }
+            } header: {
+                StyleLabel("Variant .pick")
                     .styleListSectionHeaderLabel()
             }
         }
