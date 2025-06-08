@@ -9,11 +9,18 @@ import SwiftUI
 @main
 struct SnapStyleDemoApp: App {
 
-    let demoConfiguration = DemoConfiguration()
-    let style: SnapStyle = SnapStyle()
-
     var body: some Scene {
         WindowGroup {
+            Content()
+        }
+    }
+    
+    struct Content: View {
+        
+        let demoConfiguration = DemoConfiguration()
+        let style: SnapStyle = SnapStyle()
+        
+        var body: some View {
             ContentContainer()
                 .style(setup: style)
                 .style(accent: demoConfiguration.accent)
@@ -22,5 +29,11 @@ struct SnapStyleDemoApp: App {
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }
+}
 
+
+// MARK: - Preview
+
+#Preview {
+    SnapStyleDemoApp.Content()
 }
