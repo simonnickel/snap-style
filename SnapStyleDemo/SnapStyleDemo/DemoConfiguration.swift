@@ -8,7 +8,7 @@ import SnapStyleBase
 import SwiftUI
 
 @Observable
-class Configuration {
+class DemoConfiguration {
 
     var accent: SnapStyle.Accent
 
@@ -29,6 +29,6 @@ class Configuration {
 
 extension EnvironmentValues {
 
-    @Entry var configuration: Configuration = Configuration()
+    @Entry var demoConfiguration: DemoConfiguration = DemoConfiguration()
 
 }

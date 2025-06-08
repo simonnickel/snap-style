@@ -9,7 +9,7 @@ import SwiftUI
 struct ScaleFactorConfigurationRow: View {
 
     @Environment(\.style) private var style
-    @Environment(\.configuration) private var configuration
+    @Environment(\.demoConfiguration) private var demoConfiguration
 
     @State private var scaleFactor: CGFloat = 1.0
 
@@ -21,10 +21,10 @@ struct ScaleFactorConfigurationRow: View {
         } content: {
             Slider(value: $scaleFactor, in: 0.5...2)
                 .onAppear {
-                    scaleFactor = configuration.scaleFactor
+                    scaleFactor = demoConfiguration.scaleFactor
                 }
                 .onChange(of: scaleFactor) { oldValue, newValue in
-                    configuration.scaleFactor = newValue
+                    demoConfiguration.scaleFactor = newValue
                 }
         }
     }

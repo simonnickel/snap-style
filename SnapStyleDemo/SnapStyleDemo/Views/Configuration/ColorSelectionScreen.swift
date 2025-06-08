@@ -10,7 +10,7 @@ import SwiftUI
 struct ColorSelectionScreen: View {
 
     @Environment(\.self) private var environment
-    @Environment(\.configuration) private var configuration
+    @Environment(\.demoConfiguration) private var demoConfiguration
 
     var body: some View {
 
@@ -41,9 +41,9 @@ struct ColorSelectionScreen: View {
             LazyVGrid(columns: [gridItem, gridItem]) {
                 ForEach(accents, id: \.self) { accent in
                     Button {
-                        configuration.accent = accent
+                        demoConfiguration.accent = accent
                     } label: {
-                        ColorItemView(accent: accent, selected: accent == configuration.accent)
+                        ColorItemView(accent: accent, selected: accent == demoConfiguration.accent)
                     }
                 }
             }

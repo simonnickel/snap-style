@@ -9,16 +9,16 @@ import SwiftUI
 @main
 struct SnapStyleDemoApp: App {
 
-    let configuration = Configuration()
+    let demoConfiguration = DemoConfiguration()
     let style: SnapStyle = SnapStyle()
 
     var body: some Scene {
         WindowGroup {
             ContentContainer()
                 .style(setup: style)
-                .style(accent: configuration.accent)
-                .style(scaleFactor: configuration.scaleFactor)
-                .environment(\.configuration, configuration)
+                .style(accent: demoConfiguration.accent)
+                .style(scaleFactor: demoConfiguration.scaleFactor)
+                .environment(\.demoConfiguration, demoConfiguration)
         }
     }
 
