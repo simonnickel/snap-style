@@ -46,7 +46,7 @@ struct ConfigurationFlow: View {
 
 struct ConfigurationListView: View {
     var body: some View {
-        StyleList {
+        StyleList(insetTop: false) {
             StyleListRow(.navigate(ConfigurationFlow.Screen.color), systemImage: "swatchpalette") {
                 Text("Color")
             }

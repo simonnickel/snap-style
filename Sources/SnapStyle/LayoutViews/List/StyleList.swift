@@ -8,15 +8,18 @@ import SwiftUI
 public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     
     private let selection: Binding<SelectionValue?>?
+    private let insetTop: Bool
     private let content: () -> Content
     
-    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: @escaping () -> Content) {
+    public init(selection: Binding<SelectionValue?>?, insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) {
         self.selection = selection
+        self.insetTop = insetTop
         self.content = content
     }
     
-    public init(@ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+    public init(insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
         self.selection = nil
+        self.insetTop = insetTop
         self.content = content
     }
     
@@ -33,7 +36,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 #endif
             })
             // TODO FB: Custom Section Spacing does not apply to top of first section. Needs to be smaller than actual section spacing. Would prefer to use `.contentMargins(.top, value, for: .scrollContent)`, but for some weird reason this is applied between first section header and content.
-            .style(safeAreaPadding: \.spacingGroups, .top)
+            .style(safeAreaPadding: insetTop ? \.spacingGroups : \.zero, .top)
             .listIconWidthScope()
             // Need to disable to use custom background.
             .scrollContentBackground(.hidden)
