@@ -91,7 +91,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
     public var body: some View {
         switch variant {
-            case .plain:
+            case .plain, .pick:
                 viewRow()
                     .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
                 
@@ -135,6 +135,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
                     case .selected(let isSelected): isSelected.wrappedValue.toggle()
                     case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
+                    case .pick(_, selection: _): break
                 }
             }
         } content: {
@@ -204,6 +205,15 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                             EmptyView()
                         }
                     }
+                
+            case .pick(let values, selection: let selection):
+                Picker("", selection: selection) {
+                    ForEach(values, id: \.self) { value in
+                        Text("\(value)")
+                    }
+                }
+                // Removed padding to not influence the rows height.
+                .padding(.vertical, -10)
         }
     }
 
@@ -227,6 +237,8 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
         /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
+        
+        case pick(_ values: [SelectionValue], selection: Binding<SelectionValue>)
     }
 }
 
@@ -272,6 +284,13 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 isSelected: isSelected
             ) {
                 Text("Pentagon")
+            }
+            StyleListRow(
+                .pick(["A", "B"], selection: Binding(get: { "A" }, set: { _ in })),
+                systemImage: "square",
+                isSelected: isSelected
+            ) {
+                Text("With Content")
             }
             StyleListRow(
                 .plain,
