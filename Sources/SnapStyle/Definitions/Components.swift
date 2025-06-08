@@ -132,7 +132,7 @@ extension SnapStyle.ComponentDefinition {
         fonts: { element in
             switch element {
                 case .icon, .accessory: \.listIcon // TODO: Could be an adjustment to content (content + 2 ?)
-                default: nil
+                default: \.list
             }
         },
         compositions: { element in

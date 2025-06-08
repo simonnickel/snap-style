@@ -62,6 +62,8 @@ extension SnapStyle.FontKey {
 
 
     // MARK: - List
+    
+    public var list: ValueBuilder { .base(.definition(.with(size: 17, weight: .regular))) }
 
     public var listSectionHeader: ValueBuilder {
         .builder { context in
