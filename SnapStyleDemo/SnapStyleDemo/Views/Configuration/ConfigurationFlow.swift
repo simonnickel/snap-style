@@ -46,6 +46,7 @@ struct ConfigurationFlow: View {
 
 struct ConfigurationListView: View {
     var body: some View {
+        // TODO: For some reason there is a huge spacing between title and list.
         StyleList {
             StyleListRow(.navigate(ConfigurationFlow.Screen.color), systemImage: "swatchpalette") {
                 Text("Color")
