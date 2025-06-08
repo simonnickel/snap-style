@@ -48,6 +48,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                 } else: { content in
                     content
                         .contentMargins(.horizontal, inset, for: .scrollContent)
+                        .contentMargins(.vertical, 0, for: .scrollContent)
                 }
         } else {
             content()
