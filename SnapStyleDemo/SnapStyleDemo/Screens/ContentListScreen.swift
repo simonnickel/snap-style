@@ -12,7 +12,7 @@ struct ContentListScreen: View {
         StyleList {
             ListSection(title: "Examples", screens: [.structured, .componentStack])
             ListSection(title: "Components", screens: [.card, .list, .action])
-            ListSection(title: "Compon", screens: [.elements])
+            ListSection(title: "Tools", screens: [.elements])
             ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
         }
     }

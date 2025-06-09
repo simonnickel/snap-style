@@ -3,18 +3,24 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
-public struct DebugKeyScreen: View {
+public struct DebugElementScreen: View {
 
+    @State private var component: SnapStyle.ComponentDefinition = .screen
     @State private var elementType: SnapStyle.Element.ElementType = .any
     @State private var elementHierarchy: SnapStyle.Element.Hierarchy = .primary
 
-    public init() {}
+    private let components: [SnapStyle.ComponentDefinition]
+    
+    public init(components: [SnapStyle.ComponentDefinition]) {
+        self.components = components
+    }
 
     public var body: some View {
-        VStack {
+        StyleScreen {
             config
             element
         }
@@ -23,6 +29,11 @@ public struct DebugKeyScreen: View {
     private var config: some View {
         VStack {
             HStack {
+                Picker("Component", selection: $component) {
+                    ForEach(components, id: \.self) { component in
+                        Text("\(component)")
+                    }
+                }
                 Picker("Element", selection: $elementType) {
                     ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { element in
                         Text("\(element)")
@@ -38,12 +49,15 @@ public struct DebugKeyScreen: View {
     }
 
     private var element: some View {
-        Text("Element")
-            .style(element: elementType, hierarchy: elementHierarchy)
+        StyleVStack {
+            Text("Element")
+                .style(element: elementType, hierarchy: elementHierarchy)
+        }
+        .style(component: component ?? .screen)
     }
 
 }
 
 #Preview {
-    DebugKeyScreen()
+    DebugElementScreen(components: [.screen, .contentCard, .accentCard, .valueCard, .list, .listRow])
 }
