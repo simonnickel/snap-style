@@ -12,10 +12,10 @@ struct ComponentStackScreen: View {
     var body: some View {
         StyleScreen {
 
-            content(component: [.content, .content, .content])
-            content(component: [.card, .card, .card])
-            content(component: [.card, .content, .card])
-            content(component: [.card, .content, .content])
+            content(component: [.contentCard, .contentCard, .contentCard])
+            content(component: [.accentCard, .accentCard, .accentCard])
+            content(component: [.accentCard, .contentCard, .accentCard])
+            content(component: [.accentCard, .contentCard, .contentCard])
 
         }
     }

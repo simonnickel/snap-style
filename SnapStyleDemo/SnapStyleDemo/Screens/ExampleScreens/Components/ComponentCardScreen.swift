@@ -25,7 +25,7 @@ struct ComponentCardScreen: View {
             }
 
             contentCardView
-                .style(component: .card)
+                .style(component: .accentCard)
         }
     }
 

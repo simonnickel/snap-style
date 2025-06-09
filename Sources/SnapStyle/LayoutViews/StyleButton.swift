@@ -105,7 +105,7 @@ public struct StyleButton<Content>: View where Content : View {
             StyleButton(.secondary, enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
-            StyleButton(.component(.content), enabled: isEnabled) { } content: {
+            StyleButton(.component(.contentCard), enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
             
@@ -124,7 +124,7 @@ public struct StyleButton<Content>: View where Content : View {
                 }
             }
         }
-        .style(component: .content)
+        .style(component: .contentCard)
         
         Toggle(isOn: $isEnabled) {
             Text("enabled")

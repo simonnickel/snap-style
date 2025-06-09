@@ -11,7 +11,7 @@ struct ComponentContainer<Content: View>: View {
 
     let title: String
     let component: SnapStyle.ComponentDefinition
-    let content: () -> Content
+    @ViewBuilder let content: () -> Content
 
     var body: some View {
         StyleVStack(spacing: \.spacingElements) {
@@ -28,8 +28,11 @@ struct ComponentContainer<Content: View>: View {
 
 #Preview {
     StyleScreen {
-        ComponentContainer(title: "Preview", component: .card) {
-            Text("Content")
+        ComponentContainer(title: "Preview", component: .contentCard) {
+            Text("Content Card")
+        }
+        ComponentContainer(title: "Preview", component: .accentCard) {
+            Text("Accent Card")
         }
     }
 }

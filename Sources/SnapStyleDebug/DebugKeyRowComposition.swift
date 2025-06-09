@@ -18,5 +18,5 @@ struct DebugKeyRowComposition: View {
 }
 
 #Preview {
-    DebugKeyRowComposition(keyPath: \.containerContent)
+    DebugKeyRowComposition(keyPath: \.contentContainer)
 }

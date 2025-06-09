@@ -10,23 +10,21 @@ struct ComponentActionScreen: View {
     var body: some View {
         StyleScreen {
 
-            ComponentContainer(title: "Content", component: .content) {
+            ComponentContainer(title: "Content Card", component: .contentCard) {
                 ActionButtonsView()
-            }
-
-            ComponentContainer(title: "Content", component: .card) {
-                ActionButtonsView()
-            }
-
-            ComponentContainer(title: "Disabled", component: .content) {
                 ActionButtonsView(enabled: false)
             }
 
-            ComponentContainer(title: "Subtitles", component: .content) {
+            ComponentContainer(title: "Accent Card", component: .accentCard) {
+                ActionButtonsView()
+                ActionButtonsView(enabled: false) // TODO: Disabled on accent.
+            }
+
+            ComponentContainer(title: "Subtitles", component: .contentCard) {
                 ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
             }
             
-            ComponentContainer(title: "Icon", component: .content) {
+            ComponentContainer(title: "Icon", component: .contentCard) {
                 StyleHStack(spacing: \.spacingGroups) {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
                         StyleLabel(icon: \.favorite)

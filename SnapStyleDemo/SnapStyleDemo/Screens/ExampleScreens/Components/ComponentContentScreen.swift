@@ -21,7 +21,7 @@ struct ComponentContentScreen: View {
                 }
                 content
             }
-            .style(component: .content)
+            .style(component: .contentCard)
             
         }
     }
@@ -31,7 +31,7 @@ struct ComponentContentScreen: View {
             StructuredTextView()
             ActionButtonsView()
         }
-        .style(component: .content)
+        .style(component: .contentCard)
     }
 
 }
