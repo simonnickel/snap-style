@@ -52,6 +52,16 @@ extension SnapStyle.NumberKey {
     public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(18))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
+    public var paddingActionIcon: ValueBuilder {
+        .builder { context in
+            switch context.element.hierarchy {
+                case .primary: .definition(.value(18))
+                case .secondary: .definition(.value(14))
+                case .tertiary: .definition(.value(10))
+                default: nil
+            }
+        }
+    }
 
     public var insetScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
     public var insetScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }

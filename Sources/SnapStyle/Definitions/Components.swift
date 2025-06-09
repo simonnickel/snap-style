@@ -234,4 +234,30 @@ extension SnapStyle.ComponentDefinition {
         }
     )
     
+    public static let actionIcon: Self = .init("actionIcon",
+        padding: { element in
+            switch element {
+                case .container: Padding(\.paddingActionIcon)
+                default: nil
+            }
+        },
+        fonts: { element in
+           switch element {
+               default: \.actionLarge
+           }
+        },
+        compositions: { element in
+            switch element {
+                case .container: \.interactiveContainer
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerActionIcon
+                default: nil
+            }
+        }
+    )
+    
 }

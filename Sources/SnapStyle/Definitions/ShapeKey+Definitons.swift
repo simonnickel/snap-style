@@ -14,6 +14,7 @@ extension SnapStyle.ShapeKey {
     public var containerContent: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusContent)))) }
     public var containerCard: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusCard)))) }
     public var containerAction: ValueBuilder { .base(.definition(.value(.capsule))) }
+    public var containerActionIcon: ValueBuilder { .base(.definition(.value(.circle))) }
 
 
     // MARK: - Element

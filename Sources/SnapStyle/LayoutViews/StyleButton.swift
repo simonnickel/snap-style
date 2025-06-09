@@ -14,11 +14,13 @@ public struct StyleButtonStyle: ButtonStyle {
     public enum Variant {
         case primary
         case secondary
+        case icon(hierarchy: SnapStyle.Element.Hierarchy = .primary)
         case component(SnapStyle.ComponentDefinition, hierarchy: SnapStyle.Element.Hierarchy = .primary)
         
         var component: SnapStyle.ComponentDefinition {
             switch self {
                 case .primary, .secondary: .action
+                case .icon: .actionIcon
                 case .component(let component, hierarchy: _): component
             }
         }
@@ -27,6 +29,7 @@ public struct StyleButtonStyle: ButtonStyle {
             switch self {
                 case .primary: .primary
                 case .secondary: .secondary
+                case .icon(let hierarchy): hierarchy
                 case .component(_, hierarchy: let hierarchy): hierarchy
             }
         }
@@ -104,6 +107,21 @@ public struct StyleButton<Content>: View where Content : View {
             }
             StyleButton(.component(.content), enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
+            }
+            
+            StyleHStack(spacing: \.spacingElements) {
+                StyleButton(.icon(hierarchy: .primary), enabled: isEnabled) { } content: {
+                    Label("Primary", systemImage: "star")
+                        .labelStyle(.iconOnly)
+                }
+                StyleButton(.icon(hierarchy: .secondary), enabled: isEnabled) { } content: {
+                    Label("Secondary", systemImage: "star")
+                        .labelStyle(.iconOnly)
+                }
+                StyleButton(.icon(hierarchy: .tertiary), enabled: isEnabled) { } content: {
+                    Label("Teriary", systemImage: "star")
+                        .labelStyle(.iconOnly)
+                }
             }
         }
         .style(component: .content)
