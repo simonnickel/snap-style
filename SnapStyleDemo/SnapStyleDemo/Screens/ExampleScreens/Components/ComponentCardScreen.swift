@@ -10,25 +10,18 @@ struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
 
-            StyleVStack {
-                ElementStackView(axis: .horizontal)
-            }
-            .style(component: .card)
-
-            StyleVStack {
-                ElementStackView(axis: .horizontal, hierarchy: .secondary)
-            }
-            .style(component: .card)
-
-            contentCornerValueCard
+            DemoValueCard.exampleRectangle
 
             ScrollingHStack {
-                contentCornerValueCard
-                contentCornerValueCard
-                contentCornerValueCard
-                contentCornerValueCard
-                contentCornerValueCard
-                contentCornerValueCard
+                DemoValueCard.exampleRectangle
+                DemoValueCard.exampleTriangle
+                DemoValueCard.exampleCircle
+                DemoValueCard.exampleRectangle
+                DemoValueCard.exampleTriangle
+                DemoValueCard.exampleCircle
+                DemoValueCard.exampleRectangle
+                DemoValueCard.exampleTriangle
+                DemoValueCard.exampleCircle
             }
 
             contentCardView
@@ -37,36 +30,12 @@ struct ComponentCardScreen: View {
     }
 
     private var contentCardView: some View {
-        StyleVStack {
+        StyleVStack(spacing: \.spacingGroups) {
             StructuredTextView()
             ActionButtonsView()
         }
     }
-
-    private var contentCornerValueCard: some View {
-        CornerContainer(
-            topLeading: {
-                Image(systemName: "star")
-                    .style(element: .icon)
-            },
-            topTrailing: {
-                Text("1234")
-                    .style(element: .value)
-            },
-            bottomLeading: {
-                StyleVStack {
-                    Text("Title")
-                        .style(element: .title)
-                    Text("Subtitle")
-                        .style(element: .title, hierarchy: .secondary)
-                }
-            },
-            bottomTrailing: {
-                EmptyView()
-            }
-        )
-        .style(component: .valueCard)
-    }
+    
 }
 
 

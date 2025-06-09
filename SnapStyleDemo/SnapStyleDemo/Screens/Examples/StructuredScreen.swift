@@ -25,13 +25,15 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var contentCardRow: some View {
         ScrollingHStack {
-            contentCard
-            contentCard
-            contentCard
-            contentCard
-            contentCard
-            contentCard
-            contentCard
+            DemoValueCard.exampleRectangle
+            DemoValueCard.exampleTriangle
+            DemoValueCard.exampleCircle
+            DemoValueCard.exampleRectangle
+            DemoValueCard.exampleTriangle
+            DemoValueCard.exampleCircle
+            DemoValueCard.exampleRectangle
+            DemoValueCard.exampleTriangle
+            DemoValueCard.exampleCircle
         }
     }
 
@@ -47,26 +49,9 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var contentCards: some View {
         StyleHStack(spacing: \.spacingElements) {
-            contentCard
-            contentCard
+            DemoValueCard.exampleRectangle
+            DemoValueCard.exampleTriangle
         }
-    }
-
-    @ViewBuilder
-    private var contentCard: some View {
-        CornerContainer {
-            Image(systemName: "triangle")
-                .style(element: .icon)
-        } topTrailing: {
-            Text("Value")
-                .style(element: .value)
-        } bottomLeading: {
-            Text("Title")
-                .style(element: .title, hierarchy: .primary)
-        } bottomTrailing: {
-            
-        }
-        .style(component: .valueCard)
     }
 
     @ViewBuilder
