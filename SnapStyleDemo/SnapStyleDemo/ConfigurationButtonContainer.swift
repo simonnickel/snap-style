@@ -6,7 +6,7 @@
 import SnapStyle
 import SwiftUI
 
-struct ContentContainer: View {
+struct ConfigurationButtonContainer: View {
 
     @State private var isPresented: Bool = false
     @State private var presentationDetentSelected: PresentationDetent = .medium
@@ -40,5 +40,5 @@ struct ContentContainer: View {
 // MARK: - Preview
 
 #Preview {
-    ContentContainer()
+    ConfigurationButtonContainer()
 }

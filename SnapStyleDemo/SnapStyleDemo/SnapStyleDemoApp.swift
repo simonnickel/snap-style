@@ -21,7 +21,7 @@ struct SnapStyleDemoApp: App {
         let style: SnapStyle = SnapStyle()
         
         var body: some View {
-            ContentContainer()
+            ConfigurationButtonContainer()
                 .style(setup: style)
                 .style(accent: demoConfiguration.accent)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
