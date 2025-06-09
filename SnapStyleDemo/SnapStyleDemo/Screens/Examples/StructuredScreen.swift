@@ -54,28 +54,19 @@ struct StructuredScreen: View {
 
     @ViewBuilder
     private var contentCard: some View {
-        StyleVStack {
-            StyleHStack(spacing: \.spacingElements, alignment: .top) {
-                Text("Title")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .style(element: .title, hierarchy: .primary)
-                Text("Value")
-                    .style(element: .value)
-            }
-
-            Spacer()
-
-            StyleHStack(spacing: \.spacingElements, alignment: .bottom) {
-                Text("Subitle")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .style(element: .title, hierarchy: .secondary)
-                Spacer()
-                Image(systemName: "triangle")
-                    .style(element: .icon)
-            }
+        CornerContainer {
+            Image(systemName: "triangle")
+                .style(element: .icon)
+        } topTrailing: {
+            Text("Value")
+                .style(element: .value)
+        } bottomLeading: {
+            Text("Title")
+                .style(element: .title, hierarchy: .primary)
+        } bottomTrailing: {
+            
         }
-        .style(component: .card)
-        .fixedSize(horizontal: false, vertical: true)
+        .style(component: .valueCard)
     }
 
     @ViewBuilder
@@ -100,12 +91,12 @@ struct StructuredScreen: View {
 #Preview {
     NavigationStack {
         StructuredScreen()
-            .styleOverride(
-                surfaces: [
-                    \.onAccent: SnapStyle.ValueBuilder.builder { context in
-                        .definition(.color(.yellow))
-                    }
-                ]
-            )
+//            .styleOverride(
+//                surfaces: [
+//                    \.onAccent: SnapStyle.ValueBuilder.builder { context in
+//                        .definition(.color(.yellow))
+//                    }
+//                ]
+//            )
     }
 }

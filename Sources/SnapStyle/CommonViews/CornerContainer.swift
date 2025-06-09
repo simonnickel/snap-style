@@ -69,6 +69,8 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
 
     return VStack(spacing: 20) {
         PreviewCornerContainer()
+            .fixedSize()
+        PreviewCornerContainer()
             .frame(maxWidth: 90)
         PreviewCornerContainer()
             .frame(maxWidth: 100)
