@@ -55,10 +55,10 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     NavigationStack {
         StyleList(selection: $selection) {
             Section {
-                StyleListRow(.navigate("Star"), isSelected: true) {
+                StyleListRow(.navigate("Star")) {
                     StyleLabel("Star", systemImage: "star")
                 }
-                StyleListRow(.navigate("Circle"), isSelected: false) {
+                StyleListRow(.navigate("Circle")) {
                     StyleLabel("Circle", systemImage: "circle")
                 }
                 StyleLabel("Triangle", systemImage: "triangle")
@@ -68,16 +68,16 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                     .styleListSectionHeaderLabel()
             }
             Section {
-                StyleListRow(.navigate("Star"), isSelected: true) {
+                StyleListRow(.navigate("Star")) {
                     StyleLabel("Star", systemImage: "star")
                 }
-                StyleListRow(.navigate("Circle"), isSelected: false) {
+                StyleListRow(.navigate("Circle", isPresented: { _ in true })) {
                     StyleLabel("Circle", systemImage: "circle")
                 }
                 StyleLabel("Triangle", systemImage: "triangle")
                 StyleLabel("Rectangle", systemImage: "rectangle")
             } header: {
-                Text("Section 2")
+                Text("Section with selected row")
                     .styleListSectionHeaderLabel()
             }
         }

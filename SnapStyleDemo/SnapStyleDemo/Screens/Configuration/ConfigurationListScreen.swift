@@ -13,9 +13,10 @@ struct ConfigurationListView: View {
     var body: some View {
         StyleList(insetTop: false) {
             StyleListRow(
-                .navigate(ConfigurationFlow.Screen.color),
-                systemImage: "swatchpalette",
-                isSelected: navigationState.contains(ConfigurationFlow.Screen.color)
+                .navigate(ConfigurationFlow.Screen.color, isPresented: { screen in
+                    navigationState.contains(screen)
+                }),
+                systemImage: "swatchpalette"
             ) {
                 Text("Color")
             }

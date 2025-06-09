@@ -72,23 +72,32 @@ struct ComponentListScreen: View {
         var body: some View {
             Section {
                 StyleListRow(
-                    .navigate(ContentFlow.Screen.destination("Star", source: identifier)),
-                    systemImage: "star",
-                    isSelected: navigationState.contains(.destination("Star", source: identifier))
+                    .navigate(
+                        ContentFlow.Screen.destination("Star", source: identifier),
+                        isPresented: { screen in
+                            navigationState.contains(screen)
+                        }),
+                    systemImage: "star"
                 ) {
                     Text("Star")
                 }
                 StyleListRow(
-                    .navigate(ContentFlow.Screen.destination("Rectangle", source: identifier)),
-                    systemImage: "rectangle",
-                    isSelected: navigationState.contains(.destination("Rectangle", source: identifier))
+                    .navigate(
+                        ContentFlow.Screen.destination("Rectangle", source: identifier),
+                        isPresented: { screen in
+                            navigationState.contains(screen)
+                        }),
+                    systemImage: "rectangle"
                 ) {
                     Text("Rectangle")
                 }
                 StyleListRow(
-                    .navigate(ContentFlow.Screen.destination("Triangle", source: identifier)),
-                    systemImage: "triangle",
-                    isSelected: navigationState.contains(.destination("Triangle", source: identifier))
+                    .navigate(
+                        ContentFlow.Screen.destination("Triangle", source: identifier),
+                        isPresented: { screen in
+                            navigationState.contains(screen)
+                        }),
+                    systemImage: "triangle"
                 ) {
                     Text("Triangle")
                 }
@@ -313,7 +322,7 @@ struct ComponentListScreen: View {
 
             var body: some View {
                 if applyStyle {
-                    StyleListRow(systemImage: data.icon, isSelected: selection ?? "" == data.id) {
+                    StyleListRow(systemImage: data.icon) {
                         selection = data.id
                     } title: {
                         Text(data.title)

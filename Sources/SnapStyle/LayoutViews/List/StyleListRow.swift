@@ -13,7 +13,6 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
     private let variant: Variant
     private let icon: StyleIcon.Definition?
-    private let isSelected: Bool
     private let title: () -> Title
     private let content: (() -> Content)?
     private let action: Action?
@@ -22,14 +21,12 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
         systemImage: String? = nil,
-        isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder title: @escaping () -> Title,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
-        self.isSelected = isSelected
         self.action = action
         self.title = title
         self.content = content
@@ -40,13 +37,11 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
         systemImage: String? = nil,
-        isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder title: @escaping () -> Title
     ) where Content == Never {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
-        self.isSelected = isSelected
         self.action = action
         self.title = title
         self.content = nil
@@ -57,14 +52,12 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
         systemImage: String? = nil,
-        isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder title: @escaping () -> Title,
         @ViewBuilder content: @escaping () -> Content
     ) where SelectionValue == Never {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
-        self.isSelected = isSelected
         self.action = action
         self.title = title
         self.content = content
@@ -75,13 +68,11 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         _ variant: Variant = .plain,
         icon: IconKeyPath? = nil,
         systemImage: String? = nil,
-        isSelected: Bool = false,
         action: Action? = nil,
         @ViewBuilder title: @escaping () -> Title
     ) where SelectionValue == Never, Content == Never {
         self.variant = variant
         self.icon = .init(icon: icon, systemImage: systemImage)
-        self.isSelected = isSelected
         self.action = action
         self.title = title
         self.content = nil
@@ -93,19 +84,20 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         switch variant {
             case .plain, .pick:
                 viewRow()
-                    .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                    .style(component: .listRow, state: interactionState)
                 
                 // TODO: macOS navigation style and hover highlight.
-            case .navigate(let value):
+            case .navigate(let value, let isPresented):
+                let isPresented = isPresented?(value) ?? false
                 NavigationLink(value: value) {
                     viewRow()
                 }
-                .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                .style(component: .listRow, state: isPresented ? .highlighted : interactionState)
                 
             default:
                 viewButtonContainer {
                     viewRow()
-                        .style(component: .listRow, state: isSelected ? .highlighted : interactionState)
+                        .style(component: .listRow, state: interactionState)
                 }
         }
     }
@@ -228,7 +220,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         case plain
 
         /// Navigation style.
-        case navigate(_ value: SelectionValue)
+        case navigate(_ value: SelectionValue, isPresented: ((SelectionValue) -> Bool)? = nil)
 
         /// Selection style to choose a single value.
         case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
@@ -251,78 +243,63 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
 #Preview {
 
-    @ViewBuilder @MainActor
-    func createSection(isSelected: Bool) -> some View {
-        Section {
-            StyleListRow(
-                .navigate("Star"),
-                systemImage: "star",
-                isSelected: isSelected
-            ) {
-                Text("Star")
-            }
-            StyleListRow(
-                .selectValue("Rectangle", selection: .constant("Rectangle")),
-                systemImage: "rectangle",
-                isSelected: isSelected
-            ) {
-                Text("Rectangle")
-            }
-            StyleListRow(
-                .selectValue("Circle", selection: .constant("Star")),
-                systemImage: "circle",
-                isSelected: isSelected
-            ) {
-                Text("Circle")
-            }
-            StyleListRow(
-                .enabled(Binding(get: { true }, set: { _ in })),
-                systemImage: "triangle",
-                isSelected: isSelected
-            ) {
-                Text("Triangle")
-            }
-            StyleListRow(
-                .enabled(Binding(get: { false }, set: { _ in })),
-                systemImage: "pentagon",
-                isSelected: isSelected
-            ) {
-                Text("Pentagon")
-            }
-            StyleListRow(
-                .pick(["A", "B"], selection: Binding(get: { "A" }, set: { _ in })),
-                systemImage: "square",
-                isSelected: isSelected
-            ) {
-                Text("With Content")
-            }
-            StyleListRow(
-                .plain,
-                systemImage: "line.horizontal.3",
-                isSelected: isSelected
-            ) {
-                Text("Lines")
-            }
-            StyleListRow(
-                .plain,
-                systemImage: "square",
-                isSelected: isSelected
-            ) {
-                Text("With Content")
-            } content: {
-                Rectangle()
-            }
-        } header: {
-            StyleLabel("isSelected: \(isSelected)")
-                .styleListSectionHeaderLabel()
-        }
-    }
-
-    return NavigationStack {
+    NavigationStack {
         StyleList {
-            createSection(isSelected: false)
-            createSection(isSelected: true)
-
+            Section {
+                StyleListRow(
+                    .navigate("Star"),
+                    systemImage: "star"
+                ) {
+                    Text("Star")
+                }
+                StyleListRow(
+                    .selectValue("Rectangle", selection: .constant("Rectangle")),
+                    systemImage: "rectangle"
+                ) {
+                    Text("Rectangle")
+                }
+                StyleListRow(
+                    .selectValue("Circle", selection: .constant("Star")),
+                    systemImage: "circle"
+                ) {
+                    Text("Circle")
+                }
+                StyleListRow(
+                    .enabled(Binding(get: { true }, set: { _ in })),
+                    systemImage: "triangle"
+                ) {
+                    Text("Triangle")
+                }
+                StyleListRow(
+                    .enabled(Binding(get: { false }, set: { _ in })),
+                    systemImage: "pentagon"
+                ) {
+                    Text("Pentagon")
+                }
+                StyleListRow(
+                    .pick(["A", "B"], selection: Binding(get: { "A" }, set: { _ in })),
+                    systemImage: "square"
+                ) {
+                    Text("With Content")
+                }
+                StyleListRow(
+                    .plain,
+                    systemImage: "line.horizontal.3"
+                ) {
+                    Text("Lines")
+                }
+                StyleListRow(
+                    .plain,
+                    systemImage: "square"
+                ) {
+                    Text("With Content")
+                } content: {
+                    Rectangle()
+                }
+            } header: {
+                StyleLabel("Section")
+                    .styleListSectionHeaderLabel()
+            }
         }
         List {
             // System Rows for reference
