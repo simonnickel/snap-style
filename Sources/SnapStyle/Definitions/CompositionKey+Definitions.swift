@@ -128,16 +128,20 @@ extension SnapStyle.CompositionKey {
         }
     }
     
-    public var containerContent: ValueBuilder {
+    public var containerContentCard: ValueBuilder {
         .base(.reference(\.contentContainer))
     }
     
-    public var containerList: ValueBuilder {
-        .base(.reference(\.containerContent))
+    public var containerAccentCard: ValueBuilder {
+        .base(.reference(\.accentContainer))
     }
     
-    public var containerCard: ValueBuilder {
+    public var containerValueCard: ValueBuilder {
         .base(.reference(\.accentContainer))
+    }
+
+    public var containerList: ValueBuilder {
+        .base(.reference(\.contentContainer))
     }
     
     public var containerAction: ValueBuilder {

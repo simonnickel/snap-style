@@ -21,7 +21,7 @@ struct ContentFlow: View {
         case structured
         case componentStack
 
-        case content
+        // Components
         case card
         case list
         case action
@@ -46,10 +46,11 @@ struct ContentFlow: View {
                     case .structured: StructuredScreen()
                     case .componentStack: ComponentStackScreen()
 
-                    case .content: ComponentContentScreen()
+                    // Components
                     case .card: ComponentCardScreen()
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
+
                     case .elements: DebugKeyScreen()
 
                     case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
@@ -70,7 +71,7 @@ struct ContentFlow: View {
                 case .structured: "Structured"
                 case .componentStack: "Component Stack"
 
-                case .content: "Content"
+                // Components
                 case .card: "Card"
                 case .list: "List"
                 case .action: "Action"

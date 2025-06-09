@@ -47,9 +47,9 @@ extension SnapStyle.NumberKey {
         }
     }
 
-    public var paddingContent: ValueBuilder { .base(.reference(\.paddingComponent)) }
-    public var paddingList: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingValueCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingList: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(18))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
     public var paddingActionIcon: ValueBuilder {
@@ -81,9 +81,8 @@ extension SnapStyle.NumberKey {
         }
     }
 
-    public var cornerRadiusContent: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
-    public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
     public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
+    public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
 
 
     // MARK: - Animation

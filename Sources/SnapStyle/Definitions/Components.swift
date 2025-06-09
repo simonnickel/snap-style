@@ -75,12 +75,12 @@ extension SnapStyle.ComponentDefinition {
     )
     
     
-    // MARK: - Content
+    // MARK: - Content Card
     
-    public static let content: Self = .init("content",
+    public static let contentCard: Self = .init("contentCard",
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingContent)
+                case .container: Padding(\.paddingCard)
                 default: nil
             }
         },
@@ -92,13 +92,77 @@ extension SnapStyle.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerContent
+                case .container: \.containerContentCard
                 default: nil
             }
         },
         shapes: { element in
             switch element {
-                case .container: \.containerContent
+                case .container: \.containerCard
+                default: nil
+            }
+        }
+    )
+    
+    
+    // MARK: - Accent Card
+    
+    public static let accentCard: Self = .init("accentCard",
+        requiresAlternativeAccent: true,
+        padding: { element in
+            switch element {
+                case .container: Padding(\.paddingCard)
+                default: nil
+            }
+        },
+        fonts: { element in
+            switch element {
+                case .title: \.title
+                default: \.content
+            }
+        },
+        compositions: { element in
+            switch element {
+                case .container: \.containerAccentCard
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerCard
+                default: nil
+            }
+        }
+    )
+    
+    
+    // MARK: - Value Card
+    
+    public static let valueCard: Self = .init("valueCard",
+        requiresAlternativeAccent: true,
+        padding: { element in
+            switch element {
+                case .container: Padding(\.paddingValueCard)
+                default: nil
+            }
+        },
+        fonts: { element in
+            switch element {
+                case .title: \.content
+                case .icon: \.title
+                case .value: \.title
+                default: \.card
+            }
+        },
+        compositions: { element in
+            switch element {
+                case .container: \.containerValueCard
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .container: \.containerValueCard
                 default: nil
             }
         }
@@ -139,66 +203,6 @@ extension SnapStyle.ComponentDefinition {
             switch element {
                 case .container: \.listRow
                 case .icon, .accessory: \.interactiveIndicator
-                default: nil
-            }
-        }
-    )
-    
-    
-    // MARK: - Card
-    
-    public static let card: Self = .init("card",
-        requiresAlternativeAccent: true,
-        padding: { element in
-            switch element {
-                case .container: Padding(\.paddingCard)
-                default: nil
-            }
-        },
-        fonts: { element in
-            switch element {
-                case .title: \.title
-                default: \.card
-            }
-        },
-        compositions: { element in
-            switch element {
-                case .container: \.containerCard
-                default: nil
-            }
-        },
-        shapes: { element in
-            switch element {
-                case .container: \.containerCard
-                default: nil
-            }
-        }
-    )
-    
-    public static let valueCard: Self = .init("valueCard",
-        padding: { element in
-            switch element {
-                case .container: Padding(\.paddingCard)
-                default: nil
-            }
-        },
-        fonts: { element in
-            switch element {
-                case .title: \.content
-                case .icon: \.title
-                case .value: \.title
-                default: \.card
-            }
-        },
-        compositions: { element in
-            switch element {
-                case .container: \.containerCard
-                default: nil
-            }
-        },
-        shapes: { element in
-            switch element {
-                case .container: \.containerCard
                 default: nil
             }
         }

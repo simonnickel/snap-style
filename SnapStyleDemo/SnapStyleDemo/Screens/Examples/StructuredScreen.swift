@@ -14,10 +14,10 @@ struct StructuredScreen: View {
             contentCardRow
 
             content
-                .style(component: .content)
+                .style(component: .contentCard)
 
             content
-                .style(component: .content)
+                .style(component: .contentCard)
         }
         .navigationTitle("Structured")
     }
