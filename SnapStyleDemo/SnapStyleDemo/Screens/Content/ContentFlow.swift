@@ -11,8 +11,11 @@ import SwiftUI
 struct ContentFlow: View {
 
     @MainActor
-    enum Screen: String {
-        case root = "SnapStyle"
+    enum Screen: Hashable, Equatable {
+        case root
+        
+        /// A generic destination to navigate to.
+        case destination(String, source: String)
 
         case content
         case card
@@ -25,28 +28,29 @@ struct ContentFlow: View {
 
         case elements
 
-        case cacheNumber = "Number"
-        case cacheFont = "Font"
-        case cacheSurface = "Surface"
-        case cacheComposition = "Composition"
-
-        var title: String {
-            rawValue.uppercasedFirstLetter
-        }
+        case cacheNumber
+        case cacheFont
+        case cacheSurface
+        case cacheComposition
 
         @ViewBuilder
         var screen: some View {
             Group {
                 switch self {
                     case .root: ContentListScreen()
+                        
+                    case .destination(let title, source: let source):
+                        ComponentListScreen(title: title, source: source)
+
                     case .content: ComponentContentScreen()
                     case .card: ComponentCardScreen()
-                    case .list: ComponentListScreen()
+                    case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
                     case .componentStack: ComponentStackScreen()
                     case .components: ComponentsScreen()
                     case .structured: StructuredScreen()
                     case .elements: DebugKeyScreen()
+
                     case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
                     case .cacheFont: DebugCacheScreen<SnapStyle.FontKey>()
                     case .cacheSurface: DebugCacheScreen<SnapStyle.SurfaceKey>()
@@ -55,19 +59,47 @@ struct ContentFlow: View {
             }
             .navigationTitle(title)
         }
+        
+        var title: String {
+            switch self {
+                case .root: "SnapStyle"
+                case .destination(let title, _): title
+
+                case .content: "Content"
+                case .card: "Card"
+                case .list: "List"
+                case .action: "Action"
+                case .componentStack: "Component Stack"
+
+                case .components: "Components"
+                case .structured: "Structured"
+
+                case .elements: "Elements"
+
+                case .cacheNumber: "Number"
+                case .cacheFont: "Font"
+                case .cacheSurface: "Surface"
+                case .cacheComposition: "Composition"
+            }
+        }
     }
 
-    @State private var navigationPath: [Screen] = []
+    @State private var navigationState: [Screen] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationState) {
             Screen.root.screen
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
                 }
         }
+        .environment(\.navigationState, navigationState)
     }
 
+}
+
+extension EnvironmentValues {
+    @Entry var navigationState: [ContentFlow.Screen] = []
 }
 
 

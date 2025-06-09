@@ -41,11 +41,16 @@ struct ContentListScreen: View {
     // MARK: - ListRow
 
     struct ListRow: View {
+        
+        @Environment(\.navigationState) private var navigationState
 
         let screen: ContentFlow.Screen
 
         var body: some View {
-            StyleListRow(.navigate(screen)) {
+            StyleListRow(
+                .navigate(screen),
+                isSelected: navigationState.contains(screen)
+            ) {
                 Text(screen.title)
             }
         }

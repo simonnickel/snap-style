@@ -6,45 +6,29 @@
 import SnapStyle
 import SwiftUI
 
-extension EnvironmentValues {
-    @Entry var navigationState: [String] = []
-}
-
 struct ComponentListScreen: View {
+    
+    let title: String
+    let source: String
 
     @State private var selected: String? = nil
-
-    @State private var navigationState: [String] = []
 
     var body: some View {
 
         StyleList(selection: $selected) {
             SectionVariantPlain()
-            SectionVariantNavigate()
+            SectionVariantNavigate(title: title, source: source)
             SectionVariantPick()
             SectionVariantEnabled()
             SectionVariantSelectValue()
             SectionVariantSelectValues()
             SectionVariantSelected()
             SectionVariantNoIcon()
-            ListSectionView(data: .init(title: "Section 2", count: 8), selection: $selected, applyStyle: true)
-            ListSectionView(data: .init(title: "Section 3", count: 18), selection: $selected, applyStyle: true)
+            ListSectionView(data: .init(title: "Section", count: 1), selection: $selected, applyStyle: true)
+            ListSectionView(data: .init(title: "Section", count: 10), selection: $selected, applyStyle: true)
+            ListSectionView(data: .init(title: "Section", count: 30), selection: $selected, applyStyle: true)
         }
-        .navigationDestination(for: String.self) { value in
-            List {
-                ListSectionView(data: .init(title: "Section 1", count: 3), selection: $selected, applyStyle: false)
-                ListSectionView(data: .init(title: "Section 2", count: 4), selection: $selected, applyStyle: false)
-                ListSectionView(data: .init(title: "Section 2", count: 30), selection: $selected, applyStyle: false)
-            }
-            .navigationTitle(value)
-            .onAppear {
-                navigationState.append(value)
-            }
-            .onDisappear {
-                navigationState.removeLast()
-            }
-        }
-        .environment(\.navigationState, navigationState)
+        .navigationTitle(title)
 
     }
 
@@ -76,28 +60,35 @@ struct ComponentListScreen: View {
 
     struct SectionVariantNavigate: View {
 
-        @Environment(\.navigationState) private var navgationState
+        @Environment(\.navigationState) private var navigationState
+        
+        let title: String
+        let source: String
+        
+        private var identifier: String {
+            "\(source)-\(title)"
+        }
 
         var body: some View {
             Section {
                 StyleListRow(
-                    .navigate("Star"),
+                    .navigate(ContentFlow.Screen.destination("Star", source: identifier)),
                     systemImage: "star",
-                    isSelected: navgationState.contains("Star")
+                    isSelected: navigationState.contains(.destination("Star", source: identifier))
                 ) {
                     Text("Star")
                 }
                 StyleListRow(
-                    .navigate("Rectangle"),
+                    .navigate(ContentFlow.Screen.destination("Rectangle", source: identifier)),
                     systemImage: "rectangle",
-                    isSelected: navgationState.contains("Rectangle")
+                    isSelected: navigationState.contains(.destination("Rectangle", source: identifier))
                 ) {
                     Text("Rectangle")
                 }
                 StyleListRow(
-                    .navigate("Triangle"),
+                    .navigate(ContentFlow.Screen.destination("Triangle", source: identifier)),
                     systemImage: "triangle",
-                    isSelected: navgationState.contains("Triangle")
+                    isSelected: navigationState.contains(.destination("Triangle", source: identifier))
                 ) {
                     Text("Triangle")
                 }
@@ -345,6 +336,6 @@ struct ComponentListScreen: View {
 
 #Preview {
     NavigationStack {
-        ComponentListScreen()
+        ComponentListScreen(title: "List", source: "Preview")
     }
 }
