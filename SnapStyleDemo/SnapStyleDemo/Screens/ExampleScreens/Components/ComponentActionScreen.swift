@@ -25,23 +25,19 @@ struct ComponentActionScreen: View {
             ComponentContainer(title: "Subtitles", component: .content) {
                 ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
             }
-
-
-            // MARK: Elements
-
-            StyleVStack(spacing: \.spacingElements) {
-                Text("Elements")
-                    .style(element: .title, hierarchy: .secondary)
-
-                StyleVStack(isStretching: false) {
-                    ElementStackView(axis: .horizontal)
+            
+            ComponentContainer(title: "Icon", component: .content) {
+                StyleHStack(spacing: \.spacingGroups) {
+                    StyleButton(.icon(hierarchy: .primary)) { } content: {
+                        StyleLabel(icon: \.favorite)
+                    }
+                    StyleButton(.icon(hierarchy: .secondary)) { } content: {
+                        StyleLabel(icon: \.favorite)
+                    }
+                    StyleButton(.icon(hierarchy: .tertiary)) { } content: {
+                        StyleLabel(icon: \.favorite)
+                    }
                 }
-                .style(component: .action)
-
-                StyleVStack(isStretching: false) {
-                    ElementStackView(axis: .horizontal, hierarchy: .secondary)
-                }
-                .style(component: .action)
             }
 
         }
