@@ -49,3 +49,10 @@ struct ActionButtonsView: View {
         }
     }
 }
+
+
+// MARK: - Preview
+
+#Preview {
+    ActionButtonsView()
+}
