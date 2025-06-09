@@ -4,6 +4,7 @@
 //
 
 import SnapCore
+import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
@@ -37,7 +38,7 @@ struct ConfigurationColorSelectionScreen: View {
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
 
-        ScrollView {
+        StyleScreen {
             LazyVGrid(columns: [gridItem, gridItem]) {
                 ForEach(accents, id: \.self) { accent in
                     Button {
