@@ -19,12 +19,12 @@ struct ContentFlow: View {
 
         // Examples
         case structured
+        case componentStack
 
         case content
         case card
         case list
         case action
-        case componentStack
 
         case elements
 
@@ -44,12 +44,12 @@ struct ContentFlow: View {
 
                     // Examples
                     case .structured: StructuredScreen()
+                    case .componentStack: ComponentStackScreen()
 
                     case .content: ComponentContentScreen()
                     case .card: ComponentCardScreen()
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
-                    case .componentStack: ComponentStackScreen()
                     case .elements: DebugKeyScreen()
 
                     case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
@@ -66,13 +66,14 @@ struct ContentFlow: View {
                 case .root: "SnapStyle"
                 case .destination(let title, _): title
 
+                // Examples
+                case .structured: "Structured"
+                case .componentStack: "Component Stack"
+
                 case .content: "Content"
                 case .card: "Card"
                 case .list: "List"
                 case .action: "Action"
-                case .componentStack: "Component Stack"
-
-                case .structured: "Structured"
 
                 case .elements: "Elements"
 
