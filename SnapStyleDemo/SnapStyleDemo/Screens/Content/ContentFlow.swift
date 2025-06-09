@@ -109,15 +109,4 @@ extension EnvironmentValues {
 
 #Preview {
     ContentFlow()
-        .styleOverride(
-            fonts: [
-                \.title: SnapStyle.ValueBuilder.builder { context in
-                    switch context.element.hierarchy {
-                        case .primary: .definition(.with(size: 12))
-                        default: nil
-                    }
-
-                }
-            ]
-        )
 }

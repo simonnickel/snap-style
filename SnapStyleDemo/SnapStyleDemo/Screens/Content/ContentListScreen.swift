@@ -62,5 +62,7 @@ struct ContentListScreen: View {
 // MARK: - Preview
 
 #Preview {
-    ContentListScreen()
+    NavigationStack {
+        ContentListScreen()
+    }
 }
