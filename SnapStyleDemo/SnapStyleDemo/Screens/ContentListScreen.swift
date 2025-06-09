@@ -11,7 +11,7 @@ struct ContentListScreen: View {
     var body: some View {
         StyleList {
             ListSection(title: "Examples", screens: [.structured, .componentStack])
-            ListSection(title: "Components", screens: [.content, .card, .list, .action])
+            ListSection(title: "Components", screens: [.card, .list, .action])
             ListSection(title: "Compon", screens: [.elements])
             ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
         }
