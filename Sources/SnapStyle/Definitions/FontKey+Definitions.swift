@@ -42,7 +42,7 @@ extension SnapStyle.FontKey {
 
     public var label: ValueBuilder { .base(nil) }
 
-    public var icon: ValueBuilder { .base(nil) } // TODO: Could be an adjustment to content (content + 2 ?)
+    public var icon: ValueBuilder { .base(nil) } // TODO values: Could be an adjustment to content (content + 2 ?)
 
     public var accessory: ValueBuilder { .base(.reference(\.icon)) }
 

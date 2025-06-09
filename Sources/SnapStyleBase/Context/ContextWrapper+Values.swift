@@ -78,8 +78,6 @@ extension SnapStyle.ContextWrapper {
 
         let value = value(for: keyPath)
 
-        // TODO: Font scaling?
-
         return value?.wrappedValue
 
     }
