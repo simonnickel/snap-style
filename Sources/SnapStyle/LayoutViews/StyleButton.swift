@@ -91,18 +91,25 @@ public struct StyleButton<Content>: View where Content : View {
 // MARK: - Preview
 
 #Preview {
+    
+    @Previewable @State var isEnabled: Bool = true
+    
     StyleScreen {
         StyleVStack(spacing: \.spacingElements, alignment: .center) {
-            StyleButton(.primary, enabled: true) { } content: {
+            StyleButton(.primary, enabled: isEnabled) { } content: {
                 Label("Primary", systemImage: "star")
             }
-            StyleButton(.secondary, enabled: true) { } content: {
+            StyleButton(.secondary, enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
-            StyleButton(.component(.content), enabled: true) { } content: {
+            StyleButton(.component(.content), enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
         }
         .style(component: .content)
+        
+        Toggle(isOn: $isEnabled) {
+            Text("enabled")
+        }
     }
 }
