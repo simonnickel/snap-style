@@ -19,7 +19,7 @@ struct ConfigurationFlow: View {
             Group {
                 switch self {
                     case .configuration: ConfigurationListView()
-                    case .color: ColorSelectionScreen()
+                    case .color: ConfigurationColorSelectionScreen()
                 }
             }
             .navigationTitle(rawValue.capitalized)
@@ -37,23 +37,6 @@ struct ConfigurationFlow: View {
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
                 }
-        }
-    }
-}
-
-
-// MARK: - Main List
-
-struct ConfigurationListView: View {
-    var body: some View {
-        StyleList(insetTop: false) {
-            StyleListRow(.navigate(ConfigurationFlow.Screen.color), systemImage: "swatchpalette") {
-                Text("Color")
-            }
-
-            ScaleFactorConfigurationRow()
-            
-            FontDesignConfigurationRow()
         }
     }
 }

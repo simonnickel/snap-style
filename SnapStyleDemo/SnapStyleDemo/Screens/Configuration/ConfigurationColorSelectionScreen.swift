@@ -7,7 +7,7 @@ import SnapCore
 import SnapStyleBase
 import SwiftUI
 
-struct ColorSelectionScreen: View {
+struct ConfigurationColorSelectionScreen: View {
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
@@ -57,5 +57,5 @@ struct ColorSelectionScreen: View {
 // MARK: - Preview
 
 #Preview {
-    ColorSelectionScreen()
+    ConfigurationColorSelectionScreen()
 }
