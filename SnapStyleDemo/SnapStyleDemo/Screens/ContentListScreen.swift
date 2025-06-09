@@ -10,8 +10,8 @@ struct ContentListScreen: View {
 
     var body: some View {
         StyleList {
+            ListSection(title: "Examples", screens: [.structured])
             ListSection(title: "Components", screens: [.content, .card, .list, .action, .componentStack])
-            ListSection(title: "Examples", screens: [.components, .structured])
             ListSection(title: "Compon", screens: [.elements])
             ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
         }

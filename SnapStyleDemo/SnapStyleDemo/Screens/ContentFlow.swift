@@ -17,14 +17,14 @@ struct ContentFlow: View {
         /// A generic destination to navigate to.
         case destination(String, source: String)
 
+        // Examples
+        case structured
+
         case content
         case card
         case list
         case action
         case componentStack
-
-        case components
-        case structured
 
         case elements
 
@@ -42,13 +42,14 @@ struct ContentFlow: View {
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
 
+                    // Examples
+                    case .structured: StructuredScreen()
+
                     case .content: ComponentContentScreen()
                     case .card: ComponentCardScreen()
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
                     case .componentStack: ComponentStackScreen()
-                    case .components: ComponentsScreen()
-                    case .structured: StructuredScreen()
                     case .elements: DebugKeyScreen()
 
                     case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
@@ -71,7 +72,6 @@ struct ContentFlow: View {
                 case .action: "Action"
                 case .componentStack: "Component Stack"
 
-                case .components: "Components"
                 case .structured: "Structured"
 
                 case .elements: "Elements"
