@@ -10,31 +10,28 @@ struct ComponentContentScreen: View {
     var body: some View {
         StyleScreen {
 
-            StyleVStack {
-                ElementStackView(axis: .horizontal)
-            }
-            .style(component: .content)
-
-            StyleVStack {
-                ElementStackView(axis: .horizontal, hierarchy: .secondary)
-            }
-            .style(component: .content)
+            content
 
             StyleVStack(spacing: \.spacingGroups) {
-                StructuredTextView()
-
-                ActionButtonsView()
+                StyleVStack {
+                    Text("Secondary")
+                        .style(element: .title)
+                    Text("Content inside of Content")
+                        .style(element: .title, hierarchy: .secondary)
+                }
+                content
             }
             .style(component: .content)
-
-            StyleVStack(spacing: \.spacingElements) {
-                Text("Secondary")
-                    .style(element: .title)
-                StructuredTextView()
-                    .style(component: .content)
-            }
-            .style(component: .content)
+            
         }
+    }
+    
+    private var content: some View {
+        StyleVStack(spacing: \.spacingGroups) {
+            StructuredTextView()
+            ActionButtonsView()
+        }
+        .style(component: .content)
     }
 
 }
