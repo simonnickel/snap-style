@@ -15,18 +15,15 @@ struct ConfigurationButtonContainer: View {
         ZStack {
             ContentFlow()
 
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    StyleButton {
-                        isPresented.toggle()
-                    } content: {
-                        Image(systemName: "slider.horizontal.3")
-                    }
+            ZStack {
+                StyleButton(.component(.actionIcon)) {
+                    isPresented.toggle()
+                } content: {
+                    Image(systemName: "slider.horizontal.3")
                 }
                 .style(padding: \.insetScreenHorizontal)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
         .sheet(isPresented: $isPresented) {
             ConfigurationFlow()
