@@ -73,7 +73,15 @@ extension SnapStyle.FontKey {
 
     // MARK: - List
     
-    public var list: ValueBuilder { .base(.definition(.with(size: 17, weight: .regular))) }
+    public var list: ValueBuilder {
+        .base(.definition(.with(size: 17, weight: .regular))) { context in
+            return switch context.element.type {
+                case .title: .definition(.with(size: 17, weight: .medium))
+                case .value: .definition(.with(size: 17, weight: .medium))
+                default: nil
+            }
+        }
+    }
 
     public var listSectionHeader: ValueBuilder {
         .builder { context in
