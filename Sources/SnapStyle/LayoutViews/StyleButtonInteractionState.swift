@@ -13,7 +13,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     
     private var interactionState: Binding<SnapStyle.Component.InteractionState>
     
-    @State private var isEnabled: Bool {
+    private var isEnabled: Bool {
         didSet { update() }
     }
     @State private var isPressed: Bool = false {
