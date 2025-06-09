@@ -18,8 +18,8 @@ struct ConfigurationFlow: View {
         var screen: some View {
             Group {
                 switch self {
-                    case .configuration: ConfigurationListView()
-                    case .color: ConfigurationColorSelectionScreen()
+                    case .configuration: ConfigurationScreen()
+                    case .color: ConfigurationColorScreen()
                 }
             }
             .navigationTitle(rawValue.capitalized)

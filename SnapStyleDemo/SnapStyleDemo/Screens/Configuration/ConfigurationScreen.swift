@@ -6,7 +6,7 @@
 import SnapStyle
 import SwiftUI
 
-struct ConfigurationListView: View {
+struct ConfigurationScreen: View {
     
     @Environment(\.navigationStateConfiguration) private var navigationState
     
@@ -34,6 +34,6 @@ struct ConfigurationListView: View {
 
 #Preview {
     NavigationStack {
-        ConfigurationListView()
+        ConfigurationScreen()
     }
 }
