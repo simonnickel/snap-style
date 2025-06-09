@@ -29,18 +29,24 @@ struct ConfigurationFlow: View {
         }
     }
     
-    @State private var navigationPath: [Screen] = []
+    @State private var navigationState: [Screen] = []
     
     var body: some View {
-        NavigationStack {
+        
+        NavigationStack(path: $navigationState) {
             Screen.configuration.screen
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
                 }
         }
+        .environment(\.navigationStateConfiguration, navigationState)
+        
     }
 }
 
+extension EnvironmentValues {
+    @Entry var navigationStateConfiguration: [ConfigurationFlow.Screen] = []
+}
 
 // MARK: - Preview
 

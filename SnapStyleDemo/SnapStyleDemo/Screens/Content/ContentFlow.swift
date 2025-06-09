@@ -87,6 +87,7 @@ struct ContentFlow: View {
     @State private var navigationState: [Screen] = []
 
     var body: some View {
+        
         NavigationStack(path: $navigationState) {
             Screen.root.screen
                 .navigationDestination(for: Screen.self) { screen in
@@ -94,6 +95,7 @@ struct ContentFlow: View {
                 }
         }
         .environment(\.navigationState, navigationState)
+        
     }
 
 }

@@ -8,9 +8,15 @@ import SwiftUI
 
 struct ConfigurationListView: View {
     
+    @Environment(\.navigationStateConfiguration) private var navigationState
+    
     var body: some View {
         StyleList(insetTop: false) {
-            StyleListRow(.navigate(ConfigurationFlow.Screen.color), systemImage: "swatchpalette") {
+            StyleListRow(
+                .navigate(ConfigurationFlow.Screen.color),
+                systemImage: "swatchpalette",
+                isSelected: navigationState.contains(ConfigurationFlow.Screen.color)
+            ) {
                 Text("Color")
             }
 
