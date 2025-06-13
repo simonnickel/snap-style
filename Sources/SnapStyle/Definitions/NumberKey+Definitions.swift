@@ -24,9 +24,12 @@ extension SnapStyle.NumberKey {
 
     public var spacingLabel: ValueBuilder { .base(.definition(.value(8))) } // System default is 8 (iOS 18)
 
-    public var spacingListRowTop: ValueBuilder { .base(.definition(.value(12))) }
+    public var spacingListSectionFirst: ValueBuilder { .base(.definition(.value(10))) }
+    public var spacingListSection: ValueBuilder { .base(.definition(.value(28))) }
+    public var spacingListHeaderBottom: ValueBuilder { .base(.definition(.value(10))) }
+    public var spacingListRowTop: ValueBuilder { .base(.definition(.value(16))) }
     public var spacingListRowBottom: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
-    public var spacingListRowLeading: ValueBuilder { .base(.definition(.value(20))) }
+    public var spacingListRowLeading: ValueBuilder { .base(.definition(.value(18))) }
     public var spacingListRowTrailing: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
 
 

@@ -86,8 +86,8 @@ extension SnapStyle.FontKey {
     public var listSectionHeader: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 15, weight: .bold))
-                case .secondary: .definition(.with(size: 15, weight: .medium))
+                case .any, .primary: .definition(.with(size: 16, weight: .bold))
+                case .secondary: .definition(.with(size: 17, weight: .semibold))
                 case .tertiary: .definition(.with(size: 15, weight: .regular))
             }
         }
