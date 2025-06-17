@@ -24,6 +24,8 @@ struct ConfigurationScreen: View {
             ScaleFactorConfigurationRow()
             
             FontDesignConfigurationRow()
+            
+            FontWidthConfigurationRow()
         }
     }
     

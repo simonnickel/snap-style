@@ -10,9 +10,9 @@ import SwiftUI
 
 extension View {
 
-    public func style(fontDesign: Font.Design) -> some View {
+    public func style(fontDesign: Font.Design?) -> some View {
         self
-            .modifier(FontDesignModifier(fontDesign: fontDesign ?? SnapStyle.Context.fontDesignDefault))
+            .modifier(FontDesignModifier(fontDesign: fontDesign))
     }
 
 }
@@ -33,7 +33,7 @@ internal struct FontDesignModifier: ViewModifier {
 
 extension SnapStyle.Context {
 
-    public static let fontDesignDefault: Font.Design? = .rounded
+    public static let fontDesignDefault: Font.Design? = nil
 
     public var fontDesign: Font.Design? { getValue(for: Self.fontDesign) ?? Self.fontDesignDefault }
 

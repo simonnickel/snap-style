@@ -26,6 +26,7 @@ struct SnapStyleDemoApp: App {
                 .style(accent: demoConfiguration.accent)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
+                .style(fontWidth: demoConfiguration.fontWidth)
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }

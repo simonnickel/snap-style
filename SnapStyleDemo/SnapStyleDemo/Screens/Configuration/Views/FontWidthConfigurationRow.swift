@@ -8,24 +8,24 @@ import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
-struct FontDesignConfigurationRow: View {
+struct FontWidthConfigurationRow: View {
 
     @Environment(\.style) private var style
     @Environment(\.demoConfiguration) private var demoConfiguration
 
-    @State private var fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault
+    @State private var fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault
 
     var body: some View {
-        StyleListRow(.pick(Font.Design.allCases, selection: $fontDesign), icon: \.fontDesign) {
+        StyleListRow(.pick(Font.Width.allCases, selection: $fontWidth), icon: \.fontDesign) {
             StyleVStack(spacing: \.spacingElements) {
-                StyleLabel("Font Design")
+                StyleLabel("Font Width")
             }
         }
         .onAppear {
-            fontDesign = demoConfiguration.fontDesign
+            fontWidth = demoConfiguration.fontWidth
         }
-        .onChange(of: fontDesign) { oldValue, newValue in
-            demoConfiguration.fontDesign = newValue
+        .onChange(of: fontWidth) { oldValue, newValue in
+            demoConfiguration.fontWidth = newValue
         }
     }
 }
@@ -36,7 +36,7 @@ struct FontDesignConfigurationRow: View {
 #Preview {
 
     StyleList {
-        FontDesignConfigurationRow()
+        FontWidthConfigurationRow()
     }
 
 }

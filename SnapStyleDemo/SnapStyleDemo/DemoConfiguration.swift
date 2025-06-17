@@ -14,16 +14,20 @@ class DemoConfiguration {
 
     var scaleFactor: SnapStyle.Context.ScaleFactor
     
-    var fontDesign: Font.Design
+    var fontDesign: Font.Design?
+
+    var fontWidth: Font.Width?
 
     init(
         accent: SnapStyle.Accent = SnapStyle.Accent.fallback,
         scaleFactor: SnapStyle.Context.ScaleFactor = SnapStyle.Context.scaleFactorDefault,
-        fontDesign: Font.Design = SnapStyle.Context.fontDesignDefault ?? .default
+        fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault,
+        fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault
     ) {
         self.accent = accent
         self.scaleFactor = scaleFactor
         self.fontDesign = fontDesign
+        self.fontWidth = fontWidth
     }
 
 }

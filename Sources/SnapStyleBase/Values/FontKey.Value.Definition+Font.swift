@@ -8,7 +8,7 @@ import SwiftUI
 
 extension SnapStyle.FontKey.Value.Definition {
 
-    public func font(size sizeOverride: Double? = nil, design: Font.Design? = nil) -> Font {
+    public func font(size sizeOverride: Double? = nil) -> Font {
         let sizeToUse = sizeOverride ?? size
 
         var font: Font = .system(size: sizeToUse, weight: weight, design: design)
@@ -28,7 +28,7 @@ extension SnapStyle.FontKey.Value.Definition {
 import UIKit
 
 extension SnapStyle.FontKey.Value.Definition {
-    public func uiFont(size sizeOverride: Double? = nil, design: Font.Design? = nil) -> UIFont {
+    public func uiFont(size sizeOverride: Double? = nil) -> UIFont {
         let sizeToUse = sizeOverride ?? size
         let font: UIFont = if let width {
             .systemFont(ofSize: sizeToUse, weight: weight.uiFontWeight, width: width.uiFontWidth)
@@ -36,7 +36,12 @@ extension SnapStyle.FontKey.Value.Definition {
             .systemFont(ofSize: sizeToUse, weight: weight.uiFontWeight)
         }
 
-        return font
+        if let design, let descriptor = font.fontDescriptor.withDesign(design.uiFontDesign) {
+            return UIFont(descriptor: descriptor, size: size)
+        } else {
+            return font
+        }
+
     }
 }
 #endif
@@ -48,22 +53,52 @@ extension SnapStyle.FontKey.Value.Definition {
 
 #Preview {
 
-    let fontDefinition: SnapStyle.FontKey.Value.Definition = .init(
+    let definitionStandard: SnapStyle.FontKey.Value.Definition = .init(
         size: 20,
         weight: .heavy,
-        width: .condensed,
-        design: .rounded,
+        width: nil,
+        design: nil,
+        textStyle: .body
+    )
+    let definitionDesign: SnapStyle.FontKey.Value.Definition = .init(
+        size: 20,
+        weight: .heavy,
+        width: nil,
+        design: .serif,
+        textStyle: .body
+    )
+    let definitionWidth: SnapStyle.FontKey.Value.Definition = .init(
+        size: 20,
+        weight: .heavy,
+        width: .compressed,
+        design: nil,
         textStyle: .body
     )
 
     VStack {
-        Text("Text SwiftUI")
-            .font(fontDefinition.font())
-            .frame(width: 300, height: 20, alignment: .leading)
-        UIKitTextView(text: "Text UIKit", font: fontDefinition.uiFont())
-            .frame(width: 300, height: 20, alignment: .leading)
+        Text("Standard")
+        CompareView(definition: definitionStandard)
+        Text("Design")
+        CompareView(definition: definitionDesign)
+        Text("Width")
+        CompareView(definition: definitionWidth)
     }
 
+}
+
+struct CompareView: View {
+
+    let definition: SnapStyle.FontKey.Value.Definition
+
+    var body: some View {
+        VStack {
+            Text("Text SwiftUI")
+                .font(definition.font())
+                .frame(width: 300, height: 20, alignment: .leading)
+            UIKitTextView(text: "Text UIKit", font: definition.uiFont())
+                .frame(width: 300, height: 20, alignment: .leading)
+        }
+    }
 }
 
 struct UIKitTextView: UIViewRepresentable {
