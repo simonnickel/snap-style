@@ -23,18 +23,23 @@ struct ComponentStackScreen: View {
     @ViewBuilder
     private func content(component: [SnapStyle.ComponentDefinition]) -> some View {
         StyleVStack(spacing: \.spacingElements) {
-            Text(component.description).style(element: .title)
+
+            Text(component.description)
+                .style(element: .title)
 
             StyleVStack(spacing: \.spacingElements) {
 
-                Text("Level 1").style(element: .title)
+                Text("Level 1")
+                    .style(element: .title)
 
                 StyleVStack(spacing: \.spacingElements) {
 
-                    Text("Level 2").style(element: .title)
+                    Text("Level 2")
+                        .style(element: .title)
 
                     StyleVStack(spacing: \.spacingElements) {
-                        Text("Level 3").style(element: .title)
+                        Text("Level 3")
+                            .style(element: .title)
                     }
                     .style(component: component[2])
 
