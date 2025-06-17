@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ConfigurationButtonContainer: View {
 
-    @State private var isPresented: Bool = false
+    @State private var showSheet: Bool = false
     @State private var presentationDetentSelected: PresentationDetent = .medium
 
     var body: some View {
@@ -17,7 +17,7 @@ struct ConfigurationButtonContainer: View {
 
             ZStack {
                 StyleButton(.component(.actionIcon)) {
-                    isPresented.toggle()
+                    showSheet.toggle()
                 } content: {
                     Image(systemName: "slider.horizontal.3")
                 }
@@ -25,7 +25,7 @@ struct ConfigurationButtonContainer: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
-        .sheet(isPresented: $isPresented) {
+        .sheet(isPresented: $showSheet) {
             ConfigurationFlow()
                 .presentationDetents([.medium, .height(50), .large], selection: $presentationDetentSelected)
         }
