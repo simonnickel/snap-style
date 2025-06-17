@@ -15,11 +15,15 @@ extension SnapStyle.FontKey {
     public var content: ValueBuilder { .base(.definition(.with(size: 16, weight: .regular))) }
     public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
 
+    public var navigationTitle: ValueBuilder {
+        .base(.definition(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
+    }
+    
     public var screenTitle: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 32, weight: .bold))
-                case .secondary: .definition(.with(size: 26, weight: .bold))
+                case .any, .primary: .definition(.with(size: 28, weight: .bold))
+                case .secondary: .definition(.with(size: 24, weight: .bold))
                 case .tertiary: .definition(.with(size: 20, weight: .bold))
             }
         }
