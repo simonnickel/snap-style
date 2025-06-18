@@ -67,31 +67,6 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
 }
 
-struct NavigationBarModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    func body(content: Content) -> some View {
-        content
-            .onAppear {
-                var attributesLarge = UINavigationBar.appearance().largeTitleTextAttributes
-                var font = attributesLarge?[NSAttributedString.Key.font] as? UIFont ?? UIFont.preferredFont(forTextStyle: .largeTitle)
-                if let descriptor = font.fontDescriptor.withDesign(.rounded)?.withSymbolicTraits([.traitBold]) {
-                    font = UIFont(descriptor: descriptor, size: font.pointSize)
-                } else {
-                    font = font
-                }
-                let attrs = [
-                    NSAttributedString.Key.font: font
-                ]
-
-                UINavigationBar.appearance().titleTextAttributes = attrs
-                UINavigationBar.appearance().largeTitleTextAttributes = attrs
-            }
-    }
-
-}
-
 
 // MARK: - Preview
 
