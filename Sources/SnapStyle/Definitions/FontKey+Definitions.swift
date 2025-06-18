@@ -15,7 +15,11 @@ extension SnapStyle.FontKey {
     public var content: ValueBuilder { .base(.definition(.with(size: 16, weight: .regular))) }
     public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
 
-    public var navigationTitle: ValueBuilder {
+    public var navigationTitleInline: ValueBuilder {
+        .base(.definition(.with(size: 17, weight: .semibold))) // iOS 26 - size: 17, weight: .semibold
+    }
+    
+    public var navigationTitleLarge: ValueBuilder {
         .base(.definition(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
     }
     
