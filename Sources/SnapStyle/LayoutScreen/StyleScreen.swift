@@ -47,6 +47,8 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
         .style(composition: composition, ignoreSafeAreaEdges: .all)
         .style(component: component, applyContainer: nil)
+        // TODO: Should this be a StyleNavigationStack instead? (Or just applied on the root.)
+        .styleNavigationBar()
     }
     
     @ViewBuilder
