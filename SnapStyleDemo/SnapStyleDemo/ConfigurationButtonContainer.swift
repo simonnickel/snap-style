@@ -13,7 +13,7 @@ struct ConfigurationButtonContainer: View {
 
     var body: some View {
         ZStack {
-            ContentFlow()
+            TabContainer()
 
             ZStack {
                 StyleButton(.component(.actionIcon)) {
