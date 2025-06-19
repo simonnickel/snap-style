@@ -10,12 +10,16 @@ struct TabContainer: View {
     var body: some View {
         TabView {
             Tab {
-                ContentFlow()
+                ConfigurationButtonContainer {
+                    ContentFlow()
+                }
             } label: {
                 Label("Examples", systemImage: "square.stack.3d.forward.dottedline.fill")
             }
             Tab {
-                ContentFlow()
+                ConfigurationButtonContainer {
+                    ContentFlow()
+                }
             } label: {
                 Label("Tools", systemImage: "light.beacon.max.fill")
             }

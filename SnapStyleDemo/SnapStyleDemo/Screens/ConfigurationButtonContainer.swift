@@ -6,14 +6,16 @@
 import SnapStyle
 import SwiftUI
 
-struct ConfigurationButtonContainer: View {
+struct ConfigurationButtonContainer<Content: View>: View {
 
     @State private var showSheet: Bool = false
     @State private var presentationDetentSelected: PresentationDetent = .medium
+    
+    let content: () -> Content
 
     var body: some View {
         ZStack {
-            TabContainer()
+            content()
 
             ZStack {
                 StyleButton(.component(.actionIcon)) {
@@ -37,5 +39,7 @@ struct ConfigurationButtonContainer: View {
 // MARK: - Preview
 
 #Preview {
-    ConfigurationButtonContainer()
+    ConfigurationButtonContainer() {
+        Text("Content")
+    }
 }

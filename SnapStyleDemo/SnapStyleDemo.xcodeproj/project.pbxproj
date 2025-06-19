@@ -8,14 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5A2959E02DC5155D002E1EEB /* SnapCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5A2959DF2DC5155D002E1EEB /* SnapCore */; };
-		5A295A312DC7B5DD002E1EEB /* ConfigurationButtonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A295A302DC7B5DA002E1EEB /* ConfigurationButtonContainer.swift */; };
 		5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */; };
 		5A29F0992CFB229900942934 /* SnapStyle in Frameworks */ = {isa = PBXBuildFile; productRef = 5A29F0982CFB229900942934 /* SnapStyle */; };
 		5AF6329E2DF604AE00082AD2 /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5A295A302DC7B5DA002E1EEB /* ConfigurationButtonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationButtonContainer.swift; sourceTree = "<group>"; };
 		5A29F06A2CFB1FC000942934 /* SnapStyleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapStyleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnapStyleDemo.entitlements; sourceTree = "<group>"; };
 		5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapStyleDemoApp.swift; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */,
-				5A295A302DC7B5DA002E1EEB /* ConfigurationButtonContainer.swift */,
 				5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */,
 				5A29F0922CFB221200942934 /* Screens */,
 				5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */,
@@ -151,7 +148,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A295A312DC7B5DD002E1EEB /* ConfigurationButtonContainer.swift in Sources */,
 				5AF6329E2DF604AE00082AD2 /* DemoConfiguration.swift in Sources */,
 				5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */,
 			);
