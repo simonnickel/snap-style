@@ -34,6 +34,9 @@ private struct StyleNavigationBarModifier: ViewModifier {
     }
 }
 
+
+// MARK: - StyleNavigationBarScaledModifier
+
 private struct StyleNavigationBarScaledModifier: ViewModifier {
 
     @Environment(\.style) private var style
