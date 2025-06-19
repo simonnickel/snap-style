@@ -35,7 +35,7 @@ struct ElementStackView: View {
 
     private var content: some View {
         ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { elementType in
-            Text("\(elementType)")
+            Text("\(elementType.rawValue)")
                 .style(element: elementType, hierarchy: hierarchy)
         }
     }
