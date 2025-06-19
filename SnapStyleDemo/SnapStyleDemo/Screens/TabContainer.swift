@@ -21,7 +21,12 @@ struct TabContainer: View {
                     ContentFlow()
                 }
             } label: {
-                Label("Tools", systemImage: "light.beacon.max.fill")
+                Label("Tools", systemImage: "wrench.and.screwdriver.fill")
+            }
+            Tab {
+                VanillaFlow(root: .root)
+            } label: {
+                Label("Vanilla", systemImage: "slider.horizontal.2.square.on.square")
             }
         }
         .tabViewStyle(.sidebarAdaptable)
