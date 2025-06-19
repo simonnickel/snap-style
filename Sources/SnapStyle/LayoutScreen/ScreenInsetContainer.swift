@@ -27,8 +27,8 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let maxWidth = style.number(for: Constants.keyPathMaxWidth),
             let minInset = style.number(for: Constants.keyPathInset)
         {
-            // All insets have to be based on the safe area.
-            let availableWidth = geometrySizeScreen.width - geometrySafeAreaInsets.leading - geometrySafeAreaInsets.trailing
+            // The width available.
+            let availableWidth = geometrySizeScreen.width
             // The available width for the content to fill.
             let widthForContent = applyReadableWidth ? min(availableWidth, maxWidth) : geometrySizeScreen.width
             // Margin to restrict to readable width.
@@ -49,12 +49,13 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
                 ))
                 .if(allowOverflow) { content in
+                    // TODO: Interaction outside of readable width is not interactable
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
                 } else: { content in
-                    // TODO: Does not work properly with iPadOS 26 with sidebar.
                     content
-                        .contentMargins(.horizontal, inset, for: .scrollContent)
+                        .contentMargins(.leading, inset + geometrySafeAreaInsets.leading, for: .scrollContent)
+                        .contentMargins(.trailing, inset + geometrySafeAreaInsets.trailing, for: .scrollContent)
                         .contentMargins(.vertical, 0, for: .scrollContent)
                 }
         } else {
