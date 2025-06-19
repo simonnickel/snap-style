@@ -3,13 +3,26 @@
 //  Created by Simon Nickel
 //
 
+import SnapFoundation
 import SnapStyleBase
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
 #endif
 
+// TODO improvement:
+/**
+ The modifier `View.styleNavigationBar()` configures the `UINavigationBar` with Style definitions.
+ It uses `UIKitViewControllerHookModifier` to get the responsible bar for the SwiftUI.View and updates the appearance on changes to the `ContextWrapper`. Changing the appearance proxy does not work, because the already rendered bar would not update.
+ 
+ It would be enough to apply it once per NavigationStack, e.g. on the root screen. Currently SnapStyle does not handle NavigationStack though, to not interfere with SnapNavigation. Both could be combined for a smoother experience.
+ 
+ To prevent unnecessary appearance config, the modifier requires `SnapStyle.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+ */
 extension View {
+    
+    /// Requires `SnapStyle.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// (see ``StyleNavigationBarModifier``)
     public func styleNavigationBar() -> some View {
         modifier(StyleNavigationBarModifier())
     }
@@ -26,7 +39,10 @@ private struct StyleNavigationBarModifier: ViewModifier {
         if let definitionInline, let definitionLarge {
             content
 #if canImport(UIKit)
-                .modifier(StyleNavigationBarScaledModifier(definitionInline: definitionInline, definitionLarge: definitionLarge))
+                .if(style.definition.configuration.allowNavigationBarTitleAdjustments) { content in
+                    content
+                        .modifier(StyleNavigationBarScaledModifier(definitionInline: definitionInline, definitionLarge: definitionLarge))
+                }
 #endif
         } else {
             content

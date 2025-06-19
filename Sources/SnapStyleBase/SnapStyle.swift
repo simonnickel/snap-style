@@ -9,7 +9,11 @@ public struct SnapStyle {
 
     internal var builderContainer: BuilderContainer = .init()
     internal var cacheContainer: CacheContainer = .init()
+    
+    package let configuration: Configuration
 
-    public init() {}
+    public init(configuration: Configuration = .init()) {
+        self.configuration = configuration
+    }
 
 }

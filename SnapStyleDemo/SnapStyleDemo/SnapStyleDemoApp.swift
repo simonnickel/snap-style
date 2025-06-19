@@ -18,7 +18,11 @@ struct SnapStyleDemoApp: App {
     struct Content: View {
         
         let demoConfiguration = DemoConfiguration()
-        let style: SnapStyle = SnapStyle()
+        let style: SnapStyle = SnapStyle(
+            configuration: .init(
+                allowNavigationBarTitleAdjustments: true
+            )
+        )
         
         var body: some View {
             ConfigurationButtonContainer()
