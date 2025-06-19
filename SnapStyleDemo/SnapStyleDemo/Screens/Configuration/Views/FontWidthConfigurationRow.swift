@@ -16,7 +16,7 @@ struct FontWidthConfigurationRow: View {
     @State private var fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault
 
     var body: some View {
-        StyleListRow(.pick(Font.Width.allCases, selection: $fontWidth), icon: \.fontDesign) {
+        StyleListRow(.pick(Font.Width.allCases + [nil], selection: $fontWidth), icon: \.fontDesign) {
             StyleVStack(spacing: \.spacingElements) {
                 StyleLabel("Font Width")
             }
