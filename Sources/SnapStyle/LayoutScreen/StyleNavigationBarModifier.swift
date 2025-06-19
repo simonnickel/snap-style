@@ -108,9 +108,10 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         size: Double
     ) -> UIFont {
         let design = style.context.fontDesign ?? .default
+        let fontSizeMax = style.number(for: \.fontSizeNavigationTitleMax, scaled: false) ?? 60
         var fontStyle = style.font(for: keyPath)
         // Max size has to be limited, otherwise the text is shortened anyway.
-        let size = min(size * style.context.scaleFactor, 60) // TODO: Should this be a configurable value? Should this be different per device type?
+        let size = min(size * style.context.scaleFactor, fontSizeMax)
         if let fontStyleR = fontStyle {
             fontStyle = .init(size: size, weight: fontStyleR.weight, width: fontStyleR.width, design: fontStyleR.design, textStyle: fontStyleR.textStyle)
         }

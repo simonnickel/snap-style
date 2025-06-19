@@ -91,5 +91,10 @@ extension SnapStyle.NumberKey {
     // MARK: - Animation
 
     public var animationInteractionHighlightDuration: ValueBuilder { .base(.definition(.value(0.3))) }
+    
+    
+    // MARK: - Others
+    
+    public var fontSizeNavigationTitleMax: ValueBuilder { .base(.definition(.value(60))) }
 
 }
