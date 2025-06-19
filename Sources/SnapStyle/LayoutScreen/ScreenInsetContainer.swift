@@ -36,8 +36,14 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             // Apply inset, if margin is not already large enough.
             let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
             
+//            let _ = print("###")
+//            let _ = print("geometrySizeScreen: \(geometrySizeScreen)")
+//            let _ = print("geometrySafeAreaInsets: \(geometrySafeAreaInsets)")
+//            let _ = print("availableWidth: \(availableWidth)")
+//            let _ = print("widthForContent: \(widthForContent)")
+//            let _ = print("marginWithoutInset: \(marginWithoutInset)")
+//            let _ = print("inset: \(inset)")
             content()
-                //.debugOverlay(info: "Inset: \(inset)")
                 .environment(\.geometrySizeContent, CGSize(
                     width: geometrySizeScreen.width - (inset * 2),
                     height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
@@ -46,6 +52,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
                 } else: { content in
+                    // TODO: Does not work properly with iPadOS 26 with sidebar.
                     content
                         .contentMargins(.horizontal, inset, for: .scrollContent)
                         .contentMargins(.vertical, 0, for: .scrollContent)

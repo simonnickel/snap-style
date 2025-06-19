@@ -30,7 +30,7 @@ extension [StyleScreenConfiguration] {
     public static var content: Self { [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .readableContentWidth, .allowReadableContentOverflow] }
 
     /// A default set of configurations for a system list screen.
-    public static var list: Self { [.insetHorizontalEdges, .readableContentWidth] }
+    public static var list: Self { [.insetHorizontalEdges, .readableContentWidth] } // TODO: .readableContentWidth without .allowReadableContentOverflow does not work properly on iPadOS 26 with sidebar.
 }
 
 
