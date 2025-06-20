@@ -49,7 +49,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
                 ))
                 .if(allowOverflow) { content in
-                    // TODO: Interaction outside of readable width is not interactable
+                    // TODO FB18231015: Content outside of SafeAreaPadding not interactive
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
                 } else: { content in
