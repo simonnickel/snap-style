@@ -9,15 +9,27 @@ import SwiftUI
 struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
-            
-            valueCards
 
-            content
-                .style(component: .contentCard)
-            
-            content
-                .style(component: .accentCard)
-            
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Value Card")
+                    .style(element: .title)
+                valueCards
+            }
+
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Content Card")
+                    .style(element: .title)
+                content
+                    .style(component: .contentCard)
+            }
+
+            StyleVStack(spacing: \.spacingElements) {
+                Text("Accent Card")
+                    .style(element: .title)
+                content
+                    .style(component: .accentCard)
+            }
+
             StyleVStack(spacing: \.spacingGroups) {
                 StyleVStack {
                     Text("Secondary")
