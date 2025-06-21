@@ -9,10 +9,10 @@ extension SnapStyle.ComponentDefinition.Padding {
 
     static var listRow: Self {
         .init(
-            leading: \.spacingListRowLeading,
-            top: \.spacingListRowTop,
-            trailing: \.spacingListRowTrailing,
-            bottom: \.spacingListRowBottom
+            leading: \.paddingListRowLeading,
+            top: \.paddingListRowTop,
+            trailing: \.paddingListRowTrailing,
+            bottom: \.paddingListRowBottom
         )
     }
 

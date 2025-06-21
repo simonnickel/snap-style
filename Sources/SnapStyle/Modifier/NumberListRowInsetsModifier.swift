@@ -21,10 +21,10 @@ extension View {
     }
 
     public func styleListRowInsets(
-        top: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowTop,
-        leading: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowLeading,
-        bottom: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowBottom,
-        trailing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingListRowTrailing
+        top: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowTop,
+        leading: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowLeading,
+        bottom: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowBottom,
+        trailing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowTrailing
     ) -> some View {
         self
             .modifier(

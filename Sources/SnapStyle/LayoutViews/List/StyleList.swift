@@ -29,15 +29,15 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 content()
                     .styleListRowInsets(\.zero)
             }
-            .styleModify(with: \.spacingListSection, transform: { content, value in
+            .styleModify(with: \.paddingListSection, transform: { content, value in
                 content
                 #if !os(macOS)
                     .listSectionSpacing(value)
                 #endif
             })
             // TODO FB: Custom Section Spacing does not apply to top of first section. Needs to be smaller than actual section spacing. Would prefer to use `.contentMargins(.top, value, for: .scrollContent)`, but for some weird reason this is applied between first section header and content.
-            .style(safeAreaPadding: insetTop ? \.spacingListSectionFirst : \.zero, .top)
-            .style(safeAreaPadding: \.spacingListBottom, .bottom)
+            .style(safeAreaPadding: insetTop ? \.paddingListSectionFirst : \.zero, .top)
+            .style(safeAreaPadding: \.paddingListBottom, .bottom)
             .listIconWidthScope()
             // Need to disable to use custom background.
             .scrollContentBackground(.hidden)

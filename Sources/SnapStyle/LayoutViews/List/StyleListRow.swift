@@ -144,7 +144,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         StyleStack(spacing: \.spacingElements) {
             StyleStack(.horizontal) {
 
-                StyleStack(.horizontal, spacing: \.spacingListRowLeading) {
+                StyleStack(.horizontal, spacing: \.paddingListRowLeading) {
                     if let icon {
                         StyleIcon(icon)
                             .style(element: .icon)
@@ -164,7 +164,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
             content?()
                 .insetListContent()
         }
-        .environment(\.styleLabelSpacing, \.spacingListRowLeading)
+        .environment(\.styleLabelSpacing, \.paddingListRowLeading)
     }
 
 

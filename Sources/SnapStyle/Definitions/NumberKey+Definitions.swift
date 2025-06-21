@@ -24,22 +24,13 @@ extension SnapStyle.NumberKey {
 
     public var spacingLabel: ValueBuilder { .base(.definition(.value(8))) } // System default is 8 (iOS 18)
 
-    public var spacingListBottom: ValueBuilder { .base(.reference(\.paddingScreenBottom)) }
-    public var spacingListSectionFirst: ValueBuilder { .base(.definition(.value(10))) }
-    public var spacingListSection: ValueBuilder { .base(.definition(.value(28))) }
-    public var spacingListHeaderBottom: ValueBuilder { .base(.definition(.value(10))) }
-    public var spacingListRowTop: ValueBuilder { .base(.definition(.value(16))) }
-    public var spacingListRowBottom: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
-    public var spacingListRowLeading: ValueBuilder { .base(.definition(.value(18))) }
-    public var spacingListRowTrailing: ValueBuilder { .base(.reference(\.spacingListRowTop)) }
-
 
     // MARK: - Container: Padding
 
     public var paddingScreenTop: ValueBuilder { .base(.definition(.value(10))) }
     public var paddingScreenBottom: ValueBuilder { .base(.definition(.value(10))) }
     public var paddingScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
-    
+
     /// The leading padding to inset a title to fit the screen title.
     public var paddingScreenTitleLeading: ValueBuilder { .base(.definition(.value(8))) }
 
@@ -73,6 +64,15 @@ extension SnapStyle.NumberKey {
             }
         }
     }
+
+    public var paddingListBottom: ValueBuilder { .base(.reference(\.paddingScreenBottom)) }
+    public var paddingListSectionFirst: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingListSection: ValueBuilder { .base(.definition(.value(28))) }
+    public var paddingListHeaderBottom: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingListRowTop: ValueBuilder { .base(.definition(.value(16))) }
+    public var paddingListRowBottom: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
+    public var paddingListRowLeading: ValueBuilder { .base(.definition(.value(18))) }
+    public var paddingListRowTrailing: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
 
 
     // MARK: - Shape: CornerRadius
