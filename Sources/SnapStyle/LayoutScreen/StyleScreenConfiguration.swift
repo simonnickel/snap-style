@@ -10,6 +10,9 @@ public enum StyleScreenConfiguration: Equatable {
     /// Insets the content at least by `NumberKey.insetScreenHorizontal`.
     case insetHorizontalEdges
 
+    /// Insets the content by `NumberKey.insetScreenTop` and `NumberKey.insetScreenBottom`.
+    case insetVerticalEdges
+
     /// Restricts screen width to fit `NumberKey.widthReadableContent`
     /// Configuration `.allowReadableContentOverflow` controls if it uses contentMargin or safeAreaPadding. ListStyle `.insetGrouped` requires to use contentMargin, to get rid of system inset and properly apply `\.paddingScreenHorizontal`.
     case readableContentWidth
@@ -27,7 +30,7 @@ public enum StyleScreenConfiguration: Equatable {
 
 extension [StyleScreenConfiguration] {
     /// A default set of configurations for a typical content screen.
-    public static var content: Self { [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .readableContentWidth, .allowReadableContentOverflow] }
+    public static var content: Self { [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .insetVerticalEdges, .readableContentWidth, .allowReadableContentOverflow] }
 
     /// A default set of configurations for a system list screen.
     public static var list: Self { [.insetHorizontalEdges, .readableContentWidth] } // TODO: .readableContentWidth without .allowReadableContentOverflow does not work properly on iPadOS 26 with sidebar.
@@ -39,11 +42,17 @@ extension [StyleScreenConfiguration] {
 internal struct ConfigurationModifierInset: ViewModifier {
 
     let insetHorizontalEdges: Bool
+    let insetVerticalEdges: Bool
     let applyReadableWidth: Bool
     let allowOverflow: Bool
 
     func body(content: Content) -> some View {
-        ScreenInsetContainer(insetHorizontalEdges: insetHorizontalEdges, applyReadableWidth: applyReadableWidth, allowOverflow: allowOverflow) {
+        ScreenInsetContainer(
+            insetHorizontalEdges: insetHorizontalEdges,
+            insetVerticalEdges: insetVerticalEdges,
+            applyReadableWidth: applyReadableWidth,
+            allowOverflow: allowOverflow
+        ) {
             content
         }
     }

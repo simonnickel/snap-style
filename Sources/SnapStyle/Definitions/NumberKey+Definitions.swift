@@ -70,7 +70,8 @@ extension SnapStyle.NumberKey {
         }
     }
 
-    public var insetScreenVertical: ValueBuilder { .base(.definition(.value(10))) }
+    public var insetScreenTop: ValueBuilder { .base(.definition(.value(10))) }
+    public var insetScreenBottom: ValueBuilder { .base(.definition(.value(10))) }
     public var insetScreenHorizontal: ValueBuilder { .base(.definition(.value(10))) }
 
 

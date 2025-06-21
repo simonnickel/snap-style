@@ -61,6 +61,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
             }
             .modifier(ConfigurationModifierInset(
                 insetHorizontalEdges: configuration.contains(.insetHorizontalEdges),
+                insetVerticalEdges: configuration.contains(.insetVerticalEdges),
                 applyReadableWidth: configuration.contains(.readableContentWidth),
                 allowOverflow: configuration.contains(.allowReadableContentOverflow)
             ))

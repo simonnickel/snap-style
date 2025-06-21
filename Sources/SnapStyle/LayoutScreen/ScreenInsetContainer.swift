@@ -18,6 +18,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     @Environment(\.geometrySafeAreaInsets) private var geometrySafeAreaInsets
     
     let insetHorizontalEdges: Bool
+    let insetVerticalEdges: Bool
     let applyReadableWidth: Bool
     let allowOverflow: Bool
     let content: () -> ReadableContent
@@ -35,7 +36,10 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             let marginWithoutInset = (geometrySizeScreen.width - widthForContent) / 2
             // Apply inset, if margin is not already large enough.
             let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
-            
+
+            let insetTop = insetVerticalEdges ? style.number(for: \.insetScreenTop) : nil
+            let insetBottom = insetVerticalEdges ? style.number(for: \.insetScreenBottom) : nil
+
 //            let _ = print("###")
 //            let _ = print("geometrySizeScreen: \(geometrySizeScreen)")
 //            let _ = print("geometrySafeAreaInsets: \(geometrySafeAreaInsets)")
@@ -48,6 +52,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     width: geometrySizeScreen.width - (inset * 2),
                     height: geometrySizeScreen.height - geometrySafeAreaInsets.top - geometrySafeAreaInsets.bottom
                 ))
+                .safeAreaPadding(.init(top: insetTop ?? 0, leading: 0, bottom: insetBottom ?? 0, trailing: 0))
                 .if(allowOverflow) { content in
                     // TODO FB18231015: Content outside of SafeAreaPadding not interactive
                     content
