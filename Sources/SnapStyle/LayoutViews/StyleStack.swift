@@ -11,6 +11,7 @@ import SwiftUI
 public struct StyleStack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
+    @Environment(\.styleStackSpacing) private var styleStackSpacing
 
     private let axis: Axis
     private let alignmentV: VerticalAlignment
@@ -42,7 +43,8 @@ public struct StyleStack<Content>: View where Content: View {
 
     @ViewBuilder
     private var contentStack: some View {
-        let spacing = CGFloat(Self.spacing(for: spacing, with: style))
+        let spacingKeyPath = spacing ?? styleStackSpacing
+        let spacing = CGFloat(Self.spacing(for: spacingKeyPath, with: style))
         let layout = axis == .vertical
             ? AnyLayout(VStackLayout(alignment: alignmentH, spacing: spacing))
             : AnyLayout(HStackLayout(alignment: alignmentV, spacing: spacing))
@@ -69,13 +71,20 @@ public struct StyleStack<Content>: View where Content: View {
 #Preview {
     @Previewable @State var axis: Axis = .vertical
     @Previewable @State var stretching: Bool = true
+    @Previewable @State var spacing: SnapStyle.NumberKey.ValueBuilderKeyPath? = nil
+
     StyleStack(axis, isStretching: stretching) {
-        Text("Test 1")
+        Text("Test Row 1")
             .background(.green)
-        Text("Test Row 2")
-            .background(.mint)
+        StyleStack(.horizontal) {
+            Text("Test Row 2")
+                .background(.mint)
+            Text("Test Row 3")
+                .background(.teal)
+        }
     }
     .background(.yellow)
+    .style(spacing: spacing)
 
     HStack {
         StyleButton {
@@ -92,6 +101,14 @@ public struct StyleStack<Content>: View where Content: View {
             }
         } content: {
             Text("Toggle Stretching")
+        }
+
+        StyleButton {
+            withAnimation {
+                spacing = spacing == nil ? \.spacingElements : nil
+            }
+        } content: {
+            Text("Toggle Spacing")
         }
     }
     .padding(.top, 20)
