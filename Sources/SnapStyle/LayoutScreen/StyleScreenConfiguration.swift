@@ -7,10 +7,10 @@ import SwiftUI
 
 public enum StyleScreenConfiguration: Equatable {
 
-    /// Insets the content at least by `NumberKey.insetScreenHorizontal`.
+    /// Insets the content at least by `NumberKey.paddingScreenHorizontal`.
     case insetHorizontalEdges
 
-    /// Insets the content by `NumberKey.insetScreenTop` and `NumberKey.insetScreenBottom`.
+    /// Insets the content by `NumberKey.paddingScreenTop` and `NumberKey.paddingScreenBottom`.
     case insetVerticalEdges
 
     /// Restricts screen width to fit `NumberKey.widthReadableContent`

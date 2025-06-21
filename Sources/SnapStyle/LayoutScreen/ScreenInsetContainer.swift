@@ -10,7 +10,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
     
     private struct Constants {
         static var keyPathMaxWidth: SnapStyle.NumberKey.ValueBuilderKeyPath { \.widthReadableContent }
-        static var keyPathInset: SnapStyle.NumberKey.ValueBuilderKeyPath { \.insetScreenHorizontal }
+        static var keyPathInset: SnapStyle.NumberKey.ValueBuilderKeyPath { \.paddingScreenHorizontal }
     }
     
     @Environment(\.style) private var style
@@ -37,8 +37,8 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
             // Apply inset, if margin is not already large enough.
             let inset = insetHorizontalEdges ? max(marginWithoutInset, minInset) : marginWithoutInset
 
-            let insetTop = insetVerticalEdges ? style.number(for: \.insetScreenTop) : nil
-            let insetBottom = insetVerticalEdges ? style.number(for: \.insetScreenBottom) : nil
+            let insetTop = insetVerticalEdges ? style.number(for: \.paddingScreenTop) : nil
+            let insetBottom = insetVerticalEdges ? style.number(for: \.paddingScreenBottom) : nil
 
 //            let _ = print("###")
 //            let _ = print("geometrySizeScreen: \(geometrySizeScreen)")

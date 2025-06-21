@@ -23,7 +23,7 @@ struct ConfigurationButtonContainer<Content: View>: View {
                 } content: {
                     Image(systemName: "slider.horizontal.3")
                 }
-                .style(padding: \.insetScreenHorizontal)
+                .style(padding: \.paddingScreenHorizontal)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
