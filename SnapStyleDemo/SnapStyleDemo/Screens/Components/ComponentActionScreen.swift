@@ -25,9 +25,11 @@ struct ComponentActionScreen: View {
             }
             
             ComponentContainer(title: "Icon", component: .contentCard) {
-                StyleHStack(spacing: \.spacingGroups) {
+                StyleStack(.horizontal, spacing: \.spacingGroups) {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
-                        StyleLabel(icon: \.favorite)
+                        // TODO: Why does StyleLabel not work?
+//                        StyleLabel(icon: \.favorite)
+                        StyleIcon(\.favorite)
                     }
                     StyleButton(.icon(hierarchy: .secondary)) { } content: {
                         StyleLabel(icon: \.favorite)

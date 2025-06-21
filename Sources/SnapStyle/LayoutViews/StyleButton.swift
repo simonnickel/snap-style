@@ -98,7 +98,7 @@ public struct StyleButton<Content>: View where Content : View {
     @Previewable @State var isEnabled: Bool = true
     
     StyleScreen {
-        StyleVStack(spacing: \.spacingElements, alignment: .center) {
+        StyleStack(spacing: \.spacingElements, alignmentV: .center) {
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 Label("Primary", systemImage: "star")
             }
@@ -109,7 +109,7 @@ public struct StyleButton<Content>: View where Content : View {
                 Label("Secondary", systemImage: "star")
             }
             
-            StyleHStack(spacing: \.spacingElements) {
+            StyleStack(.horizontal, spacing: \.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary), enabled: isEnabled) { } content: {
                     Label("Primary", systemImage: "star")
                         .labelStyle(.iconOnly)

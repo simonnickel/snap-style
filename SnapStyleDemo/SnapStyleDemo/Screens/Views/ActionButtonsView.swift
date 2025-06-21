@@ -22,9 +22,9 @@ struct ActionButtonsView: View {
     }
 
     var body: some View {
-        StyleHStack {
+        StyleStack(.horizontal) {
             StyleButton(.secondary, enabled: isEnabled) { } content: {
-                StyleVStack(isStretching: false) {
+                StyleStack(isStretching: false) {
                     Text("Secondary")
                         .style(element: .action)
                     if elements.contains(.secondarySubtitle) {
@@ -37,7 +37,7 @@ struct ActionButtonsView: View {
             StyleSpacer()
             
             StyleButton(.primary, enabled: isEnabled) { } content: {
-                StyleVStack(isStretching: false) {
+                StyleStack(isStretching: false) {
                     Text("Primary")
                         .style(element: .action)
                     if elements.contains(.primarySubtitle) {

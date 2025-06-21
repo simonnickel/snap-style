@@ -17,7 +17,7 @@ struct FontDesignConfigurationRow: View {
 
     var body: some View {
         StyleListRow(.pick(Font.Design.allCases + [nil], selection: $fontDesign), icon: \.fontDesign) {
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
                 StyleLabel("Font Design")
             }
         }

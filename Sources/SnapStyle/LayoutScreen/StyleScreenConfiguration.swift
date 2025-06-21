@@ -59,7 +59,7 @@ internal struct ConfigurationModifierScrollView: ViewModifier {
 
 internal struct ConfigurationModifierVerticalSections: ViewModifier {
     func body(content: Content) -> some View {
-        StyleVStack(spacing: \.spacingSections) {
+        StyleStack(spacing: \.spacingSections) {
             content
         }
     }

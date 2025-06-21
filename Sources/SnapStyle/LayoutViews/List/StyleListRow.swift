@@ -141,10 +141,10 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
     // MARK: Content
 
     private func viewRow() -> some View {
-        StyleVStack(spacing: \.spacingElements) {
-            StyleHStack {
+        StyleStack(spacing: \.spacingElements) {
+            StyleStack(.horizontal) {
 
-                StyleHStack(spacing: \.spacingListRowLeading) {
+                StyleStack(.horizontal, spacing: \.spacingListRowLeading) {
                     if let icon {
                         StyleIcon(icon)
                             .style(element: .icon)

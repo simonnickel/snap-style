@@ -47,8 +47,8 @@ struct ComponentListScreen: View {
                 }
                 // TODO: Should this be controlled by the ListRow?
                 StyleListRow(.plain, systemImage: "triangle") {
-                    StyleHStack {
-                        StyleVStack {
+                    StyleStack(.horizontal) {
+                        StyleStack {
                             Text("Triangle")
                                 .style(element: .title)
                             Text("Some text")

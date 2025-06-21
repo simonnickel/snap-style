@@ -14,7 +14,7 @@ struct ComponentContainer<Content: View>: View {
     @ViewBuilder let content: () -> Content
 
     var body: some View {
-        StyleVStack(spacing: \.spacingElements) {
+        StyleStack(spacing: \.spacingElements) {
             Text(title)
                 .style(element: .title)
             content()

@@ -10,28 +10,28 @@ struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
 
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
                 Text("Value Card")
                     .style(element: .title)
                 valueCards
             }
 
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
                 Text("Content Card")
                     .style(element: .title)
                 content
                     .style(component: .contentCard)
             }
 
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
                 Text("Accent Card")
                     .style(element: .title)
                 content
                     .style(component: .accentCard)
             }
 
-            StyleVStack(spacing: \.spacingGroups) {
-                StyleVStack {
+            StyleStack(spacing: \.spacingGroups) {
+                StyleStack {
                     Text("Secondary")
                         .style(element: .title)
                     Text("Cards inside of Card")
@@ -52,7 +52,7 @@ struct ComponentCardScreen: View {
     }
     
     private var content: some View {
-        StyleVStack(spacing: \.spacingGroups) {
+        StyleStack(spacing: \.spacingGroups) {
             StructuredTextView()
             ActionButtonsView()
         }

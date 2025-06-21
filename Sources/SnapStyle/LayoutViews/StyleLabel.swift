@@ -76,7 +76,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
     let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
-        StyleHStack(spacing: spacing) {
+        StyleStack(.horizontal, spacing: spacing) {
             configuration.icon
             configuration.title
         }
@@ -87,8 +87,8 @@ struct CustomSpacingLabelStyle: LabelStyle {
 // MARK: - Preview
 
 #Preview {
-    StyleVStack(spacing: \.spacingSections) {
-        StyleVStack {
+    StyleStack(spacing: \.spacingSections) {
+        StyleStack {
             
             StyleLabel(content: {
                 Text("Content")
@@ -108,7 +108,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
         }
 
         
-        StyleVStack {
+        StyleStack {
             Label("System Label", systemImage: "circle")
                 .font(.footnote)
             StyleLabel("Style Label", systemImage: "circle")

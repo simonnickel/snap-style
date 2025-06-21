@@ -22,22 +22,22 @@ struct ComponentStackScreen: View {
 
     @ViewBuilder
     private func content(component: [SnapStyle.ComponentDefinition]) -> some View {
-        StyleVStack(spacing: \.spacingElements) {
+        StyleStack(spacing: \.spacingElements) {
 
             Text(component.description)
                 .style(element: .title)
 
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
 
                 Text("Level 1")
                     .style(element: .title)
 
-                StyleVStack(spacing: \.spacingElements) {
+                StyleStack(spacing: \.spacingElements) {
 
                     Text("Level 2")
                         .style(element: .title)
 
-                    StyleVStack(spacing: \.spacingElements) {
+                    StyleStack(spacing: \.spacingElements) {
                         Text("Level 3")
                             .style(element: .title)
                     }

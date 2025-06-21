@@ -49,7 +49,7 @@ public struct DebugElementScreen: View {
     }
 
     private var element: some View {
-        StyleVStack {
+        StyleStack {
             Text("Element")
                 .style(element: elementType, hierarchy: elementHierarchy)
         }

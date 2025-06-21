@@ -9,8 +9,8 @@ import SwiftUI
 struct StructuredTextView: View {
 
     var body: some View {
-        StyleVStack(spacing: \.spacingGroups) {
-            StyleVStack {
+        StyleStack(spacing: \.spacingGroups) {
+            StyleStack {
                 Text("Title")
                 Text("Subitle")
                     .style(hierarchy: .secondary)
@@ -19,7 +19,7 @@ struct StructuredTextView: View {
 
             paragraph
 
-            StyleVStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingElements) {
                 Text("Section Title")
                     .style(element: .title, hierarchy: .tertiary)
 
