@@ -38,6 +38,9 @@ extension SnapStyle.NumberKey {
     public var paddingAnyElement: ValueBuilder { .base(nil) }
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
 
+    /// The leading padding to inset a title to fit the screen title.
+    public var paddingScreenTitleLeading: ValueBuilder { .base(.definition(.value(8))) }
+
     /// A padding definition based on the level in the component stack.
     public var paddingComponent: ValueBuilder {
         .builder { context in

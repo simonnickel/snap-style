@@ -59,7 +59,13 @@ extension SnapStyle.ComponentDefinition {
     // MARK: - Screen
     
     public static let screen: Self = .init("screen",
-       // Padding can not be defined here, because of scroll indicator placement.
+        padding: { element in
+            switch element {
+                case .title: Padding(\.paddingScreenTitleLeading, edges: .leading)
+                // Container Padding can not be defined here, because of scroll indicator placement.
+                default: nil
+            }
+        },
         fonts: { element in
             switch element {
                 case .title: \.screenTitle
