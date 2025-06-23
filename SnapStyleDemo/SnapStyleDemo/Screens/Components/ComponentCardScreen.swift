@@ -13,24 +13,28 @@ struct ComponentCardScreen: View {
             StyleStack(spacing: \.spacingElements) {
                 Text("Value Card")
                     .style(element: .title)
-                valueCards
+                StyleStack(.horizontal, spacing: \.spacingElements) {
+                    DemoValueCard.exampleRectangle
+                    DemoValueCard.exampleTriangle
+                    DemoValueCard.exampleCircle
+                }
             }
 
             StyleStack(spacing: \.spacingElements) {
                 Text("Content Card")
                     .style(element: .title)
-                content
+                contentCard
                     .style(component: .contentCard)
             }
 
             StyleStack(spacing: \.spacingElements) {
                 Text("Accent Card")
                     .style(element: .title)
-                content
+                contentCard
                     .style(component: .accentCard)
             }
 
-            StyleStack(spacing: \.spacingGroups) {
+            StyleStack(spacing: \.spacingGroups, ) {
                 StyleStack {
                     Text("Secondary")
                         .style(element: .title)
@@ -38,12 +42,16 @@ struct ComponentCardScreen: View {
                         .style(element: .title, hierarchy: .secondary)
                 }
                 
-                valueCards
+                StyleStack(.horizontal, spacing: \.spacingElements) {
+                    DemoValueCard.exampleRectangle
+                    DemoValueCard.exampleTriangle
+                    DemoValueCard.exampleCircle
+                }
                 
-                content
+                contentCard
                     .style(component: .contentCard)
                 
-                content
+                contentCard
                     .style(component: .accentCard)
             }
             .style(component: .contentCard)
@@ -51,24 +59,10 @@ struct ComponentCardScreen: View {
         }
     }
     
-    private var content: some View {
+    private var contentCard: some View {
         StyleStack(spacing: \.spacingGroups) {
             StructuredTextView()
             ActionButtonsView()
-        }
-    }
-    
-    private var valueCards: some View {
-        ScrollingHStack {
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
         }
     }
 
