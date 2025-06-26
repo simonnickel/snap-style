@@ -10,22 +10,33 @@ struct ComponentActionScreen: View {
     var body: some View {
         StyleScreen {
 
-            ComponentContainer(title: "Content Card", component: .contentCard) {
+            StyleStack(spacing: \.spacingElements) {
+                Text("Content Card")
+                    .style(element: .title)
                 ActionButtonsView()
                 ActionButtonsView(enabled: false)
             }
-
-            ComponentContainer(title: "Accent Card", component: .accentCard) {
+            .style(component: .contentCard)
+            
+            StyleStack(spacing: \.spacingElements) {
+                Text("Accent Card")
+                    .style(element: .title)
                 ActionButtonsView()
                 ActionButtonsView(enabled: false) // TODO: Disabled on accent.
             }
-
-            ComponentContainer(title: "Subtitles", component: .contentCard) {
+            .style(component: .accentCard)
+            
+            StyleStack(spacing: \.spacingElements) {
+                Text("Subtitles")
+                    .style(element: .title)
                 ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
             }
+            .style(component: .contentCard)
             
-            ComponentContainer(title: "Icon", component: .contentCard) {
-                StyleStack(.horizontal, spacing: \.spacingGroups) {
+            StyleStack(spacing: \.spacingElements) {
+                Text("Subtitles")
+                    .style(element: .title)
+                StyleStack(.horizontal) {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
                         // TODO: Why does StyleLabel not work?
 //                        StyleLabel(icon: \.favorite)
@@ -39,6 +50,7 @@ struct ComponentActionScreen: View {
                     }
                 }
             }
+            .style(component: .contentCard)
 
         }
     }
