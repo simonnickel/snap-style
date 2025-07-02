@@ -15,6 +15,8 @@ struct ConfigurationColorScreen: View {
 
     var body: some View {
 
+        // TODO: Define Colors with variants.
+        // TODO: Add default color variant generator.
         let accents: [SnapStyle.Accent] = [
             .fallback,
             .init(
@@ -35,6 +37,12 @@ struct ConfigurationColorScreen: View {
                 contrast: .red.adjusted(hue: .add(0.5), in: environment),
                 brightness: .dark
             ),
+            .init(
+                base: .yellow,
+                complementary: .yellow.adjusted(hue: .add(0.06), in: environment),
+                contrast: .yellow.adjusted(hue: .add(0.5), in: environment),
+                brightness: .light
+            ),
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
 
@@ -45,6 +53,7 @@ struct ConfigurationColorScreen: View {
                         demoConfiguration.accent = accent
                     } label: {
                         ColorItemView(accent: accent, selected: accent == demoConfiguration.accent)
+                            .style(accent: accent)
                     }
                 }
             }

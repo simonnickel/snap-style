@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyle
 import SnapStyleBase
 import SwiftUI
 
@@ -12,22 +13,26 @@ struct ColorItemView: View {
     let selected: Bool
 
     var body: some View {
-        VStack {
-            HStack {
-                Circle()
-                    .fill(accent.complementary)
-                Circle()
-                    .fill(accent.contrast)
+        StyleStack {
+            StyleStack(spacing: \.spacingGroups, alignmentH: .center) {
+                Text("Select")
+                    .style(element: .title)
+                    .style(foreground: \.onAccent)
+                    .padding(.top, 8)
+                HStack {
+                    Circle()
+                        .fill(accent.complementary)
+                    Circle()
+                        .fill(accent.contrast)
+                }
             }
-            .padding(.top, 8)
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Gradient(colors: [accent.base, accent.complementary]))
-                .padding(2)
+            .padding()
         }
         .background {
             RoundedRectangle(cornerRadius: 5)
-                .fill(accent.base)
                 .stroke(selected ? Color.primary : .clear, lineWidth: 2)
+                .fill(Gradient(colors: [accent.base, accent.complementary]))
+                .padding(2)
         }
     }
 }
