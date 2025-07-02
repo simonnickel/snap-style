@@ -119,7 +119,39 @@ extension View {
 
 }
 
+// TODO iOS26: Remove iOS 18 Variant
 internal struct ComponentModifier: ViewModifier {
+
+    let component: SnapStyle.ComponentDefinition
+    let state: SnapStyle.Component.InteractionState
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .modifier(ComponentModifier26(component: component, state: state))
+        } else {
+            content
+                .modifier(ComponentModifier18(component: component, state: state))
+        }
+    }
+}
+
+internal struct ComponentModifier26: ViewModifier {
+
+    @Environment(\.style) private var style
+
+    let component: SnapStyle.ComponentDefinition
+    let state: SnapStyle.Component.InteractionState
+
+    func body(content: Content) -> some View {
+        let componentStack = style.context.componentStack.appended(component, state: state)
+        content
+            .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
+    }
+
+}
+
+internal struct ComponentModifier18: ViewModifier {
 
     @Environment(\.style) private var style
 

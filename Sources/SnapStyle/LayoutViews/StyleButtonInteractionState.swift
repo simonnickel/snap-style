@@ -87,6 +87,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
 
 #Preview {
     @Previewable @State var state: SnapStyle.Component.InteractionState = .normal
+    
     StyleButtonInteractionState($state, enabled: true) {
         
     } content: {
