@@ -30,7 +30,9 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         // Has to be applied even if no value is present, to allow animation of appearing value.
-        let surface = style.surface(for: keyPath ?? \.clear)
+        /// The key`\.none` results in `nil`.
+        /// If no background should be set, `.clear` is used.
+        let surface = style.surface(for: keyPath ?? \.none)
         content
             .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }

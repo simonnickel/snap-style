@@ -3,7 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SnapFoundation
 import SnapStyleBase
 import SwiftUI
 
@@ -35,9 +34,7 @@ internal struct CompositionModifier: ViewModifier {
         content
             .modifier(CompositionBackgroundOverlayModifier(keyPath: layers.contains(.backgroundOverlay) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
             .modifier(CompositionBackgroundModifier(keyPath: layers.contains(.background) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
-            .if(layers.contains(.foreground)) { content in
-                content.modifier(CompositionForegroundModifier(keyPath: keyPath))
-            }
+            .modifier(CompositionForegroundModifier(keyPath: layers.contains(.foreground) ? keyPath : nil))
     }
 
 }
@@ -46,15 +43,12 @@ internal struct CompositionForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
-        if let surfaceKey = style.surfaceKey(layer: .foreground, for: keyPath) {
-            content
-                .style(foreground: surfaceKey)
-        } else {
-            content
-        }
+        let surfaceKey: SnapStyle.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .foreground, for: keyPath) } else { nil }
+        content
+            .style(foreground: surfaceKey)
     }
 
 }

@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath) -> some View {
+    public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?) -> some View {
         self
             .modifier(SurfaceForegroundModifier(keyPath: keyPath))
     }
@@ -22,15 +22,15 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
-        if let surface = style.surface(for: keyPath) {
-            content
-                .foregroundStyle(surface)
-        } else {
-            content
-        }
+        // Has to be applied even if no value is present, to allow animation of appearing value.
+        /// The key`\.none` results in `nil`.
+        /// `.primary` is used to apply no specifc value and use the environments `foregroundStyle`.
+        let surface = style.surface(for: keyPath ?? \.none)
+        content
+            .foregroundStyle(surface ?? AnyShapeStyle(.primary))
     }
 
 }
@@ -40,7 +40,9 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
 #Preview {
 
-    Text("Preview Example View")
+    Text("Foreground: .accent")
         .style(foreground: \.accent)
+    Text("Foreground: nil")
+        .style(foreground: nil)
 
 }

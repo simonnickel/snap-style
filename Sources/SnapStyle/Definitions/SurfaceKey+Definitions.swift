@@ -11,6 +11,7 @@ extension SnapStyle.SurfaceKey {
 
     // MARK: - Generic Surfaces
 
+    public var none: ValueBuilder { .base(.none) }
     public var clear: ValueBuilder { .base(.definition(.color(.clear))) }
 
     public var light0: ValueBuilder { .base(.definition(.color(.white))) }
