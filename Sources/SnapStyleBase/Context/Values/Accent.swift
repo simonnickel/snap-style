@@ -56,7 +56,7 @@ internal struct UpdateAccentModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .tint(accent.base)
+            .accentColor(accent.base)
             .style(attribute: SnapStyle.Context.accent, value: accent)
     }
 
