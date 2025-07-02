@@ -53,6 +53,7 @@ extension SnapStyle.SurfaceKey {
             }
         }
     }
+
     public var accentContrast: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
@@ -62,6 +63,24 @@ extension SnapStyle.SurfaceKey {
             }
         }
     }
+
+    public var accentBackground: ValueBuilder {
+        .builder { context in
+            switch context.component.level {
+                case 1: .reference(\.accentLevel1)
+                case 2: .reference(\.accentLevel2)
+                case 3: .reference(\.accentLevel3)
+                default: nil
+            }
+        }
+    }
+
+    public var accentLevel1: ValueBuilder {
+        .builder { context in
+            .reference(\.accent)
+        }
+    }
+
     public var accentLevel2: ValueBuilder {
         .builder { context in
             .definition(.color(context.accent.base.mix(with: .black, by: 0.2)))
@@ -144,19 +163,22 @@ extension SnapStyle.SurfaceKey {
             default: nil
         }
     }}
-    
+
+
+    // MARK: Content
+
     public var contentBackground: ValueBuilder {
         .builder { context in
             switch context.component.level {
-                case 1: .reference(\.content0)
-                case 2: .reference(\.content1)
-                case 3: .reference(\.content2)
+                case 1: .reference(\.contentLevel1)
+                case 2: .reference(\.contentLevel2)
+                case 3: .reference(\.contentLevel3)
                 default: nil
             }
         }
     }
 
-    public var content0: ValueBuilder { .builder { context in
+    public var contentLevel1: ValueBuilder { .builder { context in
         switch context.colorScheme {
             case .light: .reference(\.light0)
             case .dark: .reference(\.dark1)
@@ -164,7 +186,7 @@ extension SnapStyle.SurfaceKey {
         }
     }}
     
-    public var content1: ValueBuilder { .builder { context in
+    public var contentLevel2: ValueBuilder { .builder { context in
         switch context.colorScheme {
             case .light: .reference(\.light1)
             case .dark: .reference(\.dark2)
@@ -172,7 +194,7 @@ extension SnapStyle.SurfaceKey {
         }
     }}
     
-    public var content2: ValueBuilder { .builder { context in
+    public var contentLevel3: ValueBuilder { .builder { context in
         switch context.colorScheme {
             case .light: .reference(\.light2)
             case .dark: .reference(\.dark3)
@@ -188,18 +210,10 @@ extension SnapStyle.SurfaceKey {
         }
     }}
     
-    public var onContent1: ValueBuilder { .builder { context in
+    public var onContentDisabled: ValueBuilder { .builder { context in
         switch context.colorScheme {
             case .light: .reference(\.onLight1)
             case .dark: .reference(\.onDark1)
-            default: nil
-        }
-    }}
-    
-    public var onContent2: ValueBuilder { .builder { context in
-        switch context.colorScheme {
-            case .light: .reference(\.onLight2)
-            case .dark: .reference(\.onDark2)
             default: nil
         }
     }}

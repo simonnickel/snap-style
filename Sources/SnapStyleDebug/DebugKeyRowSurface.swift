@@ -21,5 +21,5 @@ struct DebugKeyRowSurface: View {
 }
 
 #Preview {
-    DebugKeyRowSurface(keyPath: \.content0)
+    DebugKeyRowSurface(keyPath: \.contentLevel1)
 }

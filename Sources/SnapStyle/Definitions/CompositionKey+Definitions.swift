@@ -52,7 +52,7 @@ extension SnapStyle.CompositionKey {
             return switch context.component.state {
                 case .disabled:
                         .definition(.layers([
-                            .foreground: \.disabled, .background: \.content0
+                            .foreground: \.disabled, .background: \.contentBackground
                         ]))
 
                 case .normal, .highlighted, .selected:
@@ -60,7 +60,7 @@ extension SnapStyle.CompositionKey {
                             .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
                         ]))
                         .definition(.layers([
-                            .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.stateOverlayAccented
+                            .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
                         ]))
             }
 #else
@@ -74,12 +74,28 @@ extension SnapStyle.CompositionKey {
             return switch context.component.state {
                 case .disabled:
                     .definition(.layers([
-                        .foreground: \.disabled, .background: \.content0
+                        .foreground: \.disabled, .background: \.contentLevel1
                     ]))
 
                 case .normal, .highlighted, .selected:
                     .definition(.layers([
                         .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
+                    ]))
+            }
+        }
+    }
+    
+    public var accentContainer: ValueBuilder {
+        .builder { context in
+            switch context.component.state {
+                case .disabled:
+                    .definition(.layers([
+                        .foreground: \.onDisabled, .background: \.disabled
+                    ]))
+
+                case .normal, .highlighted, .selected:
+                    .definition(.layers([
+                        .foreground: \.onAccent, .background: \.accentBackground, .backgroundOverlay: \.stateOverlayOnAccent
                     ]))
             }
         }
@@ -100,32 +116,8 @@ extension SnapStyle.CompositionKey {
             }
         }
     }
-    
-    public var accentContainer: ValueBuilder {
-        .builder { context in
 
-            let background: SnapStyle.SurfaceKey.ValueBuilderKeyPath = switch context.component.level {
-                case 1: \.accent
-                case 2: \.accentLevel2
-                case 3: \.accentLevel3
-                default: \.accent
-            }
 
-            return switch context.component.state {
-                case .disabled:
-                        .definition(.layers([
-                            .foreground: \.onDisabled, .background: \.disabled
-                        ]))
-
-                case .normal, .highlighted, .selected:
-                        .definition(.layers([
-                            .foreground: \.onAccent, .background: background, .backgroundOverlay: \.stateOverlayOnAccent
-                        ]))
-            }
-        }
-    }
-
-    
     // MARK: - Component: Container
     
     public var anyContainer: ValueBuilder { .base(nil) }
@@ -182,6 +174,6 @@ extension SnapStyle.CompositionKey {
     
     public var action: ValueBuilder { .base(nil) }
 
-    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContent1))) }
+    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContentDisabled))) }
 
 }
