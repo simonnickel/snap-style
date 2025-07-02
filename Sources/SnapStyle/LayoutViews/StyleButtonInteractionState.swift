@@ -12,72 +12,90 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     @Environment(\.style) private var style
     
     private var interactionState: Binding<SnapStyle.Component.InteractionState>
-    
-    private var isEnabled: Bool {
-        didSet { update() }
+
+    struct StateSet: Equatable {
+        var didPress: Bool = false
+        var isPressed: Bool = false
+        var isHovering: Bool = false
+
+        var result: SnapStyle.Component.InteractionState {
+            if isPressed || didPress {
+                return .selected
+            }
+
+            if isHovering {
+                return .highlighted
+            }
+
+            return .normal
+        }
     }
-    @State private var isPressed: Bool = false {
-        didSet { update() }
-    }
-    @State private var isHovering: Bool = false {
-        didSet { update() }
-    }
+
+    @State private var state: StateSet = .init()
 
     private let action: () -> Void
     private let content: () -> Content
 
     public init(
         _ state: Binding<SnapStyle.Component.InteractionState>,
-        enabled: Bool = true,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.interactionState = state
-        self.isEnabled = enabled
         self.action = action
         self.content = content
     }
 
+    private var delay: Double {
+        style.number(for: \.animationInteractionHighlightDuration) ?? 0
+    }
+
     public var body: some View {
         Button {
-            guard isEnabled else { return }
-
             action()
 
-            // TODO FB: It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
-            isPressed = true
-            let delay = style.number(for: \.animationInteractionHighlightDuration) ?? 0
+            // TODO FB (iOS 18): It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
+            state.didPress = true
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                withAnimation(.smooth) {
-                    isPressed = false
-                }
+                state.didPress = false
             }
         } label: {
             content()
         }
-        .disabled(!isEnabled)
+        .buttonStyle(IsPressedButtonStyle(isPressed: $state.isPressed))
+        .onChange(of: state, initial: true) { oldValue, newValue in
+            update()
+        }
 #if os(macOS)
         .onHover(perform: { isHovering in
             self.isHovering = isHovering
         })
 #else
-        .hoverEffect(.highlight, isEnabled: isEnabled)
+        .hoverEffect(.highlight) // , isEnabled: isEnabled
 #endif
     }
-    
+
     private func update() {
-        guard isEnabled else {
-            interactionState.wrappedValue = .disabled
-            return
+        withAnimation(.snappy) {
+            let current = state.result
+            interactionState.wrappedValue = current
         }
-        
-        if isPressed {
-            interactionState.wrappedValue = .selected
-        } else if isHovering {
-            interactionState.wrappedValue = .highlighted
-        } else {
-            interactionState.wrappedValue = .normal
-        }
+    }
+
+}
+
+
+// MARK: - IsPressedButtonStyle
+
+struct IsPressedButtonStyle: ButtonStyle {
+
+    @Binding var isPressed: Bool
+
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .onChange(of: configuration.isPressed, initial: true) { oldValue, newValue in
+                isPressed = newValue
+            }
     }
 
 }
@@ -88,10 +106,10 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
 #Preview {
     @Previewable @State var state: SnapStyle.Component.InteractionState = .normal
     
-    StyleButtonInteractionState($state, enabled: true) {
-        
+    StyleButtonInteractionState($state) {
+
     } content: {
-        Text("Button: \(state)")
+        Text("Button: \n\(state)")
     }
 
 }

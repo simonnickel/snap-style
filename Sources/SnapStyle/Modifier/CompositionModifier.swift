@@ -33,12 +33,8 @@ internal struct CompositionModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .if(layers.contains(.backgroundOverlay)) { content in
-                content.modifier(CompositionBackgroundOverlayModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
-            }
-            .if(layers.contains(.background)) { content in
-                content.modifier(CompositionBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
-            }
+            .modifier(CompositionBackgroundOverlayModifier(keyPath: layers.contains(.backgroundOverlay) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
+            .modifier(CompositionBackgroundModifier(keyPath: layers.contains(.background) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
             .if(layers.contains(.foreground)) { content in
                 content.modifier(CompositionForegroundModifier(keyPath: keyPath))
             }
@@ -67,16 +63,13 @@ internal struct CompositionBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        if let surfaceKey = style.surfaceKey(layer: .background, for: keyPath) {
-            content
-                .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
-        } else {
-            content
-        }
+        let surfaceKey: SnapStyle.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .background, for: keyPath) } else { nil }
+        content
+            .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }
 
 }
@@ -85,12 +78,11 @@ internal struct CompositionBackgroundOverlayModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        // Has to be applied even if no surface a key is available, to allow animation of appearing value.
-        let surfaceKey = style.surfaceKey(layer: .backgroundOverlay, for: keyPath)
+        let surfaceKey: SnapStyle.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .backgroundOverlay, for: keyPath) } else { nil }
         content
             .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }

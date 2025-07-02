@@ -7,16 +7,17 @@ import SnapStyleBase
 import SwiftUI
 
 
-// MARK: - StyleButtonStyle
+// MARK: - Variant
 
-public struct StyleButtonStyle: ButtonStyle {
-    
+extension StyleButton {
+
     public enum Variant {
+
         case primary
         case secondary
         case icon(hierarchy: SnapStyle.Element.Hierarchy = .primary)
         case component(SnapStyle.ComponentDefinition, hierarchy: SnapStyle.Element.Hierarchy = .primary)
-        
+
         var component: SnapStyle.ComponentDefinition {
             switch self {
                 case .primary, .secondary: .action
@@ -24,7 +25,7 @@ public struct StyleButtonStyle: ButtonStyle {
                 case .component(let component, hierarchy: _): component
             }
         }
-        
+
         var hierarchy: SnapStyle.Element.Hierarchy {
             switch self {
                 case .primary: .primary
@@ -33,23 +34,7 @@ public struct StyleButtonStyle: ButtonStyle {
                 case .component(_, hierarchy: let hierarchy): hierarchy
             }
         }
-    }
-    
-    private let variant: Variant
-    private let state: SnapStyle.Component.InteractionState
 
-    public init(_ variant: Variant, state: SnapStyle.Component.InteractionState) {
-        self.variant = variant
-        self.state = state
-    }
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .style(
-                component: variant.component,
-                applyContainer: variant.hierarchy,
-                state: configuration.isPressed ? .selected : state
-            )
     }
 
 }
@@ -61,8 +46,8 @@ public struct StyleButton<Content>: View where Content : View {
 
     @Environment(\.style) private var style
 
-    private let variant: StyleButtonStyle.Variant
-    
+    private let variant: StyleButton<Content>.Variant
+
     private let isEnabled: Bool
     @State private var interactionState: SnapStyle.Component.InteractionState = .normal
 
@@ -70,7 +55,7 @@ public struct StyleButton<Content>: View where Content : View {
     private let content: () -> Content
 
     public init(
-        _ variant: StyleButtonStyle.Variant = .primary,
+        _ variant: StyleButton<Content>.Variant = .primary,
         enabled: Bool = true,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -82,9 +67,12 @@ public struct StyleButton<Content>: View where Content : View {
     }
 
     public var body: some View {
-        StyleButtonInteractionState($interactionState, enabled: isEnabled, action: action, content: content)
-            .buttonStyle(
-                StyleButtonStyle(variant, state: interactionState)
+        StyleButtonInteractionState($interactionState, action: action, content: content)
+            .disabled(!isEnabled)
+            .style(
+                component: variant.component,
+                applyContainer: variant.hierarchy,
+                state: isEnabled ? interactionState : .disabled
             )
     }
 

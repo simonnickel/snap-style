@@ -106,7 +106,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
     // MARK: Action
 
     private func viewButtonContainer<ContainerContent: View>(containerContent: @escaping () -> ContainerContent) -> some View {
-        StyleButtonInteractionState($interactionState) {
+        StyleButtonInteractionState($interactionState) { // TODO: Should get same treatment as StyleButton.
             if let action {
                 action()
             } else {
