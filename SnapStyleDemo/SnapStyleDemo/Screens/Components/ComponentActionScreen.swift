@@ -52,6 +52,10 @@ struct ComponentActionScreen: View {
             }
             .style(component: .contentCard)
 
+            StyleButton(.component(.contentCard)) {} content: {
+                StructuredTextView(title: "Interactive Content Card")
+            }
+
             StyleButton(.component(.accentCard)) {} content: {
                 StructuredTextView(title: "Interactive Accent Card")
             }

@@ -145,6 +145,17 @@ extension SnapStyle.SurfaceKey {
         }
     }}
     
+    public var contentBackground: ValueBuilder {
+        .builder { context in
+            switch context.component.level {
+                case 1: .reference(\.content0)
+                case 2: .reference(\.content1)
+                case 3: .reference(\.content2)
+                default: nil
+            }
+        }
+    }
+
     public var content0: ValueBuilder { .builder { context in
         switch context.colorScheme {
             case .light: .reference(\.light0)

@@ -48,38 +48,42 @@ extension SnapStyle.CompositionKey {
     
     public var listRow: ValueBuilder {
         .builder { context in
+#if os(macOS)
             return switch context.component.state {
                 case .disabled:
                         .definition(.layers([
-                            .foreground: \.disabled, .background: \.content0, .backgroundOverlay: \.stateOverlayOnInteractive
+                            .foreground: \.disabled, .background: \.content0
                         ]))
-                    
+
                 case .normal, .highlighted, .selected:
-#if os(macOS)
                         .definition(.layers([
-                            .foreground: \.onContent0, .backgroundOverlay: \.interactionStateOverlayAccent
+                            .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
                         ]))
-#else
                         .definition(.layers([
-                            .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.stateOverlayOnInteractive
+                            .foreground: \.onContent0, .background: \.content0, .backgroundOverlay: \.stateOverlayAccented
                         ]))
-#endif
             }
+#else
+            .reference(\.contentContainer)
+#endif
         }
     }
 
-    // TODO: Content should be interactive too.
     public var contentContainer: ValueBuilder {
         .builder { context in
-            switch context.component.level {
-                case 1: .definition(.layers([.foreground: \.onContent0, .background: \.content0]))
-                case 2: .definition(.background(\.content1))
-                case 3: .definition(.background(\.content2))
-                default: nil
+            return switch context.component.state {
+                case .disabled:
+                    .definition(.layers([
+                        .foreground: \.disabled, .background: \.content0
+                    ]))
+
+                case .normal, .highlighted, .selected:
+                    .definition(.layers([
+                        .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
+                    ]))
             }
         }
     }
-
 
     public var interactiveContainer: ValueBuilder {
         .builder { context in
