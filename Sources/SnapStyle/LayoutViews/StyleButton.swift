@@ -93,11 +93,13 @@ public struct StyleButton<Content>: View where Content : View {
 
 // MARK: - Preview
 
-#Preview {
-    
-    @Previewable @State var isEnabled: Bool = true
-    
-    StyleScreen {
+#if DEBUG
+
+struct PreviewContent: View {
+
+    let isEnabled: Bool
+
+    var body: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 Label("Primary", systemImage: "star")
@@ -123,10 +125,23 @@ public struct StyleButton<Content>: View where Content : View {
                 Label("Component: .valueCard", systemImage: "star")
             }
         }
-        .style(component: .contentCard)
-        
+    }
+}
+
+#Preview {
+    
+    @Previewable @State var isEnabled: Bool = true
+
+    StyleScreen {
+        PreviewContent(isEnabled: isEnabled)
+            .style(component: .contentCard)
+        PreviewContent(isEnabled: isEnabled)
+            .style(component: .accentCard)
+
         Toggle(isOn: $isEnabled) {
             Text("enabled")
         }
     }
 }
+
+#endif
