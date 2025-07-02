@@ -71,7 +71,9 @@ extension SnapStyle.CompositionKey {
             }
         }
     }
-    
+    // TODO: Interactive, Accent should be the same. Color choice should come from contexts accentColor.
+    // TODO: Content should be interactive too.
+
     public var interactiveContainer: ValueBuilder {
         .builder { context in
             
@@ -106,11 +108,27 @@ extension SnapStyle.CompositionKey {
 
     public var accentContainer: ValueBuilder {
         .builder { context in
-            switch context.component.level {
-                case 1: .definition(.layers([.foreground: \.onAccent, .background: \.accent]))
-                case 2: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel2]))
-                case 3: .definition(.layers([.foreground: \.onAccent, .background: \.accentLevel3]))
-                default: nil
+
+            let foreground: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.onContent0 : \.onAccent
+            let background: SnapStyle.SurfaceKey.ValueBuilderKeyPath = switch context.component.level {
+                case 1: \.accent
+                case 2: \.accentLevel2
+                case 3: \.accentLevel3
+                default: \.accent
+            }
+
+            let overlay: SnapStyle.SurfaceKey.ValueBuilderKeyPath = context.component.useAlternativeAccent ? \.interactionStateOverlayAccent : \.interactionStateOverlay
+
+            return switch context.component.state {
+                case .disabled:
+                        .definition(.layers([
+                            .foreground: \.onDisabled, .background: \.disabled
+                        ]))
+
+                case .normal, .highlighted, .selected:
+                        .definition(.layers([
+                            .foreground: foreground, .background: background, .backgroundOverlay: overlay
+                        ]))
             }
         }
     }

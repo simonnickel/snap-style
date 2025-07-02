@@ -98,17 +98,13 @@ public struct StyleButton<Content>: View where Content : View {
     @Previewable @State var isEnabled: Bool = true
     
     StyleScreen {
-        StyleStack(spacing: \.spacingElements, alignmentV: .center) {
+        StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 Label("Primary", systemImage: "star")
             }
             StyleButton(.secondary, enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
-            StyleButton(.component(.contentCard), enabled: isEnabled) { } content: {
-                Label("Secondary", systemImage: "star")
-            }
-            
             StyleStack(.horizontal, spacing: \.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary), enabled: isEnabled) { } content: {
                     Label("Primary", systemImage: "star")
@@ -122,6 +118,9 @@ public struct StyleButton<Content>: View where Content : View {
                     Label("Teriary", systemImage: "star")
                         .labelStyle(.iconOnly)
                 }
+            }
+            StyleButton(.component(.valueCard), enabled: isEnabled) { } content: {
+                Label("Component: .valueCard", systemImage: "star")
             }
         }
         .style(component: .contentCard)
