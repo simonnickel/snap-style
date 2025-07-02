@@ -14,6 +14,9 @@ extension SnapStyle {
         internal var compositions: [CompositionKey.ValueBuilderKeyPath: [CompositionKey.ValueBuilder]] = [:]
         internal var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
 
+
+        // MARK: Get
+
         internal func builder<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [Key.ValueBuilder] {
 
             switch keyPath {
@@ -58,7 +61,7 @@ extension SnapStyle {
     }
 
 
-    // MARK: - Append
+    // MARK: Append
 
     internal func appended(numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)

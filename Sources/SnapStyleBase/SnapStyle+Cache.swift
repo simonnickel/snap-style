@@ -5,9 +5,6 @@
 
 extension SnapStyle {
 
-
-    // MARK: - CacheContainer
-
     /// A value type Container to bundle references to `StyleKey` specific caches.
     internal struct CacheContainer {
 
