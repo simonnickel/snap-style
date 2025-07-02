@@ -8,10 +8,16 @@ import SwiftUI
 
 struct StructuredTextView: View {
 
+    let title: String
+
+    init(title: String = "Title") {
+        self.title = title
+    }
+
     var body: some View {
         StyleStack(spacing: \.spacingGroups) {
             StyleStack {
-                Text("Title")
+                Text(title)
                 Text("Subitle")
                     .style(hierarchy: .secondary)
             }

@@ -11,7 +11,7 @@ struct ComponentActionScreen: View {
         StyleScreen {
 
             StyleStack(spacing: \.spacingElements) {
-                Text("Content Card")
+                Text("Content Card - Accent")
                     .style(element: .title)
                 ActionButtonsView()
                 ActionButtonsView(enabled: false)
@@ -19,7 +19,7 @@ struct ComponentActionScreen: View {
             .style(component: .contentCard)
             
             StyleStack(spacing: \.spacingElements) {
-                Text("Accent Card")
+                Text("Accent Card - Alternative")
                     .style(element: .title)
                 ActionButtonsView()
                 ActionButtonsView(enabled: false) // TODO: Disabled on accent.
@@ -34,7 +34,7 @@ struct ComponentActionScreen: View {
             .style(component: .contentCard)
             
             StyleStack(spacing: \.spacingElements) {
-                Text("Subtitles")
+                Text("Icons")
                     .style(element: .title)
                 StyleStack(.horizontal) {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
@@ -51,6 +51,10 @@ struct ComponentActionScreen: View {
                 }
             }
             .style(component: .contentCard)
+
+            StyleButton(.component(.accentCard)) {} content: {
+                StructuredTextView(title: "Interactive Accent Card")
+            }
 
         }
     }
