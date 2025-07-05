@@ -5,7 +5,6 @@
 
 import SnapStyleBase
 import SnapStyleComponents
-import SnapStyleDefinitions
 import SwiftUI
 
 // MARK: - Element
