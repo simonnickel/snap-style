@@ -12,10 +12,16 @@ extension View {
     /// Content behaves differently:
     /// - background by default extends behind safe area.
     /// - ScrollView uses safe area to align content, but scrolls behind it.
-    ///
+    /// 
     /// Use `.ignoresSafeArea(.container, edges: .horizontal)` or `.background(Color, ignoresSafeAreaEdges: .vertical)` to modify behaviour.
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameters:
+    ///   - keyPath: The `Number` to apply as padding. `nil` might apply a default value. Set `\.zero` to remove safeArea.
+    ///   - edges: The set of edges to pad for this view. The default is `.all`.
     public func style(
-        safeAreaPadding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        safeAreaPadding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all
     ) -> some View {
         modifier(SafeAreaPaddingModifier(keyPath: keyPath, edges: edges))
@@ -30,16 +36,13 @@ private struct SafeAreaPaddingModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?
     let edges: Edge.Set
 
     func body(content: Content) -> some View {
-        if let value = style.number(for: keyPath) {
-            content
-                .safeAreaPadding(edges, value)
-        } else {
-            content
-        }
+        let value = style.cgFloat(for: keyPath)
+        content
+            .safeAreaPadding(edges, value)
     }
 
 }
@@ -48,6 +51,9 @@ private struct SafeAreaPaddingModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview {
+
+    @Previewable @State var isActive: Bool = true
+
     VStack {
         // Default placement inside of safe area
         Rectangle()
@@ -75,6 +81,15 @@ private struct SafeAreaPaddingModifier: ViewModifier {
             }
             .background(.green)
         }
+
+        StyleButton {
+            withAnimation {
+                isActive.toggle()
+            }
+        } content: {
+            Text("Toggle")
+        }
     }
-    .style(safeAreaPadding: \.paddingScreenHorizontal)
+    .style(safeAreaPadding: isActive ? \.spacingSections : nil) // nil applies the default, use \.zero to set no safe area.
+
 }

@@ -73,7 +73,7 @@ extension SnapStyle.ContextWrapper {
 
     package func cgFloat(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> CGFloat? {
 
-        guard let keyPath, let value = number(for: keyPath) else { return nil }
+        guard let value = number(for: keyPath) else { return nil }
 
         return CGFloat(value)
     }
