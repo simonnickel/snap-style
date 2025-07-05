@@ -14,9 +14,11 @@ extension View {
     /// - ScrollView uses safe area to align content, but scrolls behind it.
     ///
     /// Use `.ignoresSafeArea(.container, edges: .horizontal)` or `.background(Color, ignoresSafeAreaEdges: .vertical)` to modify behaviour.
-    public func style(safeAreaPadding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath, _ edges: Edge.Set = .all) -> some View {
-        self
-            .modifier(SafeAreaPaddingModifier(keyPath: keyPath, edges: edges))
+    public func style(
+        safeAreaPadding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        _ edges: Edge.Set = .all
+    ) -> some View {
+        modifier(SafeAreaPaddingModifier(keyPath: keyPath, edges: edges))
     }
 
 }

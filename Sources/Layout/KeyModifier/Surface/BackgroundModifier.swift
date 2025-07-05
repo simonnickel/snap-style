@@ -19,8 +19,7 @@ extension View {
         background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?,
         ignoresSafeAreaEdges: Edge.Set = []
     ) -> some View {
-        self
-            .modifier(SurfaceBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
+        modifier(SurfaceBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
     }
 
 }

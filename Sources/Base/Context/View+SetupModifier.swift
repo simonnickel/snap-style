@@ -9,8 +9,7 @@ extension View {
 
     /// Setup the view hierarchy and `Context` to use the styling.
     public func style(setup definition: SnapStyle) -> some View {
-        self
-            .modifier(SetupModifier())
+        modifier(SetupModifier())
             .style(update: definition)
     }
 

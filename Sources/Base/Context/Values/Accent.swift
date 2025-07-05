@@ -54,8 +54,7 @@ extension SnapStyle {
 extension View {
 
     public func style(accent: SnapStyle.Accent, alternative: SnapStyle.Accent? = nil) -> some View {
-        self
-            .modifier(UpdateAccentModifier(accent: accent, alternative: alternative))
+        modifier(UpdateAccentModifier(accent: accent, alternative: alternative))
     }
 
 }

@@ -11,8 +11,7 @@ import SwiftUI
 extension View {
 
     public func style(fontDesign: Font.Design?) -> some View {
-        self
-            .modifier(FontDesignModifier(fontDesign: fontDesign))
+        modifier(FontDesignModifier(fontDesign: fontDesign))
     }
 
 }

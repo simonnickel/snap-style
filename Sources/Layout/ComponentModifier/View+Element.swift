@@ -13,8 +13,9 @@ extension View {
 
     public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
         Group {
+            // TODO: Hand applyStyle inside and use inert variants.
             if applyStyle {
-                self.modifier(ElementApplyStyleModifier())
+                modifier(ElementApplyStyleModifier())
             } else {
                 self
             }

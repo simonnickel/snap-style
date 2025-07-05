@@ -13,9 +13,10 @@ extension View {
     /// Supports animated change.
     ///
     /// - Parameter keyPath: The surface to apply, `nil` will use the environments value.
-    public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?) -> some View {
-        self
-            .modifier(SurfaceForegroundModifier(keyPath: keyPath))
+    public func style(
+        foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?
+    ) -> some View {
+        modifier(SurfaceForegroundModifier(keyPath: keyPath))
     }
 
 }

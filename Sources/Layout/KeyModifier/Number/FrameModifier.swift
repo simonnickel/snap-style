@@ -8,9 +8,11 @@ import SwiftUI
 
 extension View {
 
-    public func style(maxWidth keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath, alignment: HorizontalAlignment = .leading) -> some View {
-        self
-            .modifier(FrameMaxWidthModifier(keyPath: keyPath, alignment: alignment))
+    public func style(
+        maxWidth keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        alignment: HorizontalAlignment = .leading
+    ) -> some View {
+        modifier(FrameMaxWidthModifier(keyPath: keyPath, alignment: alignment))
     }
 
 }

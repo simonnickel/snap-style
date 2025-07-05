@@ -9,8 +9,7 @@ import SwiftUI
 extension View {
 
     public func style(shape keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath) -> some View {
-        self
-            .modifier(ShapeModifier(keyPath: keyPath))
+        modifier(ShapeModifier(keyPath: keyPath))
     }
 
 }

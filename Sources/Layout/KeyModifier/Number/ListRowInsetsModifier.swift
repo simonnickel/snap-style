@@ -9,9 +9,10 @@ import SwiftUI
 
 extension View {
 
-    public func styleListRowInsets(_ valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath) -> some View {
-        self
-            .modifier(
+    public func styleListRowInsets(
+        _ valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
+    ) -> some View {
+        modifier(
                 ListRowInsetsModifier(
                     top: valueKeyPath,
                     leading: valueKeyPath,
@@ -27,8 +28,7 @@ extension View {
         bottom: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowBottom,
         trailing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowTrailing
     ) -> some View {
-        self
-            .modifier(
+        modifier(
                 ListRowInsetsModifier(
                     top: top,
                     leading: leading,

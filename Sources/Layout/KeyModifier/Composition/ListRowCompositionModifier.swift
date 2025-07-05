@@ -15,8 +15,7 @@ extension View {
     public func style(
         listRowBackground keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath
     ) -> some View {
-        self
-            .modifier(CompositionListRowModifier(keyPath: keyPath))
+        modifier(CompositionListRowModifier(keyPath: keyPath))
     }
 
 }

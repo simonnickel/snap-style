@@ -9,9 +9,12 @@ import SwiftUI
 extension View {
 
     /// Set the content margins of this view.
-    public func style(contentMargins keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath, _ edges: Edge.Set = .all, placement: ContentMarginPlacement = .automatic) -> some View {
-        self
-            .modifier(ContentMarginModifier(keyPath: keyPath, edges: edges, placement: placement))
+    public func style(
+        contentMargins keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        _ edges: Edge.Set = .all,
+        placement: ContentMarginPlacement = .automatic
+    ) -> some View {
+        modifier(ContentMarginModifier(keyPath: keyPath, edges: edges, placement: placement))
     }
 
 }

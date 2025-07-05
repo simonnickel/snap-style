@@ -9,8 +9,7 @@ extension View {
 
     /// Set value of a `Context` attribute for use in Environment.
     public func style<Key: Hashable, Value: Hashable>(attribute: SnapStyle.Context.Attribute<Key, Value>, value: Value) -> some View {
-        self
-            .modifier(ContextAttributeModifier(attribute: attribute, value: value))
+        modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
 
 }

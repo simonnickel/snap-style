@@ -12,7 +12,7 @@ extension View {
         with valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
         transform: @escaping (AnyView, SnapStyle.NumberKey.Value.WrappedValue) -> some View
     ) -> some View {
-        self.modifier(ValueModifier(keyPath: valueKeyPath, transform: transform))
+        modifier(ValueModifier(keyPath: valueKeyPath, transform: transform))
     }
 
 }

@@ -11,8 +11,7 @@ import SwiftUI
 extension View {
 
     public func style(scaleFactor: SnapStyle.Context.ScaleFactor? = nil) -> some View {
-        self
-            .modifier(UpdateScaleFactorModifier(scaleFactor: scaleFactor ?? SnapStyle.Context.scaleFactorDefault))
+        modifier(UpdateScaleFactorModifier(scaleFactor: scaleFactor ?? SnapStyle.Context.scaleFactorDefault))
     }
 
 }

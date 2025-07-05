@@ -9,8 +9,7 @@ import SwiftUI
 extension View {
 
     public func style(font keyPath: SnapStyle.FontKey.ValueBuilderKeyPath) -> some View {
-        self
-            .modifier(FontModifier(keyPath: keyPath))
+        modifier(FontModifier(keyPath: keyPath))
     }
 
 }

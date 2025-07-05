@@ -9,14 +9,12 @@ extension View {
 
     /// Update the `SnapStyle` definition in the Environment.
     public func style(update definition: SnapStyle) -> some View {
-        self
-            .modifier(UpdateDefinitionModifier(definition: definition))
+        modifier(UpdateDefinitionModifier(definition: definition))
     }
 
     /// Update the `Context` in the Environment.
     package func style(update context: SnapStyle.Context) -> some View {
-        self
-            .modifier(UpdateContextModifier(context: context))
+        modifier(UpdateContextModifier(context: context))
     }
 
 }

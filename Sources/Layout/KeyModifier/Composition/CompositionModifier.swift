@@ -8,13 +8,12 @@ import SwiftUI
 
 extension View {
 
-    @ViewBuilder
     public func style(
         composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath,
         layers: [SnapStyle.CompositionKey.Layer] = SnapStyle.CompositionKey.Layer.allCases,
         ignoreSafeAreaEdges: Edge.Set = []
     ) -> some View {
-        self.modifier(CompositionModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
+        modifier(CompositionModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
     }
 
 }

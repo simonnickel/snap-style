@@ -10,9 +10,10 @@ import SwiftUI
 
 extension View {
 
-    public func styleListSectionHeaderLabel(hierarchy: SnapStyle.Element.Hierarchy = .secondary) -> some View {
-        self
-            .modifier(ListSectionHeaderLabel(hieararchy: hierarchy))
+    public func styleListSectionHeaderLabel(
+        hierarchy: SnapStyle.Element.Hierarchy = .secondary
+    ) -> some View {
+        modifier(ListSectionHeaderLabel(hieararchy: hierarchy))
     }
 
 }

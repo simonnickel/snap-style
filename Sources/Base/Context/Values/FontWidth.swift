@@ -11,8 +11,7 @@ import SwiftUI
 extension View {
 
     public func style(fontWidth: Font.Width?) -> some View {
-        self
-            .modifier(FontWidthModifier(fontWidth: fontWidth))
+        modifier(FontWidthModifier(fontWidth: fontWidth))
     }
 
 }

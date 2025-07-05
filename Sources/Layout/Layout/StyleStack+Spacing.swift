@@ -9,8 +9,7 @@ import SwiftUI
 extension View {
 
     public func style(spacing keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?) -> some View {
-        self
-            .modifier(StackSpacingModifier(keyPath: keyPath))
+        modifier(StackSpacingModifier(keyPath: keyPath))
     }
 
 }

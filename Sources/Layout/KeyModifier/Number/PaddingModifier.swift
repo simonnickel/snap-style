@@ -8,9 +8,11 @@ import SwiftUI
 
 extension View {
 
-    public func style(padding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath, _ edges: Edge.Set = .all) -> some View {
-        self
-            .modifier(PaddingModifier(keyPath: keyPath, edges: edges))
+    public func style(
+        padding keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        _ edges: Edge.Set = .all
+    ) -> some View {
+        modifier(PaddingModifier(keyPath: keyPath, edges: edges))
     }
 
 }
