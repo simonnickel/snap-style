@@ -7,10 +7,17 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-
+    
+    /// Convenience modifier to access a `Number` and use it in a closure to use as input for other modifiers.
+    ///
+    /// Supports animated change.
+    /// 
+    /// - Parameters:
+    ///   - valueKeyPath: The `Number` to access.
+    ///   - transform: A closure with access to the resolved value and content to apply it on.
     public func styleModify(
-        with valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
-        transform: @escaping (AnyView, SnapStyle.NumberKey.Value.WrappedValue) -> some View
+        with valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?,
+        transform: @escaping (AnyView, SnapStyle.NumberKey.Value.WrappedValue?) -> some View
     ) -> some View {
         modifier(ValueModifier(keyPath: valueKeyPath, transform: transform))
     }
@@ -22,17 +29,16 @@ extension View {
 
 private struct ValueModifier<Output: View>: ViewModifier {
 
+    typealias Value = SnapStyle.NumberKey.Value.WrappedValue
+
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
-    let transform: (AnyView, SnapStyle.NumberKey.Value.WrappedValue) -> Output
+    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?
+    let transform: (AnyView, Value?) -> Output
 
     func body(content: Content) -> some View {
-        if let value = style.number(for: keyPath) {
-            transform(AnyView(content), value)
-        } else {
-            content
-        }
+        let value: Value? = if let keyPath { style.number(for: keyPath) } else { nil }
+        transform(AnyView(content), value)
     }
 
 }
@@ -50,18 +56,18 @@ private struct ValueModifier<Output: View>: ViewModifier {
 
             .styleModify(with: keyPath) { content, value in
                 content
-                    .padding(.horizontal, value)
+                    .padding(.horizontal, value ?? .zero)
             }
 
             .padding(.vertical, 20)
             .background(.yellow)
 
-        Button {
+        StyleButton {
             withAnimation {
                 isFirst.toggle()
                 keyPath = isFirst ? \.spacingGroups : \.spacingSections
             }
-        } label: {
+        } content: {
             Text("Switch padding")
         }
     }
