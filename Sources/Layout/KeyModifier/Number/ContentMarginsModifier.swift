@@ -38,9 +38,9 @@ private struct ContentMarginModifier: ViewModifier {
     let placement: ContentMarginPlacement
     
     func body(content: Content) -> some View {
-        let value = style.number(for: keyPath ?? \.zero)
+        let value = style.cgFloat(for: keyPath)
         content
-            .contentMargins(edges, value ?? .zero, for: placement)
+            .contentMargins(edges, value, for: placement)
     }
     
 }

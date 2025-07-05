@@ -35,9 +35,7 @@ private struct FrameMaxWidthModifier: ViewModifier {
     let alignment: Alignment
     
     func body(content: Content) -> some View {
-        var value: CGFloat? = if let keyPath, let number = style.number(for: keyPath) {
-            CGFloat(number)
-        } else { nil }
+        let value = style.cgFloat(for: keyPath)
         content
             .frame(maxWidth: value, alignment: alignment)
     }

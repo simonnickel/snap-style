@@ -63,12 +63,19 @@ extension SnapStyle.ContextWrapper {
 
     // MARK: - Number
 
-    package func number(for keyPath: NumberKey.ValueBuilderKeyPath, scaled: Bool = true) -> NumberKey.Value.WrappedValue? {
+    package func number(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> NumberKey.Value.WrappedValue? {
 
-        guard let value = value(for: keyPath) else { return nil }
+        guard let keyPath, let value = value(for: keyPath) else { return nil }
 
         return value.wrappedValue * (scaled ? context.scaleFactor : 1)
 
+    }
+
+    package func cgFloat(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> CGFloat? {
+
+        guard let keyPath, let value = number(for: keyPath) else { return nil }
+
+        return CGFloat(value)
     }
 
 

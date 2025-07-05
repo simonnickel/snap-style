@@ -11,7 +11,7 @@ extension View {
     /// Convenience modifier to access a `Number` and use it in a closure to use as input for other modifiers.
     ///
     /// Supports animated change.
-    /// 
+    ///
     /// - Parameters:
     ///   - valueKeyPath: The `Number` to access.
     ///   - transform: A closure with access to the resolved value and content to apply it on.
@@ -37,7 +37,7 @@ private struct ValueModifier<Output: View>: ViewModifier {
     let transform: (AnyView, Value?) -> Output
 
     func body(content: Content) -> some View {
-        let value: Value? = if let keyPath { style.number(for: keyPath) } else { nil }
+        let value: Value? = style.number(for: keyPath)
         transform(AnyView(content), value)
     }
 
