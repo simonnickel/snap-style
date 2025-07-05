@@ -7,10 +7,17 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-
+    
+    /// Applies the `Number` as `.frame(maxWidth)`
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameters:
+    ///   - keyPath: The `Number` to apply as maxWidth, `nil` is the inert value
+    ///   - alignment: The `Alignment` of this view inside the resulting frame. Note that most alignment values have no apparent effect when the size of the frame happens to match that of this view.
     public func style(
-        maxWidth keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
-        alignment: HorizontalAlignment = .leading
+        maxWidth keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?,
+        alignment: Alignment = .leading
     ) -> some View {
         modifier(FrameMaxWidthModifier(keyPath: keyPath, alignment: alignment))
     }
@@ -24,18 +31,15 @@ private struct FrameMaxWidthModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
-    let alignment: HorizontalAlignment
+    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?
+    let alignment: Alignment
     
     func body(content: Content) -> some View {
-        if
-            let value = style.number(for: keyPath)
-        {
-            content
-                .frame(maxWidth: value, alignment: Alignment(horizontal: alignment, vertical: .center))
-        } else {
-            content
-        }
+        var value: CGFloat? = if let keyPath, let number = style.number(for: keyPath) {
+            CGFloat(number)
+        } else { nil }
+        content
+            .frame(maxWidth: value, alignment: alignment)
     }
     
 }
@@ -44,9 +48,21 @@ private struct FrameMaxWidthModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview {
+
+    @Previewable @State var isActive: Bool = true
+
     VStack {
-        Text("Test")
+        Text("Some Preview Content")
     }
-    .style(maxWidth: \.widthReadableContent)
+    .style(maxWidth: isActive ? \.spacingSections : nil)
     .background(.green)
+
+    StyleButton {
+        withAnimation {
+            isActive.toggle()
+        }
+    } content: {
+        Text("Toggle")
+    }
+
 }
