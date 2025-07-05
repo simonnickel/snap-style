@@ -8,9 +8,16 @@ import SwiftUI
 
 extension View {
 
-    /// Set the content margins of this view.
+    /// Applies the `Number` as `.contentMargin()`
+    /// 
+    /// Supports animated change.
+    /// 
+    /// - Parameters:
+    ///   - keyPath: The `Number` to apply as length, `nil` will apply no inset.
+    ///   - edges: The edges to add the margins to.
+    ///   - placement: Where the margins should be added.
     public func style(
-        contentMargins keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath,
+        contentMargins keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all,
         placement: ContentMarginPlacement = .automatic
     ) -> some View {
@@ -26,19 +33,14 @@ internal struct ContentMarginModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?
     let edges: Edge.Set
     let placement: ContentMarginPlacement
     
     func body(content: Content) -> some View {
-        if
-            let value = style.number(for: keyPath)
-        {
-            content
-                .contentMargins(edges, value, for: placement)
-        } else {
-            content
-        }
+        let value = style.number(for: keyPath ?? \.zero)
+        content
+            .contentMargins(edges, value ?? .zero, for: placement)
     }
     
 }
@@ -47,35 +49,38 @@ internal struct ContentMarginModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview {
-    ScrollView {
-        VStack {
-            // Default placement inside of safe area
-            Rectangle()
-            
-            // Ignore safe area
-            Rectangle()
-                .ignoresSafeArea(.container, edges: .horizontal)
-            
-            // Background has to handle safe area.
+
+    @Previewable @State var isActive: Bool = true
+
+    VStack {
+        ScrollView {
             VStack {
-                Text("Background ignores safe area by default!")
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.green)
-            VStack {
-                Text("Needs to be handled manually.")
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.green, ignoresSafeAreaEdges: .vertical)
-            
-            // Scroll view automatic behaviour.
-            ScrollView(.horizontal) {
-                LazyHStack {
-                    Text("ScrollView automatically allows to scroll behind safe area!")
+                Rectangle()
+
+                VStack {
+                    Text("Background respects the content margin by default!")
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background(.green)
             }
         }
+        .style(contentMargins: isActive ? \.spacingSections : nil, .all, placement: .automatic)
+
+        ScrollView(.horizontal) {
+            LazyHStack {
+                Text("Applied on ScrollView: Insets the content, but in scroll direction content is visible when scrolling outside!")
+            }
+        }
+        .style(contentMargins: isActive ? \.spacingSections : nil, .all, placement: .automatic)
+
+        Spacer()
     }
-    .style(contentMargins: \.paddingScreenHorizontal, .all, placement: .automatic)
+
+    StyleButton {
+        withAnimation {
+            isActive.toggle()
+        }
+    } content: {
+        Text("Toggle")
+    }
 }
