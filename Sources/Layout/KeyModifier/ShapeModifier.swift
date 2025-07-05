@@ -24,6 +24,7 @@ private struct ShapeModifier: ViewModifier {
     let keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath
     
     func body(content: Content) -> some View {
+        // TODO: Remove Conditional
         if
             let shape = style.shape(for: keyPath)?.insettableShape(for: style)
         {

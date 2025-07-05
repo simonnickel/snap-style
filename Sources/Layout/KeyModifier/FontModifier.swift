@@ -24,6 +24,7 @@ private struct FontModifier: ViewModifier {
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
+        // TODO: Remove Conditional
         if let definition = style.font(for: keyPath) {
             content
                 .modifier(ScaledFont(definition: definition))
