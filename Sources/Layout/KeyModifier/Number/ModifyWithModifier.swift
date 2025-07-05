@@ -20,7 +20,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct ValueModifier<Output: View>: ViewModifier {
+private struct ValueModifier<Output: View>: ViewModifier {
 
     @Environment(\.style) private var style
 

@@ -24,7 +24,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct SurfaceForegroundModifier: ViewModifier {
+private struct SurfaceForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 

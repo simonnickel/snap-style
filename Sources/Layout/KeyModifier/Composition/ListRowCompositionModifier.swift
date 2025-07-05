@@ -23,7 +23,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct CompositionListRowModifier: ViewModifier {
+private struct CompositionListRowModifier: ViewModifier {
 
     @Environment(\.style) private var style
 

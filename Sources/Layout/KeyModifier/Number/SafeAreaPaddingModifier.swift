@@ -26,7 +26,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct SafeAreaPaddingModifier: ViewModifier {
+private struct SafeAreaPaddingModifier: ViewModifier {
 
     @Environment(\.style) private var style
 

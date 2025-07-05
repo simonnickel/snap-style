@@ -20,7 +20,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct FrameMaxWidthModifier: ViewModifier {
+private struct FrameMaxWidthModifier: ViewModifier {
     
     @Environment(\.style) private var style
     

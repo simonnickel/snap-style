@@ -17,7 +17,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct ShapeModifier: ViewModifier {
+private struct ShapeModifier: ViewModifier {
     
     @Environment(\.style) private var style
     

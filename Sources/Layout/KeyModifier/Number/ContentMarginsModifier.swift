@@ -29,8 +29,8 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct ContentMarginModifier: ViewModifier {
-    
+private struct ContentMarginModifier: ViewModifier {
+
     @Environment(\.style) private var style
     
     let keyPath: SnapStyle.NumberKey.ValueBuilderKeyPath?

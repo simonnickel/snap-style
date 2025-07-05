@@ -20,7 +20,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct PaddingModifier: ViewModifier {
+private struct PaddingModifier: ViewModifier {
     
     @Environment(\.style) private var style
     

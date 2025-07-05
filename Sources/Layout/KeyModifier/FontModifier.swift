@@ -17,7 +17,7 @@ extension View {
 
 // MARK: - Modifier
 
-struct FontModifier: ViewModifier {
+private struct FontModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -34,7 +34,7 @@ struct FontModifier: ViewModifier {
 
 }
 
-struct ScaledFont: ViewModifier {
+private struct ScaledFont: ViewModifier {
     
     @Environment(\.style) private var style
     

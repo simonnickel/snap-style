@@ -29,7 +29,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct CompositionModifier: ViewModifier {
+private struct CompositionModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -46,7 +46,7 @@ internal struct CompositionModifier: ViewModifier {
 
 }
 
-internal struct CompositionForegroundModifier: ViewModifier {
+private struct CompositionForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -60,7 +60,7 @@ internal struct CompositionForegroundModifier: ViewModifier {
 
 }
 
-internal struct CompositionBackgroundModifier: ViewModifier {
+private struct CompositionBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -75,7 +75,7 @@ internal struct CompositionBackgroundModifier: ViewModifier {
 
 }
 
-internal struct CompositionBackgroundOverlayModifier: ViewModifier {
+private struct CompositionBackgroundOverlayModifier: ViewModifier {
 
     @Environment(\.style) private var style
 

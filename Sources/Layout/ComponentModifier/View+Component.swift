@@ -33,7 +33,7 @@ extension View {
 }
 
 // TODO iOS26: Remove iOS 18 Variant
-internal struct ComponentModifier: ViewModifier {
+private struct ComponentModifier: ViewModifier {
 
     let component: SnapStyle.ComponentDefinition
     let state: SnapStyle.Component.InteractionState
@@ -49,7 +49,7 @@ internal struct ComponentModifier: ViewModifier {
     }
 }
 
-internal struct ComponentModifier26: ViewModifier {
+private struct ComponentModifier26: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -64,7 +64,7 @@ internal struct ComponentModifier26: ViewModifier {
 
 }
 
-internal struct ComponentModifier18: ViewModifier {
+private struct ComponentModifier18: ViewModifier {
 
     @Environment(\.style) private var style
 

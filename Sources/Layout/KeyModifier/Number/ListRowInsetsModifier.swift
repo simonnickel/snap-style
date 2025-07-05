@@ -43,7 +43,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct ListRowInsetsModifier: ViewModifier {
+private struct ListRowInsetsModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
