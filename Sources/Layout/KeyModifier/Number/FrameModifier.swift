@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
     
-    /// Applies the `Number` as `.frame(maxWidth)`
+    /// Applies the `Number` as `.frame(maxWidth:)`
     ///
     /// Supports animated change.
     ///

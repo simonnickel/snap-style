@@ -8,20 +8,28 @@ import SnapStyleDefinitions
 import SwiftUI
 
 extension View {
-
+    
+    /// Applies the `Number` as `.listRowInsets()`
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameter valueKeyPath: Number to apply as inset to all edges.
     public func styleListRowInsets(
         _ valueKeyPath: SnapStyle.NumberKey.ValueBuilderKeyPath
     ) -> some View {
         modifier(
-                ListRowInsetsModifier(
-                    top: valueKeyPath,
-                    leading: valueKeyPath,
-                    bottom: valueKeyPath,
-                    trailing: valueKeyPath
-                )
+            ListRowInsetsModifier(
+                top: valueKeyPath,
+                leading: valueKeyPath,
+                bottom: valueKeyPath,
+                trailing: valueKeyPath
             )
+        )
     }
-
+    
+    /// Applies the `Number`s as `.listRowInsets()`
+    ///
+    /// Supports animated change.
     public func styleListRowInsets(
         top: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowTop,
         leading: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowLeading,
@@ -29,13 +37,13 @@ extension View {
         trailing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.paddingListRowTrailing
     ) -> some View {
         modifier(
-                ListRowInsetsModifier(
-                    top: top,
-                    leading: leading,
-                    bottom: bottom,
-                    trailing: trailing
-                )
+            ListRowInsetsModifier(
+                top: top,
+                leading: leading,
+                bottom: bottom,
+                trailing: trailing
             )
+        )
     }
 
 }
