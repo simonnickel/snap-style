@@ -76,7 +76,7 @@ public struct StyleStack<Content>: View where Content: View {
     StyleStack(axis, isStretching: stretching) {
         Text("Test Row 1")
             .background(.green)
-        StyleStack(.horizontal) {
+        StyleStack(.horizontal, isStretching: stretching) {
             Text("Test Row 2")
                 .background(.mint)
             Text("Test Row 3")
