@@ -4,6 +4,7 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
 
 extension SnapStyle.IconKey {
 

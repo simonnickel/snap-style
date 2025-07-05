@@ -4,6 +4,7 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
 import SwiftUI
 
 // Composition is used to:
