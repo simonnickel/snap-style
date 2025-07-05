@@ -38,7 +38,8 @@ let package = Package(
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
-            ]
+            ],
+            path: "Sources/Layout",
         ),
         // Values
         .target(
@@ -47,7 +48,8 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
-            ]
+            ],
+            path: "Sources/Definitions",
         ),
         // Components and Elements
         .target(
@@ -55,14 +57,16 @@ let package = Package(
             dependencies: [
                 "SnapStyleBase",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
-            ]
+            ],
+            path: "Sources/Components",
         ),
         // Implementation of core features.
         .target(
             name: "SnapStyleBase",
             dependencies: [
                 .product(name: "SnapFoundation", package: "snap-foundation"),
-            ]
+            ],
+            path: "Sources/Base",
         ),
         // A separate target for Debugging related helper.
         .target(
@@ -70,7 +74,7 @@ let package = Package(
             dependencies: [
                 "SnapStyle"
             ],
-            path: "Sources/SupportDebug"
+            path: "Sources/SupportDebug",
         ),
     ],
     swiftLanguageModes: [.version("6")]
