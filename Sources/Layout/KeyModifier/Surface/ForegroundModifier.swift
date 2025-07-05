@@ -8,11 +8,11 @@ import SwiftUI
 
 extension View {
 
-    /// Applies the the value as `.foregroundStyle()`
+    /// Applies the `Surface` as `.foregroundStyle()`
     ///
     /// Supports animated change.
     ///
-    /// - Parameter keyPath: The surface to apply, `nil` will use the environments value.
+    /// - Parameter keyPath: The `Surface` to apply, `nil` will use the environments value.
     public func style(
         foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?
     ) -> some View {

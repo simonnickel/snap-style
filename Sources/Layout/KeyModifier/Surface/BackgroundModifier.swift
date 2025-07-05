@@ -9,11 +9,11 @@ import SwiftUI
 
 extension View {
 
-    /// Applies the the value as `.background()`
+    /// Applies the `Surface` as `.background()`
     ///
     /// Supports animated change.
     ///
-    /// - Parameter keyPath: The surface to apply, `nil` will apply a clear background.
+    /// - Parameter keyPath: The `Surface` to apply, `nil` will apply a clear background.
     /// - Parameter ignoresSafeAreaEdges: Controls the safe area behaviour.
     public func style(
         background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?,

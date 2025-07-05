@@ -7,7 +7,15 @@ import SnapStyleBase
 import SwiftUI
 
 extension View {
-
+    
+    /// Applies the given `Layer` of the `Composition`.
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameters:
+    ///   - keyPath: The `Composition` to apply.
+    ///   - layers: The `Layer`s that should be applied
+    ///   - ignoreSafeAreaEdges: Controls the safe area behaviour of the background.
     public func style(
         composition keyPath: SnapStyle.CompositionKey.ValueBuilderKeyPath,
         layers: [SnapStyle.CompositionKey.Layer] = SnapStyle.CompositionKey.Layer.allCases,
@@ -78,6 +86,30 @@ internal struct CompositionBackgroundOverlayModifier: ViewModifier {
         let surfaceKey: SnapStyle.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .backgroundOverlay, for: keyPath) } else { nil }
         content
             .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
+    }
+
+}
+
+
+// MARK: - Preview
+
+#Preview {
+
+    @Previewable @State var isAccent: Bool = false
+
+    VStack() {
+        Text("Content")
+    }
+    .padding()
+    .style(composition: isAccent ? \.accentContainer : \.contentContainer)
+    .border(.yellow)
+
+    StyleButton {
+        withAnimation {
+            isAccent.toggle()
+        }
+    } content: {
+        Text("Toggle Accent")
     }
 
 }
