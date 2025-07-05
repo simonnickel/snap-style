@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle", "SnapStyleLayout", "SnapStyleBase", "SnapStyleDebug"]),
+            targets: ["SnapStyle", "SnapStyleLayout", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,13 +24,34 @@ let package = Package(
             name: "SnapStyle",
             dependencies: [
                 "SnapStyleBase",
+                "SnapStyleComponents",
+                "SnapStyleDefinitions",
                 "SnapStyleLayout",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ]
         ),
-        // Views and Values
+        // Views
         .target(
             name: "SnapStyleLayout",
+            dependencies: [
+                "SnapStyleBase",
+                "SnapStyleComponents",
+                "SnapStyleDefinitions",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ]
+        ),
+        // Values
+        .target(
+            name: "SnapStyleDefinitions",
+            dependencies: [
+                "SnapStyleBase",
+                "SnapStyleComponents",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ]
+        ),
+        // Components and Elements
+        .target(
+            name: "SnapStyleComponents",
             dependencies: [
                 "SnapStyleBase",
                 .product(name: "SnapFoundation", package: "snap-foundation"),

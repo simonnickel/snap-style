@@ -5,6 +5,8 @@
 
 import SnapStyle
 import SnapStyleBase
+import SnapStyleComponents
+import SnapStyleDefinitions
 import SwiftUI
 
 public struct DebugElementScreen: View {

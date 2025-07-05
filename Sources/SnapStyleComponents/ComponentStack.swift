@@ -35,7 +35,7 @@ extension SnapStyle {
         // MARK: Level
 
         /// Level of components independent of `Component`.
-        var levelOverall: Int {
+        package var levelOverall: Int {
             components.count - 1
         }
 
@@ -60,7 +60,7 @@ extension SnapStyle {
 
         // MARK: Update
 
-        func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.Component.InteractionState) -> Self {
+        package func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.Component.InteractionState) -> Self {
             var result = self
             result.components.append(component)
             result.stateByComponent[component] = state

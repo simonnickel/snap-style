@@ -4,6 +4,7 @@
 //
 
 import SnapStyleBase
+import SnapStyleDefinitions
 import SwiftUI
 
 extension View {

@@ -20,7 +20,7 @@ extension SnapStyle {
             self.hierarchy = hierarchy
         }
 
-        static var any: Self { .init(type: .any, hierarchy: .any) }
+        public static var any: Self { .init(type: .any, hierarchy: .any) }
 
 
         // MARK: ElementType
