@@ -9,6 +9,12 @@ import SwiftUI
 
 extension View {
 
+    /// Applies the the value as `.background()`
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameter keyPath: The surface to apply, `nil` will apply a clear background.
+    /// - Parameter ignoresSafeAreaEdges: Controls the safe area behaviour.
     public func style(
         background keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?,
         ignoresSafeAreaEdges: Edge.Set = []
@@ -45,8 +51,28 @@ internal struct SurfaceBackgroundModifier: ViewModifier {
 
 #Preview {
 
-    Text("Preview Example View")
+    @Previewable @State var isAccent: Bool = false
+
+    Text("Background: .accent")
         .padding()
         .style(background: \.accent)
+    Text("Background: nil")
+        .style(background: nil)
+
+    VStack() {
+        Text("toggled")
+            .padding()
+            .style(background: isAccent ? \.accentComplementary : nil)
+
+        StyleButton {
+            withAnimation {
+                isAccent.toggle()
+            }
+        } content: {
+            Text("Toggle Accent")
+        }
+    }
+    .padding()
+    .background(.yellow)
 
 }

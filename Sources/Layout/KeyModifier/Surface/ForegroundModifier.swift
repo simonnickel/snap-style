@@ -8,6 +8,11 @@ import SwiftUI
 
 extension View {
 
+    /// Applies the the value as `.foregroundStyle()`
+    ///
+    /// Supports animated change.
+    ///
+    /// - Parameter keyPath: The surface to apply, `nil` will use the environments value.
     public func style(foreground keyPath: SnapStyle.SurfaceKey.ValueBuilderKeyPath?) -> some View {
         self
             .modifier(SurfaceForegroundModifier(keyPath: keyPath))
@@ -40,9 +45,29 @@ internal struct SurfaceForegroundModifier: ViewModifier {
 
 #Preview {
 
+    @Previewable @State var isAccent: Bool = false
+
     Text("Foreground: .accent")
         .style(foreground: \.accent)
     Text("Foreground: nil")
         .style(foreground: nil)
+
+    VStack() {
+        Text("Foreground: toggled")
+            .style(foreground: isAccent ? \.accent : nil)
+        Text("Foreground from Environment")
+            .style(foreground: nil)
+
+        StyleButton {
+            withAnimation {
+                isAccent.toggle()
+            }
+        } content: {
+            Text("Toggle Accent")
+        }
+    }
+    .style(foreground: \.onAccent)
+    .padding()
+    .background(.mint)
 
 }
