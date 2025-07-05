@@ -4,7 +4,6 @@
 //
 
 import SnapStyle
-import SnapStyleBase
 import SwiftUI
 
 struct StructuredScreen: View {

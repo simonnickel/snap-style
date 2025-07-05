@@ -5,7 +5,6 @@
 
 import SnapCore
 import SnapStyle
-import SnapStyleBase
 import SwiftUI
 
 struct ConfigurationColorScreen: View {

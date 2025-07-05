@@ -4,7 +4,7 @@
 //
 
 import Observation
-import SnapStyleBase
+import SnapStyle
 import SwiftUI
 
 @Observable

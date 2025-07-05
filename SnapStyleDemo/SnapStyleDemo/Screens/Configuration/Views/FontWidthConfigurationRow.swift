@@ -5,7 +5,6 @@
 
 import SnapFoundation
 import SnapStyle
-import SnapStyleBase
 import SwiftUI
 
 struct FontWidthConfigurationRow: View {

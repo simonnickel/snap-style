@@ -12,34 +12,44 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle", "SnapStyleBase", "SnapStyleDebug"]),
+            targets: ["SnapStyle", "SnapStyleLayout", "SnapStyleBase", "SnapStyleDebug"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/simonnickel/snap-foundation.git", branch: "main"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "SnapStyleDebug",
-            dependencies: [
-                "SnapStyle",
-                "SnapStyleBase",
-            ]
-        ),
+        // The main target to import, it just exports the other targets.
         .target(
             name: "SnapStyle",
+            dependencies: [
+                "SnapStyleBase",
+                "SnapStyleLayout",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ]
+        ),
+        // Views and Values
+        .target(
+            name: "SnapStyleLayout",
             dependencies: [
                 "SnapStyleBase",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ]
         ),
+        // Implementation of core features.
         .target(
             name: "SnapStyleBase",
             dependencies: [
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ]
+        ),
+        // A separate target for Debugging related helper.
+        .target(
+            name: "SnapStyleDebug",
+            dependencies: [
+                "SnapStyle"
+            ],
+            path: "Sources/SupportDebug"
         ),
     ],
     swiftLanguageModes: [.version("6")]
