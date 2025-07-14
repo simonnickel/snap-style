@@ -78,16 +78,7 @@ extension SnapStyle.NumberKey {
     // MARK: - Shape: CornerRadius
 
     /// A corner radius definition based on the level in the component stack.
-    public var cornerRadiusComponent: ValueBuilder {
-        .builder { context in
-            switch context.componentStack.levelOverall {
-                case 1: .definition(.value(20))
-                case 2: .definition(.value(8)) // Outer corner radius - gap
-                case 3: .definition(.value(4))
-                default: nil
-            }
-        }
-    }
+    public var cornerRadiusComponent: ValueBuilder { .base(.definition(.value(30))) }
 
     public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
     public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }

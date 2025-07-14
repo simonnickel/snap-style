@@ -20,13 +20,19 @@ public struct StyleShapeView: View {
 
     public var body: some View {
         let value = style.surface(for: surface)
-        shape.insettableShape(for: style)
-            .fill(value ?? AnyShapeStyle(.clear))
+        AnyShape(
+            shape.shape(with: style)
+        )
+        .fill(value ?? AnyShapeStyle(.clear))
     }
 
 }
 
 #Preview {
     StyleShapeView(shape: .capsule, surface: \.accent)
+        .frame(width: 200, height: 100)
+    StyleShapeView(shape: .circle, surface: \.accent)
+        .frame(width: 200, height: 100)
+    StyleShapeView(shape: .rectangle, surface: \.accent)
         .frame(width: 200, height: 100)
 }

@@ -52,45 +52,39 @@ extension SnapStyle.ShapeKey {
 
     // MARK: - Shape
     
-    public enum ShapeDefinition: CustomStringConvertible {
+    public enum ShapeDefinition: Equatable, CustomStringConvertible {
         
+        case containerRelative
         case circle
         case capsule
         case rectangle
         case rectangleRounded(radius: SnapStyle.NumberKey.ValueBuilderKeyPath)
-        
-        public func insettableShape(for style: SnapStyle.ContextWrapper) -> StyleInsettableShape {
-            
+
+        public func shape(with style: SnapStyle.ContextWrapper) -> InsettableShape {
+
             switch self {
-                    
-                case .circle: StyleInsettableShape { rect in
-                    Circle().path(in: rect)
-                }
-                
-                case .capsule: StyleInsettableShape { rect in
-                    Capsule().path(in: rect)
-                }
-                    
-                case .rectangle: StyleInsettableShape { rect in
-                    Rectangle().path(in: rect)
-                }
-                    
+
+                case .containerRelative: Rectangle()
+
+                case .circle: Circle()
+
+                case .capsule: Capsule()
+
+                case .rectangle: Rectangle()
+
                 case .rectangleRounded(radius: let numberKey):
                     if let cornerRadius = style.number(for: numberKey) {
-                        StyleInsettableShape { rect in
-                            RoundedRectangle(cornerRadius: cornerRadius).path(in: rect)
-                        }
+                        RoundedRectangle(cornerRadius: cornerRadius)
                     } else {
-                        StyleInsettableShape { rect in
-                            Rectangle().path(in: rect)
-                        }
+                        Rectangle()
                     }
-                    
+
             }
         }
         
         public var description: String {
             switch self {
+                case .containerRelative: "ContainerRelative"
                 case .circle: "Circle"
                 case .capsule: "Capsule"
                 case .rectangle: "Rectangle"

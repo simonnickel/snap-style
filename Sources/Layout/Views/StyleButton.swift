@@ -71,14 +71,13 @@ public struct StyleButton<Content>: View where Content : View {
     public var body: some View {
         StyleButtonInteractionState($interactionState, action: action) {
             content()
-                .contentShape(Rectangle())
+                .style(
+                    component: variant.component,
+                    applyContainer: variant.hierarchy,
+                    state: isEnabled ? interactionState : .disabled
+                )
         }
         .disabled(!isEnabled)
-        .style(
-            component: variant.component,
-            applyContainer: variant.hierarchy,
-            state: isEnabled ? interactionState : .disabled
-        )
     }
 
 }
