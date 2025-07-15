@@ -105,36 +105,36 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
     // MARK: Action
 
-    private func viewButtonContainer<ContainerContent: View>(containerContent: @escaping () -> ContainerContent) -> some View {
-        StyleButtonInteractionState($interactionState) { // TODO: Should get same treatment as StyleButton.
-            if let action {
-                action()
-            } else {
-                // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
-                switch variant {
-                    case .plain: break
-                    case .navigate(let _): break
-
-                    case .selectValue(let value, selection: let selection):
-                        selection.wrappedValue = value
-
-                    case .selectValues(let value, selection: let selection):
-                        if selection.wrappedValue.contains(value) {
-                            selection.wrappedValue.removeAll { $0 == value }
-                        } else {
-                            selection.wrappedValue.append(value)
-                        }
-
-                    case .selected(let isSelected): isSelected.wrappedValue.toggle()
-                    case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
-                    case .pick(_, selection: _): break
+    private func viewButtonContainer<ContainerContent: View>(content: @escaping () -> ContainerContent) -> some View {
+        StyleButtonInteractionState(
+            $interactionState,
+            action: {
+                if let action {
+                    action()
+                } else {
+                    // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
+                    switch variant {
+                        case .plain: break
+                        case .navigate(let _): break
+                            
+                        case .selectValue(let value, selection: let selection):
+                            selection.wrappedValue = value
+                            
+                        case .selectValues(let value, selection: let selection):
+                            if selection.wrappedValue.contains(value) {
+                                selection.wrappedValue.removeAll { $0 == value }
+                            } else {
+                                selection.wrappedValue.append(value)
+                            }
+                            
+                        case .selected(let isSelected): isSelected.wrappedValue.toggle()
+                        case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
+                        case .pick(_, selection: _): break
+                    }
                 }
-            }
-        } content: {
-            containerContent()
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
+            },
+            content: content
+        )
     }
 
 
