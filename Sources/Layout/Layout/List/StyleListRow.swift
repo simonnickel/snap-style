@@ -80,6 +80,9 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
     
     @State private var interactionState: SnapStyle.Component.InteractionState = .normal
 
+    
+    // MARK: - Body
+    
     public var body: some View {
         switch variant {
             case .plain, .pick:
@@ -213,30 +216,6 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 // TODO FB: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
                 // .pickerStyle(.menu)
         }
-    }
-
-
-    // MARK: Variant
-
-    public enum Variant {
-        case plain
-
-        /// Navigation style.
-        case navigate(_ value: SelectionValue, isPresented: ((SelectionValue) -> Bool)? = nil)
-
-        /// Selection style to choose a single value.
-        case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
-
-        /// Select style to choose multiple values.
-        case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
-
-        /// Selection style, controlled via binding.
-        case selected(Binding<Bool>)
-
-        /// Switch style, controlled via binding.
-        case enabled(Binding<Bool>)
-        
-        case pick(_ values: [SelectionValue], selection: Binding<SelectionValue>)
     }
 }
 
