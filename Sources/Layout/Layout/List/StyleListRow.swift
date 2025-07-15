@@ -89,10 +89,12 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 // TODO: macOS navigation style and hover highlight.
             case .navigate(let value, let isPresented):
                 let isPresented = isPresented?(value) ?? false
-                NavigationLink(value: value) {
-                    viewRow()
-                }
-                .style(component: .listRow, state: isPresented ? .highlighted : interactionState)
+                StyleNavigationLink(
+                    value: value,
+                    interactionState: interactionState,
+                    isPresented: isPresented,
+                    content: viewRow
+                )
                 
             default:
                 viewButtonContainer {
