@@ -35,14 +35,15 @@ struct VanillaFlow: View {
                 }
             }
             .navigationTitle(title)
+#if !os(macOS) // TODO: platform agnostic placement
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                    } label: {
+                    Button { } label: {
                         Label("Add", systemImage: "plus")
                     }
                 }
             }
+#endif
         }
         
         var title: String {
@@ -86,6 +87,7 @@ struct VanillaFlow: View {
                     .navigationDestination(for: Screen.self) { screen in
                         screen.screen
                     }
+#if !os(macOS) // TODO: platform agnostic placement
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
@@ -95,6 +97,7 @@ struct VanillaFlow: View {
                             }
                         }
                     }
+#endif
             }
             .sheet(isPresented: $showSettings) {
                 VanillaFlow(root: .root)

@@ -70,7 +70,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
         }
 #if os(macOS)
         .onHover(perform: { isHovering in
-            self.isHovering = isHovering
+            self.state.isHovering = isHovering
         })
 #else
         .hoverEffect(.highlight) // , isEnabled: isEnabled

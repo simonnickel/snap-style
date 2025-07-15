@@ -60,9 +60,6 @@ extension SnapStyle.CompositionKey {
                         .definition(.layers([
                             .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
                         ]))
-                        .definition(.layers([
-                            .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
-                        ]))
             }
 #else
             .reference(\.contentContainer)

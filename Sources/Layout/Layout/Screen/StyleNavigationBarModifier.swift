@@ -69,11 +69,15 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         self.scaledLarge = ScaledMetric(wrappedValue: definitionLarge.size, relativeTo: definitionLarge.textStyle)
     }
     
+#if !canImport(UIKit)
+    func body(content: Content) -> some View {
+        content
+    }
+#else
     @State private var navigationBar: UINavigationBar?
 
     func body(content: Content) -> some View {
         content
-#if canImport(UIKit)
             .onViewWillAppear { vc in
                 navigationBar = vc.navigationController?.navigationBar
                 update()
@@ -88,10 +92,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 //            .onChange(of: style.context.fontWidth) { oldValue, newValue in
 //                update()
 //            }
-#endif
     }
-    
-#if canImport(UIKit)
     
     private func update() {
         if let navigationBar {
@@ -165,7 +166,9 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
             Text("Content")
             Text("Content")
         }
+#if !os(macOS)
         .navigationBarTitleDisplayMode(.large)
+#endif
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
@@ -178,7 +181,9 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
             Text("Content")
             Text("Content")
         }
+#if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
