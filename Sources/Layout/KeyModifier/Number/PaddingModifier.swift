@@ -37,7 +37,7 @@ private struct PaddingModifier: ViewModifier {
     func body(content: Content) -> some View {
         let value = style.cgFloat(for: keyPath)
         content
-            .padding(edges, value)
+            .padding(edges, value ?? 0)
     }
     
 }
