@@ -3,20 +3,37 @@
 //  Created by Simon Nickel
 //
 
+import SnapFoundation
+import SnapStyleBase
 import SwiftUI
 
-// TODO: Spacing
+// TODO: Example
 
 /// An HStack that drops to a new line.
 /// Inspired by: https://swiftwithmajid.com/2022/11/16/building-custom-layout-in-swiftui-basics/
-struct StyleFlowLayout: Layout {
+public struct StyleFlowLayout: Layout {
+    
+    @Environment(\.style) private var style
 
-    func sizeThatFits(
+    private let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?
+
+    public init(spacing: SnapStyle.NumberKey.ValueBuilderKeyPath?) {
+        self.spacing = spacing
+    }
+    
+    private func getSpacingValue() -> CGFloat {
+        guard let value = style.number(for: spacing) else { return 0 }
+            
+        return CGFloat(value)
+    }
+    
+    public func sizeThatFits(
         proposal: ProposedViewSize,
         subviews: Subviews,
         cache: inout ()
     ) -> CGSize {
-        let sizes = subviews.map { $0.sizeThatFits(.unspecified) }
+        let spacing: CGFloat = getSpacingValue()
+        let sizes = sizes(for: subviews)
 
         var totalHeight: CGFloat = 0
         var totalWidth: CGFloat = 0
@@ -24,13 +41,15 @@ struct StyleFlowLayout: Layout {
         var lineWidth: CGFloat = 0
         var lineHeight: CGFloat = 0
 
-        for size in sizes {
-            if lineWidth + size.width > proposal.width ?? 0 {
+        for index in sizes.indices {
+            let size = sizes[index]
+            let widthAndSpacing = size.width + (index > sizes.startIndex ? spacing : 0)
+            if lineWidth + widthAndSpacing > proposal.width ?? 0 {
                 totalHeight += lineHeight
                 lineWidth = size.width
                 lineHeight = size.height
             } else {
-                lineWidth += size.width
+                lineWidth += widthAndSpacing
                 lineHeight = max(lineHeight, size.height)
             }
 
@@ -42,31 +61,34 @@ struct StyleFlowLayout: Layout {
         return .init(width: totalWidth, height: totalHeight)
     }
 
-    func placeSubviews(
+    public func placeSubviews(
         in bounds: CGRect,
         proposal: ProposedViewSize,
         subviews: Subviews,
         cache: inout ()
     ) {
-        let sizes = subviews.map { $0.sizeThatFits(.unspecified) }
+        let spacing: CGFloat = getSpacingValue()
+        let sizes = sizes(for: subviews)
 
         var lineX = bounds.minX
         var lineY = bounds.minY
         var lineHeight: CGFloat = 0
 
         for index in subviews.indices {
-            if lineX + sizes[index].width > (proposal.width ?? 0) {
+            if lineX + sizes[index].width + spacing > (proposal.width ?? 0) {
                 lineY += lineHeight
                 lineHeight = 0
                 lineX = bounds.minX
+            } else if index > subviews.startIndex {
+                lineX += spacing
             }
 
             subviews[index].place(
                 at: .init(
-                    x: lineX + sizes[index].width / 2,
-                    y: lineY + sizes[index].height / 2
+                    x: lineX,
+                    y: lineY
                 ),
-                anchor: .center,
+                anchor: .topLeading,
                 proposal: ProposedViewSize(sizes[index])
             )
 
@@ -74,18 +96,27 @@ struct StyleFlowLayout: Layout {
             lineX += sizes[index].width
         }
     }
+    
+    private func sizes(for subviews: Subviews) -> [CGSize] {
+        return subviews.map { $0.sizeThatFits(.unspecified) }
+    }
 }
 
 
 // MARK: - Preview
 
 #Preview {
-    StyleFlowLayout {
-        ForEach(0..<5) { _ in
+    
+    @Previewable @State var isActive: Bool = true
+
+    StyleFlowLayout(spacing: isActive ? \.spacingSections : nil) {
+        ForEach(0..<7) { _ in
             Group {
                 Text("Hello")
                     .font(.largeTitle)
                 Text("World")
+                    .font(.title)
+                Text("1!2")
                     .font(.title)
             }
             .border(Color.red)
@@ -94,4 +125,12 @@ struct StyleFlowLayout: Layout {
     .background(.orange)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(.yellow)
+    
+    StyleButton {
+        withAnimation(.smooth) {
+            isActive.toggle()
+        }
+    } content: {
+        Text("Toggle Spacing")
+    }
 }
