@@ -160,7 +160,13 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview("Large") {
-    NavigationStack {
+    let style: SnapStyle = SnapStyle(
+        configuration: .init(
+            allowNavigationBarTitleAdjustments: true
+        )
+    )
+    
+    return NavigationStack {
         StyleScreen {
             Text("Content")
             Text("Content")
@@ -172,10 +178,17 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
+    .style(setup: style)
 }
 
 #Preview("Inline") {
-    NavigationStack {
+    let style: SnapStyle = SnapStyle(
+        configuration: .init(
+            allowNavigationBarTitleAdjustments: true
+        )
+    )
+    
+    return NavigationStack {
         StyleScreen {
             Text("Content")
             Text("Content")
@@ -187,4 +200,5 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
+    .style(setup: style)
 }
