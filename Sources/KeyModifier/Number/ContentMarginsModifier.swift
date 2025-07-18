@@ -76,11 +76,11 @@ private struct ContentMarginModifier: ViewModifier {
         Spacer()
     }
 
-    StyleButton {
+    Button {
         withAnimation {
             isActive.toggle()
         }
-    } content: {
+    } label: {
         Text("Toggle")
     }
 }

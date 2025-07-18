@@ -63,11 +63,11 @@ private struct SurfaceBackgroundModifier: ViewModifier {
             .padding()
             .style(background: isAccent ? \.accentComplementary : nil)
 
-        StyleButton {
+        Button {
             withAnimation {
                 isAccent.toggle()
             }
-        } content: {
+        } label: {
             Text("Toggle Accent")
         }
     }

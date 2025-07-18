@@ -62,12 +62,12 @@ private struct ValueModifier<Output: View>: ViewModifier {
             .padding(.vertical, 20)
             .background(.yellow)
 
-        StyleButton {
+        Button {
             withAnimation {
                 isFirst.toggle()
                 keyPath = isFirst ? \.spacingGroups : \.spacingSections
             }
-        } content: {
+        } label: {
             Text("Switch padding")
         }
     }

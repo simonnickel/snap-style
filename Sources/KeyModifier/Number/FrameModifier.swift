@@ -55,11 +55,11 @@ private struct FrameMaxWidthModifier: ViewModifier {
     .style(maxWidth: isActive ? \.spacingSections : nil)
     .background(.green)
 
-    StyleButton {
+    Button {
         withAnimation {
             isActive.toggle()
         }
-    } content: {
+    } label: {
         Text("Toggle")
     }
 

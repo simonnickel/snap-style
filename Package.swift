@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
+            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleKeyModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -26,6 +26,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
+                "SnapStyleKeyModifier",
                 "SnapStyleLayout",
                 "SnapStyleViews",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
@@ -39,6 +40,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
+                "SnapStyleKeyModifier",
                 "SnapStyleLayout",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
@@ -51,9 +53,21 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
+                "SnapStyleKeyModifier",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
             path: "Sources/Layout",
+        ),
+        // Modifier
+        .target(
+            name: "SnapStyleKeyModifier",
+            dependencies: [
+                "SnapStyleBase",
+                "SnapStyleComponents",
+                "SnapStyleDefinitions",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ],
+            path: "Sources/KeyModifier",
         ),
         // Values
         .target(

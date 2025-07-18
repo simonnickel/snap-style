@@ -104,11 +104,11 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
     .style(composition: isAccent ? \.accentContainer : \.contentContainer)
     .border(.yellow)
 
-    StyleButton {
+    Button {
         withAnimation {
             isAccent.toggle()
         }
-    } content: {
+    } label: {
         Text("Toggle Accent")
     }
 

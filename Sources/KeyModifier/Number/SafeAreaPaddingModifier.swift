@@ -82,11 +82,11 @@ private struct SafeAreaPaddingModifier: ViewModifier {
             .background(.green)
         }
 
-        StyleButton {
+        Button {
             withAnimation {
                 isActive.toggle()
             }
-        } content: {
+        } label: {
             Text("Toggle")
         }
     }

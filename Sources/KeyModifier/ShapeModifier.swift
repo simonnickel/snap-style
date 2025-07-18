@@ -74,21 +74,12 @@ private struct ShapeModifier: ViewModifier {
     .style(background: \.accentBackground)
     .style(shape: \.containerCard)
 
-    StyleButton {
+    Button {
         withAnimation(.smooth) {
             isActive.toggle()
         }
-    } content: {
+    } label: {
         Text("Toggle")
     }
-
-    VStack {
-        Text("Card Component")
-        VStack {
-            Text("Card Component, with relative shape")
-        }
-        .style(component: .accentCard)
-    }
-    .style(component: .accentCard)
 
 }

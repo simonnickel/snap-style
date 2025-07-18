@@ -85,14 +85,14 @@ private struct ListRowInsetsModifier: ViewModifier {
 #Preview {
     List {
         Section {
-            StyleLabel("Star", systemImage: "star")
+            Label("Star", systemImage: "star")
                 .styleListRowInsets()
 
-            StyleLabel("Triangle", systemImage: "triangle")
+            Label("Triangle", systemImage: "triangle")
                 .styleListRowInsets()
 
             NavigationLink(value: "None") {
-                StyleLabel("Rectangle", systemImage: "rectangle")
+                Label("Rectangle", systemImage: "rectangle")
             }
             .styleListRowInsets()
 

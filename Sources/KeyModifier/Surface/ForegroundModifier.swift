@@ -59,11 +59,11 @@ private struct SurfaceForegroundModifier: ViewModifier {
         Text("Foreground from Environment")
             .style(foreground: nil)
 
-        StyleButton {
+        Button {
             withAnimation {
                 isAccent.toggle()
             }
-        } content: {
+        } label: {
             Text("Toggle Accent")
         }
     }
