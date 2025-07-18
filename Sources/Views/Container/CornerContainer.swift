@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleLayout
 import SwiftUI
 
 public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading: View, BottomTrailing: View>: View {
