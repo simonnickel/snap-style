@@ -13,3 +13,17 @@ extension View {
     }
 
 }
+
+
+// MARK: - Preview
+
+#Preview {
+    VStack {
+        Text("Preview Content")
+            .background(.yellow)
+        Text("Preview Content")
+            .stretch()
+            .background(.yellow)
+    }
+    
+}

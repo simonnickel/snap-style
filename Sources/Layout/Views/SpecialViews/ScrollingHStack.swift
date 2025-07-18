@@ -25,3 +25,15 @@ public struct ScrollingHStack<Content: View>: View {
         .scrollTargetBehavior(.viewAligned)
     }
 }
+
+
+// MARK: - Preview
+
+#Preview {
+    ScrollingHStack {
+        ForEach(0..<10, id: \.self) { _ in
+            Text("Hello, World!")
+                .background(.yellow)
+        }
+    }
+}
