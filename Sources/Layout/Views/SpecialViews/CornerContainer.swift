@@ -29,13 +29,13 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
 
             StyleStack(.horizontal, alignmentV: .top) {
                 topLeading()
-                StyleSpacer(minLength: \.spacingElements)
+                StyleSpacer(min: \.spacingElements)
                 topTrailing()
             }
 
             StyleStack(.horizontal, alignmentV: .bottom) {
                 bottomLeading()
-                StyleSpacer(minLength: \.spacingElements)
+                StyleSpacer(min: \.spacingElements)
                 bottomTrailing()
             }
 
@@ -52,37 +52,40 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
             CornerContainer(
                 topLeading: {
                     Text("Top Leading")
+                        .background(.yellow)
                 },
                 topTrailing: {
                     Text("Top Trailing")
+                        .background(.yellow)
                 },
                 bottomLeading: {
                     Text("Bottom Leading")
+                        .background(.yellow)
                 },
                 bottomTrailing: {
                     Text("Bottom Trailing")
+                        .background(.yellow)
                 }
             )
             .background(.green)
         }
     }
 
-    return VStack(spacing: 20) {
-        PreviewCornerContainer()
-            .fixedSize()
-        PreviewCornerContainer()
-            .frame(maxWidth: 90)
-        PreviewCornerContainer()
-            .frame(maxWidth: 100)
-        PreviewCornerContainer()
-            .frame(maxWidth: 110)
-        PreviewCornerContainer()
-            .frame(maxWidth: 200)
-        PreviewCornerContainer()
-            .frame(maxWidth: 300)
-        PreviewCornerContainer()
-
+    return ScrollView {
+        VStack(spacing: 20) {
+            PreviewCornerContainer()
+            PreviewCornerContainer()
+                .frame(maxWidth: 90)
+            PreviewCornerContainer()
+                .frame(maxWidth: 100)
+            PreviewCornerContainer()
+                .frame(maxWidth: 110)
+            PreviewCornerContainer()
+                .frame(maxWidth: 200)
+            PreviewCornerContainer()
+                .frame(maxWidth: 300)
+        }
+        .frame(maxWidth: .infinity)
+        .background(.gray)
     }
-    .frame(maxWidth: .infinity)
-    .background(.gray)
 }

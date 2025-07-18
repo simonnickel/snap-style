@@ -159,7 +159,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     title()
                 }
 
-                StyleSpacer(minLength: \.spacingElements)
+                StyleSpacer(min: \.spacingElements)
 
                 viewAccessory(for: variant)
 
