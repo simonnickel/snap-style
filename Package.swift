@@ -28,7 +28,8 @@ let package = Package(
                 "SnapStyleDefinitions",
                 "SnapStyleLayout",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
-            ]
+            ],
+            path: "Sources/X-SnapStyle",
         ),
         // Views
         .target(
@@ -74,7 +75,7 @@ let package = Package(
             dependencies: [
                 "SnapStyle"
             ],
-            path: "Sources/SupportDebug",
+            path: "Sources/X-Debug",
         ),
     ],
     swiftLanguageModes: [.version("6")]

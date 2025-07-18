@@ -4,4 +4,5 @@
 //
 
 @_exported import SnapStyleBase
+@_exported import SnapStyleDefinitions
 @_exported import SnapStyleLayout
