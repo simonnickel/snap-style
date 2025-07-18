@@ -7,8 +7,6 @@ import SnapFoundation
 import SnapStyleBase
 import SwiftUI
 
-// TODO: Example
-
 /// An HStack that drops to a new line.
 /// Inspired by: https://swiftwithmajid.com/2022/11/16/building-custom-layout-in-swiftui-basics/
 public struct StyleFlowLayout: Layout {
