@@ -19,7 +19,6 @@ public struct ScrollingHStack<Content: View>: View {
             StyleLazyHStack(spacing: \.spacingElements) {
                 content()
             }
-            .fixedSize(horizontal: false, vertical: true)
             .scrollTargetLayout()
         }
         .scrollIndicators(.hidden)
