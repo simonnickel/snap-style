@@ -38,8 +38,10 @@ struct DemoMetricCard: View {
 
 #Preview {
     StyleScreen {
-        DemoMetricCard.exampleRectangle
-        DemoMetricCard.exampleTriangle
-        DemoMetricCard.exampleCircle
+        StyleStack(.horizontal, spacing: \.spacingElements) {
+            DemoMetricCard.exampleRectangle
+            DemoMetricCard.exampleTriangle
+            DemoMetricCard.exampleCircle
+        }
     }
 }
