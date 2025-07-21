@@ -24,15 +24,15 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var contentCardRow: some View {
         ScrollingHStack {
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
-            DemoValueCard.exampleCircle
+            DemoMetricCard.exampleRectangle
+            DemoMetricCard.exampleTriangle
+            DemoMetricCard.exampleCircle
+            DemoMetricCard.exampleRectangle
+            DemoMetricCard.exampleTriangle
+            DemoMetricCard.exampleCircle
+            DemoMetricCard.exampleRectangle
+            DemoMetricCard.exampleTriangle
+            DemoMetricCard.exampleCircle
         }
     }
 
@@ -48,8 +48,8 @@ struct StructuredScreen: View {
     @ViewBuilder
     private var contentCards: some View {
         StyleStack(.horizontal, spacing: \.spacingElements) {
-            DemoValueCard.exampleRectangle
-            DemoValueCard.exampleTriangle
+            DemoMetricCard.exampleRectangle
+            DemoMetricCard.exampleTriangle
         }
     }
 

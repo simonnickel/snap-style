@@ -6,11 +6,11 @@
 import SnapStyle
 import SwiftUI
 
-struct DemoValueCard: View {
+struct DemoMetricCard: View {
     
-    static var exampleRectangle: Self { DemoValueCard(icon: "rectangle", value: "\(Int.random(in: 1..<999))", title: "Rectangle") }
-    static var exampleTriangle: Self { DemoValueCard(icon: "triangle", value: "\(Int.random(in: 1..<999))", title: "Triangle") }
-    static var exampleCircle: Self { DemoValueCard(icon: "circle", value: "\(Int.random(in: 1..<999))", title: "Circle") }
+    static var exampleRectangle: Self { DemoMetricCard(icon: "rectangle", value: "\(Int.random(in: 1..<999))", title: "Rectangle") }
+    static var exampleTriangle: Self { DemoMetricCard(icon: "triangle", value: "\(Int.random(in: 1..<999))", title: "Triangle") }
+    static var exampleCircle: Self { DemoMetricCard(icon: "circle", value: "\(Int.random(in: 1..<999))", title: "Circle") }
     
     let icon: String
     let value: String
@@ -29,7 +29,7 @@ struct DemoValueCard: View {
             } bottomTrailing: {
                 
             }
-            .style(component: .valueCard)
+            .style(component: .metricCard)
     }
 }
 
@@ -38,8 +38,8 @@ struct DemoValueCard: View {
 
 #Preview {
     StyleScreen {
-        DemoValueCard.exampleRectangle
-        DemoValueCard.exampleTriangle
-        DemoValueCard.exampleCircle
+        DemoMetricCard.exampleRectangle
+        DemoMetricCard.exampleTriangle
+        DemoMetricCard.exampleCircle
     }
 }

@@ -23,7 +23,7 @@ extension SnapStyle.ShapeKey {
             }
         }
     }
-    public var containerValueCard: ValueBuilder { .base(.reference(\.containerCard)) }
+    public var containerMetricCard: ValueBuilder { .base(.reference(\.containerCard)) }
     public var containerAction: ValueBuilder { .base(.definition(.value(.capsule))) }
     public var containerActionIcon: ValueBuilder { .base(.definition(.value(.circle))) }
 

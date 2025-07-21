@@ -52,7 +52,7 @@ struct ContentFlow: View {
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
 
-                    case .elements: DebugElementScreen(components: [.screen, .contentCard, .accentCard, .valueCard, .list, .listRow])
+                    case .elements: DebugElementScreen(components: [.screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 
                     case .cacheNumber: DebugCacheScreen<SnapStyle.NumberKey>()
                     case .cacheFont: DebugCacheScreen<SnapStyle.FontKey>()

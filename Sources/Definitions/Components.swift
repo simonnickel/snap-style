@@ -143,13 +143,13 @@ extension SnapStyle.ComponentDefinition {
     )
     
     
-    // MARK: - Value Card
+    // MARK: - Metric Card
     
-    public static let valueCard: Self = .init("valueCard",
+    public static let metricCard: Self = .init("metricCard",
         requiresAlternativeAccent: true,
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingValueCard)
+                case .container: Padding(\.paddingMetricCard)
                 default: nil
             }
         },
@@ -163,13 +163,13 @@ extension SnapStyle.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerValueCard
+                case .container: \.containerMetricCard
                 default: nil
             }
         },
         shapes: { element in
             switch element {
-                case .container: \.containerValueCard
+                case .container: \.containerMetricCard
                 default: nil
             }
         }

@@ -61,5 +61,5 @@ public struct DebugElementScreen: View {
 }
 
 #Preview {
-    DebugElementScreen(components: [.screen, .contentCard, .accentCard, .valueCard, .list, .listRow])
+    DebugElementScreen(components: [.screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 }

@@ -136,7 +136,7 @@ extension SnapStyle.CompositionKey {
         .base(.reference(\.accentContainer))
     }
     
-    public var containerValueCard: ValueBuilder {
+    public var containerMetricCard: ValueBuilder {
         .base(.reference(\.accentContainer))
     }
 

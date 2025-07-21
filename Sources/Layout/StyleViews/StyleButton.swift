@@ -113,8 +113,8 @@ struct PreviewContent: View {
                         .labelStyle(.iconOnly)
                 }
             }
-            StyleButton(.component(.valueCard), enabled: isEnabled) { } content: {
-                Label("Component: .valueCard", systemImage: "star")
+            StyleButton(.component(.metricCard), enabled: isEnabled) { } content: {
+                Label("Component: .metricCard", systemImage: "star")
             }
         }
     }

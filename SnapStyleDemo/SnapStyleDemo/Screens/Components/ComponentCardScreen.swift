@@ -11,12 +11,12 @@ struct ComponentCardScreen: View {
         StyleScreen {
 
             StyleStack(spacing: \.spacingElements) {
-                Text("Value Card")
+                Text("Metric Card")
                     .style(element: .title)
                 StyleStack(.horizontal, spacing: \.spacingElements) {
-                    DemoValueCard.exampleRectangle
-                    DemoValueCard.exampleTriangle
-                    DemoValueCard.exampleCircle
+                    DemoMetricCard.exampleRectangle
+                    DemoMetricCard.exampleTriangle
+                    DemoMetricCard.exampleCircle
                 }
             }
 
@@ -43,9 +43,9 @@ struct ComponentCardScreen: View {
                 }
                 
                 StyleStack(.horizontal, spacing: \.spacingElements) {
-                    DemoValueCard.exampleRectangle
-                    DemoValueCard.exampleTriangle
-                    DemoValueCard.exampleCircle
+                    DemoMetricCard.exampleRectangle
+                    DemoMetricCard.exampleTriangle
+                    DemoMetricCard.exampleCircle
                 }
                 
                 contentCard
