@@ -8,8 +8,8 @@ import SwiftUI
 
 extension View {
 
-    public func style(shape keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath?) -> some View {
-        modifier(ShapeModifier(keyPath: keyPath))
+    public func style(shape keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
+        modifier(ShapeModifier(keyPath: keyPath, shouldClip: shouldClip))
     }
 
 }
@@ -22,6 +22,7 @@ private struct ShapeModifier: ViewModifier {
     @Environment(\.style) private var style
     
     let keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath?
+    let shouldClip: Bool
 
     var shape: InsettableShape {
         if let keyPath, let shape = style.shape(for: keyPath) {
@@ -42,6 +43,7 @@ private struct ShapeModifier: ViewModifier {
                 .contentShape(.hoverEffect, shape)
             #endif
                 .containerShape(shape)
+                .clipShape(shouldClip ? AnyShape(shape) : AnyShape(Rectangle()))
         )
     }
     
