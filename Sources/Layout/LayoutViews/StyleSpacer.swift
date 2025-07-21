@@ -29,6 +29,7 @@ public struct StyleSpacer: View {
         let valueLength: CGFloat? = if let value = style.number(for: length) { CGFloat(value) } else { nil }
         Spacer(minLength: valueMin)
             .frame(width: valueLength ?? nil)
+            .layoutPriority(-1) // Without reduced priority it stretches before a text is stretched.
     }
 
 }
@@ -39,36 +40,83 @@ public struct StyleSpacer: View {
 #Preview {
     VStack {
         HStack {
-            Rectangle()
-            StyleSpacer(\.spacingElements)
-            Rectangle()
+            Text("Some Content")
+                .background(.orange)
+            StyleSpacer(min: \.spacingElements)
+            Text("Some Content")
+                .background(.orange)
         }
+        .stretch()
         
         HStack {
-            Rectangle()
+            Text("Some Content")
+                .background(.orange)
             StyleSpacer(\.spacingElements)
-            Rectangle()
+            Text("Some Content")
+                .background(.orange)
         }
+        .stretch()
+        
+        HStack {
+            Text("Some Content with more ")
+                .background(.orange)
+            StyleSpacer(min: \.spacingElements)
+            Text("Some Content with more text")
+                .background(.orange)
+        }
+        .stretch()
+        
+        HStack {
+            Text("Some Content with more ")
+                .background(.orange)
+            StyleSpacer(\.spacingElements)
+            Text("Some Content with more text")
+                .background(.orange)
+        }
+        .stretch()
+        
+        HStack {
+            Text("Some Content")
+                .background(.orange)
+            StyleSpacer(\.spacingElements)
+            Text("Some Content")
+                .background(.orange)
+        }
+        .stretch()
         .style(scaleFactor: 5)
         
         HStack {
             Rectangle()
+                .frame(width: 150)
             StyleSpacer(min: \.spacingElements)
             Rectangle()
+                .frame(width: 60)
         }
         
         HStack {
             Rectangle()
-                .frame(width: 10)
-            StyleSpacer(min: \.spacingElements)
+                .frame(width: 150)
+            StyleSpacer(\.spacingElements)
             Rectangle()
+                .frame(width: 60)
         }
-
+        
         HStack {
             Rectangle()
+                .frame(width: 250)
             StyleSpacer(min: \.spacingElements)
             Rectangle()
+                .frame(width: 250)
         }
-        .style(scaleFactor: 5)
+        
+        HStack {
+            Rectangle()
+                .frame(width: 250)
+            StyleSpacer(\.spacingElements)
+            Rectangle()
+                .frame(width: 250)
+        }
     }
+    .frame(width: 350)
+    .background(.yellow)
 }
