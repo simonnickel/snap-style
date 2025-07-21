@@ -13,10 +13,11 @@ struct ComponentCardScreen: View {
             StyleStack(spacing: \.spacingElements) {
                 Text("Metric Card")
                     .style(element: .title)
-                StyleStack(.horizontal, spacing: \.spacingElements) {
-                    DemoMetricCard.exampleRectangle
-                    DemoMetricCard.exampleTriangle
+                ScrollingHStack {
                     DemoMetricCard.exampleCircle
+                    DemoMetricCard.exampleTriangle
+                    DemoMetricCard.exampleRectangle
+                    DemoMetricCard.examplePentagon
                 }
             }
 
@@ -36,16 +37,10 @@ struct ComponentCardScreen: View {
 
             StyleStack(spacing: \.spacingGroups, ) {
                 StyleStack {
-                    Text("Secondary")
+                    Text("Container Relative")
                         .style(element: .title)
                     Text("Cards inside of Card")
                         .style(element: .title, hierarchy: .secondary)
-                }
-                
-                StyleStack(.horizontal, spacing: \.spacingElements) {
-                    DemoMetricCard.exampleRectangle
-                    DemoMetricCard.exampleTriangle
-                    DemoMetricCard.exampleCircle
                 }
                 
                 contentCard
@@ -53,6 +48,13 @@ struct ComponentCardScreen: View {
                 
                 contentCard
                     .style(component: .accentCard)
+                
+                StyleStack(.horizontal, spacing: \.spacingElements) {
+                    DemoMetricCard.exampleRectangle
+                    DemoMetricCard.exampleTriangle
+                    DemoMetricCard.exampleCircle
+                }
+                .style(shape: \.containerRelative, shouldClip: true)
             }
             .style(component: .contentCard)
             

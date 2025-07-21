@@ -8,9 +8,10 @@ import SwiftUI
 
 struct DemoMetricCard: View {
     
-    static var exampleRectangle: Self { DemoMetricCard(icon: "rectangle", value: "\(Int.random(in: 1..<999))", title: "Rectangle") }
-    static var exampleTriangle: Self { DemoMetricCard(icon: "triangle", value: "\(Int.random(in: 1..<999))", title: "Triangle") }
     static var exampleCircle: Self { DemoMetricCard(icon: "circle", value: "\(Int.random(in: 1..<999))", title: "Circle") }
+    static var exampleTriangle: Self { DemoMetricCard(icon: "triangle", value: "\(Int.random(in: 1..<999))", title: "Triangle") }
+    static var exampleRectangle: Self { DemoMetricCard(icon: "rectangle", value: "\(Int.random(in: 1..<999))", title: "Rectangle") }
+    static var examplePentagon: Self { DemoMetricCard(icon: "pentagon", value: "\(Int.random(in: 1..<999))", title: "Pentagon") }
     
     let icon: String
     let value: String
