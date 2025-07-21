@@ -6,7 +6,7 @@
 import SnapStyle
 import SwiftUI
 
-struct ElementStackView: View {
+struct ElementsView: View {
 
     let hierarchy: SnapStyle.Element.Hierarchy
 
@@ -35,5 +35,5 @@ struct ElementStackView: View {
 // MARK: - Preview
 
 #Preview {
-    ElementStackView(hierarchy: .primary)
+    ElementsView(hierarchy: .primary)
 }
