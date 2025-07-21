@@ -81,6 +81,7 @@ extension SnapStyle.NumberKey {
     public var cornerRadiusComponent: ValueBuilder { .base(.definition(.value(30))) }
 
     public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
+    public var cornerRadiusMetricCard: ValueBuilder { .base(.definition(.value(15))) }
     public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
 
 
