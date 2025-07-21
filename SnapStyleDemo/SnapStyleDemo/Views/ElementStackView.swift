@@ -8,26 +8,16 @@ import SwiftUI
 
 struct ElementStackView: View {
 
-    let axis: Axis
     let hierarchy: SnapStyle.Element.Hierarchy
 
-    init(axis: Axis = .vertical, hierarchy: SnapStyle.Element.Hierarchy = .primary) {
-        self.axis = axis
+    init(hierarchy: SnapStyle.Element.Hierarchy = .primary) {
         self.hierarchy = hierarchy
     }
 
     var body: some View {
-
-        switch axis {
-            case .horizontal:
-                HStack(alignment: .center) {
-                    content
-                }
-
-            case .vertical:
-                VStack(alignment: .leading) {
-                    content
-                }
+        
+        StyleFlowLayout(spacing: \.spacingElements) {
+            content
         }
 
     }

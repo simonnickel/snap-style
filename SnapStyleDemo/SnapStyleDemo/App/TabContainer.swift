@@ -31,4 +31,12 @@ struct TabContainer: View {
         }
         .tabViewStyle(.sidebarAdaptable)
     }
+
+}
+
+
+// MARK: - Preview
+
+#Preview {
+    TabContainer()
 }

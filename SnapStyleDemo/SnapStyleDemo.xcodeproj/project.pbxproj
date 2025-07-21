@@ -26,6 +26,16 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		5AB5C6832E2EBB7A002B7090 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
+			sourceTree = "<group>";
+		};
+		5AB5C6872E2EBBEF002B7090 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +72,9 @@
 			children = (
 				5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */,
 				5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */,
+				5AB5C6832E2EBB7A002B7090 /* App */,
 				5A29F0922CFB221200942934 /* Screens */,
+				5AB5C6872E2EBBEF002B7090 /* Views */,
 				5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */,
 			);
 			path = SnapStyleDemo;
@@ -85,6 +97,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				5A29F0922CFB221200942934 /* Screens */,
+				5AB5C6832E2EBB7A002B7090 /* App */,
+				5AB5C6872E2EBBEF002B7090 /* Views */,
 			);
 			name = SnapStyleDemo;
 			packageProductDependencies = (
