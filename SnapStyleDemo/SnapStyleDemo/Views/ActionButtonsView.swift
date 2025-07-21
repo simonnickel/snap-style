@@ -33,7 +33,7 @@ struct ActionButtonsView: View {
                 }
             }
             
-            StyleSpacer()
+            StyleSpacer(min: \.spacingElements)
             
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 StyleStack(isStretching: false) {
@@ -54,4 +54,5 @@ struct ActionButtonsView: View {
 
 #Preview {
     ActionButtonsView()
+    ActionButtonsView(elements: [.primarySubtitle, .secondarySubtitle])
 }
