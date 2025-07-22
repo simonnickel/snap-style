@@ -35,28 +35,34 @@ struct ComponentCardScreen: View {
                     .style(component: .accentCard)
             }
 
-            StyleStack(spacing: \.spacingGroups, ) {
-                StyleStack {
-                    Text("Container Relative")
-                        .style(element: .title)
-                    Text("Cards inside of Card")
-                        .style(element: .title, hierarchy: .secondary)
+            StyleStack(spacing: \.spacingGroups) {
+                Text("Container Relative")
+                    .style(element: .title)
+                StyleStack(spacing: \.spacingGroups) {
+                    StyleStack {
+                        Text("Automatic")
+                            .style(element: .title)
+                    }
+                    
+                    contentCard
+                        .style(component: .contentCard)
                 }
-                
-                contentCard
-                    .style(component: .contentCard)
-                
-                contentCard
-                    .style(component: .accentCard)
-                
-                StyleStack(.horizontal, spacing: \.spacingElements) {
-                    DemoMetricCard.exampleRectangle
-                    DemoMetricCard.exampleTriangle
-                    DemoMetricCard.exampleCircle
+                .style(component: .contentCard)
+                StyleStack(spacing: \.spacingGroups) {
+                    StyleStack {
+                        Text("Manual clip shape")
+                            .style(element: .title)
+                    }
+                    
+                    StyleStack(.horizontal, spacing: \.spacingElements) {
+                        DemoMetricCard.exampleRectangle
+                        DemoMetricCard.exampleTriangle
+                        DemoMetricCard.exampleCircle
+                    }
+                    .style(shape: \.containerRelative, shouldClip: true)
                 }
-                .style(shape: \.containerRelative, shouldClip: true)
+                .style(component: .contentCard)
             }
-            .style(component: .contentCard)
             
         }
     }
