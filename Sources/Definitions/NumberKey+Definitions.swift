@@ -78,11 +78,17 @@ extension SnapStyle.NumberKey {
     // MARK: - Shape: CornerRadius
 
     /// A corner radius definition based on the level in the component stack.
-    public var cornerRadiusComponent: ValueBuilder { .base(.definition(.value(30))) }
+    public var cornerRadiusComponent: ValueBuilder { .base(.reference(\.cornerRadiusLarge)) }
 
     public var cornerRadiusCard: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
-    public var cornerRadiusMetricCard: ValueBuilder { .base(.definition(.value(15))) }
+    public var cornerRadiusMetricCard: ValueBuilder { .base(.reference(\.cornerRadiusSmall)) }
     public var cornerRadiusList: ValueBuilder { .base(.reference(\.cornerRadiusComponent)) }
+    
+    public var cornerRadiusSmallest: ValueBuilder { .base(.definition(.value(5))) }
+    public var cornerRadiusSmall: ValueBuilder { .base(.definition(.value(10))) }
+    public var cornerRadiusMedium: ValueBuilder { .base(.definition(.value(15))) }
+    public var cornerRadiusLarge: ValueBuilder { .base(.definition(.value(20))) }
+    public var cornerRadiusLargest: ValueBuilder { .base(.definition(.value(30))) }
 
 
     // MARK: - Animation

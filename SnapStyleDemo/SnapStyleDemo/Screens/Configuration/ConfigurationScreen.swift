@@ -26,6 +26,8 @@ struct ConfigurationScreen: View {
             FontDesignConfigurationRow()
             
             FontWidthConfigurationRow()
+            
+            CornerRadiusConfigurationRow()
         }
     }
     

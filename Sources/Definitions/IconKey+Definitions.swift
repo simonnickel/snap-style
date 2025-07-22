@@ -14,6 +14,7 @@ extension SnapStyle.IconKey {
     public var favorite: ValueBuilder { .base(.definition(.value("star"))) }
     public var scaleFactor: ValueBuilder { .base(.definition(.value("square.resize"))) }
     public var fontDesign: ValueBuilder { .base(.definition(.value("textformat"))) }
+    public var configCornerRadius: ValueBuilder { .base(.definition(.value("button.roundedbottom.horizontal"))) }
 
 
     // MARK: - Controls
