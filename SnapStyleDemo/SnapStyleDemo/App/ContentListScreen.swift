@@ -7,13 +7,33 @@ import SnapStyle
 import SwiftUI
 
 struct ContentListScreen: View {
+    
+    struct ViewData {
+        struct Section: Identifiable {
+            var id: String { title }
+            let title: String
+            let screens: [ContentFlow.Screen]
+        }
+        
+        let sections: [Section]
+        
+        static let examples: ViewData = ViewData(sections: [
+            Section(title: "Components", screens: [.card, .list, .action]),
+            Section(title: "Examples", screens: [.structured, .componentStack]),
+        ])
+        static let tools: ViewData = ViewData(sections: [
+            Section(title: "Tools", screens: [.elements]),
+            Section(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition]),
+        ])
+    }
+    
+    let data: ViewData
 
     var body: some View {
         StyleList {
-            ListSection(title: "Examples", screens: [.structured, .componentStack])
-            ListSection(title: "Components", screens: [.card, .list, .action])
-            ListSection(title: "Tools", screens: [.elements])
-            ListSection(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition])
+            ForEach(data.sections) { section in
+                ListSection(title: section.title, screens: section.screens)
+            }
         }
     }
 
@@ -63,6 +83,6 @@ struct ContentListScreen: View {
 
 #Preview {
     NavigationStack {
-        ContentListScreen()
+        ContentListScreen(data: .examples)
     }
 }

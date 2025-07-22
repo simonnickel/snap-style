@@ -11,7 +11,8 @@ struct ContentFlow: View {
 
     @MainActor
     enum Screen: Hashable, Equatable {
-        case root
+        case rootExamples
+        case rootTools
         
         /// A generic destination to navigate to.
         case destination(String, source: String)
@@ -38,7 +39,8 @@ struct ContentFlow: View {
         var screen: some View {
             Group {
                 switch self {
-                    case .root: ContentListScreen()
+                    case .rootExamples: ContentListScreen(data: .examples)
+                    case .rootTools: ContentListScreen(data: .tools)
                         
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
@@ -65,7 +67,8 @@ struct ContentFlow: View {
         
         var title: String {
             switch self {
-                case .root: "SnapStyle"
+                case .rootExamples: "Examples"
+                case .rootTools: "Tools"
                 case .destination(let title, _): title
 
                 // Examples
@@ -87,12 +90,13 @@ struct ContentFlow: View {
         }
     }
 
+    let root: Screen
     @State private var navigationState: [Screen] = []
 
     var body: some View {
         
         NavigationStack(path: $navigationState) {
-            Screen.root.screen
+            root.screen
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
                 }
@@ -111,5 +115,5 @@ extension EnvironmentValues {
 // MARK: - Preview
 
 #Preview {
-    ContentFlow()
+    ContentFlow(root: .rootExamples)
 }
