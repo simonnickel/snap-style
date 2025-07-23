@@ -9,6 +9,7 @@ import SnapStyleComponents
 extension SnapStyle.ShapeKey {
 
     public var containerRelative: ValueBuilder { .base(.definition(.value(.containerRelative))) }
+    public var circle: ValueBuilder { .base(.definition(.value(.circle))) }
     
 
     // MARK: - Component

@@ -93,7 +93,7 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
             switch element {
-                case .title: \.title
+                case .title, .icon, .accessory: \.title
                 default: \.content
             }
         },
@@ -124,7 +124,7 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
             switch element {
-                case .title: \.title
+                case .title, .icon, .accessory: \.title
                 default: \.content
             }
         },
