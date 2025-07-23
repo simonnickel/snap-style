@@ -13,26 +13,51 @@ struct ColorItemView: View {
 
     var body: some View {
         StyleStack {
-            StyleStack(spacing: \.spacingGroups, alignmentH: .center) {
+            StyleStack(spacing: \.spacingGroups) {
+                
                 Text("Select")
                     .style(element: .title)
-                    .style(foreground: \.onAccent)
-                    .padding(.top, 8)
-                HStack {
-                    Circle()
-                        .fill(accent.complementary)
-                    Circle()
-                        .fill(accent.contrast)
+                
+                StyleStack(spacing: \.spacingElements) {
+                    StyleStack(.horizontal, spacing: \.spacingElements) {
+                        // TODO: Icon with circle backgound should be a component.
+                        StyleIcon(\.favorite)
+                            .style(element: .icon)
+                            .style(padding: \.spacingElements)
+                            .style(background: \.accentComplementary)
+                            .style(shape: \.circle)
+                        StyleStack {
+                            Text("Title")
+                                .style(element: .title)
+                        }
+                    }
+                    StyleStack(.horizontal, spacing: \.spacingElements) {
+                        Text("Content Example")
+                        StyleIcon(selected ? \.selectionOn : \.selectionOff)
+                            .style(element: .accessory)
+                            .style(foreground: \.accentContrast)
+                    }
+                }
+                .style(component: .accentCard)
+                
+                StyleStack(.horizontal, spacing: \.spacingElements) {
+                    StyleStack() {
+                        Circle()
+                            .fill(accent.complementary)
+                    }
+                    .style(padding: \.paddingCard)
+                    .style(background: \.accentGradientStrong)
+
+                    StyleStack() {
+                        Circle()
+                            .fill(accent.contrast)
+                    }
+                    .style(padding: \.paddingCard)
+                    .style(background: \.accentGradientSoft)
                 }
             }
-            .padding()
         }
-        .background {
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(selected ? Color.primary : .clear, lineWidth: 2)
-                .fill(Gradient(colors: [accent.base, accent.complementary]))
-                .padding(2)
-        }
+        .style(component: .contentCard)
     }
 }
 

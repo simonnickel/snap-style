@@ -115,6 +115,16 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
+    // TODO: Define based on Accent
+    public var accentGradientSoft: ValueBuilder {
+        .base(.definition(.gradient(AnyShapeStyle(Gradient(colors: [.blue, .mint])))))
+    }
+    
+    // TODO: Define based on Accent
+    public var accentGradientStrong: ValueBuilder {
+        .base(.definition(.gradient(AnyShapeStyle(Gradient(colors: [.mint, .yellow])))))
+    }
+
 
     // MARK: Interactive
 

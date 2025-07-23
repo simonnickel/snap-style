@@ -18,34 +18,16 @@ struct ConfigurationColorScreen: View {
         // TODO: Add default color variant generator.
         let accents: [SnapStyle.Accent] = [
             .fallback,
-            .init(
-                base: .green,
-                onAccent: Color.white,
-                complementary: .green.adjusted(hue: .add(0.06), in: environment),
-                contrast: .green.adjusted(hue: .add(0.5), in: environment),
-                brightness: .dark
-            ),
-            .init(
-                base: .blue,
-                onAccent: Color.white,
-                complementary: .blue.adjusted(hue: .add(0.06), in: environment),
-                contrast: .blue.adjusted(hue: .add(0.5), in: environment),
-                brightness: .dark
-            ),
-            .init(
-                base: .red,
-                onAccent: Color.white,
-                complementary: .red.adjusted(hue: .add(0.06), in: environment),
-                contrast: .red.adjusted(hue: .add(0.5), in: environment),
-                brightness: .dark
-            ),
-            .init(
-                base: .yellow,
-                onAccent: Color.white,
-                complementary: .yellow.adjusted(hue: .add(0.06), in: environment),
-                contrast: .yellow.adjusted(hue: .add(0.5), in: environment),
-                brightness: .light
-            ),
+            .blue,
+            .green,
+            .teal,
+            .red,
+            .orange,
+            .yellow,
+            .mint,
+            .cyan,
+            .purple,
+            .indigo,
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
 
