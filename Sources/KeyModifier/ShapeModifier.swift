@@ -9,42 +9,79 @@ import SwiftUI
 extension View {
 
     public func style(shape keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
-        modifier(ShapeModifier(keyPath: keyPath, shouldClip: shouldClip))
+        modifier(ShapeKeyModifier(keyPath: keyPath, shouldClip: shouldClip))
     }
 
 }
 
 
-// MARK: - Modifier
+// MARK: - ShapeKeyModifier
 
-private struct ShapeModifier: ViewModifier {
+private struct ShapeKeyModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
     let keyPath: SnapStyle.ShapeKey.ValueBuilderKeyPath?
     let shouldClip: Bool
 
-    var shape: InsettableShape {
+    func body(content: Content) -> some View {
+        // Have to conditionally construct view, because InsettableShape can not be type erased properly.
+        // Custom `AnyInsettableShape` does not work with `.containerRelative`.
         if let keyPath, let shape = style.shape(for: keyPath) {
             if shape == .containerRelative {
-                .containerRelative
+                content
+                    .modifier(ShapeModifier(shape: .containerRelative, shouldClip: shouldClip))
             } else {
-                shape.shape(with: style)
+                let shape = shape.shape(with: style)
+                content
+                    .modifier(ShapeModifier(shape: AnyInsettableShape(shape), shouldClip: shouldClip))
             }
         } else {
-            Rectangle()
+            content
+                .modifier(ShapeModifier(shape: Rectangle(), shouldClip: shouldClip))
         }
     }
+    
+}
+
+
+// MARK: - ShapeModifier
+
+private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier {
+
+    let shape: SomeInsettableShape
+    let shouldClip: Bool
 
     func body(content: Content) -> some View {
-        AnyView(
-            content
-            #if !os(macOS)
-                .contentShape(.hoverEffect, shape)
-            #endif
-                .containerShape(shape)
-                .clipShape(shouldClip ? AnyShape(shape) : AnyShape(Rectangle()))
-        )
+        content
+        #if !os(macOS)
+            .contentShape(.hoverEffect, shape)
+        #endif
+            .containerShape(shape)
+            .clipShape(shouldClip ? AnyShape(shape) : AnyShape(Rectangle()))
+    }
+    
+}
+
+
+// MARK: - AnyInsettableShape
+
+// TODO: Should this be in Core or Foundation?
+// TODO FB: Crashes when used for .containerRelative
+public struct AnyInsettableShape: InsettableShape {
+    
+    let shape: any InsettableShape
+    
+    public init(_ shape: any InsettableShape) {
+        self.shape = shape
+    }
+    
+    public func inset(by amount: CGFloat) -> some InsettableShape {
+        AnyInsettableShape(shape.inset(by: amount))
+    }
+    
+    public func path(in rect: CGRect) -> Path {
+        shape.path(in: rect)
     }
     
 }
