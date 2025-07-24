@@ -40,7 +40,7 @@ private struct SurfaceBackgroundModifier: ViewModifier {
         /// If no background should be set, `.clear` is used.
         let surface = style.surface(for: keyPath ?? \.none)
         content
-            .background(surface ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: ignoresSafeAreaEdges)
+            .background(surface?.anyShapeStyle ?? AnyShapeStyle(.clear), ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }
 
 }

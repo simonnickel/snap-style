@@ -43,17 +43,17 @@ struct ColorItemView: View {
                 StyleStack(.horizontal, spacing: \.spacingElements) {
                     StyleStack() {
                         Circle()
-                            .fill(accent.complementary)
-                    }
-                    .style(padding: \.paddingCard)
-                    .style(background: \.accentGradientStrong)
-
-                    StyleStack() {
-                        Circle()
                             .fill(accent.contrast)
                     }
                     .style(padding: \.paddingCard)
                     .style(background: \.accentGradientSoft)
+
+                    StyleStack() {
+                        Circle()
+                            .fill(accent.complementary)
+                    }
+                    .style(padding: \.paddingCard)
+                    .style(background: \.accentGradientStrong)
                 }
             }
         }

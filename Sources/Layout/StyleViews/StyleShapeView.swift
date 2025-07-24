@@ -23,7 +23,7 @@ public struct StyleShapeView: View {
         AnyShape(
             shape.shape(with: style)
         )
-        .fill(value ?? AnyShapeStyle(.clear))
+        .fill(value?.anyShapeStyle ?? AnyShapeStyle(.clear))
     }
 
 }

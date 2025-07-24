@@ -40,7 +40,7 @@ extension SnapStyle.SurfaceKey {
     public var accent: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.base))
+                .definition(.color(context.accentAlternative.base)) // TODO: Use .contrast instead? Could get rid of accentAlternative completely. Otherwise selecting an Accent should also set a fitting accentAlternative.
             } else {
                 .definition(.color(context.accent.base))
             }
@@ -115,14 +115,46 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
-    // TODO: Define based on Accent
     public var accentGradientSoft: ValueBuilder {
-        .base(.definition(.gradient(AnyShapeStyle(Gradient(colors: [.blue, .mint])))))
+        .builder { context in
+            let base = context.accent.base
+            let complementary = context.accent.complementary
+            let contrast = context.accent.contrast
+            
+            return .definition(.any(AnyShapeStyle(
+                MeshGradient(width: 4, height: 4, points: [
+                    [0, 0], [0.33, 0], [0.66, 0], [1, 0],
+                    [0, 0.33], [0.33, 0.33], [0.66, 0.33], [1, 0.33],
+                    [0, 0.66], [0.33, 0.66], [0.66, 0.66], [1, 0.66],
+                    [0, 1], [0.33, 1], [0.66, 1], [1, 1],
+                ], colors: [
+                    complementary, complementary, base, complementary,
+                    base, complementary, complementary, base,
+                    complementary, complementary, complementary, base,
+                    complementary, complementary, base, base,
+                ])
+            )))
+        }
     }
     
-    // TODO: Define based on Accent
     public var accentGradientStrong: ValueBuilder {
-        .base(.definition(.gradient(AnyShapeStyle(Gradient(colors: [.mint, .yellow])))))
+        .builder { context in
+            let base = context.accent.base
+            let complementary = context.accent.complementary
+            let contrast = context.accent.contrast
+            
+            return .definition(.any(AnyShapeStyle(
+                MeshGradient(width: 3, height: 3, points: [
+                    [0, 0], [0.66, 0], [1, 0],
+                    [0, 0.33], [0.33, 0.33], [1, 0.33],
+                    [0, 1], [0.33, 1], [1, 1],
+                ], colors: [
+                    contrast, contrast, base,
+                    base, contrast, base,
+                    contrast, base, contrast,
+                ])
+            )))
+        }
     }
 
 

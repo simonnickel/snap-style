@@ -16,27 +16,36 @@ extension SnapStyle.SurfaceKey {
 
     public enum Value: StyleValue {
 
-        public typealias WrappedValue = AnyShapeStyle
+        // TODO: This could work for all `Value` definitions. Is WrappedValue actually needed?
+        public typealias WrappedValue = Self
         public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 
         case color(Color)
-        case gradient(AnyShapeStyle)
         case material(Material)
         case any(AnyShapeStyle)
 
         public var wrappedValue: WrappedValue {
+            self
+        }
+        
+        public var resolvedColor: Color? {
             switch self {
-                case .color(let value): AnyShapeStyle(value)
-                case .gradient(let value): value
-                case .material(let value): AnyShapeStyle(value)
-                case .any(let value): value
+                case .color(let color): color
+                default : nil
+            }
+        }
+        
+        public var anyShapeStyle: AnyShapeStyle? {
+            switch self {
+                case .color(let color): AnyShapeStyle(color)
+                case .material(let material): AnyShapeStyle(material)
+                case .any(let anyShapeStyle): AnyShapeStyle(anyShapeStyle)
             }
         }
 
         public var description: String {
             switch self {
                 case .color(let value): ".color: \(value)"
-                case .gradient(let value): ".gradient: \(value)"
                 case .material(let value): ".material: \(value)"
                 case .any(let value): ".any: \(value)"
             }
@@ -60,12 +69,6 @@ extension SnapStyle.SurfaceKey {
                     switch self {
                         case .opacity(let opacity): .color(color.opacity(opacity))
                         case .mix(let mix, let amount): .color(color.mix(with: mix, by: amount))
-                    }
-
-                case .gradient(let gradient):
-                    switch self {
-                        case .opacity(let opacity): .gradient(AnyShapeStyle(gradient.opacity(opacity)))
-                        default: .gradient(gradient)
                     }
 
                 // Material gets converted to some ShapeStyle and can no longer be applied as .material

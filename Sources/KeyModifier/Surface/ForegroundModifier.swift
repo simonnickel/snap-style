@@ -36,7 +36,7 @@ private struct SurfaceForegroundModifier: ViewModifier {
         /// `.primary` is used to apply no specifc value and use the environments `foregroundStyle`.
         let surface = style.surface(for: keyPath ?? \.none)
         content
-            .foregroundStyle(surface ?? AnyShapeStyle(.primary))
+            .foregroundStyle(surface?.anyShapeStyle ?? AnyShapeStyle(.primary))
     }
 
 }

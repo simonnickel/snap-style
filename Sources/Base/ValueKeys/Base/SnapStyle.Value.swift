@@ -13,6 +13,10 @@ extension SnapStyle {
 
         /// A definition of an actual value.
         case definition(Key.Value)
+        
+        // TODO: Should have a different name to not confuse it with the actual ValueBuilder
+        // TODO: Could the action ValueBuilder get ContextWrapper instead of just the Context? Would make this redundant.
+//        case builder((SnapStyle.ContextWrapper) -> Key.Value)
 
     }
 
