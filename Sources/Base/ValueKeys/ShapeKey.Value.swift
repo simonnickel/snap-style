@@ -60,8 +60,8 @@ extension SnapStyle.ShapeKey {
         case rectangle
         case rectangleRounded(radius: SnapStyle.NumberKey.ValueBuilderKeyPath)
 
-        public func shape(with style: SnapStyle.ContextWrapper) -> InsettableShape {
 
+        public func shape(with style: SnapStyle.ContextWrapper) -> any InsettableShape {
             switch self {
 
                 case .containerRelative: Rectangle()
@@ -94,24 +94,5 @@ extension SnapStyle.ShapeKey {
         
     }
     
-    /// A wrapper to provide an `InsettableShape` without relying on a SwiftUI defined `Shape`.
-    public struct StyleInsettableShape: InsettableShape {
-        
-        private let base: @Sendable (CGRect) -> Path
-        private let inset: CGFloat
-        
-        init(base: @Sendable @escaping (CGRect) -> Path, inset: CGFloat = 0) {
-            self.base = base
-            self.inset = inset
-        }
-        
-        public func inset(by amount: CGFloat) -> Self {
-            .init(base: base, inset: amount)
-        }
-        
-        public func path(in rect: CGRect) -> Path {
-            base(rect.inset(by: EdgeInsets(inset)))
-        }
-    }
     
 }
