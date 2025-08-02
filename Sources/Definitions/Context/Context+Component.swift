@@ -4,6 +4,9 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
+
+// Needs to be located in `Definitions` target to have access to `Component.base`.
 
 extension SnapStyle.Context {
 
@@ -11,7 +14,7 @@ extension SnapStyle.Context {
     package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
 
     public var component: SnapStyle.Component {
-        let current = componentStack.current ?? .init("") // TODO: Was .base, but its not accessible in this target. Is it necessary?
+        let current = componentStack.current ?? .base
 
         return .init(
             definition: current,

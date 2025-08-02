@@ -9,13 +9,15 @@ extension SnapStyle {
 
     package struct ComponentStack: Hashable {
 
+        package init() {}
+
 
         // MARK: Components
 
         private var components: [SnapStyle.ComponentDefinition] = []
 
-        var current: ComponentDefinition? { components.last }
-        var parent: ComponentDefinition? {
+        package var current: ComponentDefinition? { components.last }
+        package var parent: ComponentDefinition? {
             let parentIndex = components.count - 2
             guard parentIndex >= 0 else { return nil }
             return components[parentIndex]
@@ -26,7 +28,7 @@ extension SnapStyle {
 
         private var stateByComponent: [SnapStyle.ComponentDefinition: SnapStyle.Component.InteractionState] = [:]
 
-        var currentState: SnapStyle.Component.InteractionState? {
+        package var currentState: SnapStyle.Component.InteractionState? {
             guard let current else { return nil }
             return stateByComponent[current]
         }
@@ -40,7 +42,7 @@ extension SnapStyle {
         }
 
         /// Level of consistent `Component` stacked without interruption.
-        var level: Int {
+        package var level: Int {
             var result = 1
             var index = components.count - 1
             var continueLoop: Bool = true

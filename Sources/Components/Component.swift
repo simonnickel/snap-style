@@ -15,6 +15,18 @@ extension SnapStyle {
         package let state: InteractionState
         package let level: Int
 
+        package init(
+            definition: ComponentDefinition,
+            parent: ComponentDefinition?,
+            state: InteractionState,
+            level: Int
+        ) {
+            self.definition = definition
+            self.parent = parent
+            self.state = state
+            self.level = level
+        }
+
         public var useAlternativeAccent: Bool { parent?.requiresAlternativeAccent ?? false }
 
 
