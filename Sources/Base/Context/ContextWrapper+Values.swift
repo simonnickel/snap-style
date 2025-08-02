@@ -32,9 +32,6 @@ extension SnapStyle.ContextWrapper {
                         result = value(for: valueKeyPath, with: adjustments)
                     case .definition(let value):
                         result = value
-                        // TODO: Useful?
-//                    case .builder(let builder):
-//                        result = builder(self)
                 }
             }
         }
@@ -48,9 +45,6 @@ extension SnapStyle.ContextWrapper {
                         result = value(for: valueKeyPath, with: adjustments)
                     case .definition(let value):
                         result = value
-                        // TODO: Useful?
-//                    case .builder(let builder):
-//                        result = builder(self)
                 }
             }
         }

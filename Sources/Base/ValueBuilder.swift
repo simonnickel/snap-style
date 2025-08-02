@@ -8,7 +8,6 @@ extension SnapStyle {
     /// Is an enum instead of a struct to allow cleaner call-site: `.base(value) {} or .builder {}`, instead of `.init(base:) {}`.
     public enum ValueBuilder<Value> {
 
-        // TODO: Could consider to provide ContextWrapper instead of just Context. Would allow to resolve values, e.g. to create a Gradient from other definitions.
         public typealias Builder = (Context) -> Value?
 
         case base(Value?, builder: Builder? = nil)
