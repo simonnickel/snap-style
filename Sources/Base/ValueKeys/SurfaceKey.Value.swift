@@ -16,7 +16,7 @@ extension SnapStyle.SurfaceKey {
 
     public enum Value: StyleValue {
 
-        // TODO: This could work for all `Value` definitions. Is WrappedValue actually needed?
+        /// Does not define a type for WrappedValue for easier access.
         public typealias WrappedValue = Self
         public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
 

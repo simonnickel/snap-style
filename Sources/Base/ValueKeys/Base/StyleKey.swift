@@ -21,6 +21,8 @@ public protocol StyleKey {
 
 public protocol StyleValue: CustomStringConvertible {
 
+    /// A Type to separate the Definition from the Value.
+    /// NOTE: WrappedValue could map to `Self`if forwarding initializers is inconvenient. In most cases its convenient to have a separate type though.
     associatedtype WrappedValue
     associatedtype Adjustment: StyleAdjustment where Self == Adjustment.Value
 
