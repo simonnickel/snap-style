@@ -157,6 +157,26 @@ extension SnapStyle.SurfaceKey {
         }
     }
 
+    public var accentGradientStrongResolved: ValueBuilder {
+        .builderWithCaches { contextWrapper in
+            let base = contextWrapper.surface(for: \.accent)?.resolvedColor ?? .clear
+            let complementary = contextWrapper.surface(for: \.accentComplementary)?.resolvedColor ?? .clear
+            let contrast = contextWrapper.surface(for: \.accentContrast)?.resolvedColor ?? .clear
+
+            return .definition(.any(AnyShapeStyle(
+                MeshGradient(width: 3, height: 3, points: [
+                    [0, 0], [0.66, 0], [1, 0],
+                    [0, 0.33], [0.33, 0.33], [1, 0.33],
+                    [0, 1], [0.33, 1], [1, 1],
+                ], colors: [
+                    contrast, contrast, base,
+                    base, contrast, base,
+                    contrast, base, contrast,
+                ])
+            )))
+        }
+    }
+
 
     // MARK: Interactive
 
