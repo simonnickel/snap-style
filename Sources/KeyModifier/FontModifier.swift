@@ -24,13 +24,9 @@ private struct FontModifier: ViewModifier {
     let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        // TODO: Remove Conditional
-        if let definition = style.font(for: keyPath) {
-            content
-                .modifier(ScaledFont(definition: definition))
-        } else {
-            content
-        }
+        let definition = style.font(for: keyPath)
+        content
+            .modifier(ScaledFont(definition: definition))
     }
 
 }
@@ -39,21 +35,21 @@ private struct ScaledFont: ViewModifier {
     
     @Environment(\.style) private var style
     
-    private let definition: SnapStyle.FontKey.Value.Definition
+    private let definition: SnapStyle.FontKey.Value.Definition?
     private let scaled: ScaledMetric<Double>
-    
-    init(definition: SnapStyle.FontKey.Value.Definition) {
+
+    init(definition: SnapStyle.FontKey.Value.Definition?) {
         self.definition = definition
-        self.scaled = ScaledMetric(wrappedValue: definition.size, relativeTo: definition.textStyle)
+        self.scaled = ScaledMetric(wrappedValue: Double(definition?.size ?? .zero), relativeTo: definition?.textStyle ?? .body)
     }
     
     func body(content: Content) -> some View {
         let size = scaled.wrappedValue * style.context.scaleFactor
-        let font = definition.font(size: size)
+        let font = definition?.font(size: size)
 
         return content
             .font(font)
-            .fontDesign(definition.design ?? style.context.fontDesign)
-            .fontWidth(definition.width ?? style.context.fontWidth)
+            .fontDesign(definition?.design ?? style.context.fontDesign)
+            .fontWidth(definition?.width ?? style.context.fontWidth)
     }
 }
