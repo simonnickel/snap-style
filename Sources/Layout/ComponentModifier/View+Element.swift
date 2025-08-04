@@ -10,17 +10,15 @@ import SwiftUI
 // MARK: - Element
 
 extension View {
-
-    public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary, applyStyle: Bool = true) -> some View {
-        Group {
-            // TODO: Hand applyStyle inside and use inert variants.
-            if applyStyle {
-                modifier(ElementApplyStyleModifier())
-            } else {
-                self
-            }
-        }
-        .style(attribute: SnapStyle.Context.element, value: SnapStyle.Element(type: element, hierarchy: hierarchy))
+    
+    /// Apply styling defined for `ElementType`.
+    /// - Parameters:
+    ///   - element: The `ElementType` the view represents.
+    ///   - hierarchy: `Hierarchy` of the element.
+    public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
+        self
+            .modifier(ElementApplyStyleModifier())
+            .style(attribute: SnapStyle.Context.element, value: SnapStyle.Element(type: element, hierarchy: hierarchy))
     }
 
     /// Shortcut to adjust the elements hierarchy.
