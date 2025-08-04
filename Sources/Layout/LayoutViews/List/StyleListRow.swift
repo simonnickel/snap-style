@@ -213,7 +213,8 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 .labelsHidden()
                 // Removed padding to not influence the rows height.
                 .padding(.vertical, -10)
-                // TODO FB: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
+                // TODO FB19360250: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
+                // TODO FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).
                 // .pickerStyle(.menu)
         }
     }

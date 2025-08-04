@@ -56,7 +56,6 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
         Button {
             action()
 
-            // TODO FB (iOS 18): It should be enough to rely on `withAnimation(.smooth.delay(delay))`, but it does not get triggered consistently.
             state.didPress = true
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 state.didPress = false
@@ -112,6 +111,8 @@ struct IsPressedButtonStyle: ButtonStyle {
 
     } content: {
         Text("Button: \n\(state)")
+            .padding()
+            .background(state == .normal ? .yellow : .orange)
     }
 
 }
