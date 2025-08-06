@@ -29,7 +29,7 @@ struct ConfigurationColorScreen: View {
             .purple,
             .indigo,
         ]
-        let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: 180))
+        let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: .infinity))
 
         StyleScreen {
             LazyVGrid(columns: [gridItem, gridItem]) {

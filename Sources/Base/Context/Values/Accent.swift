@@ -35,6 +35,7 @@ extension SnapStyle {
                 brightness: .dark
             )
         }
+        
         public static var fallbackAlternative: Self {
             Accent(
                 base: Color.black,
