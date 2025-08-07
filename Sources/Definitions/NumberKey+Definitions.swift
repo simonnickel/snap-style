@@ -52,7 +52,7 @@ extension SnapStyle.NumberKey {
 
     public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
     public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
-    public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(18))) }
+    public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(15))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
     public var paddingActionIcon: ValueBuilder {
         .builder { context in
