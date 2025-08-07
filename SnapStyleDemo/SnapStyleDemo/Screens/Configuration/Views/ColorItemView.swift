@@ -17,25 +17,40 @@ struct ColorItemView: View {
                 
                 Text("Select")
                     .style(element: .title)
-                
+                    .style(foreground: \.accent)
+
                 StyleStack(spacing: \.spacingElements) {
                     StyleStack(.horizontal, spacing: \.spacingElements) {
-                        // TODO: Icon with circle backgound should be a component.
+                        StyleIcon(\.indicatorUnread)
+                            .style(element: .accessory)
+                            .style(foreground: \.accentContrast)
+                        StyleStack {
+                            Text("Title")
+                                .style(element: .title)
+                        }
+                        // TODO: Icon with circle background should be a component.
                         StyleIcon(\.favorite)
                             .style(element: .icon)
                             .style(padding: \.spacingElements)
                             .style(background: \.accentComplementary)
                             .style(shape: \.circle)
-                        StyleStack {
-                            Text("Title")
-                                .style(element: .title)
-                        }
                     }
-                    StyleStack(.horizontal, spacing: \.spacingElements) {
-                        Text("Content Example")
-                        StyleIcon(selected ? \.selectionOn : \.selectionOff)
-                            .style(element: .accessory)
-                            .style(foreground: \.accentContrast)
+
+                    Text("Content Example")
+
+                    StyleButton {
+                        
+                    } content: {
+                        StyleStack(.horizontal, spacing: \.spacingElements) {
+                            StyleIcon(\.indicatorUnread)
+                                .style(element: .accessory)
+                                .style(foreground: \.accentContrast)
+                            Text("Select")
+                                .stretch()
+                            StyleIcon(\.indicatorMore)
+                                .style(element: .accessory)
+                                .style(foreground: \.accentComplementary)
+                        }
                     }
                 }
                 .style(component: .accentCard)
@@ -59,6 +74,7 @@ struct ColorItemView: View {
         }
         .style(component: .contentCard)
     }
+
 }
 
 
