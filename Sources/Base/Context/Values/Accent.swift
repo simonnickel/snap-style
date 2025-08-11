@@ -50,10 +50,28 @@ extension SnapStyle {
 }
 
 
+// MARK: - Pair
+
+extension SnapStyle.Accent {
+    
+    public struct Pair: Hashable, Equatable {
+        public let accent: SnapStyle.Accent
+        public let alternative: SnapStyle.Accent
+
+        public init(_ accent: SnapStyle.Accent, _ alternative: SnapStyle.Accent) {
+            self.accent = accent
+            self.alternative = alternative
+        }
+    }
+
+}
+
+
 // MARK: - Modifier
 
 extension View {
 
+    // TODO: Should this use Accent.Pair?
     public func style(accent: SnapStyle.Accent, alternative: SnapStyle.Accent? = nil) -> some View {
         modifier(UpdateAccentModifier(accent: accent, alternative: alternative))
     }

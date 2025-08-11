@@ -31,13 +31,14 @@ struct SnapStyleDemoApp: App {
                     \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                 ])
                 .style(setup: style)
-                .style(accent: demoConfiguration.accent)
+                .style(accent: demoConfiguration.accents.accent, alternative: demoConfiguration.accents.alternative)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }
+
 }
 
 

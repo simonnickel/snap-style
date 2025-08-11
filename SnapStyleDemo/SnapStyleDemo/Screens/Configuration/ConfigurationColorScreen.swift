@@ -16,29 +16,33 @@ struct ConfigurationColorScreen: View {
 
         // TODO: Define Colors with variants.
         // TODO: Add default color variant generator.
-        let accents: [SnapStyle.Accent] = [
-            .fallback,
-            .blue,
-            .green,
-            .teal,
-            .red,
-            .orange,
-            .yellow,
-            .mint,
-            .cyan,
-            .purple,
-            .indigo,
+        let accentPairs: [SnapStyle.Accent.Pair] = [
+            .init(.blue, .fallbackAlternative),
+            .init(.blue, .yellow),
+            .init(.green, .fallbackAlternative),
+            .init(.green, .cyan),
+            .init(.teal, .fallbackAlternative),
+            .init(.teal, .yellow),
+            .init(.red, .fallbackAlternative),
+            .init(.red, .yellow),
+            .init(.orange, .fallbackAlternative),
+            .init(.yellow, .fallbackAlternative),
+            .init(.mint, .fallbackAlternative),
+            .init(.cyan, .fallbackAlternative),
+            .init(.purple, .fallbackAlternative),
+            .init(.indigo, .fallbackAlternative),
+            .init(.fallback, .fallbackAlternative),
         ]
         let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: .infinity))
 
         StyleScreen {
             LazyVGrid(columns: [gridItem, gridItem]) {
-                ForEach(accents, id: \.self) { accent in
+                ForEach(accentPairs, id: \.self) { accents in
                     Button {
-                        demoConfiguration.accent = accent
+                        demoConfiguration.accents = accents
                     } label: {
-                        ColorItemView(accent: accent, selected: accent == demoConfiguration.accent)
-                            .style(accent: accent)
+                        ColorItemView(accent: accents.accent, selected: accents == demoConfiguration.accents)
+                            .style(accent: accents.accent, alternative: accents.alternative)
                     }
                 }
             }

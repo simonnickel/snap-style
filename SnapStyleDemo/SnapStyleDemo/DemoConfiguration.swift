@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 class DemoConfiguration {
 
-    var accent: SnapStyle.Accent
+    var accents: SnapStyle.Accent.Pair
 
     var scaleFactor: SnapStyle.Context.ScaleFactor
     
@@ -19,13 +19,14 @@ class DemoConfiguration {
     var fontWidth: Font.Width?
 
     init(
-        accent: SnapStyle.Accent = SnapStyle.Accent.fallback,
+        accents: SnapStyle.Accent.Pair = SnapStyle.Accent.Pair(.fallback, .fallbackAlternative),
+        accentAlternative: SnapStyle.Accent = SnapStyle.Accent.fallbackAlternative,
         scaleFactor: SnapStyle.Context.ScaleFactor = SnapStyle.Context.scaleFactorDefault,
         fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault,
         fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault,
         cornerRadius: CornerRadiusOption = .medium,
     ) {
-        self.accent = accent
+        self.accents = accents
         self.scaleFactor = scaleFactor
         self.fontDesign = fontDesign
         self.fontWidth = fontWidth
