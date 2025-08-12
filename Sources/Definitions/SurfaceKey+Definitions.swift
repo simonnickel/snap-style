@@ -39,8 +39,9 @@ extension SnapStyle.SurfaceKey {
 
     public var accent: ValueBuilder {
         .builder { context in
+            // TODO: context.accent should resolve to context.accentPrimary/accentSecondary depending on component.
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.base)) // TODO: Use .contrast instead? Could get rid of accentAlternative completely. Otherwise selecting an Accent should also set a fitting accentAlternative.
+                .definition(.color(context.accentAlternative.base))
             } else {
                 .definition(.color(context.accent.base))
             }

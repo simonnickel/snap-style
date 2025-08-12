@@ -22,7 +22,7 @@ struct ComponentActionScreen: View {
                 Text("Accent Card - Alternative")
                     .style(element: .title)
                 ActionButtonsView()
-                ActionButtonsView(enabled: false) // TODO: Disabled on accent.
+                ActionButtonsView(enabled: false)
             }
             .style(component: .accentCard)
             
