@@ -8,7 +8,6 @@ import SwiftUI
 
 struct ColorItemView: View {
 
-    let accent: SnapStyle.Accent
     let selected: Bool
 
     var body: some View {
@@ -57,15 +56,13 @@ struct ColorItemView: View {
                 
                 StyleStack(.horizontal, spacing: \.spacingElements) {
                     StyleStack() {
-                        Circle()
-                            .fill(accent.contrast)
+                        StyleShapeView(shape: .circle, surface: \.accentContrast)
                     }
                     .style(padding: \.paddingCard)
                     .style(background: \.accentGradientSoft)
 
                     StyleStack() {
-                        Circle()
-                            .fill(accent.complementary)
+                        StyleShapeView(shape: .circle, surface: \.accentComplementary)
                     }
                     .style(padding: \.paddingCard)
                     .style(background: \.accentGradientStrong)
@@ -82,9 +79,9 @@ struct ColorItemView: View {
 
 #Preview {
     VStack {
-        ColorItemView(accent: .fallback, selected: false)
+        ColorItemView(selected: false)
             .frame(width: 200, height: 200)
-        ColorItemView(accent: .fallback, selected: true)
+        ColorItemView(selected: true)
             .frame(width: 200, height: 200)
     }
 }
