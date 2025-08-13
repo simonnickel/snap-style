@@ -27,7 +27,7 @@ extension SnapStyle {
             self.level = level
         }
 
-        public var useAlternativeAccent: Bool { parent?.requiresAlternativeAccent ?? false }
+        public var useSecondaryAccent: Bool { parent?.requiresSecondaryAccent ?? false }
 
 
         // MARK: - InteractionState

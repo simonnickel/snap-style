@@ -39,31 +39,18 @@ extension SnapStyle.SurfaceKey {
 
     public var accent: ValueBuilder {
         .builder { context in
-            // TODO: context.accent should resolve to context.accentPrimary/accentSecondary depending on component.
-            if context.component.useAlternativeAccent {
-                .definition(.color(context.accentSecondary.base))
-            } else {
-                .definition(.color(context.accentPrimary.base))
-            }
+            .definition(.color(context.accent.base))
         }
     }
     public var accentComplementary: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                .definition(.color(context.accentSecondary.complementary))
-            } else {
-                .definition(.color(context.accentPrimary.complementary))
-            }
+            .definition(.color(context.accent.complementary))
         }
     }
 
     public var accentContrast: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                .definition(.color(context.accentSecondary.contrast))
-            } else {
-                .definition(.color(context.accentPrimary.contrast))
-            }
+            .definition(.color(context.accent.contrast))
         }
     }
 
@@ -80,7 +67,7 @@ extension SnapStyle.SurfaceKey {
 
     public var accentLevel1: ValueBuilder {
         .builder { context in
-            .reference(\.accent)
+            .definition(.color(context.accentPrimary.base))
         }
     }
 
@@ -98,21 +85,13 @@ extension SnapStyle.SurfaceKey {
 
     public var onAccent: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                .definition(.color(context.accentSecondary.onAccent))
-            } else {
-                .definition(.color(context.accentPrimary.onAccent))
-            }
+            .definition(.color(context.accent.onAccent))
         }
     }
 
     public var accentAsForeground: ValueBuilder {
         .builder { context in
-            if context.component.useAlternativeAccent {
-                .definition(.color(context.accentPrimary.onAccent))
-            } else {
-                .definition(.color(context.accentPrimary.base))
-            }
+            .definition(.color(context.accent.onAccent))
         }
     }
 
@@ -172,7 +151,7 @@ extension SnapStyle.SurfaceKey {
     
     public var stateOverlayOnAccent: ValueBuilder {
         .builder { context in
-            let brightness = context.component.useAlternativeAccent ? context.accentSecondary.brightness : context.accentPrimary.brightness
+            let brightness = context.accent.brightness
 
             return switch context.component.state {
                 case .normal, .disabled: .reference(\.clear)

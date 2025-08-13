@@ -14,7 +14,7 @@ extension SnapStyle {
         public typealias MappingPadding = @Sendable (SnapStyle.Element.ElementType) -> Padding?
 
         public let id: String
-        public let requiresAlternativeAccent: Bool
+        public let requiresSecondaryAccent: Bool
 
         package let padding: MappingPadding?
         package let fonts: Mapping<FontKey>?
@@ -24,7 +24,7 @@ extension SnapStyle {
 
         public init(
             _ id: String,
-            requiresAlternativeAccent: Bool = false,
+            requiresSecondaryAccent: Bool = false,
             padding: MappingPadding? = nil,
             fonts: Mapping<SnapStyle.FontKey>? = nil,
             surfaces: Mapping<SnapStyle.SurfaceKey>? = nil,
@@ -32,7 +32,7 @@ extension SnapStyle {
             shapes: Mapping<SnapStyle.ShapeKey>? = nil
         ) {
             self.id = id
-            self.requiresAlternativeAccent = requiresAlternativeAccent
+            self.requiresSecondaryAccent = requiresSecondaryAccent
             self.padding = padding
             self.fonts = fonts
             self.surfaces = surfaces
@@ -80,7 +80,7 @@ extension SnapStyle {
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
-            hasher.combine(requiresAlternativeAccent)
+            hasher.combine(requiresSecondaryAccent)
         }
 
         public static func == (lhs: SnapStyleBase.SnapStyle.ComponentDefinition, rhs: SnapStyleBase.SnapStyle.ComponentDefinition) -> Bool {

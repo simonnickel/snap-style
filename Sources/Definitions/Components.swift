@@ -115,7 +115,7 @@ extension SnapStyle.ComponentDefinition {
     // MARK: - Accent Card
     
     public static let accentCard: Self = .init("accentCard",
-        requiresAlternativeAccent: true,
+        requiresSecondaryAccent: true,
         padding: { element in
             switch element {
                 case .container: Padding(\.paddingCard)
@@ -146,7 +146,7 @@ extension SnapStyle.ComponentDefinition {
     // MARK: - Metric Card
     
     public static let metricCard: Self = .init("metricCard",
-        requiresAlternativeAccent: true,
+        requiresSecondaryAccent: true,
         padding: { element in
             switch element {
                 case .container: Padding(\.paddingMetricCard)
