@@ -55,12 +55,12 @@ extension SnapStyle {
 extension SnapStyle.Accent {
     
     public struct Pair: Hashable, Equatable {
-        public let accent: SnapStyle.Accent
-        public let alternative: SnapStyle.Accent
+        public let primary: SnapStyle.Accent
+        public let secondary: SnapStyle.Accent
 
         public init(_ accent: SnapStyle.Accent, _ alternative: SnapStyle.Accent) {
-            self.accent = accent
-            self.alternative = alternative
+            self.primary = accent
+            self.secondary = alternative
         }
     }
 
@@ -71,9 +71,8 @@ extension SnapStyle.Accent {
 
 extension View {
 
-    // TODO: Should this use Accent.Pair?
-    public func style(accent: SnapStyle.Accent, alternative: SnapStyle.Accent? = nil) -> some View {
-        modifier(UpdateAccentModifier(accent: accent, alternative: alternative))
+    public func style(accents: SnapStyle.Accent.Pair) -> some View {
+        modifier(UpdateAccentModifier(accents: accents))
     }
 
 }
@@ -82,17 +81,13 @@ internal struct UpdateAccentModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let accent: SnapStyle.Accent
-    let alternative: SnapStyle.Accent?
+    let accents: SnapStyle.Accent.Pair
 
     func body(content: Content) -> some View {
         content
-            .accentColor(accent.base)
-            .style(attribute: SnapStyle.Context.accent, value: accent)
-            .if(unwrap: alternative, transform: { content, alternative in
-                content
-                    .style(attribute: SnapStyle.Context.accentAlternative, value: alternative)
-            })
+            .accentColor(accents.primary.base)
+            .style(attribute: SnapStyle.Context.accentPrimary, value: accents.primary)
+            .style(attribute: SnapStyle.Context.accentSecondary, value: accents.secondary)
     }
 
 }
@@ -102,10 +97,10 @@ internal struct UpdateAccentModifier: ViewModifier {
 
 extension SnapStyle.Context {
 
-    public var accent: SnapStyle.Accent { getValue(for: Self.accent) ?? SnapStyle.Accent.fallback }
-    public static var accent: Attribute<String, SnapStyle.Accent> { .init(key: "accent", valueDefault: SnapStyle.Accent.fallback) }
+    public var accentPrimary: SnapStyle.Accent { getValue(for: Self.accentPrimary) ?? SnapStyle.Accent.fallback }
+    public static var accentPrimary: Attribute<String, SnapStyle.Accent> { .init(key: "accentPrimary", valueDefault: SnapStyle.Accent.fallback) }
 
-    public var accentAlternative: SnapStyle.Accent { getValue(for: Self.accentAlternative) ?? SnapStyle.Accent.fallback }
-    public static var accentAlternative: Attribute<String, SnapStyle.Accent> { .init(key: "accentAlternative", valueDefault: SnapStyle.Accent.fallbackAlternative) }
+    public var accentSecondary: SnapStyle.Accent { getValue(for: Self.accentSecondary) ?? SnapStyle.Accent.fallback }
+    public static var accentSecondary: Attribute<String, SnapStyle.Accent> { .init(key: "accentSecondary", valueDefault: SnapStyle.Accent.fallbackAlternative) }
 
 }

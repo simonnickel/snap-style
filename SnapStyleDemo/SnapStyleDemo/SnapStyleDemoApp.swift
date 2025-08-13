@@ -31,7 +31,7 @@ struct SnapStyleDemoApp: App {
                     \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                 ])
                 .style(setup: style)
-                .style(accent: demoConfiguration.accents.accent, alternative: demoConfiguration.accents.alternative)
+                .style(accents: demoConfiguration.accents)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)

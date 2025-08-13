@@ -14,8 +14,6 @@ struct ConfigurationColorScreen: View {
 
     var body: some View {
 
-        // TODO: Define Colors with variants.
-        // TODO: Add default color variant generator.
         let accentPairs: [SnapStyle.Accent.Pair] = [
             .init(.blue, .fallbackAlternative),
             .init(.blue, .yellow),
@@ -41,8 +39,8 @@ struct ConfigurationColorScreen: View {
                     Button {
                         demoConfiguration.accents = accents
                     } label: {
-                        ColorItemView(accent: accents.accent, selected: accents == demoConfiguration.accents)
-                            .style(accent: accents.accent, alternative: accents.alternative)
+                        ColorItemView(accent: accents.primary, selected: accents == demoConfiguration.accents)
+                            .style(accents: accents)
                     }
                 }
             }

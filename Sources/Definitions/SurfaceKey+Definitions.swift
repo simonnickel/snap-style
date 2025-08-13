@@ -41,18 +41,18 @@ extension SnapStyle.SurfaceKey {
         .builder { context in
             // TODO: context.accent should resolve to context.accentPrimary/accentSecondary depending on component.
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.base))
+                .definition(.color(context.accentSecondary.base))
             } else {
-                .definition(.color(context.accent.base))
+                .definition(.color(context.accentPrimary.base))
             }
         }
     }
     public var accentComplementary: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.complementary))
+                .definition(.color(context.accentSecondary.complementary))
             } else {
-                .definition(.color(context.accent.complementary))
+                .definition(.color(context.accentPrimary.complementary))
             }
         }
     }
@@ -60,9 +60,9 @@ extension SnapStyle.SurfaceKey {
     public var accentContrast: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.contrast))
+                .definition(.color(context.accentSecondary.contrast))
             } else {
-                .definition(.color(context.accent.contrast))
+                .definition(.color(context.accentPrimary.contrast))
             }
         }
     }
@@ -86,22 +86,22 @@ extension SnapStyle.SurfaceKey {
 
     public var accentLevel2: ValueBuilder {
         .builder { context in
-            .definition(.color(context.accent.base.mix(with: .black, by: 0.2)))
+            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.2)))
         }
     }
 
     public var accentLevel3: ValueBuilder {
         .builder { context in
-            .definition(.color(context.accent.base.mix(with: .black, by: 0.4)))
+            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.4)))
         }
     }
 
     public var onAccent: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accentAlternative.onAccent))
+                .definition(.color(context.accentSecondary.onAccent))
             } else {
-                .definition(.color(context.accent.onAccent))
+                .definition(.color(context.accentPrimary.onAccent))
             }
         }
     }
@@ -109,18 +109,18 @@ extension SnapStyle.SurfaceKey {
     public var accentAsForeground: ValueBuilder {
         .builder { context in
             if context.component.useAlternativeAccent {
-                .definition(.color(context.accent.onAccent))
+                .definition(.color(context.accentPrimary.onAccent))
             } else {
-                .definition(.color(context.accent.base))
+                .definition(.color(context.accentPrimary.base))
             }
         }
     }
 
     public var accentGradientSoft: ValueBuilder {
         .builder { context in
-            let base = context.accent.base
-            let complementary = context.accent.complementary
-            let contrast = context.accent.contrast
+            let base = context.accentPrimary.base
+            let complementary = context.accentPrimary.complementary
+            let contrast = context.accentPrimary.contrast
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 4, height: 4, points: [
@@ -140,9 +140,9 @@ extension SnapStyle.SurfaceKey {
     
     public var accentGradientStrong: ValueBuilder {
         .builder { context in
-            let base = context.accent.base
-            let complementary = context.accent.complementary
-            let contrast = context.accent.contrast
+            let base = context.accentPrimary.base
+            let complementary = context.accentPrimary.complementary
+            let contrast = context.accentPrimary.contrast
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 3, height: 3, points: [
@@ -172,7 +172,7 @@ extension SnapStyle.SurfaceKey {
     
     public var stateOverlayOnAccent: ValueBuilder {
         .builder { context in
-            let brightness = context.component.useAlternativeAccent ? context.accentAlternative.brightness : context.accent.brightness
+            let brightness = context.component.useAlternativeAccent ? context.accentSecondary.brightness : context.accentPrimary.brightness
 
             return switch context.component.state {
                 case .normal, .disabled: .reference(\.clear)
