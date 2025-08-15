@@ -38,9 +38,7 @@ struct ComponentActionScreen: View {
                     .style(element: .title)
                 StyleStack(.horizontal) {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
-                        // TODO: Why does StyleLabel not work?
-//                        StyleLabel(icon: \.favorite)
-                        StyleIcon(\.favorite)
+                        StyleLabel(icon: \.favorite)
                     }
                     StyleButton(.icon(hierarchy: .secondary)) { } content: {
                         StyleLabel(icon: \.favorite)
