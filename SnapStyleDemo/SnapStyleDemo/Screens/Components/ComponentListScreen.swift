@@ -45,7 +45,6 @@ struct ComponentListScreen: View {
                 StyleListRow(.plain, systemImage: "rectangle") {
                     Text("Rectangle")
                 }
-                // TODO: Should this be controlled by the ListRow?
                 StyleListRow(.plain, systemImage: "triangle") {
                     StyleStack(.horizontal) {
                         StyleStack {
