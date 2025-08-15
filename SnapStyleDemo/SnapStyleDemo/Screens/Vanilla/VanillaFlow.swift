@@ -35,7 +35,7 @@ struct VanillaFlow: View {
                 }
             }
             .navigationTitle(title)
-#if !os(macOS) // TODO: platform agnostic placement
+#if !os(macOS) // TODO feature: platform agnostic placement
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { } label: {
@@ -87,7 +87,7 @@ struct VanillaFlow: View {
                     .navigationDestination(for: Screen.self) { screen in
                         screen.screen
                     }
-#if !os(macOS) // TODO: platform agnostic placement
+#if !os(macOS) // TODO feature: platform agnostic placement
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {

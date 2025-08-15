@@ -117,7 +117,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 if let action {
                     action()
                 } else {
-                    // TODO: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
+                    // TODO feature: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
                     switch variant {
                         case .plain: break
                         case .navigate(let _): break

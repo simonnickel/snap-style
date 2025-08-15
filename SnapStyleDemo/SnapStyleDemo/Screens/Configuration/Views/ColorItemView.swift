@@ -27,7 +27,7 @@ struct ColorItemView: View {
                             Text("Title")
                                 .style(element: .title)
                         }
-                        // TODO: Icon with circle background should be a component.
+                        // TODO feature: Icon with circle background should be a component.
                         StyleIcon(\.favorite)
                             .style(element: .icon)
                             .style(padding: \.spacingElements)
