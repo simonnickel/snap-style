@@ -43,7 +43,7 @@ extension SnapStyle.ShapeKey {
         public func shape(with style: SnapStyle.ContextWrapper) -> any InsettableShape {
             switch self {
                     
-                case .containerRelative: Rectangle()
+                case .containerRelative: ContainerRelativeShape()
                     
                 case .circle: Circle()
                     
