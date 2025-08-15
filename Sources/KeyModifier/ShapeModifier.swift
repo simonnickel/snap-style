@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapFoundation
 import SnapStyleBase
 import SwiftUI
 
@@ -25,8 +26,7 @@ private struct ShapeKeyModifier: ViewModifier {
     let shouldClip: Bool
 
     func body(content: Content) -> some View {
-        // Have to conditionally construct view, because InsettableShape can not be type erased properly.
-        // Custom `AnyInsettableShape` does not work with `.containerRelative`.
+        // TODO FB19669133: Have to conditionally construct view, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when using with `ContainerRelativeShape()`.
         if let keyPath, let shape = style.shape(for: keyPath) {
             if shape == .containerRelative {
                 content
@@ -59,29 +59,6 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
         #endif
             .containerShape(shape)
             .clipShape(shouldClip ? AnyShape(shape) : AnyShape(Rectangle()))
-    }
-    
-}
-
-
-// MARK: - AnyInsettableShape
-
-// TODO: Should this be in Core or Foundation?
-// TODO FB: Crashes when used for .containerRelative
-public struct AnyInsettableShape: InsettableShape {
-    
-    let shape: any InsettableShape
-    
-    public init(_ shape: any InsettableShape) {
-        self.shape = shape
-    }
-    
-    public func inset(by amount: CGFloat) -> some InsettableShape {
-        AnyInsettableShape(shape.inset(by: amount))
-    }
-    
-    public func path(in rect: CGRect) -> Path {
-        shape.path(in: rect)
     }
     
 }
