@@ -8,8 +8,8 @@ import SnapStyleComponents
 
 extension SnapStyle.ShapeKey {
 
-    public var containerRelative: ValueBuilder { .base(.definition(.value(.containerRelative))) }
-    public var circle: ValueBuilder { .base(.definition(.value(.circle))) }
+    public var containerRelative: ValueBuilder { .base(.definition(.containerRelative)) }
+    public var circle: ValueBuilder { .base(.definition(.circle)) }
     
 
     // MARK: - Component
@@ -18,15 +18,15 @@ extension SnapStyle.ShapeKey {
     public var containerCard: ValueBuilder {
         .builder { context in
             if context.componentStack.levelOverall > 1 {
-                .definition(.value(.containerRelative))
+                .definition(.containerRelative)
             } else {
-                .definition(.value(.rectangleRounded(radius: \.cornerRadiusCard)))
+                .definition(.rectangleRounded(radius: \.cornerRadiusCard))
             }
         }
     }
-    public var containerMetricCard: ValueBuilder { .base(.definition(.value(.rectangleRounded(radius: \.cornerRadiusMetricCard)))) }
-    public var containerAction: ValueBuilder { .base(.definition(.value(.capsule))) }
-    public var containerActionIcon: ValueBuilder { .base(.definition(.value(.circle))) }
+    public var containerMetricCard: ValueBuilder { .base(.definition(.rectangleRounded(radius: \.cornerRadiusMetricCard))) }
+    public var containerAction: ValueBuilder { .base(.definition(.capsule)) }
+    public var containerActionIcon: ValueBuilder { .base(.definition(.circle)) }
 
 
     // MARK: - Element
