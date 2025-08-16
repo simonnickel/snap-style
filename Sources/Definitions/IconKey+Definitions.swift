@@ -15,9 +15,11 @@ extension SnapStyle.IconKey {
     public var indicatorNavigation: ValueBuilder { .base(.definition(.value("chevron.right"))) }
     public var indicatorUnread: ValueBuilder { .base(.definition(.value("circlebadge.fill"))) }
     public var indicatorMore: ValueBuilder { .base(.definition(.value("ellipsis"))) }
+    public var settings: ValueBuilder { .base(.definition(.value("gear"))) }
 
     
     // MARK: - Config
+    
     public var scaleFactor: ValueBuilder { .base(.definition(.value("square.resize"))) }
     public var fontDesign: ValueBuilder { .base(.definition(.value("textformat"))) }
     public var configCornerRadius: ValueBuilder { .base(.definition(.value("button.roundedbottom.horizontal"))) }
