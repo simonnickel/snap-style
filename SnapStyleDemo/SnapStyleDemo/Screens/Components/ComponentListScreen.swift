@@ -79,32 +79,25 @@ struct ComponentListScreen: View {
 
         var body: some View {
             Section {
+                let screenStar = ContentFlow.Screen.destination("Star", source: identifier)
                 StyleListRow(
-                    .navigate(
-                        ContentFlow.Screen.destination("Star", source: identifier),
-                        isPresented: { screen in
-                            navigationState.contains(screen)
-                        }),
+                    .navigate(screenStar, isPresented: navigationState.stack.contains(screenStar)),
                     systemImage: "star"
                 ) {
                     Text("Star")
                 }
+                
+                let screenRectangle = ContentFlow.Screen.destination("Rectangle", source: identifier)
                 StyleListRow(
-                    .navigate(
-                        ContentFlow.Screen.destination("Rectangle", source: identifier),
-                        isPresented: { screen in
-                            navigationState.contains(screen)
-                        }),
+                    .navigate(screenRectangle, isPresented: navigationState.stack.contains(screenRectangle)),
                     systemImage: "rectangle"
                 ) {
                     Text("Rectangle")
                 }
+                
+                let screenTriangle = ContentFlow.Screen.destination("Triangle", source: identifier)
                 StyleListRow(
-                    .navigate(
-                        ContentFlow.Screen.destination("Triangle", source: identifier),
-                        isPresented: { screen in
-                            navigationState.contains(screen)
-                        }),
+                    .navigate(screenTriangle, isPresented: navigationState.stack.contains(screenTriangle)),
                     systemImage: "triangle"
                 ) {
                     Text("Triangle")

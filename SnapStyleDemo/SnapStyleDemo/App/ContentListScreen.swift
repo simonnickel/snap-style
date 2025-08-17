@@ -68,9 +68,7 @@ struct ContentListScreen: View {
 
         var body: some View {
             StyleListRow(
-                .navigate(screen, isPresented: { screen in
-                    navigationState.contains(screen)
-                })
+                .navigate(screen, isPresented: navigationState.stack.contains(screen))
             ) {
                 Text(screen.title)
             }

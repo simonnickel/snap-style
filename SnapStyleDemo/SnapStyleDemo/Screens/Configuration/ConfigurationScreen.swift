@@ -12,10 +12,9 @@ struct ConfigurationScreen: View {
     
     var body: some View {
         StyleList(insetTop: false) {
+            let screen = ConfigurationFlow.Screen.color
             StyleListRow(
-                .navigate(ConfigurationFlow.Screen.color, isPresented: { screen in
-                    navigationState.contains(screen)
-                }),
+                .navigate(screen, isPresented: navigationState.contains(screen)),
                 systemImage: "swatchpalette"
             ) {
                 Text("Color")

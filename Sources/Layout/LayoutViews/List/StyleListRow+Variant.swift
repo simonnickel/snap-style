@@ -12,7 +12,7 @@ extension StyleListRow {
         case plain
 
         /// Navigation style.
-        case navigate(_ value: SelectionValue, isPresented: ((SelectionValue) -> Bool)? = nil)
+        case navigate(_ value: SelectionValue, isPresented: Bool = false)
 
         /// Selection style to choose a single value.
         case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
