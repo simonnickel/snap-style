@@ -8,6 +8,10 @@ import SnapStyleDebug
 import SwiftUI
 
 struct ContentFlow: View {
+    
+    @Observable class NavigationState {
+        var stack: [Screen] = []
+    }
 
     @MainActor
     enum Screen: Hashable, Equatable {
@@ -91,11 +95,11 @@ struct ContentFlow: View {
     }
 
     let root: Screen
-    @State private var navigationState: [Screen] = []
+    @State private var navigationState = NavigationState()
 
     var body: some View {
         
-        NavigationStack(path: $navigationState) {
+        NavigationStack(path: $navigationState.stack) {
             root.screen
                 .navigationDestination(for: Screen.self) { screen in
                     screen.screen
@@ -108,7 +112,7 @@ struct ContentFlow: View {
 }
 
 extension EnvironmentValues {
-    @Entry var navigationState: [ContentFlow.Screen] = []
+    @Entry var navigationState: ContentFlow.NavigationState = .init()
 }
 
 

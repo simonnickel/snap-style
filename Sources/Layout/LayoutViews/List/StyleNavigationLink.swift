@@ -29,6 +29,8 @@ internal struct StyleNavigationLink<SelectionValue: Hashable, Content: View>: Vi
         }
         .style(component: .listRow, state: isHighlighted ? .highlighted : interactionState)
         .onChange(of: isPresented, initial: true) { oldValue, newValue in
+            guard oldValue != newValue else { return }
+            
             if oldValue && !newValue {
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     withAnimation {
