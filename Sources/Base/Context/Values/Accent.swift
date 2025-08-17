@@ -62,6 +62,10 @@ extension SnapStyle.Accent {
             self.primary = accent
             self.secondary = alternative
         }
+        
+        public static var fallback: Self {
+            Pair(.fallback, .fallbackAlternative)
+        }
     }
 
 }
