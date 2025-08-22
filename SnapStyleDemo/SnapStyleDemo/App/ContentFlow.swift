@@ -95,7 +95,7 @@ struct ContentFlow: View {
     }
 
     let root: Screen
-    @State private var navigationState = NavigationState()
+    @State private var navigationState: NavigationState = .init()
 
     var body: some View {
         

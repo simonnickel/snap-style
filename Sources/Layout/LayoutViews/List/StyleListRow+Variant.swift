@@ -11,7 +11,7 @@ extension StyleListRow {
         
         case plain
 
-        /// Navigation style.
+        /// Navigation style that pushes a value.
         case navigate(_ value: SelectionValue, isPresented: Bool = false)
 
         /// Selection style to choose a single value.

@@ -34,9 +34,9 @@ extension SnapStyle {
             case title
             case label
             case icon
-            case accessory
             case value
             case action
+            case accessory
             case separator
 
         }
