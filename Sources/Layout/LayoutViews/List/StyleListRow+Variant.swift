@@ -13,6 +13,9 @@ extension StyleListRow {
 
         /// Navigation style that pushes a value.
         case navigate(_ value: SelectionValue, isPresented: Bool = false)
+        
+        /// Navigation style that executes an action.
+        case navigation(isPresented: Bool)
 
         /// Selection style to choose a single value.
         case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)

@@ -91,12 +91,24 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 
                 // TODO macOS: navigation style and hover highlight.
             case .navigate(let value, let isPresented):
-                StyleNavigationLink(
-                    value: value,
+                StyleListRowNavigationHighlightContainer(
                     interactionState: interactionState,
-                    isPresented: isPresented,
-                    content: viewRow
-                )
+                    isPresented: isPresented
+                ) {
+                    NavigationLink(value: value) {
+                        viewRow()
+                    }
+                }
+                
+            case .navigation(let isPresented):
+                StyleListRowNavigationHighlightContainer(
+                    interactionState: interactionState,
+                    isPresented: isPresented
+                ) {
+                    viewButtonContainer {
+                        viewRow()
+                    }
+                }
                 
             default:
                 viewButtonContainer {
@@ -120,6 +132,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     switch variant {
                         case .plain: break
                         case .navigate(let _): break
+                        case .navigation(_): break
                             
                         case .selectValue(let value, selection: let selection):
                             selection.wrappedValue = value
@@ -168,6 +181,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
             content?()
                 .insetListContent()
         }
+        .contentShape(.rect)
         .environment(\.styleLabelSpacing, \.paddingListRowLeading)
     }
 
@@ -180,6 +194,11 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
             case .plain: EmptyView()
 
             case .navigate(value: _): EmptyView()
+                
+            case .navigation(_):
+                StyleIcon(\.indicatorNavigation)
+                    .style(font: \.listAccessoryNavigation)
+                    .style(foreground: \.indicatorNavigation)
 
             case .selectValue(let value, selection: let selection):
                 StyleIcon(value == selection.wrappedValue ? \.selectionOn : \.selectionOff)
@@ -232,6 +251,12 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     systemImage: "star"
                 ) {
                     Text("Star")
+                }
+                StyleListRow(
+                    .navigation(isPresented: false),
+                    systemImage: "staroflife"
+                ) {
+                    Text("Staroflife")
                 }
                 StyleListRow(
                     .selectValue("Rectangle", selection: .constant("Rectangle")),

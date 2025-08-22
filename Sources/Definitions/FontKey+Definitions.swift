@@ -107,5 +107,8 @@ extension SnapStyle.FontKey {
     }
 
     public var listIcon: ValueBuilder { .base(.definition(.with(size: 20, weight: .regular))) }
+    
+    public var listAccessory: ValueBuilder { .base(.definition(.with(size: 20, weight: .semibold))) }
+    public var listAccessoryNavigation: ValueBuilder { .base(.definition(.with(size: 14, weight: .semibold))) }
 
 }

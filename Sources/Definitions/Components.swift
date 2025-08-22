@@ -202,7 +202,8 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
             switch element {
-                case .icon, .accessory: \.listIcon
+                case .icon: \.listIcon
+                case .accessory: \.listAccessory
                 default: \.list
             }
         },

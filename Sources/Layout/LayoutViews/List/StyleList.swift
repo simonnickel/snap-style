@@ -54,6 +54,9 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
                 StyleListRow(.navigate("Star")) {
                     StyleLabel("Star", systemImage: "star")
                 }
+                StyleListRow(.navigation(isPresented: false)) {
+                    StyleLabel("Staroflife", systemImage: "staroflife")
+                }
                 StyleListRow(.navigate("Circle")) {
                     StyleLabel("Circle", systemImage: "circle")
                 }

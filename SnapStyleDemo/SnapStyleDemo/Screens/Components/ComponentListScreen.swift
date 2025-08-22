@@ -79,6 +79,17 @@ struct ComponentListScreen: View {
 
         var body: some View {
             Section {
+                let screenStarOfLife = ContentFlow.Screen.destination("Staroflife", source: identifier)
+                StyleListRow(
+                    .navigation(isPresented: navigationState.stack.contains(screenStarOfLife)),
+                    systemImage: "staroflife",
+                    action: {
+                        navigationState.stack.append(screenStarOfLife)
+                    }
+                ) {
+                    Text(screenStarOfLife.title)
+                }
+                
                 let screenStar = ContentFlow.Screen.destination("Star", source: identifier)
                 StyleListRow(
                     .navigate(screenStar, isPresented: navigationState.stack.contains(screenStar)),
