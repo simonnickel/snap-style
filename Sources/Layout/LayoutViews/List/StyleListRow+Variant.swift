@@ -9,6 +9,8 @@ extension StyleListRow {
     
     public enum Variant {
         
+        // TODO: Add Segmented Control
+        
         case plain
 
         /// Navigation style that pushes a value.
