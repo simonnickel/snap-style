@@ -91,7 +91,7 @@ extension SnapStyle.SurfaceKey {
 
     public var accentAsForeground: ValueBuilder {
         .builder { context in
-            .definition(.color(context.accent.onAccent))
+            .definition(.color(context.accent.base))
         }
     }
 
