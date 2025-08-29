@@ -64,7 +64,7 @@ extension SnapStyle.FontKey {
     public var action: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 16, weight: .medium))
+                case .any, .primary: .definition(.with(size: 16, weight: .semibold))
                 case .secondary: .definition(.with(size: 14, weight: .medium))
                 case .tertiary: .definition(.with(size: 12, weight: .medium))
             }

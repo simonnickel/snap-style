@@ -38,6 +38,7 @@ struct ActionButtonsView: View {
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 StyleStack(isStretching: false) {
                     Text("Primary")
+                    // TODO: is this element necessary? Should the button do enough? Button Component should just care about content.
                         .style(element: .action)
                     if elements.contains(.primarySubtitle) {
                         Text("Subtitle")
