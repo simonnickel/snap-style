@@ -226,6 +226,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                 Picker("", selection: selection) {
                     ForEach(values, id: \.self) { value in
                         Text("\(value[keyPath: titleKeyPath])")
+                            .tag(value)
                     }
                 }
                 .labelsHidden()
