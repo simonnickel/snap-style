@@ -12,6 +12,7 @@ extension SnapStyle.IconKey {
     // MARK: - Common
 
     public var favorite: ValueBuilder { .base(.definition(.value("star"))) }
+    public var reset: ValueBuilder { .base(.definition(.value("arrow.trianglehead.counterclockwise.rotate.90"))) }
     public var indicatorNavigation: ValueBuilder { .base(.definition(.value("chevron.right"))) }
     public var indicatorUnread: ValueBuilder { .base(.definition(.value("circlebadge.fill"))) }
     public var indicatorMore: ValueBuilder { .base(.definition(.value("ellipsis"))) }
