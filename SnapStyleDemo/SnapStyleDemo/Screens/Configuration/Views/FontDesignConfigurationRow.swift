@@ -15,7 +15,8 @@ struct FontDesignConfigurationRow: View {
     @State private var fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault
 
     var body: some View {
-        StyleListRow(.pick(Font.Design.allCases + [nil], selection: $fontDesign), icon: \.fontDesign) {
+        // TODO: Whats the title?
+        StyleListRow(.pick(Font.Design.allCases + [nil], titleKeyPath: \.debugDescription, selection: $fontDesign), icon: \.fontDesign) {
             StyleStack(spacing: \.spacingElements) {
                 StyleLabel("Font Design")
             }

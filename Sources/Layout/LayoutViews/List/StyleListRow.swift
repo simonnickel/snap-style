@@ -146,7 +146,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                             
                         case .selected(let isSelected): isSelected.wrappedValue.toggle()
                         case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
-                        case .pick(_, selection: _): break
+                        case .pick(_, _, selection: _): break
                     }
                 }
             },
@@ -221,11 +221,11 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                         }
                     }
                 
-            case .pick(let values, selection: let selection):
+            case .pick(let values, let titleKeyPath, selection: let selection):
                 // TODO FB: Picker does ignore font styling.
                 Picker("", selection: selection) {
                     ForEach(values, id: \.self) { value in
-                        Text("\(value)")
+                        Text("\(value[keyPath: titleKeyPath])")
                     }
                 }
                 .labelsHidden()
@@ -283,7 +283,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
                     Text("Pentagon")
                 }
                 StyleListRow(
-                    .pick(["A", "B"], selection: Binding(get: { "A" }, set: { _ in })),
+                    .pick(["A", "B"], titleKeyPath: \.self, selection: Binding(get: { "A" }, set: { _ in })),
                     systemImage: "square"
                 ) {
                     Text("With Content")

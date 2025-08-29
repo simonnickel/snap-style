@@ -129,7 +129,7 @@ struct ComponentListScreen: View {
 
         var body: some View {
             Section {
-                StyleListRow(.pick(["A", "B", "C"], selection: $selected), systemImage: "star") {
+                StyleListRow(.pick(["A", "B", "C"], titleKeyPath: \.self, selection: $selected), systemImage: "star") {
                     Text("Star")
                 }
             } header: {

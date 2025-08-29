@@ -31,7 +31,7 @@ extension StyleListRow {
         /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
         
-        case pick(_ values: [SelectionValue], selection: Binding<SelectionValue>)
+        case pick(_ values: [SelectionValue], titleKeyPath: KeyPath<SelectionValue, String>, selection: Binding<SelectionValue>)
         
     }
     

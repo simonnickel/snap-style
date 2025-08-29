@@ -38,7 +38,7 @@ class DemoConfiguration {
 
     var cornerRadius: CornerRadiusOption
     
-    enum CornerRadiusOption: CaseIterable {
+    enum CornerRadiusOption: String, CaseIterable {
         case small, medium, large
         
         var valueComponent: SnapStyle.NumberKey.ValueBuilderKeyPath {
