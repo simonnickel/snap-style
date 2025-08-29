@@ -31,7 +31,6 @@ extension SnapStyle.ComponentDefinition {
                 case .icon: \.icon
                 case .accessory: \.accessory
                 case .value: \.value
-                case .action: \.action
                 case .separator: \.separator
             }
         },
@@ -44,7 +43,6 @@ extension SnapStyle.ComponentDefinition {
                 case .icon: \.icon
                 case .accessory: \.accessory
                 case .value: \.value
-                case .action: \.action
                 case .separator: \.separator
             }
         },
@@ -217,9 +215,9 @@ extension SnapStyle.ComponentDefinition {
     )
     
     
-    // MARK: - Action
+    // MARK: - Button
     
-    public static let action: Self = .init("action",
+    public static let button: Self = .init("button",
         padding: { element in
             switch element {
                 case .container: Padding(horizontal: \.paddingActionHorizontal, vertical: \.paddingActionVertical)
@@ -228,8 +226,7 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
            switch element {
-               case .action: \.action
-               default: \.action
+               default: \.buttonTitle
            }
         },
         compositions: { element in
@@ -246,7 +243,7 @@ extension SnapStyle.ComponentDefinition {
         }
     )
     
-    public static let actionIcon: Self = .init("actionIcon",
+    public static let buttonIconOnly: Self = .init("buttonIconOnly",
         padding: { element in
             switch element {
                 case .container: Padding(\.paddingActionIcon)
@@ -255,7 +252,7 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
            switch element {
-               default: \.actionLarge
+               default: \.buttonIconOnly
            }
         },
         compositions: { element in

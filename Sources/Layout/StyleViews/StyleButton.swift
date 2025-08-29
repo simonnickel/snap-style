@@ -22,8 +22,8 @@ extension StyleButton {
 
         var component: SnapStyle.ComponentDefinition {
             switch self {
-                case .primary, .secondary: .action
-                case .icon: .actionIcon
+                case .primary, .secondary: .button
+                case .icon: .buttonIconOnly
                 case .component(let component, hierarchy: _): component
             }
         }
@@ -71,6 +71,7 @@ public struct StyleButton<Content>: View where Content : View {
     public var body: some View {
         StyleButtonInteractionState($interactionState, action: action) {
             content()
+                .style(element: .title)
                 .style(
                     component: variant.component,
                     applyContainer: variant.hierarchy,

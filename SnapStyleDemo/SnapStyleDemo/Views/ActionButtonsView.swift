@@ -25,10 +25,9 @@ struct ActionButtonsView: View {
             StyleButton(.secondary, enabled: isEnabled) { } content: {
                 StyleStack(isStretching: false) {
                     Text("Secondary")
-                        .style(element: .action)
                     if elements.contains(.secondarySubtitle) {
                         Text("Subtitle")
-                            .style(element: .action, hierarchy: .secondary)
+                            .style(hierarchy: .secondary)
                     }
                 }
             }
@@ -38,11 +37,9 @@ struct ActionButtonsView: View {
             StyleButton(.primary, enabled: isEnabled) { } content: {
                 StyleStack(isStretching: false) {
                     Text("Primary")
-                    // TODO: is this element necessary? Should the button do enough? Button Component should just care about content.
-                        .style(element: .action)
                     if elements.contains(.primarySubtitle) {
                         Text("Subtitle")
-                            .style(element: .action, hierarchy: .secondary)
+                            .style(hierarchy: .secondary)
                     }
                 }
             }

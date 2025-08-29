@@ -37,6 +37,26 @@ extension SnapStyle.FontKey {
             }
         }
     }
+    
+    public var buttonTitle: ValueBuilder {
+        .builder { context in
+            return switch context.element.hierarchy {
+                case .any, .primary: .definition(.with(size: 16, weight: .semibold))
+                case .secondary: .definition(.with(size: 14, weight: .medium))
+                case .tertiary: .definition(.with(size: 12, weight: .medium))
+            }
+        }
+    }
+    
+    public var buttonIconOnly: ValueBuilder {
+        .builder { context in
+            return switch context.element.hierarchy {
+                case .any, .primary: .definition(.with(size: 22, weight: .medium))
+                case .secondary: .definition(.with(size: 18, weight: .medium))
+                case .tertiary: .definition(.with(size: 14, weight: .medium))
+            }
+        }
+    }
 
 
     // MARK: - Element
@@ -60,26 +80,6 @@ extension SnapStyle.FontKey {
     public var accessory: ValueBuilder { .base(.reference(\.icon)) }
 
     public var value: ValueBuilder { .base(nil) }
-
-    public var action: ValueBuilder {
-        .builder { context in
-            return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 16, weight: .semibold))
-                case .secondary: .definition(.with(size: 14, weight: .medium))
-                case .tertiary: .definition(.with(size: 12, weight: .medium))
-            }
-        }
-    }
-    
-    public var actionLarge: ValueBuilder {
-        .builder { context in
-            return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 22, weight: .medium))
-                case .secondary: .definition(.with(size: 18, weight: .medium))
-                case .tertiary: .definition(.with(size: 14, weight: .medium))
-            }
-        }
-    }
 
     public var separator: ValueBuilder { .base(nil) }
 
