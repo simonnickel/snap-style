@@ -17,9 +17,9 @@ public struct StyleLabel<Content: View>: View {
     private let icon: StyleIcon.Definition?
     
     public init(
-        content: @escaping () -> Content,
         icon: IconKeyPath? = nil,
-        systemImage: String? = nil
+        systemImage: String? = nil,
+        content: @escaping () -> Content,
     ) {
         self.content = content
         self.icon = .init(icon: icon, systemImage: systemImage)
@@ -28,7 +28,7 @@ public struct StyleLabel<Content: View>: View {
     public init(
         _ title: String,
         icon: IconKeyPath? = nil,
-        systemImage: String? = nil
+        systemImage: String? = nil,
     ) where Content == Text {
         self.content = { Text(title) }
         self.icon = .init(icon: icon, systemImage: systemImage)
@@ -36,7 +36,7 @@ public struct StyleLabel<Content: View>: View {
 
     public init(
         icon: IconKeyPath? = nil,
-        systemImage: String? = nil
+        systemImage: String? = nil,
     ) where Content == EmptyView {
         self.content = { EmptyView() }
         self.icon = .init(icon: icon, systemImage: systemImage)
@@ -90,9 +90,9 @@ struct CustomSpacingLabelStyle: LabelStyle {
     StyleStack(spacing: \.spacingSections) {
         StyleStack {
             
-            StyleLabel(content: {
+            StyleLabel(icon: \.favorite) {
                 Text("Content")
-            }, icon: \.favorite)
+            }
             
             StyleLabel(content: {
                 Text("Content")
