@@ -7,7 +7,7 @@ import SnapStyleBase
 
 extension SnapStyle.ContextWrapper {
 
-    public var accent: SnapStyle.Accent {
+    public var accent: SnapStyle.AccentKey.Value.WrappedValue {
         if context.component.useSecondaryAccent {
             accent(for: \.secondary) ?? .fallbackSecondary
         } else {
@@ -15,7 +15,7 @@ extension SnapStyle.ContextWrapper {
         }
     }
     
-    public var accentPrimary: SnapStyle.Accent {
+    public var accentPrimary: SnapStyle.AccentKey.Value.WrappedValue {
         accent(for: \.primary) ?? .fallbackPrimary
     }
 

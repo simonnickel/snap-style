@@ -26,6 +26,8 @@ import SwiftUI
 //}
 
 struct ConfigurationColorScreen: View {
+    
+    typealias Accent = SnapStyle.AccentKey.Value.WrappedValue
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
@@ -36,7 +38,7 @@ struct ConfigurationColorScreen: View {
         case pair, primary, secondary
     }
 
-    let accentPairs: [(SnapStyle.Accent, SnapStyle.Accent)] = [
+    let accentPairs: [(Accent, Accent)] = [
         (.blue, .fallbackSecondary),
         (.blue, .yellow),
         (.green, .fallbackSecondary),
@@ -54,7 +56,7 @@ struct ConfigurationColorScreen: View {
         (.fallbackPrimary, .fallbackSecondary),
     ]
 
-    let accents: [SnapStyle.Accent] = [
+    let accents: [Accent] = [
         .fallbackPrimary,
         .fallbackSecondary,
         .blue,

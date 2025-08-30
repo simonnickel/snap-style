@@ -9,9 +9,11 @@ import SwiftUI
 
 @Observable
 class DemoConfiguration {
+    
+    typealias Accent = SnapStyle.AccentKey.Value.WrappedValue
 
-    var accentPrimary: SnapStyle.Accent
-    var accentSecondary: SnapStyle.Accent
+    var accentPrimary: Accent
+    var accentSecondary: Accent
 
     var scaleFactor: SnapStyle.Context.ScaleFactor
     
@@ -20,8 +22,8 @@ class DemoConfiguration {
     var fontWidth: Font.Width?
 
     init(
-        accentPrimary: SnapStyle.Accent = SnapStyle.Accent.fallbackPrimary,
-        accentSecondary: SnapStyle.Accent = SnapStyle.Accent.fallbackSecondary,
+        accentPrimary: Accent = .fallbackPrimary,
+        accentSecondary: Accent = .fallbackSecondary,
         scaleFactor: SnapStyle.Context.ScaleFactor = SnapStyle.Context.scaleFactorDefault,
         fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault,
         fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault,

@@ -7,7 +7,7 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
-extension SnapStyle.Accent {
+extension SnapStyle.AccentKey.Value.WrappedValue {
 
     public static var fallbackPrimary: Self {
         Self(
@@ -38,19 +38,19 @@ extension SnapStyle.AccentKey {
     
     public var primary: ValueBuilder {
         .base(.definition(.value(
-            SnapStyle.Accent.fallbackPrimary
+            .fallbackPrimary
         )))
     }
     
     public var secondary: ValueBuilder {
         .base(.definition(.value(
-            SnapStyle.Accent.fallbackSecondary
+            .fallbackSecondary
         )))
     }
     
 }
 
-extension SnapStyle.Accent {
+extension SnapStyle.AccentKey.Value.WrappedValue {
     
     public static var blue: Self {
         Self(
