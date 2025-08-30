@@ -26,8 +26,8 @@ extension SnapStyle.ContextWrapper {
         let builders = definition.builderContainer.builder(for: keyPath)
 
         // Build value from overrides
-            if let buildValue = builder.value(in: context) {
         for builder in builders {
+            if let buildValue = builder.value(in: self) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
@@ -40,7 +40,7 @@ extension SnapStyle.ContextWrapper {
         // Use default value
         if result == nil {
             let defaultBuilder = Key()[keyPath: keyPath]
-            if let buildValue = defaultBuilder.value(in: context) {
+            if let buildValue = defaultBuilder.value(in: self) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
