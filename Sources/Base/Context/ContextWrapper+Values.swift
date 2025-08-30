@@ -12,6 +12,7 @@ extension SnapStyle.ContextWrapper {
     package typealias IconKey = SnapStyle.IconKey
     package typealias SurfaceKey = SnapStyle.SurfaceKey
     package typealias CompositionKey = SnapStyle.CompositionKey
+    package typealias AccentKey = SnapStyle.AccentKey
     package typealias ShapeKey = SnapStyle.ShapeKey
 
     package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
@@ -171,6 +172,17 @@ extension SnapStyle.ContextWrapper {
 
     }
 
+
+    // MARK: - Accent
+    
+    package func accent(for keyPath: AccentKey.ValueBuilderKeyPath) -> AccentKey.Value.WrappedValue? {
+
+        let value = value(for: keyPath)
+
+        return value?.wrappedValue
+
+    }
+    
 
     // MARK: - Shape
 

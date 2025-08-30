@@ -12,6 +12,7 @@ extension SnapStyle {
         internal var icons: [IconKey.ValueBuilderKeyPath: [IconKey.ValueBuilder]] = [:]
         internal var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
         internal var compositions: [CompositionKey.ValueBuilderKeyPath: [CompositionKey.ValueBuilder]] = [:]
+        internal var accents: [AccentKey.ValueBuilderKeyPath: [AccentKey.ValueBuilder]] = [:]
         internal var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
 
 
@@ -43,6 +44,11 @@ extension SnapStyle {
 
                 case let keyPath as KeyPath<CompositionKey, CompositionKey.ValueBuilder>:
                     if let builders = compositions[keyPath] as? [Key.ValueBuilder] {
+                        return builders
+                    }
+                    
+                case let keyPath as KeyPath<AccentKey, AccentKey.ValueBuilder>:
+                    if let builders = accents[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
@@ -81,6 +87,10 @@ extension SnapStyle {
 
     internal func appended(compositions: [CompositionKey.ValueBuilderKeyPath: CompositionKey.ValueBuilder]) -> Self {
         appended(compositions, at: \.compositions)
+    }
+
+    internal func appended(accents: [AccentKey.ValueBuilderKeyPath: AccentKey.ValueBuilder]) -> Self {
+        appended(accents, at: \.accents)
     }
 
     internal func appended(shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]) -> Self {

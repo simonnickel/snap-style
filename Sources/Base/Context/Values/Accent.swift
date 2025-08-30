@@ -7,6 +7,7 @@ import SwiftUI
 
 extension SnapStyle {
 
+    // TODO: Could be moved to AccentKey.
     // TODO: Could hold ValueBuilderKeyPath instead of Color (see stash).
     public struct Accent: Hashable, Equatable {
         public let base: Color
