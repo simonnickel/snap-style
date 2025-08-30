@@ -30,7 +30,7 @@ struct ConfigurationColorScreen: View {
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
 
-    @State private var mode: Mode = .primary
+    @State private var mode: Mode = .pair
 
     private enum Mode {
         case pair, primary, secondary
