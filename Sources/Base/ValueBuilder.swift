@@ -9,12 +9,11 @@ extension SnapStyle {
     public enum ValueBuilder<Value> {
 
         public typealias Builder = (Context) -> Value?
-        public typealias BuilderPro = (ContextWrapper) -> Value?
+        public typealias BuilderWrapper = (ContextWrapper) -> Value?
 
         case base(Value?, builder: Builder? = nil)
         case builder(Builder?)
-        // TODO: Rename
-        case builderPro(BuilderPro?)
+        case builderWrapper(BuilderWrapper?)
 
         func value(in contextWrapper: ContextWrapper?) -> Value? {
             return switch self {
@@ -33,7 +32,7 @@ extension SnapStyle {
                         nil
                     }
                     
-                case .builderPro(let builder):
+                case .builderWrapper(let builder):
                     if let contextWrapper {
                         builder?(contextWrapper)
                     } else {
