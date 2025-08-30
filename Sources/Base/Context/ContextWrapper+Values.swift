@@ -12,6 +12,7 @@ extension SnapStyle.ContextWrapper {
     package typealias IconKey = SnapStyle.IconKey
     package typealias SurfaceKey = SnapStyle.SurfaceKey
     package typealias CompositionKey = SnapStyle.CompositionKey
+    package typealias AccentKey = SnapStyle.AccentKey
     package typealias ShapeKey = SnapStyle.ShapeKey
 
     package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
@@ -25,8 +26,8 @@ extension SnapStyle.ContextWrapper {
         let builders = definition.builderContainer.builder(for: keyPath)
 
         // Build value from overrides
-        for builder in builders.reversed() {
-            if let buildValue = builder.value(in: context) {
+        for builder in builders {
+            if let buildValue = builder.value(in: self) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
@@ -39,7 +40,7 @@ extension SnapStyle.ContextWrapper {
         // Use default value
         if result == nil {
             let defaultBuilder = Key()[keyPath: keyPath]
-            if let buildValue = defaultBuilder.value(in: context) {
+            if let buildValue = defaultBuilder.value(in: self) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
@@ -171,6 +172,17 @@ extension SnapStyle.ContextWrapper {
 
     }
 
+
+    // MARK: - Accent
+    
+    package func accent(for keyPath: AccentKey.ValueBuilderKeyPath) -> AccentKey.Value.WrappedValue? {
+
+        let value = value(for: keyPath)
+
+        return value?.wrappedValue
+
+    }
+    
 
     // MARK: - Shape
 

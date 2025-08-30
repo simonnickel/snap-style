@@ -70,6 +70,7 @@ struct ColorItemView: View {
             }
         }
         .style(component: .contentCard)
+        .border(.primary, width: selected ? 5 : 0)
     }
 
 }

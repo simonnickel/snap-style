@@ -26,12 +26,13 @@ struct SnapStyleDemoApp: App {
         
         var body: some View {
             TabContainer()
+                .style(accent: demoConfiguration.accentPrimary, for: \.primary)
+                .style(accent: demoConfiguration.accentSecondary, for: \.secondary)
                 .styleOverride(numbers: [
                     \.cornerRadiusComponent : .base(.reference(demoConfiguration.cornerRadius.valueComponent)),
                     \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                 ])
                 .style(setup: style)
-                .style(accents: demoConfiguration.accents)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)

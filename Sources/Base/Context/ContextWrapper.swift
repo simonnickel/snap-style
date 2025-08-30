@@ -15,16 +15,16 @@ extension SnapStyle {
         package var definition: SnapStyle
         package var context: SnapStyle.Context
 
-        internal func update(context: SnapStyle.Context) -> Self {
-            var result = self
-            result.context = context
-            return result
+        internal func updated(with context: SnapStyle.Context) -> Self {
+            var copy = self
+            copy.context = context
+            return copy
         }
 
-        internal func update(definition: SnapStyle) -> Self {
-            var result = self
-            result.definition = definition
-            return result
+        internal func updated(with definition: SnapStyle) -> Self {
+            var copy = self
+            copy.definition = definition
+            return copy
         }
 
     }

@@ -8,47 +8,49 @@ import SnapStyle
 import SwiftUI
 
 struct ConfigurationColorScreen: View {
+    
+    typealias Accent = SnapStyle.AccentKey.Value.WrappedValue
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
 
-    @State private var mode: Mode = .primary
+    @State private var mode: Mode = .pair
 
     private enum Mode {
-        case primary, secondary
+        case pair, primary, secondary
     }
 
-    let accentPairs: [SnapStyle.Accent.Pair] = [
-        .init(.blue, .fallbackAlternative),
-        .init(.blue, .yellow),
-        .init(.green, .fallbackAlternative),
-        .init(.green, .cyan),
-        .init(.teal, .fallbackAlternative),
-        .init(.teal, .yellow),
-        .init(.red, .fallbackAlternative),
-        .init(.red, .yellow),
-        .init(.orange, .fallbackAlternative),
-        .init(.yellow, .fallbackAlternative),
-        .init(.mint, .fallbackAlternative),
-        .init(.cyan, .fallbackAlternative),
-        .init(.purple, .fallbackAlternative),
-        .init(.indigo, .fallbackAlternative),
-        .init(.fallback, .fallbackAlternative),
+    let accentPairs: [(Accent, Accent)] = [
+        (.blue, .fallbackSecondary),
+        (.blue, .yellow),
+        (.green, .fallbackSecondary),
+        (.green, .cyan),
+        (.teal, .fallbackSecondary),
+        (.teal, .yellow),
+        (.red, .fallbackSecondary),
+        (.red, .yellow),
+        (.orange, .fallbackSecondary),
+        (.yellow, .fallbackSecondary),
+        (.mint, .fallbackSecondary),
+        (.cyan, .fallbackSecondary),
+        (.purple, .fallbackSecondary),
+        (.indigo, .fallbackSecondary),
+        (.fallbackPrimary, .fallbackSecondary),
     ]
 
-    let accentsSecondary: [SnapStyle.Accent] = [
-       .fallbackAlternative,
-       .blue,
-       .green,
-       .teal,
-       .red,
-       .orange,
-       .yellow,
-       .mint,
-       .cyan,
-       .purple,
-       .indigo,
-       .fallback,
+    let accents: [Accent] = [
+        .fallbackPrimary,
+        .fallbackSecondary,
+        .blue,
+        .green,
+        .teal,
+        .red,
+        .orange,
+        .yellow,
+        .mint,
+        .cyan,
+        .purple,
+        .indigo,
     ]
 
     var body: some View {
@@ -58,10 +60,13 @@ struct ConfigurationColorScreen: View {
 
             viewPicker
 
-            if mode == .primary {
-                contentPrimary
-            } else {
-                contentSecondary
+            switch mode {
+                case .pair:
+                    contentPair
+                case .primary:
+                    contentPrimary
+                case .secondary:
+                    contentSecondary
             }
         }
 
@@ -69,6 +74,8 @@ struct ConfigurationColorScreen: View {
 
     private var viewPicker: some View {
         Picker(selection: $mode) {
+            Text("Pair")
+                .tag(Mode.pair)
             Text("Primary")
                 .tag(Mode.primary)
             Text("Secondary")
@@ -81,14 +88,31 @@ struct ConfigurationColorScreen: View {
 
     private let gridItem: GridItem = GridItem(.flexible(minimum: 20, maximum: .infinity))
 
+    private var contentPair: some View {
+        LazyVGrid(columns: [gridItem, gridItem]) {
+            ForEach(accentPairs.indices, id: \.self) { index in
+                let (primary, secondary) = accentPairs[index]
+                Button {
+                    demoConfiguration.accentPrimary = primary
+                    demoConfiguration.accentSecondary = secondary
+                } label: {
+                    ColorItemView(selected: primary == demoConfiguration.accentPrimary && secondary == demoConfiguration.accentSecondary)
+                        .style(accent: primary, for: \.primary)
+                        .style(accent: secondary, for: \.secondary)
+                }
+            }
+        }
+        .padding()
+    }
+
     private var contentPrimary: some View {
         LazyVGrid(columns: [gridItem, gridItem]) {
-            ForEach(accentPairs, id: \.self) { accents in
+            ForEach(accents, id: \.self) { accent in
                 Button {
-                    demoConfiguration.accents = accents
+                    demoConfiguration.accentPrimary = accent
                 } label: {
-                    ColorItemView(selected: accents == demoConfiguration.accents)
-                        .style(accents: accents)
+                    ColorItemView(selected: accent == demoConfiguration.accentPrimary)
+                        .style(accent: accent, for: \.primary)
                 }
             }
         }
@@ -97,13 +121,12 @@ struct ConfigurationColorScreen: View {
 
     private var contentSecondary: some View {
         LazyVGrid(columns: [gridItem, gridItem]) {
-            ForEach(accentsSecondary, id: \.self) { accent in
-                let accents = SnapStyle.Accent.Pair(demoConfiguration.accents.primary, accent)
+            ForEach(accents, id: \.self) { accent in
                 Button {
-                    demoConfiguration.accents = accents
+                    demoConfiguration.accentSecondary = accent
                 } label: {
-                    ColorItemView(selected: demoConfiguration.accents.secondary == demoConfiguration.accents.secondary)
-                        .style(accents: accents)
+                    ColorItemView(selected: accent == demoConfiguration.accentSecondary)
+                        .style(accent: accent, for: \.secondary)
                 }
             }
         }

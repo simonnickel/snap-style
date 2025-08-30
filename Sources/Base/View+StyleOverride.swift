@@ -13,6 +13,7 @@ extension View {
         icons: [SnapStyle.IconKey.ValueBuilderKeyPath: SnapStyle.IconKey.ValueBuilder]? = nil,
         surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]? = nil,
         compositions: [SnapStyle.CompositionKey.ValueBuilderKeyPath: SnapStyle.CompositionKey.ValueBuilder]? = nil,
+        accents: [SnapStyle.AccentKey.ValueBuilderKeyPath: SnapStyle.AccentKey.ValueBuilder]? = nil,
         shapes: [SnapStyle.ShapeKey.ValueBuilderKeyPath: SnapStyle.ShapeKey.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
@@ -22,6 +23,7 @@ extension View {
                 icons: icons,
                 surfaces: surfaces,
                 compositions: compositions,
+                accents: accents,
                 shapes: shapes
             )
         )
@@ -41,6 +43,7 @@ private struct StyleOverrideModifier: ViewModifier {
     let icons: [SnapStyle.IconKey.ValueBuilderKeyPath: SnapStyle.IconKey.ValueBuilder]?
     let surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]?
     let compositions: [SnapStyle.CompositionKey.ValueBuilderKeyPath: SnapStyle.CompositionKey.ValueBuilder]?
+    let accents: [SnapStyle.AccentKey.ValueBuilderKeyPath: SnapStyle.AccentKey.ValueBuilder]?
     let shapes: [SnapStyle.ShapeKey.ValueBuilderKeyPath: SnapStyle.ShapeKey.ValueBuilder]?
 
     func body(content: Content) -> some View {
@@ -51,6 +54,7 @@ private struct StyleOverrideModifier: ViewModifier {
             icons: icons,
             surfaces: surfaces,
             compositions: compositions,
+            accents: accents,
             shapes: shapes
         )
 
@@ -72,6 +76,7 @@ extension SnapStyle {
         icons: [IconKey.ValueBuilderKeyPath: IconKey.ValueBuilder]? = nil,
         surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]? = nil,
         compositions: [CompositionKey.ValueBuilderKeyPath: CompositionKey.ValueBuilder]? = nil,
+        accents: [AccentKey.ValueBuilderKeyPath: AccentKey.ValueBuilder]? = nil,
         shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
@@ -94,6 +99,10 @@ extension SnapStyle {
 
         if let compositions {
             style = style.appended(compositions: compositions)
+        }
+
+        if let accents {
+            style = style.appended(accents: accents)
         }
 
         if let shapes {

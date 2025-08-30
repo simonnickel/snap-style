@@ -38,19 +38,19 @@ extension SnapStyle.SurfaceKey {
     // MARK: - Accents
 
     public var accent: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accent.base))
+        .builderWrapper { context in
+            .reference(context.accent.base)
         }
     }
     public var accentComplementary: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accent.complementary))
+        .builderWrapper { context in
+            .reference(context.accent.complementary)
         }
     }
 
     public var accentContrast: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accent.contrast))
+        .builderWrapper { context in
+            .reference(context.accent.contrast)
         }
     }
 
@@ -66,40 +66,44 @@ extension SnapStyle.SurfaceKey {
     }
 
     public var accentLevel1: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accentPrimary.base))
+        .builderWrapper { context in
+            .reference(context.accentPrimary.base)
         }
     }
 
     public var accentLevel2: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.2)))
+        .builderWrapper { context in
+            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.2)])
         }
     }
 
     public var accentLevel3: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.4)))
+        .builderWrapper { context in
+            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.4)])
         }
     }
 
     public var onAccent: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accent.onAccent))
+        .builderWrapper { context in
+            .reference(context.accent.onAccent)
         }
     }
 
     public var accentAsForeground: ValueBuilder {
-        .builder { context in
-            .definition(.color(context.accent.base))
+        .builderWrapper { context in
+            .reference(context.accent.base)
         }
     }
 
     public var accentGradientSoft: ValueBuilder {
-        .builder { context in
-            let base = context.accentPrimary.base
-            let complementary = context.accentPrimary.complementary
-            let contrast = context.accentPrimary.contrast
+        .builderWrapper { context in
+            let accentBase = context.accentPrimary.base
+            let accentComplementary = context.accentPrimary.complementary
+            let accentContrast = context.accentPrimary.contrast
+            
+            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
+            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
+            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 4, height: 4, points: [
@@ -118,10 +122,14 @@ extension SnapStyle.SurfaceKey {
     }
     
     public var accentGradientStrong: ValueBuilder {
-        .builder { context in
-            let base = context.accentPrimary.base
-            let complementary = context.accentPrimary.complementary
-            let contrast = context.accentPrimary.contrast
+        .builderWrapper { context in
+            let accentBase = context.accentPrimary.base
+            let accentComplementary = context.accentPrimary.complementary
+            let accentContrast = context.accentPrimary.contrast
+            
+            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
+            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
+            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 3, height: 3, points: [
@@ -150,10 +158,10 @@ extension SnapStyle.SurfaceKey {
     // MARK: Overlay
     
     public var stateOverlayOnAccent: ValueBuilder {
-        .builder { context in
+        .builderWrapper { context in
             let brightness = context.accent.brightness
 
-            return switch context.component.state {
+            return switch context.context.component.state {
                 case .normal, .disabled: .reference(\.clear)
                 case .highlighted: brightness == .light ? .definition(.color(.black.opacity(0.2))) :  .definition(.color(.white.opacity(0.2)))
                 case .selected: brightness == .light ? .definition(.color(.black.opacity(0.3))) : .definition(.color(.white.opacity(0.3)))
@@ -264,5 +272,80 @@ extension SnapStyle.SurfaceKey {
 //            }
 //        }
 //    }
+    
+    
+    // MARK: - Colors
+    
+    public var systemAccent: ValueBuilder {
+        .base(.definition(.color(.accentColor)))
+    }
+    
+    public var systemAccentComplementary: ValueBuilder {
+        .base(.reference(\.systemAccent, adjustments: [.mix(.white, 0.2)]))
+    }
+    
+    public var systemAccentContrast: ValueBuilder {
+        .base(.reference(\.systemAccent, adjustments: [.mix(.black, 0.2)]))
+    }
+    
+    public var snapBlack: ValueBuilder {
+        .base(.definition(.color(.black)))
+    }
+    
+    public var snapWhite: ValueBuilder {
+        .base(.definition(.color(.white)))
+    }
+    
+    public var snapGray: ValueBuilder {
+        .base(.definition(.color(.gray)))
+    }
+    
+    public var snapBlue: ValueBuilder {
+        .base(.definition(.color(.blue)))
+    }
+    
+    public var snapIndigo: ValueBuilder {
+        .base(.definition(.color(.indigo)))
+    }
+    
+    public var snapPurple: ValueBuilder {
+        .base(.definition(.color(.purple)))
+    }
+    
+    public var snapRed: ValueBuilder {
+        .base(.definition(.color(.red)))
+    }
+    
+    public var snapOrange: ValueBuilder {
+        .base(.definition(.color(.orange)))
+    }
+    
+    public var snapYellow: ValueBuilder {
+        .base(.definition(.color(.yellow)))
+    }
+    
+    public var snapPink: ValueBuilder {
+        .base(.definition(.color(.pink)))
+    }
+    
+    public var snapGreen: ValueBuilder {
+        .base(.definition(.color(.green)))
+    }
+    
+    public var snapCyan: ValueBuilder {
+        .base(.definition(.color(.cyan)))
+    }
+    
+    public var snapTeal: ValueBuilder {
+        .base(.definition(.color(.teal)))
+    }
+    
+    public var snapMint: ValueBuilder {
+        .base(.definition(.color(.mint)))
+    }
+    
+    public var snapBrown: ValueBuilder {
+        .base(.definition(.color(.brown)))
+    }
     
 }
