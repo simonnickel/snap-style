@@ -27,7 +27,7 @@ internal struct UpdateDefinitionModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .environment(\.style, style.update(definition: definition))
+            .environment(\.style, style.updated(with: definition))
     }
 
 }
@@ -40,7 +40,7 @@ internal struct UpdateContextModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .environment(\.style, style.update(context: context))
+            .environment(\.style, style.updated(with: context))
     }
 
 }

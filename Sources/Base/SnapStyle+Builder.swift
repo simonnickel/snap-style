@@ -99,17 +99,17 @@ extension SnapStyle {
 
     private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueBuilderKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<SnapStyle.BuilderContainer, [Key.ValueBuilderKeyPath: [Key.ValueBuilder]]>) -> Self {
 
-        var style = self
-        style.cacheContainer.resetCache(for: Key.self)
+        var copy = self
+        copy.cacheContainer.resetCache(for: Key.self)
 
         for (keyPath, valueBuilder) in keyPaths {
 
             var builders = self.builderContainer[keyPath: destination][keyPath] ?? []
             builders.append(valueBuilder)
-            style.builderContainer[keyPath: destination][keyPath] = builders
+            copy.builderContainer[keyPath: destination][keyPath] = builders
 
         }
 
-        return style
+        return copy
     }
 }
