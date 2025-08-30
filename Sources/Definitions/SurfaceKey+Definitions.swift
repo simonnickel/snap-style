@@ -39,18 +39,18 @@ extension SnapStyle.SurfaceKey {
 
     public var accent: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accent.base))
+            .reference(context.accent.base)
         }
     }
     public var accentComplementary: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accent.complementary))
+            .reference(context.accent.complementary)
         }
     }
 
     public var accentContrast: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accent.contrast))
+            .reference(context.accent.contrast)
         }
     }
 
@@ -67,39 +67,43 @@ extension SnapStyle.SurfaceKey {
 
     public var accentLevel1: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accentPrimary.base))
+            .reference(context.accentPrimary.base)
         }
     }
 
     public var accentLevel2: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.2)))
+            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.2)])
         }
     }
 
     public var accentLevel3: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.4)))
+            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.4)])
         }
     }
 
     public var onAccent: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accent.onAccent))
+            .reference(context.accent.onAccent)
         }
     }
 
     public var accentAsForeground: ValueBuilder {
         .builderPro { context in
-            .definition(.color(context.accent.base))
+            .reference(context.accent.base)
         }
     }
 
     public var accentGradientSoft: ValueBuilder {
         .builderPro { context in
-            let base = context.accentPrimary.base
-            let complementary = context.accentPrimary.complementary
-            let contrast = context.accentPrimary.contrast
+            let accentBase = context.accentPrimary.base
+            let accentComplementary = context.accentPrimary.complementary
+            let accentContrast = context.accentPrimary.contrast
+            
+            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
+            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
+            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 4, height: 4, points: [
@@ -119,9 +123,13 @@ extension SnapStyle.SurfaceKey {
     
     public var accentGradientStrong: ValueBuilder {
         .builderPro { context in
-            let base = context.accentPrimary.base
-            let complementary = context.accentPrimary.complementary
-            let contrast = context.accentPrimary.contrast
+            let accentBase = context.accentPrimary.base
+            let accentComplementary = context.accentPrimary.complementary
+            let accentContrast = context.accentPrimary.contrast
+            
+            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
+            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
+            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .definition(.any(AnyShapeStyle(
                 MeshGradient(width: 3, height: 3, points: [
@@ -264,5 +272,80 @@ extension SnapStyle.SurfaceKey {
 //            }
 //        }
 //    }
+    
+    
+    // MARK: - Colors
+    
+    public var systemAccent: ValueBuilder {
+        .base(.definition(.color(.accentColor)))
+    }
+    
+    public var systemAccentComplementary: ValueBuilder {
+        .base(.reference(\.systemAccent, adjustments: [.mix(.white, 0.2)]))
+    }
+    
+    public var systemAccentContrast: ValueBuilder {
+        .base(.reference(\.systemAccent, adjustments: [.mix(.black, 0.2)]))
+    }
+    
+    public var snapBlack: ValueBuilder {
+        .base(.definition(.color(.black)))
+    }
+    
+    public var snapWhite: ValueBuilder {
+        .base(.definition(.color(.white)))
+    }
+    
+    public var snapGray: ValueBuilder {
+        .base(.definition(.color(.gray)))
+    }
+    
+    public var snapBlue: ValueBuilder {
+        .base(.definition(.color(.blue)))
+    }
+    
+    public var snapIndigo: ValueBuilder {
+        .base(.definition(.color(.indigo)))
+    }
+    
+    public var snapPurple: ValueBuilder {
+        .base(.definition(.color(.purple)))
+    }
+    
+    public var snapRed: ValueBuilder {
+        .base(.definition(.color(.red)))
+    }
+    
+    public var snapOrange: ValueBuilder {
+        .base(.definition(.color(.orange)))
+    }
+    
+    public var snapYellow: ValueBuilder {
+        .base(.definition(.color(.yellow)))
+    }
+    
+    public var snapPink: ValueBuilder {
+        .base(.definition(.color(.pink)))
+    }
+    
+    public var snapGreen: ValueBuilder {
+        .base(.definition(.color(.green)))
+    }
+    
+    public var snapCyan: ValueBuilder {
+        .base(.definition(.color(.cyan)))
+    }
+    
+    public var snapTeal: ValueBuilder {
+        .base(.definition(.color(.teal)))
+    }
+    
+    public var snapMint: ValueBuilder {
+        .base(.definition(.color(.mint)))
+    }
+    
+    public var snapBrown: ValueBuilder {
+        .base(.definition(.color(.brown)))
+    }
     
 }

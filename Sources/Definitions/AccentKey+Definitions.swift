@@ -11,20 +11,20 @@ extension SnapStyle.AccentKey.Value.WrappedValue {
 
     public static var fallbackPrimary: Self {
         Self(
-            base: Color.accentColor,
-            onAccent: Color.white,
-            complementary: Color.accentColor.mix(with: .white, by: 0.2),
-            contrast: Color.accentColor.mix(with: .black, by: 0.2),
+            base: \.systemAccent,
+            onAccent: \.snapWhite,
+            complementary: \.systemAccentComplementary,
+            contrast: \.systemAccentContrast,
             brightness: .dark
         )
     }
     
     public static var fallbackSecondary: Self {
         Self(
-            base: Color.black,
-            onAccent: Color.white,
-            complementary: Color.gray,
-            contrast: Color.white,
+            base: \.snapBlack,
+            onAccent: \.snapWhite,
+            complementary: \.snapGray,
+            contrast: \.snapWhite,
             brightness: .dark
         )
     }
@@ -54,101 +54,101 @@ extension SnapStyle.AccentKey.Value.WrappedValue {
     
     public static var blue: Self {
         Self(
-            base: Color.blue,
-            onAccent: Color.white,
-            complementary: Color.mint,
+            base: \.snapBlue,
+            onAccent: \.snapWhite,
+            complementary: \.snapMint,
 //            complementary: Color.blue.mix(with: .white, by: 0.2).mix(with: .purple, by: 0.5),
-            contrast: Color.yellow,
+            contrast: \.snapYellow,
             brightness: .dark
         )
     }
     
     public static var teal: Self {
         Self(
-            base: Color.teal,
-            onAccent: Color.white,
-            complementary: Color.blue,
-            contrast: Color.purple,
+            base: \.snapTeal,
+            onAccent: \.snapWhite,
+            complementary: \.snapBlue,
+            contrast: \.snapPurple,
             brightness: .light
         )
     }
     
     public static var green: Self {
         Self(
-            base: Color.green,
-            onAccent: Color.white,
-            complementary: Color.mint,
-            contrast: Color.yellow,
+            base: \.snapGreen,
+            onAccent: \.snapWhite,
+            complementary: \.snapMint,
+            contrast: \.snapYellow,
             brightness: .light
         )
     }
     
     public static var red: Self {
         Self(
-            base: Color.red,
-            onAccent: Color.white,
-            complementary: Color.orange,
-            contrast: Color.yellow,
+            base: \.snapRed,
+            onAccent: \.snapWhite,
+            complementary: \.snapOrange,
+            contrast: \.snapYellow,
             brightness: .dark
         )
     }
     
     public static var orange: Self {
         Self(
-            base: Color.orange,
-            onAccent: Color.white,
-            complementary: Color.yellow,
-            contrast: Color.red,
+            base: \.snapOrange,
+            onAccent: \.snapWhite,
+            complementary: \.snapYellow,
+            contrast: \.snapRed,
             brightness: .light
         )
     }
     
     public static var yellow: Self {
         Self(
-            base: Color.yellow,
-            onAccent: Color.black,
-            complementary: Color.orange,
-            contrast: Color.red,
+            base: \.snapYellow,
+            onAccent: \.snapBlack,
+            complementary: \.snapOrange,
+            contrast: \.snapRed,
             brightness: .light
         )
     }
     
     public static var cyan: Self {
         Self(
-            base: Color.cyan,
-            onAccent: Color.white,
-            complementary: Color.green,
-            contrast: Color.yellow,
+            base: \.snapCyan,
+            onAccent: \.snapWhite,
+            complementary: \.snapGreen,
+            contrast: \.snapYellow,
             brightness: .light
         )
     }
     
     public static var mint: Self {
         Self(
-            base: Color.mint,
-            onAccent: Color.white,
-            complementary: Color.green,
-            contrast: Color.yellow,
+            base: \.snapMint,
+            onAccent: \.snapWhite,
+            complementary: \.snapGreen,
+            contrast: \.snapYellow,
             brightness: .light
         )
     }
     
     public static var indigo: Self {
         Self(
-            base: Color.indigo,
-            onAccent: Color.white,
-            complementary: Color.blue,
-            contrast: Color.green,
+            base: \.snapIndigo,
+            onAccent: \.snapWhite,
+            complementary: \.snapBlue,
+            contrast: \.snapGreen,
             brightness: .dark
         )
     }
     
     public static var purple: Self {
         Self(
-            base: Color.purple,
-            onAccent: Color.white,
-            complementary: Color.blue,
-            contrast: Color.yellow,
+            base: \.snapPurple,
+            onAccent: \.snapWhite,
+            complementary: \.snapBlue,
+            contrast: \.snapYellow,
             brightness: .dark
         )
     }

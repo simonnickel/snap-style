@@ -3,8 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI // TODO: Remove as soon as Accent no longer uses Color.
-
 extension SnapStyle {
     public struct AccentKey: StyleKey { public init() {} }
 }
@@ -36,20 +34,21 @@ extension SnapStyle.AccentKey {
         
         // MARK: - Accent
         
-        // TODO: Could hold ValueBuilderKeyPath instead of Color (see stash).
         public struct Accent: Hashable, Equatable {
             
-            public let base: Color
-            public let onAccent: Color
-            public let complementary: Color
-            public let contrast: Color
+            public typealias ColorValue = SnapStyle.SurfaceKey.ValueBuilderKeyPath
+            
+            public let base: ColorValue
+            public let onAccent: ColorValue
+            public let complementary: ColorValue
+            public let contrast: ColorValue
             public let brightness: Brightness
 
             public enum Brightness {
                 case light, dark
             }
 
-            public init(base: Color, onAccent: Color, complementary: Color, contrast: Color, brightness: Brightness) {
+            public init(base: ColorValue, onAccent: ColorValue, complementary: ColorValue, contrast: ColorValue, brightness: Brightness) {
                 self.base = base
                 self.onAccent = onAccent
                 self.complementary = complementary
