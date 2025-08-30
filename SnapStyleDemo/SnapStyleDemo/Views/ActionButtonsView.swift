@@ -9,10 +9,12 @@ import SwiftUI
 struct ActionButtonsView: View {
 
     enum Element {
-        case secondarySubtitle, primarySubtitle
+        case icon, subtitle
     }
 
     let elements: [Element]
+    var showIcon: Bool { elements.contains(.icon) }
+    var showSubtitle: Bool { elements.contains(.subtitle) }
     let isEnabled: Bool
 
     internal init(elements: [Element] = [], enabled: Bool = true) {
@@ -23,22 +25,24 @@ struct ActionButtonsView: View {
     var body: some View {
         StyleStack(.horizontal) {
             StyleButton(.secondary, enabled: isEnabled) { } content: {
-                StyleStack(isStretching: false) {
-                    Text("Secondary")
-                    if elements.contains(.secondarySubtitle) {
-                        Text("Subtitle")
-                            .style(hierarchy: .secondary)
-                    }
-                }
+                content(title: "Secondary", subtitle: showSubtitle ? "Subtitle" : nil)
             }
             
             StyleSpacer(min: \.spacingElements)
             
             StyleButton(.primary, enabled: isEnabled) { } content: {
+                content(title: "Primary", subtitle: showSubtitle ? "Subtitle" : nil)
+            }
+        }
+    }
+    
+    private func content(title: String, subtitle: String?) -> some View {
+        StyleStack(isStretching: false) {
+            StyleLabel(icon: showIcon ? \.favorite : nil) {
                 StyleStack(isStretching: false) {
-                    Text("Primary")
-                    if elements.contains(.primarySubtitle) {
-                        Text("Subtitle")
+                    Text(title)
+                    if let subtitle {
+                        Text(subtitle)
                             .style(hierarchy: .secondary)
                     }
                 }
@@ -52,5 +56,5 @@ struct ActionButtonsView: View {
 
 #Preview {
     ActionButtonsView()
-    ActionButtonsView(elements: [.primarySubtitle, .secondarySubtitle])
+    ActionButtonsView(elements: [.icon, .subtitle])
 }

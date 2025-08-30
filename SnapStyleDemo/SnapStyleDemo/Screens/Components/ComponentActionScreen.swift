@@ -7,31 +7,42 @@ import SnapStyle
 import SwiftUI
 
 struct ComponentActionScreen: View {
+    
+    @State private var showIcons: Bool = false
+    @State private var showSubtitles: Bool = false
+    
+    private var elements: [ActionButtonsView.Element] {
+        var elements: [ActionButtonsView.Element] = []
+        if showIcons { elements.append(.icon) }
+        if showSubtitles { elements.append(.subtitle) }
+        return elements
+    }
+    
     var body: some View {
         StyleScreen {
+            
+            Toggle(isOn: $showIcons) {
+                Text("Show Icons")
+            }
+            Toggle(isOn: $showSubtitles) {
+                Text("Show Subtitles")
+            }
 
             StyleStack(spacing: \.spacingElements) {
                 Text("Content Card - Accent")
                     .style(element: .title)
-                ActionButtonsView()
-                ActionButtonsView(enabled: false)
+                ActionButtonsView(elements: elements)
+                ActionButtonsView(elements: elements, enabled: false)
             }
             .style(component: .contentCard)
             
             StyleStack(spacing: \.spacingElements) {
                 Text("Accent Card - Alternative")
                     .style(element: .title)
-                ActionButtonsView()
-                ActionButtonsView(enabled: false)
+                ActionButtonsView(elements: elements)
+                ActionButtonsView(elements: elements, enabled: false)
             }
             .style(component: .accentCard)
-            
-            StyleStack(spacing: \.spacingElements) {
-                Text("Subtitles")
-                    .style(element: .title)
-                ActionButtonsView(elements: [.secondarySubtitle, .primarySubtitle])
-            }
-            .style(component: .contentCard)
             
             StyleStack(spacing: \.spacingElements) {
                 Text("Icons")
