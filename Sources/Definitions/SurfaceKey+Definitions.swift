@@ -38,18 +38,18 @@ extension SnapStyle.SurfaceKey {
     // MARK: - Accents
 
     public var accent: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accent.base))
         }
     }
     public var accentComplementary: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accent.complementary))
         }
     }
 
     public var accentContrast: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accent.contrast))
         }
     }
@@ -66,37 +66,37 @@ extension SnapStyle.SurfaceKey {
     }
 
     public var accentLevel1: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accentPrimary.base))
         }
     }
 
     public var accentLevel2: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.2)))
         }
     }
 
     public var accentLevel3: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accentPrimary.base.mix(with: .black, by: 0.4)))
         }
     }
 
     public var onAccent: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accent.onAccent))
         }
     }
 
     public var accentAsForeground: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             .definition(.color(context.accent.base))
         }
     }
 
     public var accentGradientSoft: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             let base = context.accentPrimary.base
             let complementary = context.accentPrimary.complementary
             let contrast = context.accentPrimary.contrast
@@ -118,7 +118,7 @@ extension SnapStyle.SurfaceKey {
     }
     
     public var accentGradientStrong: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             let base = context.accentPrimary.base
             let complementary = context.accentPrimary.complementary
             let contrast = context.accentPrimary.contrast
@@ -150,10 +150,10 @@ extension SnapStyle.SurfaceKey {
     // MARK: Overlay
     
     public var stateOverlayOnAccent: ValueBuilder {
-        .builder { context in
+        .builderPro { context in
             let brightness = context.accent.brightness
 
-            return switch context.component.state {
+            return switch context.context.component.state {
                 case .normal, .disabled: .reference(\.clear)
                 case .highlighted: brightness == .light ? .definition(.color(.black.opacity(0.2))) :  .definition(.color(.white.opacity(0.2)))
                 case .selected: brightness == .light ? .definition(.color(.black.opacity(0.3))) : .definition(.color(.white.opacity(0.3)))

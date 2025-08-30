@@ -7,6 +7,30 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
+extension SnapStyle.Accent {
+
+    public static var fallbackPrimary: Self {
+        Self(
+            base: Color.accentColor,
+            onAccent: Color.white,
+            complementary: Color.accentColor.mix(with: .white, by: 0.2),
+            contrast: Color.accentColor.mix(with: .black, by: 0.2),
+            brightness: .dark
+        )
+    }
+    
+    public static var fallbackSecondary: Self {
+        Self(
+            base: Color.black,
+            onAccent: Color.white,
+            complementary: Color.gray,
+            contrast: Color.white,
+            brightness: .dark
+        )
+    }
+
+}
+
 extension SnapStyle.AccentKey {
     
     
@@ -14,25 +38,13 @@ extension SnapStyle.AccentKey {
     
     public var primary: ValueBuilder {
         .base(.definition(.value(
-            SnapStyle.Accent(
-                base: Color.accentColor,
-                onAccent: Color.white,
-                complementary: Color.accentColor.mix(with: .white, by: 0.2),
-                contrast: Color.accentColor.mix(with: .black, by: 0.2),
-                brightness: .dark
-            )
+            SnapStyle.Accent.fallbackPrimary
         )))
     }
     
     public var secondary: ValueBuilder {
         .base(.definition(.value(
-            SnapStyle.Accent(
-                base: Color.black,
-                onAccent: Color.white,
-                complementary: Color.gray,
-                contrast: Color.white,
-                brightness: .dark
-            )
+            SnapStyle.Accent.fallbackSecondary
         )))
     }
     
