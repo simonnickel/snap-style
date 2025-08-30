@@ -49,11 +49,18 @@ extension SnapStyle {
 
                 case let key as IconKey.Type: icons = .init()
 
-                case let key as SurfaceKey.Type: surfaces = .init()
+                case let key as SurfaceKey.Type:
+                    compositions = .init()
+                    surfaces = .init()
 
-                case let key as CompositionKey.Type: compositions = .init()
+                case let key as CompositionKey.Type:
+                    compositions = .init()
+                    surfaces = .init()
                     
-                case let key as AccentKey.Type: accents = .init()
+                case let key as AccentKey.Type:
+                    accents = .init()
+                    compositions = .init()
+                    surfaces = .init()
 
                 case let key as ShapeKey.Type: shapes = .init()
 
