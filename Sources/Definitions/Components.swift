@@ -226,6 +226,7 @@ extension SnapStyle.ComponentDefinition {
         },
         fonts: { element in
            switch element {
+               case .icon: \.buttonIcon
                default: \.buttonTitle
            }
         },

@@ -46,6 +46,7 @@ public struct StyleLabel<Content: View>: View {
         Label(title: content, icon: {
             if let icon {
                 StyleIcon(icon)
+                    .style(element: .icon)
             } else {
                 EmptyView()
             }

@@ -41,8 +41,18 @@ extension SnapStyle.FontKey {
     public var buttonTitle: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 16, weight: .semibold))
-                case .secondary: .definition(.with(size: 14, weight: .medium))
+                case .any, .primary: .definition(.with(size: 17, weight: .semibold))
+                case .secondary: .definition(.with(size: 13, weight: .medium))
+                case .tertiary: .definition(.with(size: 12, weight: .medium))
+            }
+        }
+    }
+    
+    public var buttonIcon: ValueBuilder {
+        .builder { context in
+            return switch context.element.hierarchy {
+                case .any, .primary: .definition(.with(size: 17, weight: .semibold))
+                case .secondary: .definition(.with(size: 13, weight: .medium))
                 case .tertiary: .definition(.with(size: 12, weight: .medium))
             }
         }
