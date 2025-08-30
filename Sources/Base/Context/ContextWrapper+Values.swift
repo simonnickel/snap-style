@@ -26,8 +26,8 @@ extension SnapStyle.ContextWrapper {
         let builders = definition.builderContainer.builder(for: keyPath)
 
         // Build value from overrides
-        for builder in builders.reversed() {
             if let buildValue = builder.value(in: context) {
+        for builder in builders {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
