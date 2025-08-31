@@ -9,12 +9,20 @@ import SnapStyleDefinitions
 
 extension View {
 
-    public func style(accent: SnapStyle.AccentKey.Value.WrappedValue, for keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath = \.primary) -> some View {
+    public func style(
+        accent: SnapStyle.AccentKey.Value.WrappedValue,
+        for keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath = \.primary
+    ) -> some View {
         self
-            .modifier(AccentColorModifier(keyPath: keyPath))
-            .styleOverride(accents: [
-                keyPath : .base(.definition(.value(accent))),
-            ])
+            .style(accents: [keyPath: accent])
+    }
+
+    public func style(
+        accents: [SnapStyle.AccentKey.ValueBuilderKeyPath : SnapStyle.AccentKey.Value.WrappedValue]
+    ) -> some View {
+        self
+            .modifier(AccentColorModifier(keyPath: accents.keys.first { $0 == \.primary }))
+            .styleOverride(accents: accents.mapValues { .base(.definition(.value($0))) })
     }
 
 }
@@ -26,10 +34,11 @@ private struct AccentColorModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath
+    let keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
         if
+            let keyPath,
             keyPath == \.primary,
             let definition = style.accent(for: keyPath),
             let color = style.surface(for: definition.base)
