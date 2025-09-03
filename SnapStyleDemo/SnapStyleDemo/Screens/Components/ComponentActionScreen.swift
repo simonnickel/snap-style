@@ -34,7 +34,7 @@ struct ComponentActionScreen: View {
                 ActionButtonsView(elements: elements)
                 ActionButtonsView(elements: elements, enabled: false)
                 ActionButtonsView(elements: elements)
-                    .styleDestructive()
+                    .style(accent: \.destructive)
             }
             .style(component: .contentCard)
             
@@ -44,7 +44,7 @@ struct ComponentActionScreen: View {
                 ActionButtonsView(elements: elements)
                 ActionButtonsView(elements: elements, enabled: false)
                 ActionButtonsView(elements: elements)
-                    .styleDestructive()
+                    .style(accent: \.destructive)
             }
             .style(component: .accentCard)
             

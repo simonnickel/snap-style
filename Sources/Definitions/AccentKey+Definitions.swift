@@ -28,16 +28,6 @@ extension SnapStyle.AccentKey.Value.WrappedValue {
             brightness: .dark
         )
     }
-    
-    public static var fallbackDestructive: Self {
-        Self(
-            base: \.snapRed,
-            onAccent: \.snapWhite,
-            complementary: \.snapOrange,
-            contrast: \.snapYellow,
-            brightness: .dark
-        )
-    }
 
 }
 
@@ -63,7 +53,13 @@ extension SnapStyle.AccentKey {
     
     public var destructive: ValueBuilder {
         .base(.definition(.value(
-            .fallbackDestructive
+            .init(
+                base: \.snapRed,
+                onAccent: \.snapWhite,
+                complementary: \.snapOrange,
+                contrast: \.snapYellow,
+                brightness: .dark
+            )
         )))
     }
     
