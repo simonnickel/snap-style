@@ -7,22 +7,15 @@ import SwiftUI
 import SnapStyleBase
 import SnapStyleDefinitions
 
+
+// MARK: - Modifier
+
 extension View {
 
-    public func styleSetup(
-        accent: SnapStyle.AccentKey.Value.WrappedValue,
-        for keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath = \.primary
-    ) -> some View {
+    public func style(accent: SnapStyle.AccentKey.ValueBuilderKeyPath) -> some View {
         self
-            .styleSetup(accents: [keyPath: accent])
-    }
-
-    public func styleSetup(
-        accents: [SnapStyle.AccentKey.ValueBuilderKeyPath : SnapStyle.AccentKey.Value.WrappedValue]
-    ) -> some View {
-        self
-            .modifier(AccentColorModifier(keyPath: accents.keys.first { $0 == \.primary }))
-            .styleOverride(accents: accents.mapValues { .base(.definition(.value($0))) })
+            .modifier(AccentColorModifier(keyPath: accent))
+            .style(attribute: SnapStyle.Context.accent, value: accent)
     }
 
 }

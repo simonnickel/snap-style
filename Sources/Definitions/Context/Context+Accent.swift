@@ -6,9 +6,24 @@
 import SnapStyleBase
 import SwiftUI
 
+// TODO: Move all Context Values from base to Definitions?
+// Needs to be located in `Definitions` target to have access to values in `AccentKey+Definitions`.
+
+extension SnapStyle.Context {
+
+    public var accent: SnapStyle.AccentKey.ValueBuilderKeyPath? { getValue(for: Self.accent) }
+
+    public static var accent: Attribute<String, SnapStyle.AccentKey.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
+
+}
+
+
+// MARK: - ContextWrapper
+
 extension SnapStyle.ContextWrapper {
 
     public var accent: SnapStyle.AccentKey.Value.WrappedValue {
+        // TODO: Can I get rid of `useSecondaryAccent` and just set the context?
         if context.component.useSecondaryAccent {
             accent(for: \.secondary) ?? .fallbackSecondary
         } else {
@@ -19,31 +34,9 @@ extension SnapStyle.ContextWrapper {
             }
         }
     }
-    
+
     public var accentPrimary: SnapStyle.AccentKey.Value.WrappedValue {
         accent(for: \.primary) ?? .fallbackPrimary
     }
-
-}
-
-
-// MARK: - Modifier
-
-extension View {
-
-    public func style(accent: SnapStyle.AccentKey.ValueBuilderKeyPath) -> some View {
-        style(attribute: SnapStyle.Context.accent, value: accent)
-    }
-
-}
-
-
-// MARK: - Context
-
-extension SnapStyle.Context {
-
-    public var accent: SnapStyle.AccentKey.ValueBuilderKeyPath? { getValue(for: Self.accent) }
-
-    public static var accent: Attribute<String, SnapStyle.AccentKey.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
 
 }
