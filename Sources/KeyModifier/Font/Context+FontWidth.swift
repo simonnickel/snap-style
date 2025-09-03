@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleBase
 import SwiftUI
 
 
@@ -11,17 +12,7 @@ import SwiftUI
 extension View {
 
     public func style(fontWidth: Font.Width?) -> some View {
-        modifier(FontWidthModifier(fontWidth: fontWidth))
-    }
-
-}
-
-internal struct FontWidthModifier: ViewModifier {
-
-    let fontWidth: Font.Width?
-
-    func body(content: Content) -> some View {
-        content
+        self
             .style(attribute: SnapStyle.Context.fontWidth, value: fontWidth)
     }
 

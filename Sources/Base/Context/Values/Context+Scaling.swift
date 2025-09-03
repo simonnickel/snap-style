@@ -11,20 +11,8 @@ import SwiftUI
 extension View {
 
     public func style(scaleFactor: SnapStyle.Context.ScaleFactor? = nil) -> some View {
-        modifier(UpdateScaleFactorModifier(scaleFactor: scaleFactor ?? SnapStyle.Context.scaleFactorDefault))
-    }
-
-}
-
-internal struct UpdateScaleFactorModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let scaleFactor: SnapStyle.Context.ScaleFactor
-
-    func body(content: Content) -> some View {
-        content
-            .style(attribute: SnapStyle.Context.scaleFactor, value: scaleFactor)
+        self
+            .style(attribute: SnapStyle.Context.scaleFactor, value: scaleFactor ?? SnapStyle.Context.scaleFactorDefault)
     }
 
 }

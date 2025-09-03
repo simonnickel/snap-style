@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleBase
 import SwiftUI
 
 
@@ -11,17 +12,7 @@ import SwiftUI
 extension View {
 
     public func style(fontDesign: Font.Design?) -> some View {
-        modifier(FontDesignModifier(fontDesign: fontDesign))
-    }
-
-}
-
-internal struct FontDesignModifier: ViewModifier {
-    
-    let fontDesign: Font.Design?
-
-    func body(content: Content) -> some View {
-        content
+        self
             .style(attribute: SnapStyle.Context.fontDesign, value: fontDesign)
     }
 

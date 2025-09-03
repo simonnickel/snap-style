@@ -6,7 +6,6 @@
 import SnapStyleBase
 import SwiftUI
 
-// TODO: Move all Context Values from base to Definitions?
 // Needs to be located in `Definitions` target to have access to values in `AccentKey+Definitions`.
 
 extension SnapStyle.Context {
