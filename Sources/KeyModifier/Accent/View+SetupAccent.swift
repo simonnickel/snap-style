@@ -9,15 +9,15 @@ import SnapStyleDefinitions
 
 extension View {
 
-    public func style(
+    public func styleSetup(
         accent: SnapStyle.AccentKey.Value.WrappedValue,
         for keyPath: SnapStyle.AccentKey.ValueBuilderKeyPath = \.primary
     ) -> some View {
         self
-            .style(accents: [keyPath: accent])
+            .styleSetup(accents: [keyPath: accent])
     }
 
-    public func style(
+    public func styleSetup(
         accents: [SnapStyle.AccentKey.ValueBuilderKeyPath : SnapStyle.AccentKey.Value.WrappedValue]
     ) -> some View {
         self

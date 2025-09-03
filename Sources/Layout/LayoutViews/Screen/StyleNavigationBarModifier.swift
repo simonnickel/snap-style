@@ -178,7 +178,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
-    .style(setup: style)
+    .styleSetup(style)
 }
 
 #Preview("Inline") {
@@ -200,5 +200,5 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         .navigationTitle("Title")
     }
     .style(fontDesign: .monospaced)
-    .style(setup: style)
+    .styleSetup(style)
 }

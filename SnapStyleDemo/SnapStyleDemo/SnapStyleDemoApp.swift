@@ -26,7 +26,7 @@ struct SnapStyleDemoApp: App {
         
         var body: some View {
             TabContainer()
-                .style(accents: [
+                .styleSetup(accents: [
                     \.primary : demoConfiguration.accentPrimary,
                     \.secondary : demoConfiguration.accentSecondary,
                 ])
@@ -34,7 +34,7 @@ struct SnapStyleDemoApp: App {
                     \.cornerRadiusComponent : .base(.reference(demoConfiguration.cornerRadius.valueComponent)),
                     \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                 ])
-                .style(setup: style)
+                .styleSetup(style)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)
