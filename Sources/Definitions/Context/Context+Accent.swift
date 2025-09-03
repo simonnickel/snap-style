@@ -22,15 +22,10 @@ extension SnapStyle.Context {
 extension SnapStyle.ContextWrapper {
 
     public var accent: SnapStyle.AccentKey.Value.WrappedValue {
-        // TODO: Can I get rid of `useSecondaryAccent` and just set the context?
-        if context.component.useSecondaryAccent {
-            accent(for: \.secondary) ?? .fallbackSecondary
+        if let accentKeypath = context.accent {
+            accent(for: accentKeypath) ?? .fallbackPrimary
         } else {
-            if let accentKeypath = context.accent {
-                accent(for: accentKeypath) ?? .fallbackPrimary
-            } else {
-                accent(for: \.primary) ?? .fallbackPrimary
-            }
+            accent(for: \.primary) ?? .fallbackPrimary
         }
     }
 

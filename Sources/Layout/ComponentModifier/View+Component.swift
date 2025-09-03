@@ -59,6 +59,7 @@ private struct ComponentModifier26: ViewModifier {
     func body(content: Content) -> some View {
         let componentStack = style.context.componentStack.appended(component, state: state)
         content
+            .style(accent: component.requiresSecondaryAccent ? \.secondary : nil)
             .style(attribute: SnapStyle.Context.componentStack, value: componentStack)
     }
 
