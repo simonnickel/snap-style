@@ -10,6 +10,8 @@ extension SnapStyle.ContextWrapper {
     public var accent: SnapStyle.AccentKey.Value.WrappedValue {
         if context.component.useSecondaryAccent {
             accent(for: \.secondary) ?? .fallbackSecondary
+        } else if context.destructiveAccent {
+            accent(for: \.destructive) ?? .fallbackDestructive
         } else {
             accent(for: \.primary) ?? .fallbackPrimary
         }
