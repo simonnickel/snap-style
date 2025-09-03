@@ -1,4 +1,4 @@
 version: 1
 builder:
   configs:
-    - documentation_targets: [SnapStyle]
+    - documentation_targets: [SnapStyle, SnapStyleViews, SnapStyleLayout, SnapStyleKeyModifier, SnapStyleDefinitions, SnapStyleComponents, SnapStyleBase, SnapStyleDebug]
