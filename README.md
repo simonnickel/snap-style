@@ -7,13 +7,34 @@
 
 # SnapStyle
 
-Short description ...
+A toolset to abstract Colors, Fonts, Icons and Numbers of a multi-platform SwiftUI app. Define semantic attributes in a Theme and apply them to your views for a consistent UI with maintainability in mind.
 
 [![Documentation][documentation badge]][documentation] 
 
 [documentation]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyle
 [documentation badge]: https://img.shields.io/badge/Documentation-DocC-blue
 
+// TODO: Update feature set, namings, how to use and list of components
+
+## Motivation
+
+Consistency in look and feel is important. Especially for a growing app project, when you decide to tweak a few attributes or need adjustments to fit platform changes or design trends. Goal of SnapTheme is to define visual attributes in a single place, to allow: A consistent UI with simple adjustments and quick experiments, but strong maintainability.
+
+Instead of defining design attributes all over the place, you register a semantic key, assign a definition and use it in your SwiftUI views. You can also define multiple Themes to let the user choose it's favorite.
+
+Comes with:
+
+Base attributes (Color, Font, Icon, Number) and composed attributes (Surface, Background, TextSurface).
+A preset of common semantic definitions for these attributes (e.g. .textTitle, .textSubtitle) with platform specific default values.
+ViewModifier to apply them to your views.
+Wrapper of stock SwiftUI views to set attributes from Style definitions (e.g. ThemeVStack(spacing:)).
+Convenience views for common layout and style tasks (e.g. ThemeScreen, ThemeElement).
+The Theme is injected in the Environment to be available to ViewModifier and Views.
+
+Fonts and Numbers are scaled by DynamicType by default. This brings some additional benefits:
+
+UI sizes (paddings, spacings, ...) defined by the Theme will scale with DynamicType.
+By adjusting the Themes scale factor, the whole UI can be zoomed by a simple value change.
 
 ## Setup
 
