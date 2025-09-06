@@ -61,6 +61,7 @@ public struct StyleLabel<Content: View>: View {
 
 extension EnvironmentValues {
     @Entry var styleLabelSpacing: SnapStyle.NumberKey.ValueBuilderKeyPath = \.spacingLabel
+    @Entry var styleLabelContent: [StyleLabelContent] = [.icon, .label]
 }
 
 
@@ -74,13 +75,33 @@ extension LabelStyle where Self == CustomSpacingLabelStyle {
 
 struct CustomSpacingLabelStyle: LabelStyle {
     
+    @Environment(\.styleLabelContent) private var styleLabelContent
+    
     let spacing: SnapStyle.NumberKey.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
         StyleStack(.horizontal, spacing: spacing, isStretching: false) {
-            configuration.icon
-            configuration.title
+            if styleLabelContent.contains(.icon) {
+                configuration.icon
+            }
+            // TODO Accessibility: Should the label text be added as hint? Do we have access here to the text somehow?
+            if styleLabelContent.contains(.label) {
+                configuration.title
+            }
         }
+    }
+}
+
+
+// MARK: - ContentConfiguration
+
+public enum StyleLabelContent {
+    case icon, label
+}
+
+extension View {
+    public func style(labelContent: [StyleLabelContent]) -> some View {
+        environment(\.styleLabelContent, labelContent)
     }
 }
 
@@ -94,18 +115,24 @@ struct CustomSpacingLabelStyle: LabelStyle {
             StyleLabel(icon: \.favorite) {
                 Text("Content")
             }
+            .background(.yellow)
             
             StyleLabel(content: {
                 Text("Content")
             })
+            .background(.yellow)
             
             StyleLabel(icon: \.favorite)
-            
-            StyleLabel(systemImage: "rectangle")
+                .background(.yellow)
+            StyleLabel("Invisible", systemImage: "circle")
+                .style(labelContent: [.icon])
+                .background(.yellow)
             
             StyleLabel("Title", icon: \.favorite)
+                .background(.yellow)
             StyleLabel("Custom Spacing", icon: \.favorite)
                 .environment(\.styleLabelSpacing, \.spacingSections)
+                .background(.yellow)
         }
 
         
