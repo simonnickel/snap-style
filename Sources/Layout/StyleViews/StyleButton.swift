@@ -9,46 +9,14 @@ import SnapStyleDefinitions
 import SwiftUI
 
 
-// MARK: - Variant
-
-extension StyleButton {
-
-    public enum Variant {
-
-        case primary
-        case secondary
-        case icon(hierarchy: SnapStyle.Element.Hierarchy = .primary)
-        case component(SnapStyle.ComponentDefinition, hierarchy: SnapStyle.Element.Hierarchy = .primary)
-
-        var component: SnapStyle.ComponentDefinition {
-            switch self {
-                case .primary, .secondary: .button
-                case .icon: .buttonIconOnly
-                case .component(let component, hierarchy: _): component
-            }
-        }
-
-        var hierarchy: SnapStyle.Element.Hierarchy {
-            switch self {
-                case .primary: .primary
-                case .secondary: .secondary
-                case .icon(let hierarchy): hierarchy
-                case .component(_, hierarchy: let hierarchy): hierarchy
-            }
-        }
-
-    }
-
-}
-
-
 // MARK: - StyleButton
 
 public struct StyleButton<Content>: View where Content : View {
 
     @Environment(\.style) private var style
+    @Environment(\.styleButtonVariant) private var styleButtonVariant
 
-    private let variant: StyleButton<Content>.Variant
+    private let variant: StyleButtonVariant?
 
     private let isEnabled: Bool
     @State private var interactionState: SnapStyle.Component.InteractionState = .normal
@@ -57,7 +25,7 @@ public struct StyleButton<Content>: View where Content : View {
     private let content: () -> Content
 
     public init(
-        _ variant: StyleButton<Content>.Variant = .primary,
+        _ variant: StyleButtonVariant? = nil,
         enabled: Bool = true,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -69,6 +37,8 @@ public struct StyleButton<Content>: View where Content : View {
     }
 
     public var body: some View {
+        let variant = self.variant ?? styleButtonVariant
+        
         StyleButtonInteractionState($interactionState, action: action) {
             content()
                 .style(element: .title)
@@ -94,12 +64,15 @@ struct PreviewContent: View {
 
     var body: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
-            StyleButton(.primary, enabled: isEnabled) { } content: {
+            StyleButton(enabled: isEnabled) { } content: {
                 Label("Primary", systemImage: "star")
             }
-            StyleButton(.secondary, enabled: isEnabled) { } content: {
+            
+            StyleButton(enabled: isEnabled) { } content: {
                 Label("Secondary", systemImage: "star")
             }
+            .style(buttonVariant: .secondary)
+            
             StyleStack(.horizontal, spacing: \.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary), enabled: isEnabled) { } content: {
                     Label("Primary", systemImage: "star")
@@ -114,8 +87,13 @@ struct PreviewContent: View {
                         .labelStyle(.iconOnly)
                 }
             }
+            
             StyleButton(.component(.metricCard), enabled: isEnabled) { } content: {
                 Label("Component: .metricCard", systemImage: "star")
+            }
+            
+            StyleButton(.plain, enabled: isEnabled) { } content: {
+                Label("Plain", systemImage: "star")
             }
         }
     }
