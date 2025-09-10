@@ -10,6 +10,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
 
     public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
+    public typealias Variant = StyleListRowVariant<SelectionValue>
 
     private let variant: Variant
     private let icon: StyleIcon.Definition?

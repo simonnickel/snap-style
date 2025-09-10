@@ -5,34 +5,30 @@
 
 import SwiftUI
 
-extension StyleListRow {
+public enum StyleListRowVariant<SelectionValue: Hashable> {
     
-    public enum Variant {
-        
-        // TODO: Add Segmented Control
-        
-        case plain
+    // TODO: Add Segmented Control
+    
+    case plain
 
-        /// Navigation style that pushes a value.
-        case navigate(_ value: SelectionValue, isPresented: Bool = false)
-        
-        /// Navigation style that executes an action.
-        case navigation(isPresented: Bool)
+    /// Navigation style that pushes a value.
+    case navigate(_ value: SelectionValue, isPresented: Bool = false)
+    
+    /// Navigation style that executes an action.
+    case navigation(isPresented: Bool)
 
-        /// Selection style to choose a single value.
-        case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
+    /// Selection style to choose a single value.
+    case selectValue(_ value: SelectionValue, selection: Binding<SelectionValue>)
 
-        /// Select style to choose multiple values.
-        case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
+    /// Select style to choose multiple values.
+    case selectValues(_ value: SelectionValue, selection: Binding<[SelectionValue]>)
 
-        /// Selection style, controlled via binding.
-        case selected(Binding<Bool>)
+    /// Selection style, controlled via binding.
+    case selected(Binding<Bool>)
 
-        /// Switch style, controlled via binding.
-        case enabled(Binding<Bool>)
-        
-        case pick(_ values: [SelectionValue], titleKeyPath: KeyPath<SelectionValue, String>, selection: Binding<SelectionValue>)
-        
-    }
+    /// Switch style, controlled via binding.
+    case enabled(Binding<Bool>)
+    
+    case pick(_ values: [SelectionValue], titleKeyPath: KeyPath<SelectionValue, String>, selection: Binding<SelectionValue>)
     
 }
