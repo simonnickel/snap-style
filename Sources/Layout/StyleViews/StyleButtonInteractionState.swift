@@ -8,7 +8,7 @@ import SnapStyleComponents
 import SnapStyleDefinitions
 import SwiftUI
 
-/// A Button that provides a Binding to `SnapStyle.Component.InteractionState` that is updated on interaction.
+/// A Button that provides a Binding to `Style.Component.InteractionState` that is updated on interaction.
 public struct StyleButtonInteractionState<Content>: View where Content : View {
     
     @Environment(\.style) private var style

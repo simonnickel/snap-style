@@ -60,7 +60,7 @@ struct StructuredScreen: View {
         StructuredScreen()
 //            .styleOverride(
 //                surfaces: [
-//                    \.onAccent: SnapStyle.ValueBuilder.builder { context in
+//                    \.onAccent: Style.ValueBuilder.builder { context in
 //                        .definition(.color(.yellow))
 //                    }
 //                ]

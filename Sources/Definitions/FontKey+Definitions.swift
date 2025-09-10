@@ -16,13 +16,13 @@ extension Style.FontKey {
     public var content: ValueBuilder { .base(.definition(.with(size: 16, weight: .regular))) }
     public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
 
-    /// Requires `SnapStyle.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleInline: ValueBuilder {
         .base(.definition(.with(size: 17, weight: .semibold))) // iOS 26 - size: 17, weight: .semibold
     }
     
-    /// Requires `SnapStyle.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleLarge: ValueBuilder {
         .base(.definition(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
