@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import SnapCore
 
 // StyleListRow aligns the icons by their center and the content on the leading edge.
 // Icon might have different width though, so StyleList and StyleListRow store the largest width and applies them to all icons.
@@ -19,7 +20,7 @@ extension View {
     /// Enables icon width synchronisation with the other rows in the same `StyleList`. Reports the own icon width and applies the highest value to the frame.
     /// Needs to be applied on the icon of each list row.
     func listIconWidthSynchronized() -> some View {
-        self.modifier(ListIconWidthSynchronisationModifier())
+        modifier(ListIconWidthSynchronisationModifier())
     }
     
 }
@@ -70,7 +71,11 @@ extension View {
     /// Defines the scope of icon width synchronisation. Stores the highest value and provides it via Environment.
     /// Needs to be defined on the `List`.
     func listIconWidthScope() -> some View {
-        self.modifier(ListIconWidthScopeModifier())
+        self
+            .modifier(ListIconWidthScopeModifier())
+            // TODO FB20190402: Need to reload onAppear to fix the separator inset.
+            // When updating the inset after the view already appeared, the inset is not updated.
+            .modifier(ReloadOnAppearModifier())
     }
     
 }

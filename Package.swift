@@ -17,6 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/simonnickel/snap-foundation.git", branch: "main"),
+        .package(url: "https://github.com/simonnickel/snap-core.git", branch: "main"),
     ],
     targets: [
         // The main target to import, it just exports the other targets.
@@ -55,6 +56,7 @@ let package = Package(
                 "SnapStyleDefinitions",
                 "SnapStyleKeyModifier",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
+                .product(name: "SnapCore", package: "snap-core"),
             ],
             path: "Sources/Layout",
         ),

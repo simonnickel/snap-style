@@ -25,7 +25,7 @@ public struct StyleList<SelectionValue: Hashable, Content: View>: View {
     
     public var body: some View {
         StyleScreen(component: .list, configuration: .list) {
-            SeparatorReloadingList {
+            List {
                 content()
                     .styleListRowInsets(\.zero)
             }

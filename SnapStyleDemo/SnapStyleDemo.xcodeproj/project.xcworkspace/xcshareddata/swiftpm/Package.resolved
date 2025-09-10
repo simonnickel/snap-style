@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/simonnickel/snap-core.git",
       "state" : {
-        "revision" : "4c6c2451a96a893e68385148b8f72d41c6df7996",
-        "version" : "0.1.0"
+        "branch" : "main",
+        "revision" : "11e1cf4f4bc5d68b8e54a2ed7f7102ceff3ecffe"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/simonnickel/snap-foundation.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ee8af3f0c4ec6d9f375e4f9c192247d13cb1f760"
+        "revision" : "04929cb99ce8d552e61d7a5cb9cc65375fddd063"
       }
     }
   ],
