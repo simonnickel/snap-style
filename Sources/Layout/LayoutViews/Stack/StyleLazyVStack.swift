@@ -11,12 +11,12 @@ public struct StyleLazyVStack<Content>: View where Content: View {
     @Environment(\.style) private var style
 
     private let alignment: HorizontalAlignment
-    private let spacing: Style.NumberKey.ValueBuilderKeyPath?
+    private let spacing: Style.Keys.NumberKey.ValueBuilderKeyPath?
     private let isStretching: Bool
     private let content: () -> Content
 
     public init(
-        spacing: Style.NumberKey.ValueBuilderKeyPath? = nil,
+        spacing: Style.Keys.NumberKey.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
         isStretching: Bool = true,
         @ViewBuilder content: @escaping () -> Content

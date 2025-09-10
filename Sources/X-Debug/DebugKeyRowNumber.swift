@@ -8,7 +8,7 @@ import SwiftUI
 
 struct DebugKeyRowNumber: View {
 
-    let keyPath: Style.NumberKey.ValueBuilderKeyPath
+    let keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath
 
     var body: some View {
         HStack {

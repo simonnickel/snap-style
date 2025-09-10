@@ -8,16 +8,16 @@ import SwiftUI
 extension View {
 
     public func styleOverride(
-        numbers: [Style.NumberKey.ValueBuilderKeyPath: Style.NumberKey.ValueBuilder]? = nil,
-        fonts: [Style.FontKey.ValueBuilderKeyPath: Style.FontKey.ValueBuilder]? = nil,
-        icons: [Style.IconKey.ValueBuilderKeyPath: Style.IconKey.ValueBuilder]? = nil,
-        surfaces: [Style.SurfaceKey.ValueBuilderKeyPath: Style.SurfaceKey.ValueBuilder]? = nil,
-        compositions: [Style.CompositionKey.ValueBuilderKeyPath: Style.CompositionKey.ValueBuilder]? = nil,
-        accents: [Style.AccentKey.ValueBuilderKeyPath: Style.AccentKey.ValueBuilder]? = nil,
-        shapes: [Style.ShapeKey.ValueBuilderKeyPath: Style.ShapeKey.ValueBuilder]? = nil
+        numbers: [Style.Keys.NumberKey.ValueBuilderKeyPath: Style.Keys.NumberKey.ValueBuilder]? = nil,
+        fonts: [Style.Keys.FontKey.ValueBuilderKeyPath: Style.Keys.FontKey.ValueBuilder]? = nil,
+        icons: [Style.Keys.IconKey.ValueBuilderKeyPath: Style.Keys.IconKey.ValueBuilder]? = nil,
+        surfaces: [Style.Keys.SurfaceKey.ValueBuilderKeyPath: Style.Keys.SurfaceKey.ValueBuilder]? = nil,
+        compositions: [Style.Keys.CompositionKey.ValueBuilderKeyPath: Style.Keys.CompositionKey.ValueBuilder]? = nil,
+        accents: [Style.Keys.AccentKey.ValueBuilderKeyPath: Style.Keys.AccentKey.ValueBuilder]? = nil,
+        shapes: [Style.Keys.ShapeKey.ValueBuilderKeyPath: Style.Keys.ShapeKey.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
-            StyleOverrideModifier(
+            Style.OverrideModifier(
                 numbers: numbers,
                 fonts: fonts,
                 icons: icons,
@@ -34,35 +34,39 @@ extension View {
 
 // MARK: - Modifier
 
-private struct StyleOverrideModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let numbers: [Style.NumberKey.ValueBuilderKeyPath: Style.NumberKey.ValueBuilder]?
-    let fonts: [Style.FontKey.ValueBuilderKeyPath: Style.FontKey.ValueBuilder]?
-    let icons: [Style.IconKey.ValueBuilderKeyPath: Style.IconKey.ValueBuilder]?
-    let surfaces: [Style.SurfaceKey.ValueBuilderKeyPath: Style.SurfaceKey.ValueBuilder]?
-    let compositions: [Style.CompositionKey.ValueBuilderKeyPath: Style.CompositionKey.ValueBuilder]?
-    let accents: [Style.AccentKey.ValueBuilderKeyPath: Style.AccentKey.ValueBuilder]?
-    let shapes: [Style.ShapeKey.ValueBuilderKeyPath: Style.ShapeKey.ValueBuilder]?
-
-    func body(content: Content) -> some View {
-
-        let definition = style.definition.replaced(
-            numbers: numbers,
-            fonts: fonts,
-            icons: icons,
-            surfaces: surfaces,
-            compositions: compositions,
-            accents: accents,
-            shapes: shapes
-        )
-
-        content
-            .style(update: definition)
-
+extension Style {
+    
+    struct OverrideModifier: ViewModifier {
+        
+        @Environment(\.style) private var style
+        
+        let numbers: [Keys.NumberKey.ValueBuilderKeyPath: Keys.NumberKey.ValueBuilder]?
+        let fonts: [Keys.FontKey.ValueBuilderKeyPath: Keys.FontKey.ValueBuilder]?
+        let icons: [Keys.IconKey.ValueBuilderKeyPath: Keys.IconKey.ValueBuilder]?
+        let surfaces: [Keys.SurfaceKey.ValueBuilderKeyPath: Keys.SurfaceKey.ValueBuilder]?
+        let compositions: [Keys.CompositionKey.ValueBuilderKeyPath: Keys.CompositionKey.ValueBuilder]?
+        let accents: [Keys.AccentKey.ValueBuilderKeyPath: Keys.AccentKey.ValueBuilder]?
+        let shapes: [Keys.ShapeKey.ValueBuilderKeyPath: Keys.ShapeKey.ValueBuilder]?
+        
+        func body(content: Content) -> some View {
+            
+            let definition = style.definition.replaced(
+                numbers: numbers,
+                fonts: fonts,
+                icons: icons,
+                surfaces: surfaces,
+                compositions: compositions,
+                accents: accents,
+                shapes: shapes
+            )
+            
+            content
+                .style(update: definition)
+            
+        }
+        
     }
-
+    
 }
 
 
@@ -71,13 +75,13 @@ private struct StyleOverrideModifier: ViewModifier {
 extension Style {
 
     internal func replaced(
-        numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]? = nil,
-        fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]? = nil,
-        icons: [IconKey.ValueBuilderKeyPath: IconKey.ValueBuilder]? = nil,
-        surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]? = nil,
-        compositions: [CompositionKey.ValueBuilderKeyPath: CompositionKey.ValueBuilder]? = nil,
-        accents: [AccentKey.ValueBuilderKeyPath: AccentKey.ValueBuilder]? = nil,
-        shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]? = nil
+        numbers: [Keys.NumberKey.ValueBuilderKeyPath: Keys.NumberKey.ValueBuilder]? = nil,
+        fonts: [Keys.FontKey.ValueBuilderKeyPath: Keys.FontKey.ValueBuilder]? = nil,
+        icons: [Keys.IconKey.ValueBuilderKeyPath: Keys.IconKey.ValueBuilder]? = nil,
+        surfaces: [Keys.SurfaceKey.ValueBuilderKeyPath: Keys.SurfaceKey.ValueBuilder]? = nil,
+        compositions: [Keys.CompositionKey.ValueBuilderKeyPath: Keys.CompositionKey.ValueBuilder]? = nil,
+        accents: [Keys.AccentKey.ValueBuilderKeyPath: Keys.AccentKey.ValueBuilder]? = nil,
+        shapes: [Keys.ShapeKey.ValueBuilderKeyPath: Keys.ShapeKey.ValueBuilder]? = nil
     ) -> Self {
         var style = self
 

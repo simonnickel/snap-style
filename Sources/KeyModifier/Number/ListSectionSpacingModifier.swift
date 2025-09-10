@@ -13,7 +13,7 @@ extension View {
     ///
     /// - Parameter valueKeyPath: Number to apply as spacing.
     public func styleListSectionSpacing(
-        _ valueKeyPath: Style.NumberKey.ValueBuilderKeyPath
+        _ valueKeyPath: Style.Keys.NumberKey.ValueBuilderKeyPath
     ) -> some View {
         modifier(
             ListSectionSpacingModifier(spacing: valueKeyPath)
@@ -29,7 +29,7 @@ private struct ListSectionSpacingModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let spacing: Style.NumberKey.ValueBuilderKeyPath
+    let spacing: Style.Keys.NumberKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         let value = style.number(for: spacing)

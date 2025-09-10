@@ -7,7 +7,7 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
-extension Style.SurfaceKey {
+extension Style.Keys.SurfaceKey {
 
 
     // MARK: - Generic Surfaces

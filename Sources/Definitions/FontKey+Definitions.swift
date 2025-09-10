@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension Style.FontKey {
+extension Style.Keys.FontKey {
 
 
     // MARK: - Component

@@ -7,13 +7,13 @@ extension Style {
 
     internal struct BuilderContainer: Copyable {
 
-        internal var numbers: [NumberKey.ValueBuilderKeyPath: [NumberKey.ValueBuilder]] = [:]
-        internal var fonts: [FontKey.ValueBuilderKeyPath: [FontKey.ValueBuilder]] = [:]
-        internal var icons: [IconKey.ValueBuilderKeyPath: [IconKey.ValueBuilder]] = [:]
-        internal var surfaces: [SurfaceKey.ValueBuilderKeyPath: [SurfaceKey.ValueBuilder]] = [:]
-        internal var compositions: [CompositionKey.ValueBuilderKeyPath: [CompositionKey.ValueBuilder]] = [:]
-        internal var accents: [AccentKey.ValueBuilderKeyPath: [AccentKey.ValueBuilder]] = [:]
-        internal var shapes: [ShapeKey.ValueBuilderKeyPath: [ShapeKey.ValueBuilder]] = [:]
+        internal var numbers: [Keys.NumberKey.ValueBuilderKeyPath: [Keys.NumberKey.ValueBuilder]] = [:]
+        internal var fonts: [Keys.FontKey.ValueBuilderKeyPath: [Keys.FontKey.ValueBuilder]] = [:]
+        internal var icons: [Keys.IconKey.ValueBuilderKeyPath: [Keys.IconKey.ValueBuilder]] = [:]
+        internal var surfaces: [Keys.SurfaceKey.ValueBuilderKeyPath: [Keys.SurfaceKey.ValueBuilder]] = [:]
+        internal var compositions: [Keys.CompositionKey.ValueBuilderKeyPath: [Keys.CompositionKey.ValueBuilder]] = [:]
+        internal var accents: [Keys.AccentKey.ValueBuilderKeyPath: [Keys.AccentKey.ValueBuilder]] = [:]
+        internal var shapes: [Keys.ShapeKey.ValueBuilderKeyPath: [Keys.ShapeKey.ValueBuilder]] = [:]
 
 
         // MARK: Get
@@ -22,37 +22,37 @@ extension Style {
 
             switch keyPath {
 
-                case let keyPath as KeyPath<NumberKey, NumberKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.NumberKey, Keys.NumberKey.ValueBuilder>:
                     if let builders = numbers[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<FontKey, FontKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.FontKey, Keys.FontKey.ValueBuilder>:
                     if let builders = fonts[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<IconKey, IconKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.IconKey, Keys.IconKey.ValueBuilder>:
                     if let builders = icons[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<SurfaceKey, SurfaceKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.SurfaceKey, Keys.SurfaceKey.ValueBuilder>:
                     if let builders = surfaces[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<CompositionKey, CompositionKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.CompositionKey, Keys.CompositionKey.ValueBuilder>:
                     if let builders = compositions[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
                     
-                case let keyPath as KeyPath<AccentKey, AccentKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.AccentKey, Keys.AccentKey.ValueBuilder>:
                     if let builders = accents[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<ShapeKey, ShapeKey.ValueBuilder>:
+                case let keyPath as KeyPath<Keys.ShapeKey, Keys.ShapeKey.ValueBuilder>:
                     if let builders = shapes[keyPath] as? [Key.ValueBuilder] {
                         return builders
                     }
@@ -69,31 +69,31 @@ extension Style {
 
     // MARK: Append
 
-    internal func appended(numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]) -> Self {
+    internal func appended(numbers: [Keys.NumberKey.ValueBuilderKeyPath: Keys.NumberKey.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)
     }
 
-    internal func appended(fonts: [FontKey.ValueBuilderKeyPath: FontKey.ValueBuilder]) -> Self {
+    internal func appended(fonts: [Keys.FontKey.ValueBuilderKeyPath: Keys.FontKey.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
     }
 
-    internal func appended(icons: [IconKey.ValueBuilderKeyPath: IconKey.ValueBuilder]) -> Self {
+    internal func appended(icons: [Keys.IconKey.ValueBuilderKeyPath: Keys.IconKey.ValueBuilder]) -> Self {
         appended(icons, at: \.icons)
     }
 
-    internal func appended(surfaces: [SurfaceKey.ValueBuilderKeyPath: SurfaceKey.ValueBuilder]) -> Self {
+    internal func appended(surfaces: [Keys.SurfaceKey.ValueBuilderKeyPath: Keys.SurfaceKey.ValueBuilder]) -> Self {
         appended(surfaces, at: \.surfaces)
     }
 
-    internal func appended(compositions: [CompositionKey.ValueBuilderKeyPath: CompositionKey.ValueBuilder]) -> Self {
+    internal func appended(compositions: [Keys.CompositionKey.ValueBuilderKeyPath: Keys.CompositionKey.ValueBuilder]) -> Self {
         appended(compositions, at: \.compositions)
     }
 
-    internal func appended(accents: [AccentKey.ValueBuilderKeyPath: AccentKey.ValueBuilder]) -> Self {
+    internal func appended(accents: [Keys.AccentKey.ValueBuilderKeyPath: Keys.AccentKey.ValueBuilder]) -> Self {
         appended(accents, at: \.accents)
     }
 
-    internal func appended(shapes: [ShapeKey.ValueBuilderKeyPath: ShapeKey.ValueBuilder]) -> Self {
+    internal func appended(shapes: [Keys.ShapeKey.ValueBuilderKeyPath: Keys.ShapeKey.ValueBuilder]) -> Self {
         appended(shapes, at: \.shapes)
     }
 

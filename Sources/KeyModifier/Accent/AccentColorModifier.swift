@@ -12,7 +12,7 @@ import SnapStyleDefinitions
 
 extension View {
 
-    public func style(accent: Style.AccentKey.ValueBuilderKeyPath?) -> some View {
+    public func style(accent: Style.Keys.AccentKey.ValueBuilderKeyPath?) -> some View {
         self
             .modifier(AccentColorModifier(keyPath: accent))
     }
@@ -26,7 +26,7 @@ private struct AccentColorModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.AccentKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.AccentKey.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
         if

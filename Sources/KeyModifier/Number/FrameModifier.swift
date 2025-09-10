@@ -16,7 +16,7 @@ extension View {
     ///   - keyPath: The `Number` to apply as maxWidth, `nil` is the inert value
     ///   - alignment: The `Alignment` of this view inside the resulting frame. Note that most alignment values have no apparent effect when the size of the frame happens to match that of this view.
     public func style(
-        maxWidth keyPath: Style.NumberKey.ValueBuilderKeyPath?,
+        maxWidth keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?,
         alignment: Alignment = .leading
     ) -> some View {
         modifier(FrameMaxWidthModifier(keyPath: keyPath, alignment: alignment))
@@ -31,7 +31,7 @@ private struct FrameMaxWidthModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: Style.NumberKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?
     let alignment: Alignment
     
     func body(content: Content) -> some View {

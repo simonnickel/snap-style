@@ -16,7 +16,7 @@ extension View {
     /// - Parameter keyPath: The `Surface` to apply, `nil` will apply a clear background.
     /// - Parameter ignoresSafeAreaEdges: Controls the safe area behaviour.
     public func style(
-        background keyPath: Style.SurfaceKey.ValueBuilderKeyPath?,
+        background keyPath: Style.Keys.SurfaceKey.ValueBuilderKeyPath?,
         ignoresSafeAreaEdges: Edge.Set = []
     ) -> some View {
         modifier(SurfaceBackgroundModifier(keyPath: keyPath, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
@@ -31,7 +31,7 @@ private struct SurfaceBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.SurfaceKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.SurfaceKey.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {

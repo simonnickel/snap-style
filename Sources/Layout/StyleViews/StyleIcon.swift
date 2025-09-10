@@ -16,7 +16,7 @@ public struct StyleIcon: View {
         self.icon = icon
     }
 
-    public init(_ icon: Style.IconKey.ValueBuilderKeyPath) {
+    public init(_ icon: Style.Keys.IconKey.ValueBuilderKeyPath) {
         self.icon = .icon(icon)
     }
 
@@ -42,11 +42,11 @@ public struct StyleIcon: View {
 
 extension StyleIcon {
     public enum Definition {
-        case icon(Style.IconKey.ValueBuilderKeyPath)
+        case icon(Style.Keys.IconKey.ValueBuilderKeyPath)
         case system(String)
 
         /// Convenience init to create a definition if either a KeyPath or String might be available.
-        init?(icon: Style.IconKey.ValueBuilderKeyPath?, systemImage: String?) {
+        init?(icon: Style.Keys.IconKey.ValueBuilderKeyPath?, systemImage: String?) {
             if let icon {
                 self = .icon(icon)
             } else if let systemImage {

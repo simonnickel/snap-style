@@ -22,7 +22,7 @@ extension View {
 
 extension Style.Context {
 
-    public typealias ScaleFactor = Style.NumberKey.Value.WrappedValue
+    public typealias ScaleFactor = Style.Keys.NumberKey.Value.WrappedValue
 
     public static let scaleFactorDefault: ScaleFactor = 1.0
 
