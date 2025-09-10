@@ -17,8 +17,8 @@ extension View {
     ///   - layers: The `Layer`s that should be applied
     ///   - ignoreSafeAreaEdges: Controls the safe area behaviour of the background.
     public func style(
-        composition keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath,
-        layers: [Style.Keys.CompositionKey.Layer] = Style.Keys.CompositionKey.Layer.allCases,
+        composition keyPath: Style.Keys.Composition.ValueBuilderKeyPath,
+        layers: [Style.Keys.Composition.Layer] = Style.Keys.Composition.Layer.allCases,
         ignoreSafeAreaEdges: Edge.Set = []
     ) -> some View {
         modifier(CompositionModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
@@ -33,8 +33,8 @@ private struct CompositionModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath
-    let layers: [Style.Keys.CompositionKey.Layer]
+    let keyPath: Style.Keys.Composition.ValueBuilderKeyPath
+    let layers: [Style.Keys.Composition.Layer]
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
@@ -50,10 +50,10 @@ private struct CompositionForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Composition.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
-        let surfaceKey: Style.Keys.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .foreground, for: keyPath) } else { nil }
+        let surfaceKey: Style.Keys.Surface.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .foreground, for: keyPath) } else { nil }
         content
             .style(foreground: surfaceKey)
     }
@@ -64,11 +64,11 @@ private struct CompositionBackgroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Composition.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        let surfaceKey: Style.Keys.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .background, for: keyPath) } else { nil }
+        let surfaceKey: Style.Keys.Surface.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .background, for: keyPath) } else { nil }
         content
             .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }
@@ -79,11 +79,11 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Composition.ValueBuilderKeyPath?
     let ignoresSafeAreaEdges: Edge.Set
 
     func body(content: Content) -> some View {
-        let surfaceKey: Style.Keys.SurfaceKey.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .backgroundOverlay, for: keyPath) } else { nil }
+        let surfaceKey: Style.Keys.Surface.ValueBuilderKeyPath? = if let keyPath { style.surfaceKey(layer: .backgroundOverlay, for: keyPath) } else { nil }
         content
             .style(background: surfaceKey, ignoresSafeAreaEdges: ignoresSafeAreaEdges)
     }

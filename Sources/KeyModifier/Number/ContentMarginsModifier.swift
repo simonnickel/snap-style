@@ -17,7 +17,7 @@ extension View {
     ///   - edges: The edges to add the margins to.
     ///   - placement: Where the margins should be added.
     public func style(
-        contentMargins keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?,
+        contentMargins keyPath: Style.Keys.Number.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all,
         placement: ContentMarginPlacement = .automatic
     ) -> some View {
@@ -33,7 +33,7 @@ private struct ContentMarginModifier: ViewModifier {
 
     @Environment(\.style) private var style
     
-    let keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Number.ValueBuilderKeyPath?
     let edges: Edge.Set
     let placement: ContentMarginPlacement
     

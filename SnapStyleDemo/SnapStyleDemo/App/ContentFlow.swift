@@ -60,10 +60,10 @@ struct ContentFlow: View {
 
                     case .elements: DebugElementScreen(components: [.screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 
-                    case .cacheNumber: DebugCacheScreen<Style.Keys.NumberKey>()
-                    case .cacheFont: DebugCacheScreen<Style.Keys.FontKey>()
-                    case .cacheSurface: DebugCacheScreen<Style.Keys.SurfaceKey>()
-                    case .cacheComposition: DebugCacheScreen<Style.Keys.CompositionKey>()
+                    case .cacheNumber: DebugCacheScreen<Style.Keys.Number>()
+                    case .cacheFont: DebugCacheScreen<Style.Keys.Font>()
+                    case .cacheSurface: DebugCacheScreen<Style.Keys.Surface>()
+                    case .cacheComposition: DebugCacheScreen<Style.Keys.Composition>()
                 }
             }
             .navigationTitle(title)

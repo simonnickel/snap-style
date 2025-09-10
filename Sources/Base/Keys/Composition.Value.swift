@@ -6,10 +6,10 @@
 import SwiftUI
 
 extension Style.Keys {
-    public struct CompositionKey: StyleKey { public init() {} }
+    public struct Composition: StyleKey { public init() {} }
 }
 
-extension Style.Keys.CompositionKey {
+extension Style.Keys.Composition {
 
 
     // MARK: - Layer
@@ -27,7 +27,7 @@ extension Style.Keys.CompositionKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = LayeredShapeStyle
-        public typealias Adjustment = Style.Keys.CompositionKey.Adjustment
+        public typealias Adjustment = Style.Keys.Composition.Adjustment
 
         case background(LayeredShapeStyle.LayerValue)
         case foreground(LayeredShapeStyle.LayerValue)
@@ -52,7 +52,7 @@ extension Style.Keys.CompositionKey {
 
         public struct LayeredShapeStyle {
 
-            public typealias LayerValue = Style.Keys.SurfaceKey.ValueBuilderKeyPath
+            public typealias LayerValue = Style.Keys.Surface.ValueBuilderKeyPath
             typealias ShapeStyleForLayer = [Layer: LayerValue]
 
             let values: ShapeStyleForLayer
@@ -78,7 +78,7 @@ extension Style.Keys.CompositionKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.CompositionKey.Value
+        public typealias Value = Style.Keys.Composition.Value
 
         public func applied(on value: Value) -> Value {
             value

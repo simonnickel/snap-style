@@ -6,7 +6,7 @@
 import SnapFoundation
 import SwiftUI
 
-extension Style.Keys.FontKey.Value.Definition {
+extension Style.Keys.Font.Value.Definition {
 
     public func font(size sizeOverride: Double? = nil) -> Font {
         let sizeToUse = sizeOverride ?? size
@@ -27,7 +27,7 @@ extension Style.Keys.FontKey.Value.Definition {
 
 import UIKit
 
-extension Style.Keys.FontKey.Value.Definition {
+extension Style.Keys.Font.Value.Definition {
     public func uiFont(size sizeOverride: Double? = nil) -> UIFont {
         let sizeToUse = sizeOverride ?? size
         let font: UIFont = if let width {
@@ -53,21 +53,21 @@ extension Style.Keys.FontKey.Value.Definition {
 
 #Preview {
 
-    let definitionStandard: Style.Keys.FontKey.Value.Definition = .init(
+    let definitionStandard: Style.Keys.Font.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: nil,
         textStyle: .body
     )
-    let definitionDesign: Style.Keys.FontKey.Value.Definition = .init(
+    let definitionDesign: Style.Keys.Font.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: .serif,
         textStyle: .body
     )
-    let definitionWidth: Style.Keys.FontKey.Value.Definition = .init(
+    let definitionWidth: Style.Keys.Font.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: .compressed,
@@ -88,7 +88,7 @@ extension Style.Keys.FontKey.Value.Definition {
 
 struct CompareView: View {
 
-    let definition: Style.Keys.FontKey.Value.Definition
+    let definition: Style.Keys.Font.Value.Definition
 
     var body: some View {
         VStack {

@@ -7,13 +7,13 @@ import SwiftUI
 
 extension Style.ContextWrapper {
 
-    package typealias NumberKey = Style.Keys.NumberKey
-    package typealias FontKey = Style.Keys.FontKey
-    package typealias IconKey = Style.Keys.IconKey
-    package typealias SurfaceKey = Style.Keys.SurfaceKey
-    package typealias CompositionKey = Style.Keys.CompositionKey
-    package typealias AccentKey = Style.Keys.AccentKey
-    package typealias ShapeKey = Style.Keys.ShapeKey
+    package typealias NumberKey = Style.Keys.Number
+    package typealias FontKey = Style.Keys.Font
+    package typealias IconKey = Style.Keys.Icon
+    package typealias SurfaceKey = Style.Keys.Surface
+    package typealias CompositionKey = Style.Keys.Composition
+    package typealias AccentKey = Style.Keys.Accent
+    package typealias ShapeKey = Style.Keys.Shape
 
     package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
 
@@ -118,7 +118,7 @@ extension Style.ContextWrapper {
     /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
         for keyPath: CompositionKey.ValueBuilderKeyPath
-    ) -> Style.Keys.CompositionKey.Value.LayeredShapeStyle? {
+    ) -> Style.Keys.Composition.Value.LayeredShapeStyle? {
 
         let value = value(for: keyPath)
 

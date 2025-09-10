@@ -7,10 +7,10 @@ import SnapFoundation
 import SwiftUI
 
 extension Style.Keys {
-    public struct ShapeKey: StyleKey { public init() {} }
+    public struct Shape: StyleKey { public init() {} }
 }
 
-extension Style.Keys.ShapeKey {
+extension Style.Keys.Shape {
     
     
     // MARK: - ShapeKey.Value
@@ -18,13 +18,13 @@ extension Style.Keys.ShapeKey {
     public enum Value: StyleValue, Equatable {
         
         public typealias WrappedValue = Self
-        public typealias Adjustment = Style.Keys.ShapeKey.Adjustment
+        public typealias Adjustment = Style.Keys.Shape.Adjustment
         
         case containerRelative
         case circle
         case capsule
         case rectangle
-        case rectangleRounded(radius: Style.Keys.NumberKey.ValueBuilderKeyPath)
+        case rectangleRounded(radius: Style.Keys.Number.ValueBuilderKeyPath)
         
         public var wrappedValue: WrappedValue {
             self
@@ -68,7 +68,7 @@ extension Style.Keys.ShapeKey {
     
     public enum Adjustment: StyleAdjustment {
         
-        public typealias Value = Style.Keys.ShapeKey.Value
+        public typealias Value = Style.Keys.Shape.Value
         
         public func applied(on value: Value) -> Value {
             value

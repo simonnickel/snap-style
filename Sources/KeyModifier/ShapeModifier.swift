@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(shape keyPath: Style.Keys.ShapeKey.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
+    public func style(shape keyPath: Style.Keys.Shape.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
         modifier(ShapeKeyModifier(keyPath: keyPath, shouldClip: shouldClip))
     }
 
@@ -22,7 +22,7 @@ private struct ShapeKeyModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: Style.Keys.ShapeKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Shape.ValueBuilderKeyPath?
     let shouldClip: Bool
 
     func body(content: Content) -> some View {

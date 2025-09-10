@@ -9,30 +9,30 @@ extension Style {
     internal struct CacheContainer {
 
         // References to `StyleKey` specific caches.
-        internal var numbers: KeyTypeCache<Keys.NumberKey> = .init()
-        internal var fonts: KeyTypeCache<Keys.FontKey> = .init()
-        internal var icons: KeyTypeCache<Keys.IconKey> = .init()
-        internal var surfaces: KeyTypeCache<Keys.SurfaceKey> = .init()
-        internal var compositions: KeyTypeCache<Keys.CompositionKey> = .init()
-        internal var accents: KeyTypeCache<Keys.AccentKey> = .init()
-        internal var shapes: KeyTypeCache<Keys.ShapeKey> = .init()
+        internal var numbers: KeyTypeCache<Keys.Number> = .init()
+        internal var fonts: KeyTypeCache<Keys.Font> = .init()
+        internal var icons: KeyTypeCache<Keys.Icon> = .init()
+        internal var surfaces: KeyTypeCache<Keys.Surface> = .init()
+        internal var compositions: KeyTypeCache<Keys.Composition> = .init()
+        internal var accents: KeyTypeCache<Keys.Accent> = .init()
+        internal var shapes: KeyTypeCache<Keys.Shape> = .init()
 
         internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
             switch Key.self {
 
-                case let key as Keys.NumberKey.Type: return numbers as? KeyTypeCache<Key>
+                case let key as Keys.Number.Type: return numbers as? KeyTypeCache<Key>
 
-                case let key as Keys.FontKey.Type: return fonts as? KeyTypeCache<Key>
+                case let key as Keys.Font.Type: return fonts as? KeyTypeCache<Key>
 
-                case let key as Keys.IconKey.Type: return icons as? KeyTypeCache<Key>
+                case let key as Keys.Icon.Type: return icons as? KeyTypeCache<Key>
 
-                case let key as Keys.SurfaceKey.Type: return surfaces as? KeyTypeCache<Key>
+                case let key as Keys.Surface.Type: return surfaces as? KeyTypeCache<Key>
 
-                case let key as Keys.CompositionKey.Type: return compositions as? KeyTypeCache<Key>
+                case let key as Keys.Composition.Type: return compositions as? KeyTypeCache<Key>
                     
-                case let key as Keys.AccentKey.Type: return accents as? KeyTypeCache<Key>
+                case let key as Keys.Accent.Type: return accents as? KeyTypeCache<Key>
 
-                case let key as Keys.ShapeKey.Type: return shapes as? KeyTypeCache<Key>
+                case let key as Keys.Shape.Type: return shapes as? KeyTypeCache<Key>
 
                 default: fatalError("Cache is not setup properly.")
 
@@ -43,26 +43,26 @@ extension Style {
         internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
             switch Key.self {
 
-                case let key as Keys.NumberKey.Type: numbers = .init()
+                case let key as Keys.Number.Type: numbers = .init()
 
-                case let key as Keys.FontKey.Type: fonts = .init()
+                case let key as Keys.Font.Type: fonts = .init()
 
-                case let key as Keys.IconKey.Type: icons = .init()
+                case let key as Keys.Icon.Type: icons = .init()
 
-                case let key as Keys.SurfaceKey.Type:
+                case let key as Keys.Surface.Type:
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Keys.CompositionKey.Type:
+                case let key as Keys.Composition.Type:
                     compositions = .init()
                     surfaces = .init()
                     
-                case let key as Keys.AccentKey.Type:
+                case let key as Keys.Accent.Type:
                     accents = .init()
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Keys.ShapeKey.Type: shapes = .init()
+                case let key as Keys.Shape.Type: shapes = .init()
 
                 default: fatalError("Cache is not setup properly.")
 

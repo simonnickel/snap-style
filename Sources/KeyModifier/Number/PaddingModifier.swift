@@ -16,7 +16,7 @@ extension View {
     ///   - keyPath: The `Number` to apply as length of the padding, `nil` is the inert value
     ///   - edges: The set of edges to pad for this view. The default is `.all`.
     public func style(
-        padding keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?,
+        padding keyPath: Style.Keys.Number.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all
     ) -> some View {
         modifier(PaddingModifier(keyPath: keyPath, edges: edges))
@@ -31,7 +31,7 @@ private struct PaddingModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?
+    let keyPath: Style.Keys.Number.ValueBuilderKeyPath?
     let edges: Edge.Set
     
     func body(content: Content) -> some View {

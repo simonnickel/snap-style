@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 class DemoConfiguration {
     
-    typealias Accent = Style.Keys.AccentKey.Value.WrappedValue
+    typealias Accent = Style.Keys.Accent.Value.WrappedValue
 
     var accentPrimary: Accent
     var accentSecondary: Accent
@@ -45,14 +45,14 @@ class DemoConfiguration {
     enum CornerRadiusOption: String, CaseIterable {
         case small, medium, large
         
-        var valueComponent: Style.Keys.NumberKey.ValueBuilderKeyPath {
+        var valueComponent: Style.Keys.Number.ValueBuilderKeyPath {
             switch self {
                 case .small: \.cornerRadiusMedium
                 case .medium: \.cornerRadiusLarge
                 case .large: \.cornerRadiusLargest
             }
         }
-        var valueMetricCard: Style.Keys.NumberKey.ValueBuilderKeyPath {
+        var valueMetricCard: Style.Keys.Number.ValueBuilderKeyPath {
             switch self {
                 case .small: \.cornerRadiusSmallest
                 case .medium: \.cornerRadiusSmall

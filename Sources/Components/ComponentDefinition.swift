@@ -17,19 +17,19 @@ extension Style {
         public let requiresSecondaryAccent: Bool
 
         package let padding: MappingPadding?
-        package let fonts: Mapping<Keys.FontKey>?
-        package let surfaces: Mapping<Keys.SurfaceKey>?
-        package let compositions: Mapping<Keys.CompositionKey>?
-        package let shapes: Mapping<Keys.ShapeKey>?
+        package let fonts: Mapping<Keys.Font>?
+        package let surfaces: Mapping<Keys.Surface>?
+        package let compositions: Mapping<Keys.Composition>?
+        package let shapes: Mapping<Keys.Shape>?
 
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             padding: MappingPadding? = nil,
-            fonts: Mapping<Keys.FontKey>? = nil,
-            surfaces: Mapping<Keys.SurfaceKey>? = nil,
-            compositions: Mapping<Keys.CompositionKey>? = nil,
-            shapes: Mapping<Keys.ShapeKey>? = nil
+            fonts: Mapping<Keys.Font>? = nil,
+            surfaces: Mapping<Keys.Surface>? = nil,
+            compositions: Mapping<Keys.Composition>? = nil,
+            shapes: Mapping<Keys.Shape>? = nil
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
@@ -45,7 +45,7 @@ extension Style {
 
         public struct Padding {
 
-            public typealias Value = Keys.NumberKey.ValueBuilderKeyPath
+            public typealias Value = Keys.Number.ValueBuilderKeyPath
 
             package let leading: Value?
             package let top: Value?

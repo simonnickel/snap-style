@@ -11,7 +11,7 @@ struct DebugKeyRowSurface: View {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Keys.SurfaceKey.ValueBuilderKeyPath
+    let keyPath: Style.Keys.Surface.ValueBuilderKeyPath
 
     var body: some View {
         let surface = style.surface(for: keyPath)

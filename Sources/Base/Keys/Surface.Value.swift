@@ -6,10 +6,10 @@
 import SwiftUI
 
 extension Style.Keys {
-    public struct SurfaceKey: StyleKey { public init() {} }
+    public struct Surface: StyleKey { public init() {} }
 }
 
-extension Style.Keys.SurfaceKey {
+extension Style.Keys.Surface {
 
 
     // MARK: - SurfaceKey.Value
@@ -18,7 +18,7 @@ extension Style.Keys.SurfaceKey {
 
         /// Does not define a type for WrappedValue for easier access.
         public typealias WrappedValue = Self
-        public typealias Adjustment = Style.Keys.SurfaceKey.Adjustment
+        public typealias Adjustment = Style.Keys.Surface.Adjustment
 
         case color(Color)
         case material(Material)
@@ -58,7 +58,7 @@ extension Style.Keys.SurfaceKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.SurfaceKey.Value
+        public typealias Value = Style.Keys.Surface.Value
 
         case opacity(Double)
         case mix(Color, Double)

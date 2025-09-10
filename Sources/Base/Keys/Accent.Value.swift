@@ -4,10 +4,10 @@
 //
 
 extension Style.Keys {
-    public struct AccentKey: StyleKey { public init() {} }
+    public struct Accent: StyleKey { public init() {} }
 }
 
-extension Style.Keys.AccentKey {
+extension Style.Keys.Accent {
 
 
     // MARK: - NumberKey.Value
@@ -15,7 +15,7 @@ extension Style.Keys.AccentKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Accent
-        public typealias Adjustment = Style.Keys.AccentKey.Adjustment
+        public typealias Adjustment = Style.Keys.Accent.Adjustment
 
         case value(WrappedValue)
 
@@ -36,7 +36,7 @@ extension Style.Keys.AccentKey {
         
         public struct Accent: Hashable, Equatable {
             
-            public typealias ColorValue = Style.Keys.SurfaceKey.ValueBuilderKeyPath
+            public typealias ColorValue = Style.Keys.Surface.ValueBuilderKeyPath
             
             public let base: ColorValue
             public let onAccent: ColorValue
@@ -65,7 +65,7 @@ extension Style.Keys.AccentKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.AccentKey.Value
+        public typealias Value = Style.Keys.Accent.Value
 
         public func applied(on value: Value) -> Value {
             value

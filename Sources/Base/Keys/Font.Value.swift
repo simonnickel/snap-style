@@ -6,10 +6,10 @@
 import SwiftUI
 
 extension Style.Keys {
-    public struct FontKey: StyleKey { public init() {} }
+    public struct Font: StyleKey { public init() {} }
 }
 
-extension Style.Keys.FontKey {
+extension Style.Keys.Font {
 
 
     // MARK: - FontKey.Value
@@ -17,7 +17,7 @@ extension Style.Keys.FontKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Definition
-        public typealias Adjustment = Style.Keys.FontKey.Adjustment
+        public typealias Adjustment = Style.Keys.Font.Adjustment
 
         case with(
             size: CGFloat,
@@ -74,7 +74,7 @@ extension Style.Keys.FontKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.FontKey.Value
+        public typealias Value = Style.Keys.Font.Value
 
         public func applied(on value: Value) -> Value {
             value

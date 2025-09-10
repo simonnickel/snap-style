@@ -10,9 +10,9 @@ import SwiftUI
 
 extension Style.Context {
 
-    public var accent: Style.Keys.AccentKey.ValueBuilderKeyPath? { getValue(for: Self.accent) }
+    public var accent: Style.Keys.Accent.ValueBuilderKeyPath? { getValue(for: Self.accent) }
 
-    public static var accent: Attribute<String, Style.Keys.AccentKey.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
+    public static var accent: Attribute<String, Style.Keys.Accent.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
 
 }
 
@@ -21,7 +21,7 @@ extension Style.Context {
 
 extension Style.ContextWrapper {
 
-    public var accent: Style.Keys.AccentKey.Value.WrappedValue {
+    public var accent: Style.Keys.Accent.Value.WrappedValue {
         if let accentKeypath = context.accent {
             accent(for: accentKeypath) ?? .fallbackPrimary
         } else {
@@ -29,7 +29,7 @@ extension Style.ContextWrapper {
         }
     }
 
-    public var accentPrimary: Style.Keys.AccentKey.Value.WrappedValue {
+    public var accentPrimary: Style.Keys.Accent.Value.WrappedValue {
         accent(for: \.primary) ?? .fallbackPrimary
     }
 

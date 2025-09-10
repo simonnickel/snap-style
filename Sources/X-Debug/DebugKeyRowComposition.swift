@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DebugKeyRowComposition: View {
 
-    let keyPath: Style.Keys.CompositionKey.ValueBuilderKeyPath
+    let keyPath: Style.Keys.Composition.ValueBuilderKeyPath
 
     var body: some View {
         Text("\(keyPath)")

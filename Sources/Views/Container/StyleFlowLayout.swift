@@ -14,9 +14,9 @@ public struct StyleFlowLayout: Layout {
     
     @Environment(\.style) private var style
 
-    private let spacing: Style.Keys.NumberKey.ValueBuilderKeyPath?
+    private let spacing: Style.Keys.Number.ValueBuilderKeyPath?
 
-    public init(spacing: Style.Keys.NumberKey.ValueBuilderKeyPath?) {
+    public init(spacing: Style.Keys.Number.ValueBuilderKeyPath?) {
         self.spacing = spacing
     }
     

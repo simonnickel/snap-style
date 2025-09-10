@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConfigurationColorScreen: View {
     
-    typealias Accent = Style.Keys.AccentKey.Value.WrappedValue
+    typealias Accent = Style.Keys.Accent.Value.WrappedValue
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration

@@ -11,11 +11,11 @@ public struct StyleLazyHStack<Content>: View where Content: View {
     @Environment(\.style) private var style
 
     private let alignment: VerticalAlignment
-    private let spacing: Style.Keys.NumberKey.ValueBuilderKeyPath?
+    private let spacing: Style.Keys.Number.ValueBuilderKeyPath?
     private let content: () -> Content
 
     public init(
-        spacing: Style.Keys.NumberKey.ValueBuilderKeyPath? = nil,
+        spacing: Style.Keys.Number.ValueBuilderKeyPath? = nil,
         alignment: VerticalAlignment = .center,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -31,7 +31,7 @@ public struct StyleLazyHStack<Content>: View where Content: View {
         }
     }
 
-    private func spacing(for keyPath: Style.Keys.NumberKey.ValueBuilderKeyPath?) -> Style.Keys.NumberKey.Value.WrappedValue {
+    private func spacing(for keyPath: Style.Keys.Number.ValueBuilderKeyPath?) -> Style.Keys.Number.Value.WrappedValue {
         guard let keyPath else { return 0 }
 
         return style.number(for: keyPath) ?? 0

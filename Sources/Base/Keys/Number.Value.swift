@@ -4,10 +4,10 @@
 //
 
 extension Style.Keys {
-    public struct NumberKey: StyleKey { public init() {} }
+    public struct Number: StyleKey { public init() {} }
 }
 
-extension Style.Keys.NumberKey {
+extension Style.Keys.Number {
 
 
     // MARK: - NumberKey.Value
@@ -15,7 +15,7 @@ extension Style.Keys.NumberKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Double
-        public typealias Adjustment = Style.Keys.NumberKey.Adjustment
+        public typealias Adjustment = Style.Keys.Number.Adjustment
 
         case value(WrappedValue)
 
@@ -38,7 +38,7 @@ extension Style.Keys.NumberKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.NumberKey.Value
+        public typealias Value = Style.Keys.Number.Value
 
         public func applied(on value: Value) -> Value {
             value
