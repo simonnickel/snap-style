@@ -3,43 +3,53 @@
 //  Created by Simon Nickel
 //
 
+import SnapStyleBase
 import SwiftUI
 
-public struct StyleList<SelectionValue: Hashable, Content: View>: View {
+public typealias StyleList = Style.Views.List.ListView
+extension Style.Views {
+    public enum List {}
+}
+
+extension Style.Views.List {
     
-    private let selection: Binding<SelectionValue?>?
-    private let insetTop: Bool
-    private let content: () -> Content
-    
-    public init(selection: Binding<SelectionValue?>?, insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) {
-        self.selection = selection
-        self.insetTop = insetTop
-        self.content = content
-    }
-    
-    public init(insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
-        self.selection = nil
-        self.insetTop = insetTop
-        self.content = content
-    }
-    
-    public var body: some View {
-        StyleScreen(component: .list, configuration: .list) {
-            List {
-                content()
-                    .styleListRowInsets(\.zero)
+    public struct ListView<SelectionValue: Hashable, Content: View>: View {
+        
+        private let selection: Binding<SelectionValue?>?
+        private let insetTop: Bool
+        private let content: () -> Content
+        
+        public init(selection: Binding<SelectionValue?>?, insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) {
+            self.selection = selection
+            self.insetTop = insetTop
+            self.content = content
+        }
+        
+        public init(insetTop: Bool = true, @ViewBuilder content: @escaping () -> Content) where SelectionValue == Never {
+            self.selection = nil
+            self.insetTop = insetTop
+            self.content = content
+        }
+        
+        public var body: some View {
+            StyleScreen(component: .list, configuration: .list) {
+                SwiftUI.List {
+                    content()
+                        .styleListRowInsets(\.zero)
+                }
+                .listIconWidthScope()
+                .styleListSectionSpacing(\.paddingListSection)
+                // TODO FB: Custom Section Spacing does not apply to top of first section. Needs to be smaller than actual section spacing. Would prefer to use `.contentMargins(.top, value, for: .scrollContent)`, but for some weird reason this is applied between first section header and content.
+                .style(safeAreaPadding: insetTop ? \.paddingListSectionFirst : \.zero, .top)
+                .style(safeAreaPadding: \.paddingListBottom, .bottom)
+                // Need to disable to use custom background.
+                .scrollContentBackground(.hidden)
+                // SwiftUI prevents too small list rows, this messes with .listRowInsets though.
+                .environment(\.defaultMinListRowHeight, 0)
             }
-            .listIconWidthScope()
-            .styleListSectionSpacing(\.paddingListSection)
-            // TODO FB: Custom Section Spacing does not apply to top of first section. Needs to be smaller than actual section spacing. Would prefer to use `.contentMargins(.top, value, for: .scrollContent)`, but for some weird reason this is applied between first section header and content.
-            .style(safeAreaPadding: insetTop ? \.paddingListSectionFirst : \.zero, .top)
-            .style(safeAreaPadding: \.paddingListBottom, .bottom)
-            // Need to disable to use custom background.
-            .scrollContentBackground(.hidden)
-            // SwiftUI prevents too small list rows, this messes with .listRowInsets though.
-            .environment(\.defaultMinListRowHeight, 0)
         }
     }
+    
 }
 
 
