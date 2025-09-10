@@ -15,19 +15,17 @@ extension Style.Views.List.Row {
     
     public struct RowView<SelectionValue: Hashable, Title: View, Content: View>: View {
         
-        public typealias IconKeyPath = Style.IconKey.ValueBuilderKeyPath
         public typealias Action = () -> Void
-        public typealias Variant = Style.Views.List.Row.Variant<SelectionValue>
         
-        private let variant: Variant
+        private let variant: Style.Views.List.Row.Variant<SelectionValue>
         private let icon: StyleIcon.Definition?
         private let title: () -> Title
         private let content: (() -> Content)?
         private let action: Action?
         
         public init(
-            _ variant: Variant = .plain,
-            icon: IconKeyPath? = nil,
+            _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
+            icon: Style.IconKey.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title,
@@ -42,8 +40,8 @@ extension Style.Views.List.Row {
         
         /// An alternative init is required for variant that does not specify a `Content`.
         public init(
-            _ variant: Variant = .plain,
-            icon: IconKeyPath? = nil,
+            _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
+            icon: Style.IconKey.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title
@@ -57,8 +55,8 @@ extension Style.Views.List.Row {
         
         /// An alternative init is required for variant that does not specify a `SelectionValue`.
         public init(
-            _ variant: Variant = .plain,
-            icon: IconKeyPath? = nil,
+            _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
+            icon: Style.IconKey.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title,
@@ -73,8 +71,8 @@ extension Style.Views.List.Row {
         
         /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of `Content`.
         public init(
-            _ variant: Variant = .plain,
-            icon: IconKeyPath? = nil,
+            _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
+            icon: Style.IconKey.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title
@@ -197,7 +195,7 @@ extension Style.Views.List.Row {
         // MARK: Accessory
         
         @ViewBuilder
-        private func viewAccessory(for variant: Variant) -> some View {
+        private func viewAccessory(for variant: Style.Views.List.Row.Variant<SelectionValue>) -> some View {
             switch variant {
                 case .plain: EmptyView()
                     
