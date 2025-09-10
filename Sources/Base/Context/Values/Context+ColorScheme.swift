@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-extension SnapStyle.Context {
+extension Style.Context {
 
     public static let colorSchemeDefault: ColorScheme = .light
 

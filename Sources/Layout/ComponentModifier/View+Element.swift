@@ -15,14 +15,14 @@ extension View {
     /// - Parameters:
     ///   - element: The `ElementType` the view represents.
     ///   - hierarchy: `Hierarchy` of the element.
-    public func style(element: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
+    public func style(element: Style.Element.ElementType, hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
             .modifier(ElementApplyStyleModifier())
-            .style(attribute: SnapStyle.Context.element, value: SnapStyle.Element(type: element, hierarchy: hierarchy))
+            .style(attribute: Style.Context.element, value: Style.Element(type: element, hierarchy: hierarchy))
     }
 
     /// Shortcut to adjust the elements hierarchy.
-    public func style(hierarchy: SnapStyle.Element.Hierarchy = .primary) -> some View {
+    public func style(hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
             .modifier(ElementApplyStyleModifier())
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
@@ -41,10 +41,10 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let component = style.context.component.definition
         let element = style.context.element.type
 
-        let base = SnapStyle.ComponentDefinition.base
+        let base = Style.ComponentDefinition.base
 
         let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
-        let padding = component.padding?(element) ?? base.padding?(element) ?? SnapStyle.ComponentDefinition.Padding(\.paddingAnyElement)
+        let padding = component.padding?(element) ?? base.padding?(element) ?? Style.ComponentDefinition.Padding(\.paddingAnyElement)
         let compositionKeyPath = component.compositions?(element) ?? base.compositions?(element) ?? \.anyElement
         let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
 
@@ -67,14 +67,14 @@ private struct ElementHierarchyModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let hierarchy: SnapStyle.Element.Hierarchy
+    let hierarchy: Style.Element.Hierarchy
 
     func body(content: Content) -> some View {
-        let current = style.context.getValue(for: SnapStyle.Context.element) ?? .any
-        let element = SnapStyle.Element(type: current.type, hierarchy: hierarchy)
+        let current = style.context.getValue(for: Style.Context.element) ?? .any
+        let element = Style.Element(type: current.type, hierarchy: hierarchy)
 
         let context = style.context
-            .withAttribute(value: element, for: SnapStyle.Context.element)
+            .withAttribute(value: element, for: Style.Context.element)
 
         content
             .style(update: context)

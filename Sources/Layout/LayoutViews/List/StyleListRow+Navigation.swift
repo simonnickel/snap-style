@@ -12,7 +12,7 @@ internal struct StyleListRowNavigationHighlightContainer<Content: View>: View {
     
     @Environment(\.style) var style
     
-    let interactionState: SnapStyle.Component.InteractionState
+    let interactionState: Style.Component.InteractionState
     let isPresented: Bool
     let content: () -> Content
     

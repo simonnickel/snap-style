@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
 
 
     // MARK: - Context
@@ -16,7 +16,7 @@ extension SnapStyle {
         internal var content: [Key: Value] = [:]
 
         /// A context to use for default values.
-        public static var any: SnapStyle.Context { .init() }
+        public static var any: Style.Context { .init() }
 
 
         // MARK: Attribute

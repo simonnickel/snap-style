@@ -3,11 +3,11 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
     public struct IconKey: StyleKey { public init() {} }
 }
 
-extension SnapStyle.IconKey {
+extension Style.IconKey {
 
 
     // MARK: - NumberKey.Value
@@ -15,7 +15,7 @@ extension SnapStyle.IconKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = String
-        public typealias Adjustment = SnapStyle.IconKey.Adjustment
+        public typealias Adjustment = Style.IconKey.Adjustment
 
         case value(WrappedValue)
 
@@ -38,7 +38,7 @@ extension SnapStyle.IconKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = SnapStyle.IconKey.Value
+        public typealias Value = Style.IconKey.Value
 
         public func applied(on value: Value) -> Value {
             value

@@ -8,13 +8,13 @@ import SwiftUI
 extension View {
 
     public func styleOverride(
-        numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]? = nil,
-        fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]? = nil,
-        icons: [SnapStyle.IconKey.ValueBuilderKeyPath: SnapStyle.IconKey.ValueBuilder]? = nil,
-        surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]? = nil,
-        compositions: [SnapStyle.CompositionKey.ValueBuilderKeyPath: SnapStyle.CompositionKey.ValueBuilder]? = nil,
-        accents: [SnapStyle.AccentKey.ValueBuilderKeyPath: SnapStyle.AccentKey.ValueBuilder]? = nil,
-        shapes: [SnapStyle.ShapeKey.ValueBuilderKeyPath: SnapStyle.ShapeKey.ValueBuilder]? = nil
+        numbers: [Style.NumberKey.ValueBuilderKeyPath: Style.NumberKey.ValueBuilder]? = nil,
+        fonts: [Style.FontKey.ValueBuilderKeyPath: Style.FontKey.ValueBuilder]? = nil,
+        icons: [Style.IconKey.ValueBuilderKeyPath: Style.IconKey.ValueBuilder]? = nil,
+        surfaces: [Style.SurfaceKey.ValueBuilderKeyPath: Style.SurfaceKey.ValueBuilder]? = nil,
+        compositions: [Style.CompositionKey.ValueBuilderKeyPath: Style.CompositionKey.ValueBuilder]? = nil,
+        accents: [Style.AccentKey.ValueBuilderKeyPath: Style.AccentKey.ValueBuilder]? = nil,
+        shapes: [Style.ShapeKey.ValueBuilderKeyPath: Style.ShapeKey.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
             StyleOverrideModifier(
@@ -38,13 +38,13 @@ private struct StyleOverrideModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let numbers: [SnapStyle.NumberKey.ValueBuilderKeyPath: SnapStyle.NumberKey.ValueBuilder]?
-    let fonts: [SnapStyle.FontKey.ValueBuilderKeyPath: SnapStyle.FontKey.ValueBuilder]?
-    let icons: [SnapStyle.IconKey.ValueBuilderKeyPath: SnapStyle.IconKey.ValueBuilder]?
-    let surfaces: [SnapStyle.SurfaceKey.ValueBuilderKeyPath: SnapStyle.SurfaceKey.ValueBuilder]?
-    let compositions: [SnapStyle.CompositionKey.ValueBuilderKeyPath: SnapStyle.CompositionKey.ValueBuilder]?
-    let accents: [SnapStyle.AccentKey.ValueBuilderKeyPath: SnapStyle.AccentKey.ValueBuilder]?
-    let shapes: [SnapStyle.ShapeKey.ValueBuilderKeyPath: SnapStyle.ShapeKey.ValueBuilder]?
+    let numbers: [Style.NumberKey.ValueBuilderKeyPath: Style.NumberKey.ValueBuilder]?
+    let fonts: [Style.FontKey.ValueBuilderKeyPath: Style.FontKey.ValueBuilder]?
+    let icons: [Style.IconKey.ValueBuilderKeyPath: Style.IconKey.ValueBuilder]?
+    let surfaces: [Style.SurfaceKey.ValueBuilderKeyPath: Style.SurfaceKey.ValueBuilder]?
+    let compositions: [Style.CompositionKey.ValueBuilderKeyPath: Style.CompositionKey.ValueBuilder]?
+    let accents: [Style.AccentKey.ValueBuilderKeyPath: Style.AccentKey.ValueBuilder]?
+    let shapes: [Style.ShapeKey.ValueBuilderKeyPath: Style.ShapeKey.ValueBuilder]?
 
     func body(content: Content) -> some View {
 
@@ -68,7 +68,7 @@ private struct StyleOverrideModifier: ViewModifier {
 
 // MARK: - SnapStyle: replaced
 
-extension SnapStyle {
+extension Style {
 
     internal func replaced(
         numbers: [NumberKey.ValueBuilderKeyPath: NumberKey.ValueBuilder]? = nil,

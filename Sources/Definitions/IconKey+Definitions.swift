@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension SnapStyle.IconKey {
+extension Style.IconKey {
 
 
     // MARK: - Common

@@ -21,7 +21,7 @@ import SwiftUI
 ///     - configuration: An array of `StyleScreenConfiguration` to define the behaviour of the screen.
 public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
-    private let component: SnapStyle.ComponentDefinition
+    private let component: Style.ComponentDefinition
     
     private let configuration: [StyleScreenConfiguration]
     
@@ -29,7 +29,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     private let content: ContentBuilder
 
     public init(
-        component: SnapStyle.ComponentDefinition = .screen,
+        component: Style.ComponentDefinition = .screen,
         configuration: [StyleScreenConfiguration] = .content,
         @ViewBuilder content: @escaping () -> ScreenContent
     ) {

@@ -8,7 +8,7 @@ import SwiftUI
 extension View {
 
     /// Set value of a `Context` attribute for use in Environment.
-    public func style<Key: Hashable, Value: Hashable>(attribute: SnapStyle.Context.Attribute<Key, Value>, value: Value) -> some View {
+    public func style<Key: Hashable, Value: Hashable>(attribute: Style.Context.Attribute<Key, Value>, value: Value) -> some View {
         modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
 
@@ -18,7 +18,7 @@ internal struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewMo
 
     @Environment(\.style) private var style
 
-    let attribute: SnapStyle.Context.Attribute<Key, Value>
+    let attribute: Style.Context.Attribute<Key, Value>
     let value: Value
 
     func body(content: Content) -> some View {

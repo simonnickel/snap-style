@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension SnapStyle.ShapeKey {
+extension Style.ShapeKey {
 
     public var containerRelative: ValueBuilder { .base(.definition(.containerRelative)) }
     public var circle: ValueBuilder { .base(.definition(.circle)) }

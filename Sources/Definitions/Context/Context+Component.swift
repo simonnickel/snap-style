@@ -8,13 +8,13 @@ import SnapStyleComponents
 
 // Needs to be located in `Definitions` target to have access to `Component.base`.
 
-extension SnapStyle.Context {
+extension Style.Context {
 
-    package var componentStack: SnapStyle.ComponentStack { getValue(for: Self.componentStack) ?? .init() }
+    package var componentStack: Style.ComponentStack { getValue(for: Self.componentStack) ?? .init() }
     
-    package static var componentStack: Attribute<String, SnapStyle.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
+    package static var componentStack: Attribute<String, Style.ComponentStack> { .init(key: "componentStack", valueDefault: .init()) }
 
-    public var component: SnapStyle.Component {
+    public var component: Style.Component {
         let current = componentStack.current ?? .base
 
         return .init(

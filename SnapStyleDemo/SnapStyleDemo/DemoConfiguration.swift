@@ -10,12 +10,12 @@ import SwiftUI
 @Observable
 class DemoConfiguration {
     
-    typealias Accent = SnapStyle.AccentKey.Value.WrappedValue
+    typealias Accent = Style.AccentKey.Value.WrappedValue
 
     var accentPrimary: Accent
     var accentSecondary: Accent
 
-    var scaleFactor: SnapStyle.Context.ScaleFactor
+    var scaleFactor: Style.Context.ScaleFactor
     
     var fontDesign: Font.Design?
 
@@ -24,9 +24,9 @@ class DemoConfiguration {
     init(
         accentPrimary: Accent = .fallbackPrimary,
         accentSecondary: Accent = .fallbackSecondary,
-        scaleFactor: SnapStyle.Context.ScaleFactor = SnapStyle.Context.scaleFactorDefault,
-        fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault,
-        fontWidth: Font.Width? = SnapStyle.Context.fontWidthDefault,
+        scaleFactor: Style.Context.ScaleFactor = Style.Context.scaleFactorDefault,
+        fontDesign: Font.Design? = Style.Context.fontDesignDefault,
+        fontWidth: Font.Width? = Style.Context.fontWidthDefault,
         cornerRadius: CornerRadiusOption = .medium,
     ) {
         self.accentPrimary = accentPrimary
@@ -45,14 +45,14 @@ class DemoConfiguration {
     enum CornerRadiusOption: String, CaseIterable {
         case small, medium, large
         
-        var valueComponent: SnapStyle.NumberKey.ValueBuilderKeyPath {
+        var valueComponent: Style.NumberKey.ValueBuilderKeyPath {
             switch self {
                 case .small: \.cornerRadiusMedium
                 case .medium: \.cornerRadiusLarge
                 case .large: \.cornerRadiusLargest
             }
         }
-        var valueMetricCard: SnapStyle.NumberKey.ValueBuilderKeyPath {
+        var valueMetricCard: Style.NumberKey.ValueBuilderKeyPath {
             switch self {
                 case .small: \.cornerRadiusSmallest
                 case .medium: \.cornerRadiusSmall

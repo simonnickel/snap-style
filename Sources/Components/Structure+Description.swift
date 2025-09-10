@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle.ComponentDefinition: CustomStringConvertible {
+extension Style.ComponentDefinition: CustomStringConvertible {
 
     public var description: String {
         id
@@ -13,7 +13,7 @@ extension SnapStyle.ComponentDefinition: CustomStringConvertible {
 
 }
 
-extension SnapStyle.Element: CustomStringConvertible {
+extension Style.Element: CustomStringConvertible {
 
     public var description: String {
         type.rawValue + "." + hierarchy.rawValue

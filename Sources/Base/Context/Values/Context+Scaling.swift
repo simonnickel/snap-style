@@ -10,9 +10,9 @@ import SwiftUI
 
 extension View {
 
-    public func style(scaleFactor: SnapStyle.Context.ScaleFactor? = nil) -> some View {
+    public func style(scaleFactor: Style.Context.ScaleFactor? = nil) -> some View {
         self
-            .style(attribute: SnapStyle.Context.scaleFactor, value: scaleFactor ?? SnapStyle.Context.scaleFactorDefault)
+            .style(attribute: Style.Context.scaleFactor, value: scaleFactor ?? Style.Context.scaleFactorDefault)
     }
 
 }
@@ -20,9 +20,9 @@ extension View {
 
 // MARK: - Context
 
-extension SnapStyle.Context {
+extension Style.Context {
 
-    public typealias ScaleFactor = SnapStyle.NumberKey.Value.WrappedValue
+    public typealias ScaleFactor = Style.NumberKey.Value.WrappedValue
 
     public static let scaleFactorDefault: ScaleFactor = 1.0
 

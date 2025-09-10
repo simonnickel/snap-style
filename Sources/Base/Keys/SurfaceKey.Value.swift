@@ -5,11 +5,11 @@
 
 import SwiftUI
 
-extension SnapStyle {
+extension Style {
     public struct SurfaceKey: StyleKey { public init() {} }
 }
 
-extension SnapStyle.SurfaceKey {
+extension Style.SurfaceKey {
 
 
     // MARK: - SurfaceKey.Value
@@ -18,7 +18,7 @@ extension SnapStyle.SurfaceKey {
 
         /// Does not define a type for WrappedValue for easier access.
         public typealias WrappedValue = Self
-        public typealias Adjustment = SnapStyle.SurfaceKey.Adjustment
+        public typealias Adjustment = Style.SurfaceKey.Adjustment
 
         case color(Color)
         case material(Material)
@@ -58,7 +58,7 @@ extension SnapStyle.SurfaceKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = SnapStyle.SurfaceKey.Value
+        public typealias Value = Style.SurfaceKey.Value
 
         case opacity(Double)
         case mix(Color, Double)

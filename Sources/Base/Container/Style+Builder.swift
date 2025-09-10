@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
 
     internal struct BuilderContainer: Copyable {
 
@@ -97,7 +97,7 @@ extension SnapStyle {
         appended(shapes, at: \.shapes)
     }
 
-    private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueBuilderKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<SnapStyle.BuilderContainer, [Key.ValueBuilderKeyPath: [Key.ValueBuilder]]>) -> Self {
+    private func appended<Key: StyleKey>(_ keyPaths: [Key.ValueBuilderKeyPath: Key.ValueBuilder], at destination: WritableKeyPath<Style.BuilderContainer, [Key.ValueBuilderKeyPath: [Key.ValueBuilder]]>) -> Self {
 
         var copy = self
         copy.cacheContainer.resetCache(for: Key.self)

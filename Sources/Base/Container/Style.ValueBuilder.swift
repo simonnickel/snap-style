@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
 
     /// Is an enum instead of a struct to allow cleaner call-site: `.base(value) {} or .builder {}`, instead of `.init(base:) {}`.
     public enum ValueBuilder<Value> {

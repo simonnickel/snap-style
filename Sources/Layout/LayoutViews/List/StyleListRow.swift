@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>: View {
 
-    public typealias IconKeyPath = SnapStyle.IconKey.ValueBuilderKeyPath
+    public typealias IconKeyPath = Style.IconKey.ValueBuilderKeyPath
     public typealias Action = () -> Void
     public typealias Variant = StyleListRowVariant<SelectionValue>
 
@@ -79,7 +79,7 @@ public struct StyleListRow<SelectionValue: Hashable, Title: View, Content: View>
         self.content = nil
     }
     
-    @State private var interactionState: SnapStyle.Component.InteractionState = .normal
+    @State private var interactionState: Style.Component.InteractionState = .normal
 
     
     // MARK: - Body

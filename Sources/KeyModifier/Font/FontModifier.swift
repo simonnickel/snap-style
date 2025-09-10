@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(font keyPath: SnapStyle.FontKey.ValueBuilderKeyPath) -> some View {
+    public func style(font keyPath: Style.FontKey.ValueBuilderKeyPath) -> some View {
         modifier(FontModifier(keyPath: keyPath))
     }
 
@@ -21,7 +21,7 @@ private struct FontModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: SnapStyle.FontKey.ValueBuilderKeyPath
+    let keyPath: Style.FontKey.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         let definition = style.font(for: keyPath)
@@ -35,10 +35,10 @@ private struct ScaledFont: ViewModifier {
     
     @Environment(\.style) private var style
     
-    private let definition: SnapStyle.FontKey.Value.Definition?
+    private let definition: Style.FontKey.Value.Definition?
     private let scaled: ScaledMetric<Double>
 
-    init(definition: SnapStyle.FontKey.Value.Definition?) {
+    init(definition: Style.FontKey.Value.Definition?) {
         self.definition = definition
         self.scaled = ScaledMetric(wrappedValue: Double(definition?.size ?? .zero), relativeTo: definition?.textStyle ?? .body)
     }

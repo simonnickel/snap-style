@@ -12,7 +12,7 @@ struct FontDesignConfigurationRow: View {
     @Environment(\.style) private var style
     @Environment(\.demoConfiguration) private var demoConfiguration
 
-    @State private var fontDesign: Font.Design? = SnapStyle.Context.fontDesignDefault
+    @State private var fontDesign: Font.Design? = Style.Context.fontDesignDefault
 
     var body: some View {
         // TODO: Whats the title?

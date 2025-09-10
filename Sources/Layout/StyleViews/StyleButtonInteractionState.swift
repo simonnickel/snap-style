@@ -13,14 +13,14 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     
     @Environment(\.style) private var style
     
-    private var interactionState: Binding<SnapStyle.Component.InteractionState>
+    private var interactionState: Binding<Style.Component.InteractionState>
 
     struct StateSet: Equatable {
         var didPress: Bool = false
         var isPressed: Bool = false
         var isHovering: Bool = false
 
-        var result: SnapStyle.Component.InteractionState {
+        var result: Style.Component.InteractionState {
             if isPressed || didPress {
                 return .selected
             }
@@ -39,7 +39,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     private let content: () -> Content
 
     public init(
-        _ state: Binding<SnapStyle.Component.InteractionState>,
+        _ state: Binding<Style.Component.InteractionState>,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -105,7 +105,7 @@ struct IsPressedButtonStyle: ButtonStyle {
 // MARK: - Preview
 
 #Preview {
-    @Previewable @State var state: SnapStyle.Component.InteractionState = .normal
+    @Previewable @State var state: Style.Component.InteractionState = .normal
     
     StyleButtonInteractionState($state) {
 

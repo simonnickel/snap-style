@@ -9,7 +9,7 @@ public protocol StyleKey {
     associatedtype Adjustment: StyleAdjustment where Value.WrappedValue == Adjustment.Value.WrappedValue
 
     typealias ValueBuilderKeyPath = KeyPath<Self, Self.ValueBuilder>
-    typealias ValueBuilder = SnapStyle.ValueBuilder<SnapStyle.Value<Self>>
+    typealias ValueBuilder = Style.ValueBuilder<Style.Value<Self>>
 
     /// Needs an init to access KeyPaths.
     init()

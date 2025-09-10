@@ -3,11 +3,11 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
     public struct AccentKey: StyleKey { public init() {} }
 }
 
-extension SnapStyle.AccentKey {
+extension Style.AccentKey {
 
 
     // MARK: - NumberKey.Value
@@ -15,7 +15,7 @@ extension SnapStyle.AccentKey {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Accent
-        public typealias Adjustment = SnapStyle.AccentKey.Adjustment
+        public typealias Adjustment = Style.AccentKey.Adjustment
 
         case value(WrappedValue)
 
@@ -36,7 +36,7 @@ extension SnapStyle.AccentKey {
         
         public struct Accent: Hashable, Equatable {
             
-            public typealias ColorValue = SnapStyle.SurfaceKey.ValueBuilderKeyPath
+            public typealias ColorValue = Style.SurfaceKey.ValueBuilderKeyPath
             
             public let base: ColorValue
             public let onAccent: ColorValue
@@ -65,7 +65,7 @@ extension SnapStyle.AccentKey {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = SnapStyle.AccentKey.Value
+        public typealias Value = Style.AccentKey.Value
 
         public func applied(on value: Value) -> Value {
             value

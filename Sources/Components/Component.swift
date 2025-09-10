@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle {
+extension Style {
 
     /// An actual `Component` instance for a specific View.
     public struct Component {

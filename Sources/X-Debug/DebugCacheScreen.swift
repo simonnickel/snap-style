@@ -47,7 +47,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
         }
     }
 
-    private func item(context: SnapStyle.Context, value: KeyType.Value?) -> some View {
+    private func item(context: Style.Context, value: KeyType.Value?) -> some View {
         VStack(alignment: .leading) {
             Text(context.description)
             Text(value?.description ?? "")
@@ -56,7 +56,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
 }
 
 #Preview {
-    DebugCacheScreen<SnapStyle.FontKey>()
+    DebugCacheScreen<Style.FontKey>()
         .styleOverride(
             fonts: [
                 \.title: .base(.definition(.with(size: 6))) { context in

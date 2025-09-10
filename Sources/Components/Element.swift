@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle {
+extension Style {
 
     public struct Element: Hashable, Sendable, CaseIterable {
 
@@ -15,7 +15,7 @@ extension SnapStyle {
         public let type: ElementType
         public let hierarchy: Hierarchy
 
-        package init(type: SnapStyle.Element.ElementType, hierarchy: SnapStyle.Element.Hierarchy) {
+        package init(type: Style.Element.ElementType, hierarchy: Style.Element.Hierarchy) {
             self.type = type
             self.hierarchy = hierarchy
         }
@@ -73,9 +73,9 @@ extension SnapStyle {
 
 // MARK: - Context
 
-extension SnapStyle.Context {
+extension Style.Context {
 
-    public var element: SnapStyle.Element { getValue(for: Self.element) ?? .any }
-    package static var element: Attribute<String, SnapStyle.Element> { .init(key: "element", valueDefault: .any) }
+    public var element: Style.Element { getValue(for: Self.element) ?? .any }
+    package static var element: Attribute<String, Style.Element> { .init(key: "element", valueDefault: .any) }
 
 }

@@ -8,20 +8,20 @@ import SwiftUI
 
 // Needs to be located in `Definitions` target to have access to values in `AccentKey+Definitions`.
 
-extension SnapStyle.Context {
+extension Style.Context {
 
-    public var accent: SnapStyle.AccentKey.ValueBuilderKeyPath? { getValue(for: Self.accent) }
+    public var accent: Style.AccentKey.ValueBuilderKeyPath? { getValue(for: Self.accent) }
 
-    public static var accent: Attribute<String, SnapStyle.AccentKey.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
+    public static var accent: Attribute<String, Style.AccentKey.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
 
 }
 
 
 // MARK: - ContextWrapper
 
-extension SnapStyle.ContextWrapper {
+extension Style.ContextWrapper {
 
-    public var accent: SnapStyle.AccentKey.Value.WrappedValue {
+    public var accent: Style.AccentKey.Value.WrappedValue {
         if let accentKeypath = context.accent {
             accent(for: accentKeypath) ?? .fallbackPrimary
         } else {
@@ -29,7 +29,7 @@ extension SnapStyle.ContextWrapper {
         }
     }
 
-    public var accentPrimary: SnapStyle.AccentKey.Value.WrappedValue {
+    public var accentPrimary: Style.AccentKey.Value.WrappedValue {
         accent(for: \.primary) ?? .fallbackPrimary
     }
 

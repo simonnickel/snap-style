@@ -7,7 +7,7 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
-extension SnapStyle.AccentKey.Value.WrappedValue {
+extension Style.AccentKey.Value.WrappedValue {
 
     public static var fallbackPrimary: Self {
         Self(
@@ -34,7 +34,7 @@ extension SnapStyle.AccentKey.Value.WrappedValue {
 
 // MARK: - AccentKey
 
-extension SnapStyle.AccentKey {
+extension Style.AccentKey {
     
     
     // MARK: Generic Accents
@@ -68,7 +68,7 @@ extension SnapStyle.AccentKey {
 
 // MARK: - Colors
 
-extension SnapStyle.AccentKey.Value.WrappedValue {
+extension Style.AccentKey.Value.WrappedValue {
     
     public static var blue: Self {
         Self(

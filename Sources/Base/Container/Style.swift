@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct SnapStyle {
+public struct Style {
 
     internal var builderContainer: BuilderContainer = .init()
     internal var cacheContainer: CacheContainer = .init()

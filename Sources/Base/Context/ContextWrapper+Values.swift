@@ -5,15 +5,15 @@
 
 import SwiftUI
 
-extension SnapStyle.ContextWrapper {
+extension Style.ContextWrapper {
 
-    package typealias NumberKey = SnapStyle.NumberKey
-    package typealias FontKey = SnapStyle.FontKey
-    package typealias IconKey = SnapStyle.IconKey
-    package typealias SurfaceKey = SnapStyle.SurfaceKey
-    package typealias CompositionKey = SnapStyle.CompositionKey
-    package typealias AccentKey = SnapStyle.AccentKey
-    package typealias ShapeKey = SnapStyle.ShapeKey
+    package typealias NumberKey = Style.NumberKey
+    package typealias FontKey = Style.FontKey
+    package typealias IconKey = Style.IconKey
+    package typealias SurfaceKey = Style.SurfaceKey
+    package typealias CompositionKey = Style.CompositionKey
+    package typealias AccentKey = Style.AccentKey
+    package typealias ShapeKey = Style.ShapeKey
 
     package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
 
@@ -118,7 +118,7 @@ extension SnapStyle.ContextWrapper {
     /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
         for keyPath: CompositionKey.ValueBuilderKeyPath
-    ) -> SnapStyle.CompositionKey.Value.LayeredShapeStyle? {
+    ) -> Style.CompositionKey.Value.LayeredShapeStyle? {
 
         let value = value(for: keyPath)
 

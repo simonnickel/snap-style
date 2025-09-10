@@ -8,9 +8,9 @@ import SwiftUI
 
 struct ElementsView: View {
 
-    let hierarchy: SnapStyle.Element.Hierarchy
+    let hierarchy: Style.Element.Hierarchy
 
-    init(hierarchy: SnapStyle.Element.Hierarchy = .primary) {
+    init(hierarchy: Style.Element.Hierarchy = .primary) {
         self.hierarchy = hierarchy
     }
 
@@ -23,7 +23,7 @@ struct ElementsView: View {
     }
 
     private var content: some View {
-        ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { elementType in
+        ForEach(Style.Element.ElementType.allCases, id: \.self) { elementType in
             Text("\(elementType.rawValue)")
                 .style(element: elementType, hierarchy: hierarchy)
         }

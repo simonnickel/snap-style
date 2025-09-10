@@ -11,7 +11,7 @@ import SwiftUI
 extension View {
 
     public func styleListSectionHeaderLabel(
-        hierarchy: SnapStyle.Element.Hierarchy = .secondary
+        hierarchy: Style.Element.Hierarchy = .secondary
     ) -> some View {
         modifier(ListSectionHeaderLabel(hieararchy: hierarchy))
     }
@@ -23,7 +23,7 @@ extension View {
 
 internal struct ListSectionHeaderLabel: ViewModifier {
 
-    let hieararchy: SnapStyle.Element.Hierarchy
+    let hieararchy: Style.Element.Hierarchy
 
     func body(content: Content) -> some View {
         content

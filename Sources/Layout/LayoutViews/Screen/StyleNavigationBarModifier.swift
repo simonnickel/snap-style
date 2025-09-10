@@ -57,12 +57,12 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 
     @Environment(\.style) private var style
     
-    private let definitionInline: SnapStyle.FontKey.Value.Definition
-    private let definitionLarge: SnapStyle.FontKey.Value.Definition
+    private let definitionInline: Style.FontKey.Value.Definition
+    private let definitionLarge: Style.FontKey.Value.Definition
     private let scaledInline: ScaledMetric<Double>
     private let scaledLarge: ScaledMetric<Double>
     
-    init(definitionInline: SnapStyle.FontKey.Value.Definition, definitionLarge: SnapStyle.FontKey.Value.Definition) {
+    init(definitionInline: Style.FontKey.Value.Definition, definitionLarge: Style.FontKey.Value.Definition) {
         self.definitionInline = definitionInline
         self.definitionLarge = definitionLarge
         self.scaledInline = ScaledMetric(wrappedValue: definitionInline.size, relativeTo: definitionInline.textStyle)
@@ -107,7 +107,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
     
     private static func configure(
         navigationBar: UINavigationBar,
-        with style: SnapStyle.ContextWrapper,
+        with style: Style.ContextWrapper,
         scaledInline: ScaledMetric<Double>,
         scaledLarge: ScaledMetric<Double>
     ) {
@@ -123,8 +123,8 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
     }
     
     private static func font(
-        for keyPath: SnapStyle.FontKey.ValueBuilderKeyPath,
-        with style: SnapStyle.ContextWrapper,
+        for keyPath: Style.FontKey.ValueBuilderKeyPath,
+        with style: Style.ContextWrapper,
         size: Double
     ) -> UIFont {
         let design = style.context.fontDesign ?? .default
@@ -160,7 +160,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 // MARK: - Preview
 
 #Preview("Large") {
-    let style: SnapStyle = SnapStyle(
+    let style: Style = Style(
         configuration: .init(
             allowNavigationBarTitleAdjustments: true
         )
@@ -182,7 +182,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 }
 
 #Preview("Inline") {
-    let style: SnapStyle = SnapStyle(
+    let style: Style = Style(
         configuration: .init(
             allowNavigationBarTitleAdjustments: true
         )

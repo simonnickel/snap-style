@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-extension SnapStyle {
+extension Style {
     
     public struct Configuration {
         

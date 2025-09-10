@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle.Context: CustomStringConvertible {
+extension Style.Context: CustomStringConvertible {
 
     public var description: String {
         let entries = content.map { (key, value) in

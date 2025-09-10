@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension SnapStyle {
+extension Style {
 
     package struct ComponentStack: Hashable {
 
@@ -14,7 +14,7 @@ extension SnapStyle {
 
         // MARK: Components
 
-        private var components: [SnapStyle.ComponentDefinition] = []
+        private var components: [Style.ComponentDefinition] = []
 
         package var current: ComponentDefinition? { components.last }
         package var parent: ComponentDefinition? {
@@ -26,9 +26,9 @@ extension SnapStyle {
 
         // MARK: State
 
-        private var stateByComponent: [SnapStyle.ComponentDefinition: SnapStyle.Component.InteractionState] = [:]
+        private var stateByComponent: [Style.ComponentDefinition: Style.Component.InteractionState] = [:]
 
-        package var currentState: SnapStyle.Component.InteractionState? {
+        package var currentState: Style.Component.InteractionState? {
             guard let current else { return nil }
             return stateByComponent[current]
         }
@@ -62,7 +62,7 @@ extension SnapStyle {
 
         // MARK: Update
 
-        package func appended(_ component: SnapStyle.ComponentDefinition, state: SnapStyle.Component.InteractionState) -> Self {
+        package func appended(_ component: Style.ComponentDefinition, state: Style.Component.InteractionState) -> Self {
             var result = self
             result.components.append(component)
             result.stateByComponent[component] = state

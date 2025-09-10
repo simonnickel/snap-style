@@ -9,8 +9,8 @@ import SwiftUI
 struct ScreenInsetContainer<ReadableContent: View>: View {
     
     private struct Constants {
-        static var keyPathMaxWidth: SnapStyle.NumberKey.ValueBuilderKeyPath { \.widthReadableContent }
-        static var keyPathInset: SnapStyle.NumberKey.ValueBuilderKeyPath { \.paddingScreenHorizontal }
+        static var keyPathMaxWidth: Style.NumberKey.ValueBuilderKeyPath { \.widthReadableContent }
+        static var keyPathInset: Style.NumberKey.ValueBuilderKeyPath { \.paddingScreenHorizontal }
     }
     
     @Environment(\.style) private var style

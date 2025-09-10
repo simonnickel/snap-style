@@ -16,10 +16,10 @@ public enum StyleButtonVariant {
     case plain
     case primary
     case secondary
-    case icon(hierarchy: SnapStyle.Element.Hierarchy = .primary)
-    case component(SnapStyle.ComponentDefinition, hierarchy: SnapStyle.Element.Hierarchy = .primary)
+    case icon(hierarchy: Style.Element.Hierarchy = .primary)
+    case component(Style.ComponentDefinition, hierarchy: Style.Element.Hierarchy = .primary)
 
-    var component: SnapStyle.ComponentDefinition {
+    var component: Style.ComponentDefinition {
         switch self {
             case .plain: .base
             case .default, .primary, .secondary: .button
@@ -28,7 +28,7 @@ public enum StyleButtonVariant {
         }
     }
 
-    var hierarchy: SnapStyle.Element.Hierarchy? {
+    var hierarchy: Style.Element.Hierarchy? {
         switch self {
             case .plain: nil
             case .default, .primary: .primary

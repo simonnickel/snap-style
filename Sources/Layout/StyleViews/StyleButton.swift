@@ -19,7 +19,7 @@ public struct StyleButton<Content>: View where Content : View {
     private let variant: StyleButtonVariant?
 
     private let isEnabled: Bool
-    @State private var interactionState: SnapStyle.Component.InteractionState = .normal
+    @State private var interactionState: Style.Component.InteractionState = .normal
 
     private let action: () -> Void
     private let content: () -> Content

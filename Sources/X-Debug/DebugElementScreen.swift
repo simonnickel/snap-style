@@ -11,13 +11,13 @@ import SwiftUI
 
 public struct DebugElementScreen: View {
 
-    @State private var component: SnapStyle.ComponentDefinition = .screen
-    @State private var elementType: SnapStyle.Element.ElementType = .any
-    @State private var elementHierarchy: SnapStyle.Element.Hierarchy = .primary
+    @State private var component: Style.ComponentDefinition = .screen
+    @State private var elementType: Style.Element.ElementType = .any
+    @State private var elementHierarchy: Style.Element.Hierarchy = .primary
 
-    private let components: [SnapStyle.ComponentDefinition]
+    private let components: [Style.ComponentDefinition]
     
-    public init(components: [SnapStyle.ComponentDefinition]) {
+    public init(components: [Style.ComponentDefinition]) {
         self.components = components
     }
 
@@ -37,12 +37,12 @@ public struct DebugElementScreen: View {
                     }
                 }
                 Picker("Element", selection: $elementType) {
-                    ForEach(SnapStyle.Element.ElementType.allCases, id: \.self) { element in
+                    ForEach(Style.Element.ElementType.allCases, id: \.self) { element in
                         Text("\(element)")
                     }
                 }
                 Picker("Hierarchy", selection: $elementHierarchy) {
-                    ForEach(SnapStyle.Element.Hierarchy.allCases, id: \.self) { hierarchy in
+                    ForEach(Style.Element.Hierarchy.allCases, id: \.self) { hierarchy in
                         Text("\(hierarchy)")
                     }
                 }

@@ -13,7 +13,7 @@ extension View {
 
     public func style(fontWidth: Font.Width?) -> some View {
         self
-            .style(attribute: SnapStyle.Context.fontWidth, value: fontWidth)
+            .style(attribute: Style.Context.fontWidth, value: fontWidth)
     }
 
 }
@@ -21,7 +21,7 @@ extension View {
 
 // MARK: - Context
 
-extension SnapStyle.Context {
+extension Style.Context {
 
     public static let fontWidthDefault: Font.Width? = nil
 

@@ -6,7 +6,7 @@
 import SnapFoundation
 import SwiftUI
 
-extension SnapStyle.FontKey.Value.Definition {
+extension Style.FontKey.Value.Definition {
 
     public func font(size sizeOverride: Double? = nil) -> Font {
         let sizeToUse = sizeOverride ?? size
@@ -27,7 +27,7 @@ extension SnapStyle.FontKey.Value.Definition {
 
 import UIKit
 
-extension SnapStyle.FontKey.Value.Definition {
+extension Style.FontKey.Value.Definition {
     public func uiFont(size sizeOverride: Double? = nil) -> UIFont {
         let sizeToUse = sizeOverride ?? size
         let font: UIFont = if let width {
@@ -53,21 +53,21 @@ extension SnapStyle.FontKey.Value.Definition {
 
 #Preview {
 
-    let definitionStandard: SnapStyle.FontKey.Value.Definition = .init(
+    let definitionStandard: Style.FontKey.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: nil,
         textStyle: .body
     )
-    let definitionDesign: SnapStyle.FontKey.Value.Definition = .init(
+    let definitionDesign: Style.FontKey.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: .serif,
         textStyle: .body
     )
-    let definitionWidth: SnapStyle.FontKey.Value.Definition = .init(
+    let definitionWidth: Style.FontKey.Value.Definition = .init(
         size: 20,
         weight: .heavy,
         width: .compressed,
@@ -88,7 +88,7 @@ extension SnapStyle.FontKey.Value.Definition {
 
 struct CompareView: View {
 
-    let definition: SnapStyle.FontKey.Value.Definition
+    let definition: Style.FontKey.Value.Definition
 
     var body: some View {
         VStack {

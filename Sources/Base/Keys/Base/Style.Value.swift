@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-extension SnapStyle {
+extension Style {
 
     /// Top level type of value wrapper created by a `ValueBuilder`. It wraps the actual value to allow generic handling of references.
     public enum Value<Key: StyleKey> {

@@ -6,12 +6,12 @@
 import SnapStyleBase
 import SwiftUI
 
-extension SnapStyle {
+extension Style {
 
     public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
-        public typealias Mapping<Key: StyleKey> = @Sendable (SnapStyle.Element.ElementType) -> Key.ValueBuilderKeyPath?
-        public typealias MappingPadding = @Sendable (SnapStyle.Element.ElementType) -> Padding?
+        public typealias Mapping<Key: StyleKey> = @Sendable (Style.Element.ElementType) -> Key.ValueBuilderKeyPath?
+        public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
 
         public let id: String
         public let requiresSecondaryAccent: Bool
@@ -26,10 +26,10 @@ extension SnapStyle {
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             padding: MappingPadding? = nil,
-            fonts: Mapping<SnapStyle.FontKey>? = nil,
-            surfaces: Mapping<SnapStyle.SurfaceKey>? = nil,
-            compositions: Mapping<SnapStyle.CompositionKey>? = nil,
-            shapes: Mapping<SnapStyle.ShapeKey>? = nil
+            fonts: Mapping<Style.FontKey>? = nil,
+            surfaces: Mapping<Style.SurfaceKey>? = nil,
+            compositions: Mapping<Style.CompositionKey>? = nil,
+            shapes: Mapping<Style.ShapeKey>? = nil
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
@@ -45,7 +45,7 @@ extension SnapStyle {
 
         public struct Padding {
 
-            public typealias Value = SnapStyle.NumberKey.ValueBuilderKeyPath
+            public typealias Value = Style.NumberKey.ValueBuilderKeyPath
 
             package let leading: Value?
             package let top: Value?
@@ -83,7 +83,7 @@ extension SnapStyle {
             hasher.combine(requiresSecondaryAccent)
         }
 
-        public static func == (lhs: SnapStyleBase.SnapStyle.ComponentDefinition, rhs: SnapStyleBase.SnapStyle.ComponentDefinition) -> Bool {
+        public static func == (lhs: SnapStyleBase.Style.ComponentDefinition, rhs: SnapStyleBase.Style.ComponentDefinition) -> Bool {
             lhs.hashValue == rhs.hashValue
         }
 
