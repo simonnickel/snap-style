@@ -8,32 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		5A2959E02DC5155D002E1EEB /* SnapCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5A2959DF2DC5155D002E1EEB /* SnapCore */; };
-		5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */; };
 		5A29F0992CFB229900942934 /* SnapStyle in Frameworks */ = {isa = PBXBuildFile; productRef = 5A29F0982CFB229900942934 /* SnapStyle */; };
-		5AF6329E2DF604AE00082AD2 /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */; };
+		5A45FF222E743DA70054D1E4 /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45FF032E743DA70054D1E4 /* DemoConfiguration.swift */; };
+		5A45FF232E743DA70054D1E4 /* SnapStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45FF052E743DA70054D1E4 /* SnapStyleDemoApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5A29F06A2CFB1FC000942934 /* SnapStyleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapStyleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnapStyleDemo.entitlements; sourceTree = "<group>"; };
-		5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapStyleDemoApp.swift; sourceTree = "<group>"; };
-		5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoConfiguration.swift; sourceTree = "<group>"; };
+		5A45FF032E743DA70054D1E4 /* DemoConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoConfiguration.swift; sourceTree = "<group>"; };
+		5A45FF052E743DA70054D1E4 /* SnapStyleDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapStyleDemoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5A45FF652E743DD60054D1E4 /* Exceptions for "Project" folder in "SnapStyleDemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+			);
+			target = 5A29F0692CFB1FC000942934 /* SnapStyleDemo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5A29F0922CFB221200942934 /* Screens */ = {
+		5A45FF3C2E743DAC0054D1E4 /* Screens */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		5AB5C6832E2EBB7A002B7090 /* App */ = {
+		5A45FF532E743DAC0054D1E4 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5A45FF5B2E743DAC0054D1E4 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = App;
 			sourceTree = "<group>";
 		};
-		5AB5C6872E2EBBEF002B7090 /* Views */ = {
+		5A45FF632E743DD60054D1E4 /* Project */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Views;
+			exceptions = (
+				5A45FF652E743DD60054D1E4 /* Exceptions for "Project" folder in "SnapStyleDemo" target */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -54,7 +71,7 @@
 		5A29F0612CFB1FC000942934 = {
 			isa = PBXGroup;
 			children = (
-				5A29F08E2CFB220400942934 /* SnapStyleDemo */,
+				5A45FF062E743DA70054D1E4 /* SnapStyleDemo */,
 				5A29F06B2CFB1FC000942934 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,15 +84,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5A29F08E2CFB220400942934 /* SnapStyleDemo */ = {
+		5A45FF062E743DA70054D1E4 /* SnapStyleDemo */ = {
 			isa = PBXGroup;
 			children = (
-				5A29F08D2CFB220400942934 /* SnapStyleDemoApp.swift */,
-				5AF6329D2DF604AE00082AD2 /* DemoConfiguration.swift */,
-				5AB5C6832E2EBB7A002B7090 /* App */,
-				5A29F0922CFB221200942934 /* Screens */,
-				5AB5C6872E2EBBEF002B7090 /* Views */,
-				5A29F08C2CFB220400942934 /* SnapStyleDemo.entitlements */,
+				5A45FF052E743DA70054D1E4 /* SnapStyleDemoApp.swift */,
+				5A45FF032E743DA70054D1E4 /* DemoConfiguration.swift */,
+				5A45FF5B2E743DAC0054D1E4 /* App */,
+				5A45FF3C2E743DAC0054D1E4 /* Screens */,
+				5A45FF532E743DAC0054D1E4 /* Views */,
+				5A45FF632E743DD60054D1E4 /* Project */,
 			);
 			path = SnapStyleDemo;
 			sourceTree = "<group>";
@@ -96,9 +113,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5A29F0922CFB221200942934 /* Screens */,
-				5AB5C6832E2EBB7A002B7090 /* App */,
-				5AB5C6872E2EBBEF002B7090 /* Views */,
+				5A45FF3C2E743DAC0054D1E4 /* Screens */,
+				5A45FF532E743DAC0054D1E4 /* Views */,
+				5A45FF5B2E743DAC0054D1E4 /* App */,
 			);
 			name = SnapStyleDemo;
 			packageProductDependencies = (
@@ -162,8 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AF6329E2DF604AE00082AD2 /* DemoConfiguration.swift in Sources */,
-				5A29F0902CFB220400942934 /* SnapStyleDemoApp.swift in Sources */,
+				5A45FF222E743DA70054D1E4 /* DemoConfiguration.swift in Sources */,
+				5A45FF232E743DA70054D1E4 /* SnapStyleDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,11 +308,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SnapStyleDemo/SnapStyleDemo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SnapStyleDemo/Project/SnapStyleDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -329,11 +347,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SnapStyleDemo/SnapStyleDemo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SnapStyleDemo/Project/SnapStyleDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
