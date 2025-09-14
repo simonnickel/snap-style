@@ -117,8 +117,8 @@ public struct StyleFlowLayout: Layout {
 
 // MARK: - Preview
 
-#Preview {
-    
+#Preview("Text") {
+
     @Previewable @State var isActive: Bool = true
 
     StyleFlowLayout(
@@ -141,6 +141,80 @@ public struct StyleFlowLayout: Layout {
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(.yellow)
     
+    StyleButton {
+        withAnimation(.smooth) {
+            isActive.toggle()
+        }
+    } content: {
+        Text("Toggle Spacing")
+    }
+}
+
+#Preview("Circles") {
+
+    @Previewable @State var isActive: Bool = true
+
+    StyleFlowLayout(
+        spacingH: isActive ? \.spacingElements : nil,
+        spacingV: isActive ? \.spacingElements : nil
+    ) {
+        ForEach(0..<7) { _ in
+            Group {
+                Circle()
+                    .frame(width: 50, height: 50)
+                Circle()
+                    .frame(width: 50, height: 50)
+                Circle()
+                    .frame(width: 50, height: 50)
+                Circle()
+                    .frame(width: 50, height: 50)
+            }
+        }
+    }
+
+    StyleButton {
+        withAnimation(.smooth) {
+            isActive.toggle()
+        }
+    } content: {
+        Text("Toggle Spacing")
+    }
+}
+
+#Preview("In StyleListRow") {
+
+    @Previewable @State var isActive: Bool = true
+
+    NavigationStack {
+        StyleList {
+            Section {
+                StyleListRow(
+                    .plain,
+                    icon: \.favorite
+                ) {} content: {
+                    VStack(alignment: .leading, spacing: 0) {
+                        StyleFlowLayout(
+                            spacingH: isActive ? \.spacingElements : nil,
+                            spacingV: isActive ? \.spacingElements : nil
+                        ) {
+                            ForEach(0..<7) { _ in
+                                Group {
+                                    Circle()
+                                        .frame(width: 50, height: 50)
+                                    Circle()
+                                        .frame(width: 50, height: 50)
+                                    Circle()
+                                        .frame(width: 50, height: 50)
+                                    Circle()
+                                        .frame(width: 50, height: 50)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     StyleButton {
         withAnimation(.smooth) {
             isActive.toggle()

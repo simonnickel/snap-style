@@ -315,17 +315,17 @@ extension Style.Views.List.Row {
                     .styleListSectionHeaderLabel()
             }
         }
-        List {
-            // System Rows for reference
-            Section {
-                Label("Pentagon", systemImage: "pentagon")
-                Label("Rectangle", systemImage: "rectangle")
-                Label("Triangle", systemImage: "triangle")
-            } header: {
-                StyleLabel("System Rows")
-                    .styleListSectionHeaderLabel()
-            }
-        }
+//        List {
+//            // System Rows for reference
+//            Section {
+//                Label("Pentagon", systemImage: "pentagon")
+//                Label("Rectangle", systemImage: "rectangle")
+//                Label("Triangle", systemImage: "triangle")
+//            } header: {
+//                StyleLabel("System Rows")
+//                    .styleListSectionHeaderLabel()
+//            }
+//        }
     }
 
 }
