@@ -14,15 +14,26 @@ public struct StyleFlowLayout: Layout {
     
     @Environment(\.style) private var style
 
-    private let spacing: Style.Keys.Number.ValueBuilderKeyPath?
+    private let spacingH: Style.Keys.Number.ValueBuilderKeyPath?
+    private let spacingV: Style.Keys.Number.ValueBuilderKeyPath?
 
-    public init(spacing: Style.Keys.Number.ValueBuilderKeyPath?) {
-        self.spacing = spacing
+    public init(
+        spacingH: Style.Keys.Number.ValueBuilderKeyPath? = nil,
+        spacingV: Style.Keys.Number.ValueBuilderKeyPath? = nil
+    ) {
+        self.spacingH = spacingH
+        self.spacingV = spacingV
     }
     
-    private func getSpacingValue() -> CGFloat {
-        guard let value = style.number(for: spacing) else { return 0 }
-            
+    private func getSpacingH() -> CGFloat {
+        guard let value = style.number(for: spacingH) else { return 0 }
+
+        return CGFloat(value)
+    }
+
+    private func getSpacingV() -> CGFloat {
+        guard let value = style.number(for: spacingV) else { return 0 }
+
         return CGFloat(value)
     }
     
@@ -31,7 +42,8 @@ public struct StyleFlowLayout: Layout {
         subviews: Subviews,
         cache: inout ()
     ) -> CGSize {
-        let spacing: CGFloat = getSpacingValue()
+        let spacingH: CGFloat = getSpacingH()
+        let spacingV: CGFloat = getSpacingV()
         let sizes = sizes(for: subviews)
 
         var totalHeight: CGFloat = 0
@@ -42,9 +54,9 @@ public struct StyleFlowLayout: Layout {
 
         for index in sizes.indices {
             let size = sizes[index]
-            let widthAndSpacing = size.width + (index > sizes.startIndex ? spacing : 0)
+            let widthAndSpacing = size.width + (index > sizes.startIndex ? spacingH : 0)
             if lineWidth + widthAndSpacing > proposal.width ?? 0 {
-                totalHeight += lineHeight
+                totalHeight += lineHeight + spacingV
                 lineWidth = size.width
                 lineHeight = size.height
             } else {
@@ -66,7 +78,8 @@ public struct StyleFlowLayout: Layout {
         subviews: Subviews,
         cache: inout ()
     ) {
-        let spacing: CGFloat = getSpacingValue()
+        let spacingH: CGFloat = getSpacingH()
+        let spacingV: CGFloat = getSpacingV()
         let sizes = sizes(for: subviews)
 
         var lineX = bounds.minX
@@ -74,12 +87,12 @@ public struct StyleFlowLayout: Layout {
         var lineHeight: CGFloat = 0
 
         for index in subviews.indices {
-            if lineX + sizes[index].width + spacing > (proposal.width ?? 0) {
-                lineY += lineHeight
+            if lineX + sizes[index].width + spacingH > (proposal.width ?? 0) {
+                lineY += lineHeight + spacingV
                 lineHeight = 0
                 lineX = bounds.minX
             } else if index > subviews.startIndex {
-                lineX += spacing
+                lineX += spacingH
             }
 
             subviews[index].place(
@@ -108,7 +121,10 @@ public struct StyleFlowLayout: Layout {
     
     @Previewable @State var isActive: Bool = true
 
-    StyleFlowLayout(spacing: isActive ? \.spacingSections : nil) {
+    StyleFlowLayout(
+        spacingH: isActive ? \.spacingSections : nil,
+        spacingV: isActive ? \.spacingElements : nil
+    ) {
         ForEach(0..<7) { _ in
             Group {
                 Text("Hello")

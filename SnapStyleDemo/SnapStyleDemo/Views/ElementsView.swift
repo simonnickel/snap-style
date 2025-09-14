@@ -6,6 +6,8 @@
 import SnapStyle
 import SwiftUI
 
+// TODO: Show somewhere?
+
 struct ElementsView: View {
 
     let hierarchy: Style.Element.Hierarchy
@@ -16,7 +18,7 @@ struct ElementsView: View {
 
     var body: some View {
         
-        StyleFlowLayout(spacing: \.spacingElements) {
+        StyleFlowLayout(spacingH: \.spacingElements) {
             content
         }
 
