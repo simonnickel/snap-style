@@ -87,7 +87,7 @@ public struct StyleFlowLayout: Layout {
         var lineHeight: CGFloat = 0
 
         for index in subviews.indices {
-            if lineX + sizes[index].width + spacingH > (proposal.width ?? 0) {
+            if lineX + sizes[index].width + spacingH > (proposal.width ?? 0) + bounds.minX {
                 lineY += lineHeight + spacingV
                 lineHeight = 0
                 lineX = bounds.minX
