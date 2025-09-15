@@ -44,21 +44,30 @@ private struct ListIconWidthSynchronisationModifier: ViewModifier {
 
 // MARK: - Inset
 
+extension EnvironmentValues {
+    @Entry var insetListContent: Bool = false
+}
+
 extension View {
     
-    func insetListContent() -> some View {
+    func insetListContent(_ apply: Bool = true) -> some View {
+        environment(\.insetListContent, apply)
+    }
+    
+    func applyListContentInset() -> some View {
         modifier(ListContentInsetModifier())
     }
 }
 
 private struct ListContentInsetModifier: ViewModifier {
     
+    @Environment(\.insetListContent) private var insetListContent
     @Environment(\.listIconWidth) private var listIconWidth
     
     func body(content: Content) -> some View {
         content
-            .padding(.leading, listIconWidth)
-            .style(padding: \.paddingListRowLeading, .leading)
+            .padding(.leading, insetListContent ? listIconWidth : 0)
+            .style(padding: insetListContent ? \.paddingListRowLeading : \.zero, .leading)
     }
     
 }

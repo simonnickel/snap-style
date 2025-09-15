@@ -185,7 +185,7 @@ extension Style.Views.List.Row {
                 .style(composition: \.listRow, layers: [.foreground])
                 
                 content?()
-                    .insetListContent()
+                    .applyListContentInset()
             }
             .contentShape(.rect)
             .environment(\.styleLabelSpacing, \.paddingListRowLeading)
@@ -302,6 +302,15 @@ extension Style.Views.List.Row {
                 ) {
                     Text("Lines")
                 }
+                StyleListRow(
+                    .plain,
+                    systemImage: "square"
+                ) {
+                    Text("With Content")
+                } content: {
+                    Rectangle()
+                }
+                .insetListContent()
                 StyleListRow(
                     .plain,
                     systemImage: "square"
