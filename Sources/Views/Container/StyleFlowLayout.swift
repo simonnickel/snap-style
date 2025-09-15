@@ -25,12 +25,14 @@ public struct StyleFlowLayout: Layout {
         self.spacingV = spacingV
     }
     
+    // TODO: Accessing Environment<ContextWrapper>'s value outside of being installed on a View. This will always read the default value and will not update.
     private func getSpacingH() -> CGFloat {
         guard let value = style.number(for: spacingH) else { return 0 }
 
         return CGFloat(value)
     }
 
+    // TODO: Accessing Environment<ContextWrapper>'s value outside of being installed on a View. This will always read the default value and will not update.
     private func getSpacingV() -> CGFloat {
         guard let value = style.number(for: spacingV) else { return 0 }
 
