@@ -137,9 +137,8 @@ extension Style.Views.List.Row {
                         // TODO feature: Haptic Feedback (Maybe as a semantic style key, to allow customisation)
                         switch variant {
                             case .plain: break
-                            case .navigate(let _): break
-                            case .navigation(_): break
-                                
+                            case .navigate, .navigation: break
+                                                                
                             case .selectValue(let value, selection: let selection):
                                 selection.wrappedValue = value
                                 
@@ -152,7 +151,7 @@ extension Style.Views.List.Row {
                                 
                             case .selected(let isSelected): isSelected.wrappedValue.toggle()
                             case .enabled(let isEnabled): isEnabled.wrappedValue.toggle()
-                            case .pick(_, _, selection: _): break
+                            case .pick, .pickInline: break
                         }
                     }
                 },
@@ -164,7 +163,7 @@ extension Style.Views.List.Row {
         // MARK: Content
         
         private func viewRow() -> some View {
-            StyleStack(spacing: \.spacingElements) {
+            StyleStack(spacing: \.spacingGroups) {
                 StyleStack(.horizontal) {
                     
                     StyleStack(.horizontal, spacing: \.paddingListRowLeading) {
@@ -184,11 +183,26 @@ extension Style.Views.List.Row {
                 }
                 .style(composition: \.listRow, layers: [.foreground])
                 
-                content?()
+                viewContent()
                     .applyListContentInset()
             }
             .contentShape(.rect)
             .environment(\.styleLabelSpacing, \.paddingListRowLeading)
+        }
+        
+        @ViewBuilder
+        private func viewContent() -> some View {
+            switch variant {
+                case .pickInline(let values, titleKeyPath: let titleKeyPath, selection: let selection):
+                    Picker("", selection: selection) {
+                        ForEach(values, id: \.self) { value in
+                            Text("\(value[keyPath: titleKeyPath])")
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    
+                default: content?()
+            }
         }
         
         
@@ -240,6 +254,9 @@ extension Style.Views.List.Row {
                     // TODO FB19360250: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
                     // TODO FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).
                     // .pickerStyle(.menu)
+                    
+                case .pickInline(let values, let titleKeyPath, selection: let selection): EmptyView()
+
             }
         }
     }
@@ -292,6 +309,12 @@ extension Style.Views.List.Row {
                 }
                 StyleListRow(
                     .pick(["A", "B"], titleKeyPath: \.self, selection: Binding(get: { "A" }, set: { _ in })),
+                    systemImage: "square"
+                ) {
+                    Text("With Content")
+                }
+                StyleListRow(
+                    .pickInline(["A", "B"], titleKeyPath: \.self, selection: Binding(get: { "A" }, set: { _ in })),
                     systemImage: "square"
                 ) {
                     Text("With Content")

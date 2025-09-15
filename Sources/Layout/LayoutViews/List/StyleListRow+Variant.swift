@@ -10,8 +10,6 @@ extension Style.Views.List.Row {
     
     public enum Variant<SelectionValue: Hashable> {
         
-        // TODO: Add Segmented Control
-        
         case plain
         
         /// Navigation style that pushes a value.
@@ -32,7 +30,11 @@ extension Style.Views.List.Row {
         /// Switch style, controlled via binding.
         case enabled(Binding<Bool>)
         
+        /// Picker with selection menu in accessory.
         case pick(_ values: [SelectionValue], titleKeyPath: KeyPath<SelectionValue, String>, selection: Binding<SelectionValue>)
+        
+        /// Picker with segmented style in content.
+        case pickInline(_ values: [SelectionValue], titleKeyPath: KeyPath<SelectionValue, String>, selection: Binding<SelectionValue>)
         
     }
     
