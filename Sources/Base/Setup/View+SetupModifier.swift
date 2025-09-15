@@ -8,7 +8,7 @@ import SwiftUI
 extension View {
 
     /// Setup the view hierarchy and `Context` to use the styling.
-    public func styleSetup(_ definition: Style) -> some View {
+    public func styleSetup(_ definition: Style = Style()) -> some View {
         modifier(SetupModifier())
             .style(update: definition)
     }
