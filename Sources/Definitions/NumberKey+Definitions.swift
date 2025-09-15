@@ -73,6 +73,11 @@ extension Style.Keys.Number {
     public var paddingListRowBottom: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
     public var paddingListRowLeading: ValueBuilder { .base(.definition(.value(18))) }
     public var paddingListRowTrailing: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
+    
+    
+    // MARK: - Shape
+    
+    public var strokeSelected: ValueBuilder { .base(.definition(.value(2))) }
 
 
     // MARK: - Shape: CornerRadius
