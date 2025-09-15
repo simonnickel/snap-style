@@ -11,6 +11,6 @@ extension Style.Context {
 
     public var colorScheme: ColorScheme { getValue(for: Self.colorScheme) ?? Self.colorSchemeDefault }
     
-    package static var colorScheme: Attribute<String, ColorScheme> { .init(key: "colorScheme", valueDefault: nil) }
+    package static var colorScheme: Attribute<String, ColorScheme> { .init(key: "colorScheme", valueDefault: Self.colorSchemeDefault) }
 
 }

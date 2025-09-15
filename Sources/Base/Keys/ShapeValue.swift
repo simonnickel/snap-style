@@ -52,7 +52,7 @@ extension Style.Keys.Shape {
                 case .rectangle: Rectangle()
                     
                 case .rectangleRounded(radius: let numberKey):
-                    if let cornerRadius = style.number(for: numberKey) {
+                    if let cornerRadius = style.number(for: numberKey) { // TODO: Does it apply DynamicType scaling here (or in other non View contexts)?
                         RoundedRectangle(cornerRadius: cornerRadius)
                     } else {
                         Rectangle()

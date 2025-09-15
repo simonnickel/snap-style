@@ -64,6 +64,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Number
 
+    // TODO: Should also apply DynamicType scaling
     package func number(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> NumberKey.Value.WrappedValue? {
 
         guard let keyPath, let value = value(for: keyPath) else { return nil }
