@@ -15,7 +15,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     
     private var interactionState: Binding<Style.Component.InteractionState>
 
-    struct StateSet: Equatable {
+    struct States: Equatable {
         var didPress: Bool = false
         var isPressed: Bool = false
         var isHovering: Bool = false
@@ -33,7 +33,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
         }
     }
 
-    @State private var stateSet: StateSet = .init()
+    @State private var state: States = .init()
 
     private let action: () -> Void
     private let content: () -> Content
@@ -56,15 +56,15 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
         Button {
             action()
 
-            stateSet.didPress = true
+            state.didPress = true
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                stateSet.didPress = false
+                state.didPress = false
             }
         } label: {
             content()
         }
-        .buttonStyle(IsPressedButtonStyle(isPressed: $stateSet.isPressed))
-        .onChange(of: stateSet, initial: true) { oldValue, newValue in
+        .buttonStyle(IsPressedButtonStyle(isPressed: $state.isPressed))
+        .onChange(of: state, initial: true) { oldValue, newValue in
             update()
         }
 #if os(macOS)
@@ -78,7 +78,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
 
     private func update() {
         withAnimation(.snappy) {
-            let current = stateSet.result
+            let current = state.result
             interactionState.wrappedValue = current
         }
     }
