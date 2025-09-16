@@ -18,6 +18,7 @@ public struct StyleButton<Content>: View where Content : View {
 
     private let variant: StyleButtonVariant?
 
+    // TODO: Enabled state should be a generic modifier, using InteractionState.
     private let isEnabled: Bool
     @State private var interactionState: Style.Component.InteractionState = .normal
 
