@@ -91,7 +91,7 @@ extension Style.Views.List.Row {
         
         public var body: some View {
             switch variant {
-                case .plain, .pick:
+                case .plain, .pick, .pickInline:
                     viewRow()
                         .style(component: .listRow, state: interactionState)
                     
