@@ -15,22 +15,20 @@ struct ActionButtonsView: View {
     let elements: [Element]
     var showIcon: Bool { elements.contains(.icon) }
     var showSubtitle: Bool { elements.contains(.subtitle) }
-    let isEnabled: Bool
 
-    internal init(elements: [Element] = [], enabled: Bool = true) {
+    internal init(elements: [Element] = []) {
         self.elements = elements
-        self.isEnabled = enabled
     }
 
     var body: some View {
         StyleStack(.horizontal) {
-            StyleButton(.secondary, enabled: isEnabled) { } content: {
+            StyleButton(.secondary) { } content: {
                 content(title: "Secondary", subtitle: showSubtitle ? "Subtitle" : nil)
             }
             
             StyleSpacer(min: \.spacingElements)
             
-            StyleButton(.primary, enabled: isEnabled) { } content: {
+            StyleButton(.primary) { } content: {
                 content(title: "Primary", subtitle: showSubtitle ? "Subtitle" : nil)
             }
         }

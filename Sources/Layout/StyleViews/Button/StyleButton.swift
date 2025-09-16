@@ -15,11 +15,10 @@ public struct StyleButton<Content>: View where Content : View {
 
     @Environment(\.style) private var style
     @Environment(\.styleButtonVariant) private var styleButtonVariant
+    @Environment(\.enabled) private var enabled
 
     private let variant: StyleButtonVariant?
 
-    // TODO: Enabled state should be a generic modifier, using InteractionState.
-    private let isEnabled: Bool
     @State private var interactionState: Style.Component.InteractionState = .normal
 
     private let action: () -> Void
@@ -27,12 +26,10 @@ public struct StyleButton<Content>: View where Content : View {
 
     public init(
         _ variant: StyleButtonVariant? = nil,
-        enabled: Bool = true,
         _ action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.variant = variant
-        self.isEnabled = enabled
         self.action = action
         self.content = content
     }
@@ -46,10 +43,10 @@ public struct StyleButton<Content>: View where Content : View {
                 .style(
                     component: variant.component,
                     applyContainer: variant.hierarchy,
-                    state: isEnabled ? interactionState : .disabled
+                    state: enabled ? interactionState : .disabled
                 )
         }
-        .disabled(!isEnabled)
+        .disabled(!enabled)
     }
 
 }
@@ -65,38 +62,39 @@ struct PreviewContent: View {
 
     var body: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
-            StyleButton(enabled: isEnabled) { } content: {
+            StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
             }
             
-            StyleButton(enabled: isEnabled) { } content: {
+            StyleButton() { } content: {
                 Label("Secondary", systemImage: "star")
             }
             .style(buttonVariant: .secondary)
             
             StyleStack(.horizontal, spacing: \.spacingElements) {
-                StyleButton(.icon(hierarchy: .primary), enabled: isEnabled) { } content: {
+                StyleButton(.icon(hierarchy: .primary)) { } content: {
                     Label("Primary", systemImage: "star")
                         .labelStyle(.iconOnly)
                 }
-                StyleButton(.icon(hierarchy: .secondary), enabled: isEnabled) { } content: {
+                StyleButton(.icon(hierarchy: .secondary)) { } content: {
                     Label("Secondary", systemImage: "star")
                         .labelStyle(.iconOnly)
                 }
-                StyleButton(.icon(hierarchy: .tertiary), enabled: isEnabled) { } content: {
+                StyleButton(.icon(hierarchy: .tertiary)) { } content: {
                     Label("Teriary", systemImage: "star")
                         .labelStyle(.iconOnly)
                 }
             }
             
-            StyleButton(.component(.metricCard), enabled: isEnabled) { } content: {
+            StyleButton(.component(.metricCard)) { } content: {
                 Label("Component: .metricCard", systemImage: "star")
             }
             
-            StyleButton(.plain, enabled: isEnabled) { } content: {
+            StyleButton(.plain) { } content: {
                 Label("Plain", systemImage: "star")
             }
         }
+        .style(enabled: isEnabled)
     }
 }
 
