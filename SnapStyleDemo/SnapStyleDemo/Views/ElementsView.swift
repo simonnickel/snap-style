@@ -9,6 +9,8 @@ import SwiftUI
 // TODO: Show somewhere?
 
 struct ElementsView: View {
+    
+    @ScaledNumber(\.spacingElements) var spacingH
 
     let hierarchy: Style.Element.Hierarchy
 
@@ -18,7 +20,7 @@ struct ElementsView: View {
 
     var body: some View {
         
-        StyleFlowLayout(spacingH: \.spacingElements) {
+        StyleFlowLayout(spacingH: spacingH) {
             content
         }
 

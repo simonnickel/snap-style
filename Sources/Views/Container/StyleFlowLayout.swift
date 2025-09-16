@@ -14,29 +14,16 @@ public struct StyleFlowLayout: Layout {
     
     @Environment(\.style) private var style
 
-    private let spacingH: Style.Keys.Number.ValueBuilderKeyPath?
-    private let spacingV: Style.Keys.Number.ValueBuilderKeyPath?
+    // Can not use Style.Keys.Number.ValueBuilderKeyPath because Environment is not available in Layout.
+    private let spacingH: Style.Keys.Number.Value.WrappedValue?
+    private let spacingV: Style.Keys.Number.Value.WrappedValue?
 
     public init(
-        spacingH: Style.Keys.Number.ValueBuilderKeyPath? = nil,
-        spacingV: Style.Keys.Number.ValueBuilderKeyPath? = nil
+        spacingH: Style.Keys.Number.Value.WrappedValue? = nil,
+        spacingV: Style.Keys.Number.Value.WrappedValue? = nil
     ) {
         self.spacingH = spacingH
         self.spacingV = spacingV
-    }
-    
-    // TODO: Accessing Environment<ContextWrapper>'s value outside of being installed on a View. This will always read the default value and will not update.
-    private func getSpacingH() -> CGFloat {
-        guard let value = style.number(for: spacingH) else { return 0 }
-
-        return CGFloat(value)
-    }
-
-    // TODO: Accessing Environment<ContextWrapper>'s value outside of being installed on a View. This will always read the default value and will not update.
-    private func getSpacingV() -> CGFloat {
-        guard let value = style.number(for: spacingV) else { return 0 }
-
-        return CGFloat(value)
     }
     
     public func sizeThatFits(
@@ -44,8 +31,8 @@ public struct StyleFlowLayout: Layout {
         subviews: Subviews,
         cache: inout ()
     ) -> CGSize {
-        let spacingH: CGFloat = getSpacingH()
-        let spacingV: CGFloat = getSpacingV()
+        let spacingH: CGFloat = spacingH ?? 0
+        let spacingV: CGFloat = spacingV ?? 0
         let sizes = sizes(for: subviews)
 
         var totalHeight: CGFloat = 0
@@ -80,8 +67,8 @@ public struct StyleFlowLayout: Layout {
         subviews: Subviews,
         cache: inout ()
     ) {
-        let spacingH: CGFloat = getSpacingH()
-        let spacingV: CGFloat = getSpacingV()
+        let spacingH: CGFloat = spacingH ?? 0
+        let spacingV: CGFloat = spacingV ?? 0
         let sizes = sizes(for: subviews)
 
         var lineX = bounds.minX
@@ -122,10 +109,13 @@ public struct StyleFlowLayout: Layout {
 #Preview("Text") {
 
     @Previewable @State var isActive: Bool = true
+    
+    @ScaledNumber(\.spacingSections) var spacingH
+    @ScaledNumber(\.spacingElements) var spacingV
 
     StyleFlowLayout(
-        spacingH: isActive ? \.spacingSections : nil,
-        spacingV: isActive ? \.spacingElements : nil
+        spacingH: spacingH,
+        spacingV: spacingV
     ) {
         ForEach(0..<7) { _ in
             Group {
@@ -155,10 +145,13 @@ public struct StyleFlowLayout: Layout {
 #Preview("Circles") {
 
     @Previewable @State var isActive: Bool = true
-
+    
+    @ScaledNumber(\.spacingElements) var spacingH
+    @ScaledNumber(\.spacingElements) var spacingV
+    
     StyleFlowLayout(
-        spacingH: isActive ? \.spacingElements : nil,
-        spacingV: isActive ? \.spacingElements : nil
+        spacingH: spacingH,
+        spacingV: spacingV
     ) {
         ForEach(0..<7) { _ in
             Group {
@@ -186,7 +179,10 @@ public struct StyleFlowLayout: Layout {
 #Preview("In StyleListRow") {
 
     @Previewable @State var isActive: Bool = true
-
+    
+    @ScaledNumber(\.spacingElements) var spacingH
+    @ScaledNumber(\.spacingElements) var spacingV
+    
     NavigationStack {
         StyleList {
             Section {
@@ -196,8 +192,8 @@ public struct StyleFlowLayout: Layout {
                 ) {} content: {
                     VStack(alignment: .leading, spacing: 0) {
                         StyleFlowLayout(
-                            spacingH: isActive ? \.spacingElements : nil,
-                            spacingV: isActive ? \.spacingElements : nil
+                            spacingH: spacingH,
+                            spacingV: spacingV
                         ) {
                             ForEach(0..<7) { _ in
                                 Group {
