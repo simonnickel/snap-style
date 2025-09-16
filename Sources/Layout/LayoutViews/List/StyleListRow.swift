@@ -194,6 +194,7 @@ extension Style.Views.List.Row {
         private func viewContent() -> some View {
             switch variant {
                 case .pickInline(let values, titleKeyPath: let titleKeyPath, selection: let selection):
+                    // TODO FB12181540: Should be able to apply color and font to Picker.
                     Picker("", selection: selection) {
                         ForEach(values, id: \.self) { value in
                             Text("\(value[keyPath: titleKeyPath])")
@@ -242,7 +243,7 @@ extension Style.Views.List.Row {
                         }
                     
                 case .pick(let values, let titleKeyPath, selection: let selection):
-                    // TODO FB: Picker does ignore font styling.
+                    // TODO FB12181540: Should be able to apply color and font to Picker.
                     Picker("", selection: selection) {
                         ForEach(values, id: \.self) { value in
                             Text("\(value[keyPath: titleKeyPath])")
