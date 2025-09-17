@@ -162,7 +162,7 @@ extension Style.Keys.Surface {
             let brightness = context.accent.brightness
 
             return switch context.context.component.state {
-                case .normal, .disabled: .reference(\.clear)
+                case .normal, .disabled, .inactive: .reference(\.clear)
                 case .highlighted: brightness == .light ? .definition(.color(.black.opacity(0.2))) :  .definition(.color(.white.opacity(0.2)))
                 case .selected: brightness == .light ? .definition(.color(.black.opacity(0.3))) : .definition(.color(.white.opacity(0.3)))
             }
@@ -178,7 +178,7 @@ extension Style.Keys.Surface {
     public var stateOverlayAccented: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .normal, .disabled: .reference(\.clear)
+                case .normal, .disabled, .inactive: .reference(\.clear)
                 case .highlighted: .reference(\.accent, adjustments: [.opacity(0.2)])
                 case .selected: .reference(\.accent, adjustments: [.opacity(0.3)])
             }

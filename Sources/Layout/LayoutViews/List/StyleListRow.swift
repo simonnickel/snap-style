@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SwiftUI
 
@@ -13,9 +14,9 @@ extension Style.Views.List {
 
 extension Style.Views.List.Row {
     
-    // TODO: Use enabled from Environment.
-    
     public struct RowView<SelectionValue: Hashable, Title: View, Content: View>: View {
+        
+        @Environment(\.controlState) private var controlState
         
         public typealias Action = () -> Void
         
@@ -86,7 +87,15 @@ extension Style.Views.List.Row {
             self.content = nil
         }
         
-        @State private var interactionState: Style.Component.InteractionState = .normal
+        @State private var state: Style.Component.InteractionState = .normal
+        
+        private var interactionState: Style.Component.InteractionState {
+            switch controlState {
+                case .disabled: .disabled
+                case .inactive: .inactive
+                case .active: state
+            }
+        }
         
         
         // MARK: - Body
@@ -131,7 +140,7 @@ extension Style.Views.List.Row {
         
         private func viewButtonContainer<ContainerContent: View>(content: @escaping () -> ContainerContent) -> some View {
             StyleButtonInteractionState(
-                $interactionState,
+                $state,
                 action: {
                     if let action {
                         action()
@@ -271,10 +280,20 @@ extension Style.Views.List.Row {
 // MARK: - Preview
 
 #Preview {
+    
+    @Previewable @State var state: ViewControlState = .active
 
+    Picker("ControlState", selection: $state) {
+        ForEach(ViewControlState.allCases, id: \.self) { value in
+            Text(value.rawValue)
+        }
+    }
+    .pickerStyle(.segmented)
+    
     NavigationStack {
         StyleList {
             Section {
+                
                 StyleListRow(
                     .navigate("Star"),
                     systemImage: "star"
@@ -350,6 +369,7 @@ extension Style.Views.List.Row {
                 StyleLabel("Section")
                     .styleListSectionHeaderLabel()
             }
+            .controlState(state)
         }
 //        List {
 //            // System Rows for reference

@@ -21,7 +21,7 @@ extension Style.Keys.Composition {
             switch context.component.state {
                 case .normal: .definition(.foreground(\.interactiveAsForeground))
 
-                case .disabled: .definition(.foreground(\.disabled))
+                case .disabled, .inactive: .definition(.foreground(\.disabled))
                     
                 case .highlighted, .selected:
                         .definition(.layers([
@@ -40,7 +40,7 @@ extension Style.Keys.Composition {
             return switch context.component.state {
                 case .normal: .definition(.foreground(foreground))
                     
-                case .disabled: .definition(.foreground(\.disabled))
+                case .disabled, .inactive: .definition(.foreground(\.disabled))
                     
                 case .highlighted, .selected: .definition(.foreground(foreground))
             }
@@ -56,7 +56,7 @@ extension Style.Keys.Composition {
                             .foreground: \.disabled, .background: \.contentBackground
                         ]))
 
-                case .normal, .highlighted, .selected:
+                case .normal, .inactive, .highlighted, .selected:
                         .definition(.layers([
                             .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
                         ]))
@@ -75,7 +75,7 @@ extension Style.Keys.Composition {
                         .foreground: \.disabled, .background: \.contentLevel1
                     ]))
 
-                case .normal, .highlighted, .selected:
+                case .normal, .inactive, .highlighted, .selected:
                     .definition(.layers([
                         .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
                     ]))
@@ -86,7 +86,7 @@ extension Style.Keys.Composition {
     public var accentContainer: ValueBuilder {
         .builder { context in
             switch context.component.state {
-                case .disabled:
+                case .disabled, .inactive:
                     .definition(.layers([
                         .foreground: \.onDisabled, .background: \.disabled
                     ]))
@@ -102,7 +102,7 @@ extension Style.Keys.Composition {
     public var interactiveContainer: ValueBuilder {
         .builder { context in
             return switch context.component.state {
-                case .disabled:
+                case .disabled, .inactive:
                         .definition(.layers([
                             .foreground: \.onDisabled, .background: \.disabled
                         ]))

@@ -34,6 +34,7 @@ extension Style {
 
         public enum InteractionState: Comparable {
             case disabled
+            case inactive
             case normal
             case highlighted
             case selected
@@ -41,9 +42,10 @@ extension Style {
             private var priority: Int {
                 switch self {
                     case .disabled: 0
-                    case .selected: 1
-                    case .highlighted: 2
-                    case .normal: 3
+                    case .inactive: 1
+                    case .selected: 2
+                    case .highlighted: 3
+                    case .normal: 4
                 }
             }
 
