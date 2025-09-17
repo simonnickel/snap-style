@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SnapStyleComponents
 import SnapStyleDefinitions
@@ -58,8 +59,6 @@ public struct StyleButton<Content>: View where Content : View {
 
 struct PreviewContent: View {
 
-    let isEnabled: Bool
-
     var body: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton() { } content: {
@@ -94,7 +93,6 @@ struct PreviewContent: View {
                 Label("Plain", systemImage: "star")
             }
         }
-        .style(enabled: isEnabled)
     }
 }
 
@@ -103,10 +101,12 @@ struct PreviewContent: View {
     @Previewable @State var isEnabled: Bool = true
 
     StyleScreen {
-        PreviewContent(isEnabled: isEnabled)
+        PreviewContent()
             .style(component: .contentCard)
-        PreviewContent(isEnabled: isEnabled)
+            .enabled(isEnabled)
+        PreviewContent()
             .style(component: .accentCard)
+            .enabled(isEnabled)
 
         Toggle(isOn: $isEnabled) {
             Text("enabled")
