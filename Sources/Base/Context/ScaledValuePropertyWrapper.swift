@@ -17,7 +17,6 @@ import SwiftUI
     public typealias Value = Style.Keys.Number.Value.WrappedValue
     
     @Environment(\.style) private var style
-    @ScaledMetric private var scaleDynamicType: CGFloat = 1
     
     private let base: Value
 
@@ -26,7 +25,7 @@ import SwiftUI
     }
 
     public var wrappedValue: Value {
-        base * scaleDynamicType * style.context.scaleFactor
+        base * style.context.scaleDynamicType * style.context.scaleFactor
     }
 
 }
