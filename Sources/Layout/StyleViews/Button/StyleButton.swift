@@ -9,47 +9,53 @@ import SnapStyleComponents
 import SnapStyleDefinitions
 import SwiftUI
 
+public typealias StyleButton = Style.Views.Button.ButtonView
+extension Style.Views {
+    public enum Button {}
+}
 
-// MARK: - StyleButton
-
-public struct StyleButton<Content>: View where Content : View {
-
-    @Environment(\.style) private var style
-    @Environment(\.styleButtonVariant) private var styleButtonVariant
-    @Environment(\.enabled) private var enabled
-
-    private let variant: StyleButtonVariant?
-
-    @State private var interactionState: Style.Component.InteractionState = .normal
-
-    private let action: () -> Void
-    private let content: () -> Content
-
-    public init(
-        _ variant: StyleButtonVariant? = nil,
-        _ action: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.variant = variant
-        self.action = action
-        self.content = content
-    }
-
-    public var body: some View {
-        let variant = self.variant ?? styleButtonVariant
+extension Style.Views.Button {
+    
+    public struct ButtonView<Content>: View where Content : View {
         
-        StyleButtonInteractionState($interactionState, action: action) {
-            content()
-                .style(element: .title)
-                .style(
-                    component: variant.component,
-                    applyContainer: variant.hierarchy,
-                    state: enabled ? interactionState : .disabled
-                )
+        @Environment(\.style) private var style
+        @Environment(\.styleButtonVariant) private var styleButtonVariant
+        @Environment(\.enabled) private var enabled
+        
+        private let variant: Style.Views.Button.Variant?
+        
+        @State private var interactionState: Style.Component.InteractionState = .normal
+        
+        private let action: () -> Void
+        private let content: () -> Content
+        
+        public init(
+            _ variant: Style.Views.Button.Variant? = nil,
+            _ action: @escaping () -> Void,
+            @ViewBuilder content: @escaping () -> Content
+        ) {
+            self.variant = variant
+            self.action = action
+            self.content = content
         }
-        .disabled(!enabled)
+        
+        public var body: some View {
+            let variant = self.variant ?? styleButtonVariant
+            
+            StyleButtonInteractionState($interactionState, action: action) {
+                content()
+                    .style(element: .title)
+                    .style(
+                        component: variant.component,
+                        applyContainer: variant.hierarchy,
+                        state: enabled ? interactionState : .disabled
+                    )
+            }
+            .disabled(!enabled)
+        }
+        
     }
-
+    
 }
 
 
