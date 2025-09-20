@@ -15,6 +15,7 @@ extension Style.Keys.Font {
 
     public var content: ValueBuilder { .base(.definition(.with(size: 16, weight: .regular))) }
     public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
+    public var textBlock: ValueBuilder { .base(.reference(\.content)) }
 
     /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
