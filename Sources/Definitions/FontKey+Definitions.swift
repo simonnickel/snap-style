@@ -92,6 +92,8 @@ extension Style.Keys.Font {
     public var value: ValueBuilder { .base(nil) }
 
     public var separator: ValueBuilder { .base(nil) }
+    
+    public var footnote: ValueBuilder { .base(.definition(.with(size: 14, weight: .regular))) }
 
 
     // MARK: - List

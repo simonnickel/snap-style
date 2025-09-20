@@ -37,6 +37,7 @@ extension Style {
             case value
             case accessory
             case separator
+            case footnote
 
         }
 

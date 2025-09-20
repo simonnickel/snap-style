@@ -59,6 +59,9 @@ struct ComponentListScreen: View {
             } header: {
                 StyleLabel("Variant .plain")
                     .styleListSectionHeaderLabel()
+            } footer: {
+                StyleLabel("Footer with some text")
+                    .styleListSectionFooterLabel()
             }
         }
     }

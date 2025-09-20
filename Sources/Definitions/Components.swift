@@ -32,6 +32,7 @@ extension Style.ComponentDefinition {
                 case .accessory: \.accessory
                 case .value: \.value
                 case .separator: \.separator
+                case .footnote: \.footnote
             }
         },
         compositions: { element in
@@ -44,6 +45,7 @@ extension Style.ComponentDefinition {
                 case .accessory: \.accessory
                 case .value: \.value
                 case .separator: \.separator
+                case .footnote: \.footnote
             }
         },
         shapes: { element in

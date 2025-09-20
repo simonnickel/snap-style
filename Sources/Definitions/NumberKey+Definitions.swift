@@ -69,6 +69,7 @@ extension Style.Keys.Number {
     public var paddingListSectionFirst: ValueBuilder { .base(.definition(.value(10))) }
     public var paddingListSection: ValueBuilder { .base(.definition(.value(28))) }
     public var paddingListHeaderBottom: ValueBuilder { .base(.definition(.value(10))) }
+    public var paddingListFooterTop: ValueBuilder { .base(.definition(.value(5))) }
     public var paddingListRowTop: ValueBuilder { .base(.definition(.value(16))) }
     public var paddingListRowBottom: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
     public var paddingListRowLeading: ValueBuilder { .base(.definition(.value(18))) }

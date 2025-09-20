@@ -173,5 +173,7 @@ extension Style.Keys.Composition {
     public var action: ValueBuilder { .base(nil) }
 
     public var separator: ValueBuilder { .base(.definition(.foreground(\.onContentDisabled))) }
+    
+    public var footnote: ValueBuilder { .base(nil) }
 
 }
