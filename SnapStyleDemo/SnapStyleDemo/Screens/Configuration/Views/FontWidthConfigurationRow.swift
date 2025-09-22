@@ -12,11 +12,10 @@ struct FontWidthConfigurationRow: View {
     @Environment(\.style) private var style
     @Environment(\.demoConfiguration) private var demoConfiguration
 
-    @State private var fontWidth: Font.Width? = Style.Context.fontWidthDefault
+    @State private var fontWidth: Font.Width = Style.Context.fontWidthDefault
 
     var body: some View {
-        // TODO: Whats the title?
-        StyleListRow(.pick(Font.Width.allCases + [nil], titleKeyPath: \.debugDescription, selection: $fontWidth), icon: \.fontDesign) {
+        StyleListRow(.pick(Font.Width.allCases, titleKeyPath: \.description, selection: $fontWidth), icon: \.fontDesign) {
             StyleStack(spacing: \.spacingElements) {
                 StyleLabel("Font Width")
             }

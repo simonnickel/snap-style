@@ -17,16 +17,16 @@ class DemoConfiguration {
 
     var scaleFactor: Style.Context.ScaleFactor
     
-    var fontDesign: Font.Design?
+    var fontDesign: Font.Design
 
-    var fontWidth: Font.Width?
+    var fontWidth: Font.Width
 
     init(
         accentPrimary: Accent = .fallbackPrimary,
         accentSecondary: Accent = .fallbackSecondary,
         scaleFactor: Style.Context.ScaleFactor = Style.Context.scaleFactorDefault,
-        fontDesign: Font.Design? = Style.Context.fontDesignDefault,
-        fontWidth: Font.Width? = Style.Context.fontWidthDefault,
+        fontDesign: Font.Design = Style.Context.fontDesignDefault,
+        fontWidth: Font.Width = Style.Context.fontWidthDefault,
         cornerRadius: CornerRadiusOption = .medium,
     ) {
         self.accentPrimary = accentPrimary

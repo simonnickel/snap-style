@@ -11,7 +11,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(fontWidth: Font.Width?) -> some View {
+    public func style(fontWidth: Font.Width) -> some View {
         self
             .style(attribute: Style.Context.fontWidth, value: fontWidth)
     }
@@ -23,10 +23,10 @@ extension View {
 
 extension Style.Context {
 
-    public static let fontWidthDefault: Font.Width? = nil
+    public static let fontWidthDefault: Font.Width = .standard
 
-    public var fontWidth: Font.Width? { getValue(for: Self.fontWidth) ?? Self.fontWidthDefault }
+    public var fontWidth: Font.Width { getValue(for: Self.fontWidth) ?? Self.fontWidthDefault }
 
-    public static var fontWidth: Attribute<String, Font.Width?> { .init(key: "FontWidth", valueDefault: Self.fontWidthDefault) }
+    public static var fontWidth: Attribute<String, Font.Width> { .init(key: "FontWidth", valueDefault: Self.fontWidthDefault) }
 
 }
