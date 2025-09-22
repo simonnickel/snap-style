@@ -14,30 +14,31 @@ A toolset to abstract Colors, Fonts, Icons and Numbers of a multi-platform Swift
 [documentation]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyle
 [documentation badge]: https://img.shields.io/badge/Documentation-DocC-blue
 
-// TODO: Update feature set, namings, how to use and list of components
 
 ## Motivation
 
-Consistency in look and feel is important. Especially for a growing app project, when you decide to tweak a few attributes or need adjustments to fit platform changes or design trends. Goal of SnapTheme is to define visual attributes in a single place, to allow: A consistent UI with simple adjustments and quick experiments, but strong maintainability.
+Consistency in look and feel is important, especially for a growing app project. Goal of SnapStyle is to define any visual attribute in a single place. Create a consistent UI with simple adjustments and quick experiments, but strong maintainability. Tweak a few attributes or adjust components to fit platform changes just once and have the whole app updated.
 
-Instead of defining design attributes all over the place, you register a semantic key, assign a definition and use it in your SwiftUI views. You can also define multiple Themes to let the user choose it's favorite.
+Instead of defining design attributes all over the place, you register a semantic key, assign a definition and use it in your SwiftUI views. Definitions can be overwritten in the View hierarchy to allow different styles and support user customisation like Themes or Accent color selection.
 
 Comes with:
 
-Base attributes (Color, Font, Icon, Number) and composed attributes (Surface, Background, TextSurface).
-A preset of common semantic definitions for these attributes (e.g. .textTitle, .textSubtitle) with platform specific default values.
-ViewModifier to apply them to your views.
-Wrapper of stock SwiftUI views to set attributes from Style definitions (e.g. ThemeVStack(spacing:)).
-Convenience views for common layout and style tasks (e.g. ThemeScreen, ThemeElement).
-The Theme is injected in the Environment to be available to ViewModifier and Views.
+ - Base attributes (Surface, Font, Icon, Number, Shape, Padding) and composed attributes (Composition, Accent, Components).
+ - A preset of common semantic definitions for these attributes, with platform specific default values.
+ - ViewModifier to apply them to your views.
+ - Wrapper of stock SwiftUI views to set attributes from Style definitions (e.g. StyleStack(spacing:)).
+ - Convenience views for common layout and style tasks (e.g. StyleScreen, StyleElement).
+ - Configuration and Context is provided via Environment to access and configure definitions.
 
 Fonts and Numbers are scaled by DynamicType by default. This brings some additional benefits:
 
 UI sizes (paddings, spacings, ...) defined by the Theme will scale with DynamicType.
-By adjusting the Themes scale factor, the whole UI can be zoomed by a simple value change.
+By adjusting the configurations scale factor, the whole UI can be zoomed by a simple value change.
+
 
 ## Setup
 
+// TODO package: Setup
 Steps to setup the package ...
 
 
@@ -45,21 +46,38 @@ Steps to setup the package ...
 
 The [demo project](/PackageDemo) shows ...
 
+// TODO package: Update Screenshot
 <img src="/screenshot.png" height="400">
 
 
 ## How to use
 
+// TODO package: How to use
 Details about package content ...
 
 
 ## Targets
 
 ### SnapStyle
-The main target to import using the package in an app.
+The main target to import using the package in an app. Provides access to internal targets.
 
-### SnapStyleBase
+### Base
 Base implementation of Values, Caching and Context.
+
+### Components
+Implementation of Components and Elements. To build a semantic content structure.
+
+### Definitions
+Base set of definitions and values.
+
+### KeyModifier
+ViewModifier to use the definitions in SwiftUI Views.
+
+### Layout
+SwiftUI Views to structure Views.
+
+### Views
+Convenience Views and Container for common solutions, using the style definitions. 
 
 ### SnapStyleDebug
 Some helper views to look into the setup and caches, prevents exposing implementation for accidental misuse.
