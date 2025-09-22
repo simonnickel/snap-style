@@ -31,7 +31,7 @@ struct ContentFlow: View {
         case action
 
         // Tools
-        case elements
+        case components
 
         // Caches
         case cacheNumber
@@ -58,7 +58,7 @@ struct ContentFlow: View {
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
 
-                    case .elements: DebugElementScreen(components: [.screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
+                    case .components: DebugComponentsScreen(components: [.base, .screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 
                     case .cacheNumber: DebugCacheScreen<Style.Keys.Number>()
                     case .cacheFont: DebugCacheScreen<Style.Keys.Font>()
@@ -84,7 +84,7 @@ struct ContentFlow: View {
                 case .list: "List"
                 case .action: "Action"
 
-                case .elements: "Elements"
+                case .components: "Components"
 
                 case .cacheNumber: "Number"
                 case .cacheFont: "Font"

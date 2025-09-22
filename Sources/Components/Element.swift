@@ -44,13 +44,15 @@ extension Style {
 
         // MARK: Hierarchy
 
-        public enum Hierarchy: String, Sendable, CaseIterable {
+        public enum Hierarchy: String, Identifiable, Sendable, CaseIterable {
 
             case any
 
             case primary
             case secondary
             case tertiary
+            
+            public var id: String { rawValue }
 
         }
 

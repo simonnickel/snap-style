@@ -22,7 +22,7 @@ struct ContentListScreen: View {
             Section(title: "Examples", screens: [.structured, .componentStack]),
         ])
         static let tools: ViewData = ViewData(sections: [
-            Section(title: "Tools", screens: [.elements]),
+            Section(title: "Tools", screens: [.components]),
             Section(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition]),
         ])
     }

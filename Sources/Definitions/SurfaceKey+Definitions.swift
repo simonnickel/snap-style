@@ -190,7 +190,7 @@ extension Style.Keys.Surface {
     
     public var indicatorNavigation: ValueBuilder { .builder { context in
         switch context.colorScheme {
-            // TODO: Should it fit system?
+            // TODO finetuning: Should it fit system?
             case .light: .reference(\.onLight1)
             case .dark: .reference(\.onDark1)
             default: nil
