@@ -26,7 +26,7 @@ private struct ShapeKeyModifier: ViewModifier {
     let shouldClip: Bool
 
     func body(content: Content) -> some View {
-        // TODO FB19669133: Have to conditionally construct view, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when using with `ContainerRelativeShape()`.
+        // TODO FB19669133: Have to conditionally construct view, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when used with `ContainerRelativeShape()`.
         if let keyPath, let shape = style.shape(for: keyPath) {
             if shape == .containerRelative {
                 content

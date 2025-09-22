@@ -17,11 +17,11 @@ import UIKit
  
  It would be enough to apply it once per NavigationStack, e.g. on the root screen. Currently SnapStyle does not handle NavigationStack though, to not interfere with SnapNavigation. Both could be combined for a smoother experience.
  
- To prevent unnecessary appearance config, the modifier requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+ To prevent unnecessary appearance config, the modifier requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
  */
 extension View {
     
-    /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public func styleNavigationBar() -> some View {
         modifier(StyleNavigationBarModifier())

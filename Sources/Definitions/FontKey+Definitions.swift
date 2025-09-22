@@ -17,13 +17,13 @@ extension Style.Keys.Font {
     public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
     public var textBlock: ValueBuilder { .base(.reference(\.content)) }
 
-    /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleInline: ValueBuilder {
         .base(.definition(.with(size: 17, weight: .semibold))) // iOS 26 - size: 17, weight: .semibold
     }
     
-    /// Requires `Style.configuration.styleAllowNavigationBarTitleAdjustments` to be enabled.
+    /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleLarge: ValueBuilder {
         .base(.definition(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
