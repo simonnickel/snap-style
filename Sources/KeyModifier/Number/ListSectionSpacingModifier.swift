@@ -32,21 +32,19 @@ private struct ListSectionSpacingModifier: ViewModifier {
     let spacing: Style.Keys.Number.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        let value = style.number(for: spacing)
-
-#if !os(macOS)
-        // TODO FB: Modifier with value has no inert variant and can not be combined with `.default`.
-        if let value {
-            content
-                .listSectionSpacing(value)
-        } else {
-            content
-                .listSectionSpacing(.default)
-        }
-#else
+#if os(macOS)
+        // `.listSectionSpacing()` is not available on macOS.
         content
-#endif
+#else
+        let value = style.number(for: spacing)
+        let spacing: ListSectionSpacing = if let value {
+            .custom(value)
+        } else {
+            .default
+        }
 
+        content.listSectionSpacing(spacing)
+#endif
     }
 
 }
