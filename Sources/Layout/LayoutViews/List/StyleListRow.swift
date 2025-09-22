@@ -248,7 +248,6 @@ extension Style.Views.List.Row {
                     // Placed in an overlay to not influence the rows height.
                     ZStack {}
                         .overlay(alignment: .trailing) {
-                            // TODO: tint color
                             Toggle(isOn: isOn) {
                                 EmptyView()
                             }

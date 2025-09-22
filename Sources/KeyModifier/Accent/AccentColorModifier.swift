@@ -36,6 +36,7 @@ private struct AccentColorModifier: ViewModifier {
         {
             content
                 .accentColor(keyPath == \.primary ? color.resolvedColor : nil)
+                .tint(keyPath == \.primary ? color.resolvedColor : nil)
                 .style(attribute: Style.Context.accent, value: keyPath)
         } else {
             content
