@@ -6,8 +6,6 @@
 import SnapStyle
 import SwiftUI
 
-// TODO: Show somewhere?
-
 struct ElementsView: View {
     
     @ScaledNumber(\.spacingElements) var spacingH
