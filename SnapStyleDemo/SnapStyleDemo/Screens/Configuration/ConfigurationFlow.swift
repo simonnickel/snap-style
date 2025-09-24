@@ -40,6 +40,7 @@ struct ConfigurationFlow: View {
                 }
         }
         .environment(\.navigationStateConfiguration, navigationState)
+        .environment(\.styleElevation, 1) // In SnapTemplate this is automatically set via SnapNavigation.
         
     }
 }

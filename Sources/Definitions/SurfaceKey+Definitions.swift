@@ -25,8 +25,8 @@ extension Style.Keys.Surface {
 
     public var dark0: ValueBuilder { .base(.definition(.color(.black))) }
     public var dark1: ValueBuilder { .base(.definition(.color(Color(red: 28/255, green: 28/255, blue: 30/255)))) }
-    public var dark2: ValueBuilder { .base(.definition(.color(.init(white: 0.35)))) }
-    public var dark3: ValueBuilder { .base(.definition(.color(.init(white: 0.45)))) }
+    public var dark2: ValueBuilder { .base(.definition(.color(.init(white: 0.25)))) }
+    public var dark3: ValueBuilder { .base(.definition(.color(.init(white: 0.35)))) }
     public var onDark0: ValueBuilder { .base(.definition(.color(.white))) }
     public var onDark1: ValueBuilder { .base(.definition(.color(.gray))) }
     public var onDark2: ValueBuilder { .base(.definition(.color(.gray))) }
@@ -201,9 +201,10 @@ extension Style.Keys.Surface {
     // MARK: - Components
     
     public var screen: ValueBuilder { .builder { context in
-        switch context.colorScheme {
-            case .light: .definition(.color(Color(red: 242/255, green: 242/255, blue: 247/255)))
-            case .dark: .reference(\.dark0)
+        switch (context.colorScheme, context.elevation) {
+            case (.light, _): .definition(.color(Color(red: 242/255, green: 242/255, blue: 247/255)))
+            case (.dark, 0): .reference(\.dark0)
+            case (.dark, 1): .reference(\.dark1)
             default: nil
         }
     }}
@@ -213,7 +214,9 @@ extension Style.Keys.Surface {
 
     public var contentBackground: ValueBuilder {
         .builder { context in
-            switch context.component.level {
+            let elevation = min(1, context.elevation)
+            let level = context.colorScheme == .dark ? context.component.level + elevation : context.component.level
+            return switch level {
                 case 1: .reference(\.contentLevel1)
                 case 2: .reference(\.contentLevel2)
                 case 3: .reference(\.contentLevel3)

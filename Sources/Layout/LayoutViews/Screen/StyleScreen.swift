@@ -51,6 +51,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
         .style(composition: composition, ignoreSafeAreaEdges: .all)
         .style(component: component, applyContainer: nil)
         .styleNavigationBar() /// (see ``StyleNavigationBarModifier``)
+        .styleElevationRelay()
     }
     
     @ViewBuilder
