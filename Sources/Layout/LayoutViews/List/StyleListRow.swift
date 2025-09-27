@@ -205,7 +205,7 @@ extension Style.Views.List.Row {
         private func viewContent() -> some View {
             switch variant {
                 case .pickInline(let values, titleKeyPath: let titleKeyPath, selection: let selection):
-                    // TODO FB12181540: Should be able to apply color and font to Picker.
+                    // FB12181540: Should be able to apply color and font to Picker.
                     Picker("", selection: selection) {
                         ForEach(values, id: \.self) { value in
                             Text("\(value[keyPath: titleKeyPath])")
@@ -254,7 +254,7 @@ extension Style.Views.List.Row {
                         }
                     
                 case .pick(let values, let titleKeyPath, selection: let selection):
-                    // TODO FB12181540: Should be able to apply color and font to Picker.
+                    // FB12181540: Should be able to apply color and font to Picker.
                     Picker("", selection: selection) {
                         ForEach(values, id: \.self) { value in
                             Text("\(value[keyPath: titleKeyPath])")
@@ -263,8 +263,8 @@ extension Style.Views.List.Row {
                     .labelsHidden()
                     // Removed padding to not influence the rows height.
                     .padding(.vertical, -10)
-                    // TODO FB19360250: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
-                    // TODO FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).
+                    // FB19360250: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
+                    // FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).
                     // .pickerStyle(.menu)
                     
                 case .pickInline(let values, let titleKeyPath, selection: let selection): EmptyView()

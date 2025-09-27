@@ -84,7 +84,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
             if styleLabelContent.contains(.icon) {
                 configuration.icon
             }
-            // TODO Accessibility: Should the label text be added as hint? Do we have access here to the text somehow?
+            // TODO accessibility: Should the label text be added as hint? Do we have access here to the text somehow?
             if styleLabelContent.contains(.label) {
                 configuration.title
             }

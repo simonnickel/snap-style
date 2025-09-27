@@ -82,7 +82,7 @@ extension View {
     func listIconWidthScope() -> some View {
         self
             .modifier(ListIconWidthScopeModifier())
-            // TODO FB20190402: Need to reload onAppear to fix the separator inset.
+            // FB20190402: Need to reload onAppear to fix the separator inset.
             // When updating the inset after the view already appeared, the inset is not updated.
             .modifier(ReloadOnAppearModifier())
     }

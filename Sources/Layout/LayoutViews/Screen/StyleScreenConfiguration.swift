@@ -33,7 +33,7 @@ extension [StyleScreenConfiguration] {
     public static var content: Self { [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .insetVerticalEdges, .readableContentWidth, .allowReadableContentOverflow] }
 
     /// A default set of configurations for a system list screen.
-    public static var list: Self { [.insetHorizontalEdges, .readableContentWidth] } // TODO FB18231015: .readableContentWidth without .allowReadableContentOverflow does not work properly on iPadOS 26 with sidebar. Area outside of .readableContentWidth can not be used to scroll. (FB18231015: Content outside of SafeAreaPadding not interactive)
+    public static var list: Self { [.insetHorizontalEdges, .readableContentWidth] } // FB18231015 (iOS, fixed), FB20406450 (macOS, not fixed): .readableContentWidth without .allowReadableContentOverflow does not work properly on iPadOS 26 with sidebar. Area outside of .readableContentWidth can not be used to scroll. (FB18231015, FB20406450: Content outside of SafeAreaPadding not interactive)
 }
 
 

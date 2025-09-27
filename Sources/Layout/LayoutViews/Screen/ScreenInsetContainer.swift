@@ -54,7 +54,7 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                 ))
                 .safeAreaPadding(.init(top: insetTop ?? 0, leading: 0, bottom: insetBottom ?? 0, trailing: 0))
                 .if(allowOverflow) { content in
-                    // TODO FB18231015: Content outside of SafeAreaPadding not interactive
+                    // FB18231015 (iOS, fixed), FB20406450 (macOS, not fixed): Content outside of SafeAreaPadding not interactive. Fixed on iOS, but still happens on macOS.
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
                 } else: { content in
