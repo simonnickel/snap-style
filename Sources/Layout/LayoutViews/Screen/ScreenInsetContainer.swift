@@ -57,6 +57,9 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     // FB18231015 (iOS, fixed), FB20406450 (macOS, not fixed): Content outside of SafeAreaPadding not interactive. Fixed on iOS, but still happens on macOS.
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
+                        // Since iOS 26 the scroll indicator is inset by safeAreaPadding, but shouldn't.
+                        // TODO: Does not work on iPad in portrait though, for whatever fucking reason.
+                        .contentMargins(.horizontal, -inset, for: .scrollIndicators)
                 } else: { content in
                     content
                         .contentMargins(.leading, inset + geometrySafeAreaInsets.leading, for: .scrollContent)
