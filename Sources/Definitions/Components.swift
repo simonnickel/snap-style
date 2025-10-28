@@ -18,14 +18,12 @@ extension Style.ComponentDefinition {
         padding: { element in
             switch element {
                 case .any: Padding(\.paddingAnyElement)
-                case .container: Padding(\.paddingAnyContainer)
                 default: nil
             }
         },
         fonts: { element in
             switch element {
                 case .any: \.anyElement
-                case .container: \.anyComponent
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -38,7 +36,6 @@ extension Style.ComponentDefinition {
         compositions: { element in
             switch element {
                 case .any: \.anyElement
-                case .container: \.anyContainer
                 case .title: \.title
                 case .label: \.label
                 case .icon: \.icon
@@ -48,12 +45,7 @@ extension Style.ComponentDefinition {
                 case .footnote: \.footnote
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.anyContainer
-                default: nil
-            }
-        }
+        container: .base,
     )
     
     
@@ -63,7 +55,6 @@ extension Style.ComponentDefinition {
         padding: { element in
             switch element {
                 case .title: Padding(\.paddingScreenTitleLeading, edges: .leading)
-                // Container Padding can not be defined here, because of scroll indicator placement.
                 default: nil
             }
         },
@@ -75,10 +66,10 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.screen
                 default: nil
             }
-        }
+        },
+        container: .screen,
     )
     
     
@@ -87,7 +78,6 @@ extension Style.ComponentDefinition {
     public static let contentCard: Self = .init("contentCard",
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingCard)
                 default: nil
             }
         },
@@ -99,16 +89,10 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerContentCard
                 default: nil
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.containerCard
-                default: nil
-            }
-        }
+        container: .contentCard,
     )
     
     
@@ -118,7 +102,6 @@ extension Style.ComponentDefinition {
         requiresSecondaryAccent: true,
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingCard)
                 default: nil
             }
         },
@@ -130,16 +113,10 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerAccentCard
                 default: nil
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.containerCard
-                default: nil
-            }
-        }
+        container: .contentCard,
     )
     
     
@@ -149,7 +126,6 @@ extension Style.ComponentDefinition {
         requiresSecondaryAccent: true,
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingMetricCard)
                 default: nil
             }
         },
@@ -163,16 +139,10 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerMetricCard
                 default: nil
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.containerMetricCard
-                default: nil
-            }
-        }
+        container: .metricCard,
     )
     
     
@@ -187,16 +157,15 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.screen
                 default: nil
             }
-        }
+        },
+        container: .list,
     )
     
     public static let listRow: Self = .init("listRow",
         padding: { element in
             switch element {
-                case .container: .listRow
                 default: nil
             }
         },
@@ -209,11 +178,11 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.listRow
                 case .icon, .accessory: \.interactiveIndicator
                 default: nil
             }
-        }
+        },
+        container: .listRow,
     )
     
     
@@ -222,7 +191,6 @@ extension Style.ComponentDefinition {
     public static let button: Self = .init("button",
         padding: { element in
             switch element {
-                case .container: Padding(horizontal: \.paddingActionHorizontal, vertical: \.paddingActionVertical)
                 default: nil
             }
         },
@@ -234,22 +202,15 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.containerAction
                 default: nil
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.containerAction
-                default: nil
-            }
-        }
+        container: .button,
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",
         padding: { element in
             switch element {
-                case .container: Padding(\.paddingActionIcon)
                 default: nil
             }
         },
@@ -260,16 +221,10 @@ extension Style.ComponentDefinition {
         },
         compositions: { element in
             switch element {
-                case .container: \.interactiveContainer
                 default: nil
             }
         },
-        shapes: { element in
-            switch element {
-                case .container: \.containerActionIcon
-                default: nil
-            }
-        }
+        container: .buttonIconOnly,
     )
     
 }

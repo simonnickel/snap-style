@@ -8,36 +8,31 @@ import SwiftUI
 
 extension Style {
 
-    public struct ComponentDefinition: Hashable, Equatable, Sendable {
-
-        public typealias Mapping<Key: StyleKey> = @Sendable (Style.Element.ElementType) -> Key.ValueBuilderKeyPath?
-        public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
+    // TODO: @unchecked Sendable. KeyPath is not Sendable, could be wrapped in a closure.
+    public struct ContainerDefinition: Hashable, Equatable, @unchecked Sendable {
 
         public let id: String
         public let requiresSecondaryAccent: Bool
 
-        package let padding: MappingPadding?
-        package let fonts: Mapping<Keys.Font>?
-        package let surfaces: Mapping<Keys.Surface>?
-        package let compositions: Mapping<Keys.Composition>?
-        package let container: Style.ContainerDefinition?
+        package let padding: Padding?
+        package let surfaces: Keys.Surface.ValueBuilderKeyPath?
+        package let compositions: Keys.Composition.ValueBuilderKeyPath?
+        package let shapes: Keys.Shape.ValueBuilderKeyPath?
 
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
-            padding: MappingPadding? = nil,
-            fonts: Mapping<Keys.Font>? = nil,
-            surfaces: Mapping<Keys.Surface>? = nil,
-            compositions: Mapping<Keys.Composition>? = nil,
-            container: Style.ContainerDefinition? = nil,
+            padding: Padding? = nil,
+            surfaces: Keys.Surface.ValueBuilderKeyPath? = nil,
+            compositions: Keys.Composition.ValueBuilderKeyPath? = nil,
+            shapes: Keys.Shape.ValueBuilderKeyPath? = nil,
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
             self.padding = padding
-            self.fonts = fonts
             self.surfaces = surfaces
             self.compositions = compositions
-            self.container = container
+            self.shapes = shapes
         }
 
 

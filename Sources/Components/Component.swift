@@ -7,6 +7,7 @@ import SnapStyleBase
 
 extension Style {
 
+    // TODO: This should be Container instead.
     /// An actual `Component` instance for a specific View.
     public struct Component {
 

@@ -29,7 +29,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     private let content: ContentBuilder
 
     public init(
-        component: Style.ComponentDefinition = .screen,
+        component: Style.ComponentDefinition = .screen, // TODO: Does a Screen need this configurable? Should it be just a container / composition instead? Or nothing at all.
         configuration: [StyleScreenConfiguration] = .content,
         @ViewBuilder content: @escaping () -> ScreenContent
     ) {
@@ -39,7 +39,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     }
     
     public var body: some View {
-        let composition = component.compositions?(.container) ?? \.screen
+        let composition = component.container?.compositions ?? \.screen
 
         GeometryReader { geometry in
             createContent()

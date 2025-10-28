@@ -16,13 +16,13 @@ extension View {
     /// - Returns: A modified View.
     public func style(
         component: Style.ComponentDefinition,
-        applyContainer: Style.Element.Hierarchy? = .primary,
+        applyContainer: Style.Element.Hierarchy? = .primary, // TODO: Could be Bool now.
         state: Style.Component.InteractionState = .normal
     ) -> some View {
         Group {
-            if let applyContainer {
+            if let applyContainer, let container = component.container {
                 self
-                    .style(element: .container, hierarchy: applyContainer)
+                    .style(container: container)
             } else {
                 self
             }

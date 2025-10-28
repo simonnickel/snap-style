@@ -7,6 +7,7 @@ import SnapStyleBase
 
 extension Style {
 
+    // TODO: This should be ContainerStack instead.
     package struct ComponentStack: Hashable {
 
         package init() {}
