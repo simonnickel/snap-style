@@ -83,7 +83,7 @@ extension Style {
             hasher.combine(requiresSecondaryAccent)
         }
 
-        public static func == (lhs: SnapStyleBase.Style.ComponentDefinition, rhs: SnapStyleBase.Style.ComponentDefinition) -> Bool {
+        public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.hashValue == rhs.hashValue
         }
 
