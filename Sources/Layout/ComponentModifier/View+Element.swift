@@ -21,6 +21,7 @@ extension View {
             .style(attribute: Style.Context.element, value: Style.Element(type: element, hierarchy: hierarchy))
     }
 
+    // TODO: This is confusing. Setting Hierarchy should not trigger element apply. Setting an Element should be explizit.
     /// Shortcut to adjust the elements hierarchy.
     public func style(hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
