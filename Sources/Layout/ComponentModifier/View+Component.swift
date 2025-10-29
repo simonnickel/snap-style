@@ -17,76 +17,31 @@ extension View {
     public func style(
         component: Style.ComponentDefinition,
         applyContainer: Style.Element.Hierarchy? = .primary, // TODO: Could be Bool now.
-        state: Style.Component.InteractionState = .normal
+        state: Style.Container.InteractionState = .normal // TODO: This is only for the Container. Could be split?
     ) -> some View {
         Group {
             if let applyContainer, let container = component.container {
                 self
-                    .style(container: container)
+                    .style(container: container, hierarchy: applyContainer, state: state)
             } else {
                 self
             }
         }
-        .modifier(ComponentModifier(component: component, state: state))
+        .modifier(ComponentModifier(component: component))
     }
 
 }
 
-// TODO iOS26: Remove iOS 18 Variant
 private struct ComponentModifier: ViewModifier {
 
-    let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
-
-    func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            content
-                .modifier(ComponentModifier26(component: component, state: state))
-        } else {
-            content
-                .modifier(ComponentModifier18(component: component, state: state))
-        }
-    }
-}
-
-private struct ComponentModifier26: ViewModifier {
-
     @Environment(\.style) private var style
 
     let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
 
     func body(content: Content) -> some View {
-        let componentStack = style.context.componentStack.appended(component, state: state)
+        let stack = style.context.componentStack.appended(component)
         content
-            .style(accent: component.requiresSecondaryAccent ? \.secondary : nil)
-            .style(attribute: Style.Context.componentStack, value: componentStack)
-    }
-
-}
-
-private struct ComponentModifier18: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
-
-    /// Internal copy to apply animation on changes.
-    @State private var stateInternal: Style.Component.InteractionState = .normal
-
-    func body(content: Content) -> some View {
-        let componentStack = style.context.componentStack.appended(component, state: stateInternal)
-        content
-            .style(attribute: Style.Context.componentStack, value: componentStack)
-            .onChange(of: state, initial: true) { oldValue, newValue in
-                // TODO FB: (iOS 18) Need to delay to prevent from SwiftUI skipping animations. Happens e.g. when pushing a screen on a NavigationStack.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    withAnimation {
-                        stateInternal = newValue
-                    }
-                }
-            }
+            .style(attribute: Style.Context.componentStack, value: stack)
     }
 
 }

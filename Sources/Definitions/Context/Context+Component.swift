@@ -20,7 +20,6 @@ extension Style.Context {
         return .init(
             definition: current,
             parent: componentStack.parent,
-            state: componentStack.currentState ?? .normal,
             level: componentStack.level
         )
     }

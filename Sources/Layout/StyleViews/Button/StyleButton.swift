@@ -24,7 +24,7 @@ extension Style.Views.Button {
         
         private let variant: Style.Views.Button.Variant?
         
-        @State private var interactionState: Style.Component.InteractionState = .normal
+        @State private var interactionState: Style.Container.InteractionState = .normal
         
         private let action: () -> Void
         private let content: () -> Content

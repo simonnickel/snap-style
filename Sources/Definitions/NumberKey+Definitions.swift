@@ -38,20 +38,21 @@ extension Style.Keys.Number {
     public var paddingAnyElement: ValueBuilder { .base(nil) }
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
 
-    /// A padding definition based on the level in the component stack.
-    public var paddingComponent: ValueBuilder {
+    /// A padding definition based on the level in the container stack.
+    public var paddingContainer: ValueBuilder {
         .builder { context in
-            switch context.componentStack.levelOverall {
-                case 1: .definition(.value(12))
-                case 2: .definition(.value(10))
-                case 3: .definition(.value(8))
+            switch context.containerStack.levelOverall {
+                    // TODO: Should start with 1 if screen has a container as well. 
+                case 0: .definition(.value(12))
+                case 1: .definition(.value(10))
+                case 2: .definition(.value(8))
                 default: nil
             }
         }
     }
 
-    public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
-    public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
+    public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(15))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
     public var paddingActionIcon: ValueBuilder {

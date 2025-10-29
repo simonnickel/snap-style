@@ -29,9 +29,10 @@ extension View {
     }
     
     // TODO: Move somewhere else?
-    public func style(container: Style.ContainerDefinition) -> some View {
+    public func style(container: Style.ContainerDefinition, hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
             .modifier(ContainerApplyStyleModifier(container: container))
+            .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
 
 }

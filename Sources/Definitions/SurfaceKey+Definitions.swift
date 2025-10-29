@@ -56,7 +56,7 @@ extension Style.Keys.Surface {
 
     public var accentBackground: ValueBuilder {
         .builder { context in
-            switch context.component.level {
+            switch context.container.level {
                 case 1: .reference(\.accentLevel1)
                 case 2: .reference(\.accentLevel2)
                 case 3: .reference(\.accentLevel3)
@@ -161,7 +161,7 @@ extension Style.Keys.Surface {
         .builderWrapper { context in
             let brightness = context.accent.brightness
 
-            return switch context.context.component.state {
+            return switch context.context.container.state {
                 case .normal, .disabled, .inactive: .reference(\.clear)
                 case .highlighted: brightness == .light ? .definition(.color(.black.opacity(0.2))) :  .definition(.color(.white.opacity(0.2)))
                 case .selected: brightness == .light ? .definition(.color(.black.opacity(0.3))) : .definition(.color(.white.opacity(0.3)))
@@ -177,7 +177,7 @@ extension Style.Keys.Surface {
 
     public var stateOverlayAccented: ValueBuilder {
         .builder { context in
-            switch context.component.state {
+            switch context.container.state {
                 case .normal, .disabled, .inactive: .reference(\.clear)
                 case .highlighted: .reference(\.accent, adjustments: [.opacity(0.2)])
                 case .selected: .reference(\.accent, adjustments: [.opacity(0.3)])
@@ -215,7 +215,7 @@ extension Style.Keys.Surface {
     public var contentBackground: ValueBuilder {
         .builder { context in
             let elevation = min(1, context.elevation)
-            let level = context.colorScheme == .dark ? context.component.level + elevation : context.component.level
+            let level = context.colorScheme == .dark ? context.container.level + elevation : context.container.level
             return switch level {
                 case 1: .reference(\.contentLevel1)
                 case 2: .reference(\.contentLevel2)

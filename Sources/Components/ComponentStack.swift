@@ -7,7 +7,7 @@ import SnapStyleBase
 
 extension Style {
 
-    // TODO: This should be ContainerStack instead.
+    // TODO: Is a stack necessary? Could be just a context property.
     package struct ComponentStack: Hashable {
 
         package init() {}
@@ -22,16 +22,6 @@ extension Style {
             let parentIndex = components.count - 2
             guard parentIndex >= 0 else { return nil }
             return components[parentIndex]
-        }
-
-
-        // MARK: State
-
-        private var stateByComponent: [Style.ComponentDefinition: Style.Component.InteractionState] = [:]
-
-        package var currentState: Style.Component.InteractionState? {
-            guard let current else { return nil }
-            return stateByComponent[current]
         }
 
 
@@ -63,10 +53,9 @@ extension Style {
 
         // MARK: Update
 
-        package func appended(_ component: Style.ComponentDefinition, state: Style.Component.InteractionState) -> Self {
+        package func appended(_ component: Style.ComponentDefinition) -> Self {
             var result = self
             result.components.append(component)
-            result.stateByComponent[component] = state
             return result
         }
 
