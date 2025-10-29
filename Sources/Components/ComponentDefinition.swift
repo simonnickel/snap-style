@@ -14,7 +14,6 @@ extension Style {
         public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
 
         public let id: String
-        public let requiresSecondaryAccent: Bool // TODO: Should be part of the container.
 
         package let padding: MappingPadding?
         package let fonts: Mapping<Keys.Font>?
@@ -24,7 +23,6 @@ extension Style {
 
         public init(
             _ id: String,
-            requiresSecondaryAccent: Bool = false,
             padding: MappingPadding? = nil,
             fonts: Mapping<Keys.Font>? = nil,
             surfaces: Mapping<Keys.Surface>? = nil,
@@ -32,7 +30,6 @@ extension Style {
             container: Style.ContainerDefinition? = nil,
         ) {
             self.id = id
-            self.requiresSecondaryAccent = requiresSecondaryAccent
             self.padding = padding
             self.fonts = fonts
             self.surfaces = surfaces

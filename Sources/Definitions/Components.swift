@@ -99,7 +99,6 @@ extension Style.ComponentDefinition {
     // MARK: - Accent Card
     
     public static let accentCard: Self = .init("accentCard",
-        requiresSecondaryAccent: true,
         padding: { element in
             switch element {
                 default: nil
@@ -123,7 +122,6 @@ extension Style.ComponentDefinition {
     // MARK: - Metric Card
     
     public static let metricCard: Self = .init("metricCard",
-        requiresSecondaryAccent: true,
         padding: { element in
             switch element {
                 default: nil
