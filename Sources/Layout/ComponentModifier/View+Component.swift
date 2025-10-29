@@ -27,21 +27,7 @@ extension View {
                 self
             }
         }
-        .modifier(ComponentModifier(component: component))
-    }
-
-}
-
-private struct ComponentModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let component: Style.ComponentDefinition
-
-    func body(content: Content) -> some View {
-        let stack = style.context.componentStack.appended(component)
-        content
-            .style(attribute: Style.Context.componentStack, value: stack)
+        .style(attribute: Style.Context.component, value: component)
     }
 
 }
