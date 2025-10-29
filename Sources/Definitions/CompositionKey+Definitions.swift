@@ -146,7 +146,7 @@ extension Style.Keys.Composition {
     
     public var containerAction: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
+            switch context.element.hierarchy { // TODO: Should this be a separate ContainerHierarchy or ComponentHierarchy?
                 case .any, .primary:
                     .reference(\.interactiveContainer)
                 case .secondary, .tertiary:

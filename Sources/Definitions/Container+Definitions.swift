@@ -20,13 +20,6 @@ extension Style.ContainerDefinition {
     )
     
     
-    // MARK: - Screen
-    
-    public static let screen: Self = .init("screen",
-        compositions: \.screen,
-    )
-    
-    
     // MARK: - Content Card
     
     public static let contentCard: Self = .init("contentCard",
@@ -57,10 +50,6 @@ extension Style.ContainerDefinition {
     
     
     // MARK: - List
-    
-    public static let list: Self = .init("list",
-        compositions: \.screen,
-    )
     
     public static let listRow: Self = .init("listRow",
         padding: .listRow,

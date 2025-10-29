@@ -17,11 +17,10 @@ extension View {
     /// - Returns: A modified View.
     public func style(
         container: Style.ContainerDefinition,
-        hierarchy: Style.Element.Hierarchy = .primary,
         state: Style.Container.InteractionState = .normal
     ) -> some View {
         self
-            .style(container: container, hierarchy: hierarchy)
+            .style(container: container)
             .modifier(ContainerModifier(container: container, state: state))
     }
 

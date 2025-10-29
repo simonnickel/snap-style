@@ -69,7 +69,7 @@ extension Style.ComponentDefinition {
                 default: nil
             }
         },
-        container: .screen,
+        container: nil,
     )
     
     
@@ -158,7 +158,7 @@ extension Style.ComponentDefinition {
                 default: nil
             }
         },
-        container: .list,
+        container: nil,
     )
     
     public static let listRow: Self = .init("listRow",

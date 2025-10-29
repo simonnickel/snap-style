@@ -27,10 +27,9 @@ extension Style.Views.Button {
             }
         }
         
-        var hierarchy: Style.Element.Hierarchy? {
+        var hierarchy: Style.Element.Hierarchy {
             switch self {
-                case .plain: nil
-                case .default, .primary: .primary
+                case .default, .plain, .primary: .primary
                 case .secondary: .secondary
                 case .icon(let hierarchy): hierarchy
                 case .component(_, hierarchy: let hierarchy): hierarchy

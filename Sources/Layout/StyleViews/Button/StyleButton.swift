@@ -47,9 +47,9 @@ extension Style.Views.Button {
                     .style(element: .title)
                     .style(
                         component: variant.component,
-                        applyContainer: variant.hierarchy,
                         state: enabled ? interactionState : .disabled
                     )
+                    .style(hierarchy: variant.hierarchy) // TODO: Should this be a container hierarchy instead?
             }
             .disabled(!enabled)
         }
