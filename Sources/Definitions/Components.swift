@@ -116,7 +116,7 @@ extension Style.ComponentDefinition {
                 default: nil
             }
         },
-        container: .contentCard,
+        container: .accentCard,
     )
     
     
