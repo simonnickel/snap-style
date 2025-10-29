@@ -77,7 +77,7 @@ extension Style {
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
-            hasher.combine(requiresSecondaryAccent)
+            hasher.combine(container)
         }
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
