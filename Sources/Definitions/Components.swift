@@ -157,7 +157,9 @@ extension Style.ComponentDefinition {
         Self("buttonIconOnly", hierarchy: hierarchy,
             fonts: { element in
                switch element {
-                   default: \.buttonIconOnly // TODO: Just apply for the icon?
+                   case .icon: \.buttonIconOnly
+                   default: nil
+
                }
             },
             container: .buttonIconOnly,
