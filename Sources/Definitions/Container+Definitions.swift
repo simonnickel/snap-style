@@ -18,6 +18,15 @@ extension Style.ContainerDefinition {
         compositions: \.anyContainer,
         shapes: \.anyContainer,
     )
+
+    
+    // MARK: - Screen
+
+    public static let screen: Self = .init("screen",
+       ignoresSafeAreaEdges: .all,
+       compositions: \.screen,
+       shapes: nil,
+    )
     
     
     // MARK: - Content Card

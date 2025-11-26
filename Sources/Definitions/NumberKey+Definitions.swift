@@ -42,10 +42,9 @@ extension Style.Keys.Number {
     public var paddingContainer: ValueBuilder {
         .builder { context in
             switch context.containerStack.levelOverall {
-                    // TODO: Should start with 1 if screen has a container as well. 
-                case 0: .definition(.value(12))
-                case 1: .definition(.value(10))
-                case 2: .definition(.value(8))
+                case 1: .definition(.value(12))
+                case 2: .definition(.value(10))
+                case 3: .definition(.value(8))
                 default: nil
             }
         }

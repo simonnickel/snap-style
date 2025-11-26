@@ -42,16 +42,16 @@ private struct ContainerApplyStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         let base = Style.ContainerDefinition.base
 
-        let padding = container.padding ?? base.padding ?? Style.ContainerDefinition.Padding(\.paddingAnyElement)
-        let compositionKeyPath = container.compositions ?? base.compositions ?? \.anyElement
-        let shapeKeyPath = container.shapes ?? base.shapes ?? \.anyElement
+        let padding = container.padding ?? base.padding
+        let compositionKeyPath = container.compositions ?? base.compositions ?? \.anyContainer
+        let shapeKeyPath = container.shapes ?? base.shapes
 
         content
-            .style(padding: padding.leading ?? \.paddingAnyElement, .leading)
-            .style(padding: padding.top ?? \.paddingAnyElement, .top)
-            .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
-            .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
-            .style(composition: compositionKeyPath)
+            .style(padding: padding?.leading, .leading)
+            .style(padding: padding?.top, .top)
+            .style(padding: padding?.trailing, .trailing)
+            .style(padding: padding?.bottom, .bottom)
+            .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }
 

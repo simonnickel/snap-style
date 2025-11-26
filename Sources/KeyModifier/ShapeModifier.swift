@@ -38,7 +38,6 @@ private struct ShapeKeyModifier: ViewModifier {
             }
         } else {
             content
-                .modifier(ShapeModifier(shape: Rectangle(), shouldClip: shouldClip))
         }
     }
     

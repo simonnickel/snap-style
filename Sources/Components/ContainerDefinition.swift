@@ -13,6 +13,7 @@ extension Style {
 
         public let id: String
         public let requiresSecondaryAccent: Bool
+        public let ignoresSafeAreaEdges: Edge.Set
 
         package let padding: Padding?
         package let surfaces: Keys.Surface.ValueBuilderKeyPath?
@@ -22,6 +23,7 @@ extension Style {
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
+            ignoresSafeAreaEdges: Edge.Set = [],
             padding: Padding? = nil,
             surfaces: Keys.Surface.ValueBuilderKeyPath? = nil,
             compositions: Keys.Composition.ValueBuilderKeyPath? = nil,
@@ -29,6 +31,7 @@ extension Style {
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
+            self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
             self.padding = padding
             self.surfaces = surfaces
             self.compositions = compositions

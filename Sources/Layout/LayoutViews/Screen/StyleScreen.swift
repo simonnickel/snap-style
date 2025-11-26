@@ -21,7 +21,6 @@ import SwiftUI
 ///     - configuration: An array of `StyleScreenConfiguration` to define the behaviour of the screen.
 public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     
-    private let composition: Style.Keys.Composition.ValueBuilderKeyPath
     private let component: Style.ComponentDefinition
     
     private let configuration: [StyleScreenConfiguration]
@@ -30,12 +29,10 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     private let content: ContentBuilder
 
     public init(
-        composition: Style.Keys.Composition.ValueBuilderKeyPath = \.screen,
         component: Style.ComponentDefinition = .screen,
         configuration: [StyleScreenConfiguration] = .content,
         @ViewBuilder content: @escaping () -> ScreenContent
     ) {
-        self.composition = composition
         self.component = component
         self.configuration = configuration
         self.content = content
@@ -49,7 +46,6 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
-        .style(composition: composition, ignoreSafeAreaEdges: .all)
         .style(component: component)
         .styleNavigationBar() /// (see ``StyleNavigationBarModifier``)
         .styleElevationRelay()

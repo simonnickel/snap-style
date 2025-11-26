@@ -50,7 +50,7 @@ extension Style.ComponentDefinition {
     
     
     // MARK: - Screen
-    
+
     public static let screen: Self = .init("screen",
         padding: { element in
             switch element {
@@ -64,8 +64,9 @@ extension Style.ComponentDefinition {
                 default: nil
             }
         },
+        container: .screen,
     )
-    
+
     
     // MARK: - Content Card
     
@@ -117,6 +118,7 @@ extension Style.ComponentDefinition {
                 default: nil
             }
         },
+        container: .screen,
     )
     
     public static let listRow: Self = .init("listRow",
