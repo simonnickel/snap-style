@@ -9,12 +9,11 @@ import SwiftUI
 
 extension View {
 
-    // TODO: Docu
-    /// Defines the View as a component to use it's style definition and draw the container.
+    /// Applies the container.
     /// - Parameters:
-    ///   - container: Definition to use for the container.
-    ///   - containerHierarchy: Level of `.container` that should be used. Set to nil if no container should be visible.
-    /// - Returns: A modified View.
+    ///   - container: `ContainerDefinition` to use.
+    ///   - state: `InteractionState` the container is in.
+    /// - Returns: View with applied Container.
     public func style(
         container: Style.ContainerDefinition,
         state: Style.Container.InteractionState = .normal

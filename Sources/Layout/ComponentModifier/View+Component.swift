@@ -9,14 +9,14 @@ import SwiftUI
 
 extension View {
 
-    /// Defines the View as a component to use it's style definition and draw the container.
+    /// Defines the View as a component and applies the style definitions and container.
     /// - Parameters:
-    ///   - component: Definition to use for the component.
-    ///   - containerHierarchy: Level of `.container` that should be used. Set to nil if no container should be visible.
-    /// - Returns: A modified View.
+    ///   - component: `ComponentDefinition` to use for the component.
+    ///   - state: `InteractionState` the container is in.
+    /// - Returns: View with adjusted `Context` and applied Container.
     public func style(
         component: Style.ComponentDefinition,
-        state: Style.Container.InteractionState = .normal // TODO: Only for Container, could be split?
+        state: Style.Container.InteractionState = .normal
     ) -> some View {
         Group {
             if let container = component.container {
