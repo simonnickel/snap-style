@@ -143,10 +143,10 @@ extension Style.Keys.Composition {
     public var containerList: ValueBuilder {
         .base(.reference(\.contentContainer))
     }
-    
+
     public var containerAction: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy { // TODO: Should this be a separate ContainerHierarchy or ComponentHierarchy?
+            switch context.component.hierarchy {
                 case .any, .primary:
                     .reference(\.interactiveContainer)
                 case .secondary, .tertiary:
@@ -154,7 +154,7 @@ extension Style.Keys.Composition {
             }
         }
     }
-    
+
 
     // MARK: - Element
 

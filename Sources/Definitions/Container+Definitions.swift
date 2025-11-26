@@ -66,9 +66,9 @@ extension Style.ContainerDefinition {
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",
-        padding: Padding(\.paddingActionIcon),
+        padding: Padding(\.paddingActionIconOnly),
         compositions: \.interactiveContainer,
-        shapes: \.containerActionIcon,
+        shapes: \.containerActionIconOnly,
     )
     
 }

@@ -55,9 +55,9 @@ extension Style.Keys.Number {
     public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(15))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
-    public var paddingActionIcon: ValueBuilder {
+    public var paddingActionIconOnly: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
+            switch context.component.hierarchy {
                 case .primary: .definition(.value(18))
                 case .secondary: .definition(.value(14))
                 case .tertiary: .definition(.value(10))

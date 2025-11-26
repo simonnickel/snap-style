@@ -185,44 +185,48 @@ extension Style.ComponentDefinition {
     
     
     // MARK: - Button
+
+    public static func button(_ hierarchy: Hierarchy) -> Self {
+        Self("button", hierarchy: hierarchy,
+            padding: { element in
+                switch element {
+                    default: nil
+                }
+            },
+            fonts: { element in
+               switch element {
+                   case .icon: \.buttonIcon
+                   default: \.buttonTitle
+               }
+            },
+            compositions: { element in
+                switch element {
+                    default: nil
+                }
+            },
+            container: .button,
+        )
+    }
     
-    public static let button: Self = .init("button",
-        padding: { element in
-            switch element {
-                default: nil
-            }
-        },
-        fonts: { element in
-           switch element {
-               case .icon: \.buttonIcon
-               default: \.buttonTitle
-           }
-        },
-        compositions: { element in
-            switch element {
-                default: nil
-            }
-        },
-        container: .button,
-    )
-    
-    public static let buttonIconOnly: Self = .init("buttonIconOnly",
-        padding: { element in
-            switch element {
-                default: nil
-            }
-        },
-        fonts: { element in
-           switch element {
-               default: \.buttonIconOnly
-           }
-        },
-        compositions: { element in
-            switch element {
-                default: nil
-            }
-        },
-        container: .buttonIconOnly,
-    )
+    public static func buttonIconOnly(_ hierarchy: Hierarchy = .primary) -> Self {
+        Self("buttonIconOnly", hierarchy: hierarchy,
+            padding: { element in
+                switch element {
+                    default: nil
+                }
+            },
+            fonts: { element in
+               switch element {
+                   default: \.buttonIconOnly // TODO: Just apply for the icon?
+               }
+            },
+            compositions: { element in
+                switch element {
+                    default: nil
+                }
+            },
+            container: .buttonIconOnly,
+        )
+    }
     
 }

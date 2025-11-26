@@ -26,7 +26,7 @@ extension Style.Keys.Shape {
     }
     public var containerMetricCard: ValueBuilder { .base(.definition(.rectangleRounded(radius: \.cornerRadiusMetricCard))) }
     public var containerAction: ValueBuilder { .base(.definition(.capsule)) }
-    public var containerActionIcon: ValueBuilder { .base(.definition(.circle)) }
+    public var containerActionIconOnly: ValueBuilder { .base(.definition(.circle)) }
 
 
     // MARK: - Element

@@ -14,6 +14,7 @@ extension Style {
         public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
 
         public let id: String
+        public let hierarchy: Hierarchy
 
         package let padding: MappingPadding?
         package let fonts: Mapping<Keys.Font>?
@@ -23,6 +24,7 @@ extension Style {
 
         public init(
             _ id: String,
+            hierarchy: Hierarchy = .primary,
             padding: MappingPadding? = nil,
             fonts: Mapping<Keys.Font>? = nil,
             surfaces: Mapping<Keys.Surface>? = nil,
@@ -30,11 +32,27 @@ extension Style {
             container: Style.ContainerDefinition? = nil,
         ) {
             self.id = id
+            self.hierarchy = hierarchy
             self.padding = padding
             self.fonts = fonts
             self.surfaces = surfaces
             self.compositions = compositions
             self.container = container
+        }
+
+
+        // MARK: Hierarchy
+
+        public enum Hierarchy: String, Identifiable, Sendable, CaseIterable {
+
+            case any
+
+            case primary
+            case secondary
+            case tertiary
+
+            public var id: String { rawValue }
+
         }
 
 
@@ -77,6 +95,7 @@ extension Style {
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
+            hasher.combine(hierarchy)
             hasher.combine(container)
         }
 
