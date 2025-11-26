@@ -121,11 +121,7 @@ extension Style.Keys.Composition {
     public var anyContainer: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder {
-        .builder { context in
-            .definition(.composition(.with(
-                [.background: \.screen]
-            )))
-        }
+        .base(.definition(.composition(.with([.background: \.screen]))))
     }
     
     public var containerContentCard: ValueBuilder {
