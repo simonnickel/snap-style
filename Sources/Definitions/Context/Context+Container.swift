@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-// Needs to be located in `Definitions` target to have access to `Component.base`.
+// Needs to be located in `Definitions` target to have access to `.base`.
 
 extension Style.Context {
 
