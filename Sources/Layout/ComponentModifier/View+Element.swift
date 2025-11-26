@@ -30,12 +30,6 @@ extension View {
             .modifier(ElementApplyStyleModifier())
             .modifier(ElementHierarchyModifier(hierarchy: hierarchy))
     }
-    
-    // TODO: Move somewhere else?
-    public func style(container: Style.ContainerDefinition) -> some View {
-        self
-            .modifier(ContainerApplyStyleModifier(container: container))
-    }
 
 }
 
@@ -66,34 +60,6 @@ private struct ElementApplyStyleModifier: ViewModifier {
             .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
             .style(composition: compositionKeyPath)
 //            .style(shape: shapeKeyPath)
-    }
-
-}
-
-
-// MARK: ContainerApplyStyleModifier
-
-// TODO: Move somewhere else?
-private struct ContainerApplyStyleModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-    
-    let container: Style.ContainerDefinition
-
-    func body(content: Content) -> some View {
-        let base = Style.ContainerDefinition.base
-
-        let padding = container.padding ?? base.padding ?? Style.ContainerDefinition.Padding(\.paddingAnyElement)
-        let compositionKeyPath = container.compositions ?? base.compositions ?? \.anyElement
-        let shapeKeyPath = container.shapes ?? base.shapes ?? \.anyElement
-
-        content
-            .style(padding: padding.leading ?? \.paddingAnyElement, .leading)
-            .style(padding: padding.top ?? \.paddingAnyElement, .top)
-            .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
-            .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
-            .style(composition: compositionKeyPath)
-            .style(shape: shapeKeyPath)
     }
 
 }

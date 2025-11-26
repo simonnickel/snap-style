@@ -20,13 +20,48 @@ extension View {
     ) -> some View {
         self
             .style(container: container)
-            .modifier(ContainerModifier(container: container, state: state))
+            .modifier(ContainerContextModifier(container: container, state: state))
+    }
+
+    private func style(container: Style.ContainerDefinition) -> some View {
+        self
+            .modifier(ContainerApplyStyleModifier(container: container))
     }
 
 }
 
+
+// MARK: - ContainerApplyStyleModifier
+
+private struct ContainerApplyStyleModifier: ViewModifier {
+
+    @Environment(\.style) private var style
+
+    let container: Style.ContainerDefinition
+
+    func body(content: Content) -> some View {
+        let base = Style.ContainerDefinition.base
+
+        let padding = container.padding ?? base.padding ?? Style.ContainerDefinition.Padding(\.paddingAnyElement)
+        let compositionKeyPath = container.compositions ?? base.compositions ?? \.anyElement
+        let shapeKeyPath = container.shapes ?? base.shapes ?? \.anyElement
+
+        content
+            .style(padding: padding.leading ?? \.paddingAnyElement, .leading)
+            .style(padding: padding.top ?? \.paddingAnyElement, .top)
+            .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
+            .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
+            .style(composition: compositionKeyPath)
+            .style(shape: shapeKeyPath)
+    }
+
+}
+
+
+// MARK: - ContainerContextModifier
+
 // TODO iOS26: Remove iOS 18 Variant
-private struct ContainerModifier: ViewModifier {
+private struct ContainerContextModifier: ViewModifier {
 
     let container: Style.ContainerDefinition
     let state: Style.Container.InteractionState
@@ -34,15 +69,15 @@ private struct ContainerModifier: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
             content
-                .modifier(ContainerModifier26(container: container, state: state))
+                .modifier(ContainerContextModifier26(container: container, state: state))
         } else {
             content
-                .modifier(ContainerModifier18(container: container, state: state))
+                .modifier(ContainerContextModifier18(container: container, state: state))
         }
     }
 }
 
-private struct ContainerModifier26: ViewModifier {
+private struct ContainerContextModifier26: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -58,7 +93,7 @@ private struct ContainerModifier26: ViewModifier {
 
 }
 
-private struct ContainerModifier18: ViewModifier {
+private struct ContainerContextModifier18: ViewModifier {
 
     @Environment(\.style) private var style
 
