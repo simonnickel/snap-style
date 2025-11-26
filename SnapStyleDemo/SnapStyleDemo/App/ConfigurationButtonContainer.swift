@@ -18,7 +18,7 @@ struct ConfigurationButtonContainer<Content: View>: View {
             content()
 
             ZStack {
-                StyleButton(.component(.buttonIconOnly)) {
+                StyleButton(.component(.buttonIconOnly(.primary))) {
                     showSheet.toggle()
                 } content: {
                     Image(systemName: "slider.horizontal.3")

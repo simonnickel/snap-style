@@ -58,7 +58,6 @@ struct ScreenInsetContainer<ReadableContent: View>: View {
                     content
                         .safeAreaPadding(.init(horizontal: inset, vertical: 0))
                         // Since iOS 26 the scroll indicator is inset by safeAreaPadding, but shouldn't.
-                        // TODO: Does not work on iPad in portrait though, for whatever fucking reason.
                         .contentMargins(.horizontal, -inset, for: .scrollIndicators)
                 } else: { content in
                     content

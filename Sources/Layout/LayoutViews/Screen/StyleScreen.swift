@@ -39,8 +39,6 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     }
     
     public var body: some View {
-        let composition = component.compositions?(.container) ?? \.screen
-
         GeometryReader { geometry in
             createContent()
                 .environment(\.geometrySizeScreen, geometry.size)
@@ -48,8 +46,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         // Background of screen ignores safe area to stretch beyond toolbars and other insets (like dynamic island in iPhone landscape.
-        .style(composition: composition, ignoreSafeAreaEdges: .all)
-        .style(component: component, applyContainer: nil)
+        .style(component: component)
         .styleNavigationBar() /// (see ``StyleNavigationBarModifier``)
         .styleElevationRelay()
     }

@@ -29,8 +29,6 @@ extension Style {
 
             case any
 
-            case container
-
             case title
             case label
             case icon

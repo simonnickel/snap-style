@@ -11,17 +11,20 @@ import SwiftUI
 
 extension View {
     
-    /// Apply styling defined for `ElementType`.
+    /// Applies styling for the element with hierarchy.
     /// - Parameters:
-    ///   - element: The `ElementType` the view represents.
+    ///   - element:`ElementType` the view represents and is styled after.
     ///   - hierarchy: `Hierarchy` of the element.
+    /// - Returns: View with applied styling and modified `Context`.
     public func style(element: Style.Element.ElementType, hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
             .modifier(ElementApplyStyleModifier())
             .style(attribute: Style.Context.element, value: Style.Element(type: element, hierarchy: hierarchy))
     }
 
-    /// Shortcut to adjust the elements hierarchy.
+    /// Applies styling for the element from context, adjusting the hierarchy.
+    /// - Parameter hierarchy: `Hierarchy` of the element.
+    /// - Returns: View with applied styling and modified `Context`.
     public func style(hierarchy: Style.Element.Hierarchy = .primary) -> some View {
         self
             .modifier(ElementApplyStyleModifier())
@@ -38,7 +41,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
     @Environment(\.style) private var style
 
     func body(content: Content) -> some View {
-        let component = style.context.component.definition
+        let component = style.context.component
         let element = style.context.element.type
 
         let base = Style.ComponentDefinition.base

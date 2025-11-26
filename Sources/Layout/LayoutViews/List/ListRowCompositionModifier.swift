@@ -47,28 +47,28 @@ private struct CompositionListRowModifier: ViewModifier {
 
 #Preview {
 
-    List {
+    StyleList {
         Text("Normal List Row")
             .style(listRowBackground: \.listRow)
-            .style(component: .listRow, applyContainer: nil, state: .normal)
+            .style(component: .listRow, state: .normal)
     }
 
-    List {
+    StyleList {
         Text("Highlighted List Row")
             .style(listRowBackground: \.listRow)
-            .style(component: .listRow, applyContainer: nil, state: .highlighted)
+            .style(component: .listRow, state: .highlighted)
     }
 
-    List {
+    StyleList {
         Text("Selected List Row")
             .style(listRowBackground: \.listRow)
-            .style(component: .listRow, applyContainer: nil, state: .selected)
+            .style(component: .listRow, state: .selected)
     }
 
-    List {
+    StyleList {
         Text("Disabled List Row")
             .style(listRowBackground: \.listRow)
-            .style(component: .listRow, applyContainer: nil, state: .disabled)
+            .style(component: .listRow, state: .disabled)
     }
 
 }

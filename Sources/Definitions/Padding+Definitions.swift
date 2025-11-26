@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension Style.ComponentDefinition.Padding {
+extension Style.Padding {
 
     static var listRow: Self {
         .init(

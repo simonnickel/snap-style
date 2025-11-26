@@ -7,17 +7,17 @@ import SnapStyleBase
 
 extension Style {
 
-    /// An actual `Component` instance for a specific View.
-    public struct Component {
+    /// An actual `Container` instance for a specific View.
+    public struct Container {
 
-        package let definition: ComponentDefinition
-        package let parent: ComponentDefinition?
+        package let definition: ContainerDefinition
+        package let parent: ContainerDefinition?
         package let state: InteractionState
         package let level: Int
 
         package init(
-            definition: ComponentDefinition,
-            parent: ComponentDefinition?,
+            definition: ContainerDefinition,
+            parent: ContainerDefinition?,
             state: InteractionState,
             level: Int
         ) {

@@ -18,7 +18,7 @@ extension Style.Keys.Composition {
     
     public var interactiveElement: ValueBuilder {
         .builder { context in
-            switch context.component.state {
+            switch context.container.state {
                 case .normal: .definition(.foreground(\.interactiveAsForeground))
 
                 case .disabled, .inactive: .definition(.foreground(\.disabled))
@@ -35,9 +35,9 @@ extension Style.Keys.Composition {
     public var interactiveIndicator: ValueBuilder {
         .builder { context in
             
-            let foreground: Style.Keys.Surface.ValueBuilderKeyPath = context.component.useSecondaryAccent ? \.onAccent : \.interactive
+            let foreground: Style.Keys.Surface.ValueBuilderKeyPath = context.container.useSecondaryAccent ? \.onAccent : \.interactive
             
-            return switch context.component.state {
+            return switch context.container.state {
                 case .normal: .definition(.foreground(foreground))
                     
                 case .disabled, .inactive: .definition(.foreground(\.disabled))
@@ -69,7 +69,7 @@ extension Style.Keys.Composition {
 
     public var contentContainer: ValueBuilder {
         .builder { context in
-            return switch context.component.state {
+            return switch context.container.state {
                 case .disabled:
                     .definition(.layers([
                         .foreground: \.disabled, .background: \.contentLevel1
@@ -85,7 +85,7 @@ extension Style.Keys.Composition {
     
     public var accentContainer: ValueBuilder {
         .builder { context in
-            switch context.component.state {
+            switch context.container.state {
                 case .disabled, .inactive:
                     .definition(.layers([
                         .foreground: \.onDisabled, .background: \.disabled
@@ -101,7 +101,7 @@ extension Style.Keys.Composition {
 
     public var interactiveContainer: ValueBuilder {
         .builder { context in
-            return switch context.component.state {
+            return switch context.container.state {
                 case .disabled, .inactive:
                         .definition(.layers([
                             .foreground: \.onDisabled, .background: \.disabled
@@ -121,11 +121,7 @@ extension Style.Keys.Composition {
     public var anyContainer: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder {
-        .builder { context in
-            .definition(.composition(.with(
-                [.background: \.screen]
-            )))
-        }
+        .base(.definition(.composition(.with([.background: \.screen]))))
     }
     
     public var containerContentCard: ValueBuilder {
@@ -143,10 +139,10 @@ extension Style.Keys.Composition {
     public var containerList: ValueBuilder {
         .base(.reference(\.contentContainer))
     }
-    
+
     public var containerAction: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
+            switch context.component.hierarchy {
                 case .any, .primary:
                     .reference(\.interactiveContainer)
                 case .secondary, .tertiary:
@@ -154,7 +150,7 @@ extension Style.Keys.Composition {
             }
         }
     }
-    
+
 
     // MARK: - Element
 

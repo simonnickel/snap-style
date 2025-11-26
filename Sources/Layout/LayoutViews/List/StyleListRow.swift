@@ -87,9 +87,9 @@ extension Style.Views.List.Row {
             self.content = nil
         }
         
-        @State private var state: Style.Component.InteractionState = .normal
+        @State private var state: Style.Container.InteractionState = .normal
         
-        private var interactionState: Style.Component.InteractionState {
+        private var interactionState: Style.Container.InteractionState {
             switch controlState {
                 case .disabled: .disabled
                 case .inactive: .inactive

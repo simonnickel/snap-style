@@ -9,84 +9,24 @@ import SwiftUI
 
 extension View {
 
-    /// Defines the View as a component to use it's style definition and draw the container.
+    /// Defines the View as a component and applies the style definitions and container.
     /// - Parameters:
-    ///   - component: Definition to use for the component.
-    ///   - containerHierarchy: Level of `.container` that should be used. Set to nil if no container should be visible.
-    /// - Returns: A modified View.
+    ///   - component: `ComponentDefinition` to use for the component.
+    ///   - state: `InteractionState` the container is in.
+    /// - Returns: View with adjusted `Context` and applied Container.
     public func style(
         component: Style.ComponentDefinition,
-        applyContainer: Style.Element.Hierarchy? = .primary,
-        state: Style.Component.InteractionState = .normal
+        state: Style.Container.InteractionState = .normal
     ) -> some View {
         Group {
-            if let applyContainer {
+            if let container = component.container {
                 self
-                    .style(element: .container, hierarchy: applyContainer)
+                    .style(container: container, state: state)
             } else {
                 self
             }
         }
-        .modifier(ComponentModifier(component: component, state: state))
-    }
-
-}
-
-// TODO iOS26: Remove iOS 18 Variant
-private struct ComponentModifier: ViewModifier {
-
-    let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
-
-    func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            content
-                .modifier(ComponentModifier26(component: component, state: state))
-        } else {
-            content
-                .modifier(ComponentModifier18(component: component, state: state))
-        }
-    }
-}
-
-private struct ComponentModifier26: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
-
-    func body(content: Content) -> some View {
-        let componentStack = style.context.componentStack.appended(component, state: state)
-        content
-            .style(accent: component.requiresSecondaryAccent ? \.secondary : nil)
-            .style(attribute: Style.Context.componentStack, value: componentStack)
-    }
-
-}
-
-private struct ComponentModifier18: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let component: Style.ComponentDefinition
-    let state: Style.Component.InteractionState
-
-    /// Internal copy to apply animation on changes.
-    @State private var stateInternal: Style.Component.InteractionState = .normal
-
-    func body(content: Content) -> some View {
-        let componentStack = style.context.componentStack.appended(component, state: stateInternal)
-        content
-            .style(attribute: Style.Context.componentStack, value: componentStack)
-            .onChange(of: state, initial: true) { oldValue, newValue in
-                // TODO FB: (iOS 18) Need to delay to prevent from SwiftUI skipping animations. Happens e.g. when pushing a screen on a NavigationStack.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    withAnimation {
-                        stateInternal = newValue
-                    }
-                }
-            }
+        .style(attribute: Style.Context.component, value: component)
     }
 
 }

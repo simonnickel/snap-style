@@ -38,10 +38,10 @@ extension Style.Keys.Number {
     public var paddingAnyElement: ValueBuilder { .base(nil) }
     public var paddingAnyContainer: ValueBuilder { .base(nil) }
 
-    /// A padding definition based on the level in the component stack.
-    public var paddingComponent: ValueBuilder {
+    /// A padding definition based on the level in the container stack.
+    public var paddingContainer: ValueBuilder {
         .builder { context in
-            switch context.componentStack.levelOverall {
+            switch context.containerStack.levelOverall {
                 case 1: .definition(.value(12))
                 case 2: .definition(.value(10))
                 case 3: .definition(.value(8))
@@ -50,13 +50,13 @@ extension Style.Keys.Number {
         }
     }
 
-    public var paddingCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
-    public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingComponent)) }
+    public var paddingCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
+    public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.definition(.value(15))) }
     public var paddingActionVertical: ValueBuilder { .base(.definition(.value(8))) }
-    public var paddingActionIcon: ValueBuilder {
+    public var paddingActionIconOnly: ValueBuilder {
         .builder { context in
-            switch context.element.hierarchy {
+            switch context.component.hierarchy {
                 case .primary: .definition(.value(18))
                 case .secondary: .definition(.value(14))
                 case .tertiary: .definition(.value(10))

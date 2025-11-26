@@ -61,7 +61,7 @@ extension Style.Keys.Font {
     
     public var buttonIconOnly: ValueBuilder {
         .builder { context in
-            return switch context.element.hierarchy {
+            return switch context.component.hierarchy {
                 case .any, .primary: .definition(.with(size: 22, weight: .medium))
                 case .secondary: .definition(.with(size: 18, weight: .medium))
                 case .tertiary: .definition(.with(size: 14, weight: .medium))
