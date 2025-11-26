@@ -17,7 +17,8 @@ extension Style.Keys.Shape {
     public var anyContainer: ValueBuilder { .base(nil) }
     public var containerCard: ValueBuilder {
         .builder { context in
-            if context.containerStack.levelOverall > 1 {
+            // TODO: Should start with 1 if screen has a container as well. 
+            if context.containerStack.levelOverall > 0 {
                 .definition(.containerRelative)
             } else {
                 .definition(.rectangleRounded(radius: \.cornerRadiusCard))
