@@ -20,6 +20,7 @@ extension Style {
         package let fonts: Mapping<Keys.Font>?
         package let surfaces: Mapping<Keys.Surface>?
         package let compositions: Mapping<Keys.Composition>?
+        package let shapes: Mapping<Keys.Shape>?
         package let container: Style.ContainerDefinition?
 
         public init(
@@ -29,6 +30,7 @@ extension Style {
             fonts: Mapping<Keys.Font>? = nil,
             surfaces: Mapping<Keys.Surface>? = nil,
             compositions: Mapping<Keys.Composition>? = nil,
+            shapes: Mapping<Keys.Shape>? = nil,
             container: Style.ContainerDefinition? = nil,
         ) {
             self.id = id
@@ -37,6 +39,7 @@ extension Style {
             self.fonts = fonts
             self.surfaces = surfaces
             self.compositions = compositions
+            self.shapes = shapes
             self.container = container
         }
 

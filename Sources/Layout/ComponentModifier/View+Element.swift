@@ -49,8 +49,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let fontKeyPath = component.fonts?(element) ?? base.fonts?(element) ?? \.anyElement
         let padding = component.padding?(element) ?? base.padding?(element) ?? Style.ComponentDefinition.Padding(\.paddingAnyElement)
         let compositionKeyPath = component.compositions?(element) ?? base.compositions?(element) ?? \.anyElement
-        // TODO: Should Shape still be here anyway?
-//        let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
+        let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
 
         content
             .style(font: fontKeyPath)
@@ -59,7 +58,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
             .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
             .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
             .style(composition: compositionKeyPath)
-//            .style(shape: shapeKeyPath)
+            .style(shape: shapeKeyPath)
     }
 
 }
