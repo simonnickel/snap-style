@@ -16,9 +16,9 @@ extension Style {
         public let ignoresSafeAreaEdges: Edge.Set
 
         package let padding: Padding?
-        package let surfaces: Keys.Surface.ValueBuilderKeyPath?
-        package let compositions: Keys.Composition.ValueBuilderKeyPath?
-        package let shapes: Keys.Shape.ValueBuilderKeyPath?
+        package let surface: Keys.Surface.ValueBuilderKeyPath?
+        package let composition: Keys.Composition.ValueBuilderKeyPath?
+        package let shape: Keys.Shape.ValueBuilderKeyPath?
 
         public init(
             _ id: String,
@@ -33,9 +33,9 @@ extension Style {
             self.requiresSecondaryAccent = requiresSecondaryAccent
             self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
             self.padding = padding
-            self.surfaces = surfaces
-            self.compositions = compositions
-            self.shapes = shapes
+            self.surface = surfaces
+            self.composition = compositions
+            self.shape = shapes
         }
 
 

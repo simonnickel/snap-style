@@ -43,8 +43,8 @@ private struct ContainerApplyStyleModifier: ViewModifier {
         let base = Style.ContainerDefinition.base
 
         let padding = container.padding ?? base.padding
-        let compositionKeyPath = container.compositions ?? base.compositions ?? \.anyContainer
-        let shapeKeyPath = container.shapes ?? base.shapes
+        let compositionKeyPath = container.composition ?? base.composition ?? \.anyContainer
+        let shapeKeyPath = container.shape ?? base.shape
 
         content
             .style(padding: padding?.leading, .leading)
