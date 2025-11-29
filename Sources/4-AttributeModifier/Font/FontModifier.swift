@@ -26,10 +26,10 @@ extension View {
     }
 
     @ViewBuilder
-    public func styleSetup(font fontKey: Style.Attributes.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        if let fontKey {
+    public func styleSetup(font key: Style.Attributes.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+        if let key {
             let keyPath = Style.Attributes.Font.keyPath(for: element)
-            environment(keyPath, fontKey)
+            environment(keyPath, key)
         } else {
             self
         }
