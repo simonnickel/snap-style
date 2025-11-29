@@ -27,6 +27,7 @@ extension View {
             }
         }
         .setupFonts(for: component)
+        .setupComposition(for: component)
         .style(attribute: Style.Context.component, value: component)
     }
 

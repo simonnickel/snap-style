@@ -4,6 +4,7 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
 import SwiftUI
 
 extension View {
@@ -27,7 +28,63 @@ extension View {
 }
 
 
+// MARK: - Composition for Element
+
+extension View {
+
+    public func styleApplyComposition(
+        for element: Style.Element.ElementType,
+        layers: [Style.Attributes.Composition.Layer] = Style.Attributes.Composition.Layer.allCases,
+        ignoreSafeAreaEdges: Edge.Set = []
+    ) -> some View {
+        let keyPath = Style.Attributes.Composition.keyPath(for: element)
+        return modifier(CompositionFromEnvironmentModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
+    }
+
+    @ViewBuilder
+    public func styleSetup(composition key: Style.Attributes.Composition.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+        if let key {
+            let keyPath = Style.Attributes.Composition.keyPath(for: element)
+            environment(keyPath, key)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    package func setupComposition(for component: Style.ComponentDefinition) -> some View {
+        self
+            .styleSetup(composition: component.compositions?(.any), for: .any)
+            .styleSetup(composition: component.compositions?(.title), for: .title)
+            .styleSetup(composition: component.compositions?(.label), for: .label)
+            .styleSetup(composition: component.compositions?(.icon), for: .icon)
+            .styleSetup(composition: component.compositions?(.value), for: .value)
+            .styleSetup(composition: component.compositions?(.accessory), for: .accessory)
+            .styleSetup(composition: component.compositions?(.separator), for: .separator)
+            .styleSetup(composition: component.compositions?(.footnote), for: .footnote)
+    }
+
+}
+
+
 // MARK: - Modifier
+
+private struct CompositionFromEnvironmentModifier: ViewModifier {
+
+    @Environment(\.self) private var environment
+    @Environment(\.style) private var style
+
+    let keyPath: KeyPath<EnvironmentValues, Style.Attributes.Composition.ValueBuilderKeyPath>
+    let layers: [Style.Attributes.Composition.Layer]
+    let ignoresSafeAreaEdges: Edge.Set
+
+    func body(content: Content) -> some View {
+        let key = environment[keyPath: keyPath]
+        content
+            .modifier(CompositionModifier(keyPath: key, layers: layers, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
+    }
+
+}
 
 private struct CompositionModifier: ViewModifier {
 
