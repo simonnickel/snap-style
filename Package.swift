@@ -45,7 +45,7 @@ let package = Package(
                 "SnapStyleLayout",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/Views",
+            path: "Sources/6-Views",
         ),
         // Layout
         .target(
@@ -58,7 +58,7 @@ let package = Package(
                 .product(name: "SnapFoundation", package: "snap-foundation"),
                 .product(name: "SnapCore", package: "snap-core"),
             ],
-            path: "Sources/Layout",
+            path: "Sources/5-Layout",
         ),
         // Modifier
         .target(
@@ -69,7 +69,7 @@ let package = Package(
                 "SnapStyleDefinitions",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/KeyModifier", // TODO: Rename to AttributeModifier
+            path: "Sources/4-AttributeModifier",
         ),
         // Values
         .target(
@@ -79,7 +79,7 @@ let package = Package(
                 "SnapStyleComponents",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/Definitions",
+            path: "Sources/3-Definitions",
         ),
         // Components and Elements
         .target(
@@ -88,7 +88,7 @@ let package = Package(
                 "SnapStyleBase",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/Components",
+            path: "Sources/2-Components",
         ),
         // Implementation of core features.
         .target(
@@ -96,7 +96,7 @@ let package = Package(
             dependencies: [
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/Base",
+            path: "Sources/1-Base",
         ),
         // A separate target for Debugging related helper.
         .target(
