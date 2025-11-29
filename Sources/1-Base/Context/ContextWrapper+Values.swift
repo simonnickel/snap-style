@@ -7,14 +7,7 @@ import SwiftUI
 
 extension Style.ContextWrapper {
 
-    // TODO: Rename to attribute?
-    package typealias NumberKey = Style.Attributes.Number
-    package typealias FontKey = Style.Attributes.Font
-    package typealias IconKey = Style.Attributes.Icon
-    package typealias SurfaceKey = Style.Attributes.Surface
-    package typealias CompositionKey = Style.Attributes.Composition
-    package typealias AccentKey = Style.Attributes.Accent
-    package typealias ShapeKey = Style.Attributes.Shape
+    package typealias Attributes = Style.Attributes
 
     package func value<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath, with adjustments: [Attribute.Value.Adjustment] = []) -> Attribute.Value? {
 
@@ -65,7 +58,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Number
 
-    package func number(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> NumberKey.Value.WrappedValue? {
+    package func number(for keyPath: Attributes.Number.ValueBuilderKeyPath?, scaled: Bool = true) -> Attributes.Number.Value.WrappedValue? {
 
         guard let keyPath, let value = value(for: keyPath) else { return nil }
 
@@ -73,7 +66,7 @@ extension Style.ContextWrapper {
 
     }
 
-    package func cgFloat(for keyPath: NumberKey.ValueBuilderKeyPath?, scaled: Bool = true) -> CGFloat? {
+    package func cgFloat(for keyPath: Attributes.Number.ValueBuilderKeyPath?, scaled: Bool = true) -> CGFloat? {
 
         guard let value = number(for: keyPath) else { return nil }
 
@@ -84,7 +77,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Font
 
-    package func font(for keyPath: FontKey.ValueBuilderKeyPath) -> FontKey.Value.WrappedValue? {
+    package func font(for keyPath: Attributes.Font.ValueBuilderKeyPath) -> Attributes.Font.Value.WrappedValue? {
 
         let value = value(for: keyPath)
 
@@ -95,7 +88,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Icon
 
-    package func icon(for keyPath: IconKey.ValueBuilderKeyPath) -> IconKey.Value.WrappedValue? {
+    package func icon(for keyPath: Attributes.Icon.ValueBuilderKeyPath) -> Attributes.Icon.Value.WrappedValue? {
 
         let value = value(for: keyPath)
 
@@ -106,7 +99,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Surface
 
-    package func surface(for keyPath: SurfaceKey.ValueBuilderKeyPath) -> SurfaceKey.Value.WrappedValue? {
+    package func surface(for keyPath: Attributes.Surface.ValueBuilderKeyPath) -> Attributes.Surface.Value.WrappedValue? {
 
         let value = value(for: keyPath)
 
@@ -119,7 +112,7 @@ extension Style.ContextWrapper {
 
     /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
-        for keyPath: CompositionKey.ValueBuilderKeyPath
+        for keyPath: Attributes.Composition.ValueBuilderKeyPath
     ) -> Style.Attributes.Composition.Value.LayeredShapeStyle? {
 
         let value = value(for: keyPath)
@@ -130,9 +123,9 @@ extension Style.ContextWrapper {
 
     /// Get the Surface KeyPath of a layer for a `Composition` KeyPath.
     package func surfaceKey(
-        layer: CompositionKey.Layer,
-        for keyPath: CompositionKey.ValueBuilderKeyPath
-    ) -> CompositionKey.Value.LayeredShapeStyle.LayerValue? {
+        layer: Attributes.Composition.Layer,
+        for keyPath: Attributes.Composition.ValueBuilderKeyPath
+    ) -> Attributes.Composition.Value.LayeredShapeStyle.LayerValue? {
 
         let value = composition(for: keyPath)
 
@@ -142,9 +135,9 @@ extension Style.ContextWrapper {
 
     /// Get the Surface KeyPath of a layer for a `LayeredShapeStyle` (aka `Composition`).
     package func surfaceKey(
-        layer: CompositionKey.Layer,
-        composition: CompositionKey.Value.LayeredShapeStyle
-    ) -> SurfaceKey.ValueBuilderKeyPath? {
+        layer: Attributes.Composition.Layer,
+        composition: Attributes.Composition.Value.LayeredShapeStyle
+    ) -> Attributes.Surface.ValueBuilderKeyPath? {
 
         return composition.surfaceKey(for: layer)
 
@@ -152,9 +145,9 @@ extension Style.ContextWrapper {
 
     /// Get the surface of a layer for a `CompositionKey.ValueBuilderKeyPath`.
     package func surface(
-        layer: CompositionKey.Layer,
-        for keyPath: CompositionKey.ValueBuilderKeyPath
-    ) -> SurfaceKey.Value.WrappedValue? {
+        layer: Attributes.Composition.Layer,
+        for keyPath: Attributes.Composition.ValueBuilderKeyPath
+    ) -> Attributes.Surface.Value.WrappedValue? {
 
         guard let layer = surfaceKey(layer: layer, for: keyPath) else { return nil }
 
@@ -164,9 +157,9 @@ extension Style.ContextWrapper {
 
     /// Get the surface of a layer for a `LayeredShapeStyle` (aka `Composition`).
     package func surface(
-        layer: CompositionKey.Layer,
-        composition: CompositionKey.Value.LayeredShapeStyle
-    ) -> SurfaceKey.Value.WrappedValue? {
+        layer: Attributes.Composition.Layer,
+        composition: Attributes.Composition.Value.LayeredShapeStyle
+    ) -> Attributes.Surface.Value.WrappedValue? {
 
         guard let key = composition.surfaceKey(for: layer) else { return nil }
 
@@ -177,7 +170,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Accent
     
-    package func accent(for keyPath: AccentKey.ValueBuilderKeyPath) -> AccentKey.Value.WrappedValue? {
+    package func accent(for keyPath: Attributes.Accent.ValueBuilderKeyPath) -> Attributes.Accent.Value.WrappedValue? {
 
         let value = value(for: keyPath)
 
@@ -188,7 +181,7 @@ extension Style.ContextWrapper {
 
     // MARK: - Shape
 
-    package func shape(for keyPath: ShapeKey.ValueBuilderKeyPath) -> ShapeKey.Value.WrappedValue? {
+    package func shape(for keyPath: Attributes.Shape.ValueBuilderKeyPath) -> Attributes.Shape.Value.WrappedValue? {
 
         let value = value(for: keyPath)
 
