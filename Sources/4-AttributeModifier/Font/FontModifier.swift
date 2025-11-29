@@ -4,6 +4,7 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
 import SwiftUI
 
 extension View {
@@ -15,7 +16,57 @@ extension View {
 }
 
 
+// MARK: - Font for Element
+
+extension View {
+
+    public func styleApplyFont(for element: Style.Element.ElementType) -> some View {
+        let keyPath = Style.Attributes.Font.keyPath(for: element)
+        return modifier(FontFromEnvironmentModifier(keyPath: keyPath))
+    }
+
+    @ViewBuilder
+    public func styleSetup(font fontKey: Style.Attributes.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+        if let fontKey {
+            let keyPath = Style.Attributes.Font.keyPath(for: element)
+            environment(keyPath, fontKey)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    package func setupFonts(for component: Style.ComponentDefinition) -> some View {
+        self
+            .styleSetup(font: component.fonts?(.any), for: .any)
+            .styleSetup(font: component.fonts?(.title), for: .title)
+            .styleSetup(font: component.fonts?(.label), for: .label)
+            .styleSetup(font: component.fonts?(.icon), for: .icon)
+            .styleSetup(font: component.fonts?(.value), for: .value)
+            .styleSetup(font: component.fonts?(.accessory), for: .accessory)
+            .styleSetup(font: component.fonts?(.separator), for: .separator)
+            .styleSetup(font: component.fonts?(.footnote), for: .footnote)
+    }
+
+}
+
+
 // MARK: - Modifier
+
+private struct FontFromEnvironmentModifier: ViewModifier {
+
+    @Environment(\.self) private var environment
+    @Environment(\.style) private var style
+
+    let keyPath: KeyPath<EnvironmentValues, Style.Attributes.Font.ValueBuilderKeyPath>
+
+    func body(content: Content) -> some View {
+        let key = environment[keyPath: keyPath]
+        content
+            .modifier(FontModifier(keyPath: key))
+    }
+
+}
 
 private struct FontModifier: ViewModifier {
 
