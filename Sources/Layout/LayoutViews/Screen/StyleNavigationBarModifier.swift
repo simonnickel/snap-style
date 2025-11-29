@@ -57,12 +57,12 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 
     @Environment(\.style) private var style
     
-    private let definitionInline: Style.Keys.Font.Value.Definition
-    private let definitionLarge: Style.Keys.Font.Value.Definition
+    private let definitionInline: Style.Attributes.Font.Value.Definition
+    private let definitionLarge: Style.Attributes.Font.Value.Definition
     private let scaledInline: ScaledMetric<Double>
     private let scaledLarge: ScaledMetric<Double>
     
-    init(definitionInline: Style.Keys.Font.Value.Definition, definitionLarge: Style.Keys.Font.Value.Definition) {
+    init(definitionInline: Style.Attributes.Font.Value.Definition, definitionLarge: Style.Attributes.Font.Value.Definition) {
         self.definitionInline = definitionInline
         self.definitionLarge = definitionLarge
         self.scaledInline = ScaledMetric(wrappedValue: definitionInline.size, relativeTo: definitionInline.textStyle)
@@ -123,7 +123,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
     }
     
     private static func font(
-        for keyPath: Style.Keys.Font.ValueBuilderKeyPath,
+        for keyPath: Style.Attributes.Font.ValueBuilderKeyPath,
         with style: Style.ContextWrapper,
         size: Double
     ) -> UIFont {

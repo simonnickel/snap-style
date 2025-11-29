@@ -11,7 +11,7 @@ import SwiftUI
 // - define surfaces for different layers
 // - select surfaces based on the component state and level
 
-extension Style.Keys.Composition {
+extension Style.Attributes.Composition {
     
     
     // MARK: - Generic Compositions
@@ -35,7 +35,7 @@ extension Style.Keys.Composition {
     public var interactiveIndicator: ValueBuilder {
         .builder { context in
             
-            let foreground: Style.Keys.Surface.ValueBuilderKeyPath = context.container.useSecondaryAccent ? \.onAccent : \.interactive
+            let foreground: Style.Attributes.Surface.ValueBuilderKeyPath = context.container.useSecondaryAccent ? \.onAccent : \.interactive
             
             return switch context.container.state {
                 case .normal: .definition(.foreground(foreground))

@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-public protocol StyleKey {
+public protocol StyleAttribute {
 
     associatedtype Value: StyleValue
     associatedtype Adjustment: StyleAdjustment where Value.WrappedValue == Adjustment.Value.WrappedValue

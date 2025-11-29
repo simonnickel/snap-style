@@ -3,19 +3,19 @@
 //  Created by Simon Nickel
 //
 
-extension Style.Keys {
-    public struct Number: StyleKey { public init() {} }
+extension Style.Attributes {
+    public struct Number: StyleAttribute { public init() {} }
 }
 
-extension Style.Keys.Number {
+extension Style.Attributes.Number {
 
 
-    // MARK: - NumberKey.Value
+    // MARK: - Value
 
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Double
-        public typealias Adjustment = Style.Keys.Number.Adjustment
+        public typealias Adjustment = Style.Attributes.Number.Adjustment
 
         case value(WrappedValue)
 
@@ -38,7 +38,7 @@ extension Style.Keys.Number {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.Number.Value
+        public typealias Value = Style.Attributes.Number.Value
 
         public func applied(on value: Value) -> Value {
             value

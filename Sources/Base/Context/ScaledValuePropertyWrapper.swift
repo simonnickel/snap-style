@@ -14,7 +14,7 @@ import SwiftUI
 /// ```
 @propertyWrapper public struct ScaledValue: DynamicProperty {
     
-    public typealias Value = Style.Keys.Number.Value.WrappedValue
+    public typealias Value = Style.Attributes.Number.Value.WrappedValue
     
     @Environment(\.style) private var style
     
@@ -38,8 +38,8 @@ import SwiftUI
 /// ```
 @propertyWrapper public struct ScaledNumber: DynamicProperty {
     
-    public typealias KeyPath = Style.Keys.Number.ValueBuilderKeyPath
-    public typealias Value = Style.Keys.Number.Value.WrappedValue
+    public typealias KeyPath = Style.Attributes.Number.ValueBuilderKeyPath
+    public typealias Value = Style.Attributes.Number.Value.WrappedValue
 
     @Environment(\.style) private var style
     
@@ -58,7 +58,7 @@ import SwiftUI
 
 // MARK: - Preview
 
-extension Style.Keys.Number {
+extension Style.Attributes.Number {
     public var examplePreview: ValueBuilder { .base(.definition(.value(50))) }
 }
 

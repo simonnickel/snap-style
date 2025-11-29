@@ -4,6 +4,6 @@
 //
 
 extension Style {
-    /// Container Type to hierarchically structure Keys.
-    public enum Keys {}
+    /// Container Type to hierarchically structure Attributes.
+    public enum Attributes {}
 }

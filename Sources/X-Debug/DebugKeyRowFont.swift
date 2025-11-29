@@ -8,7 +8,7 @@ import SwiftUI
 
 struct DebugKeyRowFont: View {
 
-    let keyPath: Style.Keys.Font.ValueBuilderKeyPath
+    let keyPath: Style.Attributes.Font.ValueBuilderKeyPath
 
     var body: some View {
         HStack {

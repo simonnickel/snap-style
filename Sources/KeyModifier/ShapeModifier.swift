@@ -9,20 +9,20 @@ import SwiftUI
 
 extension View {
 
-    public func style(shape keyPath: Style.Keys.Shape.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
-        modifier(ShapeKeyModifier(keyPath: keyPath, shouldClip: shouldClip))
+    public func style(shape keyPath: Style.Attributes.Shape.ValueBuilderKeyPath?, shouldClip: Bool = false) -> some View {
+        modifier(ShapeAttributeModifier(keyPath: keyPath, shouldClip: shouldClip))
     }
 
 }
 
 
-// MARK: - ShapeKeyModifier
+// MARK: - ShapeAttributeModifier
 
-private struct ShapeKeyModifier: ViewModifier {
+private struct ShapeAttributeModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let keyPath: Style.Keys.Shape.ValueBuilderKeyPath?
+    let keyPath: Style.Attributes.Shape.ValueBuilderKeyPath?
     let shouldClip: Bool
 
     func body(content: Content) -> some View {

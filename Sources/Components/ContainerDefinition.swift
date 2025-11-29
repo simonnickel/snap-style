@@ -18,18 +18,18 @@ extension Style {
         public let ignoresSafeAreaEdges: Edge.Set
 
         package let padding: Padding?
-        package let surface: Keys.Surface.ValueBuilderKeyPath?
-        package let composition: Keys.Composition.ValueBuilderKeyPath?
-        package let shape: Keys.Shape.ValueBuilderKeyPath?
+        package let surface: Attributes.Surface.ValueBuilderKeyPath?
+        package let composition: Attributes.Composition.ValueBuilderKeyPath?
+        package let shape: Attributes.Shape.ValueBuilderKeyPath?
 
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             ignoresSafeAreaEdges: Edge.Set = [],
             padding: Padding? = nil,
-            surfaces: Keys.Surface.ValueBuilderKeyPath? = nil,
-            compositions: Keys.Composition.ValueBuilderKeyPath? = nil,
-            shapes: Keys.Shape.ValueBuilderKeyPath? = nil,
+            surfaces: Attributes.Surface.ValueBuilderKeyPath? = nil,
+            compositions: Attributes.Composition.ValueBuilderKeyPath? = nil,
+            shapes: Attributes.Shape.ValueBuilderKeyPath? = nil,
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent

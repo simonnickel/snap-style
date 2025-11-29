@@ -3,19 +3,19 @@
 //  Created by Simon Nickel
 //
 
-extension Style.Keys {
-    public struct Accent: StyleKey { public init() {} }
+extension Style.Attributes {
+    public struct Accent: StyleAttribute { public init() {} }
 }
 
-extension Style.Keys.Accent {
+extension Style.Attributes.Accent {
 
 
-    // MARK: - NumberKey.Value
+    // MARK: - Value
 
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Accent
-        public typealias Adjustment = Style.Keys.Accent.Adjustment
+        public typealias Adjustment = Style.Attributes.Accent.Adjustment
 
         case value(WrappedValue)
 
@@ -36,7 +36,7 @@ extension Style.Keys.Accent {
         
         public struct Accent: Hashable, Equatable {
             
-            public typealias ColorValue = Style.Keys.Surface.ValueBuilderKeyPath
+            public typealias ColorValue = Style.Attributes.Surface.ValueBuilderKeyPath
             
             public let base: ColorValue
             public let onAccent: ColorValue
@@ -65,7 +65,7 @@ extension Style.Keys.Accent {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Keys.Accent.Value
+        public typealias Value = Style.Attributes.Accent.Value
 
         public func applied(on value: Value) -> Value {
             value

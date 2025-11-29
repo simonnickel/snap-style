@@ -8,13 +8,13 @@ import SwiftUI
 extension View {
 
     public func styleOverride(
-        numbers: [Style.Keys.Number.ValueBuilderKeyPath: Style.Keys.Number.ValueBuilder]? = nil,
-        fonts: [Style.Keys.Font.ValueBuilderKeyPath: Style.Keys.Font.ValueBuilder]? = nil,
-        icons: [Style.Keys.Icon.ValueBuilderKeyPath: Style.Keys.Icon.ValueBuilder]? = nil,
-        surfaces: [Style.Keys.Surface.ValueBuilderKeyPath: Style.Keys.Surface.ValueBuilder]? = nil,
-        compositions: [Style.Keys.Composition.ValueBuilderKeyPath: Style.Keys.Composition.ValueBuilder]? = nil,
-        accents: [Style.Keys.Accent.ValueBuilderKeyPath: Style.Keys.Accent.ValueBuilder]? = nil,
-        shapes: [Style.Keys.Shape.ValueBuilderKeyPath: Style.Keys.Shape.ValueBuilder]? = nil
+        numbers: [Style.Attributes.Number.ValueBuilderKeyPath: Style.Attributes.Number.ValueBuilder]? = nil,
+        fonts: [Style.Attributes.Font.ValueBuilderKeyPath: Style.Attributes.Font.ValueBuilder]? = nil,
+        icons: [Style.Attributes.Icon.ValueBuilderKeyPath: Style.Attributes.Icon.ValueBuilder]? = nil,
+        surfaces: [Style.Attributes.Surface.ValueBuilderKeyPath: Style.Attributes.Surface.ValueBuilder]? = nil,
+        compositions: [Style.Attributes.Composition.ValueBuilderKeyPath: Style.Attributes.Composition.ValueBuilder]? = nil,
+        accents: [Style.Attributes.Accent.ValueBuilderKeyPath: Style.Attributes.Accent.ValueBuilder]? = nil,
+        shapes: [Style.Attributes.Shape.ValueBuilderKeyPath: Style.Attributes.Shape.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
             Style.OverrideModifier(
@@ -40,13 +40,13 @@ extension Style {
         
         @Environment(\.style) private var style
         
-        let numbers: [Keys.Number.ValueBuilderKeyPath: Keys.Number.ValueBuilder]?
-        let fonts: [Keys.Font.ValueBuilderKeyPath: Keys.Font.ValueBuilder]?
-        let icons: [Keys.Icon.ValueBuilderKeyPath: Keys.Icon.ValueBuilder]?
-        let surfaces: [Keys.Surface.ValueBuilderKeyPath: Keys.Surface.ValueBuilder]?
-        let compositions: [Keys.Composition.ValueBuilderKeyPath: Keys.Composition.ValueBuilder]?
-        let accents: [Keys.Accent.ValueBuilderKeyPath: Keys.Accent.ValueBuilder]?
-        let shapes: [Keys.Shape.ValueBuilderKeyPath: Keys.Shape.ValueBuilder]?
+        let numbers: [Attributes.Number.ValueBuilderKeyPath: Attributes.Number.ValueBuilder]?
+        let fonts: [Attributes.Font.ValueBuilderKeyPath: Attributes.Font.ValueBuilder]?
+        let icons: [Attributes.Icon.ValueBuilderKeyPath: Attributes.Icon.ValueBuilder]?
+        let surfaces: [Attributes.Surface.ValueBuilderKeyPath: Attributes.Surface.ValueBuilder]?
+        let compositions: [Attributes.Composition.ValueBuilderKeyPath: Attributes.Composition.ValueBuilder]?
+        let accents: [Attributes.Accent.ValueBuilderKeyPath: Attributes.Accent.ValueBuilder]?
+        let shapes: [Attributes.Shape.ValueBuilderKeyPath: Attributes.Shape.ValueBuilder]?
         
         func body(content: Content) -> some View {
             
@@ -75,13 +75,13 @@ extension Style {
 extension Style {
 
     internal func replaced(
-        numbers: [Keys.Number.ValueBuilderKeyPath: Keys.Number.ValueBuilder]? = nil,
-        fonts: [Keys.Font.ValueBuilderKeyPath: Keys.Font.ValueBuilder]? = nil,
-        icons: [Keys.Icon.ValueBuilderKeyPath: Keys.Icon.ValueBuilder]? = nil,
-        surfaces: [Keys.Surface.ValueBuilderKeyPath: Keys.Surface.ValueBuilder]? = nil,
-        compositions: [Keys.Composition.ValueBuilderKeyPath: Keys.Composition.ValueBuilder]? = nil,
-        accents: [Keys.Accent.ValueBuilderKeyPath: Keys.Accent.ValueBuilder]? = nil,
-        shapes: [Keys.Shape.ValueBuilderKeyPath: Keys.Shape.ValueBuilder]? = nil
+        numbers: [Attributes.Number.ValueBuilderKeyPath: Attributes.Number.ValueBuilder]? = nil,
+        fonts: [Attributes.Font.ValueBuilderKeyPath: Attributes.Font.ValueBuilder]? = nil,
+        icons: [Attributes.Icon.ValueBuilderKeyPath: Attributes.Icon.ValueBuilder]? = nil,
+        surfaces: [Attributes.Surface.ValueBuilderKeyPath: Attributes.Surface.ValueBuilder]? = nil,
+        compositions: [Attributes.Composition.ValueBuilderKeyPath: Attributes.Composition.ValueBuilder]? = nil,
+        accents: [Attributes.Accent.ValueBuilderKeyPath: Attributes.Accent.ValueBuilder]? = nil,
+        shapes: [Attributes.Shape.ValueBuilderKeyPath: Attributes.Shape.ValueBuilder]? = nil
     ) -> Self {
         var style = self
 

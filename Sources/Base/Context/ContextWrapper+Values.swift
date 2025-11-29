@@ -7,22 +7,23 @@ import SwiftUI
 
 extension Style.ContextWrapper {
 
-    package typealias NumberKey = Style.Keys.Number
-    package typealias FontKey = Style.Keys.Font
-    package typealias IconKey = Style.Keys.Icon
-    package typealias SurfaceKey = Style.Keys.Surface
-    package typealias CompositionKey = Style.Keys.Composition
-    package typealias AccentKey = Style.Keys.Accent
-    package typealias ShapeKey = Style.Keys.Shape
+    // TODO: Rename to attribute?
+    package typealias NumberKey = Style.Attributes.Number
+    package typealias FontKey = Style.Attributes.Font
+    package typealias IconKey = Style.Attributes.Icon
+    package typealias SurfaceKey = Style.Attributes.Surface
+    package typealias CompositionKey = Style.Attributes.Composition
+    package typealias AccentKey = Style.Attributes.Accent
+    package typealias ShapeKey = Style.Attributes.Shape
 
-    package func value<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, with adjustments: [Key.Value.Adjustment] = []) -> Key.Value? {
+    package func value<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath, with adjustments: [Attribute.Value.Adjustment] = []) -> Attribute.Value? {
 
         // Use value from cache if available
         if let value = definition.getValueFromCache(for: keyPath, in: context) {
             return value.adjusted(with: adjustments)
         }
 
-        var result: Key.Value?
+        var result: Attribute.Value?
         let builders = definition.builderContainer.builder(for: keyPath)
 
         // Build value from overrides
@@ -39,7 +40,7 @@ extension Style.ContextWrapper {
 
         // Use default value
         if result == nil {
-            let defaultBuilder = Key()[keyPath: keyPath]
+            let defaultBuilder = Attribute()[keyPath: keyPath]
             if let buildValue = defaultBuilder.value(in: self) {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
@@ -119,7 +120,7 @@ extension Style.ContextWrapper {
     /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
         for keyPath: CompositionKey.ValueBuilderKeyPath
-    ) -> Style.Keys.Composition.Value.LayeredShapeStyle? {
+    ) -> Style.Attributes.Composition.Value.LayeredShapeStyle? {
 
         let value = value(for: keyPath)
 

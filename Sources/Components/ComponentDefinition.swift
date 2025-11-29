@@ -10,7 +10,7 @@ extension Style {
 
     public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
-        public typealias Mapping<Key: StyleKey> = @Sendable (Style.Element.ElementType) -> Key.ValueBuilderKeyPath?
+        public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
         public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
         public typealias Padding = Style.Padding
 
@@ -18,20 +18,20 @@ extension Style {
         public let hierarchy: Hierarchy
 
         package let padding: MappingPadding?
-        package let fonts: Mapping<Keys.Font>?
-        package let surfaces: Mapping<Keys.Surface>?
-        package let compositions: Mapping<Keys.Composition>?
-        package let shapes: Mapping<Keys.Shape>?
+        package let fonts: Mapping<Attributes.Font>?
+        package let surfaces: Mapping<Attributes.Surface>?
+        package let compositions: Mapping<Attributes.Composition>?
+        package let shapes: Mapping<Attributes.Shape>?
         package let container: Style.ContainerDefinition?
 
         public init(
             _ id: String,
             hierarchy: Hierarchy = .primary,
             padding: MappingPadding? = nil,
-            fonts: Mapping<Keys.Font>? = nil,
-            surfaces: Mapping<Keys.Surface>? = nil,
-            compositions: Mapping<Keys.Composition>? = nil,
-            shapes: Mapping<Keys.Shape>? = nil,
+            fonts: Mapping<Attributes.Font>? = nil,
+            surfaces: Mapping<Attributes.Surface>? = nil,
+            compositions: Mapping<Attributes.Composition>? = nil,
+            shapes: Mapping<Attributes.Shape>? = nil,
             container: Style.ContainerDefinition? = nil,
         ) {
             self.id = id

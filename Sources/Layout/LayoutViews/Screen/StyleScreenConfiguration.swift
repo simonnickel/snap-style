@@ -7,13 +7,13 @@ import SwiftUI
 
 public enum StyleScreenConfiguration: Equatable {
 
-    /// Insets the content at least by `NumberKey.paddingScreenHorizontal`.
+    /// Insets the content at least by `Number.paddingScreenHorizontal`.
     case insetHorizontalEdges
 
-    /// Insets the content by `NumberKey.paddingScreenTop` and `NumberKey.paddingScreenBottom`.
+    /// Insets the content by `Number.paddingScreenTop` and `Number.paddingScreenBottom`.
     case insetVerticalEdges
 
-    /// Restricts screen width to fit `NumberKey.widthReadableContent`
+    /// Restricts screen width to fit `Number.widthReadableContent`
     /// Configuration `.allowReadableContentOverflow` controls if it uses contentMargin or safeAreaPadding. ListStyle `.insetGrouped` requires to use contentMargin, to get rid of system inset and properly apply `\.paddingScreenHorizontal`.
     case readableContentWidth
 
@@ -24,7 +24,7 @@ public enum StyleScreenConfiguration: Equatable {
     /// Wraps content in a ScrollView.
     case scrollView
 
-    /// Wraps content in a VStack with `NumberKey.spacingSections`.
+    /// Wraps content in a VStack with `Number.spacingSections`.
     case verticalSectionSpacing
 }
 

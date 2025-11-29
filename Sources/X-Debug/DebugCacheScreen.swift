@@ -6,14 +6,14 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct DebugCacheScreen<KeyType: StyleKey>: View {
+public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
 
     @Environment(\.style) private var style
 
     public init() {}
 
     public var body: some View {
-        let keyPaths = style.definition.cachedKeyPaths(for: KeyType.self)
+        let keyPaths = style.definition.cachedKeyPaths(for: AttributeType.self)
         if !keyPaths.isEmpty {
             List {
                 ForEach(keyPaths, id: \.self) { keyPath in
@@ -27,7 +27,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
         }
     }
 
-    private func section(for keyPath: KeyType.ValueBuilderKeyPath) -> some View {
+    private func section(for keyPath: AttributeType.ValueBuilderKeyPath) -> some View {
 
         Group {
             let contexts = style.definition.cachedContexts(for: keyPath)
@@ -47,7 +47,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
         }
     }
 
-    private func item(context: Style.Context, value: KeyType.Value?) -> some View {
+    private func item(context: Style.Context, value: AttributeType.Value?) -> some View {
         VStack(alignment: .leading) {
             Text(context.description)
             Text(value?.description ?? "")
@@ -56,7 +56,7 @@ public struct DebugCacheScreen<KeyType: StyleKey>: View {
 }
 
 #Preview {
-    DebugCacheScreen<Style.Keys.Font>()
+    DebugCacheScreen<Style.Attributes.Font>()
         .styleOverride(
             fonts: [
                 \.title: .base(.definition(.with(size: 6))) { context in

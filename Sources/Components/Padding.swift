@@ -10,7 +10,7 @@ extension Style {
 
     public struct Padding {
 
-        public typealias Value = Keys.Number.ValueBuilderKeyPath
+        public typealias Value = Attributes.Number.ValueBuilderKeyPath
 
         package let leading: Value?
         package let top: Value?

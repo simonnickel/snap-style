@@ -5,34 +5,34 @@
 
 extension Style {
 
-    /// A value type Container to bundle references to `StyleKey` specific caches.
+    /// A value type Container to bundle references to `StyleAttribute` specific caches.
     internal struct CacheContainer {
 
-        // References to `StyleKey` specific caches.
-        internal var numbers: KeyTypeCache<Keys.Number> = .init()
-        internal var fonts: KeyTypeCache<Keys.Font> = .init()
-        internal var icons: KeyTypeCache<Keys.Icon> = .init()
-        internal var surfaces: KeyTypeCache<Keys.Surface> = .init()
-        internal var compositions: KeyTypeCache<Keys.Composition> = .init()
-        internal var accents: KeyTypeCache<Keys.Accent> = .init()
-        internal var shapes: KeyTypeCache<Keys.Shape> = .init()
+        // References to `StyleAttribute` specific caches.
+        internal var numbers: AttributeTypeCache<Attributes.Number> = .init()
+        internal var fonts: AttributeTypeCache<Attributes.Font> = .init()
+        internal var icons: AttributeTypeCache<Attributes.Icon> = .init()
+        internal var surfaces: AttributeTypeCache<Attributes.Surface> = .init()
+        internal var compositions: AttributeTypeCache<Attributes.Composition> = .init()
+        internal var accents: AttributeTypeCache<Attributes.Accent> = .init()
+        internal var shapes: AttributeTypeCache<Attributes.Shape> = .init()
 
-        internal func getCache<Key: StyleKey>() -> KeyTypeCache<Key>? {
-            switch Key.self {
+        internal func getCache<Attribute: StyleAttribute>() -> AttributeTypeCache<Attribute>? {
+            switch Attribute.self {
 
-                case let key as Keys.Number.Type: return numbers as? KeyTypeCache<Key>
+                case let key as Attributes.Number.Type: return numbers as? AttributeTypeCache<Attribute>
 
-                case let key as Keys.Font.Type: return fonts as? KeyTypeCache<Key>
+                case let key as Attributes.Font.Type: return fonts as? AttributeTypeCache<Attribute>
 
-                case let key as Keys.Icon.Type: return icons as? KeyTypeCache<Key>
+                case let key as Attributes.Icon.Type: return icons as? AttributeTypeCache<Attribute>
 
-                case let key as Keys.Surface.Type: return surfaces as? KeyTypeCache<Key>
+                case let key as Attributes.Surface.Type: return surfaces as? AttributeTypeCache<Attribute>
 
-                case let key as Keys.Composition.Type: return compositions as? KeyTypeCache<Key>
+                case let key as Attributes.Composition.Type: return compositions as? AttributeTypeCache<Attribute>
                     
-                case let key as Keys.Accent.Type: return accents as? KeyTypeCache<Key>
+                case let key as Attributes.Accent.Type: return accents as? AttributeTypeCache<Attribute>
 
-                case let key as Keys.Shape.Type: return shapes as? KeyTypeCache<Key>
+                case let key as Attributes.Shape.Type: return shapes as? AttributeTypeCache<Attribute>
 
                 default: fatalError("Cache is not setup properly.")
 
@@ -40,29 +40,29 @@ extension Style {
         }
 
         /// Creates a new cache, the old cache will still be in use for a different style definition.
-        internal mutating func resetCache<Key: StyleKey>(for: Key.Type) {
-            switch Key.self {
+        internal mutating func resetCache<Attribute: StyleAttribute>(for: Attribute.Type) {
+            switch Attribute.self {
 
-                case let key as Keys.Number.Type: numbers = .init()
+                case let key as Attributes.Number.Type: numbers = .init()
 
-                case let key as Keys.Font.Type: fonts = .init()
+                case let key as Attributes.Font.Type: fonts = .init()
 
-                case let key as Keys.Icon.Type: icons = .init()
+                case let key as Attributes.Icon.Type: icons = .init()
 
-                case let key as Keys.Surface.Type:
+                case let key as Attributes.Surface.Type:
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Keys.Composition.Type:
+                case let key as Attributes.Composition.Type:
                     compositions = .init()
                     surfaces = .init()
                     
-                case let key as Keys.Accent.Type:
+                case let key as Attributes.Accent.Type:
                     accents = .init()
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Keys.Shape.Type: shapes = .init()
+                case let key as Attributes.Shape.Type: shapes = .init()
 
                 default: fatalError("Cache is not setup properly.")
 
@@ -72,18 +72,18 @@ extension Style {
     }
 
 
-    // MARK: - KeyTypeCache
+    // MARK: - AttributeTypeCache
 
-    package class KeyTypeCache<Key: StyleKey> {
+    package class AttributeTypeCache<Attribute: StyleAttribute> {
 
-        private var content: [Key.ValueBuilderKeyPath: ValueForContextCache<Key.Value>] = [:]
-        package var keys: [Key.ValueBuilderKeyPath] { Array(content.keys) }
+        private var content: [Attribute.ValueBuilderKeyPath: ValueForContextCache<Attribute.Value>] = [:]
+        package var keys: [Attribute.ValueBuilderKeyPath] { Array(content.keys) }
 
-        package func getValueCache(for keyPath: KeyPath<Key, Key.ValueBuilder>) -> ValueForContextCache<Key.Value>? {
+        package func getValueCache(for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>) -> ValueForContextCache<Attribute.Value>? {
             return content[keyPath]
         }
 
-        package func getValue(for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: Style.Context) -> Key.Value? {
+        package func getValue(for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) -> Attribute.Value? {
 
             if let cache = content[keyPath] {
                 return cache.getValue(for: context)
@@ -92,12 +92,12 @@ extension Style {
             return nil
         }
 
-        func setValue(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: Style.Context) {
+        func setValue(_ value: Attribute.Value, for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) {
 
             if let cache = content[keyPath] {
                 cache.setValue(value, for: context)
             } else {
-                let cache: ValueForContextCache<Key.Value> = .init()
+                let cache: ValueForContextCache<Attribute.Value> = .init()
                 cache.setValue(value, for: context)
                 content[keyPath] = cache
             }
@@ -134,14 +134,14 @@ extension Style {
 
     // MARK: Get & Set
 
-    internal func getValueFromCache<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: Style.Context) -> Key.Value? {
-        guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return nil }
+    internal func getValueFromCache<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath, in context: Style.Context) -> Attribute.Value? {
+        guard let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache() else { return nil }
 
         return cache.getValue(for: keyPath, in: context)
     }
 
-    internal func setValueInCache<Key: StyleKey>(_ value: Key.Value, for keyPath: KeyPath<Key, Key.ValueBuilder>, in context: Style.Context) {
-        guard let cache: KeyTypeCache<Key> = cacheContainer.getCache() else { return }
+    internal func setValueInCache<Attribute: StyleAttribute>(_ value: Attribute.Value, for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) {
+        guard let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache() else { return }
 
         cache.setValue(value, for: keyPath, in: context)
     }
@@ -150,18 +150,18 @@ extension Style {
     // MARK: Debug
 
     /// For debug purposes.
-    package func cachedKeyPaths<Key: StyleKey>(for: Key.Type) -> [Key.ValueBuilderKeyPath] {
+    package func cachedKeyPaths<Attribute: StyleAttribute>(for: Attribute.Type) -> [Attribute.ValueBuilderKeyPath] {
         guard
-            let cache: KeyTypeCache<Key> = cacheContainer.getCache()
+            let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache()
         else { return [] }
 
         return cache.keys
     }
 
     /// For debug purposes.
-    package func cachedContexts<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath) -> [Style.Context] {
+    package func cachedContexts<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath) -> [Style.Context] {
         guard
-            let cache: KeyTypeCache<Key> = cacheContainer.getCache(),
+            let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache(),
             let valueCache = cache.getValueCache(for: keyPath)
         else { return [] }
 
@@ -169,9 +169,9 @@ extension Style {
     }
 
     /// For debug purposes.
-    package func cachedValue<Key: StyleKey>(for keyPath: Key.ValueBuilderKeyPath, in context: Style.Context) -> Key.Value? {
+    package func cachedValue<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath, in context: Style.Context) -> Attribute.Value? {
         guard
-            let cache: KeyTypeCache<Key> = cacheContainer.getCache(),
+            let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache(),
             let valueCache = cache.getValueCache(for: keyPath)
         else { return nil }
 

@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension Style.Keys.Number {
+extension Style.Attributes.Number {
 
     public var zero: ValueBuilder { .base(.definition(.value(0))) }
 

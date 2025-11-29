@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleKeyModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
+            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleAttributeModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -27,7 +27,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleKeyModifier",
+                "SnapStyleAttributeModifier",
                 "SnapStyleLayout",
                 "SnapStyleViews",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
@@ -41,7 +41,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleKeyModifier",
+                "SnapStyleAttributeModifier",
                 "SnapStyleLayout",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
@@ -54,7 +54,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleKeyModifier",
+                "SnapStyleAttributeModifier",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
                 .product(name: "SnapCore", package: "snap-core"),
             ],
@@ -62,14 +62,14 @@ let package = Package(
         ),
         // Modifier
         .target(
-            name: "SnapStyleKeyModifier",
+            name: "SnapStyleAttributeModifier",
             dependencies: [
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/KeyModifier",
+            path: "Sources/KeyModifier", // TODO: Rename to AttributeModifier
         ),
         // Values
         .target(
