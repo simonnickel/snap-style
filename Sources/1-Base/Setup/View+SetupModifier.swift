@@ -15,7 +15,7 @@ extension View {
 
 }
 
-internal struct SetupModifier: ViewModifier {
+private struct SetupModifier: ViewModifier {
 
     @Environment(\.style) private var style
     @Environment(\.colorScheme) private var colorScheme

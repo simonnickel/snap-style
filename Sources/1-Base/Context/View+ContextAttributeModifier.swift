@@ -7,14 +7,14 @@ import SwiftUI
 
 extension View {
 
-    /// Set value of a `Context` attribute for use in Environment.
+    /// Set the value of a `Context.Attribute`.
     public func style<Key: Hashable, Value: Hashable>(attribute: Style.Context.Attribute<Key, Value>, value: Value) -> some View {
         modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
 
 }
 
-internal struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewModifier {
+private struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewModifier {
 
     @Environment(\.style) private var style
 

@@ -74,7 +74,7 @@ extension Style {
 
 extension Style {
 
-    internal func replaced(
+    private func replaced(
         numbers: [Attributes.Number.ValueBuilderKeyPath: Attributes.Number.ValueBuilder]? = nil,
         fonts: [Attributes.Font.ValueBuilderKeyPath: Attributes.Font.ValueBuilder]? = nil,
         icons: [Attributes.Icon.ValueBuilderKeyPath: Attributes.Icon.ValueBuilder]? = nil,

@@ -4,8 +4,10 @@
 //
 
 extension Style {
-    /// Container Type to hierarchically structure Attributes.
-    public enum Attributes { // TODO: Rename to Attribute
+    
+    /// Container Type to hierarchically structure implementations of `StyleAttribute`.
+    public enum Attributes {
         case accent, composition, font, icon, number, shape, surface
     }
+    
 }

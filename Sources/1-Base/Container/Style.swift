@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+/// The main container that maintains the styling setup.
 public struct Style {
 
     internal var builderContainer: BuilderContainer = .init()

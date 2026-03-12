@@ -5,7 +5,8 @@
 
 extension Style {
 
-    /// A value type Container to bundle references to `StyleAttribute` specific caches.
+    /// A Container to bundle references to `StyleAttribute` specific caches.
+    /// It is a struct to easliy be copied when definitions branch off in the view hierarchy.
     internal struct CacheContainer {
 
         // References to `StyleAttribute` specific caches.

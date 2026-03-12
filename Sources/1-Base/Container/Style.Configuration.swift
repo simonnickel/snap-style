@@ -7,6 +7,7 @@ import SwiftUI
 
 extension Style {
     
+    /// Configuration of the `Style` container.
     public struct Configuration {
         
         package let allowNavigationBarTitleAdjustments: Bool

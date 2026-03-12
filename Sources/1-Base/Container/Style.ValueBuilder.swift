@@ -5,6 +5,7 @@
 
 extension Style {
 
+    /// A container to provide different ways of defining a `Style.Value`, e.g. by a function of the context.
     /// Is an enum instead of a struct to allow cleaner call-site: `.base(value) {} or .builder {}`, instead of `.init(base:) {}`.
     public enum ValueBuilder<Value> {
 

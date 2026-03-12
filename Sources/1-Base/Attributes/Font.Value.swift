@@ -41,6 +41,7 @@ extension Style.Attributes.Font {
 
         // MARK: Definition
 
+        // TODO: Rename to FontConfiguration?
         public struct Definition: CustomStringConvertible {
 
             package let size: CGFloat

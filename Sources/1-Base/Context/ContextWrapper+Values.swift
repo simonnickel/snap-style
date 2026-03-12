@@ -9,6 +9,7 @@ extension Style.ContextWrapper {
 
     package typealias Attributes = Style.Attributes
 
+    /// Access a value, either from cache or by resolving the definition with the context.
     package func value<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath, with adjustments: [Attribute.Value.Adjustment] = []) -> Attribute.Value? {
 
         // Use value from cache if available
