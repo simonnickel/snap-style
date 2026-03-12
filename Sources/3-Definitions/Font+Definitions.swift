@@ -13,28 +13,28 @@ extension Style.Attribute.Font {
 
     public var anyComponent: ValueBuilder { .base(nil) }
 
-    public var content: ValueBuilder { .base(.definition(.with(size: 16, weight: .regular))) }
-    public var card: ValueBuilder { .base(.definition(.with(size: 18, weight: .regular))) }
+    public var content: ValueBuilder { .base(.value(.with(size: 16, weight: .regular))) }
+    public var card: ValueBuilder { .base(.value(.with(size: 18, weight: .regular))) }
     public var textBlock: ValueBuilder { .base(.reference(\.content)) }
 
     /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleInline: ValueBuilder {
-        .base(.definition(.with(size: 17, weight: .semibold))) // iOS 26 - size: 17, weight: .semibold
+        .base(.value(.with(size: 17, weight: .semibold))) // iOS 26 - size: 17, weight: .semibold
     }
     
     /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
     /// (see ``StyleNavigationBarModifier``)
     public var navigationTitleLarge: ValueBuilder {
-        .base(.definition(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
+        .base(.value(.with(size: 34, weight: .bold))) // iOS 26 - size: 34, weight: .bold
     }
     
     public var screenTitle: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 28, weight: .bold))
-                case .secondary: .definition(.with(size: 24, weight: .bold))
-                case .tertiary: .definition(.with(size: 20, weight: .bold))
+                case .any, .primary: .value(.with(size: 28, weight: .bold))
+                case .secondary: .value(.with(size: 24, weight: .bold))
+                case .tertiary: .value(.with(size: 20, weight: .bold))
             }
         }
     }
@@ -42,9 +42,9 @@ extension Style.Attribute.Font {
     public var buttonTitle: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 17, weight: .semibold))
-                case .secondary: .definition(.with(size: 13, weight: .medium))
-                case .tertiary: .definition(.with(size: 12, weight: .medium))
+                case .any, .primary: .value(.with(size: 17, weight: .semibold))
+                case .secondary: .value(.with(size: 13, weight: .medium))
+                case .tertiary: .value(.with(size: 12, weight: .medium))
             }
         }
     }
@@ -52,9 +52,9 @@ extension Style.Attribute.Font {
     public var buttonIcon: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 17, weight: .semibold))
-                case .secondary: .definition(.with(size: 13, weight: .medium))
-                case .tertiary: .definition(.with(size: 12, weight: .medium))
+                case .any, .primary: .value(.with(size: 17, weight: .semibold))
+                case .secondary: .value(.with(size: 13, weight: .medium))
+                case .tertiary: .value(.with(size: 12, weight: .medium))
             }
         }
     }
@@ -62,9 +62,9 @@ extension Style.Attribute.Font {
     public var buttonIconOnly: ValueBuilder {
         .builder { context in
             return switch context.component.hierarchy {
-                case .any, .primary: .definition(.with(size: 22, weight: .medium))
-                case .secondary: .definition(.with(size: 18, weight: .medium))
-                case .tertiary: .definition(.with(size: 14, weight: .medium))
+                case .any, .primary: .value(.with(size: 22, weight: .medium))
+                case .secondary: .value(.with(size: 18, weight: .medium))
+                case .tertiary: .value(.with(size: 14, weight: .medium))
             }
         }
     }
@@ -77,9 +77,9 @@ extension Style.Attribute.Font {
     public var title: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 18, weight: .bold))
-                case .secondary: .definition(.with(size: 16, weight: .medium))
-                case .tertiary: .definition(.with(size: 14, weight: .medium))
+                case .any, .primary: .value(.with(size: 18, weight: .bold))
+                case .secondary: .value(.with(size: 16, weight: .medium))
+                case .tertiary: .value(.with(size: 14, weight: .medium))
             }
         }
     }
@@ -94,16 +94,16 @@ extension Style.Attribute.Font {
 
     public var separator: ValueBuilder { .base(nil) }
     
-    public var footnote: ValueBuilder { .base(.definition(.with(size: 14, weight: .regular))) }
+    public var footnote: ValueBuilder { .base(.value(.with(size: 14, weight: .regular))) }
 
 
     // MARK: - List
     
     public var list: ValueBuilder {
-        .base(.definition(.with(size: 17, weight: .regular))) { context in
+        .base(.value(.with(size: 17, weight: .regular))) { context in
             return switch context.element.type {
-                case .title: .definition(.with(size: 17, weight: .medium))
-                case .value: .definition(.with(size: 17, weight: .medium))
+                case .title: .value(.with(size: 17, weight: .medium))
+                case .value: .value(.with(size: 17, weight: .medium))
                 default: nil
             }
         }
@@ -112,16 +112,16 @@ extension Style.Attribute.Font {
     public var listSectionHeader: ValueBuilder {
         .builder { context in
             switch context.element.hierarchy {
-                case .any, .primary: .definition(.with(size: 16, weight: .bold))
-                case .secondary: .definition(.with(size: 17, weight: .semibold))
-                case .tertiary: .definition(.with(size: 15, weight: .regular))
+                case .any, .primary: .value(.with(size: 16, weight: .bold))
+                case .secondary: .value(.with(size: 17, weight: .semibold))
+                case .tertiary: .value(.with(size: 15, weight: .regular))
             }
         }
     }
 
-    public var listIcon: ValueBuilder { .base(.definition(.with(size: 20, weight: .regular))) }
+    public var listIcon: ValueBuilder { .base(.value(.with(size: 20, weight: .regular))) }
     
-    public var listAccessory: ValueBuilder { .base(.definition(.with(size: 20, weight: .semibold))) }
-    public var listAccessoryNavigation: ValueBuilder { .base(.definition(.with(size: 14, weight: .semibold))) }
+    public var listAccessory: ValueBuilder { .base(.value(.with(size: 20, weight: .semibold))) }
+    public var listAccessoryNavigation: ValueBuilder { .base(.value(.with(size: 14, weight: .semibold))) }
 
 }

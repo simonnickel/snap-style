@@ -59,7 +59,7 @@ import SwiftUI
 // MARK: - Preview
 
 extension Style.Attribute.Number {
-    public var examplePreview: ValueBuilder { .base(.definition(.value(50))) }
+    public var examplePreview: ValueBuilder { .base(.value(.scaled(50))) }
 }
 
 #Preview {

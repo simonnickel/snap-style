@@ -24,7 +24,7 @@ extension Style.ContextWrapper {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
-                    case .definition(let value):
+                    case .value(let value):
                         result = value
                 }
             }
@@ -37,7 +37,7 @@ extension Style.ContextWrapper {
                 switch buildValue {
                     case .reference(let valueKeyPath, let adjustments):
                         result = value(for: valueKeyPath, with: adjustments)
-                    case .definition(let value):
+                    case .value(let value):
                         result = value
                 }
             }

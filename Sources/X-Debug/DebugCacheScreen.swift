@@ -59,9 +59,9 @@ public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
     DebugCacheScreen<Style.Attribute.Font>()
         .styleOverride(
             fonts: [
-                \.title: .base(.definition(.with(size: 6))) { context in
+                \.title: .base(.value(.with(size: 6))) { context in
                     switch context.element.hierarchy {
-                        case .primary: .definition(.with(size: 16))
+                        case .primary: .value(.with(size: 16))
                         default: nil
                     }
 

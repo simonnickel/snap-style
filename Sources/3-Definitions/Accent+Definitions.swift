@@ -40,19 +40,19 @@ extension Style.Attribute.Accent {
     // MARK: Generic Accents
     
     public var primary: ValueBuilder {
-        .base(.definition(.value(
+        .base(.value(
             .fallbackPrimary
-        )))
+        ))
     }
     
     public var secondary: ValueBuilder {
-        .base(.definition(.value(
+        .base(.value(
             .fallbackSecondary
-        )))
+        ))
     }
     
     public var destructive: ValueBuilder {
-        .base(.definition(.value(
+        .base(.value(
             .init(
                 base: \.snapRed,
                 onAccent: \.snapWhite,
@@ -60,7 +60,7 @@ extension Style.Attribute.Accent {
                 contrast: \.snapYellow,
                 brightness: .dark
             )
-        )))
+        ))
     }
     
 }

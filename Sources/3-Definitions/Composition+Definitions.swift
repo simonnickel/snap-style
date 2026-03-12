@@ -19,12 +19,12 @@ extension Style.Attribute.Composition {
     public var interactiveElement: ValueBuilder {
         .builder { context in
             switch context.container.state {
-                case .normal: .definition(.foreground(\.interactiveAsForeground))
+                case .normal: .value(.foreground(\.interactiveAsForeground))
 
-                case .disabled, .inactive: .definition(.foreground(\.disabled))
+                case .disabled, .inactive: .value(.foreground(\.disabled))
                     
                 case .highlighted, .selected:
-                        .definition(.layers([
+                        .value(.layers([
                             .foreground: \.interactiveAsForeground, .background: \.stateOverlayAccented
                         ]))
             }
@@ -38,11 +38,11 @@ extension Style.Attribute.Composition {
             let foreground: Style.Attribute.Surface.ValueBuilderKeyPath = context.container.useSecondaryAccent ? \.onAccent : \.interactive
             
             return switch context.container.state {
-                case .normal: .definition(.foreground(foreground))
+                case .normal: .value(.foreground(foreground))
                     
-                case .disabled, .inactive: .definition(.foreground(\.disabled))
+                case .disabled, .inactive: .value(.foreground(\.disabled))
                     
-                case .highlighted, .selected: .definition(.foreground(foreground))
+                case .highlighted, .selected: .value(.foreground(foreground))
             }
         }
     }
@@ -71,12 +71,12 @@ extension Style.Attribute.Composition {
         .builder { context in
             return switch context.container.state {
                 case .disabled:
-                    .definition(.layers([
+                    .value(.layers([
                         .foreground: \.disabled, .background: \.contentLevel1
                     ]))
 
                 case .normal, .inactive, .highlighted, .selected:
-                    .definition(.layers([
+                    .value(.layers([
                         .foreground: \.onContent0, .background: \.contentBackground, .backgroundOverlay: \.stateOverlayAccented
                     ]))
             }
@@ -87,12 +87,12 @@ extension Style.Attribute.Composition {
         .builder { context in
             switch context.container.state {
                 case .disabled, .inactive:
-                    .definition(.layers([
+                    .value(.layers([
                         .foreground: \.onDisabled, .background: \.disabled
                     ]))
 
                 case .normal, .highlighted, .selected:
-                    .definition(.layers([
+                    .value(.layers([
                         .foreground: \.onAccent, .background: \.accentBackground, .backgroundOverlay: \.stateOverlayOnAccent
                     ]))
             }
@@ -103,12 +103,12 @@ extension Style.Attribute.Composition {
         .builder { context in
             return switch context.container.state {
                 case .disabled, .inactive:
-                        .definition(.layers([
+                        .value(.layers([
                             .foreground: \.onDisabled, .background: \.disabled
                         ]))
 
                 case .normal, .highlighted, .selected:
-                        .definition(.layers([
+                        .value(.layers([
                             .foreground: \.onInteractive, .background: \.interactive, .backgroundOverlay: \.stateOverlayOnInteractive
                         ]))
             }
@@ -121,7 +121,7 @@ extension Style.Attribute.Composition {
     public var anyContainer: ValueBuilder { .base(nil) }
     
     public var screen: ValueBuilder {
-        .base(.definition(.composition(.with([.background: \.screen]))))
+        .base(.value(.composition(.with([.background: \.screen]))))
     }
     
     public var containerContentCard: ValueBuilder {
@@ -168,7 +168,7 @@ extension Style.Attribute.Composition {
     
     public var action: ValueBuilder { .base(nil) }
 
-    public var separator: ValueBuilder { .base(.definition(.foreground(\.onContentDisabled))) }
+    public var separator: ValueBuilder { .base(.value(.foreground(\.onContentDisabled))) }
     
     public var footnote: ValueBuilder { .base(nil) }
 

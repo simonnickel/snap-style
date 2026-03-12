@@ -17,17 +17,17 @@ extension Style.Attribute.Number {
         public typealias WrappedValue = Double
         public typealias Adjustment = Style.Attribute.Number.Adjustment
 
-        case value(WrappedValue)
+        case scaled(WrappedValue)
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .value(let value): value
+                case .scaled(let value): value
             }
         }
 
         public var description: String {
             switch self {
-                case .value(let value): ".value: \(value)"
+                case .scaled(let value): ".value: \(value)"
             }
         }
 

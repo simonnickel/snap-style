@@ -8,54 +8,39 @@ extension Style.Attribute {
 }
 
 extension Style.Attribute.Accent {
-
-
+    
+    
     // MARK: - Value
-
-    public enum Value: StyleValue {
-
-        public typealias WrappedValue = Accent
+    
+    public struct Value: StyleValue, Hashable, Equatable {
+        
+        public typealias WrappedValue = Self
         public typealias Adjustment = Style.Attribute.Accent.Adjustment
+        
+        public typealias ColorValue = Style.Attribute.Surface.ValueBuilderKeyPath
+        
+        public let base: ColorValue
+        public let onAccent: ColorValue
+        public let complementary: ColorValue
+        public let contrast: ColorValue
+        public let brightness: Brightness
 
-        case value(WrappedValue)
-
-        public var wrappedValue: WrappedValue {
-            switch self {
-                case .value(let value): value
-            }
+        public enum Brightness {
+            case light, dark
         }
 
+        public init(base: ColorValue, onAccent: ColorValue, complementary: ColorValue, contrast: ColorValue, brightness: Brightness) {
+            self.base = base
+            self.onAccent = onAccent
+            self.complementary = complementary
+            self.contrast = contrast
+            self.brightness = brightness
+        }
+        
+        public var wrappedValue: WrappedValue { self }
+        
         public var description: String {
-            switch self {
-                case .value(let value): ".value: \(value)"
-            }
-        }
-        
-        
-        // MARK: - Accent
-        
-        public struct Accent: Hashable, Equatable {
-            
-            public typealias ColorValue = Style.Attribute.Surface.ValueBuilderKeyPath
-            
-            public let base: ColorValue
-            public let onAccent: ColorValue
-            public let complementary: ColorValue
-            public let contrast: ColorValue
-            public let brightness: Brightness
-
-            public enum Brightness {
-                case light, dark
-            }
-
-            public init(base: ColorValue, onAccent: ColorValue, complementary: ColorValue, contrast: ColorValue, brightness: Brightness) {
-                self.base = base
-                self.onAccent = onAccent
-                self.complementary = complementary
-                self.contrast = contrast
-                self.brightness = brightness
-            }
-
+            "\(self)" // TODO: Proper description
         }
 
     }

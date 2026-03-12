@@ -13,25 +13,25 @@ extension Style.Attribute.Surface {
     // MARK: - Generic Surfaces
 
     public var none: ValueBuilder { .base(.none) }
-    public var clear: ValueBuilder { .base(.definition(.color(.clear))) }
+    public var clear: ValueBuilder { .base(.value(.color(.clear))) }
 
-    public var light0: ValueBuilder { .base(.definition(.color(.white))) }
-    public var light1: ValueBuilder { .base(.definition(.color(.init(white: 0.85)))) }
-    public var light2: ValueBuilder { .base(.definition(.color(.init(white: 0.7)))) }
-    public var light3: ValueBuilder { .base(.definition(.color(.init(white: 0.6)))) }
-    public var onLight0: ValueBuilder { .base(.definition(.color(.black))) }
-    public var onLight1: ValueBuilder { .base(.definition(.color(.gray))) }
-    public var onLight2: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var light0: ValueBuilder { .base(.value(.color(.white))) }
+    public var light1: ValueBuilder { .base(.value(.color(.init(white: 0.85)))) }
+    public var light2: ValueBuilder { .base(.value(.color(.init(white: 0.7)))) }
+    public var light3: ValueBuilder { .base(.value(.color(.init(white: 0.6)))) }
+    public var onLight0: ValueBuilder { .base(.value(.color(.black))) }
+    public var onLight1: ValueBuilder { .base(.value(.color(.gray))) }
+    public var onLight2: ValueBuilder { .base(.value(.color(.gray))) }
 
-    public var dark0: ValueBuilder { .base(.definition(.color(.black))) }
-    public var dark1: ValueBuilder { .base(.definition(.color(Color(red: 28/255, green: 28/255, blue: 30/255)))) }
-    public var dark2: ValueBuilder { .base(.definition(.color(.init(white: 0.25)))) }
-    public var dark3: ValueBuilder { .base(.definition(.color(.init(white: 0.35)))) }
-    public var onDark0: ValueBuilder { .base(.definition(.color(.white))) }
-    public var onDark1: ValueBuilder { .base(.definition(.color(.gray))) }
-    public var onDark2: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var dark0: ValueBuilder { .base(.value(.color(.black))) }
+    public var dark1: ValueBuilder { .base(.value(.color(Color(red: 28/255, green: 28/255, blue: 30/255)))) }
+    public var dark2: ValueBuilder { .base(.value(.color(.init(white: 0.25)))) }
+    public var dark3: ValueBuilder { .base(.value(.color(.init(white: 0.35)))) }
+    public var onDark0: ValueBuilder { .base(.value(.color(.white))) }
+    public var onDark1: ValueBuilder { .base(.value(.color(.gray))) }
+    public var onDark2: ValueBuilder { .base(.value(.color(.gray))) }
 
-    public var disabled: ValueBuilder { .base(.definition(.color(.gray))) }
+    public var disabled: ValueBuilder { .base(.value(.color(.gray))) }
     public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
 
@@ -105,7 +105,7 @@ extension Style.Attribute.Surface {
             let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
             let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
-            return .definition(.any(AnyShapeStyle(
+            return .value(.any(AnyShapeStyle(
                 MeshGradient(width: 4, height: 4, points: [
                     [0, 0], [0.33, 0], [0.66, 0], [1, 0],
                     [0, 0.33], [0.33, 0.33], [0.66, 0.33], [1, 0.33],
@@ -131,7 +131,7 @@ extension Style.Attribute.Surface {
             let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
             let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
-            return .definition(.any(AnyShapeStyle(
+            return .value(.any(AnyShapeStyle(
                 MeshGradient(width: 3, height: 3, points: [
                     [0, 0], [0.66, 0], [1, 0],
                     [0, 0.33], [0.33, 0.33], [1, 0.33],
@@ -163,8 +163,8 @@ extension Style.Attribute.Surface {
 
             return switch context.context.container.state {
                 case .normal, .disabled, .inactive: .reference(\.clear)
-                case .highlighted: brightness == .light ? .definition(.color(.black.opacity(0.2))) :  .definition(.color(.white.opacity(0.2)))
-                case .selected: brightness == .light ? .definition(.color(.black.opacity(0.3))) : .definition(.color(.white.opacity(0.3)))
+                case .highlighted: brightness == .light ? .value(.color(.black.opacity(0.2))) :  .value(.color(.white.opacity(0.2)))
+                case .selected: brightness == .light ? .value(.color(.black.opacity(0.3))) : .value(.color(.white.opacity(0.3)))
             }
         }
     }
@@ -202,7 +202,7 @@ extension Style.Attribute.Surface {
     
     public var screen: ValueBuilder { .builder { context in
         switch (context.colorScheme, context.elevation) {
-            case (.light, _): .definition(.color(Color(red: 242/255, green: 242/255, blue: 247/255)))
+            case (.light, _): .value(.color(Color(red: 242/255, green: 242/255, blue: 247/255)))
             case (.dark, 0): .reference(\.dark0)
             case (.dark, 1): .reference(\.dark1)
             default: nil
@@ -280,7 +280,7 @@ extension Style.Attribute.Surface {
     // MARK: - Colors
     
     public var systemAccent: ValueBuilder {
-        .base(.definition(.color(.accentColor)))
+        .base(.value(.color(.accentColor)))
     }
     
     public var systemAccentComplementary: ValueBuilder {
@@ -292,63 +292,63 @@ extension Style.Attribute.Surface {
     }
     
     public var snapBlack: ValueBuilder {
-        .base(.definition(.color(.black)))
+        .base(.value(.color(.black)))
     }
     
     public var snapWhite: ValueBuilder {
-        .base(.definition(.color(.white)))
+        .base(.value(.color(.white)))
     }
     
     public var snapGray: ValueBuilder {
-        .base(.definition(.color(.gray)))
+        .base(.value(.color(.gray)))
     }
     
     public var snapBlue: ValueBuilder {
-        .base(.definition(.color(.blue)))
+        .base(.value(.color(.blue)))
     }
     
     public var snapIndigo: ValueBuilder {
-        .base(.definition(.color(.indigo)))
+        .base(.value(.color(.indigo)))
     }
     
     public var snapPurple: ValueBuilder {
-        .base(.definition(.color(.purple)))
+        .base(.value(.color(.purple)))
     }
     
     public var snapRed: ValueBuilder {
-        .base(.definition(.color(.red)))
+        .base(.value(.color(.red)))
     }
     
     public var snapOrange: ValueBuilder {
-        .base(.definition(.color(.orange)))
+        .base(.value(.color(.orange)))
     }
     
     public var snapYellow: ValueBuilder {
-        .base(.definition(.color(.yellow)))
+        .base(.value(.color(.yellow)))
     }
     
     public var snapPink: ValueBuilder {
-        .base(.definition(.color(.pink)))
+        .base(.value(.color(.pink)))
     }
     
     public var snapGreen: ValueBuilder {
-        .base(.definition(.color(.green)))
+        .base(.value(.color(.green)))
     }
     
     public var snapCyan: ValueBuilder {
-        .base(.definition(.color(.cyan)))
+        .base(.value(.color(.cyan)))
     }
     
     public var snapTeal: ValueBuilder {
-        .base(.definition(.color(.teal)))
+        .base(.value(.color(.teal)))
     }
     
     public var snapMint: ValueBuilder {
-        .base(.definition(.color(.mint)))
+        .base(.value(.color(.mint)))
     }
     
     public var snapBrown: ValueBuilder {
-        .base(.definition(.color(.brown)))
+        .base(.value(.color(.brown)))
     }
     
 }

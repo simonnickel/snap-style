@@ -11,7 +11,7 @@ public protocol StyleAttribute {
     associatedtype Adjustment: StyleAdjustment where Value.WrappedValue == Adjustment.Value.WrappedValue
 
     typealias ValueBuilderKeyPath = KeyPath<Self, Self.ValueBuilder>
-    typealias ValueBuilder = Style.ValueBuilder<Style.Value<Self>>
+    typealias ValueBuilder = Style.ValueBuilder<Style.Definition<Self>>
 
     /// Needs an init to access KeyPaths.
     init()

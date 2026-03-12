@@ -17,17 +17,17 @@ extension Style.Attribute.Icon {
         public typealias WrappedValue = String
         public typealias Adjustment = Style.Attribute.Icon.Adjustment
 
-        case value(WrappedValue)
+        case named(WrappedValue)
 
         public var wrappedValue: WrappedValue {
             switch self {
-                case .value(let value): value
+                case .named(let value): value
             }
         }
 
         public var description: String {
             switch self {
-                case .value(let value): ".value: \(value)"
+                case .named(let value): ".value: \(value)"
             }
         }
 
