@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
 
-    public func style(font keyPath: Style.Attributes.Font.ValueBuilderKeyPath) -> some View {
+    public func style(font keyPath: Style.Attribute.Font.ValueBuilderKeyPath) -> some View {
         modifier(FontModifier(keyPath: keyPath))
     }
 
@@ -21,14 +21,14 @@ extension View {
 extension View {
 
     public func styleApplyFont(for element: Style.Element.ElementType) -> some View {
-        let keyPath = Style.Attributes.Font.keyPath(for: element)
+        let keyPath = Style.Attribute.Font.keyPath(for: element)
         return modifier(FontFromEnvironmentModifier(keyPath: keyPath))
     }
 
     @ViewBuilder
-    public func styleSetup(font key: Style.Attributes.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+    public func styleSetup(font key: Style.Attribute.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
         if let key {
-            let keyPath = Style.Attributes.Font.keyPath(for: element)
+            let keyPath = Style.Attribute.Font.keyPath(for: element)
             environment(keyPath, key)
         } else {
             self
@@ -58,7 +58,7 @@ private struct FontFromEnvironmentModifier: ViewModifier {
     @Environment(\.self) private var environment
     @Environment(\.style) private var style
 
-    let keyPath: KeyPath<EnvironmentValues, Style.Attributes.Font.ValueBuilderKeyPath>
+    let keyPath: KeyPath<EnvironmentValues, Style.Attribute.Font.ValueBuilderKeyPath>
 
     func body(content: Content) -> some View {
         let key = environment[keyPath: keyPath]
@@ -72,7 +72,7 @@ private struct FontModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Font.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Font.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         let properties = style.font(for: keyPath)
@@ -86,10 +86,10 @@ private struct ScaledFont: ViewModifier {
     
     @Environment(\.style) private var style
     
-    private let properties: Style.Attributes.Font.Value.Properties?
+    private let properties: Style.Attribute.Font.Value.Properties?
     private let scaled: ScaledMetric<Double>
 
-    init(properties: Style.Attributes.Font.Value.Properties?) {
+    init(properties: Style.Attribute.Font.Value.Properties?) {
         self.properties = properties
         self.scaled = ScaledMetric(wrappedValue: Double(properties?.size ?? .zero), relativeTo: properties?.textStyle ?? .body)
     }

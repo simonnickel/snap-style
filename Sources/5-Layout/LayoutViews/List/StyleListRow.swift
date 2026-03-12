@@ -28,7 +28,7 @@ extension Style.Views.List.Row {
         
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
-            icon: Style.Attributes.Icon.ValueBuilderKeyPath? = nil,
+            icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title,
@@ -44,7 +44,7 @@ extension Style.Views.List.Row {
         /// An alternative init is required for variant that does not specify a `Content`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
-            icon: Style.Attributes.Icon.ValueBuilderKeyPath? = nil,
+            icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title
@@ -59,7 +59,7 @@ extension Style.Views.List.Row {
         /// An alternative init is required for variant that does not specify a `SelectionValue`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
-            icon: Style.Attributes.Icon.ValueBuilderKeyPath? = nil,
+            icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title,
@@ -75,7 +75,7 @@ extension Style.Views.List.Row {
         /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of `Content`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
-            icon: Style.Attributes.Icon.ValueBuilderKeyPath? = nil,
+            icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
             systemImage: String? = nil,
             action: Action? = nil,
             @ViewBuilder title: @escaping () -> Title

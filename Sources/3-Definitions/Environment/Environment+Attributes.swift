@@ -7,26 +7,26 @@ import SnapStyleBase
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry public var styleFontAny: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontTitle: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontLabel: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontIcon: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontValue: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontAccessory: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontSeparator: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleFontFootnote: Style.Attributes.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontAny: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontTitle: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontLabel: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontIcon: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontValue: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontAccessory: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontSeparator: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleFontFootnote: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
 
-    @Entry public var styleCompositionAny: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionTitle: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionLabel: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionIcon: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionValue: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionAccessory: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionSeparator: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
-    @Entry public var styleCompositionFootnote: Style.Attributes.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionAny: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionTitle: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionLabel: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionIcon: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionValue: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionAccessory: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionSeparator: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleCompositionFootnote: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
 }
 
-extension Style.Attributes.Font {
+extension Style.Attribute.Font {
 
     package static func keyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
@@ -43,7 +43,7 @@ extension Style.Attributes.Font {
     
 }
 
-extension Style.Attributes.Composition {
+extension Style.Attribute.Composition {
 
     package static func keyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {

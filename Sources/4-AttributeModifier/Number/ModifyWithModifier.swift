@@ -16,8 +16,8 @@ extension View {
     ///   - valueKeyPath: The `Number` to access.
     ///   - transform: A closure with access to the resolved value and content to apply it on.
     public func styleModify(
-        with valueKeyPath: Style.Attributes.Number.ValueBuilderKeyPath?,
-        transform: @escaping (AnyView, Style.Attributes.Number.Value.WrappedValue?) -> some View
+        with valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath?,
+        transform: @escaping (AnyView, Style.Attribute.Number.Value.WrappedValue?) -> some View
     ) -> some View {
         modifier(ValueModifier(keyPath: valueKeyPath, transform: transform))
     }
@@ -29,11 +29,11 @@ extension View {
 
 private struct ValueModifier<Output: View>: ViewModifier {
 
-    typealias Value = Style.Attributes.Number.Value.WrappedValue
+    typealias Value = Style.Attribute.Number.Value.WrappedValue
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Number.ValueBuilderKeyPath?
+    let keyPath: Style.Attribute.Number.ValueBuilderKeyPath?
     let transform: (AnyView, Value?) -> Output
 
     func body(content: Content) -> some View {
@@ -49,7 +49,7 @@ private struct ValueModifier<Output: View>: ViewModifier {
 #Preview {
 
     @Previewable @State var isFirst: Bool = true
-    @Previewable @State var keyPath: Style.Attributes.Number.ValueBuilderKeyPath = \.spacingGroups
+    @Previewable @State var keyPath: Style.Attribute.Number.ValueBuilderKeyPath = \.spacingGroups
 
     VStack(spacing: 20) {
         Text("Some Text")

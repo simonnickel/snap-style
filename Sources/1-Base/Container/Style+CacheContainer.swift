@@ -10,30 +10,30 @@ extension Style {
     internal struct CacheContainer {
 
         // References to `StyleAttribute` specific caches.
-        internal var numbers: AttributeTypeCache<Attributes.Number> = .init()
-        internal var fonts: AttributeTypeCache<Attributes.Font> = .init()
-        internal var icons: AttributeTypeCache<Attributes.Icon> = .init()
-        internal var surfaces: AttributeTypeCache<Attributes.Surface> = .init()
-        internal var compositions: AttributeTypeCache<Attributes.Composition> = .init()
-        internal var accents: AttributeTypeCache<Attributes.Accent> = .init()
-        internal var shapes: AttributeTypeCache<Attributes.Shape> = .init()
+        internal var numbers: AttributeTypeCache<Attribute.Number> = .init()
+        internal var fonts: AttributeTypeCache<Attribute.Font> = .init()
+        internal var icons: AttributeTypeCache<Attribute.Icon> = .init()
+        internal var surfaces: AttributeTypeCache<Attribute.Surface> = .init()
+        internal var compositions: AttributeTypeCache<Attribute.Composition> = .init()
+        internal var accents: AttributeTypeCache<Attribute.Accent> = .init()
+        internal var shapes: AttributeTypeCache<Attribute.Shape> = .init()
 
         internal func getCache<Attribute: StyleAttribute>() -> AttributeTypeCache<Attribute>? {
             switch Attribute.self {
 
-                case let key as Attributes.Number.Type: return numbers as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Number.Type: return numbers as? AttributeTypeCache<Attribute>
 
-                case let key as Attributes.Font.Type: return fonts as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Font.Type: return fonts as? AttributeTypeCache<Attribute>
 
-                case let key as Attributes.Icon.Type: return icons as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Icon.Type: return icons as? AttributeTypeCache<Attribute>
 
-                case let key as Attributes.Surface.Type: return surfaces as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Surface.Type: return surfaces as? AttributeTypeCache<Attribute>
 
-                case let key as Attributes.Composition.Type: return compositions as? AttributeTypeCache<Attribute>
-                    
-                case let key as Attributes.Accent.Type: return accents as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Composition.Type: return compositions as? AttributeTypeCache<Attribute>
+                        
+                case let key as Style.Attribute.Accent.Type: return accents as? AttributeTypeCache<Attribute>
 
-                case let key as Attributes.Shape.Type: return shapes as? AttributeTypeCache<Attribute>
+                case let key as Style.Attribute.Shape.Type: return shapes as? AttributeTypeCache<Attribute>
 
                 default: fatalError("Cache is not setup properly.")
 
@@ -44,26 +44,26 @@ extension Style {
         internal mutating func resetCache<Attribute: StyleAttribute>(for: Attribute.Type) {
             switch Attribute.self {
 
-                case let key as Attributes.Number.Type: numbers = .init()
+                case let key as Style.Attribute.Number.Type: numbers = .init()
 
-                case let key as Attributes.Font.Type: fonts = .init()
+                case let key as Style.Attribute.Font.Type: fonts = .init()
 
-                case let key as Attributes.Icon.Type: icons = .init()
+                case let key as Style.Attribute.Icon.Type: icons = .init()
 
-                case let key as Attributes.Surface.Type:
+                case let key as Style.Attribute.Surface.Type:
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Attributes.Composition.Type:
+                case let key as Style.Attribute.Composition.Type:
                     compositions = .init()
                     surfaces = .init()
                     
-                case let key as Attributes.Accent.Type:
+                case let key as Style.Attribute.Accent.Type:
                     accents = .init()
                     compositions = .init()
                     surfaces = .init()
 
-                case let key as Attributes.Shape.Type: shapes = .init()
+                case let key as Style.Attribute.Shape.Type: shapes = .init()
 
                 default: fatalError("Cache is not setup properly.")
 

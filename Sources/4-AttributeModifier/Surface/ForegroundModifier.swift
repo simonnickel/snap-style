@@ -14,7 +14,7 @@ extension View {
     ///
     /// - Parameter keyPath: The `Surface` to apply, `nil` will use the environments value.
     public func style(
-        foreground keyPath: Style.Attributes.Surface.ValueBuilderKeyPath?
+        foreground keyPath: Style.Attribute.Surface.ValueBuilderKeyPath?
     ) -> some View {
         modifier(SurfaceForegroundModifier(keyPath: keyPath))
     }
@@ -28,7 +28,7 @@ private struct SurfaceForegroundModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Surface.ValueBuilderKeyPath?
+    let keyPath: Style.Attribute.Surface.ValueBuilderKeyPath?
 
     func body(content: Content) -> some View {
         // Has to be applied even if no value is present, to allow animation of appearing value.

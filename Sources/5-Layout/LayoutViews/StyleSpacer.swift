@@ -11,15 +11,15 @@ public struct StyleSpacer: View {
 
     @Environment(\.style) var style
 
-    private let minLength: Style.Attributes.Number.ValueBuilderKeyPath?
-    private let length: Style.Attributes.Number.ValueBuilderKeyPath?
+    private let minLength: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let length: Style.Attribute.Number.ValueBuilderKeyPath?
     
-    public init(_ length: Style.Attributes.Number.ValueBuilderKeyPath = \.spacingElements) {
+    public init(_ length: Style.Attribute.Number.ValueBuilderKeyPath = \.spacingElements) {
         self.minLength = nil
         self.length = length
     }
 
-    public init(min: Style.Attributes.Number.ValueBuilderKeyPath) {
+    public init(min: Style.Attribute.Number.ValueBuilderKeyPath) {
         self.minLength = min
         self.length = nil
     }

@@ -5,11 +5,11 @@
 
 import SwiftUI
 
-extension Style.Attributes {
+extension Style.Attribute {
     public struct Surface: StyleAttribute { public init() {} }
 }
 
-extension Style.Attributes.Surface {
+extension Style.Attribute.Surface {
 
 
     // MARK: - Value
@@ -18,7 +18,7 @@ extension Style.Attributes.Surface {
 
         /// Does not define a type for WrappedValue for easier access.
         public typealias WrappedValue = Self
-        public typealias Adjustment = Style.Attributes.Surface.Adjustment
+        public typealias Adjustment = Style.Attribute.Surface.Adjustment
 
         case color(Color)
         case material(Material)
@@ -58,7 +58,7 @@ extension Style.Attributes.Surface {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Attributes.Surface.Value
+        public typealias Value = Style.Attribute.Surface.Value
 
         case opacity(Double)
         case mix(Color, Double)

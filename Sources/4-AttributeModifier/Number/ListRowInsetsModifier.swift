@@ -15,7 +15,7 @@ extension View {
     ///
     /// - Parameter valueKeyPath: Number to apply as inset to all edges.
     public func styleListRowInsets(
-        _ valueKeyPath: Style.Attributes.Number.ValueBuilderKeyPath
+        _ valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath
     ) -> some View {
         modifier(
             ListRowInsetsModifier(
@@ -31,10 +31,10 @@ extension View {
     ///
     /// Supports animated change.
     public func styleListRowInsets(
-        top: Style.Attributes.Number.ValueBuilderKeyPath = \.paddingListRowTop,
-        leading: Style.Attributes.Number.ValueBuilderKeyPath = \.paddingListRowLeading,
-        bottom: Style.Attributes.Number.ValueBuilderKeyPath = \.paddingListRowBottom,
-        trailing: Style.Attributes.Number.ValueBuilderKeyPath = \.paddingListRowTrailing
+        top: Style.Attribute.Number.ValueBuilderKeyPath = \.paddingListRowTop,
+        leading: Style.Attribute.Number.ValueBuilderKeyPath = \.paddingListRowLeading,
+        bottom: Style.Attribute.Number.ValueBuilderKeyPath = \.paddingListRowBottom,
+        trailing: Style.Attribute.Number.ValueBuilderKeyPath = \.paddingListRowTrailing
     ) -> some View {
         modifier(
             ListRowInsetsModifier(
@@ -55,10 +55,10 @@ private struct ListRowInsetsModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let top: Style.Attributes.Number.ValueBuilderKeyPath
-    let leading: Style.Attributes.Number.ValueBuilderKeyPath
-    let bottom: Style.Attributes.Number.ValueBuilderKeyPath
-    let trailing: Style.Attributes.Number.ValueBuilderKeyPath
+    let top: Style.Attribute.Number.ValueBuilderKeyPath
+    let leading: Style.Attribute.Number.ValueBuilderKeyPath
+    let bottom: Style.Attribute.Number.ValueBuilderKeyPath
+    let trailing: Style.Attribute.Number.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         let valueTop = style.number(for: top)

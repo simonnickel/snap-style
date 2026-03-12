@@ -8,7 +8,7 @@ import SwiftUI
 
 public struct StyleLabel<Content: View>: View {
     
-    public typealias IconKeyPath = Style.Attributes.Icon.ValueBuilderKeyPath
+    public typealias IconKeyPath = Style.Attribute.Icon.ValueBuilderKeyPath
     
     @Environment(\.style) private var style
     @Environment(\.styleLabelSpacing) private var styleLabelSpacing
@@ -60,7 +60,7 @@ public struct StyleLabel<Content: View>: View {
 // MARK: - Environment
 
 extension EnvironmentValues {
-    @Entry var styleLabelSpacing: Style.Attributes.Number.ValueBuilderKeyPath = \.spacingLabel
+    @Entry var styleLabelSpacing: Style.Attribute.Number.ValueBuilderKeyPath = \.spacingLabel
     @Entry var styleLabelContent: [StyleLabelContent] = [.icon, .label]
 }
 
@@ -68,7 +68,7 @@ extension EnvironmentValues {
 // MARK: - CustomSpacingLabelStyle
 
 extension LabelStyle where Self == CustomSpacingLabelStyle {
-    static func style(spacing: Style.Attributes.Number.ValueBuilderKeyPath) -> CustomSpacingLabelStyle {
+    static func style(spacing: Style.Attribute.Number.ValueBuilderKeyPath) -> CustomSpacingLabelStyle {
         CustomSpacingLabelStyle(spacing: spacing)
     }
 }
@@ -77,7 +77,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
     
     @Environment(\.styleLabelContent) private var styleLabelContent
     
-    let spacing: Style.Attributes.Number.ValueBuilderKeyPath
+    let spacing: Style.Attribute.Number.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
         StyleStack(.horizontal, spacing: spacing, isStretching: false) {

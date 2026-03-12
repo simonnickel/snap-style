@@ -3,11 +3,11 @@
 //  Created by Simon Nickel
 //
 
-extension Style.Attributes {
+extension Style.Attribute {
     public struct Icon: StyleAttribute { public init() {} }
 }
 
-extension Style.Attributes.Icon {
+extension Style.Attribute.Icon {
 
 
     // MARK: - Value
@@ -15,7 +15,7 @@ extension Style.Attributes.Icon {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = String
-        public typealias Adjustment = Style.Attributes.Icon.Adjustment
+        public typealias Adjustment = Style.Attribute.Icon.Adjustment
 
         case value(WrappedValue)
 
@@ -38,7 +38,7 @@ extension Style.Attributes.Icon {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Attributes.Icon.Value
+        public typealias Value = Style.Attribute.Icon.Value
 
         public func applied(on value: Value) -> Value {
             value

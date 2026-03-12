@@ -21,7 +21,7 @@ extension View {
     ///   - keyPath: The `Number` to apply as padding. `nil` might apply a default value. Set `\.zero` to remove safeArea.
     ///   - edges: The set of edges to pad for this view. The default is `.all`.
     public func style(
-        safeAreaPadding keyPath: Style.Attributes.Number.ValueBuilderKeyPath?,
+        safeAreaPadding keyPath: Style.Attribute.Number.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all
     ) -> some View {
         modifier(SafeAreaPaddingModifier(keyPath: keyPath, edges: edges))
@@ -36,7 +36,7 @@ private struct SafeAreaPaddingModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Number.ValueBuilderKeyPath?
+    let keyPath: Style.Attribute.Number.ValueBuilderKeyPath?
     let edges: Edge.Set
 
     func body(content: Content) -> some View {

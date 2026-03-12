@@ -6,7 +6,7 @@
 import SnapFoundation
 import SwiftUI
 
-extension Style.Attributes.Font.Value.Properties {
+extension Style.Attribute.Font.Value.Properties {
 
     public func font(size sizeOverride: Double? = nil) -> Font {
         let sizeToUse = sizeOverride ?? size
@@ -27,7 +27,7 @@ extension Style.Attributes.Font.Value.Properties {
 
 import UIKit
 
-extension Style.Attributes.Font.Value.Properties {
+extension Style.Attribute.Font.Value.Properties {
     public func uiFont(size sizeOverride: Double? = nil) -> UIFont {
         let sizeToUse = sizeOverride ?? size
         let font: UIFont = if let width {
@@ -53,21 +53,21 @@ extension Style.Attributes.Font.Value.Properties {
 
 #Preview {
 
-    let propertiesStandard: Style.Attributes.Font.Value.Properties = .init(
+    let propertiesStandard: Style.Attribute.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: nil,
         textStyle: .body
     )
-    let propertiesDesign: Style.Attributes.Font.Value.Properties = .init(
+    let propertiesDesign: Style.Attribute.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: .serif,
         textStyle: .body
     )
-    let propertiesWidth: Style.Attributes.Font.Value.Properties = .init(
+    let propertiesWidth: Style.Attribute.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: .compressed,
@@ -88,7 +88,7 @@ extension Style.Attributes.Font.Value.Properties {
 
 struct CompareView: View {
 
-    let properties: Style.Attributes.Font.Value.Properties
+    let properties: Style.Attribute.Font.Value.Properties
 
     var body: some View {
         VStack {

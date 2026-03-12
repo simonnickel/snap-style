@@ -18,20 +18,20 @@ extension Style {
         public let hierarchy: Hierarchy
 
         package let padding: MappingPadding?
-        package let fonts: Mapping<Attributes.Font>?
-        package let surfaces: Mapping<Attributes.Surface>?
-        package let compositions: Mapping<Attributes.Composition>?
-        package let shapes: Mapping<Attributes.Shape>?
+        package let fonts: Mapping<Attribute.Font>?
+        package let surfaces: Mapping<Attribute.Surface>?
+        package let compositions: Mapping<Attribute.Composition>?
+        package let shapes: Mapping<Attribute.Shape>?
         package let container: Style.ContainerDefinition?
 
         public init(
             _ id: String,
             hierarchy: Hierarchy = .primary,
             padding: MappingPadding? = nil,
-            fonts: Mapping<Attributes.Font>? = nil,
-            surfaces: Mapping<Attributes.Surface>? = nil,
-            compositions: Mapping<Attributes.Composition>? = nil,
-            shapes: Mapping<Attributes.Shape>? = nil,
+            fonts: Mapping<Attribute.Font>? = nil,
+            surfaces: Mapping<Attribute.Surface>? = nil,
+            compositions: Mapping<Attribute.Composition>? = nil,
+            shapes: Mapping<Attribute.Shape>? = nil,
             container: Style.ContainerDefinition? = nil,
         ) {
             self.id = id

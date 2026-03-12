@@ -5,11 +5,11 @@
 
 import SwiftUI
 
-extension Style.Attributes {
+extension Style.Attribute {
     public struct Font: StyleAttribute { public init() {} }
 }
 
-extension Style.Attributes.Font {
+extension Style.Attribute.Font {
 
 
     // MARK: - Value
@@ -17,7 +17,7 @@ extension Style.Attributes.Font {
     public enum Value: StyleValue {
 
         public typealias WrappedValue = Properties
-        public typealias Adjustment = Style.Attributes.Font.Adjustment
+        public typealias Adjustment = Style.Attribute.Font.Adjustment
 
         case with(
             size: CGFloat,
@@ -74,7 +74,7 @@ extension Style.Attributes.Font {
 
     public enum Adjustment: StyleAdjustment {
 
-        public typealias Value = Style.Attributes.Font.Value
+        public typealias Value = Style.Attribute.Font.Value
 
         public func applied(on value: Value) -> Value {
             value

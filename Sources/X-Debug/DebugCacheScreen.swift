@@ -56,7 +56,7 @@ public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
 }
 
 #Preview {
-    DebugCacheScreen<Style.Attributes.Font>()
+    DebugCacheScreen<Style.Attribute.Font>()
         .styleOverride(
             fonts: [
                 \.title: .base(.definition(.with(size: 6))) { context in

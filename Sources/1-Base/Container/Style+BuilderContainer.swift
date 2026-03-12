@@ -9,13 +9,13 @@ extension Style {
     /// It is a struct to easliy be copied when definitions branch off in the view hierarchy.
     internal struct BuilderContainer: Copyable {
 
-        internal var numbers: [Attributes.Number.ValueBuilderKeyPath: [Attributes.Number.ValueBuilder]] = [:]
-        internal var fonts: [Attributes.Font.ValueBuilderKeyPath: [Attributes.Font.ValueBuilder]] = [:]
-        internal var icons: [Attributes.Icon.ValueBuilderKeyPath: [Attributes.Icon.ValueBuilder]] = [:]
-        internal var surfaces: [Attributes.Surface.ValueBuilderKeyPath: [Attributes.Surface.ValueBuilder]] = [:]
-        internal var compositions: [Attributes.Composition.ValueBuilderKeyPath: [Attributes.Composition.ValueBuilder]] = [:]
-        internal var accents: [Attributes.Accent.ValueBuilderKeyPath: [Attributes.Accent.ValueBuilder]] = [:]
-        internal var shapes: [Attributes.Shape.ValueBuilderKeyPath: [Attributes.Shape.ValueBuilder]] = [:]
+        internal var numbers: [Attribute.Number.ValueBuilderKeyPath: [Attribute.Number.ValueBuilder]] = [:]
+        internal var fonts: [Attribute.Font.ValueBuilderKeyPath: [Attribute.Font.ValueBuilder]] = [:]
+        internal var icons: [Attribute.Icon.ValueBuilderKeyPath: [Attribute.Icon.ValueBuilder]] = [:]
+        internal var surfaces: [Attribute.Surface.ValueBuilderKeyPath: [Attribute.Surface.ValueBuilder]] = [:]
+        internal var compositions: [Attribute.Composition.ValueBuilderKeyPath: [Attribute.Composition.ValueBuilder]] = [:]
+        internal var accents: [Attribute.Accent.ValueBuilderKeyPath: [Attribute.Accent.ValueBuilder]] = [:]
+        internal var shapes: [Attribute.Shape.ValueBuilderKeyPath: [Attribute.Shape.ValueBuilder]] = [:]
 
 
         // MARK: Get
@@ -24,37 +24,37 @@ extension Style {
 
             switch keyPath {
 
-                case let keyPath as KeyPath<Attributes.Number, Attributes.Number.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Number, Style.Attribute.Number.ValueBuilder>:
                     if let builders = numbers[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<Attributes.Font, Attributes.Font.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Font, Style.Attribute.Font.ValueBuilder>:
                     if let builders = fonts[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<Attributes.Icon, Attributes.Icon.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Icon, Style.Attribute.Icon.ValueBuilder>:
                     if let builders = icons[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<Attributes.Surface, Attributes.Surface.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Surface, Style.Attribute.Surface.ValueBuilder>:
                     if let builders = surfaces[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<Attributes.Composition, Attributes.Composition.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Composition, Style.Attribute.Composition.ValueBuilder>:
                     if let builders = compositions[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
                     
-                case let keyPath as KeyPath<Attributes.Accent, Attributes.Accent.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Accent, Style.Attribute.Accent.ValueBuilder>:
                     if let builders = accents[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
-                case let keyPath as KeyPath<Attributes.Shape, Attributes.Shape.ValueBuilder>:
+                case let keyPath as KeyPath<Style.Attribute.Shape, Style.Attribute.Shape.ValueBuilder>:
                     if let builders = shapes[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
@@ -71,31 +71,31 @@ extension Style {
 
     // MARK: Append
 
-    internal func appended(numbers: [Attributes.Number.ValueBuilderKeyPath: Attributes.Number.ValueBuilder]) -> Self {
+    internal func appended(numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)
     }
 
-    internal func appended(fonts: [Attributes.Font.ValueBuilderKeyPath: Attributes.Font.ValueBuilder]) -> Self {
+    internal func appended(fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
     }
 
-    internal func appended(icons: [Attributes.Icon.ValueBuilderKeyPath: Attributes.Icon.ValueBuilder]) -> Self {
+    internal func appended(icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]) -> Self {
         appended(icons, at: \.icons)
     }
 
-    internal func appended(surfaces: [Attributes.Surface.ValueBuilderKeyPath: Attributes.Surface.ValueBuilder]) -> Self {
+    internal func appended(surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]) -> Self {
         appended(surfaces, at: \.surfaces)
     }
 
-    internal func appended(compositions: [Attributes.Composition.ValueBuilderKeyPath: Attributes.Composition.ValueBuilder]) -> Self {
+    internal func appended(compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]) -> Self {
         appended(compositions, at: \.compositions)
     }
 
-    internal func appended(accents: [Attributes.Accent.ValueBuilderKeyPath: Attributes.Accent.ValueBuilder]) -> Self {
+    internal func appended(accents: [Attribute.Accent.ValueBuilderKeyPath: Attribute.Accent.ValueBuilder]) -> Self {
         appended(accents, at: \.accents)
     }
 
-    internal func appended(shapes: [Attributes.Shape.ValueBuilderKeyPath: Attributes.Shape.ValueBuilder]) -> Self {
+    internal func appended(shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]) -> Self {
         appended(shapes, at: \.shapes)
     }
 
