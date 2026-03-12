@@ -6,7 +6,7 @@
 import SnapFoundation
 import SwiftUI
 
-extension Style.Attributes.Font.Value.Definition {
+extension Style.Attributes.Font.Value.Properties {
 
     public func font(size sizeOverride: Double? = nil) -> Font {
         let sizeToUse = sizeOverride ?? size
@@ -27,7 +27,7 @@ extension Style.Attributes.Font.Value.Definition {
 
 import UIKit
 
-extension Style.Attributes.Font.Value.Definition {
+extension Style.Attributes.Font.Value.Properties {
     public func uiFont(size sizeOverride: Double? = nil) -> UIFont {
         let sizeToUse = sizeOverride ?? size
         let font: UIFont = if let width {
@@ -53,21 +53,21 @@ extension Style.Attributes.Font.Value.Definition {
 
 #Preview {
 
-    let definitionStandard: Style.Attributes.Font.Value.Definition = .init(
+    let propertiesStandard: Style.Attributes.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: nil,
         textStyle: .body
     )
-    let definitionDesign: Style.Attributes.Font.Value.Definition = .init(
+    let propertiesDesign: Style.Attributes.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: nil,
         design: .serif,
         textStyle: .body
     )
-    let definitionWidth: Style.Attributes.Font.Value.Definition = .init(
+    let propertiesWidth: Style.Attributes.Font.Value.Properties = .init(
         size: 20,
         weight: .heavy,
         width: .compressed,
@@ -77,25 +77,25 @@ extension Style.Attributes.Font.Value.Definition {
 
     VStack {
         Text("Standard")
-        CompareView(definition: definitionStandard)
+        CompareView(properties: propertiesStandard)
         Text("Design")
-        CompareView(definition: definitionDesign)
+        CompareView(properties: propertiesDesign)
         Text("Width")
-        CompareView(definition: definitionWidth)
+        CompareView(properties: propertiesWidth)
     }
 
 }
 
 struct CompareView: View {
 
-    let definition: Style.Attributes.Font.Value.Definition
+    let properties: Style.Attributes.Font.Value.Properties
 
     var body: some View {
         VStack {
             Text("Text SwiftUI")
-                .font(definition.font())
+                .font(properties.font())
                 .frame(width: 300, height: 20, alignment: .leading)
-            UIKitTextView(text: "Text UIKit", font: definition.uiFont())
+            UIKitTextView(text: "Text UIKit", font: properties.uiFont())
                 .frame(width: 300, height: 20, alignment: .leading)
         }
     }

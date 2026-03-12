@@ -75,9 +75,9 @@ private struct FontModifier: ViewModifier {
     let keyPath: Style.Attributes.Font.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
-        let definition = style.font(for: keyPath)
+        let properties = style.font(for: keyPath)
         content
-            .modifier(ScaledFont(definition: definition))
+            .modifier(ScaledFont(properties: properties))
     }
 
 }
@@ -86,21 +86,21 @@ private struct ScaledFont: ViewModifier {
     
     @Environment(\.style) private var style
     
-    private let definition: Style.Attributes.Font.Value.Definition?
+    private let properties: Style.Attributes.Font.Value.Properties?
     private let scaled: ScaledMetric<Double>
 
-    init(definition: Style.Attributes.Font.Value.Definition?) {
-        self.definition = definition
-        self.scaled = ScaledMetric(wrappedValue: Double(definition?.size ?? .zero), relativeTo: definition?.textStyle ?? .body)
+    init(properties: Style.Attributes.Font.Value.Properties?) {
+        self.properties = properties
+        self.scaled = ScaledMetric(wrappedValue: Double(properties?.size ?? .zero), relativeTo: properties?.textStyle ?? .body)
     }
     
     func body(content: Content) -> some View {
         let size = scaled.wrappedValue * style.context.scaleFactor
-        let font = definition?.font(size: size)
+        let font = properties?.font(size: size)
 
         return content
             .font(font)
-            .fontDesign(definition?.design ?? style.context.fontDesign)
-            .fontWidth(definition?.width ?? style.context.fontWidth)
+            .fontDesign(properties?.design ?? style.context.fontDesign)
+            .fontWidth(properties?.width ?? style.context.fontWidth)
     }
 }

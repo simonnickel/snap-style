@@ -16,7 +16,7 @@ extension Style.Attributes.Font {
 
     public enum Value: StyleValue {
 
-        public typealias WrappedValue = Definition
+        public typealias WrappedValue = Properties
         public typealias Adjustment = Style.Attributes.Font.Adjustment
 
         case with(
@@ -30,7 +30,7 @@ extension Style.Attributes.Font {
         public var wrappedValue: WrappedValue {
             switch self {
                 case .with(let size, let weight, let width, let design, let textStyle):
-                    Definition(size: size, weight: weight, width: width, design: design, textStyle: textStyle)
+                    Properties(size: size, weight: weight, width: width, design: design, textStyle: textStyle)
             }
         }
 
@@ -39,10 +39,9 @@ extension Style.Attributes.Font {
         }
 
 
-        // MARK: Definition
+        // MARK: Properties
 
-        // TODO: Rename to FontConfiguration?
-        public struct Definition: CustomStringConvertible {
+        public struct Properties: CustomStringConvertible {
 
             package let size: CGFloat
             package let weight: Font.Weight
