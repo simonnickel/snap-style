@@ -44,9 +44,9 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let component = style.context.component
         let element = style.context.element.type
 
-        let base = Style.ComponentDefinition.base
+        let base = Style.Component.base
 
-        let padding = component.padding?(element) ?? base.padding?(element) ?? Style.ComponentDefinition.Padding(\.paddingAnyElement)
+        let padding = component.padding?(element) ?? base.padding?(element) ?? Style.Component.Padding(\.paddingAnyElement)
         let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
 
         content

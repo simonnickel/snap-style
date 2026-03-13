@@ -11,11 +11,11 @@ extension View {
 
     /// Defines the View as a component and applies the style definitions and container.
     /// - Parameters:
-    ///   - component: `ComponentDefinition` to use for the component.
+    ///   - component: `Component` to use for the View.
     ///   - state: `InteractionState` the container is in.
     /// - Returns: View with adjusted `Context` and applied Container.
     public func style(
-        component: Style.ComponentDefinition,
+        component: Style.Component,
         state: Style.Container.InteractionState = .normal
     ) -> some View {
         Group {

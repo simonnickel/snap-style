@@ -9,7 +9,7 @@ import SnapStyleComponents
 // ComponentDefinition is used to:
 // - assign KeyPaths to elements
 
-extension Style.ComponentDefinition {
+extension Style.Component {
     
     
     // MARK: - Base

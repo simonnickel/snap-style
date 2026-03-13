@@ -5,7 +5,7 @@
 
 import SnapStyleBase
 
-extension Style.ComponentDefinition: CustomStringConvertible {
+extension Style.Component: CustomStringConvertible {
 
     public var description: String {
         id

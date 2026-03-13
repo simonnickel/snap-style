@@ -52,7 +52,7 @@ extension View {
     }
 
     @ViewBuilder
-    package func setupComposition(for component: Style.ComponentDefinition) -> some View {
+    package func setupComposition(for component: Style.Component) -> some View {
         self
             .styleSetup(composition: component.compositions?(.any), for: .any)
             .styleSetup(composition: component.compositions?(.title), for: .title)

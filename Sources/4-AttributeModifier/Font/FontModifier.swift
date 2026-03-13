@@ -36,7 +36,7 @@ extension View {
     }
 
     @ViewBuilder
-    package func setupFonts(for component: Style.ComponentDefinition) -> some View {
+    package func setupFonts(for component: Style.Component) -> some View {
         self
             .styleSetup(font: component.fonts?(.any), for: .any)
             .styleSetup(font: component.fonts?(.title), for: .title)
