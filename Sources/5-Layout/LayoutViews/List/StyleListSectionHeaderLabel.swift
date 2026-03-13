@@ -27,8 +27,7 @@ internal struct ListSectionHeaderLabel: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .style(paddingNumber: \.paddingListRowLeading, .leading)
-            .style(paddingNumber: \.paddingListHeaderBottom, .bottom)
+            .style(padding: \.listSectionHeader)
             .style(element: .title, hierarchy: hieararchy)
             .textCase(nil)
     }

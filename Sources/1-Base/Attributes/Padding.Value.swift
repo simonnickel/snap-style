@@ -21,7 +21,7 @@ extension Style.Attribute.Padding {
 
         case all(Properties.Value)
         case edges(_ edges: Edge.Set, value: Properties.Value)
-        case edge(leading: Properties.Value, top: Properties.Value, trailing: Properties.Value, bottom: Properties.Value)
+        case edge(leading: Properties.Value?, top: Properties.Value?, trailing: Properties.Value?, bottom: Properties.Value?)
         case horizontal(Properties.Value)
         case vertical(Properties.Value)
         case axis(horizontal: Properties.Value, vertical: Properties.Value)

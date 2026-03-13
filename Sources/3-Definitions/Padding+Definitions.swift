@@ -8,15 +8,6 @@ import SnapStyleComponents
 
 extension Style.Attribute.Padding {
 
-    public var listRow: ValueBuilder {
-        .base(.value(.edge(
-            leading: \.paddingListRowLeading,
-            top: \.paddingListRowTop,
-            trailing: \.paddingListRowTrailing,
-            bottom: \.paddingListRowBottom
-        )))
-    }
-
     public var screenTitleLeading: ValueBuilder {
         .base(.value(.edges([.leading], value: \.paddingCard)))
     }
@@ -46,5 +37,35 @@ extension Style.Attribute.Padding {
     // MARK: - Element
 
     public var anyElement: ValueBuilder { .base(nil) }
+    
+    
+    // MARK: - List
+    
+    public var listRow: ValueBuilder {
+        .base(.value(.edge(
+            leading: \.paddingListRowLeading,
+            top: \.paddingListRowTop,
+            trailing: \.paddingListRowTrailing,
+            bottom: \.paddingListRowBottom
+        )))
+    }
+    
+    public var listSectionHeader: ValueBuilder {
+        .base(.value(.edge(
+            leading: \.paddingListRowLeading,
+            top: nil,
+            trailing: nil,
+            bottom: \.paddingListHeaderBottom
+        )))
+    }
+    
+    public var listSectionFooter: ValueBuilder {
+        .base(.value(.edge(
+            leading: \.paddingListRowLeading,
+            top: \.paddingListFooterTop,
+            trailing: nil,
+            bottom: nil
+        )))
+    }
 
 }

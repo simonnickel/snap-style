@@ -42,10 +42,9 @@ extension Style.Attribute.Number {
     public var paddingContainer: ValueBuilder {
         .builder { context in
             switch context.containerStack.levelOverall {
-                case 1: .value(.scaled(12))
                 case 2: .value(.scaled(10))
                 case 3: .value(.scaled(8))
-                default: nil
+                default: .value(.scaled(12)) // also used for case 1
             }
         }
     }
@@ -57,10 +56,9 @@ extension Style.Attribute.Number {
     public var paddingActionIconOnly: ValueBuilder {
         .builder { context in
             switch context.component.hierarchy {
-                case .primary: .value(.scaled(18))
                 case .secondary: .value(.scaled(14))
                 case .tertiary: .value(.scaled(10))
-                default: nil
+                default: .value(.scaled(18)) // also used for .primary
             }
         }
     }
