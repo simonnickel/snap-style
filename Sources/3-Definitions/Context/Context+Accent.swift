@@ -12,7 +12,7 @@ extension Style.Context {
 
     public var accent: Style.Attribute.Accent.ValueBuilderKeyPath? { getValue(for: Self.accent) }
 
-    public static var accent: Attribute<String, Style.Attribute.Accent.ValueBuilderKeyPath> { .init(key: "Accent", valueDefault: nil) }
+    public static var accent: Attribute<String, Style.Attribute.Accent.ValueBuilderKeyPath> { .init(key: "accent", valueDefault: nil) }
 
 }
 
