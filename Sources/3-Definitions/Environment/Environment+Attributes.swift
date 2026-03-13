@@ -28,7 +28,7 @@ extension EnvironmentValues {
 
 extension Style.Attribute.Font {
 
-    package static func keyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
             case .any: \.styleFontAny
             case .title: \.styleFontTitle
@@ -45,7 +45,7 @@ extension Style.Attribute.Font {
 
 extension Style.Attribute.Composition {
 
-    package static func keyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
             case .any: \.styleCompositionAny
             case .title: \.styleCompositionTitle

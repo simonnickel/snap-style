@@ -37,14 +37,14 @@ extension View {
         layers: [Style.Attribute.Composition.Layer] = Style.Attribute.Composition.Layer.allCases,
         ignoreSafeAreaEdges: Edge.Set = []
     ) -> some View {
-        let keyPath = Style.Attribute.Composition.keyPath(for: element)
+        let keyPath = Style.Attribute.Composition.environmentKeyPath(for: element)
         return modifier(CompositionFromEnvironmentModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
     }
 
     @ViewBuilder
     public func styleSetup(composition key: Style.Attribute.Composition.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
         if let key {
-            let keyPath = Style.Attribute.Composition.keyPath(for: element)
+            let keyPath = Style.Attribute.Composition.environmentKeyPath(for: element)
             environment(keyPath, key)
         } else {
             self

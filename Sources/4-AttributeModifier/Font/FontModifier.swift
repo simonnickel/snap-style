@@ -21,14 +21,14 @@ extension View {
 extension View {
 
     public func styleApplyFont(for element: Style.Element.ElementType) -> some View {
-        let keyPath = Style.Attribute.Font.keyPath(for: element)
+        let keyPath = Style.Attribute.Font.environmentKeyPath(for: element)
         return modifier(FontFromEnvironmentModifier(keyPath: keyPath))
     }
 
     @ViewBuilder
     public func styleSetup(font key: Style.Attribute.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
         if let key {
-            let keyPath = Style.Attribute.Font.keyPath(for: element)
+            let keyPath = Style.Attribute.Font.environmentKeyPath(for: element)
             environment(keyPath, key)
         } else {
             self
