@@ -8,11 +8,14 @@ import SwiftUI
 
 extension Style {
 
+    /// Defines the style of a `View` by mapping values for `Style.Attribute`s defined as `ValueBuilderKeyPath` to semantic `ElementType`s.
     public struct ComponentDefinition: Hashable, Equatable, Sendable {
 
+        /// Maps an `ElementType` to a `ValueBuilderKeyPath`
         public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
-        public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
+        
         public typealias Padding = Style.Padding
+        public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
 
         public let id: String
         public let hierarchy: Hierarchy
