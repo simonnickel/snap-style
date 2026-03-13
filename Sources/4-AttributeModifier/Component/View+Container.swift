@@ -47,10 +47,7 @@ private struct ContainerApplyStyleModifier: ViewModifier {
         let shapeKeyPath = container.shape ?? base.shape
 
         content
-            .style(padding: padding?.leading, .leading)
-            .style(padding: padding?.top, .top)
-            .style(padding: padding?.trailing, .trailing)
-            .style(padding: padding?.bottom, .bottom)
+            .style(padding: padding)
             .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }

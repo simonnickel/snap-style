@@ -15,12 +15,6 @@ extension Style.Component {
     // MARK: - Base
     
     public static let base: Self = .init("base",
-        padding: { element in
-            switch element {
-                case .any: Padding(\.paddingAnyElement)
-                default: nil
-            }
-        },
         fonts: { element in
             switch element {
                 case .any: \.anyElement
@@ -45,6 +39,12 @@ extension Style.Component {
                 case .footnote: \.footnote
             }
         },
+        paddings: { element in
+            switch element {
+            case .any: \.anyElement
+            default: nil
+            }
+        },
         container: .base,
     )
     
@@ -52,15 +52,15 @@ extension Style.Component {
     // MARK: - Screen
 
     public static let screen: Self = .init("screen",
-        padding: { element in
-            switch element {
-                case .title: Padding(\.paddingScreenTitleLeading, edges: .leading)
-                default: nil
-            }
-        },
         fonts: { element in
             switch element {
                 case .title: \.screenTitle
+                default: nil
+            }
+        },
+        paddings: { element in
+            switch element {
+                case .title: \.screenTitleLeading
                 default: nil
             }
         },

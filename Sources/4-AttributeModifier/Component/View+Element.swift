@@ -46,15 +46,9 @@ private struct ElementApplyStyleModifier: ViewModifier {
 
         let base = Style.Component.base
 
-        // TODO: Move to environment
-        let padding = component.padding?(element) ?? base.padding?(element) ?? Style.Component.Padding(\.paddingAnyElement)
-
         content
             .style(apply: Style.Attribute.Font.self, for: element)
-            .style(padding: padding.leading ?? \.paddingAnyElement, .leading)
-            .style(padding: padding.top ?? \.paddingAnyElement, .top)
-            .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
-            .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
+            .style(apply: Style.Attribute.Padding.self, for: element)
             .style(apply: Style.Attribute.Composition.self, for: element)
             .style(apply: Style.Attribute.Shape.self, for: element)
     }

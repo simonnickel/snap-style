@@ -13,37 +13,34 @@ extension Style {
 
         /// Maps an `ElementType` to a `ValueBuilderKeyPath`
         public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
-        
-        public typealias Padding = Style.Padding
-        public typealias MappingPadding = @Sendable (Style.Element.ElementType) -> Padding?
 
         public let id: String
         public let hierarchy: Hierarchy
 
-        package let padding: MappingPadding?
         package let fonts: Mapping<Attribute.Font>?
         package let surfaces: Mapping<Attribute.Surface>?
         package let compositions: Mapping<Attribute.Composition>?
         package let shapes: Mapping<Attribute.Shape>?
+        package let paddings: Mapping<Attribute.Padding>?
         package let container: Style.Container.Properties?
 
         public init(
             _ id: String,
             hierarchy: Hierarchy = .primary,
-            padding: MappingPadding? = nil,
             fonts: Mapping<Attribute.Font>? = nil,
             surfaces: Mapping<Attribute.Surface>? = nil,
             compositions: Mapping<Attribute.Composition>? = nil,
             shapes: Mapping<Attribute.Shape>? = nil,
+            paddings: Mapping<Attribute.Padding>? = nil,
             container: Style.Container.Properties? = nil,
         ) {
             self.id = id
             self.hierarchy = hierarchy
-            self.padding = padding
             self.fonts = fonts
             self.surfaces = surfaces
             self.compositions = compositions
             self.shapes = shapes
+            self.paddings = paddings
             self.container = container
         }
 

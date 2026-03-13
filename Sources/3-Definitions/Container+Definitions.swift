@@ -11,27 +11,27 @@ extension Style.Container.Properties {
     // MARK: - Base
     
     public static let base: Self = .init("base",
-        padding: Padding(\.paddingAnyContainer),
         compositions: \.anyContainer,
         shapes: \.anyContainer,
+        padding: \.anyContainer,
     )
 
     
     // MARK: - Screen
 
     public static let screen: Self = .init("screen",
-       ignoresSafeAreaEdges: .all,
-       compositions: \.screen,
-       shapes: nil,
+        ignoresSafeAreaEdges: .all,
+        compositions: \.screen,
+        shapes: nil,
     )
     
     
     // MARK: - Content Card
     
     public static let contentCard: Self = .init("contentCard",
-        padding: Padding(\.paddingCard),
         compositions: \.containerContentCard,
         shapes: \.containerCard,
+        padding: \.containerCard,
     )
     
     
@@ -39,9 +39,9 @@ extension Style.Container.Properties {
     
     public static let accentCard: Self = .init("accentCard",
         requiresSecondaryAccent: true,
-        padding: Padding(\.paddingCard),
         compositions: \.containerAccentCard,
         shapes: \.containerCard,
+        padding: \.containerCard,
     )
     
     
@@ -49,32 +49,32 @@ extension Style.Container.Properties {
     
     public static let metricCard: Self = .init("metricCard",
         requiresSecondaryAccent: true,
-        padding: Padding(\.paddingMetricCard),
         compositions: \.containerMetricCard,
         shapes: \.containerMetricCard,
+        padding: \.containerMetricCard,
     )
     
     
     // MARK: - List
     
     public static let listRow: Self = .init("listRow",
-        padding: .listRow,
         compositions: \.listRow,
+        padding: \.listRow,
     )
     
     
     // MARK: - Button
     
     public static let button: Self = .init("button",
-        padding: Padding(horizontal: \.paddingActionHorizontal, vertical: \.paddingActionVertical),
         compositions: \.containerAction,
         shapes: \.containerAction,
+        padding: \.containerAction,
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",
-        padding: Padding(\.paddingActionIconOnly),
         compositions: \.interactiveContainer,
         shapes: \.containerActionIconOnly,
+        padding: \.containerActionIconOnly,
     )
     
 }

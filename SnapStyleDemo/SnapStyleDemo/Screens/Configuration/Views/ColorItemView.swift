@@ -30,7 +30,7 @@ struct ColorItemView: View {
                         // TODO feature: Icon with circle background should be a component.
                         StyleIcon(\.favorite)
                             .style(element: .icon)
-                            .style(padding: \.spacingElements)
+                            .style(paddingNumber: \.spacingElements)
                             .style(background: \.accentComplementary)
                             .style(shape: \.circle)
                     }
@@ -58,13 +58,13 @@ struct ColorItemView: View {
                     StyleStack() {
                         StyleShapeView(shape: .circle, surface: \.accentContrast)
                     }
-                    .style(padding: \.paddingCard)
+                    .style(paddingNumber: \.paddingCard)
                     .style(background: \.accentGradientSoft)
 
                     StyleStack() {
                         StyleShapeView(shape: .circle, surface: \.accentComplementary)
                     }
-                    .style(padding: \.paddingCard)
+                    .style(paddingNumber: \.paddingCard)
                     .style(background: \.accentGradientStrong)
                 }
             }

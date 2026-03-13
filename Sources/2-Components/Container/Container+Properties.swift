@@ -13,33 +13,33 @@ extension Style.Container {
     public struct Properties: Hashable, Equatable, @unchecked Sendable {
 
         public typealias Attribute = Style.Attribute
-        public typealias Padding = Style.Padding
 
         public let id: String
         public let requiresSecondaryAccent: Bool
         public let ignoresSafeAreaEdges: Edge.Set
 
-        package let padding: Padding?
         package let surface: Attribute.Surface.ValueBuilderKeyPath?
         package let composition: Attribute.Composition.ValueBuilderKeyPath?
         package let shape: Attribute.Shape.ValueBuilderKeyPath?
+        package let padding: Attribute.Padding.ValueBuilderKeyPath?
 
+        // TODO: rename to singular
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             ignoresSafeAreaEdges: Edge.Set = [],
-            padding: Padding? = nil,
             surfaces: Attribute.Surface.ValueBuilderKeyPath? = nil,
             compositions: Attribute.Composition.ValueBuilderKeyPath? = nil,
             shapes: Attribute.Shape.ValueBuilderKeyPath? = nil,
+            padding: Attribute.Padding.ValueBuilderKeyPath? = nil,
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
             self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
-            self.padding = padding
             self.surface = surfaces
             self.composition = compositions
             self.shape = shapes
+            self.padding = padding
         }
 
 

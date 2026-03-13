@@ -9,6 +9,7 @@ extension View {
 
     public func styleOverride(
         numbers: [Style.Attribute.Number.ValueBuilderKeyPath: Style.Attribute.Number.ValueBuilder]? = nil,
+        paddings: [Style.Attribute.Padding.ValueBuilderKeyPath: Style.Attribute.Padding.ValueBuilder]? = nil,
         fonts: [Style.Attribute.Font.ValueBuilderKeyPath: Style.Attribute.Font.ValueBuilder]? = nil,
         icons: [Style.Attribute.Icon.ValueBuilderKeyPath: Style.Attribute.Icon.ValueBuilder]? = nil,
         surfaces: [Style.Attribute.Surface.ValueBuilderKeyPath: Style.Attribute.Surface.ValueBuilder]? = nil,
@@ -19,6 +20,7 @@ extension View {
         self.modifier(
             Style.OverrideModifier(
                 numbers: numbers,
+                paddings: paddings,
                 fonts: fonts,
                 icons: icons,
                 surfaces: surfaces,
@@ -41,6 +43,7 @@ extension Style {
         @Environment(\.style) private var style
         
         let numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]?
+        let paddings: [Attribute.Padding.ValueBuilderKeyPath: Attribute.Padding.ValueBuilder]?
         let fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]?
         let icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]?
         let surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]?
@@ -52,6 +55,7 @@ extension Style {
             
             let definition = style.definition.replaced(
                 numbers: numbers,
+                paddings: paddings,
                 fonts: fonts,
                 icons: icons,
                 surfaces: surfaces,
@@ -76,6 +80,7 @@ extension Style {
 
     private func replaced(
         numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]? = nil,
+        paddings: [Attribute.Padding.ValueBuilderKeyPath: Attribute.Padding.ValueBuilder]? = nil,
         fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]? = nil,
         icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]? = nil,
         surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]? = nil,
@@ -87,6 +92,10 @@ extension Style {
 
         if let numbers {
             style = style.appended(numbers: numbers)
+        }
+        
+        if let paddings {
+            style = style.appended(paddings: paddings)
         }
 
         if let fonts {

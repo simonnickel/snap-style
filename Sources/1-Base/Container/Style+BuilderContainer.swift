@@ -10,6 +10,7 @@ extension Style {
     internal struct BuilderContainer: Copyable {
 
         internal var numbers: [Attribute.Number.ValueBuilderKeyPath: [Attribute.Number.ValueBuilder]] = [:]
+        internal var paddings: [Attribute.Padding.ValueBuilderKeyPath: [Attribute.Padding.ValueBuilder]] = [:]
         internal var fonts: [Attribute.Font.ValueBuilderKeyPath: [Attribute.Font.ValueBuilder]] = [:]
         internal var icons: [Attribute.Icon.ValueBuilderKeyPath: [Attribute.Icon.ValueBuilder]] = [:]
         internal var surfaces: [Attribute.Surface.ValueBuilderKeyPath: [Attribute.Surface.ValueBuilder]] = [:]
@@ -26,6 +27,11 @@ extension Style {
 
                 case let keyPath as KeyPath<Style.Attribute.Number, Style.Attribute.Number.ValueBuilder>:
                     if let builders = numbers[keyPath] as? [Attribute.ValueBuilder] {
+                        return builders
+                    }
+                
+                case let keyPath as KeyPath<Style.Attribute.Padding, Style.Attribute.Padding.ValueBuilder>:
+                    if let builders = paddings[keyPath] as? [Attribute.ValueBuilder] {
                         return builders
                     }
 
@@ -73,6 +79,10 @@ extension Style {
 
     internal func appended(numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)
+    }
+    
+    internal func appended(paddings: [Attribute.Padding.ValueBuilderKeyPath: Attribute.Padding.ValueBuilder]) -> Self {
+        appended(paddings, at: \.paddings)
     }
 
     internal func appended(fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]) -> Self {

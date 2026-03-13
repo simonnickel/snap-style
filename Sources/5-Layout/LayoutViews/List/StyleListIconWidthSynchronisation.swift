@@ -67,7 +67,7 @@ private struct ListContentInsetModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.leading, insetListContent ? listIconWidth : 0)
-            .style(padding: insetListContent ? \.paddingListRowLeading : \.zero, .leading)
+            .style(paddingNumber: insetListContent ? \.paddingListRowLeading : \.zero, .leading)
     }
     
 }

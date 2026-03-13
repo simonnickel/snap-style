@@ -44,6 +44,15 @@ extension EnvironmentValues {
     @Entry public var styleShapeAccessory: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
     @Entry public var styleShapeSeparator: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
     @Entry public var styleShapeFootnote: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    
+    @Entry public var stylePaddingAny: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingTitle: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingLabel: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingIcon: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingValue: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingAccessory: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingSeparator: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
+    @Entry public var stylePaddingFootnote: Style.Attribute.Padding.ValueBuilderKeyPath = \.anyElement
 }
 
 
@@ -95,6 +104,23 @@ extension Style.Attribute.Shape: StyleAttributeEnvironmentKeyPathProvider {
             case .accessory: \.styleShapeAccessory
             case .separator: \.styleShapeSeparator
             case .footnote: \.styleShapeFootnote
+        }
+    }
+    
+}
+
+extension Style.Attribute.Padding: StyleAttributeEnvironmentKeyPathProvider {
+
+    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+        switch element {
+            case .any: \.stylePaddingAny
+            case .title: \.stylePaddingTitle
+            case .label: \.stylePaddingLabel
+            case .icon: \.stylePaddingIcon
+            case .value: \.stylePaddingValue
+            case .accessory: \.stylePaddingAccessory
+            case .separator: \.stylePaddingSeparator
+            case .footnote: \.stylePaddingFootnote
         }
     }
     

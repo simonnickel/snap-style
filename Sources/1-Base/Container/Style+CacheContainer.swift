@@ -11,6 +11,7 @@ extension Style {
 
         // References to `StyleAttribute` specific caches.
         internal var numbers: AttributeTypeCache<Attribute.Number> = .init()
+        internal var paddings: AttributeTypeCache<Attribute.Padding> = .init()
         internal var fonts: AttributeTypeCache<Attribute.Font> = .init()
         internal var icons: AttributeTypeCache<Attribute.Icon> = .init()
         internal var surfaces: AttributeTypeCache<Attribute.Surface> = .init()
@@ -22,6 +23,8 @@ extension Style {
             switch Attribute.self {
 
                 case let key as Style.Attribute.Number.Type: return numbers as? AttributeTypeCache<Attribute>
+                
+                case let key as Style.Attribute.Padding.Type: return paddings as? AttributeTypeCache<Attribute>
 
                 case let key as Style.Attribute.Font.Type: return fonts as? AttributeTypeCache<Attribute>
 
@@ -45,6 +48,8 @@ extension Style {
             switch Attribute.self {
 
                 case let key as Style.Attribute.Number.Type: numbers = .init()
+                
+                case let key as Style.Attribute.Padding.Type: paddings = .init()
 
                 case let key as Style.Attribute.Font.Type: fonts = .init()
 

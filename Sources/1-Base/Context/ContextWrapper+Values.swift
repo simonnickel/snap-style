@@ -73,6 +73,19 @@ extension Style.ContextWrapper {
 
     }
 
+    
+    // MARK: - Padding
+
+    package func padding(for keyPath: Style.Attribute.Padding.ValueBuilderKeyPath?) -> Style.Attribute.Padding.Value.WrappedValue? {
+        
+        guard let keyPath else { return nil }
+
+        let value = value(for: keyPath)
+
+        return value?.wrappedValue
+
+    }
+    
 
     // MARK: - Font
 

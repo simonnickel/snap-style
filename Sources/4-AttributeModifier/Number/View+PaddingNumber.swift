@@ -8,6 +8,10 @@ import SwiftUI
 
 extension View {
 
+    // TODO: Naming
+    // TODO: Check every usage, if it should be replaced with style(padding:)
+    // TODO: Check if this could be removed completely
+    
     /// Applies the `Number` as `.padding()`
     ///
     /// Supports animated change.
@@ -16,10 +20,10 @@ extension View {
     ///   - keyPath: The `Number` to apply as length of the padding, `nil` is the inert value
     ///   - edges: The set of edges to pad for this view. The default is `.all`.
     public func style(
-        padding keyPath: Style.Attribute.Number.ValueBuilderKeyPath?,
+        paddingNumber keyPath: Style.Attribute.Number.ValueBuilderKeyPath?,
         _ edges: Edge.Set = .all
     ) -> some View {
-        modifier(PaddingModifier(keyPath: keyPath, edges: edges))
+        modifier(PaddingNumberModifier(keyPath: keyPath, edges: edges))
     }
 
 }
@@ -27,7 +31,7 @@ extension View {
 
 // MARK: - Modifier
 
-private struct PaddingModifier: ViewModifier {
+private struct PaddingNumberModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
@@ -50,7 +54,7 @@ private struct PaddingModifier: ViewModifier {
     @Previewable @State var isActive: Bool = true
 
     Text("Some Preview Content")
-        .style(padding: isActive ? \.spacingSections : nil)
+        .style(paddingNumber: isActive ? \.spacingSections : nil)
         .background(.green)
 
     Button {
