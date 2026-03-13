@@ -6,11 +6,13 @@
 import SnapStyleBase
 import SwiftUI
 
-extension Style {
+extension Style.Container {
 
     // TODO: @unchecked Sendable. KeyPath is not Sendable, could be wrapped in a closure.
-    public struct ContainerDefinition: Hashable, Equatable, @unchecked Sendable {
+    /// A description of the style of a container.
+    public struct Properties: Hashable, Equatable, @unchecked Sendable {
 
+        public typealias Attribute = Style.Attribute
         public typealias Padding = Style.Padding
 
         public let id: String

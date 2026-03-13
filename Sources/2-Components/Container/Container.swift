@@ -10,18 +10,18 @@ extension Style {
     /// An actual `Container` instance for a specific View.
     public struct Container {
 
-        package let definition: ContainerDefinition
-        package let parent: ContainerDefinition?
+        package let properties: Properties
+        package let parent: Properties?
         package let state: InteractionState
         package let level: Int
 
         package init(
-            definition: ContainerDefinition,
-            parent: ContainerDefinition?,
+            properties: Properties,
+            parent: Properties?,
             state: InteractionState,
             level: Int
         ) {
-            self.definition = definition
+            self.properties = properties
             self.parent = parent
             self.state = state
             self.level = level

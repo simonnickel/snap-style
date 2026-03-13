@@ -25,7 +25,7 @@ extension Style {
         package let surfaces: Mapping<Attribute.Surface>?
         package let compositions: Mapping<Attribute.Composition>?
         package let shapes: Mapping<Attribute.Shape>?
-        package let container: Style.ContainerDefinition?
+        package let container: Style.Container.Properties?
 
         public init(
             _ id: String,
@@ -35,7 +35,7 @@ extension Style {
             surfaces: Mapping<Attribute.Surface>? = nil,
             compositions: Mapping<Attribute.Composition>? = nil,
             shapes: Mapping<Attribute.Shape>? = nil,
-            container: Style.ContainerDefinition? = nil,
+            container: Style.Container.Properties? = nil,
         ) {
             self.id = id
             self.hierarchy = hierarchy

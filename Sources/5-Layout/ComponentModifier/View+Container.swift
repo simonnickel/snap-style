@@ -15,7 +15,7 @@ extension View {
     ///   - state: `InteractionState` the container is in.
     /// - Returns: View with applied Container.
     public func style(
-        container: Style.ContainerDefinition,
+        container: Style.Container.Properties,
         state: Style.Container.InteractionState = .normal
     ) -> some View {
         self
@@ -23,7 +23,7 @@ extension View {
             .modifier(ContainerContextModifier(container: container, state: state))
     }
 
-    private func style(container: Style.ContainerDefinition) -> some View {
+    private func style(container: Style.Container.Properties) -> some View {
         self
             .modifier(ContainerApplyStyleModifier(container: container))
     }
@@ -37,10 +37,10 @@ private struct ContainerApplyStyleModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let container: Style.ContainerDefinition
+    let container: Style.Container.Properties
 
     func body(content: Content) -> some View {
-        let base = Style.ContainerDefinition.base
+        let base = Style.Container.Properties.base
 
         let padding = container.padding ?? base.padding
         let compositionKeyPath = container.composition ?? base.composition ?? \.anyContainer
@@ -63,7 +63,7 @@ private struct ContainerApplyStyleModifier: ViewModifier {
 // TODO iOS26: Remove iOS 18 Variant
 private struct ContainerContextModifier: ViewModifier {
 
-    let container: Style.ContainerDefinition
+    let container: Style.Container.Properties
     let state: Style.Container.InteractionState
 
     func body(content: Content) -> some View {
@@ -81,7 +81,7 @@ private struct ContainerContextModifier26: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let container: Style.ContainerDefinition
+    let container: Style.Container.Properties
     let state: Style.Container.InteractionState
 
     func body(content: Content) -> some View {
@@ -97,7 +97,7 @@ private struct ContainerContextModifier18: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let container: Style.ContainerDefinition
+    let container: Style.Container.Properties
     let state: Style.Container.InteractionState
 
     /// Internal copy to apply animation on changes.

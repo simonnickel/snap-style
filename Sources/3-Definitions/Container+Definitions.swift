@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-extension Style.ContainerDefinition {
+extension Style.Container.Properties {
     
     // MARK: - Base
     

@@ -5,19 +5,20 @@
 
 import SnapStyleBase
 
-extension Style {
+extension Style.Container {
 
-    package struct ContainerStack: Hashable {
+    package struct Stack: Hashable {
 
         package init() {}
 
 
         // MARK: Containers
 
-        private var items: [Style.ContainerDefinition] = []
+        private var items: [Properties] = []
 
-        package var current: ContainerDefinition? { items.last }
-        package var parent: ContainerDefinition? {
+        package var current: Properties? { items.last }
+        
+        package var parent: Properties? {
             let parentIndex = items.count - 2
             guard parentIndex >= 0 else { return nil }
             return items[parentIndex]
@@ -26,9 +27,9 @@ extension Style {
 
         // MARK: State
 
-        private var stateByItem: [Style.ContainerDefinition: Style.Container.InteractionState] = [:]
+        private var stateByItem: [Properties: InteractionState] = [:]
 
-        package var currentState: Style.Container.InteractionState? {
+        package var currentState: InteractionState? {
             guard let current else { return nil }
             return stateByItem[current]
         }
@@ -62,7 +63,7 @@ extension Style {
 
         // MARK: Update
 
-        package func appended(_ container: Style.ContainerDefinition, state: Style.Container.InteractionState) -> Self {
+        package func appended(_ container: Properties, state: InteractionState) -> Self {
             var result = self
             result.items.append(container)
             result.stateByItem[container] = state

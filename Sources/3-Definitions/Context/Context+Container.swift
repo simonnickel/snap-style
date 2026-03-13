@@ -10,15 +10,15 @@ import SnapStyleComponents
 
 extension Style.Context {
 
-    package var containerStack: Style.ContainerStack { getValue(for: Self.containerStack) ?? .init() }
+    package var containerStack: Style.Container.Stack { getValue(for: Self.containerStack) ?? .init() }
     
-    package static var containerStack: Attribute<String, Style.ContainerStack> { .init(key: "containerStack", valueDefault: .init()) }
+    package static var containerStack: Attribute<String, Style.Container.Stack> { .init(key: "containerStack", valueDefault: .init()) }
 
     public var container: Style.Container {
         let current = containerStack.current ?? .base
 
         return .init(
-            definition: current,
+            properties: current,
             parent: containerStack.parent,
             state: containerStack.currentState ?? .normal,
             level: containerStack.level
