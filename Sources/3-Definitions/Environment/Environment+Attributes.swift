@@ -4,7 +4,18 @@
 //
 
 import SnapStyleBase
+import SnapStyleComponents
 import SwiftUI
+
+
+// MARK: - Protocol
+
+public protocol StyleAttributeEnvironmentKeyPathProvider: StyleAttribute {
+    static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath>
+}
+
+
+// MARK: - EnvironmentValues
 
 extension EnvironmentValues {
     @Entry public var styleFontAny: Style.Attribute.Font.ValueBuilderKeyPath = \.anyElement
@@ -35,9 +46,12 @@ extension EnvironmentValues {
     @Entry public var styleShapeFootnote: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
 }
 
-extension Style.Attribute.Font {
 
-    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+// MARK: - Provider
+
+extension Style.Attribute.Font: StyleAttributeEnvironmentKeyPathProvider {
+
+    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
             case .any: \.styleFontAny
             case .title: \.styleFontTitle
@@ -52,9 +66,9 @@ extension Style.Attribute.Font {
     
 }
 
-extension Style.Attribute.Composition {
+extension Style.Attribute.Composition: StyleAttributeEnvironmentKeyPathProvider {
 
-    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
             case .any: \.styleCompositionAny
             case .title: \.styleCompositionTitle
@@ -69,9 +83,9 @@ extension Style.Attribute.Composition {
     
 }
 
-extension Style.Attribute.Shape {
+extension Style.Attribute.Shape: StyleAttributeEnvironmentKeyPathProvider {
 
-    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
         switch element {
             case .any: \.styleShapeAny
             case .title: \.styleShapeTitle

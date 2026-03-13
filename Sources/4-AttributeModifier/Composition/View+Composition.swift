@@ -24,44 +24,10 @@ extension View {
     ) -> some View {
         modifier(CompositionModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
     }
-
-}
-
-
-// MARK: - Composition for Element
-
-extension View {
-
-    public func styleApplyComposition(
-        for element: Style.Element.ElementType,
-        layers: [Style.Attribute.Composition.Layer] = Style.Attribute.Composition.Layer.allCases,
-        ignoreSafeAreaEdges: Edge.Set = []
-    ) -> some View {
-        let keyPath = Style.Attribute.Composition.environmentKeyPath(for: element)
-        return modifier(CompositionFromEnvironmentModifier(keyPath: keyPath, layers: layers, ignoresSafeAreaEdges: ignoreSafeAreaEdges))
-    }
-
-    @ViewBuilder
-    public func styleSetup(composition key: Style.Attribute.Composition.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        if let key {
-            let keyPath = Style.Attribute.Composition.environmentKeyPath(for: element)
-            environment(keyPath, key)
-        } else {
-            self
-        }
-    }
-
-    @ViewBuilder
-    package func setupComposition(for component: Style.Component) -> some View {
-        self
-            .styleSetup(composition: component.compositions?(.any), for: .any)
-            .styleSetup(composition: component.compositions?(.title), for: .title)
-            .styleSetup(composition: component.compositions?(.label), for: .label)
-            .styleSetup(composition: component.compositions?(.icon), for: .icon)
-            .styleSetup(composition: component.compositions?(.value), for: .value)
-            .styleSetup(composition: component.compositions?(.accessory), for: .accessory)
-            .styleSetup(composition: component.compositions?(.separator), for: .separator)
-            .styleSetup(composition: component.compositions?(.footnote), for: .footnote)
+    
+    /// Convenience shortcut to define a `Composition` for an element via environment.
+    public func styleDefine(composition key: Style.Attribute.Composition.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+        style(define: Style.Attribute.Composition.self, key: key, for: element)
     }
 
 }
@@ -69,24 +35,7 @@ extension View {
 
 // MARK: - Modifier
 
-private struct CompositionFromEnvironmentModifier: ViewModifier {
-
-    @Environment(\.self) private var environment
-    @Environment(\.style) private var style
-
-    let keyPath: KeyPath<EnvironmentValues, Style.Attribute.Composition.ValueBuilderKeyPath>
-    let layers: [Style.Attribute.Composition.Layer]
-    let ignoresSafeAreaEdges: Edge.Set
-
-    func body(content: Content) -> some View {
-        let key = environment[keyPath: keyPath]
-        content
-            .modifier(CompositionModifier(keyPath: key, layers: layers, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
-    }
-
-}
-
-private struct CompositionModifier: ViewModifier {
+package struct CompositionModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -94,7 +43,7 @@ private struct CompositionModifier: ViewModifier {
     let layers: [Style.Attribute.Composition.Layer]
     let ignoresSafeAreaEdges: Edge.Set
 
-    func body(content: Content) -> some View {
+    package func body(content: Content) -> some View {
         content
             .modifier(CompositionBackgroundOverlayModifier(keyPath: layers.contains(.backgroundOverlay) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))
             .modifier(CompositionBackgroundModifier(keyPath: layers.contains(.background) ? keyPath : nil, ignoresSafeAreaEdges: ignoresSafeAreaEdges))

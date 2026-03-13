@@ -5,6 +5,7 @@
 
 import SnapStyleBase
 import SnapStyleComponents
+import SnapStyleDefinitions
 import SwiftUI
 
 extension View {
@@ -26,10 +27,28 @@ extension View {
                 self
             }
         }
-        .setupFonts(for: component)
-        .setupComposition(for: component)
-        .setupShape(for: component)
+        .setupAttributes(with: component.fonts)
+        .setupAttributes(with: component.compositions)
+        .setupAttributes(with: component.shapes)
         .style(attribute: Style.Context.component, value: component)
+    }
+    
+    @ViewBuilder
+    package func setupAttributes<Attribute: StyleAttributeEnvironmentKeyPathProvider>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
+        if let mapping {
+            // TODO: Should en explicit value of nil remove the value and no entry in the mapping just be ignored?
+            self
+                .style(define: Attribute.self, key: mapping(.any), for: .any)
+                .style(define: Attribute.self, key: mapping(.title), for: .title)
+                .style(define: Attribute.self, key: mapping(.label), for: .label)
+                .style(define: Attribute.self, key: mapping(.icon), for: .icon)
+                .style(define: Attribute.self, key: mapping(.value), for: .value)
+                .style(define: Attribute.self, key: mapping(.accessory), for: .accessory)
+                .style(define: Attribute.self, key: mapping(.separator), for: .separator)
+                .style(define: Attribute.self, key: mapping(.footnote), for: .footnote)
+        } else {
+            self
+        }
     }
 
 }
