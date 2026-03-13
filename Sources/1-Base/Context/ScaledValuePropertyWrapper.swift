@@ -76,5 +76,5 @@ extension Style.Attribute.Number {
     
     return MyView()
         .style(scaleFactor: 2)
-        .styleSetup()
+        .styleSetupLazy()
 }

@@ -17,8 +17,8 @@ struct SnapStyleDemoApp: App {
     
     struct Content: View {
         
-        let demoConfiguration = DemoConfiguration()
-        let style: Style = Style(
+        @State var demoConfiguration = DemoConfiguration()
+        @State var style: Style = Style(
             configuration: .init(
                 allowNavigationBarTitleAdjustments: true
             )
