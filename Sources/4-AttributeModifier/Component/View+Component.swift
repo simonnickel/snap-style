@@ -28,6 +28,7 @@ extension View {
         }
         .setupFonts(for: component)
         .setupComposition(for: component)
+        .setupShape(for: component)
         .style(attribute: Style.Context.component, value: component)
     }
 

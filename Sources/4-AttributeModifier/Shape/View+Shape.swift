@@ -5,6 +5,7 @@
 
 import SnapFoundation
 import SnapStyleBase
+import SnapStyleComponents
 import SwiftUI
 
 extension View {
@@ -16,7 +17,57 @@ extension View {
 }
 
 
-// MARK: - ShapeAttributeModifier
+// MARK: - Shape for Element
+
+extension View {
+
+    public func styleApplyShape(for element: Style.Element.ElementType) -> some View {
+        let keyPath = Style.Attribute.Shape.environmentKeyPath(for: element)
+        return modifier(ShapeFromEnvironmentModifier(keyPath: keyPath))
+    }
+
+    @ViewBuilder
+    public func styleSetup(shape key: Style.Attribute.Shape.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+        if let key {
+            let keyPath = Style.Attribute.Shape.environmentKeyPath(for: element)
+            environment(keyPath, key)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    package func setupShape(for component: Style.Component) -> some View {
+        self
+            .styleSetup(shape: component.shapes?(.any), for: .any)
+            .styleSetup(shape: component.shapes?(.title), for: .title)
+            .styleSetup(shape: component.shapes?(.label), for: .label)
+            .styleSetup(shape: component.shapes?(.icon), for: .icon)
+            .styleSetup(shape: component.shapes?(.value), for: .value)
+            .styleSetup(shape: component.shapes?(.accessory), for: .accessory)
+            .styleSetup(shape: component.shapes?(.separator), for: .separator)
+            .styleSetup(shape: component.shapes?(.footnote), for: .footnote)
+    }
+
+}
+
+
+// MARK: - Modifier
+
+private struct ShapeFromEnvironmentModifier: ViewModifier {
+
+    @Environment(\.self) private var environment
+    @Environment(\.style) private var style
+
+    let keyPath: KeyPath<EnvironmentValues, Style.Attribute.Shape.ValueBuilderKeyPath>
+
+    func body(content: Content) -> some View {
+        let key = environment[keyPath: keyPath]
+        content
+            .modifier(ShapeAttributeModifier(keyPath: key, shouldClip: false)) // TODO: Should clip?
+    }
+
+}
 
 private struct ShapeAttributeModifier: ViewModifier {
     
@@ -96,5 +147,47 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
     } label: {
         Text("Toggle")
     }
+
+}
+
+#if DEBUG
+extension Style.Component {
+    
+    public static let preview: Self = .init(
+        "preview",
+        compositions: { element in
+            switch element {
+            case .icon: \.interactiveContainer
+                default: nil
+            }
+        },
+        shapes: { element in
+            switch element {
+                case .icon: \.circle
+                default: nil
+            }
+        },
+    )
+                                         
+}
+#endif
+
+#Preview("Component") {
+
+    VStack {
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+            Text("With shape from Component")
+        }
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+                .styleSetup(shape: \.containerRelative, for: .icon)
+            Text("With custom override")
+        }
+    }
+    .padding(10)
+    .style(component: .preview)
 
 }

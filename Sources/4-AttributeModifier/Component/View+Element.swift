@@ -47,7 +47,6 @@ private struct ElementApplyStyleModifier: ViewModifier {
         let base = Style.Component.base
 
         let padding = component.padding?(element) ?? base.padding?(element) ?? Style.Component.Padding(\.paddingAnyElement)
-        let shapeKeyPath = component.shapes?(element) ?? base.shapes?(element) ?? \.anyElement
 
         content
             .styleApplyFont(for: element)
@@ -56,7 +55,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
             .style(padding: padding.trailing ?? \.paddingAnyElement, .trailing)
             .style(padding: padding.bottom ?? \.paddingAnyElement, .bottom)
             .styleApplyComposition(for: element)
-            .style(shape: shapeKeyPath)
+            .styleApplyShape(for: element)
     }
 
 }

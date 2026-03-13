@@ -24,6 +24,15 @@ extension EnvironmentValues {
     @Entry public var styleCompositionAccessory: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
     @Entry public var styleCompositionSeparator: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
     @Entry public var styleCompositionFootnote: Style.Attribute.Composition.ValueBuilderKeyPath = \.anyElement
+
+    @Entry public var styleShapeAny: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeTitle: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeLabel: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeIcon: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeValue: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeAccessory: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeSeparator: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
+    @Entry public var styleShapeFootnote: Style.Attribute.Shape.ValueBuilderKeyPath = \.anyElement
 }
 
 extension Style.Attribute.Font {
@@ -55,6 +64,23 @@ extension Style.Attribute.Composition {
             case .accessory: \.styleCompositionAccessory
             case .separator: \.styleCompositionSeparator
             case .footnote: \.styleCompositionFootnote
+        }
+    }
+    
+}
+
+extension Style.Attribute.Shape {
+
+    package static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath> {
+        switch element {
+            case .any: \.styleShapeAny
+            case .title: \.styleShapeTitle
+            case .label: \.styleShapeLabel
+            case .icon: \.styleShapeIcon
+            case .value: \.styleShapeValue
+            case .accessory: \.styleShapeAccessory
+            case .separator: \.styleShapeSeparator
+            case .footnote: \.styleShapeFootnote
         }
     }
     
