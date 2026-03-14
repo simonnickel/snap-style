@@ -28,8 +28,11 @@ extension View {
             }
         }
         .setupAttributes(with: component.fonts)
+        // TODO: Add missing Attributes?
+//        .setupAttributes(with: component.surfaces)
         .setupAttributes(with: component.compositions)
         .setupAttributes(with: component.shapes)
+        .setupAttributes(with: component.paddings)
         .style(attribute: Style.Context.component, value: component)
     }
     

@@ -56,6 +56,9 @@ private struct AttributeFromEnvironmentModifier<Attribute: StyleAttributeEnviron
             case is Style.Attribute.Shape.Type:
                 content.modifier(ShapeAttributeModifier(keyPath: key as? Style.Attribute.Shape.ValueBuilderKeyPath, shouldClip: false))
 
+            case is Style.Attribute.Padding.Type:
+                content.modifier(PaddingAttributeModifier(keyPath: key as? Style.Attribute.Padding.ValueBuilderKeyPath))
+
             default: content
 
         }
