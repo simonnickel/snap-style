@@ -8,29 +8,31 @@ import SwiftUI
 
 extension Style.Container {
 
-    // TODO: @unchecked Sendable. KeyPath is not Sendable, could be wrapped in a closure.
     /// A description of the style of a container.
-    public struct Properties: Hashable, Equatable, @unchecked Sendable {
+    public struct Properties: Hashable, Equatable, Sendable {
 
         public typealias Attribute = Style.Attribute
+        
+        /// Closure that provides a ValueBuilder from an Attribute type. Required instead of using KeyPath directly to allow the type to be `Sendable`.
+        public typealias KeyPathProvider<Attribute: StyleAttribute> = @Sendable () -> Attribute.ValueBuilderKeyPath
 
         public let id: String
         public let requiresSecondaryAccent: Bool
         public let ignoresSafeAreaEdges: Edge.Set
 
-        package let surface: Attribute.Surface.ValueBuilderKeyPath?
-        package let composition: Attribute.Composition.ValueBuilderKeyPath?
-        package let shape: Attribute.Shape.ValueBuilderKeyPath?
-        package let padding: Attribute.Padding.ValueBuilderKeyPath?
+        package let surface: KeyPathProvider<Attribute.Surface>?
+        package let composition: KeyPathProvider<Attribute.Composition>?
+        package let shape: KeyPathProvider<Attribute.Shape>?
+        package let padding: KeyPathProvider<Attribute.Padding>?
 
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             ignoresSafeAreaEdges: Edge.Set = [],
-            surface: Attribute.Surface.ValueBuilderKeyPath? = nil,
-            composition: Attribute.Composition.ValueBuilderKeyPath? = nil,
-            shape: Attribute.Shape.ValueBuilderKeyPath? = nil,
-            padding: Attribute.Padding.ValueBuilderKeyPath? = nil,
+            surface: KeyPathProvider<Attribute.Surface>? = nil,
+            composition: KeyPathProvider<Attribute.Composition>? = nil,
+            shape: KeyPathProvider<Attribute.Shape>? = nil,
+            padding: KeyPathProvider<Attribute.Padding>? = nil
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent

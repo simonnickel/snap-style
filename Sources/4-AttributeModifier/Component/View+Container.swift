@@ -42,9 +42,10 @@ private struct ContainerApplyStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         let base = Style.Container.Properties.base
 
-        let paddingKeyPath = container.padding ?? base.padding
-        let compositionKeyPath = container.composition ?? base.composition ?? \.anyContainer
-        let shapeKeyPath = container.shape ?? base.shape
+        // Call the closures to get the KeyPaths
+        let paddingKeyPath: Style.Attribute.Padding.ValueBuilderKeyPath = (container.padding ?? base.padding)?() ?? \.anyContainer
+        let compositionKeyPath: Style.Attribute.Composition.ValueBuilderKeyPath = (container.composition ?? base.composition)?() ?? \.anyContainer
+        let shapeKeyPath: Style.Attribute.Shape.ValueBuilderKeyPath = (container.shape ?? base.shape)?() ?? \.anyContainer
 
         content
             .style(padding: paddingKeyPath)
