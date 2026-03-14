@@ -49,17 +49,23 @@ The component defines what `.title` means in this context, which font, which for
 
 SnapStyle is built around a few core ideas:
 
-**Attributes** are the types of visual properties you can define: `Surface` (colors/materials), `Font`, `Number` (dimensions/spacing), `Padding`, `Shape`, `Icon`, `Accent`, and `Composition` (layered combinations of surface, foreground, and background).
+### Attributes
+The types of visual properties you can define: `Surface` (colors/materials), `Font`, `Number` (dimensions/spacing), `Padding`, `Shape`, `Icon`, `Accent`, and `Composition` (layered combinations of surface, foreground, and background).
 
-**Definitions** assign values to semantic key paths on each attribute type (e.g. `\.title`, `\.screenTitle`, `\.list` on `Style.Attribute.Font`). A definition can be a static value, a reference to another key path, or a builder that receives the current context and returns a value dynamically — for example, returning a different font weight depending on the element hierarchy, or a different surface depending on the container's interaction state. The package ships with a preset of common definitions; these can be overridden or extended.
+### Definitions
+Assign values to semantic key paths on each attribute type (e.g. `\.title`, `\.screenTitle`, `\.list` on `Style.Attribute.Font`). A definition can be a static value, a reference to another key path, or a builder that receives the current context and returns a value dynamically — for example, returning a different font weight depending on the element hierarchy, or a different surface depending on the container's interaction state. The package ships with a preset of common definitions; these can be overridden or extended.
 
-**Components** group attribute definitions together for a view hierarchy. A `.contentCard` component assigns specific fonts, compositions, shapes, and paddings to its elements. Components have a `Container` (surface, shape, padding of the wrapping view) and map attribute key paths to `Element` types.
+### Components
+Group attribute definitions together for a view hierarchy. A `.contentCard` component assigns specific fonts, compositions, shapes, and paddings to its elements. Components have a `Container` (surface, shape, padding of the wrapping view) and map attribute key paths to `Element` types.
 
-**Elements** are semantic roles within a component: `.title`, `.label`, `.icon`, `.value`, `.accessory`, `.separator`, `.footnote`. Each can have a `.primary`, `.secondary`, or `.tertiary` hierarchy.
+### Elements
+Semantic roles within a component: `.title`, `.label`, `.icon`, `.value`, `.accessory`, `.separator`, `.footnote`. Each can have a `.primary`, `.secondary`, or `.tertiary` hierarchy.
 
-**Context** is the accumulated state flowing through the environment: color scheme, font design, font width, scale factor, current component, container stack, and element. Attribute definitions can use the context to return different values.
+### Context
+The accumulated state flowing through the environment: color scheme, font design, font width, scale factor, current component, container stack, and element. Attribute definitions can use the context to return different values.
 
-**Caching** — Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.style(update:)` or `.styleOverride(...)`, the relevant caches are reset automatically.
+### Caching
+Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.style(update:)` or `.styleOverride(...)`, the relevant caches are reset automatically.
 
 ## Demo Project
 
