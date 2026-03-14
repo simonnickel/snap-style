@@ -23,13 +23,13 @@ extension View {
 
 // MARK: - Modifier
 
-private struct PaddingAttributeModifier: ViewModifier {
+package struct PaddingAttributeModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
     let keyPath: Style.Attribute.Padding.ValueBuilderKeyPath?
     
-    func body(content: Content) -> some View {
+    package func body(content: Content) -> some View {
         let padding = style.padding(for: keyPath)
         content
             .style(padding: padding?.leading, .leading)
@@ -43,12 +43,55 @@ private struct PaddingAttributeModifier: ViewModifier {
 
 // MARK: - Preview
 
-#Preview {
+#if DEBUG
+extension Style.Component {
+    
+    static let previewPadding: Self = .init(
+        "previewPadding",
+        compositions: { element in
+            switch element {
+                case .icon: \.accentContainer
+                default: nil
+            }
+        },
+        paddings: { element in
+            switch element {
+                case .icon: \.containerCard
+                default: nil
+            }
+        },
+    )
+                                         
+}
+#endif
+
+#Preview("Component") {
+
+    VStack(alignment: .leading, spacing: 15) {
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+            Text("Padding from Component")
+                .style(element: .label)
+        }
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+                .styleDefine(padding: \.listRow, for: .icon)
+            Text("Padding override")
+                .style(element: .label)
+        }
+    }
+    .style(component: .previewPadding)
+
+}
+
+#Preview("Animation") {
 
     @Previewable @State var isActive: Bool = true
 
     Text("Some Preview Content")
-        .style(padding: isActive ? \.listRow : nil)
+        .style(padding: isActive ? \.containerCard : nil)
         .background(.green)
 
     Button {

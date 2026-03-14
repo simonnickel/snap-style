@@ -59,3 +59,55 @@ private struct ScaledFont: ViewModifier {
             .fontWidth(properties?.width ?? style.context.fontWidth)
     }
 }
+
+
+// MARK: - Preview
+
+#Preview {
+
+    VStack(spacing: 16) {
+        Text("Title font")
+            .style(font: \.title)
+        Text("Content font")
+            .style(font: \.content)
+        Text("Footnote font")
+            .style(font: \.footnote)
+    }
+    .padding()
+
+}
+
+#if DEBUG
+extension Style.Component {
+    
+    static let previewFont: Self = .init(
+        "previewFont",
+        fonts: { element in
+            switch element {
+            case .icon: \.listIcon
+                default: nil
+            }
+        },
+    )
+                                         
+}
+#endif
+
+#Preview("Component") {
+
+    VStack(alignment: .leading, spacing: 15) {
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+            Text("Font from Component")
+        }
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+                .styleDefine(font: \.screenTitle, for: .icon)
+            Text("Font override")
+        }
+    }
+    .style(component: .previewFont)
+
+}

@@ -119,3 +119,38 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
     }
 
 }
+
+#if DEBUG
+extension Style.Component {
+    
+    static let previewComposition: Self = .init(
+        "previewComposition",
+        compositions: { element in
+            switch element {
+            case .icon: \.accentContainer
+                default: nil
+            }
+        },
+    )
+                                         
+}
+#endif
+
+#Preview("Component") {
+
+    VStack(alignment: .leading, spacing: 15) {
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+            Text("Composition from Component")
+        }
+        HStack {
+            Image(systemName: "star")
+                .style(element: .icon)
+            Text("Composition override")
+        }
+        .styleDefine(composition: \.contentContainer, for: .icon)
+    }
+    .style(component: .previewComposition)
+
+}

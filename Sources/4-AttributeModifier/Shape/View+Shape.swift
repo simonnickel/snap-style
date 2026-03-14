@@ -108,8 +108,8 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
 #if DEBUG
 extension Style.Component {
     
-    public static let preview: Self = .init(
-        "preview",
+    static let previewShape: Self = .init(
+        "previewShape",
         compositions: { element in
             switch element {
             case .icon: \.interactiveContainer
@@ -129,20 +129,19 @@ extension Style.Component {
 
 #Preview("Component") {
 
-    VStack {
+    VStack(alignment: .leading, spacing: 15) {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-            Text("With shape from Component")
+            Text("Shape from Component")
         }
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
                 .styleDefine(shape: \.containerRelative, for: .icon)
-            Text("With custom override")
+            Text("Shape override")
         }
     }
-    .padding(10)
-    .style(component: .preview)
+    .style(component: .previewShape)
 
 }
