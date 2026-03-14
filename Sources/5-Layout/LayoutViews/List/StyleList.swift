@@ -35,7 +35,7 @@ extension Style.Views.List {
             StyleScreen(component: .list, configuration: .list) {
                 SwiftUI.List {
                     content()
-                        .styleListRowInsets(\.zero)
+                        .style(listRowInsets: \.zero)
                 }
                 .listIconWidthScope()
                 .styleListSectionSpacing(\.paddingListSection)

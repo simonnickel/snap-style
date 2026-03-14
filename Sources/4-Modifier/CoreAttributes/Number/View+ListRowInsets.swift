@@ -14,8 +14,8 @@ extension View {
     /// Supports animated change.
     ///
     /// - Parameter valueKeyPath: Number to apply as inset to all edges.
-    public func styleListRowInsets(
-        _ valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath
+    public func style(
+        listRowInsets valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath
     ) -> some View {
         modifier(
             ListRowInsetsModifier(
