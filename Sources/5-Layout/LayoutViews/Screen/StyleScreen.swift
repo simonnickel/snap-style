@@ -119,7 +119,7 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
     }
 //    .styleOverride(
 //        numbers: [
-//            \.widthReadableContent: .base(.definition(.value(200)))
+//            \.widthReadableContent: .base(.value(.scaled(200)))
 //        ]
 //    )
 }

@@ -265,17 +265,6 @@ extension Style.Attribute.Surface {
         }
     }}
     
-//    public var text: ValueBuilder {
-//        .base(.definition(.value(.primary))) { context in
-//            switch context.element.hierarchy {
-//                case .any: .definition(.value(.primary))
-//                case .primary: .definition(.value(.primary))
-//                case .secondary: .definition(.value(.secondary))
-//                case .tertiary: .definition(.value(.secondary))
-//            }
-//        }
-//    }
-    
     
     // MARK: - Colors
     

@@ -5,7 +5,7 @@
 
 extension Style {
     
-    /// Container Type to hierarchically structure Views.
+    /// Namespace to structure Views.
     public enum Views {}
     
 }
