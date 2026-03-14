@@ -30,7 +30,7 @@ struct ColorItemView: View {
                         // TODO feature: Icon with circle background should be a component.
                         StyleIcon(\.favorite)
                             .style(element: .icon)
-                            .style(paddingNumber: \.spacingElements)
+                            .style(padding: \.spacingElements)
                             .style(background: \.accentComplementary)
                             .style(shape: \.circle)
                     }

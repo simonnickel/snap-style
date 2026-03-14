@@ -32,10 +32,10 @@ private struct PaddingAttributeModifier: ViewModifier {
     func body(content: Content) -> some View {
         let padding = style.padding(for: keyPath)
         content
-            .style(paddingNumber: padding?.leading, .leading)
-            .style(paddingNumber: padding?.top, .top)
-            .style(paddingNumber: padding?.trailing, .trailing)
-            .style(paddingNumber: padding?.bottom, .bottom)
+            .style(padding: padding?.leading, .leading)
+            .style(padding: padding?.top, .top)
+            .style(padding: padding?.trailing, .trailing)
+            .style(padding: padding?.bottom, .bottom)
     }
     
 }
