@@ -45,7 +45,7 @@ public protocol StyleAdjustment {
 
 extension StyleValue {
 
-    public func adjusted(with adjustments: [Self.Adjustment]) -> Self {
+    func adjusted(with adjustments: [Self.Adjustment]) -> Self {
         var result = self
         for adjustment in adjustments {
             result = result.adjusted(with: adjustment)
