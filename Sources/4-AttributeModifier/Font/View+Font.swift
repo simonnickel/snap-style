@@ -63,37 +63,6 @@ private struct ScaledFont: ViewModifier {
 
 // MARK: - Preview
 
-#Preview {
-
-    VStack(spacing: 16) {
-        Text("Title font")
-            .style(font: \.title)
-        Text("Content font")
-            .style(font: \.content)
-        Text("Footnote font")
-            .style(font: \.footnote)
-    }
-    .padding()
-
-}
-
-#Preview("Animation") {
-
-    @Previewable @State var isActive: Bool = true
-
-    Text("Some Preview Content")
-        .style(font: isActive ? \.title : \.footnote)
-
-    Button {
-        withAnimation {
-            isActive.toggle()
-        }
-    } label: {
-        Text("Toggle")
-    }
-
-}
-
 #if DEBUG
 extension Style.Component {
     
@@ -105,24 +74,31 @@ extension Style.Component {
                 default: nil
             }
         },
+        container: .contentCard
     )
                                          
 }
 #endif
 
-#Preview("Component") {
+#Preview {
+    
+    @Previewable @State var override: Bool = true
 
     VStack(alignment: .leading, spacing: 15) {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
             Text("Font from Component")
+                .style(element: .label)
         }
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(font: \.screenTitle, for: .icon)
-            Text("Font override")
+                .styleDefine(font: override ? \.screenTitle : nil, for: .icon) // TODO: Should animate
+            Toggle(isOn: $override.animation()) {
+                Text("Define override")
+                    .style(element: .label)
+            }
         }
     }
     .style(component: .previewFont)

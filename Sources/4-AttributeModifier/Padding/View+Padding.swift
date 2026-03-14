@@ -66,7 +66,7 @@ extension Style.Component {
 }
 #endif
 
-#Preview("Component") {
+#Preview {
     
     @Previewable @State var override: Bool = true
 
@@ -80,7 +80,7 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(padding: override ? \.listRow : nil, for: .icon)
+                .styleDefine(padding: override ? \.listRow : nil, for: .icon) // TODO: nil should go back to component
             Toggle(isOn: $override.animation()) {
                 Text("Define override")
                     .style(element: .label)

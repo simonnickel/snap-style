@@ -99,27 +99,6 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
 
 // MARK: - Preview
 
-#Preview("Animation") {
-
-    @Previewable @State var isAccent: Bool = false
-
-    VStack() {
-        Text("Content")
-    }
-    .padding()
-    .style(composition: isAccent ? \.accentContainer : \.contentContainer)
-    .border(.yellow)
-
-    Button {
-        withAnimation {
-            isAccent.toggle()
-        }
-    } label: {
-        Text("Toggle")
-    }
-
-}
-
 #if DEBUG
 extension Style.Component {
     
@@ -131,25 +110,32 @@ extension Style.Component {
                 default: nil
             }
         },
+        container: .contentCard
     )
                                          
 }
 #endif
 
-#Preview("Component") {
+#Preview {
+    
+    @Previewable @State var override: Bool = true
 
     VStack(alignment: .leading, spacing: 15) {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
             Text("Composition from Component")
+                .style(element: .label)
         }
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-            Text("Composition override")
+                .styleDefine(composition: override ? \.contentContainer : nil, for: .icon) // TODO: Animate + Back to component
+            Toggle(isOn: $override.animation()) {
+                Text("Define override")
+                    .style(element: .label)
+            }
         }
-        .styleDefine(composition: \.contentContainer, for: .icon)
     }
     .style(component: .previewComposition)
 

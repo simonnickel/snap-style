@@ -71,40 +71,6 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
 
 // MARK: - Preview
 
-#Preview("Animation") {
-
-    @Previewable @State var isActive: Bool = true
-
-    VStack {
-        Text("Card Shape, no component")
-        VStack {
-            Text("Card Shape")
-        }
-        .padding(20)
-        .style(background: \.contentBackground)
-        .style(shape: isActive ? \.containerCard : nil)
-
-        VStack {
-            Text("Container Relative Shape")
-        }
-        .padding(20)
-        .style(background: \.contentBackground)
-        .style(shape: isActive ? \.containerRelative : nil)
-    }
-    .padding(10)
-    .style(background: \.accentBackground)
-    .style(shape: \.containerCard)
-
-    Button {
-        withAnimation(.smooth) {
-            isActive.toggle()
-        }
-    } label: {
-        Text("Toggle")
-    }
-
-}
-
 #if DEBUG
 extension Style.Component {
     
@@ -122,24 +88,37 @@ extension Style.Component {
                 default: nil
             }
         },
+        paddings:  { element in
+            switch element {
+                case .icon: \.containerCard
+                default: nil
+            }
+        },
+        container: .contentCard
     )
                                          
 }
 #endif
 
-#Preview("Component") {
+#Preview {
+    
+    @Previewable @State var override: Bool = true
 
     VStack(alignment: .leading, spacing: 15) {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
             Text("Shape from Component")
+                .style(element: .label)
         }
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(shape: \.containerRelative, for: .icon)
-            Text("Shape override")
+                .styleDefine(shape: override ? \.rectangle : nil, for: .icon) // TODO: Animate + Back to component
+            Toggle(isOn: $override.animation()) {
+                Text("Define override")
+                    .style(element: .label)
+            }
         }
     }
     .style(component: .previewShape)
