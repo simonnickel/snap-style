@@ -17,12 +17,31 @@ A semantic styling system for multi-platform SwiftUI apps. Define visual attribu
 
 ## Motivation
 
-Instead of scattering design values across your codebase, SnapStyle lets you define them in a single place and reference them by semantic meaning. A font is `\.title`, not `.system(size: 18, weight: .bold)`. A color is `\.accent`, not `.blue`. A spacing is `\.spacingGroups`, not `16`.
+Without a styling system, design values are scattered across your views:
 
-This gives you:
-- **Consistency** -- change a value once, the whole app updates.
+```swift
+Text("Title")
+    .font(.system(size: 18, weight: .bold))
+    .foregroundStyle(.blue)
+    .padding(.horizontal, 16)
+```
+
+Changing a value means finding every occurrence. Platform differences require `#if` checks in view code. There is no connection between the font of a title and the font of an icon — each is defined independently.
+
+With SnapStyle, views reference semantic assignments instead of literal values:
+
+```swift
+Text("Title")
+    .style(element: .title)
+    .style(component: .contentCard)
+```
+
+The component defines what `.title` means in this context, which font, which foreground color, which padding. The definition can also adapt to the context, e.g. when the container is highlighted, selected, or disabled. Change the definition once and every `.contentCard` in the app updates.
+
+- **Consistency** -- define once, apply everywhere.
 - **Maintainability** -- platform-specific adjustments happen in definitions, not in views.
 - **DynamicType scaling** -- fonts and numbers (paddings, spacings, corner radii) scale automatically.
+- **Context-aware styling** -- values can be defined based on the context, e.g. hierarchy or state (normal, highlighted, disabled, selected) without any logic in your views.
 - **Overridability** -- definitions can be overridden at any point in the view hierarchy for theming or user customization.
 
 
@@ -42,13 +61,31 @@ SnapStyle is built around a few core ideas:
 
 **Caching** — Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.style(update:)` or `.styleOverride(...)`, the relevant caches are reset automatically.
 
-## Demo project
+## Demo Project
 
-The [demo project](/PackageDemo) shows ...
+The [SnapStyleDemo](/SnapStyleDemo) app showcases the built-in components, attribute definitions, and context configuration options. It includes examples for cards, lists, buttons, and a configuration screen to experiment with accent colors, font design, font width, corner radii, and scale factor.
 
-// TODO package: Update Screenshot
-<img src="/screenshot.png" height="400">
+## Installation
 
+Add it as a package dependency to an Xcode project:
+```swift
+https://github.com/simonnickel/snap-style
+```
+Or to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/simonnickel/snap-style.git", from: "0.1.0")
+]
+```
+
+Then add `SnapStyle` as a dependency of your target:
+
+```swift
+.target(name: "YourTarget", dependencies: [
+    .product(name: "SnapStyle", package: "snap-style")
+])
+```
 
 ## Usage
 
@@ -81,7 +118,7 @@ StyleStack(spacing: \.spacingElements) {
 .style(component: .contentCard)
 ```
 
-The component maps each element type to the appropriate font, composition, and padding key paths. Built-in components: `.base`, `.screen`, `.contentCard`, `.accentCard`, `.metricCard`, `.list`, `.listRow`, `.button(hierarchy)`, `.buttonIconOnly(hierarchy)`.
+The component applies the container's styling (background surface, shape, padding) and sets up element attribute mappings in the environment. Assigning an element to a child view applies these attributes.
 
 ### Applying Attributes Directly
 
@@ -139,6 +176,7 @@ ContentView()
     .style(scaleFactor: 1.2)
     .style(accent: \.destructive)
 ```
+
 ### Overriding Definitions
 
 Override specific attribute definitions for a subtree:
@@ -149,6 +187,19 @@ ContentView()
         fonts: [\.title: .base(.value(.with(size: 24, weight: .heavy)))],
         surfaces: [\.accent: .base(.value(.color(.purple)))]
     )
+```
+
+Override which key path a component resolves for a specific element type. For example, use a different font for icons inside a component:
+
+```swift
+HStack {
+    Image(systemName: "star")
+        .style(element: .icon)
+    Text("Custom icon font")
+        .style(element: .label)
+}
+.style(define: .icon, font: \.screenTitle)
+.style(component: .contentCard)
 ```
 
 ### Custom Components
