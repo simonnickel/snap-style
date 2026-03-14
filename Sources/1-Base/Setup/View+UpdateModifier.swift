@@ -7,7 +7,7 @@ import SwiftUI
 
 extension View {
 
-    /// Update the `SnapStyle` definition in the Environment.
+    /// Update the `Style` definition in the Environment.
     public func style(update definition: Style) -> some View {
         modifier(UpdateDefinitionModifier(definition: definition))
     }

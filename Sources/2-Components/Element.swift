@@ -7,6 +7,7 @@ import SnapStyleBase
 
 extension Style {
 
+    /// A semantic label to assign to a View, used to assign values of `Style.Attribute`s mapped in the `Component`.
     public struct Element: Hashable, Sendable, CaseIterable {
 
 

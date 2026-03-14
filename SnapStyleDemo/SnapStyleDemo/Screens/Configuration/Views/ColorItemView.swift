@@ -54,19 +54,16 @@ struct ColorItemView: View {
                 }
                 .style(component: .accentCard)
                 
-                StyleStack(.horizontal, spacing: \.spacingElements) {
-                    StyleStack() {
-                        StyleShapeView(shape: .circle, surface: \.accentContrast)
-                    }
-                    .style(padding: \.paddingCard)
-                    .style(background: \.accentGradientSoft)
+                StyleStack(.horizontal, spacing: \.spacingElements, alignmentH: .center) {
+                    StyleShapeView(shape: .circle, surface: \.accentContrast)
+                        .style(padding: \.containerCard)
+                        .style(background: \.accentGradientSoft)
 
-                    StyleStack() {
-                        StyleShapeView(shape: .circle, surface: \.accentComplementary)
-                    }
-                    .style(padding: \.paddingCard)
-                    .style(background: \.accentGradientStrong)
+                    StyleShapeView(shape: .circle, surface: \.accentComplementary)
+                        .style(padding: \.containerCard)
+                        .style(background: \.accentGradientStrong)
                 }
+                .frame(minHeight: 100) // Required for Preview only
             }
         }
         .style(component: .contentCard)

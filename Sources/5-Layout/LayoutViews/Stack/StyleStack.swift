@@ -16,13 +16,13 @@ public struct StyleStack<Content>: View where Content: View {
     private let axis: Axis
     private let alignmentV: VerticalAlignment
     private let alignmentH: HorizontalAlignment
-    private let spacing: Style.Attributes.Number.ValueBuilderKeyPath?
+    private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let isStretching: Bool
     private let content: () -> Content
 
     public init(
         _ axis: Axis = .vertical,
-        spacing: Style.Attributes.Number.ValueBuilderKeyPath? = nil,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignmentV: VerticalAlignment = .center,
         alignmentH: HorizontalAlignment = .leading,
         isStretching: Bool = true,
@@ -54,7 +54,7 @@ public struct StyleStack<Content>: View where Content: View {
         }
     }
 
-    package static func spacing(for keyPath: Style.Attributes.Number.ValueBuilderKeyPath?, with style: Style.ContextWrapper) -> Style.Attributes.Number.Value.WrappedValue {
+    package static func spacing(for keyPath: Style.Attribute.Number.ValueBuilderKeyPath?, with style: Style.ContextWrapper) -> Style.Attribute.Number.Value.WrappedValue {
         guard let keyPath else { return 0 }
 
         return style.number(for: keyPath) ?? 0
@@ -68,7 +68,7 @@ public struct StyleStack<Content>: View where Content: View {
 #Preview {
     @Previewable @State var axis: Axis = .vertical
     @Previewable @State var stretching: Bool = true
-    @Previewable @State var spacing: Style.Attributes.Number.ValueBuilderKeyPath? = nil
+    @Previewable @State var spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
 
     StyleStack(axis, isStretching: stretching) {
         Text("Test Row 1")

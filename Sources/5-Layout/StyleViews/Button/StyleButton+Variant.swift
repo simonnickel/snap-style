@@ -15,10 +15,10 @@ extension Style.Views.Button {
         case plain
         case primary
         case secondary
-        case icon(hierarchy: Style.ComponentDefinition.Hierarchy = .primary)
-        case component(Style.ComponentDefinition, hierarchy: Style.Element.Hierarchy = .primary)
+        case icon(hierarchy: Style.Component.Hierarchy = .primary)
+        case component(Style.Component, hierarchy: Style.Element.Hierarchy = .primary)
         
-        var component: Style.ComponentDefinition {
+        var component: Style.Component {
             switch self {
                 case .plain: .base
                 case .default, .primary: .button(.primary)

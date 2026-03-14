@@ -10,8 +10,8 @@ import SnapStyleComponents
 
 extension Style.Context {
 
-    package var component: Style.ComponentDefinition { getValue(for: Self.component) ?? .base }
+    package var component: Style.Component { getValue(for: Self.component) ?? .base }
     
-    package static var component: Attribute<String, Style.ComponentDefinition> { .init(key: "component", valueDefault: .base) }
+    package static var component: Attribute<String, Style.Component> { .init(key: "component", valueDefault: .base) }
 
 }

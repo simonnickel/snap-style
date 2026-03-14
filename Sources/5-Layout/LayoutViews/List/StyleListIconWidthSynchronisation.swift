@@ -7,10 +7,10 @@ import SwiftUI
 import SnapCore
 
 // StyleListRow aligns the icons by their center and the content on the leading edge.
-// Icon might have different width though, so StyleList and StyleListRow store the largest width and applies them to all icons.
+// Icons might have different widths though, so StyleList and StyleListRow store the largest width and apply it to all icons.
 
 // Therefore the icon sizes are reported up the hierarchy via the `ListIconWidthPreferenceKey`.
-// The StyleList provides the highest value via Environment to apply on the icons.
+// The StyleList provides the highest value via Environment to apply to the icons.
 
 
 // MARK: - Synchronisation

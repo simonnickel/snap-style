@@ -11,11 +11,11 @@ import SwiftUI
 
 public struct DebugComponentsScreen: View {
 
-    @State private var component: Style.ComponentDefinition = .screen
+    @State private var component: Style.Component = .screen
 
-    private let components: [Style.ComponentDefinition]
+    private let components: [Style.Component]
     
-    public init(components: [Style.ComponentDefinition]) {
+    public init(components: [Style.Component]) {
         self.components = components
     }
 
@@ -31,7 +31,7 @@ public struct DebugComponentsScreen: View {
             HStack {
                 Picker("Component", selection: $component) {
                     ForEach(components, id: \.self) { component in
-                        Text("\(component)")
+                        Text("\(component.description)")
                     }
                 }
             }
@@ -44,7 +44,7 @@ public struct DebugComponentsScreen: View {
                 StyleStack {
                     DebugElementsView(hierarchy: hierarchy)
                 }
-                .style(component: component ?? .screen)
+                .style(component: component)
             }
         }
     }

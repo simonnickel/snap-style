@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SwiftUI
 
-/// A container to create a `.listRow` component which delays `InteractionState` after it no longer presents it's value.
+/// A container to create a `.listRow` component which delays `InteractionState` after it no longer presents its value.
 /// Necessary to allow the selection highlight to show through after the destination got dismissed.
 internal struct StyleListRowNavigationHighlightContainer<Content: View>: View {
     

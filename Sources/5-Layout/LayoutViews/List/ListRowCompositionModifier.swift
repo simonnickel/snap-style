@@ -13,7 +13,7 @@ extension View {
     /// - Returns: A modified view.
     @available(*, deprecated, message: "`style(listRowBackground:)` is not recommended to use. Has issues with environment and does not properly animate component state changes. (iOS 18) - Should use `.styleListRowInsets(.zero)` instead and `.style(component: .listRow)`")
     public func style(
-        listRowBackground keyPath: Style.Attributes.Composition.ValueBuilderKeyPath
+        listRowBackground keyPath: Style.Attribute.Composition.ValueBuilderKeyPath
     ) -> some View {
         modifier(CompositionListRowModifier(keyPath: keyPath))
     }
@@ -27,7 +27,7 @@ private struct CompositionListRowModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Composition.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Composition.ValueBuilderKeyPath
 
     func body(content: Content) -> some View {
         content
@@ -47,28 +47,30 @@ private struct CompositionListRowModifier: ViewModifier {
 
 #Preview {
 
-    StyleList {
-        Text("Normal List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .normal)
-    }
-
-    StyleList {
-        Text("Highlighted List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .highlighted)
-    }
-
-    StyleList {
-        Text("Selected List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .selected)
-    }
-
-    StyleList {
-        Text("Disabled List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .disabled)
-    }
+// **Deprecated**
+//
+//    StyleList {
+//        Text("Normal List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .normal)
+//    }
+//
+//    StyleList {
+//        Text("Highlighted List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .highlighted)
+//    }
+//
+//    StyleList {
+//        Text("Selected List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .selected)
+//    }
+//
+//    StyleList {
+//        Text("Disabled List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .disabled)
+//    }
 
 }

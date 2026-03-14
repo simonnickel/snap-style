@@ -5,8 +5,8 @@
 
 import SwiftUI
 
-// Elevation is provided from the outside via Environment.
-// Each Screen has to translate the environment into Context
+// Elevation is provided from outside via the Environment.
+// Use `styleElevationRelay()` to forward the environment value into the `Context`.
 
 extension View {
     

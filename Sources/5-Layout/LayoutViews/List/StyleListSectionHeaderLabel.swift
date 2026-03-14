@@ -13,7 +13,7 @@ extension View {
     public func styleListSectionHeaderLabel(
         hierarchy: Style.Element.Hierarchy = .secondary
     ) -> some View {
-        modifier(ListSectionHeaderLabel(hieararchy: hierarchy))
+        modifier(ListSectionHeaderLabel(hierarchy: hierarchy))
     }
 
 }
@@ -23,13 +23,12 @@ extension View {
 
 internal struct ListSectionHeaderLabel: ViewModifier {
 
-    let hieararchy: Style.Element.Hierarchy
+    let hierarchy: Style.Element.Hierarchy
 
     func body(content: Content) -> some View {
         content
-            .style(padding: \.paddingListRowLeading, .leading)
-            .style(padding: \.paddingListHeaderBottom, .bottom)
-            .style(element: .title, hierarchy: hieararchy)
+            .style(padding: \.listSectionHeader)
+            .style(element: .title, hierarchy: hierarchy)
             .textCase(nil)
     }
 

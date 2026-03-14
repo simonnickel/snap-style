@@ -33,15 +33,15 @@ private struct StyleNavigationBarModifier: ViewModifier {
     @Environment(\.style) private var style
 
     func body(content: Content) -> some View {
-        let definitionInline = style.font(for: \.navigationTitleInline)
-        let definitionLarge = style.font(for: \.navigationTitleLarge)
+        let propertiesInline = style.font(for: \.navigationTitleInline)
+        let propertiesLarge = style.font(for: \.navigationTitleLarge)
         
-        if let definitionInline, let definitionLarge {
+        if let propertiesInline, let propertiesLarge {
             content
 #if canImport(UIKit)
                 .if(style.definition.configuration.allowNavigationBarTitleAdjustments) { content in
                     content
-                        .modifier(StyleNavigationBarScaledModifier(definitionInline: definitionInline, definitionLarge: definitionLarge))
+                        .modifier(StyleNavigationBarScaledModifier(propertiesInline: propertiesInline, propertiesLarge: propertiesLarge))
                 }
 #endif
         } else {
@@ -57,16 +57,19 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
 
     @Environment(\.style) private var style
     
-    private let definitionInline: Style.Attributes.Font.Value.Definition
-    private let definitionLarge: Style.Attributes.Font.Value.Definition
+    private let propertiesInline: Style.Attribute.Font.Value.Properties
+    private let propertiesLarge: Style.Attribute.Font.Value.Properties
     private let scaledInline: ScaledMetric<Double>
     private let scaledLarge: ScaledMetric<Double>
     
-    init(definitionInline: Style.Attributes.Font.Value.Definition, definitionLarge: Style.Attributes.Font.Value.Definition) {
-        self.definitionInline = definitionInline
-        self.definitionLarge = definitionLarge
-        self.scaledInline = ScaledMetric(wrappedValue: definitionInline.size, relativeTo: definitionInline.textStyle)
-        self.scaledLarge = ScaledMetric(wrappedValue: definitionLarge.size, relativeTo: definitionLarge.textStyle)
+    init(
+        propertiesInline: Style.Attribute.Font.Value.Properties,
+        propertiesLarge: Style.Attribute.Font.Value.Properties,
+    ) {
+        self.propertiesInline = propertiesInline
+        self.propertiesLarge = propertiesLarge
+        self.scaledInline = ScaledMetric(wrappedValue: propertiesInline.size, relativeTo: propertiesInline.textStyle)
+        self.scaledLarge = ScaledMetric(wrappedValue: propertiesLarge.size, relativeTo: propertiesLarge.textStyle)
     }
     
 #if !canImport(UIKit)
@@ -123,11 +126,11 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
     }
     
     private static func font(
-        for keyPath: Style.Attributes.Font.ValueBuilderKeyPath,
+        for keyPath: Style.Attribute.Font.ValueBuilderKeyPath,
         with style: Style.ContextWrapper,
         size: Double
     ) -> UIFont {
-        let design = style.context.fontDesign ?? .default
+        let design = style.context.fontDesign
         let fontSizeMax = style.number(for: \.fontSizeNavigationTitleMax, scaled: false) ?? 60
         var fontStyle = style.font(for: keyPath)
         // Max size has to be limited, otherwise the text is shortened anyway.

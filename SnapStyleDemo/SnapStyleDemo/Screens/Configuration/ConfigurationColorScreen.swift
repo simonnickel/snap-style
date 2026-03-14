@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConfigurationColorScreen: View {
     
-    typealias Accent = Style.Attributes.Accent.Value.WrappedValue
+    typealias Accent = Style.Attribute.Accent.Value
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
@@ -98,10 +98,10 @@ struct ConfigurationColorScreen: View {
                 } label: {
                     ColorItemView(selected: primary == demoConfiguration.accentPrimary && secondary == demoConfiguration.accentSecondary)
                         .styleOverride(accents: [
-                            \.primary: .base(.definition(.value(primary)))
+                            \.primary: .base(.value(primary))
                         ])
                         .styleOverride(accents: [
-                            \.secondary: .base(.definition(.value(secondary)))
+                            \.secondary: .base(.value(secondary))
                         ])
                 }
             }
@@ -117,7 +117,7 @@ struct ConfigurationColorScreen: View {
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentPrimary)
                         .styleOverride(accents: [
-                            \.primary: .base(.definition(.value(accent)))
+                            \.primary: .base(.value(accent))
                         ])
                 }
             }
@@ -133,7 +133,7 @@ struct ConfigurationColorScreen: View {
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentSecondary)
                         .styleOverride(accents: [
-                            \.secondary: .base(.definition(.value(accent)))
+                            \.secondary: .base(.value(accent))
                         ])
                 }
             }

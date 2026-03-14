@@ -11,11 +11,11 @@ struct DebugKeyRowSurface: View {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attributes.Surface.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Surface.ValueBuilderKeyPath
 
     var body: some View {
         let surface = style.surface(for: keyPath)
-        Text("\(keyPath)")
+        Text("\(keyPath.debugDescription)")
             .foregroundStyle(surface?.anyShapeStyle ?? AnyShapeStyle(.white))
     }
 }

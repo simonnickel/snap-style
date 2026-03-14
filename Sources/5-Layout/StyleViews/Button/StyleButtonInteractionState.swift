@@ -8,7 +8,7 @@ import SnapStyleComponents
 import SnapStyleDefinitions
 import SwiftUI
 
-/// A Button that provides a Binding to `Style.Component.InteractionState` that is updated on interaction.
+/// A Button that provides a Binding to `Style.Container.InteractionState` that is updated on interaction.
 public struct StyleButtonInteractionState<Content>: View where Content : View {
     
     @Environment(\.style) private var style
@@ -69,7 +69,7 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
         }
 #if os(macOS)
         .onHover(perform: { isHovering in
-            stateSet.isHovering = isHovering
+            state.isHovering = isHovering
         })
 #else
         .hoverEffect(.highlight) // , isEnabled: isEnabled
@@ -110,7 +110,7 @@ struct IsPressedButtonStyle: ButtonStyle {
     StyleButtonInteractionState($state) {
 
     } content: {
-        Text("Button: \n\(state)")
+        Text("Button: \n\(String(describing: state))")
             .padding()
             .background(state == .normal ? .yellow : .orange)
     }

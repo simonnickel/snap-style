@@ -7,7 +7,7 @@ import SwiftUI
 
 extension Style {
 
-    /// A bundle of `Definition` (aka `SnapStyle`) and `Context` to use in Views via the Environment.
+    /// A bundle of `Style` (the definition container) and `Context` to use in Views via the Environment.
     /// The `definition` contains the value generation logic and caches. It needs the `context` to produce the output.
     /// They are bundled to simplify value access by accessing a single entry from the environment.
     public struct ContextWrapper {

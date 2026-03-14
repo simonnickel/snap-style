@@ -8,6 +8,8 @@ extension Style {
 
     // MARK: - Context
 
+    /// A set of variables, environment values and configurations that influence the styling of elements.
+    /// Is shared via the `Environment` as part of `ContextWrapper`.
     public struct Context: Hashable {
 
         internal typealias Key = AnyHashable

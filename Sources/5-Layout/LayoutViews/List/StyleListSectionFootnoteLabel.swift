@@ -23,8 +23,7 @@ internal struct ListSectionFooterLabel: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .style(padding: \.paddingListRowLeading, .leading)
-            .style(padding: \.paddingListFooterTop, .top)
+            .style(padding: \.listSectionFooter)
             .style(element: .footnote)
             .textCase(nil)
     }

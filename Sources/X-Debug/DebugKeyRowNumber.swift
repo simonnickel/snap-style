@@ -8,11 +8,11 @@ import SwiftUI
 
 struct DebugKeyRowNumber: View {
 
-    let keyPath: Style.Attributes.Number.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Number.ValueBuilderKeyPath
 
     var body: some View {
         HStack {
-            Text("\(keyPath)")
+            Text("\(keyPath.debugDescription)")
         }
     }
 }

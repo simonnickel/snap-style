@@ -3,7 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyleBase
 import SwiftUI
 
 /// Scales the property based on DynamicType and the scale factor defined in the style context.
@@ -14,7 +13,7 @@ import SwiftUI
 /// ```
 @propertyWrapper public struct ScaledValue: DynamicProperty {
     
-    public typealias Value = Style.Attributes.Number.Value.WrappedValue
+    public typealias Value = Style.Attribute.Number.Value.WrappedValue
     
     @Environment(\.style) private var style
     
@@ -30,7 +29,7 @@ import SwiftUI
 
 }
 
-/// Provides a scaled value based on the Key, scaling is influence by DynamicType and the scale factor defined in the style context.
+/// Provides a scaled value based on a KeyPath, scaling is influenced by DynamicType and the scale factor defined in the style context.
 ///
 /// Define your property:
 /// ```
@@ -38,8 +37,8 @@ import SwiftUI
 /// ```
 @propertyWrapper public struct ScaledNumber: DynamicProperty {
     
-    public typealias KeyPath = Style.Attributes.Number.ValueBuilderKeyPath
-    public typealias Value = Style.Attributes.Number.Value.WrappedValue
+    public typealias KeyPath = Style.Attribute.Number.ValueBuilderKeyPath
+    public typealias Value = Style.Attribute.Number.Value.WrappedValue
 
     @Environment(\.style) private var style
     
@@ -58,8 +57,8 @@ import SwiftUI
 
 // MARK: - Preview
 
-extension Style.Attributes.Number {
-    public var examplePreview: ValueBuilder { .base(.definition(.value(50))) }
+extension Style.Attribute.Number {
+    public var examplePreview: ValueBuilder { .base(.value(.scaled(50))) }
 }
 
 #Preview {
@@ -76,5 +75,5 @@ extension Style.Attributes.Number {
     
     return MyView()
         .style(scaleFactor: 2)
-        .styleSetup()
+        .styleSetupLazy()
 }

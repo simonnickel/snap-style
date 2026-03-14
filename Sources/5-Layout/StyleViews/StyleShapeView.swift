@@ -10,10 +10,10 @@ public struct StyleShapeView: View {
 
     @Environment(\.style) private var style
 
-    let shape: Style.Attributes.Shape.Value
-    let surface: Style.Attributes.Surface.ValueBuilderKeyPath
+    let shape: Style.Attribute.Shape.Value
+    let surface: Style.Attribute.Surface.ValueBuilderKeyPath
 
-    public init(shape: Style.Attributes.Shape.Value, surface: Style.Attributes.Surface.ValueBuilderKeyPath) {
+    public init(shape: Style.Attribute.Shape.Value, surface: Style.Attribute.Surface.ValueBuilderKeyPath) {
         self.shape = shape
         self.surface = surface
     }

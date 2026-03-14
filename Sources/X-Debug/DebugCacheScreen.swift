@@ -39,7 +39,7 @@ public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
                         item(context: context, value: value)
                     }
                 } header: {
-                    Text("\(keyPath) - \(contexts.count)")
+                    Text("\(keyPath.debugDescription) - \(contexts.count)")
                 }
             } else {
                 EmptyView()
@@ -56,12 +56,12 @@ public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
 }
 
 #Preview {
-    DebugCacheScreen<Style.Attributes.Font>()
+    DebugCacheScreen<Style.Attribute.Font>()
         .styleOverride(
             fonts: [
-                \.title: .base(.definition(.with(size: 6))) { context in
+                \.title: .base(.value(.with(size: 6))) { context in
                     switch context.element.hierarchy {
-                        case .primary: .definition(.with(size: 16))
+                        case .primary: .value(.with(size: 16))
                         default: nil
                     }
 

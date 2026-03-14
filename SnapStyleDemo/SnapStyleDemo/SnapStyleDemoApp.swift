@@ -17,8 +17,8 @@ struct SnapStyleDemoApp: App {
     
     struct Content: View {
         
-        let demoConfiguration = DemoConfiguration()
-        let style: Style = Style(
+        @State var demoConfiguration = DemoConfiguration()
+        @State var style: Style = Style(
             configuration: .init(
                 allowNavigationBarTitleAdjustments: true
             )
@@ -33,8 +33,8 @@ struct SnapStyleDemoApp: App {
                         \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                     ],
                     accents: [
-                        \.primary : .base(.definition(.value(demoConfiguration.accentPrimary))),
-                        \.secondary : .base(.definition(.value(demoConfiguration.accentSecondary))),
+                        \.primary : .base(.value(demoConfiguration.accentPrimary)),
+                        \.secondary : .base(.value(demoConfiguration.accentSecondary)),
                     ]
                 )
                 .styleSetup(style)
