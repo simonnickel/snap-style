@@ -15,7 +15,7 @@ struct DebugKeyRowSurface: View {
 
     var body: some View {
         let surface = style.surface(for: keyPath)
-        Text("\(keyPath)")
+        Text("\(keyPath.debugDescription)")
             .foregroundStyle(surface?.anyShapeStyle ?? AnyShapeStyle(.white))
     }
 }

@@ -12,7 +12,7 @@ struct DebugKeyRowComposition: View {
     let keyPath: Style.Attribute.Composition.ValueBuilderKeyPath
 
     var body: some View {
-        Text("\(keyPath)")
+        Text("\(keyPath.debugDescription)")
             .style(composition: keyPath)
     }
 }

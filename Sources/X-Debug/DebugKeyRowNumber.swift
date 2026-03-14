@@ -12,7 +12,7 @@ struct DebugKeyRowNumber: View {
 
     var body: some View {
         HStack {
-            Text("\(keyPath)")
+            Text("\(keyPath.debugDescription)")
         }
     }
 }

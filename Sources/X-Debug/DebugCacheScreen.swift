@@ -39,7 +39,7 @@ public struct DebugCacheScreen<AttributeType: StyleAttribute>: View {
                         item(context: context, value: value)
                     }
                 } header: {
-                    Text("\(keyPath) - \(contexts.count)")
+                    Text("\(keyPath.debugDescription) - \(contexts.count)")
                 }
             } else {
                 EmptyView()

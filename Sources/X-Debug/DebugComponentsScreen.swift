@@ -31,7 +31,7 @@ public struct DebugComponentsScreen: View {
             HStack {
                 Picker("Component", selection: $component) {
                     ForEach(components, id: \.self) { component in
-                        Text("\(component)")
+                        Text("\(component.description)")
                     }
                 }
             }
@@ -44,7 +44,7 @@ public struct DebugComponentsScreen: View {
                 StyleStack {
                     DebugElementsView(hierarchy: hierarchy)
                 }
-                .style(component: component ?? .screen)
+                .style(component: component)
             }
         }
     }

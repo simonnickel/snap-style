@@ -12,7 +12,7 @@ struct DebugKeyRowFont: View {
 
     var body: some View {
         HStack {
-            Text("\(keyPath)")
+            Text("\(keyPath.debugDescription)")
                 .style(font: keyPath)
         }
     }

@@ -267,7 +267,7 @@ extension Style.Views.List.Row {
                     // FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).
                     // .pickerStyle(.menu)
                     
-                case .pickInline(let values, let titleKeyPath, selection: let selection): EmptyView()
+                case .pickInline(_, _, selection: _): EmptyView()
 
             }
         }

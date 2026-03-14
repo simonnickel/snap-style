@@ -11,8 +11,6 @@ import SwiftUI
 /// An HStack that drops to a new line.
 /// Inspired by: https://swiftwithmajid.com/2022/11/16/building-custom-layout-in-swiftui-basics/
 public struct StyleFlowLayout: Layout {
-    
-    @Environment(\.style) private var style
 
     // Cannot use Style.Attribute.Number.ValueBuilderKeyPath because Environment is not available in Layout.
     private let spacingH: Style.Attribute.Number.Value.WrappedValue?

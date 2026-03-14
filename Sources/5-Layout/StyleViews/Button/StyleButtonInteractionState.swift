@@ -110,7 +110,7 @@ struct IsPressedButtonStyle: ButtonStyle {
     StyleButtonInteractionState($state) {
 
     } content: {
-        Text("Button: \n\(state)")
+        Text("Button: \n\(String(describing: state))")
             .padding()
             .background(state == .normal ? .yellow : .orange)
     }

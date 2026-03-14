@@ -99,11 +99,11 @@ extension Style.Attribute.Surface {
         .builderWrapper { context in
             let accentBase = context.accentPrimary.base
             let accentComplementary = context.accentPrimary.complementary
-            let accentContrast = context.accentPrimary.contrast
+//            let accentContrast = context.accentPrimary.contrast
             
             let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
             let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
-            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
+//            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .value(.any(AnyShapeStyle(
                 MeshGradient(width: 4, height: 4, points: [
@@ -124,11 +124,11 @@ extension Style.Attribute.Surface {
     public var accentGradientStrong: ValueBuilder {
         .builderWrapper { context in
             let accentBase = context.accentPrimary.base
-            let accentComplementary = context.accentPrimary.complementary
+//            let accentComplementary = context.accentPrimary.complementary
             let accentContrast = context.accentPrimary.contrast
             
             let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
-            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
+//            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
             let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
             return .value(.any(AnyShapeStyle(

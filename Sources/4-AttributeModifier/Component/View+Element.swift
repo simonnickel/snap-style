@@ -41,10 +41,7 @@ private struct ElementApplyStyleModifier: ViewModifier {
     @Environment(\.style) private var style
 
     func body(content: Content) -> some View {
-        let component = style.context.component
         let element = style.context.element.type
-
-        let base = Style.Component.base
 
         content
             .style(apply: Style.Attribute.Font.self, for: element)
