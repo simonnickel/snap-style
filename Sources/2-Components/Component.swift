@@ -66,7 +66,9 @@ extension Style {
         }
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.hashValue == rhs.hashValue
+            lhs.id == rhs.id
+            && lhs.hierarchy == rhs.hierarchy
+            && lhs.container == rhs.container
         }
 
     }

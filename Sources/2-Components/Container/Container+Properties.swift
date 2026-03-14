@@ -53,7 +53,9 @@ extension Style.Container {
         }
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.hashValue == rhs.hashValue
+            lhs.id == rhs.id
+            && lhs.requiresSecondaryAccent == rhs.requiresSecondaryAccent
+            && lhs.ignoresSafeAreaEdges == rhs.ignoresSafeAreaEdges
         }
 
     }
