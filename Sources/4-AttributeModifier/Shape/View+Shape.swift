@@ -77,10 +77,17 @@ extension Style.Component {
     
     static let previewShape: Self = .init(
         "previewShape",
+        container: .contentCard,
         compositions: { element in
             switch element {
             case .icon: \.interactiveContainer
                 default: nil
+            }
+        },
+        paddings:  { element in
+            switch element {
+            case .icon: \.containerCard
+            default: nil
             }
         },
         shapes: { element in
@@ -89,13 +96,6 @@ extension Style.Component {
                 default: nil
             }
         },
-        paddings:  { element in
-            switch element {
-                case .icon: \.containerCard
-                default: nil
-            }
-        },
-        container: .contentCard
     )
                                          
 }

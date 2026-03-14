@@ -16,31 +16,31 @@ extension Style {
 
         public let id: String
         public let hierarchy: Hierarchy
-
-        package let fonts: Mapping<Attribute.Font>?
-        package let surfaces: Mapping<Attribute.Surface>?
-        package let compositions: Mapping<Attribute.Composition>?
-        package let shapes: Mapping<Attribute.Shape>?
-        package let paddings: Mapping<Attribute.Padding>?
         package let container: Style.Container.Properties?
+
+        package let compositions: Mapping<Attribute.Composition>?
+        package let fonts: Mapping<Attribute.Font>?
+        package let paddings: Mapping<Attribute.Padding>?
+        package let shapes: Mapping<Attribute.Shape>?
+        package let surfaces: Mapping<Attribute.Surface>?
 
         public init(
             _ id: String,
             hierarchy: Hierarchy = .primary,
-            fonts: Mapping<Attribute.Font>? = nil,
-            surfaces: Mapping<Attribute.Surface>? = nil,
-            compositions: Mapping<Attribute.Composition>? = nil,
-            shapes: Mapping<Attribute.Shape>? = nil,
-            paddings: Mapping<Attribute.Padding>? = nil,
             container: Style.Container.Properties? = nil,
+            compositions: Mapping<Attribute.Composition>? = nil,
+            fonts: Mapping<Attribute.Font>? = nil,
+            paddings: Mapping<Attribute.Padding>? = nil,
+            shapes: Mapping<Attribute.Shape>? = nil,
+            surfaces: Mapping<Attribute.Surface>? = nil,
         ) {
             self.id = id
             self.hierarchy = hierarchy
-            self.fonts = fonts
-            self.surfaces = surfaces
             self.compositions = compositions
-            self.shapes = shapes
+            self.fonts = fonts
             self.paddings = paddings
+            self.shapes = shapes
+            self.surfaces = surfaces
             self.container = container
         }
 

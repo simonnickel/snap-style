@@ -48,6 +48,7 @@ extension Style.Component {
     
     static let previewPadding: Self = .init(
         "previewPadding",
+        container: .contentCard,
         compositions: { element in
             switch element {
                 case .icon: \.accentContainer
@@ -60,7 +61,6 @@ extension Style.Component {
                 default: nil
             }
         },
-        container: .contentCard
     )
                                          
 }

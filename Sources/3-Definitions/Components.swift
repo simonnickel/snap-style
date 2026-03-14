@@ -15,19 +15,20 @@ extension Style.Component {
     // MARK: - Base
     
     public static let base: Self = .init("base",
-        fonts: { element in
+        container: .base,
+        compositions: { element in
             switch element {
-                case .any: \.anyElement
-                case .title: \.title
-                case .label: \.label
-                case .icon: \.icon
-                case .accessory: \.accessory
-                case .value: \.value
-                case .separator: \.separator
-                case .footnote: \.footnote
+            case .any: \.anyElement
+            case .title: \.title
+            case .label: \.label
+            case .icon: \.icon
+            case .accessory: \.accessory
+            case .value: \.value
+            case .separator: \.separator
+            case .footnote: \.footnote
             }
         },
-        compositions: { element in
+        fonts: { element in
             switch element {
                 case .any: \.anyElement
                 case .title: \.title
@@ -45,13 +46,13 @@ extension Style.Component {
             default: nil
             }
         },
-        container: .base,
     )
     
     
     // MARK: - Screen
 
     public static let screen: Self = .init("screen",
+        container: .screen,
         fonts: { element in
             switch element {
                 case .title: \.screenTitle
@@ -64,39 +65,39 @@ extension Style.Component {
                 default: nil
             }
         },
-        container: .screen,
     )
 
     
     // MARK: - Content Card
     
     public static let contentCard: Self = .init("contentCard",
+        container: .contentCard,
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
                 default: \.content
             }
         },
-        container: .contentCard,
     )
     
     
     // MARK: - Accent Card
     
     public static let accentCard: Self = .init("accentCard",
+        container: .accentCard,
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
                 default: \.content
             }
         },
-        container: .accentCard,
     )
     
     
     // MARK: - Metric Card
     
     public static let metricCard: Self = .init("metricCard",
+        container: .metricCard,
         fonts: { element in
             switch element {
                 case .title: \.content
@@ -105,23 +106,29 @@ extension Style.Component {
                 default: \.card
             }
         },
-        container: .metricCard,
     )
     
     
     // MARK: - List
     
     public static let list: Self = .init("list",
+        container: .screen,
         fonts: { element in
             switch element {
                 case .title: \.listSectionHeader
                 default: nil
             }
         },
-        container: .screen,
     )
     
     public static let listRow: Self = .init("listRow",
+        container: .listRow,
+        compositions: { element in
+            switch element {
+            case .icon, .accessory: \.interactiveIndicator
+            default: nil
+            }
+        },
         fonts: { element in
             switch element {
                 case .icon: \.listIcon
@@ -129,13 +136,6 @@ extension Style.Component {
                 default: \.list
             }
         },
-        compositions: { element in
-            switch element {
-                case .icon, .accessory: \.interactiveIndicator
-                default: nil
-            }
-        },
-        container: .listRow,
     )
     
     
@@ -143,18 +143,19 @@ extension Style.Component {
 
     public static func button(_ hierarchy: Hierarchy) -> Self {
         Self("button", hierarchy: hierarchy,
+            container: .button,
             fonts: { element in
                switch element {
                    case .icon: \.buttonIcon
                    default: \.buttonTitle
                }
             },
-            container: .button,
         )
     }
     
     public static func buttonIconOnly(_ hierarchy: Hierarchy = .primary) -> Self {
         Self("buttonIconOnly", hierarchy: hierarchy,
+            container: .buttonIconOnly,
             fonts: { element in
                switch element {
                    case .icon: \.buttonIconOnly
@@ -162,7 +163,6 @@ extension Style.Component {
 
                }
             },
-            container: .buttonIconOnly,
         )
     }
     

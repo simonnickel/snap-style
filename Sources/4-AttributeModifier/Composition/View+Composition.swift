@@ -104,6 +104,7 @@ extension Style.Component {
     
     static let previewComposition: Self = .init(
         "previewComposition",
+        container: .contentCard,
         compositions: { element in
             switch element {
             case .icon: \.accentContainer
@@ -116,7 +117,6 @@ extension Style.Component {
                 default: nil
             }
         },
-        container: .contentCard
     )
                                          
 }

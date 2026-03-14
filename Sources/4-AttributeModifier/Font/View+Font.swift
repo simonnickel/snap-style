@@ -70,13 +70,13 @@ extension Style.Component {
     
     static let previewFont: Self = .init(
         "previewFont",
+        container: .contentCard,
         fonts: { element in
             switch element {
             case .icon: \.listIcon
                 default: nil
             }
         },
-        container: .contentCard
     )
                                          
 }

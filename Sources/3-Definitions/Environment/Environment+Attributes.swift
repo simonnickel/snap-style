@@ -18,14 +18,6 @@ public protocol StyleAttributeEnvironmentKeyPathProvider: StyleAttribute {
 // MARK: - EnvironmentValues
 
 extension EnvironmentValues {
-    @Entry public var styleFontAny: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontTitle: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontLabel: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontIcon: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontValue: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontAccessory: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontSeparator: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var styleFontFootnote: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
 
     @Entry public var styleCompositionAny: Style.Attribute.Composition.ValueBuilderKeyPath? = \.anyElement
     @Entry public var styleCompositionTitle: Style.Attribute.Composition.ValueBuilderKeyPath? = \.anyElement
@@ -35,6 +27,24 @@ extension EnvironmentValues {
     @Entry public var styleCompositionAccessory: Style.Attribute.Composition.ValueBuilderKeyPath? = \.anyElement
     @Entry public var styleCompositionSeparator: Style.Attribute.Composition.ValueBuilderKeyPath? = \.anyElement
     @Entry public var styleCompositionFootnote: Style.Attribute.Composition.ValueBuilderKeyPath? = \.anyElement
+    
+    @Entry public var styleFontAny: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontTitle: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontLabel: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontIcon: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontValue: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontAccessory: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontSeparator: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var styleFontFootnote: Style.Attribute.Font.ValueBuilderKeyPath? = \.anyElement
+
+    @Entry public var stylePaddingAny: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingTitle: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingLabel: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingIcon: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingValue: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingAccessory: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingSeparator: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
+    @Entry public var stylePaddingFootnote: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
 
     @Entry public var styleShapeAny: Style.Attribute.Shape.ValueBuilderKeyPath? = \.anyElement
     @Entry public var styleShapeTitle: Style.Attribute.Shape.ValueBuilderKeyPath? = \.anyElement
@@ -45,35 +55,10 @@ extension EnvironmentValues {
     @Entry public var styleShapeSeparator: Style.Attribute.Shape.ValueBuilderKeyPath? = \.anyElement
     @Entry public var styleShapeFootnote: Style.Attribute.Shape.ValueBuilderKeyPath? = \.anyElement
 
-    @Entry public var stylePaddingAny: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingTitle: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingLabel: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingIcon: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingValue: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingAccessory: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingSeparator: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
-    @Entry public var stylePaddingFootnote: Style.Attribute.Padding.ValueBuilderKeyPath? = \.anyElement
 }
 
 
 // MARK: - Provider
-
-extension Style.Attribute.Font: StyleAttributeEnvironmentKeyPathProvider {
-
-    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
-        switch element {
-            case .any: \.styleFontAny
-            case .title: \.styleFontTitle
-            case .label: \.styleFontLabel
-            case .icon: \.styleFontIcon
-            case .value: \.styleFontValue
-            case .accessory: \.styleFontAccessory
-            case .separator: \.styleFontSeparator
-            case .footnote: \.styleFontFootnote
-        }
-    }
-    
-}
 
 extension Style.Attribute.Composition: StyleAttributeEnvironmentKeyPathProvider {
 
@@ -92,18 +77,18 @@ extension Style.Attribute.Composition: StyleAttributeEnvironmentKeyPathProvider 
     
 }
 
-extension Style.Attribute.Shape: StyleAttributeEnvironmentKeyPathProvider {
+extension Style.Attribute.Font: StyleAttributeEnvironmentKeyPathProvider {
 
     public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
         switch element {
-            case .any: \.styleShapeAny
-            case .title: \.styleShapeTitle
-            case .label: \.styleShapeLabel
-            case .icon: \.styleShapeIcon
-            case .value: \.styleShapeValue
-            case .accessory: \.styleShapeAccessory
-            case .separator: \.styleShapeSeparator
-            case .footnote: \.styleShapeFootnote
+            case .any: \.styleFontAny
+            case .title: \.styleFontTitle
+            case .label: \.styleFontLabel
+            case .icon: \.styleFontIcon
+            case .value: \.styleFontValue
+            case .accessory: \.styleFontAccessory
+            case .separator: \.styleFontSeparator
+            case .footnote: \.styleFontFootnote
         }
     }
     
@@ -121,6 +106,23 @@ extension Style.Attribute.Padding: StyleAttributeEnvironmentKeyPathProvider {
             case .accessory: \.stylePaddingAccessory
             case .separator: \.stylePaddingSeparator
             case .footnote: \.stylePaddingFootnote
+        }
+    }
+    
+}
+
+extension Style.Attribute.Shape: StyleAttributeEnvironmentKeyPathProvider {
+
+    public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
+        switch element {
+            case .any: \.styleShapeAny
+            case .title: \.styleShapeTitle
+            case .label: \.styleShapeLabel
+            case .icon: \.styleShapeIcon
+            case .value: \.styleShapeValue
+            case .accessory: \.styleShapeAccessory
+            case .separator: \.styleShapeSeparator
+            case .footnote: \.styleShapeFootnote
         }
     }
     
