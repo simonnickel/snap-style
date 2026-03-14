@@ -18,12 +18,8 @@ extension View {
     /// Define a value of an attribute for an element in the environment.
     @ViewBuilder
     public func style<Attribute: StyleAttributeEnvironmentKeyPathProvider>(define: Attribute.Type, key: Attribute.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        if let key {
-            let keyPath = Attribute.environmentKeyPath(for: element)
-            environment(keyPath, key)
-        } else {
-            self
-        }
+        let keyPath = Attribute.environmentKeyPath(for: element)
+        environment(keyPath, key)
     }
     
 }
@@ -39,15 +35,17 @@ private struct AttributeFromEnvironmentModifier<Attribute: StyleAttributeEnviron
         let keyPath = Attribute.environmentKeyPath(for: element)
 
         // Type-erase to AnyKeyPath so the cast inside each metatype branch doesn't trigger compiler warnings.
-        let key: AnyKeyPath = environment[keyPath: keyPath]
+        let key: AnyKeyPath? = environment[keyPath: keyPath]
 
         switch Attribute.self {
 
+            // TODO: Handle animation with optional
             case is Style.Attribute.Font.Type:
                 if let fontKey = key as? Style.Attribute.Font.ValueBuilderKeyPath {
                     content.modifier(FontModifier(keyPath: fontKey))
                 } else { content }
 
+            // TODO: Handle animation with optional
             case is Style.Attribute.Composition.Type:
                 if let compositionKey = key as? Style.Attribute.Composition.ValueBuilderKeyPath {
                     content.modifier(CompositionModifier(keyPath: compositionKey, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
