@@ -41,7 +41,7 @@ extension Style.Views.List.Row {
             self.content = content
         }
         
-        /// An alternative init is required for variant that does not specify a `Content`.
+        /// An alternative init is required for call sites that do not specify a `Content`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
             icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
@@ -56,7 +56,7 @@ extension Style.Views.List.Row {
             self.content = nil
         }
         
-        /// An alternative init is required for variant that does not specify a `SelectionValue`.
+        /// An alternative init is required for call sites that do not specify a `SelectionValue`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
             icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
@@ -72,7 +72,7 @@ extension Style.Views.List.Row {
             self.content = content
         }
         
-        /// An alternative init is required for variant that does not specify a `SelectionValue`, without a definition of `Content`.
+        /// An alternative init is required for call sites that do not specify a `SelectionValue` or `Content`.
         public init(
             _ variant: Style.Views.List.Row.Variant<SelectionValue> = .plain,
             icon: Style.Attribute.Icon.ValueBuilderKeyPath? = nil,
@@ -245,7 +245,7 @@ extension Style.Views.List.Row {
                         .style(element: .accessory)
                     
                 case .enabled(let isOn):
-                    // Placed in an overlay to not influence the rows height.
+                    // Placed in an overlay to not influence the row's height.
                     ZStack {}
                         .overlay(alignment: .trailing) {
                             Toggle(isOn: isOn) {
@@ -261,7 +261,7 @@ extension Style.Views.List.Row {
                         }
                     }
                     .labelsHidden()
-                    // Removed padding to not influence the rows height.
+                    // Removed padding to not influence the row's height.
                     .padding(.vertical, -10)
                     // FB19360250: Setting .menu explicitly disables full row interaction. Default is .menu anyway.
                     // FB19360025: Need to set .menu explicitly to apply tint color, but this would prevent full row interaction (FB19360250).

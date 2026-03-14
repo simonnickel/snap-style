@@ -9,7 +9,7 @@ import SwiftUI
 
 // Composition is used to:
 // - define surfaces for different layers
-// - select surfaces based on the component state and level
+// - select surfaces based on the container state and level
 
 extension Style.Attribute.Composition {
     

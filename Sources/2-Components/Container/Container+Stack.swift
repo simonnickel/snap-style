@@ -37,12 +37,12 @@ extension Style.Container {
 
         // MARK: Level
 
-        /// Level of components independent of `Component`.
+        /// Level of containers independent of their identity.
         package var levelOverall: Int {
             items.count - 1
         }
 
-        /// Level of consistent `Component` stacked without interruption.
+        /// Level of consistent `Properties` stacked without interruption.
         package var level: Int {
             var result = 1
             var index = items.count - 1

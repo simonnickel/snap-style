@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SnapStyleComponents
 
-// ComponentDefinition is used to:
+// Style.Component is used to:
 // - assign KeyPaths to elements
 
 extension Style.Component {

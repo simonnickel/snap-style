@@ -32,8 +32,8 @@ private struct SurfaceForegroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         // Has to be applied even if no value is present, to allow animation of appearing value.
-        /// The key`\.none` results in `nil`.
-        /// `.primary` is used to apply no specifc value and use the environments `foregroundStyle`.
+        /// The key `\.none` results in `nil`.
+        /// `.primary` is used to apply no specific value and use the environment's `foregroundStyle`.
         let surface = style.surface(for: keyPath ?? \.none)
         content
             .foregroundStyle(surface?.anyShapeStyle ?? AnyShapeStyle(.primary))

@@ -5,8 +5,8 @@
 
 extension Style {
 
-    /// A container to hold the configured `ValueBuilder` for all `Attributes`.
-    /// It is a struct to easliy be copied when definitions branch off in the view hierarchy.
+    /// A container to hold the configured `ValueBuilder` for all `Attribute` types.
+    /// It is a struct to easily be copied when definitions branch off in the view hierarchy.
     internal struct BuilderContainer: Copyable {
 
         internal var numbers: [Attribute.Number.ValueBuilderKeyPath: [Attribute.Number.ValueBuilder]] = [:]

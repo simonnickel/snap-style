@@ -7,7 +7,7 @@ import SwiftUI
 
 extension View {
 
-    /// Setup the view hierarchy and `Context` to use the styling.
+    /// Set up the view hierarchy and `Context` to use the styling.
     /// ```
     /// @State var style: Style = Style()
     ///
@@ -22,7 +22,7 @@ extension View {
     }
     
     #if DEBUG
-    /// Convenience definition to allow a setup without a dedicated `Style` container, e.g. for Previews.
+    /// Convenience definition to allow a setup without a dedicated `Style` instance, e.g. for Previews.
     /// The container is re-instantiated on body evaluations.
     public func styleSetupLazy() -> some View {
         self.styleSetup(Style())

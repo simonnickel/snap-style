@@ -74,7 +74,7 @@ extension Style {
 }
 
 
-// MARK: - SnapStyle: replaced
+// MARK: - Style: replaced
 
 extension Style {
 

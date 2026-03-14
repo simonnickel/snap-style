@@ -11,7 +11,7 @@ extension View {
 
     /// Applies the container.
     /// - Parameters:
-    ///   - container: `ContainerDefinition` to use.
+    ///   - container: `Properties` to use.
     ///   - state: `InteractionState` the container is in.
     /// - Returns: View with applied Container.
     public func style(
@@ -106,7 +106,7 @@ private struct ContainerContextModifier18: ViewModifier {
         content
             .style(attribute: Style.Context.containerStack, value: stack)
             .onChange(of: state, initial: true) { oldValue, newValue in
-                // TODO FB: (iOS 18) Need to delay to prevent from SwiftUI skipping animations. Happens e.g. when pushing a screen on a NavigationStack.
+                // TODO FB: (iOS 18) Need to delay to prevent SwiftUI from skipping animations. Happens e.g. when pushing a screen on a NavigationStack.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     withAnimation {
                         stateInternal = newValue

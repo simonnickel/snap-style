@@ -14,7 +14,7 @@ public struct StyleFlowLayout: Layout {
     
     @Environment(\.style) private var style
 
-    // Can not use Style.Attributes.Number.ValueBuilderKeyPath because Environment is not available in Layout.
+    // Cannot use Style.Attribute.Number.ValueBuilderKeyPath because Environment is not available in Layout.
     private let spacingH: Style.Attribute.Number.Value.WrappedValue?
     private let spacingV: Style.Attribute.Number.Value.WrappedValue?
 

@@ -3,7 +3,6 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyleBase
 import SwiftUI
 
 /// Scales the property based on DynamicType and the scale factor defined in the style context.
@@ -30,7 +29,7 @@ import SwiftUI
 
 }
 
-/// Provides a scaled value based on the Key, scaling is influence by DynamicType and the scale factor defined in the style context.
+/// Provides a scaled value based on a KeyPath, scaling is influenced by DynamicType and the scale factor defined in the style context.
 ///
 /// Define your property:
 /// ```

@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     
-    /// Applies the given `Layer` of the `Composition`.
+    /// Applies the given `Layer`s of the `Composition`.
     ///
     /// Supports animated change.
     ///

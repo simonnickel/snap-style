@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
 
-    /// Applies the `Number` as `.contentMargin()`
+    /// Applies the `Number` as `.contentMargins()`
     /// 
     /// Supports animated change.
     /// 

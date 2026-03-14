@@ -155,7 +155,7 @@ extension Style.ContextWrapper {
 
     }
 
-    /// Get the surface of a layer for a `CompositionKey.ValueBuilderKeyPath`.
+    /// Get the surface of a layer for a `Composition.ValueBuilderKeyPath`.
     package func surface(
         layer: Style.Attribute.Composition.Layer,
         for keyPath: Style.Attribute.Composition.ValueBuilderKeyPath

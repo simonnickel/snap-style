@@ -5,7 +5,7 @@
 
 extension Style {
 
-    /// Top level type to wrap values created by a `ValueBuilder`. It wraps the actual value to allow generic handling of references.
+    /// Type produced by a `ValueBuilder` that represents either a direct value or a reference to another key path.
     public enum Definition<Attribute: StyleAttribute> {
 
         /// A reference to another `KeyPath`, with a set of adjustments.
