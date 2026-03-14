@@ -10,8 +10,11 @@ import SwiftUI
 
 // MARK: - Protocol
 
-public protocol StyleAttributeEnvironmentKeyPathProvider: StyleAttribute {
+/// A specific `Attribute` that can define a value for each `Element` in a `Component`.
+public protocol StyleElementAttribute: StyleAttribute {
+    
     static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?>
+    
 }
 
 
@@ -60,7 +63,7 @@ extension EnvironmentValues {
 
 // MARK: - Provider
 
-extension Style.Attribute.Composition: StyleAttributeEnvironmentKeyPathProvider {
+extension Style.Attribute.Composition: StyleElementAttribute {
 
     public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
         switch element {
@@ -77,7 +80,7 @@ extension Style.Attribute.Composition: StyleAttributeEnvironmentKeyPathProvider 
     
 }
 
-extension Style.Attribute.Font: StyleAttributeEnvironmentKeyPathProvider {
+extension Style.Attribute.Font: StyleElementAttribute {
 
     public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
         switch element {
@@ -94,7 +97,7 @@ extension Style.Attribute.Font: StyleAttributeEnvironmentKeyPathProvider {
     
 }
 
-extension Style.Attribute.Padding: StyleAttributeEnvironmentKeyPathProvider {
+extension Style.Attribute.Padding: StyleElementAttribute {
 
     public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
         switch element {
@@ -111,7 +114,7 @@ extension Style.Attribute.Padding: StyleAttributeEnvironmentKeyPathProvider {
     
 }
 
-extension Style.Attribute.Shape: StyleAttributeEnvironmentKeyPathProvider {
+extension Style.Attribute.Shape: StyleElementAttribute {
 
     public static func environmentKeyPath(for element: Style.Element.ElementType) -> WritableKeyPath<EnvironmentValues, ValueBuilderKeyPath?> {
         switch element {

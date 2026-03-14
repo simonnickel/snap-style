@@ -11,20 +11,20 @@ import SwiftUI
 extension View {
     
     /// Apply the attribute for the element defined in the environment.
-    public func style<Attribute: StyleAttributeEnvironmentKeyPathProvider>(apply: Attribute.Type, for element: Style.Element.ElementType) -> some View {
+    public func style<Attribute: StyleElementAttribute>(apply: Attribute.Type, for element: Style.Element.ElementType) -> some View {
         return modifier(AttributeFromEnvironmentModifier<Attribute>(element: element))
     }
     
     /// Define a value of an attribute for an element in the environment.
     @ViewBuilder
-    public func style<Attribute: StyleAttributeEnvironmentKeyPathProvider>(define: Attribute.Type, key: Attribute.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
+    public func style<Attribute: StyleElementAttribute>(define: Attribute.Type, key: Attribute.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
         let keyPath = Attribute.environmentKeyPath(for: element)
         environment(keyPath, key)
     }
     
 }
     
-private struct AttributeFromEnvironmentModifier<Attribute: StyleAttributeEnvironmentKeyPathProvider>: ViewModifier {
+private struct AttributeFromEnvironmentModifier<Attribute: StyleElementAttribute>: ViewModifier {
     
     @Environment(\.self) private var environment
     @Environment(\.style) private var style

@@ -37,7 +37,7 @@ extension View {
     }
     
     @ViewBuilder
-    package func setupAttributes<Attribute: StyleAttributeEnvironmentKeyPathProvider>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
+    package func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
         if let mapping {
             // TODO: Should an explicit value of nil remove the value and no entry in the mapping just be ignored?
             self
