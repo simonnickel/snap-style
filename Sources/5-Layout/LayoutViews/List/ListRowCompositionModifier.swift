@@ -47,28 +47,30 @@ private struct CompositionListRowModifier: ViewModifier {
 
 #Preview {
 
-    StyleList {
-        Text("Normal List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .normal)
-    }
-
-    StyleList {
-        Text("Highlighted List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .highlighted)
-    }
-
-    StyleList {
-        Text("Selected List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .selected)
-    }
-
-    StyleList {
-        Text("Disabled List Row")
-            .style(listRowBackground: \.listRow)
-            .style(component: .listRow, state: .disabled)
-    }
+// **Deprecated**
+//
+//    StyleList {
+//        Text("Normal List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .normal)
+//    }
+//
+//    StyleList {
+//        Text("Highlighted List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .highlighted)
+//    }
+//
+//    StyleList {
+//        Text("Selected List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .selected)
+//    }
+//
+//    StyleList {
+//        Text("Disabled List Row")
+//            .style(listRowBackground: \.listRow)
+//            .style(component: .listRow, state: .disabled)
+//    }
 
 }
