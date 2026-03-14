@@ -39,7 +39,7 @@ package struct CompositionModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attribute.Composition.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Composition.ValueBuilderKeyPath?
     let layers: [Style.Attribute.Composition.Layer]
     let ignoresSafeAreaEdges: Edge.Set
 
@@ -110,6 +110,12 @@ extension Style.Component {
                 default: nil
             }
         },
+        paddings:  { element in
+            switch element {
+                case .icon: \.containerCard
+                default: nil
+            }
+        },
         container: .contentCard
     )
                                          
@@ -130,7 +136,7 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(composition: override ? \.contentContainer : nil, for: .icon) // TODO: Animate + Back to component
+                .styleDefine(composition: override ? \.interactiveElement : nil, for: .icon)
             Toggle(isOn: $override.animation()) {
                 Text("Define override")
                     .style(element: .label)

@@ -52,6 +52,7 @@ package struct ShapeAttributeModifier: ViewModifier {
 
 // MARK: - ShapeModifier
 
+/// SwiftUI does not animate shape changes.
 private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier {
 
     let shape: SomeInsettableShape
@@ -114,8 +115,9 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(shape: override ? \.rectangle : nil, for: .icon) // TODO: Animate + Back to component
-            Toggle(isOn: $override.animation()) {
+                .modifier(ShapeModifier(shape: override ? AnyInsettableShape(Rectangle()) : AnyInsettableShape(Circle()), shouldClip: true))
+                .styleDefine(shape: override ? \.rectangle : nil, for: .icon) // Does not animate!
+            Toggle(isOn: $override.animation(.bouncy.delay(2))) {
                 Text("Define override")
                     .style(element: .label)
             }

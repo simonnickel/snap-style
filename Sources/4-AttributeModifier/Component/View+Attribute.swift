@@ -39,17 +39,11 @@ private struct AttributeFromEnvironmentModifier<Attribute: StyleAttributeEnviron
 
         switch Attribute.self {
 
-            // TODO: Handle animation with optional
             case is Style.Attribute.Font.Type:
-                if let fontKey = key as? Style.Attribute.Font.ValueBuilderKeyPath {
-                    content.modifier(FontModifier(keyPath: fontKey))
-                } else { content }
+                content.modifier(FontModifier(keyPath: key as? Style.Attribute.Font.ValueBuilderKeyPath))
 
-            // TODO: Handle animation with optional
             case is Style.Attribute.Composition.Type:
-                if let compositionKey = key as? Style.Attribute.Composition.ValueBuilderKeyPath {
-                    content.modifier(CompositionModifier(keyPath: compositionKey, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
-                } else { content }
+                content.modifier(CompositionModifier(keyPath: key as? Style.Attribute.Composition.ValueBuilderKeyPath, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
 
             case is Style.Attribute.Shape.Type:
                 content.modifier(ShapeAttributeModifier(keyPath: key as? Style.Attribute.Shape.ValueBuilderKeyPath, shouldClip: false))

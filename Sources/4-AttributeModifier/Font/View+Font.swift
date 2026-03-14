@@ -27,10 +27,12 @@ package struct FontModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let keyPath: Style.Attribute.Font.ValueBuilderKeyPath
+    let keyPath: Style.Attribute.Font.ValueBuilderKeyPath?
 
     package func body(content: Content) -> some View {
-        let properties = style.font(for: keyPath)
+        let properties: Style.Attribute.Font.Value.Properties? = if let keyPath {
+            style.font(for: keyPath)
+        } else { nil }
         content
             .modifier(ScaledFont(properties: properties))
     }
@@ -94,7 +96,7 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(font: override ? \.screenTitle : nil, for: .icon) // TODO: Should animate
+                .styleDefine(font: override ? \.screenTitle : nil, for: .icon)
             Toggle(isOn: $override.animation()) {
                 Text("Define override")
                     .style(element: .label)
