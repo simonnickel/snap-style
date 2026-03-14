@@ -23,22 +23,21 @@ extension Style.Container {
         package let shape: Attribute.Shape.ValueBuilderKeyPath?
         package let padding: Attribute.Padding.ValueBuilderKeyPath?
 
-        // TODO: rename to singular
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             ignoresSafeAreaEdges: Edge.Set = [],
-            surfaces: Attribute.Surface.ValueBuilderKeyPath? = nil,
-            compositions: Attribute.Composition.ValueBuilderKeyPath? = nil,
-            shapes: Attribute.Shape.ValueBuilderKeyPath? = nil,
+            surface: Attribute.Surface.ValueBuilderKeyPath? = nil,
+            composition: Attribute.Composition.ValueBuilderKeyPath? = nil,
+            shape: Attribute.Shape.ValueBuilderKeyPath? = nil,
             padding: Attribute.Padding.ValueBuilderKeyPath? = nil,
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
             self.ignoresSafeAreaEdges = ignoresSafeAreaEdges
-            self.surface = surfaces
-            self.composition = compositions
-            self.shape = shapes
+            self.surface = surface
+            self.composition = composition
+            self.shape = shape
             self.padding = padding
         }
 

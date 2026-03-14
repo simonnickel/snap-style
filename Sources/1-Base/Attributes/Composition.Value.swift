@@ -14,7 +14,6 @@ extension Style.Attribute.Composition {
 
     // MARK: - Layer
 
-    // TODO: Move inside the Value/Definition?
     public enum Layer: CaseIterable {
         case any
         case foreground

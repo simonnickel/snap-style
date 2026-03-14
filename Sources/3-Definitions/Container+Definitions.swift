@@ -11,8 +11,8 @@ extension Style.Container.Properties {
     // MARK: - Base
     
     public static let base: Self = .init("base",
-        compositions: \.anyContainer,
-        shapes: \.anyContainer,
+        composition: \.anyContainer,
+        shape: \.anyContainer,
         padding: \.anyContainer,
     )
 
@@ -21,16 +21,16 @@ extension Style.Container.Properties {
 
     public static let screen: Self = .init("screen",
         ignoresSafeAreaEdges: .all,
-        compositions: \.screen,
-        shapes: nil,
+        composition: \.screen,
+        shape: nil,
     )
     
     
     // MARK: - Content Card
     
     public static let contentCard: Self = .init("contentCard",
-        compositions: \.containerContentCard,
-        shapes: \.containerCard,
+        composition: \.containerContentCard,
+        shape: \.containerCard,
         padding: \.containerCard,
     )
     
@@ -39,8 +39,8 @@ extension Style.Container.Properties {
     
     public static let accentCard: Self = .init("accentCard",
         requiresSecondaryAccent: true,
-        compositions: \.containerAccentCard,
-        shapes: \.containerCard,
+        composition: \.containerAccentCard,
+        shape: \.containerCard,
         padding: \.containerCard,
     )
     
@@ -49,8 +49,8 @@ extension Style.Container.Properties {
     
     public static let metricCard: Self = .init("metricCard",
         requiresSecondaryAccent: true,
-        compositions: \.containerMetricCard,
-        shapes: \.containerMetricCard,
+        composition: \.containerMetricCard,
+        shape: \.containerMetricCard,
         padding: \.containerMetricCard,
     )
     
@@ -58,7 +58,7 @@ extension Style.Container.Properties {
     // MARK: - List
     
     public static let listRow: Self = .init("listRow",
-        compositions: \.listRow,
+        composition: \.listRow,
         padding: \.listRow,
     )
     
@@ -66,14 +66,14 @@ extension Style.Container.Properties {
     // MARK: - Button
     
     public static let button: Self = .init("button",
-        compositions: \.containerAction,
-        shapes: \.containerAction,
+        composition: \.containerAction,
+        shape: \.containerAction,
         padding: \.containerAction,
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",
-        compositions: \.interactiveContainer,
-        shapes: \.containerActionIconOnly,
+        composition: \.interactiveContainer,
+        shape: \.containerActionIconOnly,
         padding: \.containerActionIconOnly,
     )
     
