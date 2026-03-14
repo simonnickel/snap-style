@@ -130,7 +130,7 @@ private struct StyleNavigationBarScaledModifier: ViewModifier {
         with style: Style.ContextWrapper,
         size: Double
     ) -> UIFont {
-        let design = style.context.fontDesign ?? .default
+        let design = style.context.fontDesign
         let fontSizeMax = style.number(for: \.fontSizeNavigationTitleMax, scaled: false) ?? 60
         var fontStyle = style.font(for: keyPath)
         // Max size has to be limited, otherwise the text is shortened anyway.

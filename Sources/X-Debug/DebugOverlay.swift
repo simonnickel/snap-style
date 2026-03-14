@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapFoundation
 import SnapStyle
 import SwiftUI
 
@@ -56,8 +57,8 @@ internal struct DebugOverlayModifier: ViewModifier {
 
     var viewInfo: some View {
         StyleStack(isStretching: false) {
-            Text("Content: \(geometrySizeContent)")
-            Text("Screen:   \(geometrySizeScreen)")
+            Text("Content: \(geometrySizeContent.description)")
+            Text("Screen:   \(geometrySizeScreen.description)")
             Text("top: \(geometrySafeAreaInsets.top.formatted()), l: \(geometrySafeAreaInsets.leading.formatted()), b: \(geometrySafeAreaInsets.bottom.formatted()), t: \(geometrySafeAreaInsets.trailing.formatted())")
             if let info {
                 Text("\(info)")

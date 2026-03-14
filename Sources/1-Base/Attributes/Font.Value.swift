@@ -63,7 +63,7 @@ extension Style.Attribute.Font {
                 self.textStyle = textStyle
             }
 
-            public var description: String { "size: \(size), weight: \(weight), width: \(width), design: \(design), textStyle: \(textStyle)" }
+            public var description: String { "size: \(size), weight: \(weight), width: \(width, default: "-"), design: \(design, default: "-"), textStyle: \(textStyle)" }
 
         }
 

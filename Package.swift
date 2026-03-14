@@ -102,7 +102,8 @@ let package = Package(
         .target(
             name: "SnapStyleDebug",
             dependencies: [
-                "SnapStyle"
+                "SnapStyle",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
             path: "Sources/X-Debug",
         ),
