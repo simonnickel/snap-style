@@ -26,15 +26,14 @@ extension View {
     }
     
     /// Convenience shortcut to define a `Composition` for an element via environment.
-    public func styleDefine(
+    public func style(
+        define element: Style.Element.ElementType,
         composition key: Style.Attribute.Composition.ValueBuilderKeyPath?,
-        for element: Style.Element.ElementType,
         shouldClear: Bool = false,
     ) -> some View {
         style(
-            define: Style.Attribute.Composition.self,
+            define: element,
             key: key,
-            for: element,
             shouldClear: shouldClear,
         )
     }
@@ -145,7 +144,7 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(composition: override ? \.interactiveElement : nil, for: .icon)
+                .style(define: .icon, composition: override ? \.interactiveElement : nil)
             Toggle(isOn: $override.animation()) {
                 Text("Define override")
                     .style(element: .label)

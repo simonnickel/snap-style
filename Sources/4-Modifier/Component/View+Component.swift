@@ -39,14 +39,14 @@ extension View {
         if let mapping {
             // TODO: Should an explicit value of nil remove the value and no entry in the mapping just be ignored?
             self
-                .style(define: Attribute.self, key: mapping(.any), for: .any)
-                .style(define: Attribute.self, key: mapping(.title), for: .title)
-                .style(define: Attribute.self, key: mapping(.label), for: .label)
-                .style(define: Attribute.self, key: mapping(.icon), for: .icon)
-                .style(define: Attribute.self, key: mapping(.value), for: .value)
-                .style(define: Attribute.self, key: mapping(.accessory), for: .accessory)
-                .style(define: Attribute.self, key: mapping(.separator), for: .separator)
-                .style(define: Attribute.self, key: mapping(.footnote), for: .footnote)
+                .style(define: .any, key: mapping(.any))
+                .style(define: .title, key: mapping(.title))
+                .style(define: .label, key: mapping(.label))
+                .style(define: .icon, key: mapping(.icon))
+                .style(define: .value, key: mapping(.value))
+                .style(define: .accessory, key: mapping(.accessory))
+                .style(define: .separator, key: mapping(.separator))
+                .style(define: .footnote, key: mapping(.footnote))
         } else {
             self
         }

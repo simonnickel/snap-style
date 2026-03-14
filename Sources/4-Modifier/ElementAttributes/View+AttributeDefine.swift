@@ -13,9 +13,8 @@ extension View {
     /// Define a value of an attribute for an element in the environment.
     @ViewBuilder
     public func style<Attribute: StyleElementAttribute>(
-        define: Attribute.Type,
+        define element: Style.Element.ElementType,
         key: Attribute.ValueBuilderKeyPath?,
-        for element: Style.Element.ElementType,
         shouldClear: Bool = false,
     ) -> some View {
         let keyPath = Attribute.environmentKeyPath(for: element)

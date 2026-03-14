@@ -15,15 +15,14 @@ extension View {
     }
     
     /// Convenience shortcut to define a `Shape` for an element via environment.
-    public func styleDefine(
+    public func style(
+        define element: Style.Element.ElementType,
         shape key: Style.Attribute.Shape.ValueBuilderKeyPath?,
-        for element: Style.Element.ElementType,
         shouldClear: Bool = false,
     ) -> some View {
         style(
-            define: Style.Attribute.Shape.self,
+            define: element,
             key: key,
-            for: element,
             shouldClear: shouldClear,
         )
     }
@@ -125,7 +124,7 @@ extension Style.Component {
             Image(systemName: "star")
                 .style(element: .icon)
                 .modifier(ShapeModifier(shape: override ? AnyInsettableShape(Rectangle()) : AnyInsettableShape(Circle()), shouldClip: true))
-                .styleDefine(shape: override ? \.rectangle : nil, for: .icon) // Does not animate!
+                .style(define: .icon, shape: override ? \.rectangle : nil) // Does not animate!
             Toggle(isOn: $override.animation(.bouncy.delay(2))) {
                 Text("Define override")
                     .style(element: .label)

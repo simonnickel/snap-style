@@ -14,15 +14,14 @@ extension View {
     }
     
     /// Convenience shortcut to define a `Padding` for an element via environment.
-    public func styleDefine(
+    public func style(
+        define element: Style.Element.ElementType,
         padding key: Style.Attribute.Padding.ValueBuilderKeyPath?,
-        for element: Style.Element.ElementType,
         shouldClear: Bool = false,
     ) -> some View {
         style(
-            define: Style.Attribute.Padding.self,
+            define: element,
             key: key,
-            for: element,
             shouldClear: shouldClear,
         )
     }
@@ -89,7 +88,7 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(padding: override ? \.listRow : nil, for: .icon)
+                .style(define: .icon, padding: override ? \.listRow : nil)
             Toggle(isOn: $override.animation()) {
                 Text("Define override")
                     .style(element: .label)
