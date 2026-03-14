@@ -50,16 +50,16 @@ extension Style.Attribute.Composition {
     public var listRow: ValueBuilder {
         .builder { context in
 #if os(macOS)
-            return switch context.component.state {
+            return switch context.containerStack.currentState {
                 case .disabled:
-                        .definition(.layers([
-                            .foreground: \.disabled, .background: \.contentBackground
-                        ]))
+                    .value(.layers([
+                        .foreground: \.disabled, .background: \.contentBackground
+                    ]))
 
-                case .normal, .inactive, .highlighted, .selected:
-                        .definition(.layers([
-                            .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
-                        ]))
+                case .normal, .inactive, .highlighted, .selected, .none:
+                    .value(.layers([
+                        .foreground: \.onContent0, .backgroundOverlay: \.stateOverlayAccented
+                    ]))
             }
 #else
             .reference(\.contentContainer)
