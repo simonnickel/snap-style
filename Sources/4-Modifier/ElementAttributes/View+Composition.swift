@@ -26,8 +26,17 @@ extension View {
     }
     
     /// Convenience shortcut to define a `Composition` for an element via environment.
-    public func styleDefine(composition key: Style.Attribute.Composition.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        style(define: Style.Attribute.Composition.self, key: key, for: element)
+    public func styleDefine(
+        composition key: Style.Attribute.Composition.ValueBuilderKeyPath?,
+        for element: Style.Element.ElementType,
+        shouldClear: Bool = false,
+    ) -> some View {
+        style(
+            define: Style.Attribute.Composition.self,
+            key: key,
+            for: element,
+            shouldClear: shouldClear,
+        )
     }
 
 }

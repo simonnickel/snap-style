@@ -15,13 +15,6 @@ extension View {
         return modifier(AttributeFromEnvironmentModifier<Attribute>(element: element))
     }
     
-    /// Define a value of an attribute for an element in the environment.
-    @ViewBuilder
-    public func style<Attribute: StyleElementAttribute>(define: Attribute.Type, key: Attribute.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        let keyPath = Attribute.environmentKeyPath(for: element)
-        environment(keyPath, key)
-    }
-    
 }
     
 private struct AttributeFromEnvironmentModifier<Attribute: StyleElementAttribute>: ViewModifier {

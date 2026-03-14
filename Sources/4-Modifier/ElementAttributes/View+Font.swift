@@ -14,8 +14,17 @@ extension View {
     }
     
     /// Convenience shortcut to define a `Font` for an element via environment.
-    public func styleDefine(font key: Style.Attribute.Font.ValueBuilderKeyPath?, for element: Style.Element.ElementType) -> some View {
-        style(define: Style.Attribute.Font.self, key: key, for: element)
+    public func styleDefine(
+        font key: Style.Attribute.Font.ValueBuilderKeyPath?,
+        for element: Style.Element.ElementType,
+        shouldClear: Bool = false,
+    ) -> some View {
+        style(
+            define: Style.Attribute.Font.self,
+            key: key,
+            for: element,
+            shouldClear: shouldClear,
+        )
     }
 
 }
