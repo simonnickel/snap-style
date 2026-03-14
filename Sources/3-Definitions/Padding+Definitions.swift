@@ -7,11 +7,12 @@ import SnapStyleBase
 import SnapStyleComponents
 
 extension Style.Attribute.Padding {
+    
+    
+    // MARK: - Component
 
-    public var screenTitleLeading: ValueBuilder {
-        .base(.value(.edges([.leading], value: \.paddingCard)))
-    }
-
+    public var anyContainer: ValueBuilder { .base(nil) }
+    
     public var containerCard: ValueBuilder {
         .base(.value(.all(\.paddingCard)))
     }
@@ -27,16 +28,15 @@ extension Style.Attribute.Padding {
     public var containerActionIconOnly: ValueBuilder {
         .base(.value(.all(\.paddingActionIconOnly)))
     }
-    
-    
-    // MARK: - Component
-
-    public var anyContainer: ValueBuilder { .base(nil) }
 
     
     // MARK: - Element
 
     public var anyElement: ValueBuilder { .base(nil) }
+    
+    public var screenTitleLeading: ValueBuilder {
+        .base(.value(.edges([.leading], value: \.paddingCard)))
+    }
     
     
     // MARK: - List

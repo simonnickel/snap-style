@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
     
     public func style(padding keyPath: Style.Attribute.Padding.ValueBuilderKeyPath?) -> some View {
-        modifier(PaddingModifier(keyPath: keyPath))
+        modifier(PaddingAttributeModifier(keyPath: keyPath))
     }
     
     /// Convenience shortcut to define a `Padding` for an element via environment.
@@ -23,7 +23,7 @@ extension View {
 
 // MARK: - Modifier
 
-private struct PaddingModifier: ViewModifier {
+private struct PaddingAttributeModifier: ViewModifier {
     
     @Environment(\.style) private var style
     

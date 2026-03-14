@@ -42,12 +42,12 @@ private struct ContainerApplyStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         let base = Style.Container.Properties.base
 
-        let padding = container.padding ?? base.padding
+        let paddingKeyPath = container.padding ?? base.padding
         let compositionKeyPath = container.composition ?? base.composition ?? \.anyContainer
         let shapeKeyPath = container.shape ?? base.shape
 
         content
-            .style(padding: padding)
+            .style(padding: paddingKeyPath)
             .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }
