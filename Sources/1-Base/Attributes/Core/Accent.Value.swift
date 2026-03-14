@@ -40,7 +40,7 @@ extension Style.Attribute.Accent {
         public var wrappedValue: WrappedValue { self }
         
         public var description: String {
-            "\(self)" // TODO: Proper description
+            "\(self)" // TODO finetuning: Proper description
         }
 
     }
