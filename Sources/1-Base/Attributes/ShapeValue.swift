@@ -23,6 +23,7 @@ extension Style.Attribute.Shape {
         case containerRelative
         case circle
         case capsule
+        case ellipse
         case rectangle
         case rectangleRounded(radius: Style.Attribute.Number.ValueBuilderKeyPath)
         
@@ -35,6 +36,7 @@ extension Style.Attribute.Shape {
                 case .containerRelative: "ContainerRelative"
                 case .circle: "Circle"
                 case .capsule: "Capsule"
+                case .ellipse: "Ellipse"
                 case .rectangle: "Rectangle"
                 case .rectangleRounded(radius: let radius): "RectangleRounded, radius: \(radius)"
             }
@@ -48,6 +50,8 @@ extension Style.Attribute.Shape {
                 case .circle: Circle()
                     
                 case .capsule: Capsule()
+                
+                case .ellipse: Ellipse()
                     
                 case .rectangle: Rectangle()
                     

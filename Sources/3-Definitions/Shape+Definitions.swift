@@ -9,7 +9,10 @@ import SnapStyleComponents
 extension Style.Attribute.Shape {
 
     public var containerRelative: ValueBuilder { .base(.value(.containerRelative)) }
+    public var rectangle: ValueBuilder { .base(.value(.rectangle)) }
     public var circle: ValueBuilder { .base(.value(.circle)) }
+    public var capsule: ValueBuilder { .base(.value(.capsule)) }
+    public var ellipse: ValueBuilder { .base(.value(.ellipse)) }
     
 
     // MARK: - Component
