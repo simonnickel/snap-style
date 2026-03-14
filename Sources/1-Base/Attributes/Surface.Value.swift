@@ -16,7 +16,7 @@ extension Style.Attribute.Surface {
 
     public enum Value: StyleValue {
 
-        /// Does not define a type for WrappedValue for easier access.
+        /// WrappedValue maps to Self for easier access.
         public typealias WrappedValue = Self
         public typealias Adjustment = Style.Attribute.Surface.Adjustment
 

@@ -13,7 +13,7 @@ extension Style.Container {
 
         public typealias Attribute = Style.Attribute
         
-        /// Closure that provides a ValueBuilder from an Attribute type. Required instead of using KeyPath directly to allow the type to be `Sendable`.
+        /// Closure that provides a KeyPath to a ValueBuilder from an Attribute type. Required instead of using KeyPath directly to allow the type to be `Sendable`.
         public typealias KeyPathProvider<Attribute: StyleAttribute> = @Sendable () -> Attribute.ValueBuilderKeyPath
 
         public let id: String

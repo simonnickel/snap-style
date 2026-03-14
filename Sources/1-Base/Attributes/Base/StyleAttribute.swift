@@ -4,7 +4,7 @@
 //
 
 /// A `StyleAttribute` defines a dimension of styling applied to a View and is used as a generic constraint of a `Value`.
-/// It is defined by a Value and provides  types for a `ValueBuilder` to create values of the attribute.
+/// It is defined by a Value and provides types for a `ValueBuilder` to create values of the attribute.
 public protocol StyleAttribute {
 
     associatedtype Value: StyleValue
@@ -23,8 +23,8 @@ public protocol StyleAttribute {
 
 public protocol StyleValue: CustomStringConvertible {
 
-    /// A Type to separate the Definition from the Value.
-    /// NOTE: WrappedValue could map to `Self`if forwarding initializers is inconvenient. In most cases its convenient to have a separate type though.
+    /// A type to separate the Definition from the Value.
+    /// NOTE: WrappedValue could map to `Self` if forwarding initializers is inconvenient. In most cases its convenient to have a separate type though.
     associatedtype WrappedValue
     associatedtype Adjustment: StyleAdjustment where Self == Adjustment.Value
 
