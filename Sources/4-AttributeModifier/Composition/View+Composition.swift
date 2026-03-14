@@ -99,7 +99,7 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Animation") {
 
     @Previewable @State var isAccent: Bool = false
 
@@ -115,7 +115,7 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
             isAccent.toggle()
         }
     } label: {
-        Text("Toggle Accent")
+        Text("Toggle")
     }
 
 }

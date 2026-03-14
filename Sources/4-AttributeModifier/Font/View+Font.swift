@@ -77,6 +77,23 @@ private struct ScaledFont: ViewModifier {
 
 }
 
+#Preview("Animation") {
+
+    @Previewable @State var isActive: Bool = true
+
+    Text("Some Preview Content")
+        .style(font: isActive ? \.title : \.footnote)
+
+    Button {
+        withAnimation {
+            isActive.toggle()
+        }
+    } label: {
+        Text("Toggle")
+    }
+
+}
+
 #if DEBUG
 extension Style.Component {
     

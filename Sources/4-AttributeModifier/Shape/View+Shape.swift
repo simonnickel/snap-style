@@ -71,7 +71,7 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Animation") {
 
     @Previewable @State var isActive: Bool = true
 

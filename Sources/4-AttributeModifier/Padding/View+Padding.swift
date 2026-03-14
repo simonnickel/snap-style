@@ -60,12 +60,15 @@ extension Style.Component {
                 default: nil
             }
         },
+        container: .contentCard
     )
                                          
 }
 #endif
 
 #Preview("Component") {
+    
+    @Previewable @State var override: Bool = true
 
     VStack(alignment: .leading, spacing: 15) {
         HStack {
@@ -77,29 +80,13 @@ extension Style.Component {
         HStack {
             Image(systemName: "star")
                 .style(element: .icon)
-                .styleDefine(padding: \.listRow, for: .icon)
-            Text("Padding override")
-                .style(element: .label)
+                .styleDefine(padding: override ? \.listRow : nil, for: .icon)
+            Toggle(isOn: $override.animation()) {
+                Text("Define override")
+                    .style(element: .label)
+            }
         }
     }
     .style(component: .previewPadding)
-
-}
-
-#Preview("Animation") {
-
-    @Previewable @State var isActive: Bool = true
-
-    Text("Some Preview Content")
-        .style(padding: isActive ? \.containerCard : nil)
-        .background(.green)
-
-    Button {
-        withAnimation {
-            isActive.toggle()
-        }
-    } label: {
-        Text("Toggle")
-    }
 
 }
