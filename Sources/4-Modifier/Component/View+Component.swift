@@ -36,19 +36,18 @@ extension View {
     
     @ViewBuilder
     package func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
-        if let mapping {
-            self
-                .style(define: .any, key: mapping(.any))
-                .style(define: .title, key: mapping(.title))
-                .style(define: .label, key: mapping(.label))
-                .style(define: .icon, key: mapping(.icon))
-                .style(define: .value, key: mapping(.value))
-                .style(define: .accessory, key: mapping(.accessory))
-                .style(define: .separator, key: mapping(.separator))
-                .style(define: .footnote, key: mapping(.footnote))
-        } else {
-            self
-        }
+        
+        // Make sure to clear values even if no mapping is defined.
+        let map = mapping ?? { _ in nil }
+        self
+            .style(define: .any, key: map(.any), shouldClear: true)
+            .style(define: .title, key: map(.title), shouldClear: true)
+            .style(define: .label, key: map(.label), shouldClear: true)
+            .style(define: .icon, key: map(.icon), shouldClear: true)
+            .style(define: .value, key: map(.value), shouldClear: true)
+            .style(define: .accessory, key: map(.accessory), shouldClear: true)
+            .style(define: .separator, key: map(.separator), shouldClear: true)
+            .style(define: .footnote, key: map(.footnote), shouldClear: true)
     }
 
 }

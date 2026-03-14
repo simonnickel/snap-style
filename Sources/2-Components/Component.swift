@@ -11,7 +11,7 @@ extension Style {
     /// Defines the style of a `View` by mapping values for `Style.Attribute`s defined as `ValueBuilderKeyPath` to semantic `ElementType`s.
     public struct Component: Hashable, Equatable, Sendable {
 
-        /// Maps an `ElementType` to a `ValueBuilderKeyPath`
+        /// Maps an `ElementType` to a `ValueBuilderKeyPath`, cannot use KeyPath directly, because it is not Sendable.
         public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
 
         public let id: String
