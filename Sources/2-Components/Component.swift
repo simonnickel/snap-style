@@ -22,7 +22,6 @@ extension Style {
         package let fonts: Mapping<Attribute.Font>?
         package let paddings: Mapping<Attribute.Padding>?
         package let shapes: Mapping<Attribute.Shape>?
-        package let surfaces: Mapping<Attribute.Surface>?
 
         public init(
             _ id: String,
@@ -32,7 +31,6 @@ extension Style {
             fonts: Mapping<Attribute.Font>? = nil,
             paddings: Mapping<Attribute.Padding>? = nil,
             shapes: Mapping<Attribute.Shape>? = nil,
-            surfaces: Mapping<Attribute.Surface>? = nil,
         ) {
             self.id = id
             self.hierarchy = hierarchy
@@ -40,7 +38,6 @@ extension Style {
             self.fonts = fonts
             self.paddings = paddings
             self.shapes = shapes
-            self.surfaces = surfaces
             self.container = container
         }
 
