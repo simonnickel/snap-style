@@ -16,7 +16,7 @@ extension Style.ContextWrapper {
         }
 
         var result: Attribute.Value?
-        let builders = definition.builderContainer.builder(for: keyPath)
+        let builders = definition.builderContainer.builders(for: keyPath)
 
         // Build value from overrides
         for builder in builders {

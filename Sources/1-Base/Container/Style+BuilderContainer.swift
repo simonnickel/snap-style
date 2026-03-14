@@ -21,48 +21,51 @@ extension Style {
 
         // MARK: Get
 
-        internal func builder<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath) -> [Attribute.ValueBuilder] {
+        internal func builders<Attribute: StyleAttribute>(for keyPath: Attribute.ValueBuilderKeyPath) -> [Attribute.ValueBuilder] {
 
-            switch keyPath {
+            // Type-erase to Any​Key​Path, this prevents the compiler from warning "cast always fails"
+            let anyKeyPath: AnyKeyPath = keyPath
 
-                case let keyPath as KeyPath<Style.Attribute.Number, Style.Attribute.Number.ValueBuilder>:
-                    if let builders = numbers[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
-                    }
-                
-                case let keyPath as KeyPath<Style.Attribute.Padding, Style.Attribute.Padding.ValueBuilder>:
-                    if let builders = paddings[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+            switch Attribute.self {
+
+                case is Style.Attribute.Number.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Number.ValueBuilderKeyPath {
+                        return numbers[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case let keyPath as KeyPath<Style.Attribute.Font, Style.Attribute.Font.ValueBuilder>:
-                    if let builders = fonts[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+                case is Style.Attribute.Padding.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Padding.ValueBuilderKeyPath {
+                        return paddings[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case let keyPath as KeyPath<Style.Attribute.Icon, Style.Attribute.Icon.ValueBuilder>:
-                    if let builders = icons[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+                case is Style.Attribute.Font.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Font.ValueBuilderKeyPath {
+                        return fonts[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case let keyPath as KeyPath<Style.Attribute.Surface, Style.Attribute.Surface.ValueBuilder>:
-                    if let builders = surfaces[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+                case is Style.Attribute.Icon.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Icon.ValueBuilderKeyPath {
+                        return icons[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case let keyPath as KeyPath<Style.Attribute.Composition, Style.Attribute.Composition.ValueBuilder>:
-                    if let builders = compositions[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
-                    }
-                    
-                case let keyPath as KeyPath<Style.Attribute.Accent, Style.Attribute.Accent.ValueBuilder>:
-                    if let builders = accents[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+                case is Style.Attribute.Surface.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Surface.ValueBuilderKeyPath {
+                        return surfaces[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case let keyPath as KeyPath<Style.Attribute.Shape, Style.Attribute.Shape.ValueBuilder>:
-                    if let builders = shapes[keyPath] as? [Attribute.ValueBuilder] {
-                        return builders
+                case is Style.Attribute.Composition.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Composition.ValueBuilderKeyPath {
+                        return compositions[key] as? [Attribute.ValueBuilder] ?? []
+                    }
+
+                case is Style.Attribute.Accent.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Accent.ValueBuilderKeyPath {
+                        return accents[key] as? [Attribute.ValueBuilder] ?? []
+                    }
+
+                case is Style.Attribute.Shape.Type:
+                    if let key = anyKeyPath as? Style.Attribute.Shape.ValueBuilderKeyPath {
+                        return shapes[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
                 default: fatalError("Not defined for \(Attribute.self)")

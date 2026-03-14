@@ -37,21 +37,27 @@ private struct AttributeFromEnvironmentModifier<Attribute: StyleAttributeEnviron
     
     func body(content: Content) -> some View {
         let keyPath = Attribute.environmentKeyPath(for: element)
-        let key = environment[keyPath: keyPath]
 
-        switch key {
-            
-            case let kp as KeyPath<Style.Attribute.Font, Style.Attribute.Font.ValueBuilder>:
-                content.modifier(FontModifier(keyPath: kp))
-            
-            case let kp as KeyPath<Style.Attribute.Composition, Style.Attribute.Composition.ValueBuilder>:
-                content.modifier(CompositionModifier(keyPath: kp, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
-            
-            case let kp as KeyPath<Style.Attribute.Shape, Style.Attribute.Shape.ValueBuilder>:
-                content.modifier(ShapeAttributeModifier(keyPath: kp, shouldClip: false))
-            
+        // Type-erase to AnyKeyPath so the cast inside each metatype branch doesn't trigger compiler warnings.
+        let key: AnyKeyPath = environment[keyPath: keyPath]
+
+        switch Attribute.self {
+
+            case is Style.Attribute.Font.Type:
+                if let fontKey = key as? Style.Attribute.Font.ValueBuilderKeyPath {
+                    content.modifier(FontModifier(keyPath: fontKey))
+                } else { content }
+
+            case is Style.Attribute.Composition.Type:
+                if let compositionKey = key as? Style.Attribute.Composition.ValueBuilderKeyPath {
+                    content.modifier(CompositionModifier(keyPath: compositionKey, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
+                } else { content }
+
+            case is Style.Attribute.Shape.Type:
+                content.modifier(ShapeAttributeModifier(keyPath: key as? Style.Attribute.Shape.ValueBuilderKeyPath, shouldClip: false))
+
             default: content
-            
+
         }
     }
     
