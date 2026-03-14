@@ -34,20 +34,20 @@ extension View {
         .style(attribute: Style.Context.component, value: component)
     }
     
-    @ViewBuilder
     package func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
-        
+
         // Make sure to clear values even if no mapping is defined.
-        let map = mapping ?? { _ in nil }
         self
-            .style(define: .any, key: map(.any), shouldClear: true)
-            .style(define: .title, key: map(.title), shouldClear: true)
-            .style(define: .label, key: map(.label), shouldClear: true)
-            .style(define: .icon, key: map(.icon), shouldClear: true)
-            .style(define: .value, key: map(.value), shouldClear: true)
-            .style(define: .accessory, key: map(.accessory), shouldClear: true)
-            .style(define: .separator, key: map(.separator), shouldClear: true)
-            .style(define: .footnote, key: map(.footnote), shouldClear: true)
+            .style(define: .any, key: mapping?(.any), shouldClear: true)
+            .style(define: .title, key: mapping?(.title), shouldClear: true)
+            .style(define: .label, key: mapping?(.label), shouldClear: true)
+            .style(define: .icon, key: mapping?(.icon), shouldClear: true)
+            .style(define: .value, key: mapping?(.value), shouldClear: true)
+            .style(define: .accessory, key: mapping?(.accessory), shouldClear: true)
+            .style(define: .separator, key: mapping?(.separator), shouldClear: true)
+            .style(define: .footnote, key: mapping?(.footnote), shouldClear: true)
     }
 
 }
+
+
