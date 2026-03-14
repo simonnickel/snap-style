@@ -7,7 +7,13 @@ extension Style {
     
     /// Container Type to hierarchically structure implementations of `StyleAttribute`.
     public enum Attribute {
-        case accent, composition, font, icon, number, padding, shape, surface
+        
+        // Core Attributes
+        case accent, icon, number, surface
+        
+        // Element Attributes
+        case composition, font, padding, shape
+        
     }
     
 }

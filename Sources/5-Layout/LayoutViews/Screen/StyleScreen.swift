@@ -6,7 +6,7 @@
 import SnapFoundation
 import SnapStyleBase
 import SnapStyleComponents
-import SnapStyleAttributeModifier
+import SnapStyleModifier
 import SnapStyleDefinitions
 import SwiftUI
 
