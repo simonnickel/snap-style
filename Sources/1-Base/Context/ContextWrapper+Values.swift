@@ -67,7 +67,7 @@ extension Style.ContextWrapper {
 
     package func cgFloat(for keyPath: Style.Attribute.Number.ValueBuilderKeyPath?, scaled: Bool = true) -> CGFloat? {
 
-        guard let value = number(for: keyPath) else { return nil }
+        guard let value = number(for: keyPath, scaled: scaled) else { return nil }
 
         return CGFloat(value)
 
