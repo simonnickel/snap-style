@@ -107,6 +107,16 @@ let package = Package(
             ],
             path: "Sources/X-Debug",
         ),
+        // Tests
+        .testTarget(
+            name: "SnapStyleTests",
+            dependencies: [
+                "SnapStyleBase",
+                "SnapStyleComponents",
+                "SnapStyleDefinitions",
+            ],
+            path: "Tests/SnapStyleTests",
+        ),
     ],
     swiftLanguageModes: [.version("6")]
 )
