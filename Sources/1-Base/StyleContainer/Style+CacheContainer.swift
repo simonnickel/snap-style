@@ -44,29 +44,36 @@ extension Style {
         }
 
         /// Creates a new cache, the old cache will still be in use for a different style definition.
+        ///
+        /// Cross-attribute dependencies exist but never require cascading cache resets:
+        /// - `Composition.Value` stores `Surface.ValueBuilderKeyPath` references per layer.
+        /// - `Accent.Value` stores `Surface.ValueBuilderKeyPath` references for its color slots.
+        /// - `Padding.Value` stores `Number.ValueBuilderKeyPath` references per edge.
+        ///
+        /// Because cached values store key path references (not resolved values), each attribute's
+        /// cache is independent. The referenced attribute's actual value is resolved separately at
+        /// access time, so only the directly changed attribute's cache needs resetting.
         internal mutating func resetCache<Attribute: StyleAttribute>(for: Attribute.Type) {
             switch Attribute.self {
 
+                // Referenced by Padding (key path refs, not resolved values).
                 case is Style.Attribute.Number.Type: numbers = .init()
-                
+
+                // References Number (key path refs, not resolved values).
                 case is Style.Attribute.Padding.Type: paddings = .init()
 
                 case is Style.Attribute.Font.Type: fonts = .init()
 
                 case is Style.Attribute.Icon.Type: icons = .init()
 
-                case is Style.Attribute.Surface.Type:
-                    compositions = .init()
-                    surfaces = .init()
+                // Referenced by Composition and Accent (key path refs, not resolved values).
+                case is Style.Attribute.Surface.Type: surfaces = .init()
 
-                case is Style.Attribute.Composition.Type:
-                    compositions = .init()
-                    surfaces = .init()
-                    
-                case is Style.Attribute.Accent.Type:
-                    accents = .init()
-                    compositions = .init()
-                    surfaces = .init()
+                // References Surface (key path refs, not resolved values).
+                case is Style.Attribute.Composition.Type: compositions = .init()
+
+                // References Surface (key path refs, not resolved values).
+                case is Style.Attribute.Accent.Type: accents = .init()
 
                 case is Style.Attribute.Shape.Type: shapes = .init()
 
