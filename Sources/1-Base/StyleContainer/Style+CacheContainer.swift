@@ -80,6 +80,10 @@ extension Style {
 
     // MARK: - AttributeTypeCache
 
+    /// Per-attribute cache that maps each `ValueBuilderKeyPath` to a context-specific value cache.
+    ///
+    /// Used by `CacheContainer` to store resolved values for a single attribute type (e.g. `Number`, `Surface`).
+    /// Each key path gets its own ``ValueForContextCache`` so the same attribute can hold different resolved values for different contexts.
     package class AttributeTypeCache<Attribute: StyleAttribute> {
 
         private var content: [Attribute.ValueBuilderKeyPath: ValueForContextCache<Attribute.Value>] = [:]
@@ -115,6 +119,10 @@ extension Style {
 
     // MARK: - ValueForContextCache
 
+    /// Context-keyed cache that maps a ``Style/Context`` to a single resolved value.
+    ///
+    /// Used by ``AttributeTypeCache`` to store the resolved value for one key path across different contexts.
+    /// This allows the same attribute key path to cache distinct results when the context varies (e.g. different scale factors).
     package class ValueForContextCache<Value> {
 
         private var content: [Style.Context: Value] = [:]
