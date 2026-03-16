@@ -44,7 +44,7 @@ extension Style.Attribute.Number {
             switch context.containerStack.levelOverall {
                 case 2: .value(.scaled(10))
                 case 3: .value(.scaled(8))
-                default: .value(.scaled(12)) // also used for case 1
+                default: .value(.scaled(12)) // also used for case 1 and -1 (empty)
             }
         }
     }

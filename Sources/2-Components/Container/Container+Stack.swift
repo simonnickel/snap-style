@@ -38,6 +38,7 @@ extension Style.Container {
         // MARK: Level
 
         /// Level of containers independent of their identity.
+        /// If empty it is -1.
         package var levelOverall: Int {
             items.count - 1
         }
