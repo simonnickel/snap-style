@@ -8,6 +8,8 @@ import SwiftUI
 
 extension View {
     
+    // TODO: Rename
+    
     /// Convenience modifier to access a `Number` and use it in a closure to use as input for other modifiers.
     ///
     /// Supports animated change.

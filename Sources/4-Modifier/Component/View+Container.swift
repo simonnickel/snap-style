@@ -19,11 +19,11 @@ extension View {
         state: Style.Container.InteractionState = .normal
     ) -> some View {
         self
-            .style(container: container)
+            .styleApply(container: container)
             .modifier(ContainerContextModifier(container: container, state: state))
     }
 
-    private func style(container: Style.Container.Properties) -> some View {
+    private func styleApply(container: Style.Container.Properties) -> some View {
         self
             .modifier(ContainerApplyStyleModifier(container: container))
     }

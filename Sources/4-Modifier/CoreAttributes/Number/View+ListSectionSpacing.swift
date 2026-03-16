@@ -12,8 +12,8 @@ extension View {
     /// Applies the `Number` as `.listSectionSpacing()`
     ///
     /// - Parameter valueKeyPath: Number to apply as spacing.
-    public func styleListSectionSpacing(
-        _ valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath
+    public func style(
+        listSectionSpacing valueKeyPath: Style.Attribute.Number.ValueBuilderKeyPath
     ) -> some View {
         modifier(
             ListSectionSpacingModifier(spacing: valueKeyPath)
@@ -70,5 +70,5 @@ private struct ListSectionSpacingModifier: ViewModifier {
             Text("System Inset")
         }
     }
-    .styleListSectionSpacing(\.spacingSections)
+    .style(listSectionSpacing: \.spacingSections)
 }

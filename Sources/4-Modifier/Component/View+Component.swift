@@ -34,7 +34,7 @@ extension View {
         .style(attribute: Style.Context.component, value: component)
     }
     
-    package func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
+    private func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
 
         // Make sure to clear values even if no mapping is defined.
         self
