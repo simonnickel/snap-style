@@ -19,9 +19,13 @@ X-Examples (this target)
 
 ## How to add a new example
 
+If it`s a generic example:
+
 1. Create a `package struct` in the appropriate implementation target's `Examples/` directory.
 2. Add `#Preview` blocks in that file or use the example in other previews within the same target.
 3. Create a `public struct` wrapper in this target (`X-Examples/`) that delegates to the `package` type.
+
+Otherwise just define it below the `// MARK: - Preview` section of the implementation.
 
 ## Constraints
 

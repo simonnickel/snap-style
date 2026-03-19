@@ -30,10 +30,20 @@ public struct ScrollingHStack<Content: View>: View {
 // MARK: - Preview
 
 #Preview {
-    ScrollingHStack {
-        ForEach(0..<10, id: \.self) { _ in
-            Text("Hello, World!")
-                .background(.yellow)
+    ScrollingHStackExample()
+}
+
+
+package struct ScrollingHStackExample: View {
+
+    package init() {}
+    
+    package var body: some View {
+        ScrollingHStack {
+            ForEach(0..<10, id: \.self) { _ in
+                Text("Hello, World!")
+                    .background(.yellow)
+            }
         }
     }
 }

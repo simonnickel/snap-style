@@ -20,15 +20,19 @@ struct ContentFlow: View {
         
         /// A generic destination to navigate to.
         case destination(String, source: String)
-
-        // Examples
-        case structured
-        case componentStack
-
+        
+        // Views
+        case viewStyleStack
+        case viewScrollingHStack
+        
         // Components
         case card
         case list
         case action
+
+        // Examples
+        case structured
+        case componentStack
 
         // Tools
         case components
@@ -48,15 +52,19 @@ struct ContentFlow: View {
                         
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
-
-                    // Examples
-                    case .structured: StructuredScreen()
-                    case .componentStack: ComponentStackScreen()
+                    
+                    // Views
+                    case .viewStyleStack: StyleStackScreen()
+                    case .viewScrollingHStack: ScrollingHStackScreen()
 
                     // Components
                     case .card: ComponentCardScreen()
                     case .list: ComponentListScreen(title: self.title, source: "")
                     case .action: ComponentActionScreen()
+                        
+                        // Examples
+                    case .structured: StructuredScreen()
+                    case .componentStack: ComponentStackScreen()
 
                     case .components: DebugComponentsScreen(components: [.base, .screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 
@@ -75,14 +83,18 @@ struct ContentFlow: View {
                 case .rootTools: "Tools"
                 case .destination(let title, _): title
 
-                // Examples
-                case .structured: "Structured"
-                case .componentStack: "Component Stack"
-
+                // Views
+                case .viewStyleStack: "StyleStack"
+                case .viewScrollingHStack: "ScrollingHStack"
+                
                 // Components
                 case .card: "Card"
                 case .list: "List"
                 case .action: "Action"
+                    
+                // Examples
+                case .structured: "Structured"
+                case .componentStack: "Component Stack"
 
                 case .components: "Components"
 

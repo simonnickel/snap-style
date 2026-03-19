@@ -18,6 +18,7 @@ struct ContentListScreen: View {
         let sections: [Section]
         
         static let examples: ViewData = ViewData(sections: [
+            Section(title: "Views", screens: [.viewStyleStack, .viewScrollingHStack]),
             Section(title: "Components", screens: [.card, .list, .action]),
             Section(title: "Examples", screens: [.structured, .componentStack]),
         ])
