@@ -18,7 +18,7 @@ struct TabContainer: View {
             }
             Tab {
                 ConfigurationButtonContainer {
-                    ContentFlow(root: .rootExamples)
+                    ExamplesFlow(root: .root)
                 }
             } label: {
                 Label("Examples", systemImage: "square.stack.3d.forward.dottedline.fill")

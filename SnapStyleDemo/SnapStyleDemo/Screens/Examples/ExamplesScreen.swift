@@ -6,13 +6,13 @@
 import SnapStyle
 import SwiftUI
 
-struct ContentListScreen: View {
+struct ExamplesScreen: View {
     
     struct ViewData {
         struct Section: Identifiable {
             var id: String { title }
             let title: String
-            let screens: [ContentFlow.Screen]
+            let screens: [ExamplesFlow.Screen]
         }
         
         let sections: [Section]
@@ -39,7 +39,7 @@ struct ContentListScreen: View {
     struct ListSection: View {
 
         let title: String
-        let screens: [ContentFlow.Screen]
+        let screens: [ExamplesFlow.Screen]
 
         var body: some View {
             Section {
@@ -58,9 +58,9 @@ struct ContentListScreen: View {
 
     struct ListRow: View {
         
-        @Environment(\.navigationState) private var navigationState
+        @Environment(\.navigationStateExamples) private var navigationState
 
-        let screen: ContentFlow.Screen
+        let screen: ExamplesFlow.Screen
 
         var body: some View {
             StyleListRow(
@@ -77,6 +77,6 @@ struct ContentListScreen: View {
 
 #Preview {
     NavigationStack {
-        ContentListScreen(data: .examples)
+        ExamplesScreen(data: .examples)
     }
 }

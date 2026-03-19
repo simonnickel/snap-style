@@ -7,7 +7,7 @@ import SnapStyle
 import SnapStyleDebug
 import SwiftUI
 
-struct ContentFlow: View {
+struct ExamplesFlow: View {
     
     @Observable class NavigationState {
         var stack: [Screen] = []
@@ -15,7 +15,7 @@ struct ContentFlow: View {
 
     @MainActor
     enum Screen: Hashable, Equatable {
-        case rootExamples
+        case root
         
         /// A generic destination to navigate to.
         case destination(String, source: String)
@@ -33,7 +33,7 @@ struct ContentFlow: View {
         var screen: some View {
             Group {
                 switch self {
-                    case .rootExamples: ContentListScreen(data: .examples)
+                    case .root: ExamplesScreen(data: .examples)
                         
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
@@ -53,7 +53,7 @@ struct ContentFlow: View {
         
         var title: String {
             switch self {
-                case .rootExamples: "Examples"
+                case .root: "Examples"
                 case .destination(let title, _): title
                 
                 // Components
@@ -79,19 +79,19 @@ struct ContentFlow: View {
                     screen.screen
                 }
         }
-        .environment(\.navigationState, navigationState)
+        .environment(\.navigationStateExamples, navigationState)
         
     }
 
 }
 
 extension EnvironmentValues {
-    @Entry var navigationState: ContentFlow.NavigationState = .init()
+    @Entry var navigationStateExamples: ExamplesFlow.NavigationState = .init()
 }
 
 
 // MARK: - Preview
 
 #Preview {
-    ContentFlow(root: .rootExamples)
+    ExamplesFlow(root: .root)
 }
