@@ -6,24 +6,19 @@
 import SnapStyle
 import SwiftUI
 
-struct ContentListScreen: View {
+struct SnapStyleScreen: View {
     
     struct ViewData {
         struct Section: Identifiable {
             var id: String { title }
             let title: String
-            let screens: [ContentFlow.Screen]
+            let screens: [SnapStyleFlow.Screen]
         }
         
         let sections: [Section]
         
-        static let examples: ViewData = ViewData(sections: [
-            Section(title: "Components", screens: [.card, .list, .action]),
-            Section(title: "Examples", screens: [.structured, .componentStack]),
-        ])
-        static let tools: ViewData = ViewData(sections: [
-            Section(title: "Tools", screens: [.components]),
-            Section(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition]),
+        static let views: ViewData = ViewData(sections: [
+            Section(title: "Views", screens: [.viewStyleStack, .viewScrollingHStack]),
         ])
     }
     
@@ -43,7 +38,7 @@ struct ContentListScreen: View {
     struct ListSection: View {
 
         let title: String
-        let screens: [ContentFlow.Screen]
+        let screens: [SnapStyleFlow.Screen]
 
         var body: some View {
             Section {
@@ -62,9 +57,9 @@ struct ContentListScreen: View {
 
     struct ListRow: View {
         
-        @Environment(\.navigationState) private var navigationState
+        @Environment(\.navigationStateSnapStyle) private var navigationState
 
-        let screen: ContentFlow.Screen
+        let screen: SnapStyleFlow.Screen
 
         var body: some View {
             StyleListRow(
@@ -81,6 +76,6 @@ struct ContentListScreen: View {
 
 #Preview {
     NavigationStack {
-        ContentListScreen(data: .examples)
+        SnapStyleScreen(data: .views)
     }
 }

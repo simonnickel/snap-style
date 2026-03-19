@@ -11,6 +11,13 @@ struct TabContainer: View {
         TabView {
             Tab {
                 ConfigurationButtonContainer {
+                    SnapStyleFlow(root: .root)
+                }
+            } label: {
+                Label("SnapStyle", systemImage: "square.stack.3d.forward.dottedline.fill")
+            }
+            Tab {
+                ConfigurationButtonContainer {
                     ContentFlow(root: .rootExamples)
                 }
             } label: {

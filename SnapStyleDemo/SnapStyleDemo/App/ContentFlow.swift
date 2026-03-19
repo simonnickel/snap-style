@@ -21,10 +21,6 @@ struct ContentFlow: View {
         /// A generic destination to navigate to.
         case destination(String, source: String)
         
-        // Views
-        case viewStyleStack
-        case viewScrollingHStack
-        
         // Components
         case card
         case list
@@ -52,10 +48,6 @@ struct ContentFlow: View {
                         
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
-                    
-                    // Views
-                    case .viewStyleStack: StyleStackScreen()
-                    case .viewScrollingHStack: ScrollingHStackScreen()
 
                     // Components
                     case .card: ComponentCardScreen()
@@ -82,10 +74,6 @@ struct ContentFlow: View {
                 case .rootExamples: "Examples"
                 case .rootTools: "Tools"
                 case .destination(let title, _): title
-
-                // Views
-                case .viewStyleStack: "StyleStack"
-                case .viewScrollingHStack: "ScrollingHStack"
                 
                 // Components
                 case .card: "Card"
