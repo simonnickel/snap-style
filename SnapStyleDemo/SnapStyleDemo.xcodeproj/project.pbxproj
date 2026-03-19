@@ -11,6 +11,7 @@
 		5A29F0992CFB229900942934 /* SnapStyle in Frameworks */ = {isa = PBXBuildFile; productRef = 5A29F0982CFB229900942934 /* SnapStyle */; };
 		5A45FF222E743DA70054D1E4 /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45FF032E743DA70054D1E4 /* DemoConfiguration.swift */; };
 		5A45FF232E743DA70054D1E4 /* SnapStyleDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45FF052E743DA70054D1E4 /* SnapStyleDemoApp.swift */; };
+		5AF911252F6C425A0087A3CA /* SnapStyleExamples in Frameworks */ = {isa = PBXBuildFile; productRef = 5AF911242F6C425A0087A3CA /* SnapStyleExamples */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 			files = (
 				5A29F0992CFB229900942934 /* SnapStyle in Frameworks */,
 				5A2959E02DC5155D002E1EEB /* SnapCore in Frameworks */,
+				5AF911252F6C425A0087A3CA /* SnapStyleExamples in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				5A45FF062E743DA70054D1E4 /* SnapStyleDemo */,
+				5AF911232F6C425A0087A3CA /* Frameworks */,
 				5A29F06B2CFB1FC000942934 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +98,13 @@
 				5A45FF632E743DD60054D1E4 /* Project */,
 			);
 			path = SnapStyleDemo;
+			sourceTree = "<group>";
+		};
+		5AF911232F6C425A0087A3CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +131,7 @@
 			packageProductDependencies = (
 				5A29F0982CFB229900942934 /* SnapStyle */,
 				5A2959DF2DC5155D002E1EEB /* SnapCore */,
+				5AF911242F6C425A0087A3CA /* SnapStyleExamples */,
 			);
 			productName = SnapStyleDemo;
 			productReference = 5A29F06A2CFB1FC000942934 /* SnapStyleDemo.app */;
@@ -431,6 +442,11 @@
 		5A29F0982CFB229900942934 /* SnapStyle */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SnapStyle;
+		};
+		5AF911242F6C425A0087A3CA /* SnapStyleExamples */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A29F0972CFB229900942934 /* XCLocalSwiftPackageReference "../../snap-style" */;
+			productName = SnapStyleExamples;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

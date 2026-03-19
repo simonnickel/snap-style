@@ -66,48 +66,5 @@ public struct StyleStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    @Previewable @State var axis: Axis = .vertical
-    @Previewable @State var stretching: Bool = true
-    @Previewable @State var spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
-
-    StyleStack(axis, isStretching: stretching) {
-        Text("Test Row 1")
-            .background(.green)
-        StyleStack(.horizontal, isStretching: stretching) {
-            Text("Test Row 2")
-                .background(.mint)
-            Text("Test Row 3")
-                .background(.teal)
-        }
-//        .style(spacing: nil)
-    }
-    .background(.yellow)
-    .style(spacing: spacing)
-
-    HStack {
-        StyleButton {
-            withAnimation {
-                axis = axis == .horizontal ? .vertical : .horizontal
-            }
-        } content: {
-            Text("Toggle Axis")
-        }
-
-        StyleButton {
-            withAnimation {
-                stretching.toggle()
-            }
-        } content: {
-            Text("Toggle Stretching")
-        }
-
-        StyleButton {
-            withAnimation {
-                spacing = spacing == nil ? \.spacingElements : nil
-            }
-        } content: {
-            Text("Toggle Spacing")
-        }
-    }
-    .padding(.top, 20)
+    StyleStackExample()
 }

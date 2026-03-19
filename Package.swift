@@ -13,6 +13,10 @@ let package = Package(
         .library(
             name: "SnapStyle",
             targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
+        // Examples target, not intended for consumers. Used by the demo app and previews.
+        .library(
+            name: "SnapStyleExamples",
+            targets: ["SnapStyleExamples"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -106,6 +110,17 @@ let package = Package(
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
             path: "Sources/X-Debug",
+        ),
+        // Examples: Re-exports package-level example views as public for the demo app.
+        .target(
+            name: "SnapStyleExamples",
+            dependencies: [
+                "SnapStyle",
+                "SnapStyleLayout",
+                "SnapStyleViews",
+                .product(name: "SnapFoundation", package: "snap-foundation"),
+            ],
+            path: "Sources/X-Examples",
         ),
         // Tests
         .testTarget(
