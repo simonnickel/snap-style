@@ -45,14 +45,14 @@ extension Style {
 
         /// Creates a new cache, the old cache will still be in use for a different style definition.
         ///
-        /// Cross-attribute dependencies exist but never require cascading cache resets:
-        /// - `Composition.Value` stores `Surface.ValueBuilderKeyPath` references per layer.
-        /// - `Accent.Value` stores `Surface.ValueBuilderKeyPath` references for its color slots.
-        /// - `Padding.Value` stores `Number.ValueBuilderKeyPath` references per edge.
-        ///
-        /// Because cached values store key path references (not resolved values), each attribute's
-        /// cache is independent. The referenced attribute's actual value is resolved separately at
+        /// When a `Value` stores references to another attribute's key paths (not resolved
+        /// values), its cache is independent — the referenced value is resolved separately at
         /// access time, so only the directly changed attribute's cache needs resetting.
+        ///
+        /// When a `ValueBuilder` uses `builderWrapper` to access another attribute and the
+        /// resolved result is cached, changing that other attribute stales the cached value.
+        /// Surface values can depend on Accent (via `builderWrapper`), so an Accent reset
+        /// must also reset the Surface cache.
         internal mutating func resetCache<Attribute: StyleAttribute>(for: Attribute.Type) {
             switch Attribute.self {
 
@@ -72,8 +72,11 @@ extension Style {
                 // References Surface (key path refs, not resolved values).
                 case is Style.Attribute.Composition.Type: compositions = .init()
 
-                // References Surface (key path refs, not resolved values).
-                case is Style.Attribute.Accent.Type: accents = .init()
+                // Surface values can be resolved from Accent data via `builderWrapper`,
+                // so changing Accent may stale cached Surface values.
+                case is Style.Attribute.Accent.Type:
+                    accents = .init()
+                    surfaces = .init()
 
                 case is Style.Attribute.Shape.Type: shapes = .init()
 

@@ -100,11 +100,12 @@ struct CacheContainerTests {
 
     // MARK: - CacheContainer.resetCache
     //
-    // Cross-attribute dependencies exist but never require cascading cache resets:
-    // Composition and Accent store Surface key path references; Padding stores Number
-    // key path references. Because cached values hold these references (not resolved
-    // values), each attribute's cache is independent — the referenced attribute's actual
-    // value is resolved separately at access time.
+    // When a Value stores key path references to another attribute, its cache is
+    // independent — the referenced value is resolved at access time.
+    //
+    // When a ValueBuilder uses `builderWrapper` to access another attribute, the
+    // resolved result is cached directly, so changing that attribute stales the cache.
+    // Surface can depend on Accent this way, so an Accent reset must also reset Surface.
 
     @Test("within-attribute reference picks up new value after resetCache")
     func resetCacheInvalidatesReference() {
@@ -187,6 +188,35 @@ struct CacheContainerTests {
 
         // Surface resolves to the new value independently.
         #expect(wrapper2.surface(for: \.testSurface)?.resolvedColor == .blue)
+    }
+
+    @Test("Accent reset also clears Surface cache — Surface resolves Accent values at cache time")
+    func resetCacheAccentClearsSurface() {
+        let definition = Style()
+
+        // Populate both Surface and Accent caches.
+        let wrapper1 = Style.ContextWrapper(definition: definition, context: .any)
+        #expect(wrapper1.surface(for: \.testSurface)?.resolvedColor == .red)
+        #expect(wrapper1.accent(for: \.testAccent)?.base == \.testSurface)
+
+        // Verify Surface cache is populated.
+        #expect(definition.cachedKeyPaths(for: Style.Attribute.Surface.self).contains(\.testSurface))
+
+        // Append a new Accent value — must reset both Accent and Surface caches.
+        let updated = definition
+            .appended(accents: [\.testAccent: .base(.value(.init(
+                base: \.testSurface,
+                onAccent: \.testSurface,
+                complementary: \.testSurface,
+                contrast: \.testSurface,
+                brightness: .dark
+            )))])
+
+        // Surface cache should have been cleared by the Accent reset.
+        #expect(updated.cachedKeyPaths(for: Style.Attribute.Surface.self).isEmpty)
+
+        // Accent cache should also have been cleared.
+        #expect(updated.cachedKeyPaths(for: Style.Attribute.Accent.self).isEmpty)
     }
 
 }
