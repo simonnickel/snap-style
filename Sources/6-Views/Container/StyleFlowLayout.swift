@@ -112,8 +112,8 @@ public struct StyleFlowLayout: Layout {
     @ScaledNumber(\.spacingElements) var spacingV
 
     StyleFlowLayout(
-        spacingH: spacingH,
-        spacingV: spacingV
+        spacingH: isActive ? spacingH : nil,
+        spacingV: isActive ? spacingV : nil,
     ) {
         ForEach(0..<7) { _ in
             Group {
@@ -148,8 +148,8 @@ public struct StyleFlowLayout: Layout {
     @ScaledNumber(\.spacingElements) var spacingV
     
     StyleFlowLayout(
-        spacingH: spacingH,
-        spacingV: spacingV
+        spacingH: isActive ? spacingH : nil,
+        spacingV: isActive ? spacingV : nil,
     ) {
         ForEach(0..<7) { _ in
             Group {
@@ -190,8 +190,8 @@ public struct StyleFlowLayout: Layout {
                 ) {} content: {
                     VStack(alignment: .leading, spacing: 0) {
                         StyleFlowLayout(
-                            spacingH: spacingH,
-                            spacingV: spacingV
+                            spacingH: isActive ? spacingH : nil,
+                            spacingV: isActive ? spacingV : nil,
                         ) {
                             ForEach(0..<7) { _ in
                                 Group {

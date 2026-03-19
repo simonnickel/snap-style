@@ -79,6 +79,7 @@ public struct StyleStack<Content>: View where Content: View {
             Text("Test Row 3")
                 .background(.teal)
         }
+//        .style(spacing: nil)
     }
     .background(.yellow)
     .style(spacing: spacing)
