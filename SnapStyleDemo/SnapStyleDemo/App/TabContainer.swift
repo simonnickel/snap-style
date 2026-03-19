@@ -25,7 +25,7 @@ struct TabContainer: View {
             }
             Tab {
                 ConfigurationButtonContainer {
-                    ContentFlow(root: .rootTools)
+                    ToolsFlow(root: .root)
                 }
             } label: {
                 Label("Tools", systemImage: "wrench.and.screwdriver.fill")

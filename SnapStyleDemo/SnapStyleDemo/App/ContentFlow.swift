@@ -16,7 +16,6 @@ struct ContentFlow: View {
     @MainActor
     enum Screen: Hashable, Equatable {
         case rootExamples
-        case rootTools
         
         /// A generic destination to navigate to.
         case destination(String, source: String)
@@ -30,21 +29,11 @@ struct ContentFlow: View {
         case structured
         case componentStack
 
-        // Tools
-        case components
-
-        // Caches
-        case cacheNumber
-        case cacheFont
-        case cacheSurface
-        case cacheComposition
-
         @ViewBuilder
         var screen: some View {
             Group {
                 switch self {
                     case .rootExamples: ContentListScreen(data: .examples)
-                    case .rootTools: ContentListScreen(data: .tools)
                         
                     case .destination(let title, source: let source):
                         ComponentListScreen(title: title, source: source)
@@ -57,13 +46,6 @@ struct ContentFlow: View {
                         // Examples
                     case .structured: StructuredScreen()
                     case .componentStack: ComponentStackScreen()
-
-                    case .components: DebugComponentsScreen(components: [.base, .screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
-
-                    case .cacheNumber: DebugCacheScreen<Style.Attribute.Number>()
-                    case .cacheFont: DebugCacheScreen<Style.Attribute.Font>()
-                    case .cacheSurface: DebugCacheScreen<Style.Attribute.Surface>()
-                    case .cacheComposition: DebugCacheScreen<Style.Attribute.Composition>()
                 }
             }
             .navigationTitle(title)
@@ -72,7 +54,6 @@ struct ContentFlow: View {
         var title: String {
             switch self {
                 case .rootExamples: "Examples"
-                case .rootTools: "Tools"
                 case .destination(let title, _): title
                 
                 // Components
@@ -83,13 +64,6 @@ struct ContentFlow: View {
                 // Examples
                 case .structured: "Structured"
                 case .componentStack: "Component Stack"
-
-                case .components: "Components"
-
-                case .cacheNumber: "Number"
-                case .cacheFont: "Font"
-                case .cacheSurface: "Surface"
-                case .cacheComposition: "Composition"
             }
         }
     }
