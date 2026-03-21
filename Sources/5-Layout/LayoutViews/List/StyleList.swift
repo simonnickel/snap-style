@@ -92,3 +92,51 @@ extension Style.Views.List {
         }
     }
 }
+
+#Preview("Example") {
+    StyleListExample()
+}
+
+
+package struct StyleListExample: View {
+
+    @State private var selection: String? = "Circle"
+
+    package init() {}
+
+    package var body: some View {
+        NavigationStack {
+            StyleList(selection: $selection) {
+                Section {
+                    StyleListRow(.navigate("Star")) {
+                        StyleLabel("Star", systemImage: "star")
+                    }
+                    StyleListRow(.navigation(isPresented: false)) {
+                        StyleLabel("Staroflife", systemImage: "staroflife")
+                    }
+                    StyleListRow(.navigate("Circle")) {
+                        StyleLabel("Circle", systemImage: "circle")
+                    }
+                    StyleLabel("Triangle", systemImage: "triangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
+                } header: {
+                    Text("Section")
+                        .styleListSectionHeaderLabel()
+                }
+                Section {
+                    StyleListRow(.navigate("Star")) {
+                        StyleLabel("Star", systemImage: "star")
+                    }
+                    StyleListRow(.navigate("Circle", isPresented: true)) {
+                        StyleLabel("Circle", systemImage: "circle")
+                    }
+                    StyleLabel("Triangle", systemImage: "triangle")
+                    StyleLabel("Rectangle", systemImage: "rectangle")
+                } header: {
+                    Text("Section with selected row")
+                        .styleListSectionHeaderLabel()
+                }
+            }
+        }
+    }
+}

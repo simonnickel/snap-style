@@ -384,3 +384,106 @@ extension Style.Views.List.Row {
     }
 
 }
+
+#Preview("Example") {
+    StyleListRowExample()
+}
+
+
+package struct StyleListRowExample: View {
+
+    @State private var state: ViewControlState = .active
+
+    package init() {}
+
+    package var body: some View {
+        Picker("ControlState", selection: $state) {
+            ForEach(ViewControlState.allCases, id: \.self) { value in
+                Text(value.rawValue)
+            }
+        }
+        .pickerStyle(.segmented)
+
+        NavigationStack {
+            StyleList {
+                Section {
+                    StyleListRow(
+                        .navigate("Star"),
+                        systemImage: "star"
+                    ) {
+                        Text("Star")
+                    }
+                    StyleListRow(
+                        .navigation(isPresented: false),
+                        systemImage: "staroflife"
+                    ) {
+                        Text("Staroflife")
+                    }
+                    StyleListRow(
+                        .selectValue("Rectangle", selection: .constant("Rectangle")),
+                        systemImage: "rectangle"
+                    ) {
+                        Text("Rectangle")
+                    }
+                    StyleListRow(
+                        .selectValue("Circle", selection: .constant("Star")),
+                        systemImage: "circle"
+                    ) {
+                        Text("Circle")
+                    }
+                    StyleListRow(
+                        .enabled(Binding(get: { true }, set: { _ in })),
+                        systemImage: "triangle"
+                    ) {
+                        Text("Triangle")
+                    }
+                    StyleListRow(
+                        .enabled(Binding(get: { false }, set: { _ in })),
+                        systemImage: "pentagon"
+                    ) {
+                        Text("Pentagon")
+                    }
+                    StyleListRow(
+                        .pick(["A", "B"], titleKeyPath: \.self, selection: Binding(get: { "A" }, set: { _ in })),
+                        systemImage: "square"
+                    ) {
+                        Text("With Content")
+                    }
+                    StyleListRow(
+                        .pickInline(["A", "B"], titleKeyPath: \.self, selection: Binding(get: { "A" }, set: { _ in })),
+                        systemImage: "square"
+                    ) {
+                        Text("With Content")
+                    }
+                    StyleListRow(
+                        .plain,
+                        systemImage: "line.horizontal.3"
+                    ) {
+                        Text("Lines")
+                    }
+                    StyleListRow(
+                        .plain,
+                        systemImage: "square"
+                    ) {
+                        Text("With Content")
+                    } content: {
+                        Rectangle()
+                    }
+                    .insetListContent()
+                    StyleListRow(
+                        .plain,
+                        systemImage: "square"
+                    ) {
+                        Text("With Content")
+                    } content: {
+                        Rectangle()
+                    }
+                } header: {
+                    StyleLabel("Section")
+                        .styleListSectionHeaderLabel()
+                }
+                .controlState(state)
+            }
+        }
+    }
+}
