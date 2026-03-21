@@ -18,7 +18,7 @@ struct SnapStyleScreen: View {
         let sections: [Section]
         
         static let views: ViewData = ViewData(sections: [
-            Section(title: "Views", screens: [.viewStyleStack, .viewScrollingHStack, .viewStyleFlowLayout]),
+            Section(title: "Views", screens: [.viewStyleStack, .viewScrollingHStack, .viewStyleFlowLayout, .viewStyleScreen]),
         ])
     }
     

@@ -21,6 +21,7 @@ struct SnapStyleFlow: View {
         case viewStyleStack
         case viewScrollingHStack
         case viewStyleFlowLayout
+        case viewStyleScreen
 
         @ViewBuilder
         var screen: some View {
@@ -32,6 +33,7 @@ struct SnapStyleFlow: View {
                     case .viewStyleStack: StyleStackScreen()
                     case .viewScrollingHStack: ScrollingHStackScreen()
                     case .viewStyleFlowLayout: StyleFlowLayoutScreen()
+                    case .viewStyleScreen: StyleScreenScreen()
 
                 }
             }
@@ -46,6 +48,7 @@ struct SnapStyleFlow: View {
                 case .viewStyleStack: "StyleStack"
                 case .viewScrollingHStack: "ScrollingHStack"
                 case .viewStyleFlowLayout: "StyleFlowLayout"
+                case .viewStyleScreen: "StyleScreen"
             }
         }
     }
