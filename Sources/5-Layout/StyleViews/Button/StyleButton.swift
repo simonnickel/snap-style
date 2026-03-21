@@ -60,21 +60,42 @@ extension Style.Views.Button {
 
 // MARK: - Preview
 
-#if DEBUG
+#Preview {
+    StyleButtonExample()
+}
 
-struct PreviewContent: View {
+package struct StyleButtonExample: View {
 
-    var body: some View {
+    @State private var isEnabled: Bool = true
+
+    package init() {}
+
+    package var body: some View {
+        StyleScreen {
+            buttonVariants
+                .style(component: .contentCard)
+                .enabled(isEnabled)
+            buttonVariants
+                .style(component: .accentCard)
+                .enabled(isEnabled)
+
+            Toggle(isOn: $isEnabled) {
+                Text("enabled")
+            }
+        }
+    }
+
+    private var buttonVariants: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
             }
-            
+
             StyleButton() { } content: {
                 Label("Secondary", systemImage: "star")
             }
             .style(buttonVariant: .secondary)
-            
+
             StyleStack(.horizontal, spacing: \.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary)) { } content: {
                     Label("Primary", systemImage: "star")
@@ -89,34 +110,14 @@ struct PreviewContent: View {
                         .labelStyle(.iconOnly)
                 }
             }
-            
+
             StyleButton(.component(.metricCard)) { } content: {
                 Label("Component: .metricCard", systemImage: "star")
             }
-            
+
             StyleButton(.plain) { } content: {
                 Label("Plain", systemImage: "star")
             }
         }
     }
 }
-
-#Preview {
-    
-    @Previewable @State var isEnabled: Bool = true
-
-    StyleScreen {
-        PreviewContent()
-            .style(component: .contentCard)
-            .enabled(isEnabled)
-        PreviewContent()
-            .style(component: .accentCard)
-            .enabled(isEnabled)
-
-        Toggle(isOn: $isEnabled) {
-            Text("enabled")
-        }
-    }
-}
-
-#endif
