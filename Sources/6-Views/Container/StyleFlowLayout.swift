@@ -174,6 +174,10 @@ public struct StyleFlowLayout: Layout {
     }
 }
 
+#Preview("Example") {
+    StyleFlowLayoutExample()
+}
+
 #Preview("In StyleListRow") {
 
     @Previewable @State var isActive: Bool = true
@@ -217,5 +221,46 @@ public struct StyleFlowLayout: Layout {
         }
     } content: {
         Text("Toggle Spacing")
+    }
+}
+
+
+package struct StyleFlowLayoutExample: View {
+
+    @State private var isActive: Bool = true
+
+    @ScaledNumber(\.spacingSections) private var spacingH
+    @ScaledNumber(\.spacingElements) private var spacingV
+
+    package init() {}
+
+    package var body: some View {
+        StyleFlowLayout(
+            spacingH: isActive ? spacingH : nil,
+            spacingV: isActive ? spacingV : nil
+        ) {
+            ForEach(0..<7, id: \.self) { _ in
+                Group {
+                    Text("Hello")
+                        .font(.largeTitle)
+                    Text("World")
+                        .font(.title)
+                    Text("1!2")
+                        .font(.title)
+                }
+                .border(Color.red)
+            }
+        }
+        .background(.orange)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.yellow)
+
+        StyleButton {
+            withAnimation(.smooth) {
+                isActive.toggle()
+            }
+        } content: {
+            Text("Toggle Spacing")
+        }
     }
 }
