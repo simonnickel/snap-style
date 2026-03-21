@@ -37,45 +37,9 @@ internal struct ListSectionHeaderLabel: ViewModifier {
 
 // MARK: - Preview
 
-#Preview {
-    StyleList {
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .primary")
-                .styleListSectionHeaderLabel(hierarchy: .primary)
-        }
-
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .secondary (default)")
-                .styleListSectionHeaderLabel()
-        }
-
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .tertiary")
-                .styleListSectionHeaderLabel(hierarchy: .tertiary)
-        }
-
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header")
-        }
-    }
-}
-
 #Preview("Example") {
     StyleListSectionHeaderLabelExample()
 }
-
 
 package struct StyleListSectionHeaderLabelExample: View {
 

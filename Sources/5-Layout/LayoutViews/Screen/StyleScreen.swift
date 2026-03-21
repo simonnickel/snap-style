@@ -73,36 +73,43 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
 
 // MARK: - Preview
 
-#Preview {
-    NavigationStack {
+#Preview("Example") {
+    StyleScreenExample()
+}
+
+package struct StyleScreenExample: View {
+
+    package init() {}
+
+    package var body: some View {
         StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .readableContentWidth, .allowReadableContentOverflow]) {
             // Default placement inside of safe area
             Rectangle()
-            
+
             // Ignore safe area
             Rectangle()
                 .ignoresSafeArea(.container, edges: .horizontal)
-            
+
             // Background has to handle safe area.
             VStack {
                 Text("Background ignores safe area by default!")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.green)
-            
+
             VStack {
                 Text("Needs to be handled manually.")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.green, ignoresSafeAreaEdges: .vertical)
-            
+
             VStack {
                 Text("Or put inside another container.")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(.green, ignoresSafeAreaEdges: .vertical)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             // Scroll view automatic behaviour.
             ScrollView(.horizontal) {
                 LazyHStack {
@@ -116,66 +123,5 @@ public struct StyleScreen<ScreenContent>: View where ScreenContent: View {
 #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
 #endif
-    }
-//    .styleOverride(
-//        numbers: [
-//            \.widthReadableContent: .base(.value(.scaled(200)))
-//        ]
-//    )
-}
-
-#Preview("Example") {
-    StyleScreenExample()
-}
-
-
-package struct StyleScreenExample: View {
-
-    package init() {}
-
-    package var body: some View {
-        NavigationStack {
-            StyleScreen(configuration: [.scrollView, .verticalSectionSpacing, .insetHorizontalEdges, .readableContentWidth, .allowReadableContentOverflow]) {
-                // Default placement inside of safe area
-                Rectangle()
-
-                // Ignore safe area
-                Rectangle()
-                    .ignoresSafeArea(.container, edges: .horizontal)
-
-                // Background has to handle safe area.
-                VStack {
-                    Text("Background ignores safe area by default!")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.green)
-
-                VStack {
-                    Text("Needs to be handled manually.")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.green, ignoresSafeAreaEdges: .vertical)
-
-                VStack {
-                    Text("Or put inside another container.")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(.green, ignoresSafeAreaEdges: .vertical)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                // Scroll view automatic behaviour.
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        Text("ScrollView automatically allows to scroll behind safe area!")
-                            .font(.system(size: 60))
-                    }
-                    .background(.green)
-                }
-            }
-            .navigationTitle("Preview")
-#if !os(macOS)
-            .navigationBarTitleDisplayMode(.inline)
-#endif
-        }
     }
 }
