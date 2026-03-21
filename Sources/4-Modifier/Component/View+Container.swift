@@ -7,6 +7,8 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
+// TODO: Container Element: The Components should define a composition for a container with hierarchies, to simply apply different hierarchies of backgrounds inside a single component. The components container should use the same mechanism. (Is that the same as just assigning the same component again? - kind of, but components container do more)
+
 extension View {
 
     /// Applies the container.
