@@ -17,18 +17,22 @@ struct SnapStyleFlow: View {
     enum Screen: Hashable, Equatable {
         case root
         
-        // Views
-        case viewStyleStack
-        case viewScrollingHStack
-        case viewStyleFlowLayout
+        // Layout
         case viewStyleScreen
+        case viewStyleStack
+        case viewStyleSpacer
+
+        // List
         case viewStyleList
         case viewStyleListRow
         case viewStyleListSectionHeaderLabel
         case viewStyleListSectionFooterLabel
-        case viewStyleSpacer
-        case viewStyleButton
+        
+        // Views
+        case viewStyleFlowLayout
+        case viewScrollingHStack
         case viewCornerContainer
+        case viewStyleButton
 
         @ViewBuilder
         var screen: some View {
@@ -36,18 +40,22 @@ struct SnapStyleFlow: View {
                 switch self {
                     case .root: SnapStyleScreen(data: .views)
                     
-                    // Views
-                    case .viewStyleStack: StyleStackScreen()
-                    case .viewScrollingHStack: ScrollingHStackScreen()
-                    case .viewStyleFlowLayout: StyleFlowLayoutScreen()
+                    // Layout
                     case .viewStyleScreen: StyleScreenScreen()
+                    case .viewStyleStack: StyleStackScreen()
+                    case .viewStyleSpacer: StyleSpacerScreen()
+                    
+                    // List
                     case .viewStyleList: StyleListScreen()
                     case .viewStyleListRow: StyleListRowScreen()
                     case .viewStyleListSectionHeaderLabel: StyleListSectionHeaderLabelScreen()
                     case .viewStyleListSectionFooterLabel: StyleListSectionFooterLabelScreen()
-                    case .viewStyleSpacer: StyleSpacerScreen()
-                    case .viewStyleButton: StyleButtonScreen()
+                    
+                    // Views
+                    case .viewStyleFlowLayout: StyleFlowLayoutScreen()
+                    case .viewScrollingHStack: ScrollingHStackScreen()
                     case .viewCornerContainer: CornerContainerScreen()
+                    case .viewStyleButton: StyleButtonScreen()
 
                 }
             }
