@@ -78,3 +78,59 @@ internal struct ListSectionFooterLabel: ViewModifier {
         }
     }
 }
+
+#Preview("Example") {
+    StyleListSectionFooterLabelExample()
+}
+
+
+package struct StyleListSectionFooterLabelExample: View {
+
+    package init() {}
+
+    package var body: some View {
+        StyleList {
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .primary")
+                    .styleListSectionHeaderLabel(hierarchy: .primary)
+            } footer: {
+                StyleLabel("Footer")
+                    .styleListSectionFooterLabel()
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .secondary (default)")
+                    .styleListSectionHeaderLabel()
+            } footer: {
+                StyleLabel("Footer")
+                    .styleListSectionFooterLabel()
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .tertiary")
+                    .styleListSectionHeaderLabel(hierarchy: .tertiary)
+            } footer: {
+                StyleLabel("Footer")
+                    .styleListSectionFooterLabel()
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header")
+            } footer: {
+                StyleLabel("Footer")
+            }
+        }
+    }
+}

@@ -24,6 +24,8 @@ struct SnapStyleFlow: View {
         case viewStyleScreen
         case viewStyleList
         case viewStyleListRow
+        case viewStyleListSectionHeaderLabel
+        case viewStyleListSectionFooterLabel
 
         @ViewBuilder
         var screen: some View {
@@ -38,6 +40,8 @@ struct SnapStyleFlow: View {
                     case .viewStyleScreen: StyleScreenScreen()
                     case .viewStyleList: StyleListScreen()
                     case .viewStyleListRow: StyleListRowScreen()
+                    case .viewStyleListSectionHeaderLabel: StyleListSectionHeaderLabelScreen()
+                    case .viewStyleListSectionFooterLabel: StyleListSectionFooterLabelScreen()
 
                 }
             }
@@ -55,6 +59,8 @@ struct SnapStyleFlow: View {
                 case .viewStyleScreen: "StyleScreen"
                 case .viewStyleList: "StyleList"
                 case .viewStyleListRow: "StyleListRow"
+                case .viewStyleListSectionHeaderLabel: "SectionHeaderLabel"
+                case .viewStyleListSectionFooterLabel: "SectionFooterLabel"
             }
         }
     }
