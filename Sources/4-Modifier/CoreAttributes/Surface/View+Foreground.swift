@@ -46,29 +46,38 @@ private struct SurfaceForegroundModifier: ViewModifier {
 
 #Preview {
 
-    @Previewable @State var isAccent: Bool = false
+    StyleSurfaceForegroundModifierExample()
 
-    Text("Foreground: .accent")
-        .style(foreground: \.accent)
-    Text("Foreground: nil")
-        .style(foreground: nil)
+}
 
-    VStack() {
-        Text("Foreground: toggled")
-            .style(foreground: isAccent ? \.accent : nil)
-        Text("Foreground from Environment")
+package struct StyleSurfaceForegroundModifierExample: View {
+
+    @State private var isAccent: Bool = false
+
+    package init() {}
+
+    package var body: some View {
+        Text("Foreground: .accent")
+            .style(foreground: \.accent)
+        Text("Foreground: nil")
             .style(foreground: nil)
 
-        Button {
-            withAnimation {
-                isAccent.toggle()
-            }
-        } label: {
-            Text("Toggle Accent")
-        }
-    }
-    .style(foreground: \.onAccent)
-    .padding()
-    .background(.mint)
+        VStack() {
+            Text("Foreground: toggled")
+                .style(foreground: isAccent ? \.accent : nil)
+            Text("Foreground from Environment")
+                .style(foreground: nil)
 
+            Button {
+                withAnimation {
+                    isAccent.toggle()
+                }
+            } label: {
+                Text("Toggle Accent")
+            }
+        }
+        .style(foreground: \.onAccent)
+        .padding()
+        .background(.mint)
+    }
 }

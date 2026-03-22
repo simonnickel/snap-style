@@ -45,6 +45,13 @@ struct SnapStyleScreen: View {
                         .viewStyleButton,
                     ]
                 ),
+                Section(
+                    title: "Modifier",
+                    screens: [
+                        .modifierSurfaceForeground,
+                        .modifierSurfaceBackground,
+                    ]
+                ),
             ]
         )
     }

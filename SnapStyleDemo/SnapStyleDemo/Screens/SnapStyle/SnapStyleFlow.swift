@@ -5,6 +5,7 @@
 
 import SnapStyle
 import SnapStyleDebug
+import SnapStyleExamples
 import SwiftUI
 
 struct SnapStyleFlow: View {
@@ -33,6 +34,10 @@ struct SnapStyleFlow: View {
         case viewScrollingHStack
         case viewCornerContainer
         case viewStyleButton
+        
+        // Attribtues
+        case modifierSurfaceForeground
+        case modifierSurfaceBackground
 
         @ViewBuilder
         var screen: some View {
@@ -56,6 +61,10 @@ struct SnapStyleFlow: View {
                     case .viewScrollingHStack: ScrollingHStackScreen()
                     case .viewCornerContainer: CornerContainerScreen()
                     case .viewStyleButton: StyleButtonScreen()
+                    
+                    // Attributes
+                    case .modifierSurfaceForeground: ExampleStyleSurfaceForegroundModifier()
+                    case .modifierSurfaceBackground: ExampleStyleSurfaceBackgroundModifier()
 
                 }
             }
@@ -66,18 +75,27 @@ struct SnapStyleFlow: View {
             switch self {
                 case .root: "SnapStyle"
                 
-                // Views
-                case .viewStyleStack: "StyleStack"
-                case .viewScrollingHStack: "ScrollingHStack"
-                case .viewStyleFlowLayout: "StyleFlowLayout"
+                // Layout
                 case .viewStyleScreen: "StyleScreen"
+                case .viewStyleStack: "StyleStack"
+                case .viewStyleSpacer: "StyleSpacer"
+                
+                // List
                 case .viewStyleList: "StyleList"
                 case .viewStyleListRow: "StyleListRow"
                 case .viewStyleListSectionHeaderLabel: "SectionHeaderLabel"
                 case .viewStyleListSectionFooterLabel: "SectionFooterLabel"
-                case .viewStyleSpacer: "StyleSpacer"
-                case .viewStyleButton: "StyleButton"
+                
+                // Views
+                case .viewScrollingHStack: "ScrollingHStack"
+                case .viewStyleFlowLayout: "StyleFlowLayout"
                 case .viewCornerContainer: "CornerContainer"
+                case .viewStyleButton: "StyleButton"
+                
+                // Attributes
+                case .modifierSurfaceForeground: "Attribute: Surface Foreground"
+                case .modifierSurfaceBackground: "Attribute: Surface Background"
+
             }
         }
     }

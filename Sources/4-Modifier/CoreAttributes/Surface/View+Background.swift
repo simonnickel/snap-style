@@ -50,28 +50,37 @@ private struct SurfaceBackgroundModifier: ViewModifier {
 
 #Preview {
 
-    @Previewable @State var isAccent: Bool = false
+    StyleSurfaceBackgroundModifierExample()
 
-    Text("Background: .accent")
-        .padding()
-        .style(background: \.accent)
-    Text("Background: nil")
-        .style(background: nil)
+}
 
-    VStack() {
-        Text("toggled")
+package struct StyleSurfaceBackgroundModifierExample: View {
+
+    @State private var isAccent: Bool = false
+
+    package init() {}
+
+    package var body: some View {
+        Text("Background: .accent")
             .padding()
-            .style(background: isAccent ? \.accentComplementary : nil)
+            .style(background: \.accent)
+        Text("Background: nil")
+            .style(background: nil)
 
-        Button {
-            withAnimation {
-                isAccent.toggle()
+        VStack() {
+            Text("toggled")
+                .padding()
+                .style(background: isAccent ? \.accentComplementary : nil)
+
+            Button {
+                withAnimation {
+                    isAccent.toggle()
+                }
+            } label: {
+                Text("Toggle Accent")
             }
-        } label: {
-            Text("Toggle Accent")
         }
+        .padding()
+        .background(.yellow)
     }
-    .padding()
-    .background(.yellow)
-
 }
