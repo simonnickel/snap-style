@@ -52,6 +52,8 @@ struct SnapStyleScreen: View {
                         .modifierSurfaceBackground,
                         .modifierComposition,
                         .modifierFont,
+                        .modifierPadding,
+                        .modifierShape,
                     ]
                 ),
             ]

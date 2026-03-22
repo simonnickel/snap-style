@@ -40,6 +40,8 @@ struct SnapStyleFlow: View {
         case modifierSurfaceBackground
         case modifierComposition
         case modifierFont
+        case modifierPadding
+        case modifierShape
 
         @ViewBuilder
         var screen: some View {
@@ -69,6 +71,8 @@ struct SnapStyleFlow: View {
                     case .modifierSurfaceBackground: ExampleStyleSurfaceBackgroundModifier()
                     case .modifierComposition: ExampleStyleCompositionModifier()
                     case .modifierFont: ExampleStyleFontModifier()
+                    case .modifierPadding: ExampleStylePaddingModifier()
+                    case .modifierShape: ExampleStyleShapeModifier()
 
                 }
             }
@@ -101,6 +105,8 @@ struct SnapStyleFlow: View {
                 case .modifierSurfaceBackground: "Attribute: Surface Background"
                 case .modifierComposition: "Attribute: Composition"
                 case .modifierFont: "Attribute: Font"
+                case .modifierPadding: "Attribute: Padding"
+                case .modifierShape: "Attribute: Shape"
 
             }
         }

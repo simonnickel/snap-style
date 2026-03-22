@@ -80,11 +80,40 @@ private struct ShapeModifier<SomeInsettableShape: InsettableShape>: ViewModifier
 
 // MARK: - Preview
 
-#if DEBUG
-extension Style.Component {
-    
-    static let previewShape: Self = .init(
-        "previewShape",
+#Preview {
+    StyleShapeModifierExample()
+}
+
+package struct StyleShapeModifierExample: View {
+
+    @State private var override: Bool = true
+
+    package init() {}
+
+    package var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                Text("Shape from Component")
+                    .style(element: .label)
+            }
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                    .modifier(ShapeModifier(shape: override ? AnyInsettableShape(Rectangle()) : AnyInsettableShape(Circle()), shouldClip: true))
+                    .style(define: .icon, shape: override ? \.rectangle : nil) // Does not animate!
+                Toggle(isOn: $override.animation(.bouncy.delay(2))) {
+                    Text("Define override")
+                        .style(element: .label)
+                }
+            }
+        }
+        .style(component: exampleComponent)
+    }
+
+    let exampleComponent: Style.Component = .init(
+        "exampleComponent",
         container: .contentCard,
         compositions: { element in
             switch element {
@@ -92,7 +121,7 @@ extension Style.Component {
                 default: nil
             }
         },
-        paddings:  { element in
+        paddings: { element in
             switch element {
             case .icon: \.containerCard
             default: nil
@@ -105,32 +134,4 @@ extension Style.Component {
             }
         },
     )
-                                         
-}
-#endif
-
-#Preview {
-    
-    @Previewable @State var override: Bool = true
-
-    VStack(alignment: .leading, spacing: 15) {
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-            Text("Shape from Component")
-                .style(element: .label)
-        }
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-                .modifier(ShapeModifier(shape: override ? AnyInsettableShape(Rectangle()) : AnyInsettableShape(Circle()), shouldClip: true))
-                .style(define: .icon, shape: override ? \.rectangle : nil) // Does not animate!
-            Toggle(isOn: $override.animation(.bouncy.delay(2))) {
-                Text("Define override")
-                    .style(element: .label)
-            }
-        }
-    }
-    .style(component: .previewShape)
-
 }
