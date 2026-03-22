@@ -50,21 +50,21 @@ struct SnapStyleFlow: View {
                     case .root: SnapStyleScreen(data: .views)
                     
                     // Layout
-                    case .viewStyleScreen: StyleScreenScreen()
-                    case .viewStyleStack: StyleStackScreen()
-                    case .viewStyleSpacer: StyleSpacerScreen()
+                    case .viewStyleScreen: ExampleStyleScreen()
+                    case .viewStyleStack: ExampleStyleStack()
+                    case .viewStyleSpacer: ExampleStyleSpacer()
                     
                     // List
-                    case .viewStyleList: StyleListScreen()
-                    case .viewStyleListRow: StyleListRowScreen()
-                    case .viewStyleListSectionHeaderLabel: StyleListSectionHeaderLabelScreen()
-                    case .viewStyleListSectionFooterLabel: StyleListSectionFooterLabelScreen()
+                    case .viewStyleList: ExampleStyleList()
+                    case .viewStyleListRow: ExampleStyleListRow()
+                    case .viewStyleListSectionHeaderLabel: ExampleStyleListSectionHeaderLabel()
+                    case .viewStyleListSectionFooterLabel: ExampleStyleListSectionFooterLabel()
                     
                     // Views
-                    case .viewStyleFlowLayout: StyleFlowLayoutScreen()
-                    case .viewScrollingHStack: ScrollingHStackScreen()
-                    case .viewCornerContainer: CornerContainerScreen()
-                    case .viewStyleButton: StyleButtonScreen()
+                    case .viewStyleFlowLayout: ExampleStyleFlowLayout()
+                    case .viewScrollingHStack: ExampleScrollingHStack()
+                    case .viewCornerContainer: ExampleCornerContainer()
+                    case .viewStyleButton: ExampleStyleButton()
                     
                     // Attributes
                     case .modifierSurfaceForeground: ExampleStyleSurfaceForegroundModifier()
