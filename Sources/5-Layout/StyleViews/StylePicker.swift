@@ -23,7 +23,7 @@ extension Style.Views.Picker {
         let content: () -> Content
         let label: () -> Label
         
-        public init(style: Style = .automatic, selection: Binding<SelectionValue>, content: @escaping () -> Content, label: @escaping () -> Label) {
+        public init(style: Style = .automatic, selection: Binding<SelectionValue>, @ViewBuilder content: @escaping () -> Content, label: @escaping () -> Label) {
             self.style = style
             self.selection = selection
             self.content = content
