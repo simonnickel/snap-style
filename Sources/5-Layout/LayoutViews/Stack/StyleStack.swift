@@ -71,52 +71,64 @@ public struct StyleStack<Content>: View where Content: View {
 
 package struct StyleStackExample: View {
     
-    @State var axis: Axis = .vertical
-    @State var stretching: Bool = true
-    @State var spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
+    @State var axisA: Axis = .horizontal
+    @State var axisB: Axis = .horizontal
+    @State var enabledStretching: Bool = true
+    @State var enabledSpacing: Bool = true
 
     package init() {}
     
     package var body: some View {
-        StyleStack(axis, isStretching: stretching) {
-            Text("Test Row 1")
-                .background(.green)
-            StyleStack(.horizontal, isStretching: stretching) {
-                Text("Test Row 2")
-                    .background(.mint)
-                Text("Test Row 3")
-                    .background(.teal)
+        let spacing: Style.Attribute.Number.ValueBuilderKeyPath? = enabledSpacing ? \.spacingElements : nil
+        StyleScreen {
+            StyleStack(axisA, isStretching: enabledStretching) {
+                Text("Axis A")
+                    .style(component: .accentCard)
+                StyleStack(axisB, isStretching: enabledStretching) {
+                    Text("Axis B (1)")
+                        .style(component: .accentCard)
+                    Text("(2)")
+                        .style(component: .accentCard)
+                }
+                .style(component: .accentCard)
             }
-//            .style(spacing: nil)
+            .style(component: .contentCard)
+            .style(spacing: spacing)
+            
+            // TODO: This should be an inline list
+            VStack {
+                
+                HStack {
+                    Text("Axis A")
+                    StylePicker(style: .segmented, selection: $axisA.animation()) {
+                        ForEach(Axis.allCases, id: \.self) { axis in
+                            Text(axis.description)
+                                .tag(axis)
+                        }
+                    } label: {
+                        Text("Select Axis A")
+                    }
+                }
+                HStack {
+                    Text("Axis B")
+                    StylePicker(style: .segmented, selection: $axisB.animation()) {
+                        ForEach(Axis.allCases, id: \.self) { axis in
+                            Text(axis.description)
+                                .tag(axis)
+                        }
+                    } label: {
+                        Text("Select Axis B")
+                    }
+                }
+
+                StyleToggle(isOn: $enabledStretching.animation()) {
+                    Text("Stretch Container")
+                }
+                StyleToggle(isOn: $enabledSpacing.animation()) {
+                    Text("Spacing between elements")
+                }
+            }
+            .padding(.top, 20)
         }
-        .background(.yellow)
-        .style(spacing: spacing)
-
-        HStack {
-            StyleButton {
-                withAnimation {
-                    axis = axis == .horizontal ? .vertical : .horizontal
-                }
-            } content: {
-                Text("Toggle Axis")
-            }
-
-            StyleButton {
-                withAnimation {
-                    stretching.toggle()
-                }
-            } content: {
-                Text("Toggle Stretching")
-            }
-
-            StyleButton {
-                withAnimation {
-                    spacing = spacing == nil ? \.spacingElements : nil
-                }
-            } content: {
-                Text("Toggle Spacing")
-            }
-        }
-        .padding(.top, 20)
     }
 }
