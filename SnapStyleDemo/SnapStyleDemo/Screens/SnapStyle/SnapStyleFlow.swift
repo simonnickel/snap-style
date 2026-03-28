@@ -35,6 +35,7 @@ struct SnapStyleFlow: View {
         case viewCornerContainer
         case viewStyleButton
         case viewStyleToggle
+        case viewStylePicker
         
         // Attribtues
         case modifierSurfaceForeground
@@ -67,6 +68,7 @@ struct SnapStyleFlow: View {
                     case .viewCornerContainer: ExampleCornerContainer()
                     case .viewStyleButton: ExampleStyleButton()
                     case .viewStyleToggle: ExampleStyleToggle()
+                    case .viewStylePicker: ExampleStylePicker()
                     
                     // Attributes
                     case .modifierSurfaceForeground: ExampleStyleSurfaceForegroundModifier()
@@ -102,6 +104,7 @@ struct SnapStyleFlow: View {
                 case .viewCornerContainer: "CornerContainer"
                 case .viewStyleButton: "StyleButton"
                 case .viewStyleToggle: "StyleToggle"
+                case .viewStylePicker: "StylePicker"
                 
                 // Modifier
                 case .modifierSurfaceForeground: "Attribute: Surface Foreground"

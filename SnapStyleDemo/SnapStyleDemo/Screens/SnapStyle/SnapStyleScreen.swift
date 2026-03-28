@@ -44,6 +44,7 @@ struct SnapStyleScreen: View {
                         .viewCornerContainer,
                         .viewStyleButton,
                         .viewStyleToggle,
+                        .viewStylePicker,
                     ]
                 ),
                 Section(
