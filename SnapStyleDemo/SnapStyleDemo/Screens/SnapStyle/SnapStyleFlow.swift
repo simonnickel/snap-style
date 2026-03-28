@@ -34,6 +34,7 @@ struct SnapStyleFlow: View {
         case viewScrollingHStack
         case viewCornerContainer
         case viewStyleButton
+        case viewStyleToggle
         
         // Attribtues
         case modifierSurfaceForeground
@@ -65,6 +66,7 @@ struct SnapStyleFlow: View {
                     case .viewScrollingHStack: ExampleScrollingHStack()
                     case .viewCornerContainer: ExampleCornerContainer()
                     case .viewStyleButton: ExampleStyleButton()
+                    case .viewStyleToggle: ExampleStyleToggle()
                     
                     // Attributes
                     case .modifierSurfaceForeground: ExampleStyleSurfaceForegroundModifier()
@@ -99,6 +101,7 @@ struct SnapStyleFlow: View {
                 case .viewStyleFlowLayout: "StyleFlowLayout"
                 case .viewCornerContainer: "CornerContainer"
                 case .viewStyleButton: "StyleButton"
+                case .viewStyleToggle: "StyleToggle"
                 
                 // Modifier
                 case .modifierSurfaceForeground: "Attribute: Surface Foreground"

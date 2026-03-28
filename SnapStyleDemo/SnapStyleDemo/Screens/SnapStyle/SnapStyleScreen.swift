@@ -43,6 +43,7 @@ struct SnapStyleScreen: View {
                         .viewScrollingHStack,
                         .viewCornerContainer,
                         .viewStyleButton,
+                        .viewStyleToggle,
                     ]
                 ),
                 Section(
