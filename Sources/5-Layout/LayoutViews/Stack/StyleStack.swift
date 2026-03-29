@@ -70,65 +70,79 @@ public struct StyleStack<Content>: View where Content: View {
 }
 
 package struct StyleStackExample: View {
+
+    struct Configuration {
+        var axisA: Axis = .horizontal
+        var axisB: Axis = .horizontal
+        var shouldStretch: Bool = true
+        var shouldApplySpacing: Bool = true
+        
+        var spacing: Style.Attribute.Number.ValueBuilderKeyPath? {
+            shouldApplySpacing ? \.spacingElements : nil
+        }
+    }
     
-    @State var axisA: Axis = .horizontal
-    @State var axisB: Axis = .horizontal
-    @State var enabledStretching: Bool = true
-    @State var enabledSpacing: Bool = true
+    @State private var configuration: Configuration = .init()
 
     package init() {}
     
     package var body: some View {
-        let spacing: Style.Attribute.Number.ValueBuilderKeyPath? = enabledSpacing ? \.spacingElements : nil
         StyleScreen {
-            StyleStack(axisA, isStretching: enabledStretching) {
-                Text("Axis A")
-                    .style(component: .accentCard)
-                StyleStack(axisB, isStretching: enabledStretching) {
-                    Text("Axis B (1)")
-                        .style(component: .accentCard)
-                    Text("(2)")
-                        .style(component: .accentCard)
-                }
+            contentExample
+            contentConfiguration
+        }
+    }
+    
+    private var contentExample: some View {
+        StyleStack(configuration.axisA, isStretching: configuration.shouldStretch) {
+            Text("Axis A")
                 .style(component: .accentCard)
+            StyleStack(configuration.axisB, isStretching: configuration.shouldStretch) {
+                Text("Axis B (1)")
+                    .style(component: .accentCard)
+                Text("(2)")
+                    .style(component: .accentCard)
             }
-            .style(component: .contentCard)
-            .style(spacing: spacing)
+            .style(component: .accentCard)
+        }
+        .style(component: .contentCard)
+        .style(spacing: configuration.spacing)
+    }
+    
+    // TODO: This could be an inline list
+    private var contentConfiguration: some View {
+        VStack {
+            HStack {
+                Text("Axis A")
+                StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
+                    ForEach(Axis.allCases, id: \.self) { axis in
+                        Text(axis.description)
+                            .tag(axis)
+                    }
+                } label: {
+                    Text("Select Axis A")
+                }
+            }
             
-            // TODO: This should be an inline list
-            VStack {
-                
-                HStack {
-                    Text("Axis A")
-                    StylePicker(style: .segmented, selection: $axisA.animation()) {
-                        ForEach(Axis.allCases, id: \.self) { axis in
-                            Text(axis.description)
-                                .tag(axis)
-                        }
-                    } label: {
-                        Text("Select Axis A")
+            HStack {
+                Text("Axis B")
+                StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
+                    ForEach(Axis.allCases, id: \.self) { axis in
+                        Text(axis.description)
+                            .tag(axis)
                     }
-                }
-                HStack {
-                    Text("Axis B")
-                    StylePicker(style: .segmented, selection: $axisB.animation()) {
-                        ForEach(Axis.allCases, id: \.self) { axis in
-                            Text(axis.description)
-                                .tag(axis)
-                        }
-                    } label: {
-                        Text("Select Axis B")
-                    }
-                }
-
-                StyleToggle(isOn: $enabledStretching.animation()) {
-                    Text("Stretch Container")
-                }
-                StyleToggle(isOn: $enabledSpacing.animation()) {
-                    Text("Spacing between elements")
+                } label: {
+                    Text("Select Axis B")
                 }
             }
-            .padding(.top, 20)
+
+            StyleToggle(isOn: $configuration.shouldStretch.animation()) {
+                Text("Stretch Container")
+            }
+            
+            StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
+                Text("Spacing between elements")
+            }
         }
     }
 }
