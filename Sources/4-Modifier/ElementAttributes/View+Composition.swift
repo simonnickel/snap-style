@@ -145,7 +145,7 @@ package struct StyleCompositionModifierExample: View {
         container: .contentCard,
         compositions: { element in
             switch element {
-            case .icon: \.accentContainer
+                case .icon: \.accentContainer
                 default: nil
             }
         },
