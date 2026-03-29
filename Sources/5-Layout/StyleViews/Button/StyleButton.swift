@@ -65,27 +65,27 @@ extension Style.Views.Button {
 }
 
 package struct StyleButtonExample: View {
-
-    @State private var isEnabled: Bool = true
+    
+    struct Configuration {
+        var component: Style.Component = .contentCard
+        var enabled: Bool = true
+    }
+    
+    @State private var configuration: Configuration = .init()
 
     package init() {}
 
     package var body: some View {
         StyleScreen {
-            buttonVariants
-                .style(component: .contentCard)
-                .enabled(isEnabled)
-            buttonVariants
-                .style(component: .accentCard)
-                .enabled(isEnabled)
+            contentButtons
+                .style(component: configuration.component)
+                .enabled(configuration.enabled)
 
-            Toggle(isOn: $isEnabled) {
-                Text("enabled")
-            }
+            contentConfiguration
         }
     }
 
-    private var buttonVariants: some View {
+    private var contentButtons: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
@@ -119,5 +119,26 @@ package struct StyleButtonExample: View {
                 Label("Plain", systemImage: "star")
             }
         }
+    }
+    
+    private var contentConfiguration: some View {
+        StyleStack {
+            StylePicker(style: .segmented, selection: $configuration.component) {
+                Text("Content")
+                    .tag(Style.Component.contentCard)
+                 Text("Accent")
+                    .tag(Style.Component.accentCard)
+                 Text("Info")
+                    .tag(Style.Component.infoCard)
+            } label: {
+                Text("Component")
+            }
+
+            StyleToggle(isOn: $configuration.enabled) {
+                Text("enabled")
+            }
+        }
+        .style(component: .infoCard)
+        .style(spacing: \.spacingElements)
     }
 }
