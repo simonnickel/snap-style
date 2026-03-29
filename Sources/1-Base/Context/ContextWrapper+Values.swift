@@ -111,7 +111,10 @@ extension Style.ContextWrapper {
 
     // MARK: - Surface
 
-    package func surface(for keyPath: Style.Attribute.Surface.ValueBuilderKeyPath) -> Style.Attribute.Surface.Value.WrappedValue? {
+    package func surface(
+        for keyPath: Style.Attribute.Surface.ValueBuilderKeyPath?,
+    ) -> Style.Attribute.Surface.Value.WrappedValue? {
+        guard let keyPath else { return nil }
 
         let value = value(for: keyPath)
 
