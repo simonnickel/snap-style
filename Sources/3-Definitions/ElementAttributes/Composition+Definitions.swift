@@ -115,7 +115,10 @@ extension Style.Attribute.Composition {
 
                 case .normal, .highlighted, .selected:
                         .value(.layers([
-                            .foreground: \.onInteractive, .background: \.interactive, .backgroundOverlay: \.stateOverlayOnInteractive
+                            .foreground: \.onInteractive,
+                            .background: \.interactive,
+                            .backgroundOverlay: \.stateOverlayOnInteractive,
+                            .border: \.interactiveBorder,
                         ]))
             }
         }

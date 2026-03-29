@@ -44,13 +44,15 @@ private struct ContainerApplyStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         let base = Style.Container.Properties.base
 
-        // Call the closures to get the KeyPaths
         let paddingKeyPath: Style.Attribute.Padding.ValueBuilderKeyPath = (container.padding ?? base.padding)?() ?? \.anyContainer
         let compositionKeyPath: Style.Attribute.Composition.ValueBuilderKeyPath = (container.composition ?? base.composition)?() ?? \.anyContainer
         let shapeKeyPath: Style.Attribute.Shape.ValueBuilderKeyPath = (container.shape ?? base.shape)?() ?? \.anyContainer
 
+        let composition = style.composition(for: compositionKeyPath)
+        
         content
             .style(padding: paddingKeyPath)
+            .style(border: composition?.surfaceKey(for: .border), shape: shapeKeyPath, width: container.border?())
             .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }

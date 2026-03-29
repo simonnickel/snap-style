@@ -74,10 +74,12 @@ extension Style.Container.Properties {
     
     // MARK: - Button
     
-    public static let button: Self = .init("button",
+    public static let button: Self = .init(
+        "button",
         composition: \.containerAction,
         shape: \.containerAction,
         padding: \.containerAction,
+        border: \.border,
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",

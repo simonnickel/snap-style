@@ -12,7 +12,6 @@ extension Style.Container {
     public struct Properties: Hashable, Equatable, Sendable {
 
         public typealias Attribute = Style.Attribute
-
         
         public let id: String
         public let requiresSecondaryAccent: Bool
@@ -22,6 +21,7 @@ extension Style.Container {
         package let composition: Attribute.Composition.ValueBuilderKeyPathProvider?
         package let shape: Attribute.Shape.ValueBuilderKeyPathProvider?
         package let padding: Attribute.Padding.ValueBuilderKeyPathProvider?
+        package let border: Attribute.Number.ValueBuilderKeyPathProvider?
 
         public init(
             _ id: String,
@@ -30,7 +30,8 @@ extension Style.Container {
             surface: @autoclosure @escaping @Sendable () -> Attribute.Surface.ValueBuilderKeyPath? = nil,
             composition: @autoclosure @escaping @Sendable () -> Attribute.Composition.ValueBuilderKeyPath? = nil,
             shape: @autoclosure @escaping @Sendable () -> Attribute.Shape.ValueBuilderKeyPath? = nil,
-            padding: @autoclosure @escaping @Sendable () -> Attribute.Padding.ValueBuilderKeyPath? = nil
+            padding: @autoclosure @escaping @Sendable () -> Attribute.Padding.ValueBuilderKeyPath? = nil,
+            border: @autoclosure @escaping @Sendable () -> Attribute.Number.ValueBuilderKeyPath? = nil,
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent
@@ -39,6 +40,7 @@ extension Style.Container {
             self.composition = composition
             self.shape = shape
             self.padding = padding
+            self.border = border
         }
 
 

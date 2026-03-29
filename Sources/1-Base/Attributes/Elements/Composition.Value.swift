@@ -19,6 +19,7 @@ extension Style.Attribute.Composition {
         case foreground
         case background
         case backgroundOverlay
+        case border
     }
 
 
