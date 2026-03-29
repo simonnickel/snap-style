@@ -60,15 +60,14 @@ package struct StylePickerExample: View {
 
     package var body: some View {
         StyleScreen {
-            VStack {
-                StylePicker(style: .segmented, selection: $selection, content: {
-                    ForEach(PickerValue.allCases) { value in
-                        Text(value.rawValue)
-                            .tag(value)
-                    }
-                }, label: {
-                    Text("Select Value")
-                })
+            StyleStack(spacing: \.spacingGroups) {
+                contentPicker(style: .segmented)
+                    .style(component: .contentCard)
+                contentPicker(style: .menu)
+                    .style(component: .contentCard)
+                contentPicker(style: .wheel)
+                    .style(component: .contentCard)
+                    
                 
 //                Picker(selection: $selection) {
 //                    ForEach(PickerValue.allCases) { value in
@@ -81,8 +80,18 @@ package struct StylePickerExample: View {
 //                .pickerStyle(.menu)
 
             }
-            .style(component: .contentCard)
         }
+    }
+    
+    private func contentPicker<Style: PickerStyle>(style: Style) -> some View {
+        StylePicker(style: style, selection: $selection, content: {
+            ForEach(PickerValue.allCases) { value in
+                Text(value.rawValue)
+                    .tag(value)
+            }
+        }, label: {
+            Text("Select Value")
+        })
     }
 
 }
