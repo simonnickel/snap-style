@@ -99,11 +99,11 @@ extension Style {
         private var content: [Attribute.ValueBuilderKeyPath: ValueForContextCache<Attribute.Value>] = [:]
         package var keys: [Attribute.ValueBuilderKeyPath] { Array(content.keys) }
 
-        package func getValueCache(for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>) -> ValueForContextCache<Attribute.Value>? {
+        package func getValueCache(for keyPath: Attribute.ValueBuilderKeyPath) -> ValueForContextCache<Attribute.Value>? {
             return content[keyPath]
         }
 
-        package func getValue(for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) -> Attribute.Value? {
+        package func getValue(for keyPath: Attribute.ValueBuilderKeyPath, in context: Style.Context) -> Attribute.Value? {
 
             if let cache = content[keyPath] {
                 return cache.getValue(for: context)
@@ -112,7 +112,7 @@ extension Style {
             return nil
         }
 
-        func setValue(_ value: Attribute.Value, for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) {
+        func setValue(_ value: Attribute.Value, for keyPath: Attribute.ValueBuilderKeyPath, in context: Style.Context) {
 
             if let cache = content[keyPath] {
                 cache.setValue(value, for: context)
@@ -164,7 +164,7 @@ extension Style {
         return cache.getValue(for: keyPath, in: context)
     }
 
-    internal func setValueInCache<Attribute: StyleAttribute>(_ value: Attribute.Value, for keyPath: KeyPath<Attribute, Attribute.ValueBuilder>, in context: Style.Context) {
+    internal func setValueInCache<Attribute: StyleAttribute>(_ value: Attribute.Value, for keyPath: Attribute.ValueBuilderKeyPath, in context: Style.Context) {
         guard let cache: AttributeTypeCache<Attribute> = cacheContainer.getCache() else { return }
 
         cache.setValue(value, for: keyPath, in: context)
