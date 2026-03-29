@@ -139,6 +139,5 @@ package struct StyleButtonExample: View {
             }
         }
         .style(component: .infoCard)
-        .style(spacing: \.spacingElements)
     }
 }

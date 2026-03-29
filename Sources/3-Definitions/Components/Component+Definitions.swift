@@ -70,8 +70,12 @@ extension Style.Component {
     
     // MARK: - Content Card
     
-    public static let contentCard: Self = .init("contentCard",
+    // TODO: They should all use a generic Card base definition
+    
+    public static let contentCard: Self = .init(
+        "contentCard",
         container: .contentCard,
+        spacing: { \.spacingElements },
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
@@ -83,15 +87,19 @@ extension Style.Component {
     
     // MARK: - Accessory Card
     
-    public static let infoCard: Self = .init("infoCard",
+    public static let infoCard: Self = .init(
+        "infoCard",
         container: .infoCard,
+        spacing: { \.spacingElements },
     )
     
     
     // MARK: - Accent Card
     
-    public static let accentCard: Self = .init("accentCard",
+    public static let accentCard: Self = .init(
+        "accentCard",
         container: .accentCard,
+        spacing: { \.spacingElements },
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
@@ -103,8 +111,10 @@ extension Style.Component {
     
     // MARK: - Metric Card
     
-    public static let metricCard: Self = .init("metricCard",
+    public static let metricCard: Self = .init(
+        "metricCard",
         container: .metricCard,
+        spacing: { \.spacingElements },
         fonts: { element in
             switch element {
                 case .title: \.content

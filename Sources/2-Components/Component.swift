@@ -13,11 +13,14 @@ extension Style {
 
         /// Maps an `ElementType` to a `ValueBuilderKeyPath`, cannot use KeyPath directly, because it is not Sendable.
         public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
+        
+        /// Wraps a ValueBuilderKeyPath in a Closure to make it Sendable.
+        public typealias SpacingResolver = @Sendable () -> Style.Attribute.Number.ValueBuilderKeyPath
 
         public let id: String
         public let hierarchy: Hierarchy
         package let container: Style.Container.Properties?
-
+        package let spacing: SpacingResolver?
         package let compositions: Mapping<Attribute.Composition>?
         package let fonts: Mapping<Attribute.Font>?
         package let paddings: Mapping<Attribute.Padding>?
@@ -27,6 +30,7 @@ extension Style {
             _ id: String,
             hierarchy: Hierarchy = .primary,
             container: Style.Container.Properties? = nil,
+            spacing: SpacingResolver? = nil,
             compositions: Mapping<Attribute.Composition>? = nil,
             fonts: Mapping<Attribute.Font>? = nil,
             paddings: Mapping<Attribute.Padding>? = nil,
@@ -34,6 +38,7 @@ extension Style {
         ) {
             self.id = id
             self.hierarchy = hierarchy
+            self.spacing = spacing
             self.compositions = compositions
             self.fonts = fonts
             self.paddings = paddings

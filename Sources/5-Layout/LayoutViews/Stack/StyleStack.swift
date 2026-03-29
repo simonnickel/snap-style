@@ -11,7 +11,7 @@ import SwiftUI
 public struct StyleStack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
-    @Environment(\.styleStackSpacing) private var styleStackSpacing
+    @Environment(\.styleSpacing) private var styleSpacing
 
     private let axis: Axis
     private let alignmentV: VerticalAlignment
@@ -43,7 +43,7 @@ public struct StyleStack<Content>: View where Content: View {
 
     @ViewBuilder
     private var contentStack: some View {
-        let spacingKeyPath = spacing ?? styleStackSpacing
+        let spacingKeyPath = spacing ?? styleSpacing
         let spacing = CGFloat(Self.spacing(for: spacingKeyPath, with: style))
         let layout = axis == .vertical
             ? AnyLayout(VStackLayout(alignment: alignmentH, spacing: spacing))
@@ -103,10 +103,11 @@ package struct StyleStackExample: View {
                 Text("(2)")
                     .style(component: .accentCard)
             }
+            .style(spacing: configuration.spacing)
             .style(component: .accentCard)
         }
-        .style(component: .contentCard)
         .style(spacing: configuration.spacing)
+        .style(component: .contentCard)
     }
     
     // TODO: This could be an inline list
@@ -145,6 +146,5 @@ package struct StyleStackExample: View {
             }
         }
         .style(component: .infoCard)
-        .style(spacing: \.spacingElements)
     }
 }

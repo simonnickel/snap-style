@@ -8,8 +8,9 @@ import SwiftUI
 
 extension View {
 
+    /// Define the spacing that should be used inside.
     public func style(spacing keyPath: Style.Attribute.Number.ValueBuilderKeyPath?) -> some View {
-        modifier(StackSpacingModifier(keyPath: keyPath))
+        modifier(SpacingModifier(keyPath: keyPath))
     }
 
 }
@@ -17,7 +18,7 @@ extension View {
 
 // MARK: - Modifier
 
-internal struct StackSpacingModifier: ViewModifier {
+internal struct SpacingModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
@@ -25,7 +26,7 @@ internal struct StackSpacingModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .environment(\.styleStackSpacing, keyPath)
+            .environment(\.styleSpacing, keyPath)
     }
 
 }
@@ -35,6 +36,6 @@ internal struct StackSpacingModifier: ViewModifier {
 
 extension EnvironmentValues {
 
-    @Entry package var styleStackSpacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
+    @Entry package var styleSpacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
 
 }
