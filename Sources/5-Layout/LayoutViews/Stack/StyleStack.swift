@@ -111,8 +111,8 @@ package struct StyleStackExample: View {
     
     // TODO: This could be an inline list
     private var contentConfiguration: some View {
-        VStack {
-            HStack {
+        StyleStack {
+            StyleStack(.horizontal) {
                 Text("Axis A")
                 StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -124,7 +124,7 @@ package struct StyleStackExample: View {
                 }
             }
             
-            HStack {
+            StyleStack(.horizontal) {
                 Text("Axis B")
                 StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -144,5 +144,7 @@ package struct StyleStackExample: View {
                 Text("Spacing between elements")
             }
         }
+        .style(component: .infoCard)
+        .style(spacing: \.spacingElements)
     }
 }

@@ -81,6 +81,13 @@ extension Style.Component {
     )
     
     
+    // MARK: - Accessory Card
+    
+    public static let infoCard: Self = .init("infoCard",
+        container: .infoCard,
+    )
+    
+    
     // MARK: - Accent Card
     
     public static let accentCard: Self = .init("accentCard",

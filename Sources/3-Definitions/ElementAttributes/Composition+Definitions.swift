@@ -82,6 +82,12 @@ extension Style.Attribute.Composition {
             }
         }
     }
+
+    public var infoContainer: ValueBuilder {
+        .base(.value(.layers([
+            .foreground: \.onContent0, .background: \.contentLevel2, .backgroundOverlay: \.stateOverlayAccented
+        ])))
+    }
     
     public var accentContainer: ValueBuilder {
         .builder { context in
@@ -126,6 +132,10 @@ extension Style.Attribute.Composition {
     
     public var containerContentCard: ValueBuilder {
         .base(.reference(\.contentContainer))
+    }
+    
+    public var containerInfoCard: ValueBuilder {
+        .base(.reference(\.infoContainer))
     }
     
     public var containerAccentCard: ValueBuilder {

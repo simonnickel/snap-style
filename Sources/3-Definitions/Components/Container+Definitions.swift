@@ -35,6 +35,15 @@ extension Style.Container.Properties {
     )
     
     
+    // MARK: - Accessory Card
+    
+    public static let infoCard: Self = .init("infoCard",
+        composition: { \.containerInfoCard },
+        shape: { \.containerCard },
+        padding: { \.containerCard },
+    )
+    
+    
     // MARK: - Accent Card
     
     public static let accentCard: Self = .init("accentCard",
