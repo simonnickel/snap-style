@@ -12,27 +12,25 @@ extension Style.Container {
     public struct Properties: Hashable, Equatable, Sendable {
 
         public typealias Attribute = Style.Attribute
-        
-        /// Closure that provides a `ValueBuilderKeyPath` for an `Attribute` type. Required instead of using `KeyPath` directly to allow the type to be `Sendable`.
-        public typealias KeyPathProvider<Attribute: StyleAttribute> = @Sendable () -> Attribute.ValueBuilderKeyPath
 
+        
         public let id: String
         public let requiresSecondaryAccent: Bool
         public let ignoresSafeAreaEdges: Edge.Set
 
-        package let surface: KeyPathProvider<Attribute.Surface>?
-        package let composition: KeyPathProvider<Attribute.Composition>?
-        package let shape: KeyPathProvider<Attribute.Shape>?
-        package let padding: KeyPathProvider<Attribute.Padding>?
+        package let surface: Attribute.Surface.ValueBuilderKeyPathProvider?
+        package let composition: Attribute.Composition.ValueBuilderKeyPathProvider?
+        package let shape: Attribute.Shape.ValueBuilderKeyPathProvider?
+        package let padding: Attribute.Padding.ValueBuilderKeyPathProvider?
 
         public init(
             _ id: String,
             requiresSecondaryAccent: Bool = false,
             ignoresSafeAreaEdges: Edge.Set = [],
-            surface: KeyPathProvider<Attribute.Surface>? = nil,
-            composition: KeyPathProvider<Attribute.Composition>? = nil,
-            shape: KeyPathProvider<Attribute.Shape>? = nil,
-            padding: KeyPathProvider<Attribute.Padding>? = nil
+            surface: @autoclosure @escaping @Sendable () -> Attribute.Surface.ValueBuilderKeyPath? = nil,
+            composition: @autoclosure @escaping @Sendable () -> Attribute.Composition.ValueBuilderKeyPath? = nil,
+            shape: @autoclosure @escaping @Sendable () -> Attribute.Shape.ValueBuilderKeyPath? = nil,
+            padding: @autoclosure @escaping @Sendable () -> Attribute.Padding.ValueBuilderKeyPath? = nil
         ) {
             self.id = id
             self.requiresSecondaryAccent = requiresSecondaryAccent

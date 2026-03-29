@@ -10,8 +10,10 @@ public protocol StyleAttribute {
     associatedtype Value: StyleValue
     associatedtype Adjustment: StyleAdjustment where Value.WrappedValue == Adjustment.Value.WrappedValue
 
-    typealias ValueBuilderKeyPath = KeyPath<Self, Self.ValueBuilder>
     typealias ValueBuilder = Style.ValueBuilder<Style.Definition<Self>>
+    typealias ValueBuilderKeyPath = KeyPath<Self, Self.ValueBuilder>
+    /// Closure to provide a `ValueBuilderKeyPath` for the `Attribute` type. Needed for Sendable types, because `KeyPath` is not `Sendable`, so it needs to be wrapped.
+    typealias ValueBuilderKeyPathProvider = @Sendable () -> Self.ValueBuilderKeyPath?
 
     /// Needs an init to access KeyPaths.
     init()

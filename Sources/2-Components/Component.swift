@@ -11,16 +11,13 @@ extension Style {
     /// Defines the style of a `View` by mapping values for `Style.Attribute`s defined as `ValueBuilderKeyPath` to semantic `ElementType`s.
     public struct Component: Hashable, Equatable, Sendable {
 
-        /// Maps an `ElementType` to a `ValueBuilderKeyPath`, cannot use KeyPath directly, because it is not Sendable.
+        /// Maps an `ElementType` to a `ValueBuilderKeyPath`.
         public typealias Mapping<Attribute: StyleAttribute> = @Sendable (Style.Element.ElementType) -> Attribute.ValueBuilderKeyPath?
-        
-        /// Wraps a ValueBuilderKeyPath in a Closure to make it Sendable.
-        public typealias SpacingResolver = @Sendable () -> Style.Attribute.Number.ValueBuilderKeyPath
 
         public let id: String
         public let hierarchy: Hierarchy
         package let container: Style.Container.Properties?
-        package let spacing: SpacingResolver?
+        package let spacing: Style.Attribute.Number.ValueBuilderKeyPathProvider?
         package let compositions: Mapping<Attribute.Composition>?
         package let fonts: Mapping<Attribute.Font>?
         package let paddings: Mapping<Attribute.Padding>?
@@ -30,7 +27,7 @@ extension Style {
             _ id: String,
             hierarchy: Hierarchy = .primary,
             container: Style.Container.Properties? = nil,
-            spacing: SpacingResolver? = nil,
+            spacing: @autoclosure @escaping @Sendable () -> Style.Attribute.Number.ValueBuilderKeyPath? = nil,
             compositions: Mapping<Attribute.Composition>? = nil,
             fonts: Mapping<Attribute.Font>? = nil,
             paddings: Mapping<Attribute.Padding>? = nil,

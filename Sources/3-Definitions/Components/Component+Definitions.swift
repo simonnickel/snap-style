@@ -75,7 +75,7 @@ extension Style.Component {
     public static let contentCard: Self = .init(
         "contentCard",
         container: .contentCard,
-        spacing: { \.spacingElements },
+        spacing: \.spacingElements,
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
@@ -90,7 +90,7 @@ extension Style.Component {
     public static let infoCard: Self = .init(
         "infoCard",
         container: .infoCard,
-        spacing: { \.spacingElements },
+        spacing: \.spacingElements,
     )
     
     
@@ -99,7 +99,7 @@ extension Style.Component {
     public static let accentCard: Self = .init(
         "accentCard",
         container: .accentCard,
-        spacing: { \.spacingElements },
+        spacing: \.spacingElements,
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
@@ -114,7 +114,7 @@ extension Style.Component {
     public static let metricCard: Self = .init(
         "metricCard",
         container: .metricCard,
-        spacing: { \.spacingElements },
+        spacing: \.spacingElements,
         fonts: { element in
             switch element {
                 case .title: \.content
