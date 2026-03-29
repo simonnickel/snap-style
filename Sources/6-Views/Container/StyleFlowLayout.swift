@@ -104,18 +104,44 @@ public struct StyleFlowLayout: Layout {
 
 // MARK: - Preview
 
-#Preview("Text") {
+#Preview("Example") {
+    StyleFlowLayoutExample()
+}
 
-    @Previewable @State var isActive: Bool = true
+package struct StyleFlowLayoutExample: View {
     
-    @ScaledNumber(\.spacingSections) var spacingH
-    @ScaledNumber(\.spacingElements) var spacingV
+    struct Configuration {
+        var shouldApplySpacing: Bool = true
+    }
+    
+    @State private var configuration: Configuration = .init()
 
-    StyleFlowLayout(
-        spacingH: isActive ? spacingH : nil,
-        spacingV: isActive ? spacingV : nil,
-    ) {
-        ForEach(0..<7) { _ in
+    @ScaledNumber(\.spacingSections) private var spacingH
+    @ScaledNumber(\.spacingElements) private var spacingV
+
+    package init() {}
+
+    package var body: some View {
+        StyleScreen {
+            StyleFlowLayout(
+                spacingH: configuration.shouldApplySpacing ? spacingH : nil,
+                spacingV: configuration.shouldApplySpacing ? spacingV : nil
+            ) {
+                content
+            }
+            .background(.orange)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.yellow)
+            .style(component: .contentCard)
+            
+            contentConfiguration
+                .style(component: .infoCard)
+        }
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        ForEach(0..<7, id: \.self) { _ in
             Group {
                 Text("Hello")
                     .font(.largeTitle)
@@ -127,16 +153,11 @@ public struct StyleFlowLayout: Layout {
             .border(Color.red)
         }
     }
-    .background(.orange)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(.yellow)
     
-    StyleButton {
-        withAnimation(.smooth) {
-            isActive.toggle()
+    private var contentConfiguration: some View {
+        StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
+            Text("Spacing")
         }
-    } content: {
-        Text("Toggle Spacing")
     }
 }
 
@@ -172,10 +193,6 @@ public struct StyleFlowLayout: Layout {
     } content: {
         Text("Toggle Spacing")
     }
-}
-
-#Preview("Example") {
-    StyleFlowLayoutExample()
 }
 
 #Preview("In StyleListRow") {
@@ -221,46 +238,5 @@ public struct StyleFlowLayout: Layout {
         }
     } content: {
         Text("Toggle Spacing")
-    }
-}
-
-
-package struct StyleFlowLayoutExample: View {
-
-    @State private var isActive: Bool = true
-
-    @ScaledNumber(\.spacingSections) private var spacingH
-    @ScaledNumber(\.spacingElements) private var spacingV
-
-    package init() {}
-
-    package var body: some View {
-        StyleFlowLayout(
-            spacingH: isActive ? spacingH : nil,
-            spacingV: isActive ? spacingV : nil
-        ) {
-            ForEach(0..<7, id: \.self) { _ in
-                Group {
-                    Text("Hello")
-                        .font(.largeTitle)
-                    Text("World")
-                        .font(.title)
-                    Text("1!2")
-                        .font(.title)
-                }
-                .border(Color.red)
-            }
-        }
-        .background(.orange)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.yellow)
-
-        StyleButton {
-            withAnimation(.smooth) {
-                isActive.toggle()
-            }
-        } content: {
-            Text("Toggle Spacing")
-        }
     }
 }
