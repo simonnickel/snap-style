@@ -278,21 +278,26 @@ extension Style.Views.List.Row {
 
 // MARK: - Preview
 
-#Preview {
-    
-    @Previewable @State var state: ViewControlState = .active
+#Preview("Example") {
+    StyleListRowExample()
+}
 
-    Picker("ControlState", selection: $state) {
-        ForEach(ViewControlState.allCases, id: \.self) { value in
-            Text(value.rawValue)
+package struct StyleListRowExample: View {
+
+    @State private var state: ViewControlState = .active
+
+    package init() {}
+
+    package var body: some View {
+        Picker("ControlState", selection: $state) {
+            ForEach(ViewControlState.allCases, id: \.self) { value in
+                Text(value.rawValue)
+            }
         }
-    }
-    .pickerStyle(.segmented)
-    
-    NavigationStack {
+        .pickerStyle(.segmented)
+
         StyleList {
             Section {
-                
                 StyleListRow(
                     .navigate("Star"),
                     systemImage: "star"
@@ -370,17 +375,5 @@ extension Style.Views.List.Row {
             }
             .controlState(state)
         }
-//        List {
-//            // System Rows for reference
-//            Section {
-//                Label("Pentagon", systemImage: "pentagon")
-//                Label("Rectangle", systemImage: "rectangle")
-//                Label("Triangle", systemImage: "triangle")
-//            } header: {
-//                StyleLabel("System Rows")
-//                    .styleListSectionHeaderLabel()
-//            }
-//        }
     }
-
 }

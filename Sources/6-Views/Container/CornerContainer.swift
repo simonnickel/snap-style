@@ -48,45 +48,52 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
 // MARK: - Preview
 
 #Preview {
-    struct PreviewCornerContainer: View {
-        var body: some View {
-            CornerContainer(
-                topLeading: {
-                    Text("Top Leading")
-                        .background(.yellow)
-                },
-                topTrailing: {
-                    Text("Top Trailing")
-                        .background(.yellow)
-                },
-                bottomLeading: {
-                    Text("Bottom Leading")
-                        .background(.yellow)
-                },
-                bottomTrailing: {
-                    Text("Bottom Trailing")
-                        .background(.yellow)
-                }
-            )
-            .background(.green)
+    CornerContainerExample()
+}
+
+package struct CornerContainerExample: View {
+
+    package init() {}
+
+    package var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                cornerContainer
+                cornerContainer
+                    .frame(maxWidth: 90)
+                cornerContainer
+                    .frame(maxWidth: 100)
+                cornerContainer
+                    .frame(maxWidth: 110)
+                cornerContainer
+                    .frame(maxWidth: 200)
+                cornerContainer
+                    .frame(maxWidth: 300)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.gray)
         }
     }
 
-    return ScrollView {
-        VStack(spacing: 20) {
-            PreviewCornerContainer()
-            PreviewCornerContainer()
-                .frame(maxWidth: 90)
-            PreviewCornerContainer()
-                .frame(maxWidth: 100)
-            PreviewCornerContainer()
-                .frame(maxWidth: 110)
-            PreviewCornerContainer()
-                .frame(maxWidth: 200)
-            PreviewCornerContainer()
-                .frame(maxWidth: 300)
-        }
-        .frame(maxWidth: .infinity)
-        .background(.gray)
+    private var cornerContainer: some View {
+        CornerContainer(
+            topLeading: {
+                Text("Top Leading")
+                    .background(.yellow)
+            },
+            topTrailing: {
+                Text("Top Trailing")
+                    .background(.yellow)
+            },
+            bottomLeading: {
+                Text("Bottom Leading")
+                    .background(.yellow)
+            },
+            bottomTrailing: {
+                Text("Bottom Trailing")
+                    .background(.yellow)
+            }
+        )
+        .background(.green)
     }
 }

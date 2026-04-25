@@ -55,10 +55,18 @@ extension Style.Views.List {
 
 // MARK: - Preview
 
-#Preview {
-    @Previewable @State var selection: String? = "Circle"
-    
-    NavigationStack {
+#Preview("Example") {
+    StyleListExample()
+}
+
+
+package struct StyleListExample: View {
+
+    @State private var selection: String? = "Circle"
+
+    package init() {}
+
+    package var body: some View {
         StyleList(selection: $selection) {
             Section {
                 StyleListRow(.navigate("Star")) {

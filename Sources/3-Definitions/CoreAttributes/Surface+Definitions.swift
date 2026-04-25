@@ -53,6 +53,15 @@ extension Style.Attribute.Surface {
             .reference(context.accent.contrast)
         }
     }
+    
+    public var accentAdjustedIntense: ValueBuilder {
+        .builderWrapper { wrapper in
+            switch wrapper.context.colorScheme {
+                case .dark: .reference(wrapper.accent.base, adjustments: [.mix(.white, 0.3)])
+                default: .reference(wrapper.accent.base, adjustments: [.mix(.black, 0.3)])
+            }
+        }
+    }
 
     public var accentBackground: ValueBuilder {
         .builder { context in
@@ -153,6 +162,8 @@ extension Style.Attribute.Surface {
     public var onInteractive: ValueBuilder { .base(.reference(\.onAccent)) }
 
     public var interactiveAsForeground: ValueBuilder { .base(.reference(\.accentAsForeground)) }
+    
+    public var interactiveBorder: ValueBuilder { .base(.reference(\.accentAdjustedIntense)) }
 
     
     // MARK: Overlay

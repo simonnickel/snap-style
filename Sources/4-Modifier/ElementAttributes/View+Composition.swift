@@ -107,15 +107,45 @@ private struct CompositionBackgroundOverlayModifier: ViewModifier {
 
 // MARK: - Preview
 
-#if DEBUG
-extension Style.Component {
+#Preview {
     
-    static let previewComposition: Self = .init(
-        "previewComposition",
+    StyleCompositionModifierExample()
+
+}
+
+package struct StyleCompositionModifierExample: View {
+
+    @State private var override: Bool = true
+
+    package init() {}
+
+    package var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                Text("Composition from Component")
+                    .style(element: .label)
+            }
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                    .style(define: .icon, composition: override ? \.interactiveElement : nil)
+                Toggle(isOn: $override.animation()) {
+                    Text("Define override")
+                        .style(element: .label)
+                }
+            }
+        }
+        .style(component: exampleComponent)
+    }
+    
+    let exampleComponent: Style.Component = .init(
+        "exampleComponent",
         container: .contentCard,
         compositions: { element in
             switch element {
-            case .icon: \.accentContainer
+                case .icon: \.accentContainer
                 default: nil
             }
         },
@@ -126,31 +156,4 @@ extension Style.Component {
             }
         },
     )
-                                         
-}
-#endif
-
-#Preview {
-    
-    @Previewable @State var override: Bool = true
-
-    VStack(alignment: .leading, spacing: 15) {
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-            Text("Composition from Component")
-                .style(element: .label)
-        }
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-                .style(define: .icon, composition: override ? \.interactiveElement : nil)
-            Toggle(isOn: $override.animation()) {
-                Text("Define override")
-                    .style(element: .label)
-            }
-        }
-    }
-    .style(component: .previewComposition)
-
 }

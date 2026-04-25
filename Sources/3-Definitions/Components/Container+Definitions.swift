@@ -11,9 +11,9 @@ extension Style.Container.Properties {
     // MARK: - Base
     
     public static let base: Self = .init("base",
-        composition: { \.anyContainer },
-        shape: { \.anyContainer },
-        padding: { \.anyContainer },
+        composition: \.anyContainer,
+        shape: \.anyContainer,
+        padding: \.anyContainer,
     )
 
     
@@ -21,7 +21,7 @@ extension Style.Container.Properties {
 
     public static let screen: Self = .init("screen",
         ignoresSafeAreaEdges: .all,
-        composition: { \.screen },
+        composition: \.screen,
         shape: nil,
     )
     
@@ -29,9 +29,18 @@ extension Style.Container.Properties {
     // MARK: - Content Card
     
     public static let contentCard: Self = .init("contentCard",
-        composition: { \.containerContentCard },
-        shape: { \.containerCard },
-        padding: { \.containerCard },
+        composition: \.containerContentCard,
+        shape: \.containerCard,
+        padding: \.containerCard,
+    )
+    
+    
+    // MARK: - Accessory Card
+    
+    public static let infoCard: Self = .init("infoCard",
+        composition: \.containerInfoCard,
+        shape: \.containerCard,
+        padding: \.containerCard,
     )
     
     
@@ -39,9 +48,9 @@ extension Style.Container.Properties {
     
     public static let accentCard: Self = .init("accentCard",
         requiresSecondaryAccent: true,
-        composition: { \.containerAccentCard },
-        shape: { \.containerCard },
-        padding: { \.containerCard },
+        composition: \.containerAccentCard,
+        shape: \.containerCard,
+        padding: \.containerCard,
     )
     
     
@@ -49,32 +58,34 @@ extension Style.Container.Properties {
     
     public static let metricCard: Self = .init("metricCard",
         requiresSecondaryAccent: true,
-        composition: { \.containerMetricCard },
-        shape: { \.containerMetricCard },
-        padding: { \.containerMetricCard },
+        composition: \.containerMetricCard,
+        shape: \.containerMetricCard,
+        padding: \.containerMetricCard,
     )
     
     
     // MARK: - List
     
     public static let listRow: Self = .init("listRow",
-        composition: { \.listRow },
-        padding: { \.listRow },
+        composition: \.listRow,
+        padding: \.listRow,
     )
     
     
     // MARK: - Button
     
-    public static let button: Self = .init("button",
-        composition: { \.containerAction },
-        shape: { \.containerAction },
-        padding: { \.containerAction },
+    public static let button: Self = .init(
+        "button",
+        composition: \.containerAction,
+        shape: \.containerAction,
+        padding: \.containerAction,
+        border: \.border,
     )
     
     public static let buttonIconOnly: Self = .init("buttonIconOnly",
-        composition: { \.interactiveContainer },
-        shape: { \.containerActionIconOnly },
-        padding: { \.containerActionIconOnly },
+        composition: \.interactiveContainer,
+        shape: \.containerActionIconOnly,
+        padding: \.containerActionIconOnly,
     )
     
 }

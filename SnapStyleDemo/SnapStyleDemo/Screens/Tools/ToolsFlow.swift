@@ -7,7 +7,7 @@ import SnapStyle
 import SnapStyleDebug
 import SwiftUI
 
-struct ContentFlow: View {
+struct ToolsFlow: View {
     
     @Observable class NavigationState {
         var stack: [Screen] = []
@@ -15,21 +15,8 @@ struct ContentFlow: View {
 
     @MainActor
     enum Screen: Hashable, Equatable {
-        case rootExamples
-        case rootTools
+        case root
         
-        /// A generic destination to navigate to.
-        case destination(String, source: String)
-
-        // Examples
-        case structured
-        case componentStack
-
-        // Components
-        case card
-        case list
-        case action
-
         // Tools
         case components
 
@@ -43,21 +30,8 @@ struct ContentFlow: View {
         var screen: some View {
             Group {
                 switch self {
-                    case .rootExamples: ContentListScreen(data: .examples)
-                    case .rootTools: ContentListScreen(data: .tools)
-                        
-                    case .destination(let title, source: let source):
-                        ComponentListScreen(title: title, source: source)
-
-                    // Examples
-                    case .structured: StructuredScreen()
-                    case .componentStack: ComponentStackScreen()
-
-                    // Components
-                    case .card: ComponentCardScreen()
-                    case .list: ComponentListScreen(title: self.title, source: "")
-                    case .action: ComponentActionScreen()
-
+                    case .root: ToolsScreen(data: .tools)
+                    
                     case .components: DebugComponentsScreen(components: [.base, .screen, .contentCard, .accentCard, .metricCard, .list, .listRow])
 
                     case .cacheNumber: DebugCacheScreen<Style.Attribute.Number>()
@@ -71,18 +45,7 @@ struct ContentFlow: View {
         
         var title: String {
             switch self {
-                case .rootExamples: "Examples"
-                case .rootTools: "Tools"
-                case .destination(let title, _): title
-
-                // Examples
-                case .structured: "Structured"
-                case .componentStack: "Component Stack"
-
-                // Components
-                case .card: "Card"
-                case .list: "List"
-                case .action: "Action"
+                case .root: "Tools"
 
                 case .components: "Components"
 
@@ -105,19 +68,19 @@ struct ContentFlow: View {
                     screen.screen
                 }
         }
-        .environment(\.navigationState, navigationState)
+        .environment(\.navigationStateTools, navigationState)
         
     }
 
 }
 
 extension EnvironmentValues {
-    @Entry var navigationState: ContentFlow.NavigationState = .init()
+    @Entry var navigationStateTools: ToolsFlow.NavigationState = .init()
 }
 
 
 // MARK: - Preview
 
 #Preview {
-    ContentFlow(root: .rootExamples)
+    ToolsFlow(root: .root)
 }

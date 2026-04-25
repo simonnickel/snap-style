@@ -38,85 +38,95 @@ public struct StyleSpacer: View {
 // MARK: - Preview
 
 #Preview {
-    VStack {
-        HStack {
-            Text("Some Content")
-                .background(.orange)
-            StyleSpacer(min: \.spacingElements)
-            Text("Some Content")
-                .background(.orange)
+    StyleSpacerExample()
+}
+
+
+package struct StyleSpacerExample: View {
+
+    package init() {}
+
+    package var body: some View {
+        VStack {
+            HStack {
+                Text("Some Content")
+                    .background(.orange)
+                StyleSpacer(min: \.spacingElements)
+                Text("Some Content")
+                    .background(.orange)
+            }
+            .stretch()
+
+            HStack {
+                Text("Some Content")
+                    .background(.orange)
+                StyleSpacer(\.spacingElements)
+                Text("Some Content")
+                    .background(.orange)
+            }
+            .stretch()
+
+            HStack {
+                Text("Some Content with more ")
+                    .background(.orange)
+                StyleSpacer(min: \.spacingElements)
+                Text("Some Content with more text")
+                    .background(.orange)
+            }
+            .stretch()
+
+            HStack {
+                Text("Some Content with more ")
+                    .background(.orange)
+                StyleSpacer(\.spacingElements)
+                Text("Some Content with more text")
+                    .background(.orange)
+            }
+            .stretch()
+
+            HStack {
+                Text("Some Content")
+                    .background(.orange)
+                StyleSpacer(\.spacingElements)
+                Text("Some Content")
+                    .background(.orange)
+            }
+            .stretch()
+            .style(scaleFactor: 5)
+
+            HStack {
+                Rectangle()
+                    .frame(width: 150)
+                StyleSpacer(min: \.spacingElements)
+                Rectangle()
+                    .frame(width: 60)
+            }
+
+            HStack {
+                Rectangle()
+                    .frame(width: 150)
+                StyleSpacer(\.spacingElements)
+                Rectangle()
+                    .frame(width: 60)
+            }
+
+            HStack {
+                Rectangle()
+                    .frame(width: 250)
+                StyleSpacer(min: \.spacingElements)
+                Rectangle()
+                    .frame(width: 250)
+            }
+
+            HStack {
+                Rectangle()
+                    .frame(width: 250)
+                StyleSpacer(\.spacingElements)
+                Rectangle()
+                    .frame(width: 250)
+            }
         }
-        .stretch()
-        
-        HStack {
-            Text("Some Content")
-                .background(.orange)
-            StyleSpacer(\.spacingElements)
-            Text("Some Content")
-                .background(.orange)
-        }
-        .stretch()
-        
-        HStack {
-            Text("Some Content with more ")
-                .background(.orange)
-            StyleSpacer(min: \.spacingElements)
-            Text("Some Content with more text")
-                .background(.orange)
-        }
-        .stretch()
-        
-        HStack {
-            Text("Some Content with more ")
-                .background(.orange)
-            StyleSpacer(\.spacingElements)
-            Text("Some Content with more text")
-                .background(.orange)
-        }
-        .stretch()
-        
-        HStack {
-            Text("Some Content")
-                .background(.orange)
-            StyleSpacer(\.spacingElements)
-            Text("Some Content")
-                .background(.orange)
-        }
-        .stretch()
-        .style(scaleFactor: 5)
-        
-        HStack {
-            Rectangle()
-                .frame(width: 150)
-            StyleSpacer(min: \.spacingElements)
-            Rectangle()
-                .frame(width: 60)
-        }
-        
-        HStack {
-            Rectangle()
-                .frame(width: 150)
-            StyleSpacer(\.spacingElements)
-            Rectangle()
-                .frame(width: 60)
-        }
-        
-        HStack {
-            Rectangle()
-                .frame(width: 250)
-            StyleSpacer(min: \.spacingElements)
-            Rectangle()
-                .frame(width: 250)
-        }
-        
-        HStack {
-            Rectangle()
-                .frame(width: 250)
-            StyleSpacer(\.spacingElements)
-            Rectangle()
-                .frame(width: 250)
-        }
+        .frame(width: 350)
+        .background(.yellow)
     }
-    .frame(width: 350)
-    .background(.yellow)
 }

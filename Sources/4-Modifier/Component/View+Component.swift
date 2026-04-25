@@ -32,6 +32,7 @@ extension View {
         .setupAttributes(with: component.shapes)
         .setupAttributes(with: component.paddings)
         .style(attribute: Style.Context.component, value: component)
+        .style(spacing: component.spacing?())
     }
     
     private func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {
@@ -49,5 +50,4 @@ extension View {
     }
 
 }
-
 

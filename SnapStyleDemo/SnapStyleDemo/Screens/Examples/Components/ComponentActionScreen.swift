@@ -5,6 +5,7 @@
 
 import SnapStyle
 import SwiftUI
+import SnapStyleExamples
 
 struct ComponentActionScreen: View {
     
@@ -20,6 +21,8 @@ struct ComponentActionScreen: View {
     
     var body: some View {
         StyleScreen {
+            
+            ExampleStyleStack()
             
             Toggle(isOn: $showIcons) {
                 Text("Show Icons")

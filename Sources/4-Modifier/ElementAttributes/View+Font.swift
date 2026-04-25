@@ -73,11 +73,39 @@ private struct ScaledFont: ViewModifier {
 
 // MARK: - Preview
 
-#if DEBUG
-extension Style.Component {
-    
-    static let previewFont: Self = .init(
-        "previewFont",
+#Preview {
+    StyleFontModifierExample()
+}
+
+package struct StyleFontModifierExample: View {
+
+    @State private var override: Bool = true
+
+    package init() {}
+
+    package var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                Text("Font from Component")
+                    .style(element: .label)
+            }
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                    .style(define: .icon, font: override ? \.screenTitle : nil)
+                Toggle(isOn: $override.animation()) {
+                    Text("Define override")
+                        .style(element: .label)
+                }
+            }
+        }
+        .style(component: exampleComponent)
+    }
+
+    let exampleComponent: Style.Component = .init(
+        "exampleComponent",
         container: .contentCard,
         fonts: { element in
             switch element {
@@ -86,31 +114,4 @@ extension Style.Component {
             }
         },
     )
-                                         
-}
-#endif
-
-#Preview {
-    
-    @Previewable @State var override: Bool = true
-
-    VStack(alignment: .leading, spacing: 15) {
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-            Text("Font from Component")
-                .style(element: .label)
-        }
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-                .style(define: .icon, font: override ? \.screenTitle : nil)
-            Toggle(isOn: $override.animation()) {
-                Text("Define override")
-                    .style(element: .label)
-            }
-        }
-    }
-    .style(component: .previewFont)
-
 }

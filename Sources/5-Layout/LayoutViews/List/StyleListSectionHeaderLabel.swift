@@ -37,37 +37,46 @@ internal struct ListSectionHeaderLabel: ViewModifier {
 
 // MARK: - Preview
 
-#Preview {
-    StyleList {
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .primary")
-                .styleListSectionHeaderLabel(hierarchy: .primary)
-        }
+#Preview("Example") {
+    StyleListSectionHeaderLabelExample()
+}
 
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .secondary (default)")
-                .styleListSectionHeaderLabel()
-        }
+package struct StyleListSectionHeaderLabelExample: View {
 
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header .tertiary")
-                .styleListSectionHeaderLabel(hierarchy: .tertiary)
-        }
+    package init() {}
 
-        Section {
-            StyleListRow { Text("Row") }
-            StyleListRow { Text("Row") }
-        } header: {
-            StyleLabel("Header")
+    package var body: some View {
+        StyleList {
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .primary")
+                    .styleListSectionHeaderLabel(hierarchy: .primary)
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .secondary (default)")
+                    .styleListSectionHeaderLabel()
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header .tertiary")
+                    .styleListSectionHeaderLabel(hierarchy: .tertiary)
+            }
+
+            Section {
+                StyleListRow { Text("Row") }
+                StyleListRow { Text("Row") }
+            } header: {
+                StyleLabel("Header")
+            }
         }
     }
 }

@@ -74,12 +74,17 @@ extension Style.Attribute.Number {
     public var paddingListRowTrailing: ValueBuilder { .base(.reference(\.paddingListRowTop)) }
     
     
+    // MARK: - Container: Border
+    
+    public var border: ValueBuilder { .base(.value(.scaled(1))) }
+
+    
     // MARK: - Shape
     
     public var strokeSelected: ValueBuilder { .base(.value(.scaled(2))) }
 
 
-    // MARK: - Shape: CornerRadius
+    // MARK: Shape: CornerRadius
 
     /// A corner radius definition based on the level in the component stack.
     public var cornerRadiusComponent: ValueBuilder { .base(.reference(\.cornerRadiusLarge)) }

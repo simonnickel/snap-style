@@ -11,7 +11,7 @@ import SwiftUI
 public struct StyleStack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
-    @Environment(\.styleStackSpacing) private var styleStackSpacing
+    @Environment(\.styleSpacing) private var styleSpacing
 
     private let axis: Axis
     private let alignmentV: VerticalAlignment
@@ -43,7 +43,7 @@ public struct StyleStack<Content>: View where Content: View {
 
     @ViewBuilder
     private var contentStack: some View {
-        let spacingKeyPath = spacing ?? styleStackSpacing
+        let spacingKeyPath = spacing ?? styleSpacing
         let spacing = CGFloat(Self.spacing(for: spacingKeyPath, with: style))
         let layout = axis == .vertical
             ? AnyLayout(VStackLayout(alignment: alignmentH, spacing: spacing))
@@ -66,48 +66,85 @@ public struct StyleStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    @Previewable @State var axis: Axis = .vertical
-    @Previewable @State var stretching: Bool = true
-    @Previewable @State var spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil
+    StyleStackExample()
+}
 
-    StyleStack(axis, isStretching: stretching) {
-        Text("Test Row 1")
-            .background(.green)
-        StyleStack(.horizontal, isStretching: stretching) {
-            Text("Test Row 2")
-                .background(.mint)
-            Text("Test Row 3")
-                .background(.teal)
-        }
-//        .style(spacing: nil)
-    }
-    .background(.yellow)
-    .style(spacing: spacing)
+package struct StyleStackExample: View {
 
-    HStack {
-        StyleButton {
-            withAnimation {
-                axis = axis == .horizontal ? .vertical : .horizontal
-            }
-        } content: {
-            Text("Toggle Axis")
-        }
-
-        StyleButton {
-            withAnimation {
-                stretching.toggle()
-            }
-        } content: {
-            Text("Toggle Stretching")
-        }
-
-        StyleButton {
-            withAnimation {
-                spacing = spacing == nil ? \.spacingElements : nil
-            }
-        } content: {
-            Text("Toggle Spacing")
+    struct Configuration {
+        var axisA: Axis = .horizontal
+        var axisB: Axis = .horizontal
+        var shouldStretch: Bool = true
+        var shouldApplySpacing: Bool = true
+        
+        var spacing: Style.Attribute.Number.ValueBuilderKeyPath? {
+            shouldApplySpacing ? \.spacingElements : nil
         }
     }
-    .padding(.top, 20)
+    
+    @State private var configuration: Configuration = .init()
+
+    package init() {}
+    
+    package var body: some View {
+        StyleScreen {
+            contentExample
+            contentConfiguration
+        }
+    }
+    
+    private var contentExample: some View {
+        StyleStack(configuration.axisA, isStretching: configuration.shouldStretch) {
+            Text("Axis A")
+                .style(component: .accentCard)
+            StyleStack(configuration.axisB, isStretching: configuration.shouldStretch) {
+                Text("Axis B (1)")
+                    .style(component: .accentCard)
+                Text("(2)")
+                    .style(component: .accentCard)
+            }
+            .style(spacing: configuration.spacing)
+            .style(component: .accentCard)
+        }
+        .style(spacing: configuration.spacing)
+        .style(component: .contentCard)
+    }
+    
+    // TODO: This could be an inline list
+    private var contentConfiguration: some View {
+        StyleStack {
+            StyleStack(.horizontal) {
+                Text("Axis A")
+                StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
+                    ForEach(Axis.allCases, id: \.self) { axis in
+                        Text(axis.description)
+                            .tag(axis)
+                    }
+                } label: {
+                    Text("Select Axis A")
+                }
+            }
+            
+            StyleStack(.horizontal) {
+                Text("Axis B")
+                StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
+                    ForEach(Axis.allCases, id: \.self) { axis in
+                        Text(axis.description)
+                            .tag(axis)
+                    }
+                } label: {
+                    Text("Select Axis B")
+                }
+            }
+
+            StyleToggle(isOn: $configuration.shouldStretch.animation()) {
+                Text("Stretch Container")
+            }
+            
+            StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
+                Text("Spacing between elements")
+            }
+        }
+        .style(component: .infoCard)
+    }
 }

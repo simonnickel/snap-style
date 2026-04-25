@@ -60,21 +60,42 @@ extension Style.Views.Button {
 
 // MARK: - Preview
 
-#if DEBUG
+#Preview {
+    StyleButtonExample()
+}
 
-struct PreviewContent: View {
+package struct StyleButtonExample: View {
+    
+    struct Configuration {
+        var component: Style.Component = .contentCard
+        var enabled: Bool = true
+    }
+    
+    @State private var configuration: Configuration = .init()
 
-    var body: some View {
+    package init() {}
+
+    package var body: some View {
+        StyleScreen {
+            contentButtons
+                .style(component: configuration.component)
+                .enabled(configuration.enabled)
+
+            contentConfiguration
+        }
+    }
+
+    private var contentButtons: some View {
         StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
             StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
             }
-            
+
             StyleButton() { } content: {
                 Label("Secondary", systemImage: "star")
             }
             .style(buttonVariant: .secondary)
-            
+
             StyleStack(.horizontal, spacing: \.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary)) { } content: {
                     Label("Primary", systemImage: "star")
@@ -89,34 +110,34 @@ struct PreviewContent: View {
                         .labelStyle(.iconOnly)
                 }
             }
-            
+
             StyleButton(.component(.metricCard)) { } content: {
                 Label("Component: .metricCard", systemImage: "star")
             }
-            
+
             StyleButton(.plain) { } content: {
                 Label("Plain", systemImage: "star")
             }
         }
     }
-}
-
-#Preview {
     
-    @Previewable @State var isEnabled: Bool = true
+    private var contentConfiguration: some View {
+        StyleStack {
+            StylePicker(style: .segmented, selection: $configuration.component) {
+                Text("Content")
+                    .tag(Style.Component.contentCard)
+                 Text("Accent")
+                    .tag(Style.Component.accentCard)
+                 Text("Info")
+                    .tag(Style.Component.infoCard)
+            } label: {
+                Text("Component")
+            }
 
-    StyleScreen {
-        PreviewContent()
-            .style(component: .contentCard)
-            .enabled(isEnabled)
-        PreviewContent()
-            .style(component: .accentCard)
-            .enabled(isEnabled)
-
-        Toggle(isOn: $isEnabled) {
-            Text("enabled")
+            StyleToggle(isOn: $configuration.enabled) {
+                Text("enabled")
+            }
         }
+        .style(component: .infoCard)
     }
 }
-
-#endif

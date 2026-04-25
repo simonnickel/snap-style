@@ -51,11 +51,39 @@ package struct PaddingAttributeModifier: ViewModifier {
 
 // MARK: - Preview
 
-#if DEBUG
-extension Style.Component {
-    
-    static let previewPadding: Self = .init(
-        "previewPadding",
+#Preview {
+    StylePaddingModifierExample()
+}
+
+package struct StylePaddingModifierExample: View {
+
+    @State private var override: Bool = true
+
+    package init() {}
+
+    package var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                Text("Padding from Component")
+                    .style(element: .label)
+            }
+            HStack {
+                Image(systemName: "star")
+                    .style(element: .icon)
+                    .style(define: .icon, padding: override ? \.listRow : nil)
+                Toggle(isOn: $override.animation()) {
+                    Text("Define override")
+                        .style(element: .label)
+                }
+            }
+        }
+        .style(component: exampleComponent)
+    }
+
+    let exampleComponent: Style.Component = .init(
+        "exampleComponent",
         container: .contentCard,
         compositions: { element in
             switch element {
@@ -70,31 +98,4 @@ extension Style.Component {
             }
         },
     )
-                                         
-}
-#endif
-
-#Preview {
-    
-    @Previewable @State var override: Bool = true
-
-    VStack(alignment: .leading, spacing: 15) {
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-            Text("Padding from Component")
-                .style(element: .label)
-        }
-        HStack {
-            Image(systemName: "star")
-                .style(element: .icon)
-                .style(define: .icon, padding: override ? \.listRow : nil)
-            Toggle(isOn: $override.animation()) {
-                Text("Define override")
-                    .style(element: .label)
-            }
-        }
-    }
-    .style(component: .previewPadding)
-
 }

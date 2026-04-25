@@ -71,7 +71,7 @@ struct ComponentListScreen: View {
 
     struct SectionVariantNavigate: View {
 
-        @Environment(\.navigationState) private var navigationState
+        @Environment(\.navigationStateExamples) private var navigationState
         
         let title: String
         let source: String
@@ -82,7 +82,7 @@ struct ComponentListScreen: View {
 
         var body: some View {
             Section {
-                let screenStarOfLife = ContentFlow.Screen.destination("Staroflife", source: identifier)
+                let screenStarOfLife = ExamplesFlow.Screen.destination("Staroflife", source: identifier)
                 StyleListRow(
                     .navigation(isPresented: navigationState.stack.contains(screenStarOfLife)),
                     systemImage: "staroflife",
@@ -93,7 +93,7 @@ struct ComponentListScreen: View {
                     Text(screenStarOfLife.title)
                 }
                 
-                let screenStar = ContentFlow.Screen.destination("Star", source: identifier)
+                let screenStar = ExamplesFlow.Screen.destination("Star", source: identifier)
                 StyleListRow(
                     .navigate(screenStar, isPresented: navigationState.stack.contains(screenStar)),
                     systemImage: "star"
@@ -101,7 +101,7 @@ struct ComponentListScreen: View {
                     Text("Star")
                 }
                 
-                let screenRectangle = ContentFlow.Screen.destination("Rectangle", source: identifier)
+                let screenRectangle = ExamplesFlow.Screen.destination("Rectangle", source: identifier)
                 StyleListRow(
                     .navigate(screenRectangle, isPresented: navigationState.stack.contains(screenRectangle)),
                     systemImage: "rectangle"
@@ -109,7 +109,7 @@ struct ComponentListScreen: View {
                     Text("Rectangle")
                 }
                 
-                let screenTriangle = ContentFlow.Screen.destination("Triangle", source: identifier)
+                let screenTriangle = ExamplesFlow.Screen.destination("Triangle", source: identifier)
                 StyleListRow(
                     .navigate(screenTriangle, isPresented: navigationState.stack.contains(screenTriangle)),
                     systemImage: "triangle"

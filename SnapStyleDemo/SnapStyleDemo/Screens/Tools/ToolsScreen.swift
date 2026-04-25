@@ -6,21 +6,17 @@
 import SnapStyle
 import SwiftUI
 
-struct ContentListScreen: View {
+struct ToolsScreen: View {
     
     struct ViewData {
         struct Section: Identifiable {
             var id: String { title }
             let title: String
-            let screens: [ContentFlow.Screen]
+            let screens: [ToolsFlow.Screen]
         }
         
         let sections: [Section]
         
-        static let examples: ViewData = ViewData(sections: [
-            Section(title: "Components", screens: [.card, .list, .action]),
-            Section(title: "Examples", screens: [.structured, .componentStack]),
-        ])
         static let tools: ViewData = ViewData(sections: [
             Section(title: "Tools", screens: [.components]),
             Section(title: "Caches", screens: [.cacheNumber, .cacheFont, .cacheSurface, .cacheComposition]),
@@ -43,7 +39,7 @@ struct ContentListScreen: View {
     struct ListSection: View {
 
         let title: String
-        let screens: [ContentFlow.Screen]
+        let screens: [ToolsFlow.Screen]
 
         var body: some View {
             Section {
@@ -62,9 +58,9 @@ struct ContentListScreen: View {
 
     struct ListRow: View {
         
-        @Environment(\.navigationState) private var navigationState
+        @Environment(\.navigationStateTools) private var navigationState
 
-        let screen: ContentFlow.Screen
+        let screen: ToolsFlow.Screen
 
         var body: some View {
             StyleListRow(
@@ -81,6 +77,6 @@ struct ContentListScreen: View {
 
 #Preview {
     NavigationStack {
-        ContentListScreen(data: .examples)
+        ToolsScreen(data: .tools)
     }
 }
