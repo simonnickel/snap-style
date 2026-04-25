@@ -1,5 +1,4 @@
-// swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 6.3
 
 import PackageDescription
 
@@ -9,7 +8,6 @@ let package = Package(
 		.iOS(.v17), .macOS(.v15)
 	],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SnapStyle",
             targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
@@ -19,7 +17,6 @@ let package = Package(
             targets: ["SnapStyleExamples"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/simonnickel/snap-foundation.git", branch: "main"),
         .package(url: "https://github.com/simonnickel/snap-core.git", branch: "main"),
     ],
@@ -133,5 +130,4 @@ let package = Package(
             path: "Tests/SnapStyleTests",
         ),
     ],
-    swiftLanguageModes: [.version("6")]
 )
