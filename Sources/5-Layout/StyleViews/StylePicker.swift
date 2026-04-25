@@ -65,8 +65,10 @@ package struct StylePickerExample: View {
                     .style(component: .contentCard)
                 contentPicker(style: .menu)
                     .style(component: .contentCard)
+                #if !os(macOS)
                 contentPicker(style: .wheel)
                     .style(component: .contentCard)
+                #endif
                     
                 
 //                Picker(selection: $selection) {
