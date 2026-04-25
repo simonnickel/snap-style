@@ -114,19 +114,24 @@ extension Style.Attribute.Surface {
             let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
 //            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
-            return .value(.any(AnyShapeStyle(
-                MeshGradient(width: 4, height: 4, points: [
-                    [0, 0], [0.33, 0], [0.66, 0], [1, 0],
-                    [0, 0.33], [0.33, 0.33], [0.66, 0.33], [1, 0.33],
-                    [0, 0.66], [0.33, 0.66], [0.66, 0.66], [1, 0.66],
-                    [0, 1], [0.33, 1], [0.66, 1], [1, 1],
-                ], colors: [
-                    complementary, complementary, base, complementary,
-                    base, complementary, complementary, base,
-                    complementary, complementary, complementary, base,
-                    complementary, complementary, base, base,
-                ])
-            )))
+            if #available(iOS 18.0, *) {
+                return .value(.any(AnyShapeStyle(
+                    MeshGradient(width: 4, height: 4, points: [
+                        [0, 0], [0.33, 0], [0.66, 0], [1, 0],
+                        [0, 0.33], [0.33, 0.33], [0.66, 0.33], [1, 0.33],
+                        [0, 0.66], [0.33, 0.66], [0.66, 0.66], [1, 0.66],
+                        [0, 1], [0.33, 1], [0.66, 1], [1, 1],
+                    ], colors: [
+                        complementary, complementary, base, complementary,
+                        base, complementary, complementary, base,
+                        complementary, complementary, complementary, base,
+                        complementary, complementary, base, base,
+                    ])
+                )))
+            } else {
+                // TODO: Test if this does work as a fallback.
+                return .value(.any(AnyShapeStyle(Gradient(colors: [complementary, base, complementary, base]))))
+            }
         }
     }
     
@@ -140,17 +145,22 @@ extension Style.Attribute.Surface {
 //            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
             let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
             
-            return .value(.any(AnyShapeStyle(
-                MeshGradient(width: 3, height: 3, points: [
-                    [0, 0], [0.66, 0], [1, 0],
-                    [0, 0.33], [0.33, 0.33], [1, 0.33],
-                    [0, 1], [0.33, 1], [1, 1],
-                ], colors: [
-                    contrast, contrast, base,
-                    base, contrast, base,
-                    contrast, base, contrast,
-                ])
-            )))
+            if #available(iOS 18.0, *) {
+                return .value(.any(AnyShapeStyle(
+                    MeshGradient(width: 3, height: 3, points: [
+                        [0, 0], [0.66, 0], [1, 0],
+                        [0, 0.33], [0.33, 0.33], [1, 0.33],
+                        [0, 1], [0.33, 1], [1, 1],
+                    ], colors: [
+                        contrast, contrast, base,
+                        base, contrast, base,
+                        contrast, base, contrast,
+                    ])
+                )))
+            } else {
+                // TODO: Test if this does work as a fallback.
+                return .value(.any(AnyShapeStyle(Gradient(colors: [contrast, base]))))
+            }
         }
     }
 

@@ -68,7 +68,13 @@ extension Style.Attribute.Surface {
                 case .color(let color):
                     switch self {
                         case .opacity(let opacity): .color(color.opacity(opacity))
-                        case .mix(let mix, let amount): .color(color.mix(with: mix, by: amount))
+                        case .mix(let mix, let amount):
+                            if #available(iOS 18.0, *) {
+                                .color(color.mix(with: mix, by: amount))
+                            } else {
+                                // TODO: Test if this does work as a fallback.
+                                .color(color)
+                            }
                     }
 
                 // Material gets converted to some ShapeStyle and can no longer be applied as .material
