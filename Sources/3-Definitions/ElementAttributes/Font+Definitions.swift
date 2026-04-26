@@ -77,9 +77,9 @@ extension Style.Attribute.Font {
     public var title: ValueBuilder {
         .builder { context in
             return switch context.element.hierarchy {
-                case .any, .primary: .value(.with(size: 18, weight: .bold))
-                case .secondary: .value(.with(size: 16, weight: .medium))
-                case .tertiary: .value(.with(size: 14, weight: .medium))
+                case .any, .primary: .value(.with(size: 22, weight: .bold))
+                case .secondary: .value(.with(size: 18, weight: .semibold))
+                case .tertiary: .value(.with(size: 16, weight: .medium))
             }
         }
     }
