@@ -27,6 +27,7 @@ extension View {
                 self
             }
         }
+        .style(element: .any)
         .setupAttributes(with: component.fonts)
         .setupAttributes(with: component.compositions)
         .setupAttributes(with: component.shapes)

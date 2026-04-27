@@ -28,6 +28,7 @@ extension Style {
 
         public enum ElementType: String, Sendable, CaseIterable {
 
+            /// Is set on root of component to apply to everything.
             case any
 
             case title
