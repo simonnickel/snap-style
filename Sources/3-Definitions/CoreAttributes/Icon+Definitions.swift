@@ -17,6 +17,7 @@ extension Style.Attribute.Icon {
     public var indicatorUnread: ValueBuilder { .base(.value(.named("circlebadge.fill"))) }
     public var indicatorMore: ValueBuilder { .base(.value(.named("ellipsis"))) }
     public var settings: ValueBuilder { .base(.value(.named("gear"))) }
+    public var edit: ValueBuilder { .base(.value(.named("square.and.pencil"))) }
 
     
     // MARK: - Config
