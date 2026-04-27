@@ -79,6 +79,7 @@ extension Style.Component {
         fonts: { element in
             switch element {
                 case .title, .icon, .accessory: \.title
+                case .footnote: \.footnote
                 default: \.content
             }
         },
