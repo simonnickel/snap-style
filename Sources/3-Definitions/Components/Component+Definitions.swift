@@ -158,13 +158,15 @@ extension Style.Component {
     
     // MARK: - Button
 
+    /// Used for `Style.Views.Button.Variant.primary / .secondary`.
     public static func button(_ hierarchy: Hierarchy) -> Self {
         Self("button", hierarchy: hierarchy,
             container: .button,
             fonts: { element in
                switch element {
+                   case .any: \.buttonTitle
                    case .icon: \.buttonIcon
-                   default: \.buttonTitle
+                   default: nil
                }
             },
         )
@@ -177,7 +179,6 @@ extension Style.Component {
                switch element {
                    case .icon: \.buttonIconOnly
                    default: nil
-
                }
             },
         )
