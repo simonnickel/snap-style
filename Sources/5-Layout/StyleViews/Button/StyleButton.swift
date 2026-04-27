@@ -31,7 +31,7 @@ extension Style.Views.Button {
         
         public init(
             _ variant: Style.Views.Button.Variant? = nil,
-            _ action: @escaping () -> Void,
+            action: @escaping () -> Void,
             @ViewBuilder content: @escaping () -> Content
         ) {
             self.variant = variant
