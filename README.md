@@ -65,11 +65,18 @@ Semantic roles within a component: `.title`, `.label`, `.icon`, `.value`, `.acce
 The accumulated state flowing through the environment: color scheme, font design, font width, scale factor, current component, container stack, and element. Attribute definitions can use the context to return different values.
 
 ### Caching
-Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.style(update:)` or `.styleOverride(...)`, the relevant caches are reset automatically.
+Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.styleOverride(...)`, the relevant caches are reset automatically.
 
 ## Demo Project
 
-The [SnapStyleDemo](/SnapStyleDemo) app showcases the built-in components, attribute definitions, and context configuration options. It includes examples for cards, lists, buttons, and a configuration screen to experiment with accent colors, font design, font width, corner radii, and scale factor.
+The [SnapStyleDemo](SnapStyleDemo) app showcases the built-in components, attribute definitions, and context configuration options. It includes examples for cards, lists, buttons, and a configuration screen to experiment with accent colors, font design, font width, corner radii, and scale factor.
+
+## Requirements
+
+- iOS 17+ / macOS 15+
+- Swift 6.3+
+- [snap-foundation](https://github.com/simonnickel/snap-foundation)
+- [snap-core](https://github.com/simonnickel/snap-core)
 
 ## Installation
 
@@ -151,7 +158,9 @@ SnapStyle provides views that integrate with the style system.
 | `StyleStack` | HStack/VStack with style-defined spacing, animatable axis switching |
 | `StyleLazyVStack` / `StyleLazyHStack` | Lazy stack variants with style-defined spacing |
 | `StyleList` | Styled List with section spacing and insets |
-| `StyleListRow` | List row with variants: `.plain`, `.navigate`, `.selected`, `.pick`, and more |
+| `StyleListRow` | List row with variants: `.plain`, `.navigate`, `.navigation`, `.selectValue`, `.selectValues`, `.selected`, `.enabled`, `.pick`, `.pickInline` |
+| `StyleListSectionHeaderLabel` | Styled section header label for lists |
+| `StyleListSectionFooterLabel` | Styled section footer label for lists |
 | `StyleSpacer` | Spacer with a style-defined minimum length |
 
 **Components** -- Interactive and content views that resolve their styling from the component/element system.
@@ -162,6 +171,8 @@ SnapStyle provides views that integrate with the style system.
 | `StyleLabel` | Applies element-based font, composition, and padding |
 | `StyleIcon` | Styled icon from a `Style.Attribute.Icon` key path |
 | `StyleShapeView` | Renders a shape from a `Style.Attribute.Shape` key path |
+| `StylePicker` | Styled picker with variant support |
+| `StyleToggle` | Styled toggle |
 
 **Utilities** -- General-purpose layout helpers, not specific to the style system.
 
@@ -234,9 +245,9 @@ Define containers with surface, composition, shape, and padding:
 ```swift
 extension Style.Container.Properties {
     static let myContainer: Self = .init("myContainer",
-        composition: { \.containerContentCard },
-        shape: { \.containerCard },
-        padding: { \.containerCard },
+        composition: \.containerContentCard,
+        shape: \.containerCard,
+        padding: \.containerCard,
     )
 }
 ```
