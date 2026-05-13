@@ -70,64 +70,59 @@ extension Style.Component {
     )
 
     
-    // MARK: - Content Card
+    // MARK: - Card
     
-    // TODO: They should all use a generic Card base definition
-    
-    public static let contentCard: Self = .init(
-        "contentCard",
-        container: .contentCard,
+    public static let card: Self = .init(
+        "card",
+        container: .card,
         spacing: \.spacingElements,
-        fonts: { element in
+    )
+    
+    // MARK: Content Card
+    
+    public static let contentCard: Self = Self.card.adjusted(
+        "contentCard",
+        container: .set(.contentCard),
+        fonts: .set({ element in
             switch element {
                 case .any: \.content
                 case .title, .icon, .accessory: \.title
                 case .footnote: \.footnote
                 default: nil
             }
-        },
+        }),
     )
-    
-    
-    // MARK: - Accessory Card
-    
-    public static let infoCard: Self = .init(
+
+
+    // MARK: Accessory Card
+
+    public static let infoCard: Self = Self.contentCard.adjusted(
         "infoCard",
-        container: .infoCard,
-        spacing: \.spacingElements,
+        container: .set(.infoCard),
     )
-    
-    
-    // MARK: - Accent Card
-    
-    public static let accentCard: Self = .init(
+
+
+    // MARK: Accent Card
+
+    public static let accentCard: Self = Self.contentCard.adjusted(
         "accentCard",
-        container: .accentCard,
-        spacing: \.spacingElements,
-        fonts: { element in
-            switch element {
-                case .any: \.content
-                case .title, .icon, .accessory: \.title
-                default: nil
-            }
-        },
+        container: .set(.accentCard),
     )
-    
-    
-    // MARK: - Metric Card
-    
-    public static let metricCard: Self = .init(
+
+
+    // MARK: Metric Card
+
+    public static let metricCard: Self = Self.card.adjusted(
         "metricCard",
-        container: .metricCard,
-        spacing: \.spacingElements,
-        fonts: { element in
+        container: .set(.metricCard),
+        fonts: .set({ element in
             switch element {
                 case .title: \.content
                 case .icon: \.title
                 case .value: \.title
                 default: nil
             }
-        },
+        }),
     )
     
     

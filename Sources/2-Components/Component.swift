@@ -73,6 +73,31 @@ extension Style {
             && lhs.container == rhs.container
         }
 
+        
+        // MARK: - Adjusted
+        
+        /// Creates a copy with adjusted values.
+        public func adjusted(
+            _ id: String,
+            hierarchy: Style.Override<Hierarchy> = .keep,
+            container: Style.Override<Style.Container.Properties?> = .keep,
+            spacing: Style.Override<Style.Attribute.Number.ValueBuilderKeyPathProvider?> = .keep,
+            compositions: Style.Override<Mapping<Attribute.Composition>?> = .keep,
+            fonts: Style.Override<Mapping<Attribute.Font>?> = .keep,
+            paddings: Style.Override<Mapping<Attribute.Padding>?> = .keep,
+            shapes: Style.Override<Mapping<Attribute.Shape>?> = .keep,
+        ) -> Self {
+            Self(
+                id,
+                hierarchy: hierarchy.resolved(against: self.hierarchy),
+                container: container.resolved(against: self.container),
+                spacing: spacing.resolved(against: self.spacing)?(),
+                compositions: compositions.resolved(against: self.compositions),
+                fonts: fonts.resolved(against: self.fonts),
+                paddings: paddings.resolved(against: self.paddings),
+                shapes: shapes.resolved(against: self.shapes),
+            )
+        }
     }
 
 }

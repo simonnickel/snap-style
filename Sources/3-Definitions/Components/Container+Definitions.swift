@@ -28,41 +28,47 @@ extension Style.Container.Properties {
     )
     
     
-    // MARK: - Content Card
+    // MARK: - Card
     
-    public static let contentCard: Self = .init("contentCard",
-        composition: \.containerContentCard,
+    public static let card: Self = .init(
+        "card",
         shape: \.containerCard,
         padding: \.containerCard,
     )
     
+    // MARK: Content Card
     
-    // MARK: - Accessory Card
-    
-    public static let infoCard: Self = .init("infoCard",
-        composition: \.containerInfoCard,
-        shape: \.containerCard,
-        padding: \.containerCard,
+    public static let contentCard: Self = Self.card.adjusted(
+        "contentCard",
+        composition: .set(\.containerContentCard),
     )
-    
-    
-    // MARK: - Accent Card
-    
-    public static let accentCard: Self = .init("accentCard",
-        requiresSecondaryAccent: true,
-        composition: \.containerAccentCard,
-        shape: \.containerCard,
-        padding: \.containerCard,
+
+
+    // MARK: Accessory Card
+
+    public static let infoCard: Self = Self.card.adjusted(
+        "infoCard",
+        composition: .set(\.containerInfoCard),
     )
-    
-    
-    // MARK: - Metric Card
-    
-    public static let metricCard: Self = .init("metricCard",
-        requiresSecondaryAccent: true,
-        composition: \.containerMetricCard,
-        shape: \.containerMetricCard,
-        padding: \.containerMetricCard,
+
+
+    // MARK: Accent Card
+
+    public static let accentCard: Self = Self.card.adjusted(
+        "accentCard",
+        requiresSecondaryAccent: .set(true),
+        composition: .set(\.containerAccentCard),
+    )
+
+
+    // MARK: Metric Card
+
+    public static let metricCard: Self = Self.card.adjusted(
+        "metricCard",
+        requiresSecondaryAccent: .set(true),
+        composition: .set(\.containerMetricCard),
+        shape: .set(\.containerMetricCard),
+        padding: .set(\.containerMetricCard),
     )
     
     

@@ -57,7 +57,32 @@ extension Style.Container {
             && lhs.requiresSecondaryAccent == rhs.requiresSecondaryAccent
             && lhs.ignoresSafeAreaEdges == rhs.ignoresSafeAreaEdges
         }
-
+        
+        
+        // MARK: - Adjusted
+        
+        /// Creates a copy with adjusted values.
+        public func adjusted(
+            _ id: String,
+            requiresSecondaryAccent: Style.Override<Bool> = .keep,
+            ignoresSafeAreaEdges: Style.Override<Edge.Set> = .keep,
+            surface: Style.Override<Attribute.Surface.ValueBuilderKeyPathProvider?> = .keep,
+            composition: Style.Override<Attribute.Composition.ValueBuilderKeyPathProvider?> = .keep,
+            shape: Style.Override<Attribute.Shape.ValueBuilderKeyPathProvider?> = .keep,
+            padding: Style.Override<Attribute.Padding.ValueBuilderKeyPathProvider?> = .keep,
+            border: Style.Override<Attribute.Number.ValueBuilderKeyPathProvider?> = .keep,
+        ) -> Self {
+            Self(
+                id,
+                requiresSecondaryAccent: requiresSecondaryAccent.resolved(against: self.requiresSecondaryAccent),
+                ignoresSafeAreaEdges: ignoresSafeAreaEdges.resolved(against: self.ignoresSafeAreaEdges),
+                surface: surface.resolved(against: self.surface)?(),
+                composition: composition.resolved(against: self.composition)?(),
+                shape: shape.resolved(against: self.shape)?(),
+                padding: padding.resolved(against: self.padding)?(),
+                border: border.resolved(against: self.border)?(),
+            )
+        }
     }
 
 }
