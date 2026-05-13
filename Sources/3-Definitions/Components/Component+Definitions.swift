@@ -14,7 +14,8 @@ extension Style.Component {
     
     // MARK: - Base
     
-    public static let base: Self = .init("base",
+    public static let base: Self = .init(
+        "base",
         container: .base,
         compositions: { element in
             switch element {
@@ -51,7 +52,8 @@ extension Style.Component {
     
     // MARK: - Screen
 
-    public static let screen: Self = .init("screen",
+    public static let screen: Self = .init(
+        "screen",
         container: .screen,
         fonts: { element in
             switch element {
@@ -131,7 +133,8 @@ extension Style.Component {
     
     // MARK: - List
     
-    public static let list: Self = .init("list",
+    public static let list: Self = .init(
+        "list",
         container: .screen,
         fonts: { element in
             switch element {
@@ -141,7 +144,8 @@ extension Style.Component {
         },
     )
     
-    public static let listRow: Self = .init("listRow",
+    public static let listRow: Self = .init(
+        "listRow",
         container: .listRow,
         compositions: { element in
             switch element {

@@ -10,7 +10,8 @@ extension Style.Container.Properties {
     
     // MARK: - Base
     
-    public static let base: Self = .init("base",
+    public static let base: Self = .init(
+        "base",
         composition: \.anyContainer,
         shape: \.anyContainer,
         padding: \.anyContainer,
@@ -19,7 +20,8 @@ extension Style.Container.Properties {
     
     // MARK: - Screen
 
-    public static let screen: Self = .init("screen",
+    public static let screen: Self = .init(
+        "screen",
         ignoresSafeAreaEdges: .all,
         composition: \.screen,
         shape: nil,
@@ -66,7 +68,8 @@ extension Style.Container.Properties {
     
     // MARK: - List
     
-    public static let listRow: Self = .init("listRow",
+    public static let listRow: Self = .init(
+        "listRow",
         composition: \.listRow,
         padding: \.listRow,
     )
@@ -82,7 +85,8 @@ extension Style.Container.Properties {
         border: \.border,
     )
     
-    public static let buttonIconOnly: Self = .init("buttonIconOnly",
+    public static let buttonIconOnly: Self = .init(
+        "buttonIconOnly",
         composition: \.interactiveContainer,
         shape: \.containerActionIconOnly,
         padding: \.containerActionIconOnly,
