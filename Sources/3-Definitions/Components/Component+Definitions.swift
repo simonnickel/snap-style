@@ -78,9 +78,10 @@ extension Style.Component {
         spacing: \.spacingElements,
         fonts: { element in
             switch element {
+                case .any: \.content
                 case .title, .icon, .accessory: \.title
                 case .footnote: \.footnote
-                default: \.content
+                default: nil
             }
         },
     )
@@ -103,8 +104,9 @@ extension Style.Component {
         spacing: \.spacingElements,
         fonts: { element in
             switch element {
+                case .any: \.content
                 case .title, .icon, .accessory: \.title
-                default: \.content
+                default: nil
             }
         },
     )
@@ -121,7 +123,7 @@ extension Style.Component {
                 case .title: \.content
                 case .icon: \.title
                 case .value: \.title
-                default: \.card
+                default: nil
             }
         },
     )
@@ -149,9 +151,10 @@ extension Style.Component {
         },
         fonts: { element in
             switch element {
+                case .any: \.list
                 case .icon: \.listIcon
                 case .accessory: \.listAccessory
-                default: \.list
+                default: nil
             }
         },
     )

@@ -14,7 +14,6 @@ extension Style.Attribute.Font {
     public var anyComponent: ValueBuilder { .base(nil) }
 
     public var content: ValueBuilder { .base(.value(.with(size: 16, weight: .regular))) }
-    public var card: ValueBuilder { .base(.value(.with(size: 18, weight: .regular))) }
     public var textBlock: ValueBuilder { .base(.reference(\.content)) }
 
     /// Requires `Style.configuration.allowNavigationBarTitleAdjustments` to be enabled.
