@@ -20,17 +20,21 @@ Strictly layered — dependencies only flow downward:
 
 ## Core Types
 
-**Attributes** — eight types: `Surface` (colors/materials), `Number` (dimensions, DynamicType-aware), `Icon`, `Accent`, `Font`, `Composition` (layered surfaces), `Padding`, `Shape`.
+**Attributes** — eight types split into two groups:
+- *Core* (`Accent`, `Icon`, `Number`, `Surface`): applied at the style/component level.
+- *Element* (`Composition`, `Font`, `Padding`, `Shape`): implement `StyleElementAttribute`, making them mappable per `ElementType` in a `Component`. When adding a new element-mappable attribute, implement `StyleElementAttribute` and register one `@Entry` environment key per `ElementType` in `3-Definitions`.
 
 **`Style`** — holds `BuilderContainer` (definition storage) and `CacheContainer` (per-attribute caches, invalidated when definitions change).
 
 **`Context`** — dictionary-based accumulated state (color scheme, font design/width, scale factor, component, container stack, element hierarchy).
 
-**`Component`** — groups attribute definitions, maps `ElementType` → key paths. Supports `.adjusted()` for variants.
+**`Component`** — groups attribute definitions, maps `ElementType` → key paths for element attributes. Supports `.adjusted()` for variants.
 
 **`Element`** — combines `ElementType` (`.title`, `.label`, `.icon`, `.value`, `.accessory`, `.separator`, `.footnote`) and `Hierarchy` (`.primary`, `.secondary`, `.tertiary`).
 
-**`Container`** — instance with `properties` (surface/shape/padding), `parent`, `state` (`InteractionState`), nesting `level`.
+**`Container.Properties`** — static style descriptor (`surface`, `composition`, `shape`, `padding`, `border`); passed via `Component.container`. Supports `.adjusted()` for variants.
+
+**`Container`** — live runtime instance wrapping `properties: Container.Properties`, `parent: Container.Properties?`, `state: InteractionState`, nesting `level`.
 
 ## Value Resolution
 
