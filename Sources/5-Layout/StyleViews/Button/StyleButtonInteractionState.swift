@@ -31,6 +31,11 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
 
             return .normal
         }
+        
+        var shouldBeAnimated: Bool {
+            // Do not animate start of pressing.
+            !didPress
+        }
     }
 
     @State private var state: States = .init()
@@ -77,9 +82,8 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
     }
 
     private func update() {
-        withAnimation(.snappy) {
-            let current = state.result
-            interactionState.wrappedValue = current
+        withAnimation(state.shouldBeAnimated ? .snappy : .none) {
+            interactionState.wrappedValue = state.result
         }
     }
 
