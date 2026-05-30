@@ -19,6 +19,7 @@ extension Style.Attribute.Accent {
         
         public typealias ColorValue = Style.Attribute.Surface.ValueBuilderKeyPath
         
+        // TODO: Change to enum that either is a KeyPath or a Color
         public let base: ColorValue
         public let onAccent: ColorValue
         public let complementary: ColorValue
