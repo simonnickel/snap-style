@@ -31,17 +31,26 @@ private struct AccentColorModifier: ViewModifier {
     func body(content: Content) -> some View {
         if
             let keyPath,
-            let definition = style.accent(for: keyPath),
-            let color = style.surface(for: definition.base)
+            let value = style.accent(for: keyPath),
+            let color = style.surface(for: value.base)
         {
             content
             // TODO: .accentColor() is deprecated, but I think this is used in the definitions to get the system defined tint color. Need to check and replace. Also check other uses of .accentColor.
                 .accentColor(keyPath == \.primary ? color.resolvedColor : nil)
                 .tint(keyPath == \.primary ? color.resolvedColor : nil)
-                .style(attribute: Style.Context.accent, value: keyPath)
+                .style(attribute: Style.Context.accent, value: value)
         } else {
             content
         }
     }
 
+}
+
+#Preview {
+    VStack {
+        Text("Hello, World!")
+            .style(foreground: \.accent)
+            
+    }
+    
 }
