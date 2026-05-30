@@ -26,7 +26,7 @@ extension Style.ContextWrapper {
     }
 
     public var accentPrimary: Style.Attribute.Accent.Value.WrappedValue {
-        accent(for: \.primary) ?? .fallbackPrimary
+        accentValue(for: \.primary) ?? .fallbackPrimary
     }
 
 }

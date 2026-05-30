@@ -31,8 +31,8 @@ private struct AccentColorModifier: ViewModifier {
     func body(content: Content) -> some View {
         if
             let keyPath,
-            let value = style.accent(for: keyPath),
             let color = style.accentColor(for: keyPath, variant: .base)
+            let value = style.accentValue(for: keyPath)
         {
             content
             // TODO: .accentColor() is deprecated, but I think this is used in the definitions to get the system defined tint color. Need to check and replace. Also check other uses of .accentColor.
