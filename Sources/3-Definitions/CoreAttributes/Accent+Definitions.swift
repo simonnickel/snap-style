@@ -68,6 +68,51 @@ extension Style.Attribute.Accent {
 
 // MARK: - Colors
 
+extension Style.Attribute.Accent {
+    
+    public var blue: ValueBuilder {
+        .base(.value(
+            .init(
+                base: \.snapBlue,
+                onAccent: \.snapWhite,
+                complementary: \.snapMint,
+                //            complementary: Color.blue.mix(with: .white, by: 0.2).mix(with: .purple, by: 0.5),
+                contrast: \.snapYellow,
+                brightness: .dark
+            )
+        ))
+    }
+    
+    
+    public var teal: ValueBuilder {
+        .base(.value(
+            .init(
+                base: \.snapTeal,
+                onAccent: \.snapWhite,
+                complementary: \.snapBlue,
+                contrast: \.snapPurple,
+                brightness: .light
+            )
+        ))
+    }
+    
+    public func builder(with color: Color) -> ValueBuilder {
+        .builder({ context in
+            .value(
+                .init(
+                    base: \.snapTeal,
+                    onAccent: \.snapWhite,
+                    complementary: \.snapBlue,
+                    contrast: \.snapPurple,
+                    brightness: .light
+                )
+            )
+        })
+    }
+    
+}
+
+// TODO: is this necessary?
 extension Style.Attribute.Accent.Value.WrappedValue {
     
     public static var blue: Self {

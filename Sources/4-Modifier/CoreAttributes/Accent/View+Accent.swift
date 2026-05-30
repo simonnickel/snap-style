@@ -52,5 +52,6 @@ private struct AccentColorModifier: ViewModifier {
             .style(foreground: \.accent)
             
     }
+    .style(accent: \.teal)
     
 }
