@@ -24,6 +24,7 @@ extension Style.Attribute.Accent {
         public let onAccent: ColorValue
         public let complementary: ColorValue
         public let contrast: ColorValue
+        
         public let brightness: Brightness
 
         public enum Brightness {
@@ -42,6 +43,22 @@ extension Style.Attribute.Accent {
         
         public var description: String {
             "\(self)" // TODO finetuning: Proper description
+        }
+        
+        
+        // MARK: - Variant
+        
+        public enum Variant {
+            case base, onAccent, complementary, contrast
+        }
+        
+        public func surface(for variant: Variant) -> ColorValue {
+            return switch variant {
+                case .base: base
+                case .onAccent: onAccent
+                case .complementary: complementary
+                case .contrast: contrast
+            }
         }
 
     }

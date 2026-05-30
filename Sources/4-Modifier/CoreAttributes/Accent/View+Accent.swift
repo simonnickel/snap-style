@@ -32,12 +32,12 @@ private struct AccentColorModifier: ViewModifier {
         if
             let keyPath,
             let value = style.accent(for: keyPath),
-            let surface = style.surface(for: value.base)
+            let color = style.accentColor(for: keyPath, variant: .base)
         {
             content
             // TODO: .accentColor() is deprecated, but I think this is used in the definitions to get the system defined tint color. Need to check and replace. Also check other uses of .accentColor.
-                .accentColor(keyPath == \.primary ? surface.resolvedColor : nil)
-                .tint(keyPath == \.primary ? surface.resolvedColor : nil)
+                .accentColor(keyPath == \.primary ? color : nil)
+                .tint(keyPath == \.primary ? color : nil)
                 .style(attribute: Style.Context.accent, value: value)
         } else {
             content
