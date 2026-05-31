@@ -89,6 +89,7 @@ private struct ContainerContextModifier26: ViewModifier {
     func body(content: Content) -> some View {
         let stack = style.context.containerStack.appended(container, state: state)
         content
+        // TODO: How to handle this properly?
             .style(accent: container.requiresSecondaryAccent ? \.secondary : nil)
             .style(attribute: Style.Context.containerStack, value: stack)
     }

@@ -9,6 +9,9 @@ import SwiftUI
 
 extension Style.Attribute.Accent.Value.WrappedValue {
 
+// MARK: - Fallback
+
+// TODO: One should be enough, or one should reference the other.
     public static var fallbackPrimary: Self {
         .surface(
             base: \.systemAccent,
@@ -39,6 +42,7 @@ extension Style.Attribute.Accent {
     
     // MARK: Generic Accents
     
+    // TODO: Instead of context, everything should reference and override primary / secondary exclusively. Or only the context should be used and Accent should not be an Attribute at all.
     public var primary: ValueBuilder {
         .base(.value(
             .fallbackPrimary
