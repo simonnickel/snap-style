@@ -10,7 +10,7 @@ import SwiftUI
 extension Style.Attribute.Accent.Value.WrappedValue {
 
     public static var fallbackPrimary: Self {
-        Self(
+        .surface(
             base: \.systemAccent,
             onAccent: \.snapWhite,
             complementary: \.systemAccentComplementary,
@@ -20,7 +20,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var fallbackSecondary: Self {
-        Self(
+        .surface(
             base: \.snapBlack,
             onAccent: \.snapWhite,
             complementary: \.snapGray,
@@ -53,7 +53,7 @@ extension Style.Attribute.Accent {
     
     public var destructive: ValueBuilder {
         .base(.value(
-            .init(
+            .surface(
                 base: \.snapRed,
                 onAccent: \.snapWhite,
                 complementary: \.snapOrange,
@@ -72,7 +72,7 @@ extension Style.Attribute.Accent {
     
     public var blue: ValueBuilder {
         .base(.value(
-            .init(
+            .surface(
                 base: \.snapBlue,
                 onAccent: \.snapWhite,
                 complementary: \.snapMint,
@@ -86,7 +86,7 @@ extension Style.Attribute.Accent {
     
     public var teal: ValueBuilder {
         .base(.value(
-            .init(
+            .surface(
                 base: \.snapTeal,
                 onAccent: \.snapWhite,
                 complementary: \.snapBlue,
@@ -99,7 +99,7 @@ extension Style.Attribute.Accent {
     public func builder(with color: Color) -> ValueBuilder {
         .builder({ context in
             .value(
-                .init(
+                .surface(
                     base: \.snapTeal,
                     onAccent: \.snapWhite,
                     complementary: \.snapBlue,
@@ -116,7 +116,7 @@ extension Style.Attribute.Accent {
 extension Style.Attribute.Accent.Value.WrappedValue {
     
     public static var blue: Self {
-        Self(
+        .surface(
             base: \.snapBlue,
             onAccent: \.snapWhite,
             complementary: \.snapMint,
@@ -127,7 +127,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var teal: Self {
-        Self(
+        .surface(
             base: \.snapTeal,
             onAccent: \.snapWhite,
             complementary: \.snapBlue,
@@ -137,7 +137,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var green: Self {
-        Self(
+        .surface(
             base: \.snapGreen,
             onAccent: \.snapWhite,
             complementary: \.snapMint,
@@ -147,7 +147,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var red: Self {
-        Self(
+        .surface(
             base: \.snapRed,
             onAccent: \.snapWhite,
             complementary: \.snapOrange,
@@ -157,7 +157,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var orange: Self {
-        Self(
+        .surface(
             base: \.snapOrange,
             onAccent: \.snapWhite,
             complementary: \.snapYellow,
@@ -167,7 +167,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var yellow: Self {
-        Self(
+        .surface(
             base: \.snapYellow,
             onAccent: \.snapBlack,
             complementary: \.snapOrange,
@@ -177,7 +177,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var cyan: Self {
-        Self(
+        .surface(
             base: \.snapCyan,
             onAccent: \.snapWhite,
             complementary: \.snapGreen,
@@ -187,7 +187,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var mint: Self {
-        Self(
+        .surface(
             base: \.snapMint,
             onAccent: \.snapWhite,
             complementary: \.snapGreen,
@@ -197,7 +197,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var indigo: Self {
-        Self(
+        .surface(
             base: \.snapIndigo,
             onAccent: \.snapWhite,
             complementary: \.snapBlue,
@@ -207,7 +207,7 @@ extension Style.Attribute.Accent.Value.WrappedValue {
     }
     
     public static var purple: Self {
-        Self(
+        .surface(
             base: \.snapPurple,
             onAccent: \.snapWhite,
             complementary: \.snapBlue,

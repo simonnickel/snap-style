@@ -195,14 +195,12 @@ extension Style.ContextWrapper {
     
     package func accentColor(
         for keyPath: Style.Attribute.Accent.ValueBuilderKeyPath,
-        variant: Style.Attribute.Accent.Value.Variant,
+        variant: Style.Attribute.Accent.Value.Variant = .base,
     ) -> Color? {
 
         let value = value(for: keyPath)
-        let surfaceVariantKeyPath = value?.surface(for: variant)
-        let surface = self.surface(for: surfaceVariantKeyPath)
         
-        return surface?.resolvedColor
+        return value?.color(of: variant, in: self)
         
     }
     

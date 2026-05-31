@@ -39,26 +39,33 @@ extension Style.Attribute.Surface {
 
     public var accent: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accent.base)
+            .value(.color(context.accent.color(of: .base, in: context)))
         }
     }
+    
+    public var onAccent: ValueBuilder {
+        .builderWrapper { context in
+            .value(.color(context.accent.color(of: .onAccent, in: context)))
+        }
+    }
+    
     public var accentComplementary: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accent.complementary)
+            .value(.color(context.accent.color(of: .complementary, in: context)))
         }
     }
 
     public var accentContrast: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accent.contrast)
+            .value(.color(context.accent.color(of: .contrast, in: context)))
         }
     }
     
     public var accentAdjustedIntense: ValueBuilder {
         .builderWrapper { wrapper in
             switch wrapper.context.colorScheme {
-                case .dark: .reference(wrapper.accent.base, adjustments: [.mix(.white, 0.3)])
-                default: .reference(wrapper.accent.base, adjustments: [.mix(.black, 0.3)])
+                case .dark: .reference(\.accent, adjustments: [.mix(.white, 0.3)])
+                default: .reference(\.accent, adjustments: [.mix(.black, 0.3)])
             }
         }
     }
@@ -76,43 +83,32 @@ extension Style.Attribute.Surface {
 
     public var accentLevel1: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accentPrimary.base)
+            .reference(\.accent)
         }
     }
 
     public var accentLevel2: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.2)])
+            .reference(\.accent, adjustments: [.mix(.black, 0.2)])
         }
     }
 
     public var accentLevel3: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accentPrimary.base, adjustments: [.mix(.black, 0.4)])
-        }
-    }
-
-    public var onAccent: ValueBuilder {
-        .builderWrapper { context in
-            .reference(context.accent.onAccent)
+                .reference(\.accent, adjustments: [.mix(.black, 0.4)])
         }
     }
 
     public var accentAsForeground: ValueBuilder {
         .builderWrapper { context in
-            .reference(context.accent.base)
+            .reference(\.accent)
         }
     }
 
     public var accentGradientSoft: ValueBuilder {
         .builderWrapper { context in
-            let accentBase = context.accentPrimary.base
-            let accentComplementary = context.accentPrimary.complementary
-//            let accentContrast = context.accentPrimary.contrast
-            
-            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
-            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
-//            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
+            let base = context.accent.color(of: .base, in: context)
+            let complementary = context.accent.color(of: .complementary, in: context)
             
             if #available(iOS 18.0, *) {
                 return .value(.any(AnyShapeStyle(
@@ -137,13 +133,8 @@ extension Style.Attribute.Surface {
     
     public var accentGradientStrong: ValueBuilder {
         .builderWrapper { context in
-            let accentBase = context.accentPrimary.base
-//            let accentComplementary = context.accentPrimary.complementary
-            let accentContrast = context.accentPrimary.contrast
-            
-            let base = context.surface(for: accentBase)?.resolvedColor ?? .clear
-//            let complementary = context.surface(for: accentComplementary)?.resolvedColor ?? .clear
-            let contrast = context.surface(for: accentContrast)?.resolvedColor ?? .clear
+            let base = context.accent.color(of: .base, in: context)
+            let contrast = context.accent.color(of: .contrast, in: context)
             
             if #available(iOS 18.0, *) {
                 return .value(.any(AnyShapeStyle(

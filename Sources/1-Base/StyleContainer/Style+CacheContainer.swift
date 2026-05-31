@@ -66,8 +66,11 @@ extension Style {
 
                 case is Style.Attribute.Icon.Type: icons = .init()
 
-                // Referenced by Composition and Accent (key path refs, not resolved values).
-                case is Style.Attribute.Surface.Type: surfaces = .init()
+                // Referenced by Composition (key path refs, not resolved values),
+                // and Accent (resolved values, needs reset).
+                case is Style.Attribute.Surface.Type:
+                    surfaces = .init()
+                    accents = .init()
 
                 // References Surface (key path refs, not resolved values).
                 case is Style.Attribute.Composition.Type: compositions = .init()
