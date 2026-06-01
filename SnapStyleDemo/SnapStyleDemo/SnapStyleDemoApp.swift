@@ -33,8 +33,8 @@ struct SnapStyleDemoApp: App {
                         \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                     ],
                     accents: [
-                        \.primary : .base(.value(demoConfiguration.accentPrimary)),
-                        \.secondary : .base(.value(demoConfiguration.accentSecondary)),
+                        \.primary : .base(.reference(demoConfiguration.accentPrimary)),
+                        \.secondary : .base(.reference(demoConfiguration.accentSecondary)),
                     ]
                 )
                 .styleSetup(style)

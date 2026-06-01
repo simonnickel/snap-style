@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConfigurationColorScreen: View {
     
-    typealias Accent = Style.Attribute.Accent.Value
+    typealias Accent = Style.Attribute.Accent.ValueBuilderKeyPath
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
@@ -21,36 +21,36 @@ struct ConfigurationColorScreen: View {
     }
 
     let accentPairs: [(Accent, Accent)] = [
-        (.blue, .fallbackSecondary),
-        (.blue, .yellow),
-        (.green, .fallbackSecondary),
-        (.green, .cyan),
-        (.teal, .fallbackSecondary),
-        (.teal, .yellow),
-        (.red, .fallbackSecondary),
-        (.red, .yellow),
-        (.orange, .fallbackSecondary),
-        (.yellow, .fallbackSecondary),
-        (.mint, .fallbackSecondary),
-        (.cyan, .fallbackSecondary),
-        (.purple, .fallbackSecondary),
-        (.indigo, .fallbackSecondary),
-        (.fallbackPrimary, .fallbackSecondary),
+        (\.blue, \.fallbackSecondary),
+        (\.blue, \.yellow),
+        (\.green, \.fallbackSecondary),
+        (\.green, \.cyan),
+        (\.teal, \.fallbackSecondary),
+        (\.teal, \.yellow),
+        (\.red, \.fallbackSecondary),
+        (\.red, \.yellow),
+        (\.orange, \.fallbackSecondary),
+        (\.yellow, \.fallbackSecondary),
+        (\.mint, \.fallbackSecondary),
+        (\.cyan, \.fallbackSecondary),
+        (\.purple, \.fallbackSecondary),
+        (\.indigo, \.fallbackSecondary),
+        (\.fallbackPrimary, \.fallbackSecondary),
     ]
 
     let accents: [Accent] = [
-        .fallbackPrimary,
-        .fallbackSecondary,
-        .blue,
-        .green,
-        .teal,
-        .red,
-        .orange,
-        .yellow,
-        .mint,
-        .cyan,
-        .purple,
-        .indigo,
+        \.fallbackPrimary,
+        \.fallbackSecondary,
+        \.blue,
+        \.green,
+        \.teal,
+        \.red,
+        \.orange,
+        \.yellow,
+        \.mint,
+        \.cyan,
+        \.purple,
+        \.indigo,
     ]
 
     var body: some View {
@@ -97,11 +97,12 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentSecondary = secondary
                 } label: {
                     ColorItemView(selected: primary == demoConfiguration.accentPrimary && secondary == demoConfiguration.accentSecondary)
+                        .style(accent: primary) // TODO: This should not be necessary
                         .styleOverride(accents: [
-                            \.primary: .base(.value(primary))
+                            \.primary: .base(.reference(primary))
                         ])
                         .styleOverride(accents: [
-                            \.secondary: .base(.value(secondary))
+                            \.secondary: .base(.reference(secondary))
                         ])
                 }
             }
@@ -117,7 +118,7 @@ struct ConfigurationColorScreen: View {
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentPrimary)
                         .styleOverride(accents: [
-                            \.primary: .base(.value(accent))
+                            \.primary: .base(.reference(accent))
                         ])
                 }
             }
@@ -133,7 +134,7 @@ struct ConfigurationColorScreen: View {
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentSecondary)
                         .styleOverride(accents: [
-                            \.secondary: .base(.value(accent))
+                            \.secondary: .base(.reference(accent))
                         ])
                 }
             }

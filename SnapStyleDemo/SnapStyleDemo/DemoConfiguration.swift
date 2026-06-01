@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 class DemoConfiguration {
     
-    typealias Accent = Style.Attribute.Accent.Value.WrappedValue
+    typealias Accent = Style.Attribute.Accent.ValueBuilderKeyPath
 
     var accentPrimary: Accent
     var accentSecondary: Accent
@@ -22,8 +22,8 @@ class DemoConfiguration {
     var fontWidth: Font.Width
 
     init(
-        accentPrimary: Accent = .fallbackPrimary,
-        accentSecondary: Accent = .fallbackSecondary,
+        accentPrimary: Accent = \.fallbackPrimary,
+        accentSecondary: Accent = \.fallbackSecondary,
         scaleFactor: Style.Context.ScaleFactor = Style.Context.scaleFactorDefault,
         fontDesign: Font.Design = Style.Context.fontDesignDefault,
         fontWidth: Font.Width = Style.Context.fontWidthDefault,
