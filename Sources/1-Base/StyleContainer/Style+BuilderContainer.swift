@@ -15,7 +15,6 @@ extension Style {
         internal var icons: [Attribute.Icon.ValueBuilderKeyPath: [Attribute.Icon.ValueBuilder]] = [:]
         internal var surfaces: [Attribute.Surface.ValueBuilderKeyPath: [Attribute.Surface.ValueBuilder]] = [:]
         internal var compositions: [Attribute.Composition.ValueBuilderKeyPath: [Attribute.Composition.ValueBuilder]] = [:]
-        internal var accents: [Attribute.Accent.ValueBuilderKeyPath: [Attribute.Accent.ValueBuilder]] = [:]
         internal var shapes: [Attribute.Shape.ValueBuilderKeyPath: [Attribute.Shape.ValueBuilder]] = [:]
 
 
@@ -58,11 +57,6 @@ extension Style {
                         return compositions[key] as? [Attribute.ValueBuilder] ?? []
                     }
 
-                case is Style.Attribute.Accent.Type:
-                    if let key = anyKeyPath as? Style.Attribute.Accent.ValueBuilderKeyPath {
-                        return accents[key] as? [Attribute.ValueBuilder] ?? []
-                    }
-
                 case is Style.Attribute.Shape.Type:
                     if let key = anyKeyPath as? Style.Attribute.Shape.ValueBuilderKeyPath {
                         return shapes[key] as? [Attribute.ValueBuilder] ?? []
@@ -102,10 +96,6 @@ extension Style {
 
     internal func appended(compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]) -> Self {
         appended(compositions, at: \.compositions)
-    }
-
-    internal func appended(accents: [Attribute.Accent.ValueBuilderKeyPath: Attribute.Accent.ValueBuilder]) -> Self {
-        appended(accents, at: \.accents)
     }
 
     internal func appended(shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]) -> Self {

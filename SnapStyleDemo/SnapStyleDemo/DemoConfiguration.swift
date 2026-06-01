@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 class DemoConfiguration {
     
-    typealias Accent = Style.Attribute.Accent.Value.WrappedValue
+    typealias Accent = Style.Context.Accent
 
     var accentPrimary: Accent
     var accentSecondary: Accent

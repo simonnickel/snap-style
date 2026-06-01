@@ -181,28 +181,6 @@ extension Style.ContextWrapper {
         return surface(for: key)
 
     }
-
-
-    // MARK: - Accent
-    
-    package func accentValue(for keyPath: Style.Attribute.Accent.ValueBuilderKeyPath) -> Style.Attribute.Accent.Value.WrappedValue? {
-
-        let value = value(for: keyPath)
-        
-        return value?.wrappedValue
-
-    }
-    
-    package func accentColor(
-        for keyPath: Style.Attribute.Accent.ValueBuilderKeyPath,
-        variant: Style.Attribute.Accent.Value.Variant = .base,
-    ) -> Color? {
-
-        let value = value(for: keyPath)
-        
-        return value?.color(of: variant, in: self)
-        
-    }
     
 
     // MARK: - Shape

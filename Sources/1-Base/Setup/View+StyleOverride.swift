@@ -14,7 +14,6 @@ extension View {
         icons: [Style.Attribute.Icon.ValueBuilderKeyPath: Style.Attribute.Icon.ValueBuilder]? = nil,
         surfaces: [Style.Attribute.Surface.ValueBuilderKeyPath: Style.Attribute.Surface.ValueBuilder]? = nil,
         compositions: [Style.Attribute.Composition.ValueBuilderKeyPath: Style.Attribute.Composition.ValueBuilder]? = nil,
-        accents: [Style.Attribute.Accent.ValueBuilderKeyPath: Style.Attribute.Accent.ValueBuilder]? = nil,
         shapes: [Style.Attribute.Shape.ValueBuilderKeyPath: Style.Attribute.Shape.ValueBuilder]? = nil
     ) -> some View {
         self.modifier(
@@ -25,7 +24,6 @@ extension View {
                 icons: icons,
                 surfaces: surfaces,
                 compositions: compositions,
-                accents: accents,
                 shapes: shapes
             )
         )
@@ -48,7 +46,6 @@ extension Style {
         let icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]?
         let surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]?
         let compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]?
-        let accents: [Attribute.Accent.ValueBuilderKeyPath: Attribute.Accent.ValueBuilder]?
         let shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]?
         
         func body(content: Content) -> some View {
@@ -60,7 +57,6 @@ extension Style {
                 icons: icons,
                 surfaces: surfaces,
                 compositions: compositions,
-                accents: accents,
                 shapes: shapes
             )
             
@@ -85,7 +81,6 @@ extension Style {
         icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]? = nil,
         surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]? = nil,
         compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]? = nil,
-        accents: [Attribute.Accent.ValueBuilderKeyPath: Attribute.Accent.ValueBuilder]? = nil,
         shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]? = nil
     ) -> Self {
         var style = self
@@ -112,10 +107,6 @@ extension Style {
 
         if let compositions {
             style = style.appended(compositions: compositions)
-        }
-
-        if let accents {
-            style = style.appended(accents: accents)
         }
 
         if let shapes {

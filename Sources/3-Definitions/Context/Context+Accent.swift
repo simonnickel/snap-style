@@ -10,9 +10,13 @@ import SwiftUI
 
 extension Style.Context {
 
-    public var accent: Style.Attribute.Accent.Value.WrappedValue? { getValue(for: Self.accent) }
+    public var accentPrimary: Style.Context.Accent? { getValue(for: Self.accentPrimary) }
 
-    public static var accent: Attribute<String, Style.Attribute.Accent.Value.WrappedValue> { .init(key: "accent", valueDefault: nil) }
+    public static var accentPrimary: Attribute<String, Style.Context.Accent> { .init(key: "accentPrimary", valueDefault: nil) }
+    
+    public var accentSecondary: Style.Context.Accent? { getValue(for: Self.accentSecondary) }
+
+    public static var accentSecondary: Attribute<String, Style.Context.Accent> { .init(key: "accentSecondary", valueDefault: nil) }
 
 }
 
@@ -21,12 +25,19 @@ extension Style.Context {
 
 extension Style.ContextWrapper {
 
-    public var accent: Style.Attribute.Accent.Value.WrappedValue {
-        context.accent ?? accentPrimary
+    public var accent: Style.Context.Accent {
+        if context.containerStack.parent?.requiresSecondaryAccent ?? false {
+            return accentSecondary
+        }
+        return accentPrimary
     }
 
-    public var accentPrimary: Style.Attribute.Accent.Value.WrappedValue {
-        accentValue(for: \.primary) ?? .fallbackPrimary
+    public var accentPrimary: Style.Context.Accent {
+        context.accentPrimary ?? .fallbackPrimary
+    }
+
+    public var accentSecondary: Style.Context.Accent {
+        context.accentSecondary ?? .fallbackSecondary
     }
 
 }

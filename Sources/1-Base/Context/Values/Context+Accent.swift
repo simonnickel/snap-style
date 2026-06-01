@@ -5,28 +5,20 @@
 
 import SwiftUI
 
-extension Style.Attribute {
-    public struct Accent: StyleAttribute { public init() {} }
-}
-
-extension Style.Attribute.Accent {
+extension Style.Context {
     
-    
-    // MARK: - Value
-    
-    public enum Value: StyleValue, Hashable, Equatable {
+    public enum Accent: Hashable, Equatable {
         
         public typealias WrappedValue = Self
-        public typealias Adjustment = Style.Attribute.Accent.Adjustment
         
-        public typealias ColorValue = Style.Attribute.Surface.ValueBuilderKeyPath
+        public typealias SurfaceValue = Style.Attribute.Surface.ValueBuilderKeyPath
         
         /// A set of values referencing surfaces.
         case surface(
-            base: ColorValue,
-            onAccent: ColorValue,
-            complementary: ColorValue,
-            contrast: ColorValue,
+            base: SurfaceValue,
+            onAccent: SurfaceValue,
+            complementary: SurfaceValue,
+            contrast: SurfaceValue,
             brightness: Brightness,
         )
         
@@ -85,19 +77,6 @@ extension Style.Attribute.Accent {
                 case .color(_, _, _, _, let brightness): brightness
             }
         }
-    }
-
-
-    // MARK: - Adjustment
-
-    public enum Adjustment: StyleAdjustment {
-
-        public typealias Value = Style.Attribute.Accent.Value
-
-        public func applied(on value: Value) -> Value {
-            value
-        }
-
     }
 
 }
