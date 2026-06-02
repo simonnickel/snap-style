@@ -9,7 +9,8 @@ import SwiftUI
 
 extension Style.Context.Accent {
 
-// MARK: - Fallback
+    
+    // MARK: - Fallback
 
     public static var fallbackPrimary: Self {
         .surface(
@@ -31,16 +32,7 @@ extension Style.Context.Accent {
         )
     }
 
-}
-
-
-// MARK: - Accent
-
-// TODO: Where should this be?
-
-extension Style.Context.Accent {
-    
-    
+    // TODO: This should be parallel to primary / secondary?
     // MARK: - Generic Accents
     
     public var destructive: Self {

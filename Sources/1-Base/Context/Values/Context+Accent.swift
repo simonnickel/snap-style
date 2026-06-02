@@ -7,6 +7,17 @@ import SwiftUI
 
 extension Style.Context {
     
+    public var accentPrimary: Style.Context.Accent? { getValue(for: Self.accentPrimary) }
+
+    public static var accentPrimary: Attribute<String, Style.Context.Accent> { .init(key: "accentPrimary", valueDefault: nil) }
+    
+    public var accentSecondary: Style.Context.Accent? { getValue(for: Self.accentSecondary) }
+
+    public static var accentSecondary: Attribute<String, Style.Context.Accent> { .init(key: "accentSecondary", valueDefault: nil) }
+    
+    
+    // MARK: - Accent
+    
     public enum Accent: Hashable, Equatable {
         
         public typealias WrappedValue = Self
