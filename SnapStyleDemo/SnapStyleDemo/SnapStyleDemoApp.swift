@@ -33,8 +33,8 @@ struct SnapStyleDemoApp: App {
                     ],
                 )
                 .styleSetup(style) // TODO: Should this be placed last?
-                .style(accent: demoConfiguration.accentPrimary)
-                .style(accentSecondary: demoConfiguration.accentSecondary)
+                .style(accent: demoConfiguration.accentPrimary, for: .primary)
+                .style(accent: demoConfiguration.accentSecondary, for: .secondary)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)

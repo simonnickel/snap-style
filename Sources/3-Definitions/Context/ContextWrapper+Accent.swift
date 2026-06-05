@@ -8,6 +8,7 @@ import SwiftUI
 
 extension Style.ContextWrapper {
 
+    /// Selects `.primary` or `.secondary` based on the context.
     public var accent: Style.Context.Accent {
         if context.containerStack.parent?.requiresSecondaryAccent ?? false {
             return accentSecondary
@@ -15,12 +16,19 @@ extension Style.ContextWrapper {
         return accentPrimary
     }
 
+    /// Convenience access to `primary` specifically, in most cases `.accent` should be used.
     public var accentPrimary: Style.Context.Accent {
-        context.accentPrimary ?? .fallbackPrimary
+        context.accent(.primary) ?? .fallbackPrimary
     }
 
+    /// Convenience access to `secondary` specifically, in most cases `.accent` should be used.
     public var accentSecondary: Style.Context.Accent {
-        context.accentSecondary ?? .fallbackSecondary
+        context.accent(.secondary) ?? .fallbackSecondary
+    }
+
+    /// Convenience access to `destructive` accent.
+    public var accentDestructive: Style.Context.Accent {
+        context.accent(.destructive) ?? .fallbackDestructive
     }
 
 }

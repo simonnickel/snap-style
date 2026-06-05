@@ -7,16 +7,43 @@ import SwiftUI
 
 extension Style.Context {
     
-    public var accentPrimary: Style.Context.Accent? { getValue(for: Self.accentPrimary) }
+    public typealias AccentDefinitions = [Accent.Key : Accent]
+    
+    public var accents: AccentDefinitions {
+        getValue(for: Self.accents) ?? [:]
+    }
+    
+    public static var accents: Attribute<String, AccentDefinitions> { .init(key: "accentDefinitions", valueDefault: nil) }
+    
+    public func accent(_ key: Accent.Key) -> Accent? {
+        accents[key]
+    }
+    
+}
 
-    public static var accentPrimary: Attribute<String, Style.Context.Accent> { .init(key: "accentPrimary", valueDefault: nil) }
-    
-    public var accentSecondary: Style.Context.Accent? { getValue(for: Self.accentSecondary) }
 
-    public static var accentSecondary: Attribute<String, Style.Context.Accent> { .init(key: "accentSecondary", valueDefault: nil) }
+// MARK: - Key
+
+extension Style.Context.Accent {
     
+    public struct Key: Identifiable, Hashable, Equatable {
+        
+        public let id: String
+        
+        public init(id: String) {
+            self.id = id
+        }
+        
+        public static var primary: Self { Self(id: "primary") }
+        public static var secondary: Self { Self(id: "secondary") }
+        public static var destructive: Self { Self(id: "destructive") }
+        
+    }
+}
     
-    // MARK: - Accent
+// MARK: - Accent
+
+extension Style.Context {
     
     public enum Accent: Hashable, Equatable {
         

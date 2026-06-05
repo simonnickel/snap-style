@@ -31,11 +31,8 @@ extension Style.Context.Accent {
             brightness: .dark
         )
     }
-
-    // TODO: This should be parallel to primary / secondary?
-    // MARK: - Generic Accents
     
-    public var destructive: Self {
+    public static var fallbackDestructive: Self {
         .surface(
             base: \.snapRed,
             onAccent: \.snapWhite,

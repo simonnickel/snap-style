@@ -97,8 +97,8 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentSecondary = secondary
                 } label: {
                     ColorItemView(selected: primary == demoConfiguration.accentPrimary && secondary == demoConfiguration.accentSecondary)
-                        .style(accent: primary)
-                        .style(accentSecondary: secondary)
+                        .style(accent: primary, for: .primary)
+                        .style(accent: secondary, for: .secondary)
                 }
             }
         }
@@ -126,7 +126,7 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentSecondary = accent
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentSecondary)
-                        .style(accentSecondary: accent)
+                        .style(accent: accent, for: .secondary)
                 }
             }
         }

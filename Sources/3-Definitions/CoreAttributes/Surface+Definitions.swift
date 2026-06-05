@@ -154,6 +154,23 @@ extension Style.Attribute.Surface {
             }
         }
     }
+    
+    // MARK: Secondary
+    
+    public var accentSecondary: ValueBuilder {
+        .builderWrapper { context in
+            .value(.color(context.accentSecondary.color(of: .base, in: context)))
+        }
+    }
+    
+    
+    // MARK: Destructive
+    
+    public var accentDestructive: ValueBuilder {
+        .builderWrapper { context in
+            .value(.color(context.accentDestructive.color(of: .base, in: context)))
+        }
+    }
 
 
     // MARK: Interactive

@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import SnapFoundation
 import SnapStyleBase
 import SnapStyleDefinitions
 
@@ -14,14 +15,9 @@ extension View {
     
     // TODO: Enum for .primary, .secondary, .destructive
 
-    public func style(accent: Style.Context.Accent) -> some View {
+    public func style(accent accent: Style.Context.Accent, for key: Style.Context.Accent.Key = .primary) -> some View {
         self
-            .modifier(AccentValueModifier(value: accent))
-    }
-    
-    public func style(accentSecondary: Style.Context.Accent) -> some View {
-        self
-            .modifier(AccentValueSecondaryModifier(value: accentSecondary))
+            .modifier(AccentValueModifier(key: key, accent: accent))
     }
 
 }
@@ -33,28 +29,18 @@ private struct AccentValueModifier: ViewModifier {
 
     @Environment(\.style) private var style
 
-    let value: Style.Context.Accent
+    let key: Style.Context.Accent.Key
+    let accent: Style.Context.Accent
 
     func body(content: Content) -> some View {
-        let color = value.color(in: style)
+        let color = accent.color(in: style)
+        let accents = style.context.accents.updated(key: key, with: accent)
+        
         content
         // TODO: .accentColor() is deprecated, but I think this is used in the definitions to get the system defined tint color. Need to check and replace. Also check other uses of .accentColor.
             .accentColor(color)
             .tint(color)
-            .style(attribute: Style.Context.accentPrimary, value: value)
-    }
-
-}
-
-private struct AccentValueSecondaryModifier: ViewModifier {
-
-    @Environment(\.style) private var style
-
-    let value: Style.Context.Accent
-
-    func body(content: Content) -> some View {
-        content
-            .style(attribute: Style.Context.accentSecondary, value: value)
+            .style(attribute: Style.Context.accents, value: accents)
     }
 
 }
@@ -62,11 +48,18 @@ private struct AccentValueSecondaryModifier: ViewModifier {
 #Preview {
     VStack {
         
-        Text("Hello, World!")
+        Text("Primary fallback")
             .style(foreground: \.accent)
-            .style(accent: .teal)
+        Text("Secondary fallback")
+            .style(foreground: \.accentSecondary)
+        Text("Destructive fallback")
+            .style(foreground: \.accentDestructive)
         
-        Text("Hello, World!")
+        Text("Accent Override")
+            .style(foreground: \.accent)
+            .style(accent: .teal, for: .primary)
+        
+        Text("Custom Color Accent")
             .style(foreground: \.accent)
             .style(accent: .color(base: .orange, onAccent: .black, complementary: .black, contrast: .black, brightness: .light))
             
