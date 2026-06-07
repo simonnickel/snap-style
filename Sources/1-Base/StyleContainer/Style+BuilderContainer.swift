@@ -74,31 +74,31 @@ extension Style {
 
     // MARK: Append
 
-    internal func appended(numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]) -> Self {
+    package func appended(numbers: [Attribute.Number.ValueBuilderKeyPath: Attribute.Number.ValueBuilder]) -> Self {
         appended(numbers, at: \.numbers)
     }
     
-    internal func appended(paddings: [Attribute.Padding.ValueBuilderKeyPath: Attribute.Padding.ValueBuilder]) -> Self {
+    package func appended(paddings: [Attribute.Padding.ValueBuilderKeyPath: Attribute.Padding.ValueBuilder]) -> Self {
         appended(paddings, at: \.paddings)
     }
 
-    internal func appended(fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]) -> Self {
+    package func appended(fonts: [Attribute.Font.ValueBuilderKeyPath: Attribute.Font.ValueBuilder]) -> Self {
         appended(fonts, at: \.fonts)
     }
 
-    internal func appended(icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]) -> Self {
+    package func appended(icons: [Attribute.Icon.ValueBuilderKeyPath: Attribute.Icon.ValueBuilder]) -> Self {
         appended(icons, at: \.icons)
     }
 
-    internal func appended(surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]) -> Self {
+    package func appended(surfaces: [Attribute.Surface.ValueBuilderKeyPath: Attribute.Surface.ValueBuilder]) -> Self {
         appended(surfaces, at: \.surfaces)
     }
 
-    internal func appended(compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]) -> Self {
+    package func appended(compositions: [Attribute.Composition.ValueBuilderKeyPath: Attribute.Composition.ValueBuilder]) -> Self {
         appended(compositions, at: \.compositions)
     }
 
-    internal func appended(shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]) -> Self {
+    package func appended(shapes: [Attribute.Shape.ValueBuilderKeyPath: Attribute.Shape.ValueBuilder]) -> Self {
         appended(shapes, at: \.shapes)
     }
 

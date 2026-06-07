@@ -26,7 +26,6 @@ struct SnapStyleDemoApp: App {
         
         var body: some View {
             TabContainer()
-                .styleSetup(style) // Needs to be placed inside of configuration definitions.
                 .styleOverride(
                     numbers: [
                         \.cornerRadiusComponent : .base(.reference(demoConfiguration.cornerRadius.valueComponent)),
@@ -38,6 +37,7 @@ struct SnapStyleDemoApp: App {
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)
+                .styleSetup(style) // Needs to be placed outside of configuration definitions.
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }

@@ -3,24 +3,7 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyleBase
 import SwiftUI
-
-
-// MARK: - Modifier
-
-extension View {
-
-    /// Sets the `Font.Design`, inert value: `.default`.
-    public func style(fontDesign: Font.Design = Style.Context.fontDesignDefault) -> some View {
-        self
-            .style(attribute: Style.Context.fontDesign, value: fontDesign)
-    }
-
-}
-
-
-// MARK: - Context
 
 extension Style.Context {
 

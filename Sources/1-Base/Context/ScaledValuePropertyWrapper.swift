@@ -53,31 +53,3 @@ import SwiftUI
     }
 
 }
-
-
-// MARK: - Preview
-
-#if DEBUG
-
-extension Style.Attribute.Number {
-    public var examplePreview: ValueBuilder { .base(.value(.scaled(50))) }
-}
-
-#endif
-
-#Preview {
-    struct MyView: View {
-        
-        @ScaledValue(50) var width
-        @ScaledNumber(\.examplePreview) var height
-        
-        var body: some View {
-            Rectangle()
-                .frame(width: width, height: height)
-        }
-    }
-    
-    return MyView()
-        .style(scaleFactor: 2)
-        .styleSetupLazy()
-}
