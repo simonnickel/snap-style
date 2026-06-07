@@ -9,9 +9,8 @@ import SnapStyleBase
 
 extension View {
 
-    // TODO: Needs inert value
-    /// Apply the accent for the `Key` as `.tint` and in `Context`.
-    public func style(accent key: Style.Context.Accent.Key) -> some View {
+    /// Apply the accent for the `Key` as `.tint` and in `Context`. Inert value: `nil`, keeps the definition from `Context`.
+    public func style(accent key: Style.Context.Accent.Key?) -> some View {
         self
             .modifier(AccentApplyModifier())
             .modifier(AccentKeyModifier(key: key))
@@ -33,14 +32,13 @@ private struct AccentKeyModifier: ViewModifier {
     
     @Environment(\.style) private var style
     
-    let key: Style.Context.Accent.Key
+    let key: Style.Context.Accent.Key?
     
     func body(content: Content) -> some View {
         let accent = style.context.accent(for: key)
-        let color = accent?.color(in: style) ?? .accentColor
         
         content
-            .style(attribute: Style.Context.accent, value: key)
+            .style(attribute: Style.Context.accent, value: key ?? style.context.accent)
     }
 }
 

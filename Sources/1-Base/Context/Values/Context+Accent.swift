@@ -29,8 +29,12 @@ extension Style.Context {
     
     // MARK: - Convenience
     
-    public func accent(for key: Accent.Key) -> Accent? {
-        accents[key]
+    public func accent(for key: Accent.Key?) -> Accent? {
+        if let key {
+            accents[key]
+        } else {
+            nil
+        }
     }
     
 }
