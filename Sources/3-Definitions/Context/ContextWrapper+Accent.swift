@@ -12,8 +12,6 @@ extension Style.ContextWrapper {
     public var accent: Style.Context.Accent {
         let key = context.accent
         return context.accent(for: key) ?? .fallbackPrimary
-        
-        // TODO: Set context to use .secondary in container stacks where parent has requiresSecondaryAccent == true.
     }
 
     /// Convenience access to `primary` specifically, in most cases `.accent` should be used.

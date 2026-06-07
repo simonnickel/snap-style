@@ -35,7 +35,7 @@ extension Style.Attribute.Surface {
     public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
 
-    // MARK: - Accents
+    // MARK: - Accent
 
     public var accent: ValueBuilder {
         .builderWrapper { context in
@@ -80,22 +80,25 @@ extension Style.Attribute.Surface {
             }
         }
     }
+    
+    
+    // MARK: Accent Level
 
     public var accentLevel1: ValueBuilder {
         .builderWrapper { context in
-            .reference(\.accent)
+            .reference(\.accentPrimary)
         }
     }
 
     public var accentLevel2: ValueBuilder {
         .builderWrapper { context in
-            .reference(\.accent, adjustments: [.mix(.black, 0.2)])
+            .reference(\.accentPrimary, adjustments: [.mix(.black, 0.2)])
         }
     }
 
     public var accentLevel3: ValueBuilder {
         .builderWrapper { context in
-                .reference(\.accent, adjustments: [.mix(.black, 0.4)])
+            .reference(\.accentPrimary, adjustments: [.mix(.black, 0.4)])
         }
     }
 
@@ -105,6 +108,9 @@ extension Style.Attribute.Surface {
         }
     }
 
+    
+    // MARK: Accent Gradients
+    
     public var accentGradientSoft: ValueBuilder {
         .builderWrapper { context in
             let base = context.accent.color(of: .base, in: context)
@@ -155,16 +161,20 @@ extension Style.Attribute.Surface {
         }
     }
     
-    // MARK: Secondary
+    
+    // MARK: Accent Keys
+    
+    public var accentPrimary: ValueBuilder {
+        .builderWrapper { context in
+            .value(.color(context.accentPrimary.color(of: .base, in: context)))
+        }
+    }
     
     public var accentSecondary: ValueBuilder {
         .builderWrapper { context in
             .value(.color(context.accentSecondary.color(of: .base, in: context)))
         }
     }
-    
-    
-    // MARK: Destructive
     
     public var accentDestructive: ValueBuilder {
         .builderWrapper { context in
@@ -184,7 +194,7 @@ extension Style.Attribute.Surface {
     public var interactiveBorder: ValueBuilder { .base(.reference(\.accentAdjustedIntense)) }
 
     
-    // MARK: Overlay
+    // MARK: - Overlay
     
     public var stateOverlayOnAccent: ValueBuilder {
         .builderWrapper { context in

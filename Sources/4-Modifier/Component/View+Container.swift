@@ -53,6 +53,7 @@ private struct ContainerApplyStyleModifier: ViewModifier {
         content
             .style(padding: paddingKeyPath)
             .style(border: composition?.surfaceKey(for: .border), shape: shapeKeyPath, width: container.border?())
+            .style(accent: container.requiresSecondaryAccent ? .secondary : .primary) // TODO: Should this use an inert value instead?
             .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }
