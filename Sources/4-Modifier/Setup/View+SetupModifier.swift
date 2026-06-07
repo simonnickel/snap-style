@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import SnapStyleBase
 
 extension View {
 
@@ -39,10 +40,18 @@ private struct SetupModifier: ViewModifier {
     @ScaledMetric private var dynamicTypeScale: Double = 1
 
     func body(content: Content) -> some View {
+        let accentDefinitions: Style.Context.AccentDefinitions = [
+            .primary : .fallbackPrimary,
+            .secondary : .fallbackSecondary,
+            .destructive : .fallbackDestructive,
+        ]
+            
         let context = style.context
             .withAttribute(value: colorScheme, for: Style.Context.colorScheme)
             .withAttribute(value: dynamicTypeScale, for: Style.Context.scaleDynamicType)
+            .withAttribute(value: accentDefinitions, for: Style.Context.accents)
         content
+            .style(accent: .primary)
             .style(update: context)
     }
 

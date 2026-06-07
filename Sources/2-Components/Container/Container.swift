@@ -27,8 +27,6 @@ extension Style {
             self.level = level
         }
 
-        public var useSecondaryAccent: Bool { parent?.requiresSecondaryAccent ?? false }
-
 
         // MARK: - InteractionState
 

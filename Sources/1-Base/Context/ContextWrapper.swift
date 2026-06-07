@@ -15,13 +15,13 @@ extension Style {
         package var definition: Style
         package var context: Style.Context
 
-        internal func updated(with context: Style.Context) -> Self {
+        package func updated(with context: Style.Context) -> Self {
             var copy = self
             copy.context = context
             return copy
         }
 
-        internal func updated(with definition: Style) -> Self {
+        package func updated(with definition: Style) -> Self {
             var copy = self
             copy.definition = definition
             return copy

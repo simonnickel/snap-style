@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConfigurationColorScreen: View {
     
-    typealias Accent = Style.Attribute.Accent.Value
+    typealias Accent = Style.Context.Accent
 
     @Environment(\.self) private var environment
     @Environment(\.demoConfiguration) private var demoConfiguration
@@ -97,12 +97,8 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentSecondary = secondary
                 } label: {
                     ColorItemView(selected: primary == demoConfiguration.accentPrimary && secondary == demoConfiguration.accentSecondary)
-                        .styleOverride(accents: [
-                            \.primary: .base(.value(primary))
-                        ])
-                        .styleOverride(accents: [
-                            \.secondary: .base(.value(secondary))
-                        ])
+                        .styleSet(accent: primary, for: .primary)
+                        .styleSet(accent: secondary, for: .secondary)
                 }
             }
         }
@@ -116,9 +112,7 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentPrimary = accent
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentPrimary)
-                        .styleOverride(accents: [
-                            \.primary: .base(.value(accent))
-                        ])
+                        .styleSet(accent: accent, for: .primary)
                 }
             }
         }
@@ -132,9 +126,7 @@ struct ConfigurationColorScreen: View {
                     demoConfiguration.accentSecondary = accent
                 } label: {
                     ColorItemView(selected: accent == demoConfiguration.accentSecondary)
-                        .styleOverride(accents: [
-                            \.secondary: .base(.value(accent))
-                        ])
+                        .styleSet(accent: accent, for: .secondary)
                 }
             }
         }

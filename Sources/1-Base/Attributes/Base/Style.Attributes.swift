@@ -9,7 +9,7 @@ extension Style {
     public enum Attribute {
         
         // Core Attributes
-        // case accent, icon, number, surface
+        // case icon, number, surface
         
         // Element Attributes
         // case composition, font, padding, shape

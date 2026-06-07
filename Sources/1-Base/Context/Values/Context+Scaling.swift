@@ -3,38 +3,18 @@
 //  Created by Simon Nickel
 //
 
-import SwiftUI
-
-
-// MARK: - Modifier
-
-extension View {
-
-    public func style(scaleFactor: Style.Context.ScaleFactor? = nil) -> some View {
-        self
-            .style(attribute: Style.Context.scaleFactor, value: scaleFactor ?? Style.Context.scaleFactorDefault)
-    }
-
-}
-
-
-// MARK: - Context
-
 extension Style.Context {
 
     public typealias ScaleFactor = Style.Attribute.Number.Value.WrappedValue
 
     public static let scaleFactorDefault: ScaleFactor = 1.0
-    
-    
-    // MARK: Style
 
     public var scaleFactor: ScaleFactor { getValue(for: Self.scaleFactor) ?? Self.scaleFactorDefault }
 
     public static var scaleFactor: Attribute<String, ScaleFactor> { .init(key: "ScaleFactor", valueDefault: Self.scaleFactorDefault) }
     
 
-    // MARK: Dynamic Type
+    // MARK: - Dynamic Type
     
     public var scaleDynamicType: ScaleFactor { getValue(for: Self.scaleDynamicType) ?? Self.scaleFactorDefault }
     

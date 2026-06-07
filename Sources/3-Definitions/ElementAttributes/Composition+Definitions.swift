@@ -35,7 +35,7 @@ extension Style.Attribute.Composition {
     public var interactiveIndicator: ValueBuilder {
         .builder { context in
             
-            let foreground: Style.Attribute.Surface.ValueBuilderKeyPath = context.container.useSecondaryAccent ? \.onAccent : \.interactive
+            let foreground: Style.Attribute.Surface.ValueBuilderKeyPath = \.interactive
             
             return switch context.container.state {
                 case .normal: .value(.foreground(foreground))

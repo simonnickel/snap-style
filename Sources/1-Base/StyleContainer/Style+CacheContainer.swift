@@ -16,7 +16,6 @@ extension Style {
         internal var icons: AttributeTypeCache<Attribute.Icon> = .init()
         internal var surfaces: AttributeTypeCache<Attribute.Surface> = .init()
         internal var compositions: AttributeTypeCache<Attribute.Composition> = .init()
-        internal var accents: AttributeTypeCache<Attribute.Accent> = .init()
         internal var shapes: AttributeTypeCache<Attribute.Shape> = .init()
 
         internal func getCache<Attribute: StyleAttribute>() -> AttributeTypeCache<Attribute>? {
@@ -33,8 +32,6 @@ extension Style {
                 case is Style.Attribute.Surface.Type: return surfaces as? AttributeTypeCache<Attribute>
 
                 case is Style.Attribute.Composition.Type: return compositions as? AttributeTypeCache<Attribute>
-
-                case is Style.Attribute.Accent.Type: return accents as? AttributeTypeCache<Attribute>
 
                 case is Style.Attribute.Shape.Type: return shapes as? AttributeTypeCache<Attribute>
 
@@ -66,17 +63,12 @@ extension Style {
 
                 case is Style.Attribute.Icon.Type: icons = .init()
 
-                // Referenced by Composition and Accent (key path refs, not resolved values).
-                case is Style.Attribute.Surface.Type: surfaces = .init()
+                // Referenced by Composition (key path refs, not resolved values)
+                case is Style.Attribute.Surface.Type:
+                    surfaces = .init()
 
                 // References Surface (key path refs, not resolved values).
                 case is Style.Attribute.Composition.Type: compositions = .init()
-
-                // Surface values can be resolved from Accent data via `builderWrapper`,
-                // so changing Accent may stale cached Surface values.
-                case is Style.Attribute.Accent.Type:
-                    accents = .init()
-                    surfaces = .init()
 
                 case is Style.Attribute.Shape.Type: shapes = .init()
 

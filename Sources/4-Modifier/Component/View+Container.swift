@@ -53,6 +53,7 @@ private struct ContainerApplyStyleModifier: ViewModifier {
         content
             .style(padding: paddingKeyPath)
             .style(border: composition?.surfaceKey(for: .border), shape: shapeKeyPath, width: container.border?())
+            .style(accent: container.requiresSecondaryAccent ? .secondary : nil)
             .style(composition: compositionKeyPath, ignoreSafeAreaEdges: container.ignoresSafeAreaEdges)
             .style(shape: shapeKeyPath)
     }
@@ -89,7 +90,6 @@ private struct ContainerContextModifier26: ViewModifier {
     func body(content: Content) -> some View {
         let stack = style.context.containerStack.appended(container, state: state)
         content
-            .style(accent: container.requiresSecondaryAccent ? \.secondary : nil)
             .style(attribute: Style.Context.containerStack, value: stack)
     }
 
