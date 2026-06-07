@@ -26,18 +26,18 @@ struct SnapStyleDemoApp: App {
         
         var body: some View {
             TabContainer()
+                .styleSetup(style) // Needs to be placed inside of configuration definitions.
                 .styleOverride(
                     numbers: [
                         \.cornerRadiusComponent : .base(.reference(demoConfiguration.cornerRadius.valueComponent)),
                         \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                     ],
                 )
-                .style(accent: demoConfiguration.accentPrimary, for: .primary)
-                .style(accent: demoConfiguration.accentSecondary, for: .secondary)
+                .styleSet(accent: demoConfiguration.accentPrimary, for: .primary)
+                .styleSet(accent: demoConfiguration.accentSecondary, for: .secondary)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)
-                .styleSetup(style)
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }

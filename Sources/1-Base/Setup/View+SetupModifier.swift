@@ -43,6 +43,7 @@ private struct SetupModifier: ViewModifier {
             .withAttribute(value: colorScheme, for: Style.Context.colorScheme)
             .withAttribute(value: dynamicTypeScale, for: Style.Context.scaleDynamicType)
         content
+            .style(accent: .primary)
             .style(update: context)
     }
 

@@ -7,15 +7,29 @@ import SwiftUI
 
 extension Style.Context {
     
+    /// The `Accent.Key` that is used for accents.
+    public var accent: Accent.Key {
+        getValue(for: Self.accent) ?? Accent.Key.default
+    }
+    
+    public static var accent: Attribute<String, Accent.Key> { .init(key: "accent", valueDefault: Accent.Key.default) }
+    
+    
+    // MARK: - Definitions
+    
     public typealias AccentDefinitions = [Accent.Key : Accent]
     
+    /// The `Accent` definitions for each`Accent.Key`.
     public var accents: AccentDefinitions {
         getValue(for: Self.accents) ?? [:]
     }
     
     public static var accents: Attribute<String, AccentDefinitions> { .init(key: "accentDefinitions", valueDefault: nil) }
     
-    public func accent(_ key: Accent.Key) -> Accent? {
+    
+    // MARK: - Convenience
+    
+    public func accent(for key: Accent.Key) -> Accent? {
         accents[key]
     }
     
@@ -34,6 +48,7 @@ extension Style.Context.Accent {
             self.id = id
         }
         
+        public static var `default`: Self { primary }
         public static var primary: Self { Self(id: "primary") }
         public static var secondary: Self { Self(id: "secondary") }
         public static var destructive: Self { Self(id: "destructive") }
