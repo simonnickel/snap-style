@@ -32,12 +32,12 @@ struct SnapStyleDemoApp: App {
                         \.cornerRadiusMetricCard : .base(.reference(demoConfiguration.cornerRadius.valueMetricCard)),
                     ],
                 )
-                .styleSetup(style) // TODO: Should this be placed last?
                 .style(accent: demoConfiguration.accentPrimary, for: .primary)
                 .style(accent: demoConfiguration.accentSecondary, for: .secondary)
                 .style(scaleFactor: demoConfiguration.scaleFactor)
                 .style(fontDesign: demoConfiguration.fontDesign)
                 .style(fontWidth: demoConfiguration.fontWidth)
+                .styleSetup(style)
                 .environment(\.demoConfiguration, demoConfiguration)
         }
     }
