@@ -17,23 +17,18 @@ extension View {
     /// - Returns: View with adjusted `Context` and applied Container.
     public func style(
         component: Style.Component,
-        state: Style.Container.InteractionState = .normal
+        state: Style.Container.InteractionState = .normal,
+        applyContainer: Bool = true,
     ) -> some View {
-        Group {
-            if let container = component.container {
-                self
-                    .style(container: container, state: state)
-            } else {
-                self
-            }
-        }
-        .style(element: .any)
-        .setupAttributes(with: component.fonts)
-        .setupAttributes(with: component.compositions)
-        .setupAttributes(with: component.shapes)
-        .setupAttributes(with: component.paddings)
-        .style(attribute: Style.Context.component, value: component)
-        .style(spacing: component.spacing?())
+        self
+            .style(container: applyContainer ? component.container : nil, state: state)
+            .style(element: .any)
+            .setupAttributes(with: component.fonts)
+            .setupAttributes(with: component.compositions)
+            .setupAttributes(with: component.shapes)
+            .setupAttributes(with: component.paddings)
+            .style(attribute: Style.Context.component, value: component)
+            .style(spacing: component.spacing?())
     }
     
     private func setupAttributes<Attribute: StyleElementAttribute>(with mapping: Style.Component.Mapping<Attribute>?) -> some View {

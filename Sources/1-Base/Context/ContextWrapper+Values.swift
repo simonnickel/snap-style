@@ -127,8 +127,10 @@ extension Style.ContextWrapper {
 
     /// Get the `LayeredShapeStyle` (aka `Composition`) for a KeyPath.
     package func composition(
-        for keyPath: Style.Attribute.Composition.ValueBuilderKeyPath
+        for keyPath: Style.Attribute.Composition.ValueBuilderKeyPath?
     ) -> Style.Attribute.Composition.Value.LayeredShapeStyle? {
+        
+        guard let keyPath else { return nil }
 
         let value = value(for: keyPath)
 

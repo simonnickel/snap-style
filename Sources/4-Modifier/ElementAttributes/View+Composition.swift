@@ -18,7 +18,7 @@ extension View {
     ///   - layers: The `Layer`s that should be applied
     ///   - ignoreSafeAreaEdges: Controls the safe area behaviour of the background.
     public func style(
-        composition keyPath: Style.Attribute.Composition.ValueBuilderKeyPath,
+        composition keyPath: Style.Attribute.Composition.ValueBuilderKeyPath?,
         layers: [Style.Attribute.Composition.Layer] = Style.Attribute.Composition.Layer.allCases,
         ignoreSafeAreaEdges: Edge.Set = []
     ) -> some View {
