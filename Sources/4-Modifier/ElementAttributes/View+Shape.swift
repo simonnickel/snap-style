@@ -40,19 +40,20 @@ package struct ShapeAttributeModifier: ViewModifier {
     let shouldClip: Bool
 
     package func body(content: Content) -> some View {
-        // FB19669133: Have to conditionally construct view, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when used with `ContainerRelativeShape()`.
-        if let keyPath, let shape = style.shape(for: keyPath) {
+        // FB19669133: Have to conditionally construct modifier, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when used with `ContainerRelativeShape()`.
+        // This no longer crashes in here, while the FB example still does crash.
+        let shape: any InsettableShape = if let keyPath, let shape = style.shape(for: keyPath) {
             if shape == .containerRelative {
-                content
-                    .modifier(ShapeModifier(shape: .containerRelative, shouldClip: shouldClip))
+                .containerRelative
             } else {
-                let shape = shape.shape(with: style)
-                content
-                    .modifier(ShapeModifier(shape: AnyInsettableShape(shape), shouldClip: shouldClip))
+                shape.shape(with: style)
             }
         } else {
-            content
+            .rect
         }
+        
+        content
+            .modifier(ShapeModifier(shape: AnyInsettableShape(shape), shouldClip: shouldClip))
     }
     
 }
