@@ -41,6 +41,7 @@ package struct ShapeAttributeModifier: ViewModifier {
 
     package func body(content: Content) -> some View {
         // FB19669133: Have to conditionally construct view, because InsettableShape can not be type erased properly and custom `AnyInsettableShape` crashes when used with `ContainerRelativeShape()`.
+        // When this causes animation issues: Make sure to only animate between definitions in the same view tree, e.g. between custom shapes.
         if let keyPath, let shape = style.shape(for: keyPath) {
             if shape == .containerRelative {
                 content
