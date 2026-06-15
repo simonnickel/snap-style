@@ -187,7 +187,9 @@ extension Style.ContextWrapper {
 
     // MARK: - Shape
 
-    package func shape(for keyPath: Style.Attribute.Shape.ValueBuilderKeyPath) -> Style.Attribute.Shape.Value.WrappedValue? {
+    package func shape(for keyPath: Style.Attribute.Shape.ValueBuilderKeyPath?) -> Style.Attribute.Shape.Value.WrappedValue? {
+        
+        guard let keyPath else { return nil }
 
         let value = value(for: keyPath)
 
