@@ -104,14 +104,14 @@ extension Style.Context {
         
         public func color(of variant: Variant = .base, in context: Style.ContextWrapper) -> Color {
             return switch self {
-                case .surface(let base, let onAccent, let complementary, let contrast, let brightness):
+                case .surface(let base, let onAccent, let complementary, let contrast, _):
                     switch variant {
                         case .base: context.surface(for: base)?.resolvedColor ?? .clear
                         case .onAccent: context.surface(for: onAccent)?.resolvedColor ?? .clear
                         case .complementary: context.surface(for: complementary)?.resolvedColor ?? .clear
                         case .contrast: context.surface(for: contrast)?.resolvedColor ?? .clear
                     }
-                case .color(let base, let onAccent, let complementary, let contrast, let brightness):
+                case .color(let base, let onAccent, let complementary, let contrast, _):
                     switch variant {
                         case .base: base
                         case .onAccent: onAccent
