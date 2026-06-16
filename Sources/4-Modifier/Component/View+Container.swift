@@ -7,34 +7,51 @@ import SnapStyleBase
 import SnapStyleComponents
 import SwiftUI
 
-// TODO: Container Element: The Components should define a composition for a container with hierarchies, to simply apply different hierarchies of backgrounds inside a single component. The components container should use the same mechanism. (Is that the same as just assigning the same component again? - kind of, but components container do more)
-
 extension View {
-
-    /// Applies the container.
-    /// - Parameters:
-    ///   - container: `Properties` to use.
-    ///   - state: `InteractionState` the container is in.
-    /// - Returns: View with applied Container.
+    
+    /// Applies the given container.
     public func style(
         container: Style.Container.Properties?,
-        state: Style.Container.InteractionState = .normal
+        state: Style.Container.InteractionState = .normal,
     ) -> some View {
         self
-            .styleApply(container: container)
+            .modifier(ContainerApplyStyleModifier(container: container))
             .modifier(ContainerContextModifier(container: container, state: state))
     }
+    
+}
+ 
 
-    private func styleApply(container: Style.Container.Properties?) -> some View {
-        self
-            .modifier(ContainerApplyStyleModifier(container: container))
+// MARK: - FromComponentModifier
+
+extension View {
+    
+    /// Applies the container defined by the component.
+    public func styleContainer(
+        state: Style.Container.InteractionState = .normal,
+    ) -> some View {
+        self.modifier(ContainerFromComponentModifier(state: state))
     }
+    
+}
 
+/// Applies the container defined by the component.
+private struct ContainerFromComponentModifier: ViewModifier {
+    
+    @Environment(\.style) private var style
+
+    let state: Style.Container.InteractionState
+    
+    func body(content: Content) -> some View {
+        content
+            .style(container: style.context.component.container, state: state)
+    }
 }
 
 
-// MARK: - ContainerApplyStyleModifier
+// MARK: - ApplyStyleModifier
 
+/// Applies the container to the view.
 private struct ContainerApplyStyleModifier: ViewModifier {
 
     @Environment(\.style) private var style
@@ -59,9 +76,10 @@ private struct ContainerApplyStyleModifier: ViewModifier {
 }
 
 
-// MARK: - ContainerContextModifier
+// MARK: - ContextModifier
 
 // TODO iOS26: Remove iOS 18 Variant
+/// Updates the context with container definition.
 private struct ContainerContextModifier: ViewModifier {
 
     let container: Style.Container.Properties?

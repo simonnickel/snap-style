@@ -11,43 +11,32 @@ struct ComponentStackScreen: View {
     var body: some View {
         StyleScreen {
 
-            content(component: [.contentCard, .contentCard, .contentCard])
-            content(component: [.accentCard, .accentCard, .accentCard])
-            content(component: [.accentCard, .contentCard, .accentCard])
-            content(component: [.accentCard, .contentCard, .contentCard])
-
+            containerStack(component: .contentCard)
+            containerStack(component: .accentCard)
+            containerStack(component: .infoCard)
+            containerStack(component: .metricCard)
+            
         }
     }
-
+    
     @ViewBuilder
-    private func content(component: [Style.Component]) -> some View {
+    private func containerStack(component: Style.Component) -> some View {
         StyleStack(spacing: \.spacingElements) {
-
-            Text(component.description)
+            Text("Stack of .\(component.description)")
                 .style(element: .title)
-
             StyleStack(spacing: \.spacingElements) {
-
-                Text("Level 1")
+                Text("Level 2")
                     .style(element: .title)
-
                 StyleStack(spacing: \.spacingElements) {
-
-                    Text("Level 2")
+                    Text("Level 3")
                         .style(element: .title)
-
-                    StyleStack(spacing: \.spacingElements) {
-                        Text("Level 3")
-                            .style(element: .title)
-                    }
-                    .style(component: component[2])
-
                 }
-                .style(component: component[1])
-
+                .styleContainer()
             }
-            .style(component: component[0])
+            .styleContainer()
         }
+        .styleContainer()
+        .style(component: component, applyContainer: false)
     }
 
 }
