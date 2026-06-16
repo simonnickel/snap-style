@@ -40,18 +40,3 @@ extension Style.Attribute.Padding {
 
 }
 
-
-extension Style.Attribute.Accent {
-
-    public var testAccent: ValueBuilder {
-        .base(.value(.init(
-            base: \.testSurface,
-            onAccent: \.testSurface,
-            complementary: \.testSurface,
-            contrast: \.testSurface,
-            brightness: .light
-        )))
-    }
-
-}
-
