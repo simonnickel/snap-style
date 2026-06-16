@@ -4,10 +4,10 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
-/// Public wrapper for `SnapStyleLayout.StyleListSectionFooterLabelExample`.
+/// Public wrapper for `SnapStyleView.StyleListSectionFooterLabelExample`.
 public struct ExampleStyleListSectionFooterLabel: View {
 
     public init() {}

@@ -5,7 +5,7 @@
 
 import SnapFoundation
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
 /// An HStack that drops to a new line.

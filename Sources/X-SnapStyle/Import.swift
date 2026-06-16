@@ -6,6 +6,5 @@
 @_exported import SnapStyleBase
 @_exported import SnapStyleComponents
 @_exported import SnapStyleDefinitions
-@_exported import SnapStyleModifier
-@_exported import SnapStyleLayout
+@_exported import SnapStyleView
 @_exported import SnapStyleViews

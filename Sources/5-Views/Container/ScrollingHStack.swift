@@ -3,7 +3,7 @@
 //  Created by Simon Nickel
 //
 
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
 public struct ScrollingHStack<Content: View>: View {

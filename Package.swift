@@ -10,7 +10,7 @@ let package = Package(
     products: [
         .library(
             name: "SnapStyle",
-            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleLayout", "SnapStyleModifier", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
+            targets: ["SnapStyle", "SnapStyleViews", "SnapStyleView", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
         // Examples target, not intended for consumers. Used by the demo app and previews.
         .library(
             name: "SnapStyleExamples",
@@ -28,8 +28,7 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleModifier",
-                "SnapStyleLayout",
+                "SnapStyleView",
                 "SnapStyleViews",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
@@ -42,35 +41,22 @@ let package = Package(
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleModifier",
-                "SnapStyleLayout",
+                "SnapStyleView",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],
-            path: "Sources/6-Views",
+            path: "Sources/5-Views",
         ),
-        // Layout
+        // View layer: modifiers and styled views
         .target(
-            name: "SnapStyleLayout",
+            name: "SnapStyleView",
             dependencies: [
                 "SnapStyleBase",
                 "SnapStyleComponents",
                 "SnapStyleDefinitions",
-                "SnapStyleModifier",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
                 .product(name: "SnapCore", package: "snap-core"),
             ],
-            path: "Sources/5-Layout",
-        ),
-        // Modifier
-        .target(
-            name: "SnapStyleModifier",
-            dependencies: [
-                "SnapStyleBase",
-                "SnapStyleComponents",
-                "SnapStyleDefinitions",
-                .product(name: "SnapFoundation", package: "snap-foundation"),
-            ],
-            path: "Sources/4-Modifier",
+            path: "Sources/4-View",
         ),
         // Values
         .target(
@@ -113,7 +99,7 @@ let package = Package(
             name: "SnapStyleExamples",
             dependencies: [
                 "SnapStyle",
-                "SnapStyleLayout",
+                "SnapStyleView",
                 "SnapStyleViews",
                 .product(name: "SnapFoundation", package: "snap-foundation"),
             ],

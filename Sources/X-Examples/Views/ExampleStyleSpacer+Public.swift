@@ -4,10 +4,10 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
-/// Public wrapper for `SnapStyleLayout.StyleSpacerExample`.
+/// Public wrapper for `SnapStyleView.StyleSpacerExample`.
 public struct ExampleStyleSpacer: View {
 
     public init() {}

@@ -4,8 +4,7 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
-import SnapStyleModifier
+import SnapStyleView
 import SwiftUI
 
 /// Public wrapper for `SnapStyleViews.CornerContainerExample`.

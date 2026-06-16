@@ -4,10 +4,10 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
-/// Public wrapper for `SnapStyleLayout.StyleListSectionHeaderLabelExample`.
+/// Public wrapper for `SnapStyleView.StyleListSectionHeaderLabelExample`.
 public struct ExampleStyleListSectionHeaderLabel: View {
 
     public init() {}

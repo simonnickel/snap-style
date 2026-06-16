@@ -4,7 +4,7 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
 /// Public wrapper for `StyleToggleExample`.

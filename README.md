@@ -290,8 +290,7 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 | **SnapStyleBase** | Core types: `Style`, `Style.Context`, attribute protocols, value builders, caching |
 | **SnapStyleComponents** | `Style.Component`, `Style.Element`, `Style.Container` |
 | **SnapStyleDefinitions** | Built-in definitions and values for all attribute types |
-| **SnapStyleModifier** | View modifiers: `.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc. |
-| **SnapStyleLayout** | `StyleScreen`, `StyleStack`, `StyleList`, `StyleButton`, `StyleLabel`, and other views |
+| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `StyleStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
 | **SnapStyleViews** | Additional convenience views |
 | **SnapStyleDebug** | Debug views for inspecting style state and caches |
 

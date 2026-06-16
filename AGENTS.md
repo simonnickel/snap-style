@@ -13,9 +13,8 @@ Strictly layered — dependencies only flow downward:
 | `1-Base` | `Style`, `Context`, attribute protocols, caching |
 | `2-Components` | `Component`, `Element`, `Container` definitions |
 | `3-Definitions` | Built-in attribute key path definitions and preset values |
-| `4-Modifier` | View modifiers (`.style()` family) |
-| `5-Layout` | Styled views (`StyleScreen`, `StyleStack`, `StyleButton`, etc.) |
-| `6-Views` | Utility layout views |
+| `4-View` | View layer: modifiers (`.style()` family) and styled views (`StyleScreen`, `StyleStack`, `StyleButton`, etc.) |
+| `5-Views` | Specific utility views |
 | `X-Debug` / `X-Examples` | Debug / example views |
 
 ## Attributes

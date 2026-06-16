@@ -4,10 +4,10 @@
 //
 
 import SnapStyleBase
-import SnapStyleLayout
+import SnapStyleView
 import SwiftUI
 
-/// Public wrapper for `SnapStyleLayout.ExampleStyleStack`.
+/// Public wrapper for `SnapStyleView.ExampleStyleStack`.
 public struct ExampleStyleStack: View {
     
     public init() {}
