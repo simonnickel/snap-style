@@ -20,8 +20,8 @@ Strictly layered — dependencies only flow downward:
 
 ## Attributes
 
-Eight types in two groups:
-- *Core* (`Accent`, `Icon`, `Number`, `Surface`): applied at the style/component level.
+Seven types in two groups:
+- *Core* (`Icon`, `Number`, `Surface`): applied at the style/component level.
 - *Element* (`Composition`, `Font`, `Padding`, `Shape`): implement `StyleElementAttribute`, making them mappable per `ElementType` in a `Component`. Adding a new element-mappable attribute requires implementing `StyleElementAttribute` and registering one `@Entry` environment key per `ElementType` in `3-Definitions`.
 
 ## Container
