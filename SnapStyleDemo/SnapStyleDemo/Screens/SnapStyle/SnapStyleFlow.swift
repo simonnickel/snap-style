@@ -42,6 +42,7 @@ struct SnapStyleFlow: View {
         case modifierSurfaceBackground
         case modifierSurfaceBorder
         case modifierComposition
+        case modifierContainer
         case modifierFont
         case modifierPadding
         case modifierShape
@@ -76,6 +77,7 @@ struct SnapStyleFlow: View {
                     case .modifierSurfaceBackground: ExampleStyleSurfaceBackgroundModifier()
                     case .modifierSurfaceBorder: ExampleStyleSurfaceBorderModifier()
                     case .modifierComposition: ExampleStyleCompositionModifier()
+                    case .modifierContainer: ExampleStyleContainerModifier()
                     case .modifierFont: ExampleStyleFontModifier()
                     case .modifierPadding: ExampleStylePaddingModifier()
                     case .modifierShape: ExampleStyleShapeModifier()
@@ -113,6 +115,7 @@ struct SnapStyleFlow: View {
                 case .modifierSurfaceBackground: "Attribute: Surface Background"
                 case .modifierSurfaceBorder: "Attribute: Surface Border"
                 case .modifierComposition: "Attribute: Composition"
+                case .modifierContainer: "Component: Container"
                 case .modifierFont: "Attribute: Font"
                 case .modifierPadding: "Attribute: Padding"
                 case .modifierShape: "Attribute: Shape"

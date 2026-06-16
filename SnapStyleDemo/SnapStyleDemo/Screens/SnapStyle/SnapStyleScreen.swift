@@ -48,6 +48,12 @@ struct SnapStyleScreen: View {
                     ]
                 ),
                 Section(
+                    title: "Component",
+                    screens: [
+                        .modifierContainer,
+                    ]
+                ),
+                Section(
                     title: "Modifier",
                     screens: [
                         .modifierSurfaceForeground,
