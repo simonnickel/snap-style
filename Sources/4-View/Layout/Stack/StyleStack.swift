@@ -21,14 +21,14 @@ public struct StyleStack<Content>: View where Content: View {
 
     public init(
         _ axis: Axis = .vertical,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: Alignment = .leading,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content,
     ) {
         self.axis = axis
-        self.spacing = spacing
         self.alignment = alignment
+        self.spacing = spacing
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -89,14 +89,14 @@ package struct StyleStackExample: View {
         StyleStack(
             configuration.axisA,
             spacing: configuration.spacing,
-            fillsWidth: configuration.shouldFillWidth
+            fillsWidth: configuration.shouldFillWidth,
         ) {
             Text("Axis A")
                 .style(component: .accentCard)
             StyleStack(
                 configuration.axisB,
                 spacing: configuration.spacing,
-                fillsWidth: configuration.shouldFillWidth
+                fillsWidth: configuration.shouldFillWidth,
             ) {
                 Text("Axis B (1)")
                     .style(component: .accentCard)

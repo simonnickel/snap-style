@@ -17,13 +17,13 @@ public struct StyleLazyHStack<Content>: View where Content: View {
     private let content: () -> Content
 
     public init(
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: VerticalAlignment = .center,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content,
     ) {
-        self.spacing = spacing
         self.alignment = alignment
+        self.spacing = spacing
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -75,7 +75,7 @@ package struct StyleLazyHStackExample: View {
     private var contentExample: some View {
         StyleLazyHStack(
             spacing: configuration.spacing,
-            fillsWidth: configuration.shouldFillWidth
+            fillsWidth: configuration.shouldFillWidth,
         ) {
             ForEach(0..<4) { index in
                 Text("Item \(index)")
