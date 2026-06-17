@@ -174,10 +174,10 @@ extension Style.Views.List.Row {
         // MARK: Content
         
         private func viewRow() -> some View {
-            StackV(\.spacingGroups) {
-                StackH {
+            StyleVStack(\.spacingGroups) {
+                StyleHStack {
 
-                    StackH(\.paddingListRowLeading) {
+                    StyleHStack(\.paddingListRowLeading) {
                         if let icon {
                             StyleIcon(icon)
                                 .style(element: .icon)

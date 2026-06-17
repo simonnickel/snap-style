@@ -10,7 +10,7 @@ struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
 
-            StackV(\.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Metric Card")
                     .style(element: .title)
                 ScrollingHStack {
@@ -21,25 +21,25 @@ struct ComponentCardScreen: View {
                 }
             }
 
-            StackV(\.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Content Card")
                     .style(element: .title)
                 contentCard
                     .style(component: .contentCard)
             }
 
-            StackV(\.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Accent Card")
                     .style(element: .title)
                 contentCard
                     .style(component: .accentCard)
             }
 
-            StackV(\.spacingGroups) {
+            StyleVStack(\.spacingGroups) {
                 Text("Container Relative")
                     .style(element: .title)
-                StackV(\.spacingGroups) {
-                    StackV {
+                StyleVStack(\.spacingGroups) {
+                    StyleVStack {
                         Text("Automatic")
                             .style(element: .title)
                     }
@@ -48,13 +48,13 @@ struct ComponentCardScreen: View {
                         .style(component: .contentCard)
                 }
                 .style(component: .contentCard)
-                StackV(\.spacingGroups) {
-                    StackV {
+                StyleVStack(\.spacingGroups) {
+                    StyleVStack {
                         Text("Manual clip shape")
                             .style(element: .title)
                     }
                     
-                    StackH(\.spacingElements) {
+                    StyleHStack(\.spacingElements) {
                         DemoMetricCard.exampleRectangle
                         DemoMetricCard.exampleTriangle
                         DemoMetricCard.exampleCircle
@@ -68,7 +68,7 @@ struct ComponentCardScreen: View {
     }
     
     private var contentCard: some View {
-        StackV(\.spacingGroups) {
+        StyleVStack(\.spacingGroups) {
             StructuredTextView()
             ActionButtonsView()
         }

@@ -11,19 +11,19 @@ struct ColorItemView: View {
     let selected: Bool
 
     var body: some View {
-        StackV {
-            StackV(\.spacingGroups) {
+        StyleVStack {
+            StyleVStack(\.spacingGroups) {
                 
                 Text("Select")
                     .style(element: .title)
                     .style(foreground: \.accent)
 
-                StackV(\.spacingElements) {
-                    StackH(\.spacingElements) {
+                StyleVStack(\.spacingElements) {
+                    StyleHStack(\.spacingElements) {
                         StyleIcon(\.indicatorUnread)
                             .style(element: .accessory)
                             .style(foreground: \.accentContrast)
-                        StackV {
+                        StyleVStack {
                             Text("Title")
                                 .style(element: .title)
                         }
@@ -40,7 +40,7 @@ struct ColorItemView: View {
                     StyleButton {
                         
                     } content: {
-                        StackH(\.spacingElements) {
+                        StyleHStack(\.spacingElements) {
                             StyleIcon(\.indicatorUnread)
                                 .style(element: .accessory)
                                 .style(foreground: \.accentContrast)
@@ -54,7 +54,7 @@ struct ColorItemView: View {
                 }
                 .style(component: .accentCard)
                 
-                StackH(\.spacingElements, alignment: .center) {
+                StyleHStack(\.spacingElements, alignment: .center) {
                     StyleShapeView(shape: \.circle, surface: \.accentContrast)
                         .style(padding: \.containerCard)
                         .style(background: \.accentGradientSoft)

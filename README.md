@@ -120,7 +120,7 @@ var body: some View {
 Apply a component to a view hierarchy, then assign elements to individual views:
 
 ```swift
-StackV(\.spacingElements) {
+StyleVStack(\.spacingElements) {
     Image(systemName: "star")
         .style(element: .icon)
     Text("Title")
@@ -156,8 +156,8 @@ SnapStyle provides views that integrate with the style system.
 |------|---------|
 | `StyleScreen` | Screen container with readable content width, scroll view, and inset configuration |
 | `Stack` | HStack/VStack with style-defined spacing and explicit, animatable axis switching |
-| `StackV` / `StackH` | Fixed vertical and horizontal stacks with type-safe alignment |
-| `StackVLazy` / `StackHLazy` | Lazy stack variants with style-defined spacing |
+| `StyleVStack` / `StyleHStack` | Fixed vertical and horizontal stacks with type-safe alignment |
+| `StyleLazyVStack` / `StyleLazyHStack` | Lazy stack variants with style-defined spacing |
 | `StyleList` | Styled List with section spacing and insets |
 | `StyleListRow` | List row with variants: `.plain`, `.navigate`, `.navigation`, `.selectValue`, `.selectValues`, `.selected`, `.enabled`, `.pick`, `.pickInline` |
 | `StyleListSectionHeaderLabel` | Styled section header label for lists |
@@ -291,7 +291,7 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 | **SnapStyleBase** | Core types: `Style`, `Style.Context`, attribute protocols, value builders, caching |
 | **SnapStyleComponents** | `Style.Component`, `Style.Element`, `Style.Container` |
 | **SnapStyleDefinitions** | Built-in definitions and values for all attribute types |
-| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `Stack`, `StackV`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
+| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `Stack`, `StyleVStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
 | **SnapStyleViews** | Additional convenience views |
 | **SnapStyleDebug** | Debug views for inspecting style state and caches |
 

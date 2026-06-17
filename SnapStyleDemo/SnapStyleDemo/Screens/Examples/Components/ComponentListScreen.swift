@@ -46,8 +46,8 @@ struct ComponentListScreen: View {
                     Text("Rectangle")
                 }
                 StyleListRow(.plain, systemImage: "triangle") {
-                    StackH {
-                        StackV {
+                    StyleHStack {
+                        StyleVStack {
                             Text("Triangle")
                                 .style(element: .title)
                             Text("Some text")

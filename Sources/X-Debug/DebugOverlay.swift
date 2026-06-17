@@ -56,7 +56,7 @@ internal struct DebugOverlayModifier: ViewModifier {
     }
 
     var viewInfo: some View {
-        StackV(fillsWidth: false) {
+        StyleVStack(fillsWidth: false) {
             Text("Content: \(geometrySizeContent.description)")
             Text("Screen:   \(geometrySizeScreen.description)")
             Text("top: \(geometrySafeAreaInsets.top.formatted()), l: \(geometrySafeAreaInsets.leading.formatted()), b: \(geometrySafeAreaInsets.bottom.formatted()), t: \(geometrySafeAreaInsets.trailing.formatted())")
@@ -76,7 +76,7 @@ internal struct DebugOverlayModifier: ViewModifier {
 
 #Preview {
     StyleScreen {
-        StackV(\.spacingSections) {
+        StyleVStack(\.spacingSections) {
             Text("Some Content")
                 .padding()
                 .debugOverlay()

@@ -15,8 +15,8 @@ struct StructuredTextView: View {
     }
 
     var body: some View {
-        StackV(\.spacingGroups) {
-            StackV {
+        StyleVStack(\.spacingGroups) {
+            StyleVStack {
                 Text(title)
                 Text("Subitle")
                     .style(hierarchy: .secondary)
@@ -25,7 +25,7 @@ struct StructuredTextView: View {
 
             paragraph
 
-            StackV(\.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Section Title")
                     .style(element: .title, hierarchy: .tertiary)
 

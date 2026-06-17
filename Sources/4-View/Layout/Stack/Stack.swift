@@ -55,9 +55,9 @@ public struct Stack<Content>: View where Content: View {
 }
 
 
-// MARK: - StackV
+// MARK: - StyleVStack
 
-public struct StackV<Content>: View where Content: View {
+public struct StyleVStack<Content>: View where Content: View {
 
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let alignment: HorizontalAlignment
@@ -89,9 +89,9 @@ public struct StackV<Content>: View where Content: View {
 }
 
 
-// MARK: - StackH
+// MARK: - StyleHStack
 
-public struct StackH<Content>: View where Content: View {
+public struct StyleHStack<Content>: View where Content: View {
 
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let alignment: VerticalAlignment
@@ -178,8 +178,8 @@ package struct StackExample: View {
 
     // TODO: This could be an inline list
     private var contentConfiguration: some View {
-        StackV {
-            StackH {
+        StyleVStack {
+            StyleHStack {
                 Text("Axis A")
                 StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -191,7 +191,7 @@ package struct StackExample: View {
                 }
             }
 
-            StackH {
+            StyleHStack {
                 Text("Axis B")
                 StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
