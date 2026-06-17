@@ -72,8 +72,8 @@ package struct StyleStackExample: View {
         var shouldFillWidth: Bool = true
         var shouldApplySpacing: Bool = true
         
-        var spacing: Style.Attribute.Number.ValueBuilderKeyPath? {
-            shouldApplySpacing ? \.spacingElements : nil
+        var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
+            shouldApplySpacing ? \.spacingElements : \.zero
         }
     }
     
@@ -89,19 +89,25 @@ package struct StyleStackExample: View {
     }
     
     private var contentExample: some View {
-        StyleStack(configuration.axisA, fillsWidth: configuration.shouldFillWidth) {
+        StyleStack(
+            configuration.axisA,
+            spacing: configuration.spacing,
+            fillsWidth: configuration.shouldFillWidth
+        ) {
             Text("Axis A")
                 .style(component: .accentCard)
-            StyleStack(configuration.axisB, fillsWidth: configuration.shouldFillWidth) {
+            StyleStack(
+                configuration.axisB,
+                spacing: configuration.spacing,
+                fillsWidth: configuration.shouldFillWidth
+            ) {
                 Text("Axis B (1)")
                     .style(component: .accentCard)
                 Text("(2)")
                     .style(component: .accentCard)
             }
-            .style(spacing: configuration.spacing)
             .style(component: .accentCard)
         }
-        .style(spacing: configuration.spacing)
         .style(component: .contentCard)
     }
     

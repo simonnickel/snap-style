@@ -31,6 +31,8 @@ public struct StyleLazyVStack<Content>: View where Content: View {
     public var body: some View {
         contentStack
             .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
+            // LazyVStack takes its proposed width by default, so shrink to content when not filling.
+            .fixedSize(horizontal: !fillsWidth, vertical: false)
     }
 
     @ViewBuilder
@@ -52,13 +54,54 @@ public struct StyleLazyVStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    StyleScreen {
-        StyleLazyVStack {
-            Text("Test 1")
-                .background(.green)
-            Text("Test Row 2")
-                .background(.mint)
+    StyleLazyVStackExample()
+}
+
+package struct StyleLazyVStackExample: View {
+
+    struct Configuration {
+        var shouldFillWidth: Bool = true
+        var shouldApplySpacing: Bool = true
+
+        var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
+            shouldApplySpacing ? \.spacingElements : \.zero
         }
-        .background(.yellow)
+    }
+
+    @State private var configuration: Configuration = .init()
+
+    package init() {}
+
+    package var body: some View {
+        StyleScreen {
+            contentExample
+            contentConfiguration
+        }
+    }
+
+    private var contentExample: some View {
+        StyleLazyVStack(
+            spacing: configuration.spacing,
+            fillsWidth: configuration.shouldFillWidth
+        ) {
+            ForEach(0..<4) { index in
+                Text("Item \(index)")
+                    .style(component: .accentCard)
+            }
+        }
+        .style(component: .contentCard)
+    }
+
+    private var contentConfiguration: some View {
+        StyleStack {
+            StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
+                Text("Fill Width")
+            }
+
+            StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
+                Text("Spacing between elements")
+            }
+        }
+        .style(component: .infoCard)
     }
 }
