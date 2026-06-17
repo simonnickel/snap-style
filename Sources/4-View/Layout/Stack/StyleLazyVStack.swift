@@ -29,17 +29,12 @@ public struct StyleLazyVStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        contentStack
-            .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
-            // LazyVStack takes its proposed width by default, so shrink to content when not filling.
-            .fixedSize(horizontal: !fillsWidth, vertical: false)
-    }
-
-    @ViewBuilder
-    private var contentStack: some View {
         LazyVStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
+        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
+        // LazyVStack takes its proposed width by default, so shrink to content when not filling.
+        .fixedSize(horizontal: !fillsWidth, vertical: false)
     }
 
     private var resolvedSpacing: CGFloat {

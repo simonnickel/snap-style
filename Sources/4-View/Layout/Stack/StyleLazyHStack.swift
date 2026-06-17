@@ -29,15 +29,10 @@ public struct StyleLazyHStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        contentStack
-            .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: .leading, vertical: alignment))
-    }
-
-    @ViewBuilder
-    private var contentStack: some View {
         LazyHStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
+        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: .leading, vertical: alignment))
     }
 
     private var resolvedSpacing: CGFloat {

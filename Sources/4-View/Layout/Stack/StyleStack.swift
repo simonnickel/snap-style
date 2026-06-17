@@ -34,19 +34,16 @@ public struct StyleStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        contentStack
-            .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: alignment)
-    }
-
-    @ViewBuilder
-    private var contentStack: some View {
-        let layout = axis == .vertical
-            ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: resolvedSpacing))
-            : AnyLayout(HStackLayout(alignment: alignment.vertical, spacing: resolvedSpacing))
-
-        layout {
+        resolvedLayout {
             content()
         }
+        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: alignment)
+    }
+    
+    private var resolvedLayout: AnyLayout {
+        return axis == .vertical
+        ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: resolvedSpacing))
+        : AnyLayout(HStackLayout(alignment: alignment.vertical, spacing: resolvedSpacing))
     }
 
     private var resolvedSpacing: CGFloat {
