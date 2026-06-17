@@ -26,7 +26,7 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
     }
 
     public var body: some View {
-        StackV(spacing: \.spacingElements) {
+        StackV(\.spacingElements) {
 
             StackH(alignment: .top) {
                 topLeading()

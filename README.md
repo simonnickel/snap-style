@@ -120,7 +120,7 @@ var body: some View {
 Apply a component to a view hierarchy, then assign elements to individual views:
 
 ```swift
-StackV(spacing: \.spacingElements) {
+StackV(\.spacingElements) {
     Image(systemName: "star")
         .style(element: .icon)
     Text("Title")

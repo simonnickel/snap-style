@@ -76,7 +76,7 @@ internal struct DebugOverlayModifier: ViewModifier {
 
 #Preview {
     StyleScreen {
-        StackV(spacing: \.spacingSections) {
+        StackV(\.spacingSections) {
             Text("Some Content")
                 .padding()
                 .debugOverlay()

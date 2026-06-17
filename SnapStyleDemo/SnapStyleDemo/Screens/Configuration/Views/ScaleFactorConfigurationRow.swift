@@ -15,7 +15,7 @@ struct ScaleFactorConfigurationRow: View {
 
     var body: some View {
         StyleListRow(icon: \.scaleFactor) {
-            StackV(spacing: \.spacingElements) {
+            StackV(\.spacingElements) {
                 StyleLabel("Scale Factor")
             }
         } content: {

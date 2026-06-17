@@ -14,21 +14,21 @@ public struct Stack<Content>: View where Content: View {
     @Environment(\.styleSpacing) private var styleSpacing
 
     private let axis: Axis
-    private let alignment: Alignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: Alignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
         axis: Axis,
-        alignment: Alignment = .leading,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        alignment: Alignment = .leading,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.axis = axis
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -59,19 +59,19 @@ public struct Stack<Content>: View where Content: View {
 
 public struct StackV<Content>: View where Content: View {
 
-    private let alignment: HorizontalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: HorizontalAlignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -79,8 +79,8 @@ public struct StackV<Content>: View where Content: View {
     public var body: some View {
         Stack(
             axis: .vertical,
-            alignment: Alignment(horizontal: alignment, vertical: .center),
             spacing: spacing,
+            alignment: Alignment(horizontal: alignment, vertical: .center),
             fillsWidth: fillsWidth,
             content: content,
         )
@@ -93,19 +93,19 @@ public struct StackV<Content>: View where Content: View {
 
 public struct StackH<Content>: View where Content: View {
 
-    private let alignment: VerticalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: VerticalAlignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: VerticalAlignment = .center,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -113,8 +113,8 @@ public struct StackH<Content>: View where Content: View {
     public var body: some View {
         Stack(
             axis: .horizontal,
-            alignment: Alignment(horizontal: .leading, vertical: alignment),
             spacing: spacing,
+            alignment: Alignment(horizontal: .leading, vertical: alignment),
             fillsWidth: fillsWidth,
             content: content,
         )

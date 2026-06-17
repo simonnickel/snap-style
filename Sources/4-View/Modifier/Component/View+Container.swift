@@ -169,13 +169,13 @@ package struct StyleContainerModifierExample: View {
 
     @ViewBuilder
     private func containerStack(component: Style.Component) -> some View {
-        StackV(spacing: \.spacingElements) {
+        StackV(\.spacingElements) {
             Text("Stack of .\(component.description)")
                 .style(element: .title)
-            StackV(spacing: \.spacingElements) {
+            StackV(\.spacingElements) {
                 Text("Level 2")
                     .style(element: .title)
-                StackV(spacing: \.spacingElements) {
+                StackV(\.spacingElements) {
                     Text("Level 3")
                         .style(element: .title)
                 }

@@ -38,7 +38,7 @@ struct StructuredScreen: View {
 
     @ViewBuilder
     private var content: some View {
-        StackV(spacing: \.spacingSections) {
+        StackV(\.spacingSections) {
             contentCards
             StructuredTextView()
             ActionButtonsView()
@@ -47,7 +47,7 @@ struct StructuredScreen: View {
 
     @ViewBuilder
     private var contentCards: some View {
-        StackH(spacing: \.spacingElements) {
+        StackH(\.spacingElements) {
             DemoMetricCard.exampleRectangle
             DemoMetricCard.exampleTriangle
         }

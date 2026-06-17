@@ -39,7 +39,7 @@ struct DemoMetricCard: View {
 
 #Preview {
     StyleScreen {
-        StackH(spacing: \.spacingElements) {
+        StackH(\.spacingElements) {
             DemoMetricCard.exampleRectangle
             DemoMetricCard.exampleTriangle
             DemoMetricCard.exampleCircle

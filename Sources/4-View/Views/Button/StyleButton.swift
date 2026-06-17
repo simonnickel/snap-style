@@ -85,7 +85,7 @@ package struct StyleButtonExample: View {
     }
 
     private var contentButtons: some View {
-        StackV(spacing: \.spacingGroups) {
+        StackV(\.spacingGroups) {
             StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
             }
@@ -95,7 +95,7 @@ package struct StyleButtonExample: View {
             }
             .style(buttonVariant: .secondary)
 
-            StackH(spacing: \.spacingElements) {
+            StackH(\.spacingElements) {
                 StyleButton(.icon(hierarchy: .primary)) { } content: {
                     Label("Primary", systemImage: "star")
                         .labelStyle(.iconOnly)

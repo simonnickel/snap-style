@@ -80,7 +80,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
     let spacing: Style.Attribute.Number.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
-        StackH(spacing: spacing, fillsWidth: false) {
+        StackH(spacing, fillsWidth: false) {
             if styleLabelContent.contains(.icon) {
                 configuration.icon
             }
@@ -109,7 +109,7 @@ extension View {
 // MARK: - Preview
 
 #Preview {
-    StackV(spacing: \.spacingSections) {
+    StackV(\.spacingSections) {
         StackV {
             
             StyleLabel(icon: \.favorite) {

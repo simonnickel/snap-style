@@ -11,19 +11,19 @@ public struct StackHLazy<Content: View>: View {
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
 
-    private let alignment: VerticalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: VerticalAlignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: VerticalAlignment = .center,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -74,7 +74,7 @@ package struct StackHLazyExample: View {
 
     private var contentExample: some View {
         StackHLazy(
-            spacing: configuration.spacing,
+            configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             ForEach(0..<4) { index in
