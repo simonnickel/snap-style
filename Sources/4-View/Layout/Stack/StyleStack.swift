@@ -27,8 +27,8 @@ public struct StyleStack<Content>: View where Content: View {
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.axis = axis
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }

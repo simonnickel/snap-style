@@ -11,8 +11,8 @@ public struct StyleLazyVStack<Content>: View where Content: View {
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
 
-    private let alignment: HorizontalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: HorizontalAlignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
@@ -22,8 +22,8 @@ public struct StyleLazyVStack<Content>: View where Content: View {
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -52,11 +52,13 @@ public struct StyleLazyVStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    StyleLazyVStack {
-        Text("Test 1")
-            .background(.green)
-        Text("Test Row 2")
-            .background(.mint)
+    StyleScreen {
+        StyleLazyVStack {
+            Text("Test 1")
+                .background(.green)
+            Text("Test Row 2")
+                .background(.mint)
+        }
+        .background(.yellow)
     }
-    .background(.yellow)
 }
