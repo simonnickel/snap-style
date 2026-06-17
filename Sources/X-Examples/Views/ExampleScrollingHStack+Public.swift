@@ -8,7 +8,7 @@ import SnapStyleBase
 import SnapStyleViews
 import SwiftUI
 
-/// Public wrapper for `SnapStyleView.ExampleStyleStack`.
+/// Public wrapper for `SnapStyleViews.ScrollingHStackExample`.
 public struct ExampleScrollingHStack: View {
     
     public init() {}

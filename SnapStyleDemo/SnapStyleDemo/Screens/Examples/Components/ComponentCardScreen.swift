@@ -10,7 +10,7 @@ struct ComponentCardScreen: View {
     var body: some View {
         StyleScreen {
 
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Metric Card")
                     .style(element: .title)
                 ScrollingHStack {
@@ -21,25 +21,25 @@ struct ComponentCardScreen: View {
                 }
             }
 
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Content Card")
                     .style(element: .title)
                 contentCard
                     .style(component: .contentCard)
             }
 
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Accent Card")
                     .style(element: .title)
                 contentCard
                     .style(component: .accentCard)
             }
 
-            StyleStack(spacing: \.spacingGroups) {
+            StyleVStack(\.spacingGroups) {
                 Text("Container Relative")
                     .style(element: .title)
-                StyleStack(spacing: \.spacingGroups) {
-                    StyleStack {
+                StyleVStack(\.spacingGroups) {
+                    StyleVStack {
                         Text("Automatic")
                             .style(element: .title)
                     }
@@ -48,13 +48,13 @@ struct ComponentCardScreen: View {
                         .style(component: .contentCard)
                 }
                 .style(component: .contentCard)
-                StyleStack(spacing: \.spacingGroups) {
-                    StyleStack {
+                StyleVStack(\.spacingGroups) {
+                    StyleVStack {
                         Text("Manual clip shape")
                             .style(element: .title)
                     }
                     
-                    StyleStack(.horizontal, spacing: \.spacingElements) {
+                    StyleHStack(\.spacingElements) {
                         DemoMetricCard.exampleRectangle
                         DemoMetricCard.exampleTriangle
                         DemoMetricCard.exampleCircle
@@ -68,7 +68,7 @@ struct ComponentCardScreen: View {
     }
     
     private var contentCard: some View {
-        StyleStack(spacing: \.spacingGroups) {
+        StyleVStack(\.spacingGroups) {
             StructuredTextView()
             ActionButtonsView()
         }

@@ -16,7 +16,7 @@ struct CornerRadiusConfigurationRow: View {
 
     var body: some View {
         StyleListRow(.pickInline(DemoConfiguration.CornerRadiusOption.allCases, titleKeyPath: \.rawValue, selection: $option), icon: \.configCornerRadius) {
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 StyleLabel("Corner Radius")
             }
         }

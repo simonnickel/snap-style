@@ -14,21 +14,21 @@ public struct StyleStack<Content>: View where Content: View {
     @Environment(\.styleSpacing) private var styleSpacing
 
     private let axis: Axis
-    private let alignment: Alignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: Alignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
-        _ axis: Axis = .vertical,
-        alignment: Alignment = .leading,
+        axis: Axis,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        alignment: Alignment = .leading,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.axis = axis
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -39,7 +39,7 @@ public struct StyleStack<Content>: View where Content: View {
         }
         .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: alignment)
     }
-    
+
     private var resolvedLayout: AnyLayout {
         return axis == .vertical
         ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: resolvedSpacing))
@@ -50,6 +50,74 @@ public struct StyleStack<Content>: View where Content: View {
         if let key = spacing ?? styleSpacing, let value = style.number(for: key) {
             CGFloat(value)
         } else { 0 }
+    }
+
+}
+
+
+// MARK: - StyleVStack
+
+public struct StyleVStack<Content>: View where Content: View {
+
+    private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: HorizontalAlignment
+    private let fillsWidth: Bool
+    private let content: () -> Content
+
+    public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        alignment: HorizontalAlignment = .leading,
+        fillsWidth: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+    ) {
+        self.spacing = spacing
+        self.alignment = alignment
+        self.fillsWidth = fillsWidth
+        self.content = content
+    }
+
+    public var body: some View {
+        StyleStack(
+            axis: .vertical,
+            spacing: spacing,
+            alignment: Alignment(horizontal: alignment, vertical: .center),
+            fillsWidth: fillsWidth,
+            content: content,
+        )
+    }
+
+}
+
+
+// MARK: - StyleHStack
+
+public struct StyleHStack<Content>: View where Content: View {
+
+    private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let alignment: VerticalAlignment
+    private let fillsWidth: Bool
+    private let content: () -> Content
+
+    public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        alignment: VerticalAlignment = .center,
+        fillsWidth: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+    ) {
+        self.spacing = spacing
+        self.alignment = alignment
+        self.fillsWidth = fillsWidth
+        self.content = content
+    }
+
+    public var body: some View {
+        StyleStack(
+            axis: .horizontal,
+            spacing: spacing,
+            alignment: Alignment(horizontal: .leading, vertical: alignment),
+            fillsWidth: fillsWidth,
+            content: content,
+        )
     }
 
 }
@@ -68,33 +136,33 @@ package struct StyleStackExample: View {
         var axisB: Axis = .horizontal
         var shouldFillWidth: Bool = true
         var shouldApplySpacing: Bool = true
-        
+
         var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
             shouldApplySpacing ? \.spacingElements : \.zero
         }
     }
-    
+
     @State private var configuration: Configuration = .init()
 
     package init() {}
-    
+
     package var body: some View {
         StyleScreen {
             contentExample
             contentConfiguration
         }
     }
-    
+
     private var contentExample: some View {
         StyleStack(
-            configuration.axisA,
+            axis: configuration.axisA,
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             Text("Axis A")
                 .style(component: .accentCard)
             StyleStack(
-                configuration.axisB,
+                axis: configuration.axisB,
                 spacing: configuration.spacing,
                 fillsWidth: configuration.shouldFillWidth,
             ) {
@@ -107,11 +175,11 @@ package struct StyleStackExample: View {
         }
         .style(component: .contentCard)
     }
-    
+
     // TODO: This could be an inline list
     private var contentConfiguration: some View {
-        StyleStack {
-            StyleStack(.horizontal) {
+        StyleVStack {
+            StyleHStack {
                 Text("Axis A")
                 StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -122,8 +190,8 @@ package struct StyleStackExample: View {
                     Text("Select Axis A")
                 }
             }
-            
-            StyleStack(.horizontal) {
+
+            StyleHStack {
                 Text("Axis B")
                 StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -138,7 +206,7 @@ package struct StyleStackExample: View {
             StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
                 Text("Fill Width")
             }
-            
+
             StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
                 Text("Spacing between elements")
             }

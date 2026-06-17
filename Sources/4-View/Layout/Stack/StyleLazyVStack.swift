@@ -6,7 +6,7 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleLazyVStack<Content>: View where Content: View {
+public struct StyleLazyVStack<Content: View>: View {
 
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
@@ -17,13 +17,13 @@ public struct StyleLazyVStack<Content>: View where Content: View {
     private let content: () -> Content
 
     public init(
+        _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
-        self.alignment = alignment
         self.spacing = spacing
+        self.alignment = alignment
         self.fillsWidth = fillsWidth
         self.content = content
     }
@@ -76,7 +76,7 @@ package struct StyleLazyVStackExample: View {
 
     private var contentExample: some View {
         StyleLazyVStack(
-            spacing: configuration.spacing,
+            configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             ForEach(0..<4) { index in
@@ -88,7 +88,7 @@ package struct StyleLazyVStackExample: View {
     }
 
     private var contentConfiguration: some View {
-        StyleStack {
+        StyleVStack {
             StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
                 Text("Fill Width")
             }

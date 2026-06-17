@@ -22,8 +22,6 @@ struct ComponentActionScreen: View {
     var body: some View {
         StyleScreen {
             
-            ExampleStyleStack()
-            
             Toggle(isOn: $showIcons) {
                 Text("Show Icons")
             }
@@ -31,7 +29,7 @@ struct ComponentActionScreen: View {
                 Text("Show Subtitles")
             }
 
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Content Card - Accent")
                     .style(element: .title)
                 ActionButtonsView(elements: elements)
@@ -42,7 +40,7 @@ struct ComponentActionScreen: View {
             }
             .style(component: .contentCard)
             
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Accent Card - Alternative")
                     .style(element: .title)
                 ActionButtonsView(elements: elements)
@@ -53,10 +51,10 @@ struct ComponentActionScreen: View {
             }
             .style(component: .accentCard)
             
-            StyleStack(spacing: \.spacingElements) {
+            StyleVStack(\.spacingElements) {
                 Text("Icons")
                     .style(element: .title)
-                StyleStack(.horizontal) {
+                StyleHStack {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
                         StyleLabel(icon: \.favorite)
                     }

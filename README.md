@@ -120,7 +120,7 @@ var body: some View {
 Apply a component to a view hierarchy, then assign elements to individual views:
 
 ```swift
-StyleStack(spacing: \.spacingElements) {
+StyleVStack(\.spacingElements) {
     Image(systemName: "star")
         .style(element: .icon)
     Text("Title")
@@ -155,7 +155,8 @@ SnapStyle provides views that integrate with the style system.
 | View | Purpose |
 |------|---------|
 | `StyleScreen` | Screen container with readable content width, scroll view, and inset configuration |
-| `StyleStack` | HStack/VStack with style-defined spacing, animatable axis switching |
+| `StyleStack` | HStack/VStack with style-defined spacing and explicit, animatable axis switching |
+| `StyleVStack` / `StyleHStack` | Fixed vertical and horizontal stacks with type-safe alignment |
 | `StyleLazyVStack` / `StyleLazyHStack` | Lazy stack variants with style-defined spacing |
 | `StyleList` | Styled List with section spacing and insets |
 | `StyleListRow` | List row with variants: `.plain`, `.navigate`, `.navigation`, `.selectValue`, `.selectValues`, `.selected`, `.enabled`, `.pick`, `.pickInline` |
@@ -290,7 +291,7 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 | **SnapStyleBase** | Core types: `Style`, `Style.Context`, attribute protocols, value builders, caching |
 | **SnapStyleComponents** | `Style.Component`, `Style.Element`, `Style.Container` |
 | **SnapStyleDefinitions** | Built-in definitions and values for all attribute types |
-| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `StyleStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
+| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `StyleStack`, `StyleVStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
 | **SnapStyleViews** | Additional convenience views |
 | **SnapStyleDebug** | Debug views for inspecting style state and caches |
 
@@ -299,4 +300,3 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 
 - Custom accent colors do not replicate the iOS behavior where `.accentColor` grays out when a popover or sheet is presented.
 - Readable content width (`\.widthReadableContent`) is implemented manually since UIKit's `readableContentGuide` is not available in SwiftUI.
-

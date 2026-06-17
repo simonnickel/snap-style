@@ -21,7 +21,7 @@ struct ActionButtonsView: View {
     }
 
     var body: some View {
-        StyleStack(.horizontal) {
+        StyleHStack {
             StyleButton(.secondary) { } content: {
                 content(title: "Secondary", subtitle: showSubtitle ? "Subtitle" : nil)
             }
@@ -35,9 +35,9 @@ struct ActionButtonsView: View {
     }
     
     private func content(title: String, subtitle: String?) -> some View {
-        StyleStack(fillsWidth: false) {
+        StyleVStack(fillsWidth: false) {
             StyleLabel(icon: showIcon ? \.favorite : nil) {
-                StyleStack(fillsWidth: false) {
+                StyleVStack(fillsWidth: false) {
                     Text(title)
                     if let subtitle {
                         Text(subtitle)
