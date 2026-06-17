@@ -8,7 +8,7 @@ import SwiftUI
 
 /// A container that stacks its content on the defined Axis.
 /// Switching the Axis can be animated.
-public struct Stack<Content>: View where Content: View {
+public struct StyleStack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
@@ -77,7 +77,7 @@ public struct StyleVStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        Stack(
+        StyleStack(
             axis: .vertical,
             spacing: spacing,
             alignment: Alignment(horizontal: alignment, vertical: .center),
@@ -111,7 +111,7 @@ public struct StyleHStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        Stack(
+        StyleStack(
             axis: .horizontal,
             spacing: spacing,
             alignment: Alignment(horizontal: .leading, vertical: alignment),
@@ -126,10 +126,10 @@ public struct StyleHStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    StackExample()
+    StyleStackExample()
 }
 
-package struct StackExample: View {
+package struct StyleStackExample: View {
 
     struct Configuration {
         var axisA: Axis = .horizontal
@@ -154,14 +154,14 @@ package struct StackExample: View {
     }
 
     private var contentExample: some View {
-        Stack(
+        StyleStack(
             axis: configuration.axisA,
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             Text("Axis A")
                 .style(component: .accentCard)
-            Stack(
+            StyleStack(
                 axis: configuration.axisB,
                 spacing: configuration.spacing,
                 fillsWidth: configuration.shouldFillWidth,

@@ -20,7 +20,7 @@ struct SnapStyleFlow: View {
         
         // Layout
         case viewStyleScreen
-        case viewStack
+        case viewStyleStack
         case viewStyleLazyVStack
         case viewStyleLazyHStack
         case viewStyleSpacer
@@ -57,7 +57,7 @@ struct SnapStyleFlow: View {
                     
                     // Layout
                     case .viewStyleScreen: ExampleStyleScreen()
-                    case .viewStack: ExampleStack()
+                    case .viewStyleStack: ExampleStyleStack()
                     case .viewStyleLazyVStack: ExampleStyleLazyVStack()
                     case .viewStyleLazyHStack: ExampleStyleLazyHStack()
                     case .viewStyleSpacer: ExampleStyleSpacer()
@@ -97,7 +97,7 @@ struct SnapStyleFlow: View {
                 
                 // Layout
                 case .viewStyleScreen: "StyleScreen"
-                case .viewStack: "Stack"
+                case .viewStyleStack: "StyleStack"
                 case .viewStyleLazyVStack: "StyleLazyVStack"
                 case .viewStyleLazyHStack: "StyleLazyHStack"
                 case .viewStyleSpacer: "StyleSpacer"

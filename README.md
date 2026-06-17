@@ -155,7 +155,7 @@ SnapStyle provides views that integrate with the style system.
 | View | Purpose |
 |------|---------|
 | `StyleScreen` | Screen container with readable content width, scroll view, and inset configuration |
-| `Stack` | HStack/VStack with style-defined spacing and explicit, animatable axis switching |
+| `StyleStack` | HStack/VStack with style-defined spacing and explicit, animatable axis switching |
 | `StyleVStack` / `StyleHStack` | Fixed vertical and horizontal stacks with type-safe alignment |
 | `StyleLazyVStack` / `StyleLazyHStack` | Lazy stack variants with style-defined spacing |
 | `StyleList` | Styled List with section spacing and insets |
@@ -291,7 +291,7 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 | **SnapStyleBase** | Core types: `Style`, `Style.Context`, attribute protocols, value builders, caching |
 | **SnapStyleComponents** | `Style.Component`, `Style.Element`, `Style.Container` |
 | **SnapStyleDefinitions** | Built-in definitions and values for all attribute types |
-| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `Stack`, `StyleVStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
+| **SnapStyleView** | View modifiers (`.style(font:)`, `.style(foreground:)`, `.style(component:)`, etc.) and styled views (`StyleScreen`, `StyleStack`, `StyleVStack`, `StyleList`, `StyleButton`, `StyleLabel`, etc.) |
 | **SnapStyleViews** | Additional convenience views |
 | **SnapStyleDebug** | Debug views for inspecting style state and caches |
 
