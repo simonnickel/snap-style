@@ -14,8 +14,7 @@ public struct StyleStack<Content>: View where Content: View {
     @Environment(\.styleSpacing) private var styleSpacing
 
     private let axis: Axis
-    private let alignmentV: VerticalAlignment
-    private let alignmentH: HorizontalAlignment
+    private let alignment: Alignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let isStretching: Bool
     private let content: () -> Content
@@ -23,14 +22,12 @@ public struct StyleStack<Content>: View where Content: View {
     public init(
         _ axis: Axis = .vertical,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
-        alignmentV: VerticalAlignment = .center,
-        alignmentH: HorizontalAlignment = .leading,
+        alignment: Alignment = .leading,
         isStretching: Bool = true,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.axis = axis
-        self.alignmentV = alignmentV
-        self.alignmentH = alignmentH
+        self.alignment = alignment
         self.spacing = spacing
         self.isStretching = isStretching
         self.content = content
@@ -38,7 +35,7 @@ public struct StyleStack<Content>: View where Content: View {
 
     public var body: some View {
         contentStack
-            .frame(maxWidth: isStretching ? .infinity : nil, alignment: Alignment(horizontal: alignmentH, vertical: alignmentV))
+            .frame(maxWidth: isStretching ? .infinity : nil, alignment: alignment)
     }
 
     @ViewBuilder
@@ -46,8 +43,8 @@ public struct StyleStack<Content>: View where Content: View {
         let spacingKeyPath = spacing ?? styleSpacing
         let spacing = CGFloat(Self.spacing(for: spacingKeyPath, with: style))
         let layout = axis == .vertical
-            ? AnyLayout(VStackLayout(alignment: alignmentH, spacing: spacing))
-            : AnyLayout(HStackLayout(alignment: alignmentV, spacing: spacing))
+            ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: spacing))
+            : AnyLayout(HStackLayout(alignment: alignment.vertical, spacing: spacing))
 
         layout {
             content()

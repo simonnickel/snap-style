@@ -85,7 +85,7 @@ package struct StyleButtonExample: View {
     }
 
     private var contentButtons: some View {
-        StyleStack(spacing: \.spacingGroups, alignmentV: .center) {
+        StyleStack(spacing: \.spacingGroups) {
             StyleButton() { } content: {
                 Label("Primary", systemImage: "star")
             }

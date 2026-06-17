@@ -54,7 +54,7 @@ struct ColorItemView: View {
                 }
                 .style(component: .accentCard)
                 
-                StyleStack(.horizontal, spacing: \.spacingElements, alignmentH: .center) {
+                StyleStack(.horizontal, spacing: \.spacingElements, alignment: .center) {
                     StyleShapeView(shape: \.circle, surface: \.accentContrast)
                         .style(padding: \.containerCard)
                         .style(background: \.accentGradientSoft)
