@@ -23,9 +23,9 @@ struct SnapStyleScreen: View {
                     title: "Layout",
                     screens: [
                         .viewStyleScreen,
-                        .viewStyleStack,
-                        .viewStyleLazyVStack,
-                        .viewStyleLazyHStack,
+                        .viewStack,
+                        .viewStackVLazy,
+                        .viewStackHLazy,
                         .viewStyleSpacer,
                     ]
                 ),

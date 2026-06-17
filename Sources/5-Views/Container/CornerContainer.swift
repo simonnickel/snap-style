@@ -26,15 +26,15 @@ public struct CornerContainer<TopLeading: View, TopTrailing: View, BottomLeading
     }
 
     public var body: some View {
-        StyleStack(spacing: \.spacingElements) {
+        Stack(spacing: \.spacingElements) {
 
-            StyleStack(.horizontal, alignment: .topLeading) {
+            Stack.H(alignment: .top) {
                 topLeading()
                 StyleSpacer(min: \.spacingElements)
                 topTrailing()
             }
 
-            StyleStack(.horizontal, alignment: .bottomLeading) {
+            Stack.H(alignment: .bottom) {
                 bottomLeading()
                 StyleSpacer(min: \.spacingElements)
                 bottomTrailing()

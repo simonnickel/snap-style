@@ -7,13 +7,13 @@ import SnapStyleBase
 import SnapStyleView
 import SwiftUI
 
-/// Public wrapper for `SnapStyleView.ExampleStyleLazyVStack`.
-public struct ExampleStyleLazyVStack: View {
+/// Public wrapper for `SnapStyleView.StackVLazyExample`.
+public struct ExampleStackVLazy: View {
 
     public init() {}
 
     public var body: some View {
-        StyleLazyVStackExample()
+        StackVLazyExample()
     }
 
 }
@@ -22,5 +22,5 @@ public struct ExampleStyleLazyVStack: View {
 // MARK: - Preview
 
 #Preview {
-    ExampleStyleLazyVStack()
+    ExampleStackVLazy()
 }

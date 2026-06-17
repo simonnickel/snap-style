@@ -8,7 +8,7 @@ import SwiftUI
 
 /// A container that stacks its content on the defined Axis.
 /// Switching the Axis can be animated.
-public struct StyleStack<Content>: View where Content: View {
+public struct Stack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
@@ -39,7 +39,7 @@ public struct StyleStack<Content>: View where Content: View {
         }
         .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: alignment)
     }
-    
+
     private var resolvedLayout: AnyLayout {
         return axis == .vertical
         ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: resolvedSpacing))
@@ -55,45 +55,84 @@ public struct StyleStack<Content>: View where Content: View {
 }
 
 
+// MARK: - Factories
+
+extension Stack {
+
+    /// Vertical stack with type-safe horizontal alignment.
+    public static func V(
+        alignment: HorizontalAlignment = .leading,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        fillsWidth: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+    ) -> Stack {
+        Stack(
+            .vertical,
+            alignment: Alignment(horizontal: alignment, vertical: .center),
+            spacing: spacing,
+            fillsWidth: fillsWidth,
+            content: content,
+        )
+    }
+
+    /// Horizontal stack with type-safe vertical alignment.
+    public static func H(
+        alignment: VerticalAlignment = .center,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        fillsWidth: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+    ) -> Stack {
+        Stack(
+            .horizontal,
+            alignment: Alignment(horizontal: .leading, vertical: alignment),
+            spacing: spacing,
+            fillsWidth: fillsWidth,
+            content: content,
+        )
+    }
+
+}
+
+
 // MARK: - Preview
 
 #Preview {
-    StyleStackExample()
+    StackExample()
 }
 
-package struct StyleStackExample: View {
+package struct StackExample: View {
 
     struct Configuration {
         var axisA: Axis = .horizontal
         var axisB: Axis = .horizontal
         var shouldFillWidth: Bool = true
         var shouldApplySpacing: Bool = true
-        
+
         var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
             shouldApplySpacing ? \.spacingElements : \.zero
         }
     }
-    
+
     @State private var configuration: Configuration = .init()
 
     package init() {}
-    
+
     package var body: some View {
         StyleScreen {
             contentExample
             contentConfiguration
         }
     }
-    
+
     private var contentExample: some View {
-        StyleStack(
+        Stack(
             configuration.axisA,
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             Text("Axis A")
                 .style(component: .accentCard)
-            StyleStack(
+            Stack(
                 configuration.axisB,
                 spacing: configuration.spacing,
                 fillsWidth: configuration.shouldFillWidth,
@@ -107,11 +146,11 @@ package struct StyleStackExample: View {
         }
         .style(component: .contentCard)
     }
-    
+
     // TODO: This could be an inline list
     private var contentConfiguration: some View {
-        StyleStack {
-            StyleStack(.horizontal) {
+        Stack {
+            Stack.H {
                 Text("Axis A")
                 StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -122,8 +161,8 @@ package struct StyleStackExample: View {
                     Text("Select Axis A")
                 }
             }
-            
-            StyleStack(.horizontal) {
+
+            Stack.H {
                 Text("Axis B")
                 StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -138,7 +177,7 @@ package struct StyleStackExample: View {
             StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
                 Text("Fill Width")
             }
-            
+
             StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
                 Text("Spacing between elements")
             }

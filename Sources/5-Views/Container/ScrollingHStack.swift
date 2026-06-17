@@ -16,7 +16,7 @@ public struct ScrollingHStack<Content: View>: View {
 
     public var body: some View {
         ScrollView(.horizontal) {
-            StyleLazyHStack(spacing: \.spacingElements) {
+            Stack.HLazy(spacing: \.spacingElements) {
                 content()
             }
             .scrollTargetLayout()

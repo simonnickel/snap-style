@@ -6,20 +6,42 @@
 import SnapStyleBase
 import SwiftUI
 
-public struct StyleLazyHStack<Content>: View where Content: View {
+extension Stack {
+
+    /// Lazy vertical stack with type-safe horizontal alignment.
+    public static func VLazy(
+        alignment: HorizontalAlignment = .leading,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        fillsWidth: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+    ) -> some View {
+        _LazyVStack(
+            alignment: alignment,
+            spacing: spacing,
+            fillsWidth: fillsWidth,
+            content: content,
+        )
+    }
+
+}
+
+
+// MARK: - Implementation
+
+internal struct _LazyVStack<Content: View>: View {
 
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
 
+    private let alignment: HorizontalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
-    private let alignment: VerticalAlignment
     private let fillsWidth: Bool
     private let content: () -> Content
 
-    public init(
-        alignment: VerticalAlignment = .center,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
-        fillsWidth: Bool = true,
+    init(
+        alignment: HorizontalAlignment,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath?,
+        fillsWidth: Bool,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.alignment = alignment
@@ -28,11 +50,13 @@ public struct StyleLazyHStack<Content>: View where Content: View {
         self.content = content
     }
 
-    public var body: some View {
-        LazyHStack(alignment: alignment, spacing: resolvedSpacing) {
+    var body: some View {
+        LazyVStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
-        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: .leading, vertical: alignment))
+        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
+        // LazyVStack takes its proposed width by default, so shrink to content when not filling.
+        .fixedSize(horizontal: !fillsWidth, vertical: false)
     }
 
     private var resolvedSpacing: CGFloat {
@@ -47,10 +71,10 @@ public struct StyleLazyHStack<Content>: View where Content: View {
 // MARK: - Preview
 
 #Preview {
-    StyleLazyHStackExample()
+    StackVLazyExample()
 }
 
-package struct StyleLazyHStackExample: View {
+package struct StackVLazyExample: View {
 
     struct Configuration {
         var shouldFillWidth: Bool = true
@@ -73,7 +97,7 @@ package struct StyleLazyHStackExample: View {
     }
 
     private var contentExample: some View {
-        StyleLazyHStack(
+        Stack.VLazy(
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
@@ -86,7 +110,7 @@ package struct StyleLazyHStackExample: View {
     }
 
     private var contentConfiguration: some View {
-        StyleStack {
+        Stack {
             StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
                 Text("Fill Width")
             }
