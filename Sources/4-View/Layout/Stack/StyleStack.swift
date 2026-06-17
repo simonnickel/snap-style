@@ -40,21 +40,19 @@ public struct StyleStack<Content>: View where Content: View {
 
     @ViewBuilder
     private var contentStack: some View {
-        let spacingKeyPath = spacing ?? styleSpacing
-        let spacing = CGFloat(Self.spacing(for: spacingKeyPath, with: style))
         let layout = axis == .vertical
-            ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: spacing))
-            : AnyLayout(HStackLayout(alignment: alignment.vertical, spacing: spacing))
+            ? AnyLayout(VStackLayout(alignment: alignment.horizontal, spacing: resolvedSpacing))
+            : AnyLayout(HStackLayout(alignment: alignment.vertical, spacing: resolvedSpacing))
 
         layout {
             content()
         }
     }
 
-    package static func spacing(for keyPath: Style.Attribute.Number.ValueBuilderKeyPath?, with style: Style.ContextWrapper) -> Style.Attribute.Number.Value.WrappedValue {
-        guard let keyPath else { return 0 }
-
-        return style.number(for: keyPath) ?? 0
+    private var resolvedSpacing: CGFloat {
+        if let key = spacing ?? styleSpacing, let value = style.number(for: key) {
+            CGFloat(value)
+        } else { 0 }
     }
 
 }

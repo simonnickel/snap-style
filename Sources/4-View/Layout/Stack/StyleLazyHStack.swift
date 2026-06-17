@@ -9,6 +9,7 @@ import SwiftUI
 public struct StyleLazyHStack<Content>: View where Content: View {
 
     @Environment(\.style) private var style
+    @Environment(\.styleSpacing) private var styleSpacing
 
     private let alignment: VerticalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
@@ -25,16 +26,15 @@ public struct StyleLazyHStack<Content>: View where Content: View {
     }
 
     public var body: some View {
-        let spacing = CGFloat(spacing(for: spacing))
-        LazyHStack(alignment: alignment, spacing: spacing) {
+        LazyHStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
     }
 
-    private func spacing(for keyPath: Style.Attribute.Number.ValueBuilderKeyPath?) -> Style.Attribute.Number.Value.WrappedValue {
-        guard let keyPath else { return 0 }
-
-        return style.number(for: keyPath) ?? 0
+    private var resolvedSpacing: CGFloat {
+        if let key = spacing ?? styleSpacing, let value = style.number(for: key) {
+            CGFloat(value)
+        } else { 0 }
     }
 
 }
