@@ -16,26 +16,26 @@ public struct StyleStack<Content>: View where Content: View {
     private let axis: Axis
     private let alignment: Alignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
-    private let isStretching: Bool
+    private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
         _ axis: Axis = .vertical,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: Alignment = .leading,
-        isStretching: Bool = true,
+        fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.axis = axis
         self.alignment = alignment
         self.spacing = spacing
-        self.isStretching = isStretching
+        self.fillsWidth = fillsWidth
         self.content = content
     }
 
     public var body: some View {
         contentStack
-            .frame(maxWidth: isStretching ? .infinity : nil, alignment: alignment)
+            .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: alignment)
     }
 
     @ViewBuilder
@@ -71,7 +71,7 @@ package struct StyleStackExample: View {
     struct Configuration {
         var axisA: Axis = .horizontal
         var axisB: Axis = .horizontal
-        var shouldStretch: Bool = true
+        var shouldFillWidth: Bool = true
         var shouldApplySpacing: Bool = true
         
         var spacing: Style.Attribute.Number.ValueBuilderKeyPath? {
@@ -91,10 +91,10 @@ package struct StyleStackExample: View {
     }
     
     private var contentExample: some View {
-        StyleStack(configuration.axisA, isStretching: configuration.shouldStretch) {
+        StyleStack(configuration.axisA, fillsWidth: configuration.shouldFillWidth) {
             Text("Axis A")
                 .style(component: .accentCard)
-            StyleStack(configuration.axisB, isStretching: configuration.shouldStretch) {
+            StyleStack(configuration.axisB, fillsWidth: configuration.shouldFillWidth) {
                 Text("Axis B (1)")
                     .style(component: .accentCard)
                 Text("(2)")
@@ -134,8 +134,8 @@ package struct StyleStackExample: View {
                 }
             }
 
-            StyleToggle(isOn: $configuration.shouldStretch.animation()) {
-                Text("Stretch Container")
+            StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
+                Text("Fill Width")
             }
             
             StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {

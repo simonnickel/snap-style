@@ -80,7 +80,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
     let spacing: Style.Attribute.Number.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
-        StyleStack(.horizontal, spacing: spacing, isStretching: false) {
+        StyleStack(.horizontal, spacing: spacing, fillsWidth: false) {
             if styleLabelContent.contains(.icon) {
                 configuration.icon
             }

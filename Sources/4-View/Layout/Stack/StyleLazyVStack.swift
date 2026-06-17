@@ -12,24 +12,24 @@ public struct StyleLazyVStack<Content>: View where Content: View {
 
     private let alignment: HorizontalAlignment
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
-    private let isStretching: Bool
+    private let fillsWidth: Bool
     private let content: () -> Content
 
     public init(
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
-        isStretching: Bool = true,
+        fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.alignment = alignment
         self.spacing = spacing
-        self.isStretching = isStretching
+        self.fillsWidth = fillsWidth
         self.content = content
     }
 
     public var body: some View {
         contentStack
-            .frame(maxWidth: isStretching ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
+            .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
     }
 
     @ViewBuilder

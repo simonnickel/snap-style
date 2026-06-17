@@ -35,9 +35,9 @@ struct ActionButtonsView: View {
     }
     
     private func content(title: String, subtitle: String?) -> some View {
-        StyleStack(isStretching: false) {
+        StyleStack(fillsWidth: false) {
             StyleLabel(icon: showIcon ? \.favorite : nil) {
-                StyleStack(isStretching: false) {
+                StyleStack(fillsWidth: false) {
                     Text(title)
                     if let subtitle {
                         Text(subtitle)
