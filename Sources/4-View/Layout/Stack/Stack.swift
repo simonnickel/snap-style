@@ -20,7 +20,7 @@ public struct Stack<Content>: View where Content: View {
     private let content: () -> Content
 
     public init(
-        _ axis: Axis = .vertical,
+        axis: Axis,
         alignment: Alignment = .leading,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
@@ -55,19 +55,30 @@ public struct Stack<Content>: View where Content: View {
 }
 
 
-// MARK: - Factories
+// MARK: - StackV
 
-extension Stack {
+public struct StackV<Content>: View where Content: View {
 
-    /// Vertical stack with type-safe horizontal alignment.
-    public static func V(
+    private let alignment: HorizontalAlignment
+    private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let fillsWidth: Bool
+    private let content: () -> Content
+
+    public init(
         alignment: HorizontalAlignment = .leading,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
-    ) -> Stack {
+    ) {
+        self.alignment = alignment
+        self.spacing = spacing
+        self.fillsWidth = fillsWidth
+        self.content = content
+    }
+
+    public var body: some View {
         Stack(
-            .vertical,
+            axis: .vertical,
             alignment: Alignment(horizontal: alignment, vertical: .center),
             spacing: spacing,
             fillsWidth: fillsWidth,
@@ -75,15 +86,33 @@ extension Stack {
         )
     }
 
-    /// Horizontal stack with type-safe vertical alignment.
-    public static func H(
+}
+
+
+// MARK: - StackH
+
+public struct StackH<Content>: View where Content: View {
+
+    private let alignment: VerticalAlignment
+    private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
+    private let fillsWidth: Bool
+    private let content: () -> Content
+
+    public init(
         alignment: VerticalAlignment = .center,
         spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
-    ) -> Stack {
+    ) {
+        self.alignment = alignment
+        self.spacing = spacing
+        self.fillsWidth = fillsWidth
+        self.content = content
+    }
+
+    public var body: some View {
         Stack(
-            .horizontal,
+            axis: .horizontal,
             alignment: Alignment(horizontal: .leading, vertical: alignment),
             spacing: spacing,
             fillsWidth: fillsWidth,
@@ -126,14 +155,14 @@ package struct StackExample: View {
 
     private var contentExample: some View {
         Stack(
-            configuration.axisA,
+            axis: configuration.axisA,
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
             Text("Axis A")
                 .style(component: .accentCard)
             Stack(
-                configuration.axisB,
+                axis: configuration.axisB,
                 spacing: configuration.spacing,
                 fillsWidth: configuration.shouldFillWidth,
             ) {
@@ -149,8 +178,8 @@ package struct StackExample: View {
 
     // TODO: This could be an inline list
     private var contentConfiguration: some View {
-        Stack {
-            Stack.H {
+        StackV {
+            StackH {
                 Text("Axis A")
                 StylePicker(style: .segmented, selection: $configuration.axisA.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in
@@ -162,7 +191,7 @@ package struct StackExample: View {
                 }
             }
 
-            Stack.H {
+            StackH {
                 Text("Axis B")
                 StylePicker(style: .segmented, selection: $configuration.axisB.animation()) {
                     ForEach(Axis.allCases, id: \.self) { axis in

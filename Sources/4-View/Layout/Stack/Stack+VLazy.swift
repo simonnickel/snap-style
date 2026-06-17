@@ -6,29 +6,7 @@
 import SnapStyleBase
 import SwiftUI
 
-extension Stack {
-
-    /// Lazy vertical stack with type-safe horizontal alignment.
-    public static func VLazy(
-        alignment: HorizontalAlignment = .leading,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
-        fillsWidth: Bool = true,
-        @ViewBuilder content: @escaping () -> Content,
-    ) -> some View {
-        _LazyVStack(
-            alignment: alignment,
-            spacing: spacing,
-            fillsWidth: fillsWidth,
-            content: content,
-        )
-    }
-
-}
-
-
-// MARK: - Implementation
-
-internal struct _LazyVStack<Content: View>: View {
+public struct StackVLazy<Content: View>: View {
 
     @Environment(\.style) private var style
     @Environment(\.styleSpacing) private var styleSpacing
@@ -38,10 +16,10 @@ internal struct _LazyVStack<Content: View>: View {
     private let fillsWidth: Bool
     private let content: () -> Content
 
-    init(
-        alignment: HorizontalAlignment,
-        spacing: Style.Attribute.Number.ValueBuilderKeyPath?,
-        fillsWidth: Bool,
+    public init(
+        alignment: HorizontalAlignment = .leading,
+        spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
+        fillsWidth: Bool = true,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.alignment = alignment
@@ -50,7 +28,7 @@ internal struct _LazyVStack<Content: View>: View {
         self.content = content
     }
 
-    var body: some View {
+    public var body: some View {
         LazyVStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
@@ -97,7 +75,7 @@ package struct StackVLazyExample: View {
     }
 
     private var contentExample: some View {
-        Stack.VLazy(
+        StackVLazy(
             spacing: configuration.spacing,
             fillsWidth: configuration.shouldFillWidth,
         ) {
@@ -110,7 +88,7 @@ package struct StackVLazyExample: View {
     }
 
     private var contentConfiguration: some View {
-        Stack {
+        StackV {
             StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
                 Text("Fill Width")
             }

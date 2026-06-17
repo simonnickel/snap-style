@@ -98,8 +98,8 @@ struct SnapStyleFlow: View {
                 // Layout
                 case .viewStyleScreen: "StyleScreen"
                 case .viewStack: "Stack"
-                case .viewStackVLazy: "Stack.VLazy"
-                case .viewStackHLazy: "Stack.HLazy"
+                case .viewStackVLazy: "StackVLazy"
+                case .viewStackHLazy: "StackHLazy"
                 case .viewStyleSpacer: "StyleSpacer"
                 
                 // List

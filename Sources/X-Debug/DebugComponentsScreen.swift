@@ -39,9 +39,9 @@ public struct DebugComponentsScreen: View {
     }
 
     private var element: some View {
-        Stack(spacing: \.spacingSections) {
+        StackV(spacing: \.spacingSections) {
             ForEach(Style.Element.Hierarchy.allCases) { hierarchy in
-                Stack {
+                StackV {
                     DebugElementsView(hierarchy: hierarchy)
                 }
                 .style(component: component)

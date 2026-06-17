@@ -29,7 +29,7 @@ struct ComponentActionScreen: View {
                 Text("Show Subtitles")
             }
 
-            Stack(spacing: \.spacingElements) {
+            StackV(spacing: \.spacingElements) {
                 Text("Content Card - Accent")
                     .style(element: .title)
                 ActionButtonsView(elements: elements)
@@ -40,7 +40,7 @@ struct ComponentActionScreen: View {
             }
             .style(component: .contentCard)
             
-            Stack(spacing: \.spacingElements) {
+            StackV(spacing: \.spacingElements) {
                 Text("Accent Card - Alternative")
                     .style(element: .title)
                 ActionButtonsView(elements: elements)
@@ -51,10 +51,10 @@ struct ComponentActionScreen: View {
             }
             .style(component: .accentCard)
             
-            Stack(spacing: \.spacingElements) {
+            StackV(spacing: \.spacingElements) {
                 Text("Icons")
                     .style(element: .title)
-                Stack.H {
+                StackH {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
                         StyleLabel(icon: \.favorite)
                     }

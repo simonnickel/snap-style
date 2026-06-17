@@ -16,7 +16,7 @@ struct FontWidthConfigurationRow: View {
 
     var body: some View {
         StyleListRow(.pick(Font.Width.allCases, titleKeyPath: \.description, selection: $fontWidth), icon: \.fontDesign) {
-            Stack(spacing: \.spacingElements) {
+            StackV(spacing: \.spacingElements) {
                 StyleLabel("Font Width")
             }
         }

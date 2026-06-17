@@ -11,10 +11,10 @@ Since the demo app is an Xcode project (not a target within this Swift package),
 ```
 Implementation Target (e.g. 4-View)
 ├── Layout/
-│   └── StyleStackExample.swift          <- package access, used in #Preview blocks
+│   └── StylePickerExample.swift               <- package access, used in #Preview blocks
 │
 X-Examples (this target)
-├── ExampleStyleStack+Public.swift       <- public wrapper, used by demo app
+├── ExampleStylePicker+Public.swift            <- public wrapper, used by demo app
 ```
 
 ## How to add a new example

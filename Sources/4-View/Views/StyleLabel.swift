@@ -80,7 +80,7 @@ struct CustomSpacingLabelStyle: LabelStyle {
     let spacing: Style.Attribute.Number.ValueBuilderKeyPath
     
     func makeBody(configuration: Configuration) -> some View {
-        Stack.H(spacing: spacing, fillsWidth: false) {
+        StackH(spacing: spacing, fillsWidth: false) {
             if styleLabelContent.contains(.icon) {
                 configuration.icon
             }
@@ -109,8 +109,8 @@ extension View {
 // MARK: - Preview
 
 #Preview {
-    Stack(spacing: \.spacingSections) {
-        Stack {
+    StackV(spacing: \.spacingSections) {
+        StackV {
             
             StyleLabel(icon: \.favorite) {
                 Text("Content")
@@ -136,7 +136,7 @@ extension View {
         }
 
         
-        Stack {
+        StackV {
             Label("System Label", systemImage: "circle")
                 .font(.footnote)
             StyleLabel("Style Label", systemImage: "circle")

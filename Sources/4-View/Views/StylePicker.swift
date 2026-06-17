@@ -60,7 +60,7 @@ package struct StylePickerExample: View {
 
     package var body: some View {
         StyleScreen {
-            Stack(spacing: \.spacingGroups) {
+            StackV(spacing: \.spacingGroups) {
                 contentPicker(style: .segmented)
                     .style(component: .contentCard)
                 contentPicker(style: .menu)
