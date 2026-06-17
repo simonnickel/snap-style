@@ -22,8 +22,6 @@ struct ComponentActionScreen: View {
     var body: some View {
         StyleScreen {
             
-            ExampleStyleStack()
-            
             Toggle(isOn: $showIcons) {
                 Text("Show Icons")
             }
