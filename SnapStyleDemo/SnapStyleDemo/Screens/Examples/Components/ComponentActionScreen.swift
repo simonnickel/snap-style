@@ -56,13 +56,16 @@ struct ComponentActionScreen: View {
                     .style(element: .title)
                 StyleHStack {
                     StyleButton(.icon(hierarchy: .primary)) { } content: {
-                        StyleLabel(icon: \.favorite)
+                        StyleIcon(\.favorite)
+                            .style(element: .icon)
                     }
                     StyleButton(.icon(hierarchy: .secondary)) { } content: {
-                        StyleLabel(icon: \.favorite)
+                        StyleIcon(\.favorite)
+                            .style(element: .icon)
                     }
                     StyleButton(.icon(hierarchy: .tertiary)) { } content: {
-                        StyleLabel(icon: \.favorite)
+                        StyleIcon(\.favorite)
+                            .style(element: .icon)
                     }
                 }
             }

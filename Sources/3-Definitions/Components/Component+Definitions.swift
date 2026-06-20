@@ -167,7 +167,7 @@ extension Style.Component {
             container: .button,
             fonts: { element in
                switch element {
-                   case .any: \.buttonTitle
+                   case .title: \.buttonTitle
                    case .icon: \.buttonIcon
                    default: nil
                }

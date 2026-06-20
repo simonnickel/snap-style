@@ -39,23 +39,11 @@ extension Style.Attribute.Font {
     }
     
     public var buttonTitle: ValueBuilder {
-        .builder { context in
-            return switch context.element.hierarchy {
-                case .any, .primary: .value(.with(size: 17, weight: .semibold))
-                case .secondary: .value(.with(size: 13, weight: .medium))
-                case .tertiary: .value(.with(size: 12, weight: .medium))
-            }
-        }
+        .base(.value(.with(size: 18, weight: .semibold)))
     }
     
     public var buttonIcon: ValueBuilder {
-        .builder { context in
-            return switch context.element.hierarchy {
-                case .any, .primary: .value(.with(size: 17, weight: .semibold))
-                case .secondary: .value(.with(size: 13, weight: .medium))
-                case .tertiary: .value(.with(size: 12, weight: .medium))
-            }
-        }
+        .base(.value(.with(size: 17, weight: .semibold)))
     }
     
     public var buttonIconOnly: ValueBuilder {

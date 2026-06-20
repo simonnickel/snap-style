@@ -44,6 +44,7 @@ struct ActionButtonsView: View {
                             .style(hierarchy: .secondary)
                     }
                 }
+                .style(element: .title)
             }
         }
     }
