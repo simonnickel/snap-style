@@ -53,15 +53,7 @@ extension Style.Attribute.Number {
     public var paddingMetricCard: ValueBuilder { .base(.reference(\.paddingContainer)) }
     public var paddingActionHorizontal: ValueBuilder { .base(.value(.scaled(15))) }
     public var paddingActionVertical: ValueBuilder { .base(.value(.scaled(8))) }
-    public var paddingActionIconOnly: ValueBuilder {
-        .builder { context in
-            switch context.component.hierarchy {
-                case .secondary: .value(.scaled(14))
-                case .tertiary: .value(.scaled(10))
-                default: .value(.scaled(18)) // also used for .primary
-            }
-        }
-    }
+    public var paddingActionIconOnly: ValueBuilder { .base(.value(.scaled(12))) }
 
     public var paddingListBottom: ValueBuilder { .base(.reference(\.paddingScreenBottom)) }
     public var paddingListSectionFirst: ValueBuilder { .base(.value(.scaled(10))) }

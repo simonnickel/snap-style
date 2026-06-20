@@ -93,7 +93,7 @@ extension Style.Container.Properties {
     
     public static let buttonIconOnly: Self = .init(
         "buttonIconOnly",
-        composition: \.interactiveContainer,
+        composition: \.containerAction,
         shape: \.containerActionIconOnly,
         padding: \.containerActionIconOnly,
     )

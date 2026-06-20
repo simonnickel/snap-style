@@ -59,13 +59,7 @@ extension Style.Attribute.Font {
     }
     
     public var buttonIconOnly: ValueBuilder {
-        .builder { context in
-            return switch context.component.hierarchy {
-                case .any, .primary: .value(.with(size: 22, weight: .medium))
-                case .secondary: .value(.with(size: 18, weight: .medium))
-                case .tertiary: .value(.with(size: 14, weight: .medium))
-            }
-        }
+        .base(.value(.with(size: 22, weight: .semibold)))
     }
 
 
