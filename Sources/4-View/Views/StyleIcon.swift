@@ -26,6 +26,15 @@ public struct StyleIcon: View {
 
     public var body: some View {
 
+        content
+            // Allow animated icon replacement.
+            .contentTransition(
+                .symbolEffect(.replace)
+            )
+
+    }
+    
+    private var content: some View {
         switch icon {
             case .icon(let keyPath):
                 if let iconName = style.value(for: keyPath)?.wrappedValue {
@@ -34,10 +43,10 @@ public struct StyleIcon: View {
                     Image(systemName: "questionmark.diamond")
                 }
             case .system(let name):
-                AnyView(Image(systemName: name))
+                Image(systemName: name)
         }
-
     }
+    
 }
 
 extension StyleIcon {
