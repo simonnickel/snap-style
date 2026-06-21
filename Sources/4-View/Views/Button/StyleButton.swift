@@ -44,11 +44,11 @@ extension Style.Views.Button {
             
             StyleButtonInteractionState($interactionState, action: action) {
                 content()
-                    .style(
-                        component: variant.component,
-                        state: enabled ? interactionState : .disabled
-                    )
             }
+            .style(
+                component: variant.component,
+                state: enabled ? interactionState : .disabled
+            )
             .disabled(!enabled)
         }
         

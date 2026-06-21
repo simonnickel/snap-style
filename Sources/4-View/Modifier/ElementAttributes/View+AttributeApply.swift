@@ -39,7 +39,7 @@ private struct AttributeFromEnvironmentModifier<Attribute: StyleElementAttribute
                 content.modifier(CompositionModifier(keyPath: key as? Style.Attribute.Composition.ValueBuilderKeyPath, layers: Style.Attribute.Composition.Layer.allCases, ignoresSafeAreaEdges: []))
 
             case is Style.Attribute.Shape.Type:
-                content.modifier(ShapeAttributeModifier(keyPath: key as? Style.Attribute.Shape.ValueBuilderKeyPath, shouldClip: false))
+                content.modifier(ShapeAttributeModifier(keyPath: key as? Style.Attribute.Shape.ValueBuilderKeyPath))
 
             case is Style.Attribute.Padding.Type:
                 content.modifier(PaddingAttributeModifier(keyPath: key as? Style.Attribute.Padding.ValueBuilderKeyPath))

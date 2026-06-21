@@ -59,7 +59,7 @@ struct ComponentCardScreen: View {
                         DemoMetricCard.exampleTriangle
                         DemoMetricCard.exampleCircle
                     }
-                    .style(shape: \.containerRelative, shouldClip: true)
+                    .style(shape: \.containerRelative)
                 }
                 .style(component: .contentCard)
             }
