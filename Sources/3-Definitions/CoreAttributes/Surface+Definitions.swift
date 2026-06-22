@@ -31,6 +31,8 @@ extension Style.Attribute.Surface {
     public var onDark1: ValueBuilder { .base(.value(.color(.gray))) }
     public var onDark2: ValueBuilder { .base(.value(.color(.gray))) }
 
+    public var placeholder: ValueBuilder { .base(.value(.color(.gray))) }
+    
     public var disabled: ValueBuilder { .base(.value(.color(.gray))) }
     public var onDisabled: ValueBuilder { .base(.reference(\.onDark0)) }
 
