@@ -67,6 +67,8 @@ public struct StyleButtonInteractionState<Content>: View where Content : View {
             }
         } label: {
             content()
+                // Make sure the whole container is tapable.
+                .contentShape(.rect)
         }
         .buttonStyle(IsPressedButtonStyle(isPressed: $state.isPressed))
         .onChange(of: state, initial: true) { oldValue, newValue in
