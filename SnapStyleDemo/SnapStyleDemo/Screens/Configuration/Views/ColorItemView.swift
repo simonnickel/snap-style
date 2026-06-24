@@ -45,7 +45,7 @@ struct ColorItemView: View {
                                 .style(element: .accessory)
                                 .style(foreground: \.accentContrast)
                             Text("Select")
-                                .stretch()
+                                .framed()
                             StyleIcon(\.indicatorMore)
                                 .style(element: .accessory)
                                 .style(foreground: \.accentComplementary)

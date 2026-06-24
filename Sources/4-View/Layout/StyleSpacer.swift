@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SnapStyleDefinitions
 import SwiftUI
@@ -55,7 +56,7 @@ package struct StyleSpacerExample: View {
                 Text("Some Content")
                     .background(.orange)
             }
-            .stretch()
+            .framed()
 
             HStack {
                 Text("Some Content")
@@ -64,7 +65,7 @@ package struct StyleSpacerExample: View {
                 Text("Some Content")
                     .background(.orange)
             }
-            .stretch()
+            .framed()
 
             HStack {
                 Text("Some Content with more ")
@@ -73,7 +74,7 @@ package struct StyleSpacerExample: View {
                 Text("Some Content with more text")
                     .background(.orange)
             }
-            .stretch()
+            .framed()
 
             HStack {
                 Text("Some Content with more ")
@@ -82,7 +83,7 @@ package struct StyleSpacerExample: View {
                 Text("Some Content with more text")
                     .background(.orange)
             }
-            .stretch()
+            .framed()
 
             HStack {
                 Text("Some Content")
@@ -91,7 +92,7 @@ package struct StyleSpacerExample: View {
                 Text("Some Content")
                     .background(.orange)
             }
-            .stretch()
+            .framed()
             .style(scaleFactor: 5)
 
             HStack {

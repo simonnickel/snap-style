@@ -56,7 +56,7 @@ internal struct DebugOverlayModifier: ViewModifier {
     }
 
     var viewInfo: some View {
-        StyleVStack(fillsWidth: false) {
+        StyleVStack(width: .fit) {
             Text("Content: \(geometrySizeContent.description)")
             Text("Screen:   \(geometrySizeScreen.description)")
             Text("top: \(geometrySafeAreaInsets.top.formatted()), l: \(geometrySafeAreaInsets.leading.formatted()), b: \(geometrySafeAreaInsets.bottom.formatted()), t: \(geometrySafeAreaInsets.trailing.formatted())")

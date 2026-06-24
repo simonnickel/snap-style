@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SwiftUI
 
@@ -13,18 +14,18 @@ public struct StyleLazyVStack<Content: View>: View {
 
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let alignment: HorizontalAlignment
-    private let fillsWidth: Bool
+    private let width: FrameWidth
     private let content: () -> Content
 
     public init(
         _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: HorizontalAlignment = .leading,
-        fillsWidth: Bool = true,
+        width: FrameWidth = .fill,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.spacing = spacing
         self.alignment = alignment
-        self.fillsWidth = fillsWidth
+        self.width = width
         self.content = content
     }
 
@@ -32,9 +33,9 @@ public struct StyleLazyVStack<Content: View>: View {
         LazyVStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
-        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: alignment, vertical: .center))
+        .framed(width, alignment: Alignment(horizontal: alignment, vertical: .center))
         // LazyVStack takes its proposed width by default, so shrink to content when not filling.
-        .fixedSize(horizontal: !fillsWidth, vertical: false)
+        .fixedSize(horizontal: width == .fit, vertical: false)
     }
 
     private var resolvedSpacing: CGFloat {
@@ -55,7 +56,7 @@ public struct StyleLazyVStack<Content: View>: View {
 package struct StyleLazyVStackExample: View {
 
     struct Configuration {
-        var shouldFillWidth: Bool = true
+        var width: FrameWidth = .fill
         var shouldApplySpacing: Bool = true
 
         var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
@@ -77,7 +78,7 @@ package struct StyleLazyVStackExample: View {
     private var contentExample: some View {
         StyleLazyVStack(
             configuration.spacing,
-            fillsWidth: configuration.shouldFillWidth,
+            width: configuration.width,
         ) {
             ForEach(0..<4) { index in
                 Text("Item \(index)")
@@ -89,8 +90,16 @@ package struct StyleLazyVStackExample: View {
 
     private var contentConfiguration: some View {
         StyleVStack {
-            StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
-                Text("Fill Width")
+            StyleHStack {
+                Text("Width")
+                StylePicker(style: .segmented, selection: $configuration.width.animation()) {
+                    ForEach(FrameWidth.allCases, id: \.self) { width in
+                        Text(width.rawValue)
+                            .tag(width)
+                    }
+                } label: {
+                    Text("Select Width")
+                }
             }
 
             StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {

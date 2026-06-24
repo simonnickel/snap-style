@@ -3,6 +3,7 @@
 //  Created by Simon Nickel
 //
 
+import SnapCore
 import SnapStyleBase
 import SwiftUI
 
@@ -13,18 +14,18 @@ public struct StyleLazyHStack<Content: View>: View {
 
     private let spacing: Style.Attribute.Number.ValueBuilderKeyPath?
     private let alignment: VerticalAlignment
-    private let fillsWidth: Bool
+    private let width: FrameWidth
     private let content: () -> Content
 
     public init(
         _ spacing: Style.Attribute.Number.ValueBuilderKeyPath? = nil,
         alignment: VerticalAlignment = .center,
-        fillsWidth: Bool = true,
+        width: FrameWidth = .fill,
         @ViewBuilder content: @escaping () -> Content,
     ) {
         self.spacing = spacing
         self.alignment = alignment
-        self.fillsWidth = fillsWidth
+        self.width = width
         self.content = content
     }
 
@@ -32,7 +33,7 @@ public struct StyleLazyHStack<Content: View>: View {
         LazyHStack(alignment: alignment, spacing: resolvedSpacing) {
             content()
         }
-        .frame(maxWidth: fillsWidth ? .infinity : nil, alignment: Alignment(horizontal: .leading, vertical: alignment))
+        .framed(width, alignment: Alignment(horizontal: .leading, vertical: alignment))
     }
 
     private var resolvedSpacing: CGFloat {
@@ -53,7 +54,7 @@ public struct StyleLazyHStack<Content: View>: View {
 package struct StyleLazyHStackExample: View {
 
     struct Configuration {
-        var shouldFillWidth: Bool = true
+        var width: FrameWidth = .fill
         var shouldApplySpacing: Bool = true
 
         var spacing: Style.Attribute.Number.ValueBuilderKeyPath {
@@ -75,7 +76,7 @@ package struct StyleLazyHStackExample: View {
     private var contentExample: some View {
         StyleLazyHStack(
             configuration.spacing,
-            fillsWidth: configuration.shouldFillWidth,
+            width: configuration.width,
         ) {
             ForEach(0..<4) { index in
                 Text("Item \(index)")
@@ -87,8 +88,16 @@ package struct StyleLazyHStackExample: View {
 
     private var contentConfiguration: some View {
         StyleVStack {
-            StyleToggle(isOn: $configuration.shouldFillWidth.animation()) {
-                Text("Fill Width")
+            StyleHStack {
+                Text("Width")
+                StylePicker(style: .segmented, selection: $configuration.width.animation()) {
+                    ForEach(FrameWidth.allCases, id: \.self) { width in
+                        Text(width.rawValue)
+                            .tag(width)
+                    }
+                } label: {
+                    Text("Select Width")
+                }
             }
 
             StyleToggle(isOn: $configuration.shouldApplySpacing.animation()) {
