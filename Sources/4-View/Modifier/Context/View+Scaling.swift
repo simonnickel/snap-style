@@ -8,10 +8,10 @@ import SnapStyleBase
 
 extension View {
 
-    // TODO: Inert value (nil or default) should not set default, but current value from context.
-    public func style(scaleFactor: Style.Context.ScaleFactor? = nil) -> some View {
+    /// Sets the `ScaleFactor`. Inert value: `nil`, keeps the value from `Context`.
+    public func style(scaleFactor: Style.Context.ScaleFactor?) -> some View {
         self
-            .style(attribute: Style.Context.scaleFactor, value: scaleFactor ?? Style.Context.scaleFactorDefault)
+            .style(attribute: Style.Context.scaleFactor, value: scaleFactor)
     }
 
 }

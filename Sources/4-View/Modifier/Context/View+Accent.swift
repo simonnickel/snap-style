@@ -13,7 +13,7 @@ extension View {
     public func style(accent key: Style.Context.Accent.Key?) -> some View {
         self
             .modifier(AccentApplyModifier())
-            .modifier(AccentKeyModifier(key: key))
+            .style(attribute: Style.Context.accent, value: key)
     }
     
     /// Set the `Accent` definition for the `Key`.
@@ -27,18 +27,6 @@ extension View {
 
 
 // MARK: - Modifier
-
-private struct AccentKeyModifier: ViewModifier {
-    
-    @Environment(\.style) private var style
-    
-    let key: Style.Context.Accent.Key?
-    
-    func body(content: Content) -> some View {
-        content
-            .style(attribute: Style.Context.accent, value: key ?? style.context.accent)
-    }
-}
 
 private struct AccentDefinitionModifier: ViewModifier {
 

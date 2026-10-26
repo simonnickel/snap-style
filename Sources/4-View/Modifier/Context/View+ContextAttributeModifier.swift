@@ -8,8 +8,8 @@ import SnapStyleBase
 
 extension View {
 
-    /// Set the value of a `Context.Attribute`.
-    public func style<Key: Hashable, Value: Hashable>(attribute: Style.Context.Attribute<Key, Value>, value: Value) -> some View {
+    /// Set the value of a `Context.Attribute`. Inert value: `nil`, keeps the value from `Context`.
+    public func style<Key: Hashable, Value: Hashable>(attribute: Style.Context.Attribute<Key, Value>, value: Value?) -> some View {
         modifier(ContextAttributeModifier(attribute: attribute, value: value))
     }
 
@@ -20,11 +20,10 @@ private struct ContextAttributeModifier<Key: Hashable, Value: Hashable>: ViewMod
     @Environment(\.style) private var style
 
     let attribute: Style.Context.Attribute<Key, Value>
-    let value: Value
+    let value: Value?
 
     func body(content: Content) -> some View {
-        let context = style.context
-            .withAttribute(value: value, for: attribute)
+        let context = value.map { style.context.withAttribute(value: $0, for: attribute) } ?? style.context
         content
             .style(update: context)
     }
