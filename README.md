@@ -67,18 +67,13 @@ The accumulated state flowing through the environment: color scheme, font design
 ### Caching
 Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.styleOverride(...)`, the relevant caches are reset automatically.
 
-## Demo Project
-
-The [SnapStyleDemo](SnapStyleDemo) app showcases the built-in components, attribute definitions, and context configuration options. It includes examples for cards, lists, buttons, and a configuration screen to experiment with accent colors, font design, font width, corner radii, and scale factor.
-
 ## Requirements
 
-- iOS 17+ / macOS 15+
-- Swift 6.3+
-- [snap-foundation](https://github.com/simonnickel/snap-foundation)
-- [snap-core](https://github.com/simonnickel/snap-core)
+- iOS 17+, macOS 15+
+- Swift 6.3
+- Dependencies: [snap-foundation](https://github.com/simonnickel/snap-foundation), [snap-core](https://github.com/simonnickel/snap-core)
 
-## Installation
+## Setup
 
 Add it as a package dependency to an Xcode project:
 ```swift
@@ -99,6 +94,10 @@ Then add `SnapStyle` as a dependency of your target:
     .product(name: "SnapStyle", package: "snap-style")
 ])
 ```
+
+## Demo project
+
+The [SnapStyleDemo](SnapStyleDemo) app showcases the built-in components, attribute definitions, and context configuration options. It includes examples for cards, lists, buttons, and a configuration screen to experiment with accent colors, font design, font width, corner radii, and scale factor.
 
 ## Usage
 
