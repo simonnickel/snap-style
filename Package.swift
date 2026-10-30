@@ -12,6 +12,7 @@ let package = Package(
             name: "SnapStyle",
             targets: ["SnapStyle", "SnapStyleViews", "SnapStyleView", "SnapStyleDefinitions", "SnapStyleComponents", "SnapStyleBase", "SnapStyleDebug"]),
         // Examples target, not intended for consumers. Used by the demo app and previews.
+        // TODO-1: Demo-only library product.
         .library(
             name: "SnapStyleExamples",
             targets: ["SnapStyleExamples"]),
