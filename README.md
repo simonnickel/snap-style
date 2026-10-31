@@ -9,10 +9,28 @@
 
 A semantic styling system for multi-platform SwiftUI apps. Define visual attributes (colors, fonts, spacing, shapes) once, reference them by semantic key paths, and apply them consistently across your views.
 
-[![Documentation][documentation badge]][documentation] 
+[![SnapStyle][documentation style badge]][documentation style] 
+[![SnapStyleBase][documentation base badge]][documentation base] 
+[![SnapStyleComponents][documentation components badge]][documentation components] 
+[![SnapStyleDefinitions][documentation definitions badge]][documentation definitions] 
+[![SnapStyleView][documentation view badge]][documentation view] 
+[![SnapStyleViews][documentation views badge]][documentation views] 
+[![SnapStyleDebug][documentation debug badge]][documentation debug] 
 
-[documentation]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyle
-[documentation badge]: https://img.shields.io/badge/Documentation-DocC-blue
+[documentation style]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyle
+[documentation style badge]: https://img.shields.io/badge/SnapStyle-DocC-blue
+[documentation base]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstylebase
+[documentation base badge]: https://img.shields.io/badge/SnapStyleBase-DocC-blue
+[documentation components]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstylecomponents
+[documentation components badge]: https://img.shields.io/badge/SnapStyleComponents-DocC-blue
+[documentation definitions]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyledefinitions
+[documentation definitions badge]: https://img.shields.io/badge/SnapStyleDefinitions-DocC-blue
+[documentation view]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyleview
+[documentation view badge]: https://img.shields.io/badge/SnapStyleView-DocC-blue
+[documentation views]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyleviews
+[documentation views badge]: https://img.shields.io/badge/SnapStyleViews-DocC-blue
+[documentation debug]: https://swiftpackageindex.com/simonnickel/snap-style/main/documentation/snapstyledebug
+[documentation debug badge]: https://img.shields.io/badge/SnapStyleDebug-DocC-blue
 
 
 ## Motivation
