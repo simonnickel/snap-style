@@ -33,6 +33,13 @@ A semantic styling system for multi-platform SwiftUI apps. Define visual attribu
 [documentation debug badge]: https://img.shields.io/badge/SnapStyleDebug-DocC-blue
 
 
+## Requirements
+
+- iOS 17+, macOS 15+
+- Swift 6.3
+- Dependencies: [snap-foundation](https://github.com/simonnickel/snap-foundation), [snap-core](https://github.com/simonnickel/snap-core)
+
+
 ## Motivation
 
 Without a styling system, design values are scattered across your views:
@@ -85,11 +92,6 @@ The accumulated state flowing through the environment: color scheme, font design
 ### Caching
 Resolved attribute values are cached per (key path, context) pair, so a definition is only evaluated once for each unique context. When definitions are overridden in a subtree via `.styleOverride(...)`, the relevant caches are reset automatically.
 
-## Requirements
-
-- iOS 17+, macOS 15+
-- Swift 6.3
-- Dependencies: [snap-foundation](https://github.com/simonnickel/snap-foundation), [snap-core](https://github.com/simonnickel/snap-core)
 
 ## Setup
 
