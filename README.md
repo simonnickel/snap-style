@@ -152,7 +152,7 @@ StyleVStack(\.spacingElements) {
 
 The component applies the container's styling (background surface, shape, padding) and sets up element attribute mappings in the environment. Assigning an element to a child view applies these attributes.
 
-### Applying Attributes Directly
+### Applying Attributes directly
 
 Use `.style(...)` modifiers to apply individual attributes by key path:
 
@@ -273,7 +273,7 @@ extension Style.Container.Properties {
 ```
 
 
-## Attribute Types
+## Attribute types
 
 An attribute is a type of visual property — color, font, spacing, shape, etc. Each attribute type defines a set of semantic key paths (e.g. `\.accent`, `\.screenTitle`, `\.spacingGroups`) that resolve to concrete values based on the current context. Attributes can be applied directly to a view via `.style(...)` modifiers.
 
@@ -315,7 +315,7 @@ The package is split into layered targets. Import `SnapStyle` to get everything:
 | **SnapStyleDebug** | Debug views for inspecting style state and caches |
 
 
-## Known Limitations
+## Known limitations
 
 - Custom accent colors do not replicate the iOS behavior where `.accentColor` grays out when a popover or sheet is presented.
 - Readable content width (`\.widthReadableContent`) is implemented manually since UIKit's `readableContentGuide` is not available in SwiftUI.

@@ -4,7 +4,7 @@
 
 A semantic styling system for SwiftUI (iOS 17+, macOS 15+). All styling state flows through `@Environment(\.style)` as a `ContextWrapper` (bundles `Style` + `Context`).
 
-## Target Structure
+## Target structure
 
 Strictly layered — dependencies only flow downward:
 
@@ -27,7 +27,7 @@ Seven types in two groups:
 
 `Container.Properties` is the static style descriptor passed via `Component.container`; `Container` is the live runtime instance built from the stack during rendering.
 
-## Value Resolution
+## Value resolution
 
 ```swift
 .base(.value(...))                    // static
@@ -36,7 +36,7 @@ Seven types in two groups:
 .builderWrapper { contextWrapper in } // access Style + Context + caches
 ```
 
-## View Modifier Chain
+## View modifier chain
 
 ```swift
 .styleSetup(style)    // root setup — once at app root
